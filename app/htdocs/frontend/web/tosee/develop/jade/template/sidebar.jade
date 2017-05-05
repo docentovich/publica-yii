@@ -1,0 +1,14 @@
+-var menu = [{h : '/second.html', n : 'вторая страница'}]
+-var soc = [{h : 'vk.ru', n : 'вк'}]
++b.DIV.sidebar
+    +e.UL.menu
+        +e.LI.li
+            +e.IMG(src="/images/logo.png").logo
+        for item in menu
+            +e.LI.li
+                +e.A(href='#{item.h}') #{item.n}
+
+    +e.UL.soc
+        for item in soc
+            +e.LI.li
+                +e.A(href='#{item.h}') #{item.n}

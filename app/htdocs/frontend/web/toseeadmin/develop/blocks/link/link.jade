@@ -1,0 +1,12 @@
+//--начинаем link с +e так чтобы это был элемент родительского блока а не отдельный блок, для дальнейшей стилизации/ это нам надо чтобы не пписать триста раз rUrl
+- var prefix = "html"
+mixin link(url)
+    -if( url.substring(0,1) != '/') url = "/" + url;
+
+    - if (prefix != ''){
+        -var _url = url.split(".");
+        - if(_url[1] != prefix) url = url + "." + prefix;
+    -}
+
+    +e.A.a(href="#{rUrl}#{url}")&attributes(attributes)
+        block

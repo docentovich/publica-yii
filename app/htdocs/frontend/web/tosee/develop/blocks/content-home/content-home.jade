@@ -1,0 +1,27 @@
+mixin content-home()
+    +b.content-home&attributes(attributes)
+        +e.wrapper
+            +e.mainlogo
+                +e.IMG(src="/images/logos/publica.png").i._mainlogo
+            +e.projects-row
+                //-.col-sm-8.col-xs-24
+                +b.A(href="/past/1.html").project._tosee
+                    +e.logo
+                        +e.IMG(src="/images/logos/tosee.png").i
+                    +e.content
+                        +e.IMG(src="/images/dep.png").img
+                        +e.text Светская жизнь в моем городе, стране, мире
+                //-.col-sm-8.col-xs-24
+                +b.project._probank
+                    +e.logo
+                        +e.IMG(src="/images/logos/probank.png").i
+                    +e.content
+                        +e.IMG(src="/images/model.png").img
+                        +e.text Модели Фотографы Актеры
+                //- .col-sm-8.col-xs-24
+                +b.project._shotme
+                    +e.logo
+                        +e.IMG(src="/images/logos/shotme.png").i
+                    +e.content
+                        +e.IMG(src="/images/fotografer.png").img
+                        +e.text Закажи  фотографа прямо сейчас!

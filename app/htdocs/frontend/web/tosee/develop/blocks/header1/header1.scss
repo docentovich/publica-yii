@@ -1,0 +1,22 @@
+.header1{
+    background-color: $col-bg2;
+    padding: 17px 0 15px 0;
+    &__logo{
+        cursor: pointer;
+        max-width: 223px;
+        width: 100%;
+        float: left;
+    }
+
+    &__controls1{
+        margin-top: 8px;
+        float: right;
+    }
+
+     @media (max-width: 389px){
+        &__logo{
+            width: 50%;
+            width: 46vw;
+        }
+    }
+}

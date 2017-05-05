@@ -1,0 +1,35 @@
+.search-form{
+    position: relative;
+    // Style for "Rounded Rectan"
+
+    &__input{
+        width: 100%;
+        height: 66px;
+        background-color: rgba(54, 61, 71, .5);
+        border: 3px solid rgba(255, 255, 255, .5);
+        border-radius: 9px;
+
+        padding: 17px 0 17px 20px;
+
+        color: white;
+        font-family: Tahoma;
+        font-size: 30px;
+        font-weight: 400;
+
+        @include placeholder {
+            color: rgba(188, 188, 188, .5);
+           // font-style: italic;
+        }
+    }
+
+    &__loopa{
+        position: absolute;
+        right: 10px;
+        top: 12px;
+        opacity: 0.5;
+    }
+
+    &__svg{
+        width: 39px;
+    }
+}

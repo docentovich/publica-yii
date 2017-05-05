@@ -1,0 +1,4 @@
+mixin sprite-img(sprite, item, modif)
+    -modif = (modif != undefined) ? "_" + modif : "";
+    -var iClass = "sprite-img sp-" + sprite + " sp-" + sprite + "__" + item;
+    +e.I(class="i #{modif} #{iClass}")&attributes(attributes)

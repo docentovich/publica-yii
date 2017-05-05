@@ -1,0 +1,12 @@
+mixin sidebars()
+    +sidebar#menu
+        +menu
+    +sidebar._search#search
+        +search
+
+mixin sidebar()
+    +b.sidebar&attributes(attributes)
+        +e.sidebar-inner-relative
+            +e.close X
+            +e.sidebar-inner
+                block

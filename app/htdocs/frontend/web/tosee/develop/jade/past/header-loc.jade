@@ -1,0 +1,16 @@
+- var alias = "m"
+- var page = 'past'
+- var colp = 10
+mixin header-loc()    
+    doctype
+    html(lang='ru')
+        +document-header-tosee
+        body.pageload.no-js
+            +sidebars
+            +header
+            +header1
+            +content
+                +navigation('/future/1.html')
+                 | Что было
+                +events
+                block

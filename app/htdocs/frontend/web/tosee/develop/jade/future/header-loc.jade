@@ -1,0 +1,16 @@
+- var alias = "m"
+- var page = 'future'
+- var colp = 3
+mixin header-loc()    
+    doctype
+    html(lang='ru')
+        +document-header-tosee
+        body.pageload.no-js
+            +sidebars
+            +header
+            +header1
+            +content
+                +navigation('/past/1.html')
+                 | Что будет
+                +events
+                block

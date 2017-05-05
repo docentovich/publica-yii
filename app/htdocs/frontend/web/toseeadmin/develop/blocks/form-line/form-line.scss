@@ -1,0 +1,59 @@
+.form-line{
+    margin-bottom: 33px;
+
+    &__text{
+        color: rgba(0, 0, 0, .7);
+        font-size: 18px;
+        font-weight: 400;
+
+        @media #{$lg},#{$md},#{$sm}{
+            text-align: left;
+        }
+    }
+
+    &__label{
+        color: rgba(0, 0, 0, .33);
+        font-size: 18px;
+        font-weight: 400;
+
+        @media #{$xsm}{
+            font-size: 25px;
+        }
+        @media #{$lg},#{$md},#{$sm}{
+            text-align: right;
+        }
+    }
+
+    &__inline &__img{
+        margin-right: 43px;
+    }
+
+
+    &__inline{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: stretch;
+        align-items: center;
+
+        & > *{
+            display: inline-block;
+            margin-bottom: 7px;
+        }
+
+        @media #{$xsm}{
+            justify-content: center;
+            align-content: center;
+            text-align: center;
+
+            & > *{
+                margin: auto auto 7px auto !important;
+            }
+
+
+        }
+    }
+
+    &__img{}
+}

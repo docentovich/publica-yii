@@ -1,0 +1,29 @@
+.header{
+    background-color: $col-bgd;
+    padding: 6px 0 1px 0;
+
+    &__logo{
+        float: left;
+        opacity: .3;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 1;
+        }
+    }
+
+    &__controls{
+        float: right;
+        width: 100%;
+        max-width: 186px;
+    }
+
+    @media #{$xsm}{
+        &__controls{
+            max-width: 100px;
+
+        }
+    }
+
+
+}

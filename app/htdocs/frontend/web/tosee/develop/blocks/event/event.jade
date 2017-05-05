@@ -1,0 +1,9 @@
+mixin event(img, date, title, description)
+    +b.event
+        +e.image-wrap
+            a(href="/event.html")
+                +e.I(style="background-image: url(#{img})").img.img-well
+            +e.date #{date}
+        +e.content
+            +e.A(href="/event.html").title #{title}
+            +e.description #{description}

@@ -1,0 +1,26 @@
+.chbox{
+  position: relative;
+  top: -5px;
+
+  @media #{$xsm}{
+    top: 0;
+  }
+
+  &__input-chbox{
+    display: none;
+    
+  }
+
+  &__input-chbox + label:after{
+    content: "";
+    width: 26px;
+    height: 26px;
+    background-color: #ebeaea;
+    border: 1px solid #dedcdc;  
+    display: block;      
+  }
+
+  &__input-chbox:checked + label:after{
+    @include sprite($checkbox);
+  }
+}

@@ -1,0 +1,6 @@
+mixin pagination-item(text, url, disabled, current)
+    -var modif = (disabled) ? '_disabled' : '';
+    -modif =  modif + " " + ((current == true) ? '_active' : '');
+    -if(disabled) url='';
+    +b.A(class="pagination-item #{modif}" href="#{url}")
+        block

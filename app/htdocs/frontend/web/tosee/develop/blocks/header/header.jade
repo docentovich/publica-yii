@@ -1,0 +1,9 @@
+mixin header()
+    +b.header
+        .container-fluid
+            .row
+                .col-xs-24
+                    +e.A(href='/').logo
+                        +sprite-img('sprite', 'publica')
+                    +e.controls
+                        +controls

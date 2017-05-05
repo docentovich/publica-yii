@@ -1,0 +1,6 @@
+-var chbx = 0;
+mixin chbox()
+    +b.chbox
+        +e.INPUT.input-chbox(type="checkbox" id="cbx-#{chbx}")&attributes(attributes)
+        +e.LABEL.label(for="cbx-#{chbx}")
+    - chbx++

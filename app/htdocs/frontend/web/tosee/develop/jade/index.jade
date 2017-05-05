@@ -1,0 +1,13 @@
+include ../blocks/**/*
+include ../../../bemBlocks/**/*
+include template/header
+include template/footer
+- var alias = "m"
+doctype
+html(lang='ru')
+    +document-header-tosee
+    body.pageload.no-js
+        +header
+        +content-home
+        +footer1
+        +footer-scripts

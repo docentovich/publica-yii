@@ -1,0 +1,16 @@
+mixin navigation(url)
+    - if (url == undefined) url = '';
+    .row
+        .col-xs-24
+            +b.navigation                
+                
+                +e.col._center
+                    block
+                +e.A(href="#{url}" ).col._left
+                    +e.svg-wrapper
+                        +e.IMG.svg(src="/images/svg/ar-left-w.svg")
+                    //- +sprite-img('sprite', 'to-left')
+                +e.A(href="#{url}" ).col._right
+                    +e.svg-wrapper
+                        +e.IMG.svg(src="/images/svg/ar-right-w.svg")
+                   //- +sprite-img('sprite', 'to-right')

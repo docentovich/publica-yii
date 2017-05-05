@@ -1,0 +1,19 @@
+mixin footer-scripts()
+    // build:js /js/vendor.js 
+    script(src='/libs/jquery.min.js')
+    script(src='/libs/bootstrap.min.js')
+    script(src='/libs/jquery-migrate-3.0.0.min.js')
+    script(src='/libs/jquery.mousewheel-3.0.6.pack.js')
+    script(src='/libs/fancybox/jquery.fancybox.min.js')
+    script(src='/libs/modernizr-custom.js')
+    script(src='/libs/polyfills/placeholders.min.js')
+    //- script(src='/libs/polyfills/flexibility.js')
+    //- script(src='/libs/polyfills/flexipol-master/vendor/parsecss.js')
+    //- script(src='/libs/polyfills/flexipol-master/src/flex_element.js')
+    //- script(src='/libs/polyfills/flexipol-master/src/flex_parent.js')
+    //- script(src='/libs/polyfills/flexipol-master/src/flex_child.js')
+    //- script(src='/libs/polyfills/flexipol-master/src/init.js')
+    // endbuild
+    // build:js /js/main.js
+    script(src='/js/main.js')
+    // endbuild
