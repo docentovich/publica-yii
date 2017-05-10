@@ -10,12 +10,17 @@ return [
             'tablePrefix' => 'tbl_'
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'viewPath' => '@common/mail',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+             'class' => 'yii\swiftmailer\Mailer',
+                'viewPath' => '@common/mail',
+                'useFileTransport' => false,
+                'transport' => [
+                    'class' => 'Swift_SmtpTransport',
+                    'host' => 'smtp.mailtrap.io',
+                    'username' => '19c6e4ea034778',
+                    'password' => '929b6ae9dbc93e',
+                    'port' => '2525',
+                    'encryption' => 'tls',
+                ],
         ],
     ],
 

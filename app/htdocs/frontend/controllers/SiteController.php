@@ -24,28 +24,28 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
+        'access' => [
+        'class' => AccessControl::className(),
+        'only' => ['logout', 'signup'],
+        'rules' => [
+        [
+        'actions' => ['signup'],
+        'allow' => true,
+        'roles' => ['?'],
+        ],
+        [
+        'actions' => ['logout'],
+        'allow' => true,
+        'roles' => ['@'],
+        ],
+        ],
+        ],
+        'verbs' => [
+        'class' => VerbFilter::className(),
+        'actions' => [
+        'logout' => ['post'],
+        ],
+        ],
         ];
     }
 
@@ -55,13 +55,13 @@ class SiteController extends Controller
     public function actions()
     {
         return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
+        'error' => [
+        'class' => 'yii\web\ErrorAction',
+        ],
+        'captcha' => [
+        'class' => 'yii\captcha\CaptchaAction',
+        'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+        ],
         ];
     }
 
@@ -102,6 +102,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout='__main';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -112,7 +113,7 @@ class SiteController extends Controller
         } else {
             return $this->render('login', [
                 'model' => $model,
-            ]);
+                ]);
         }
     }
 
@@ -136,6 +137,8 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
+        $this->layout='__main';
+
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
@@ -147,7 +150,7 @@ class SiteController extends Controller
 
         return $this->render('signup', [
             'model' => $model,
-        ]);
+            ]);
     }
 
     /**
@@ -157,6 +160,8 @@ class SiteController extends Controller
      */
     public function actionRequestPasswordReset()
     {
+        $this->layout='__main';
+
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -170,7 +175,7 @@ class SiteController extends Controller
 
         return $this->render('requestPasswordResetToken', [
             'model' => $model,
-        ]);
+            ]);
     }
 
     /**
@@ -182,6 +187,8 @@ class SiteController extends Controller
      */
     public function actionResetPassword($token)
     {
+        $this->layout='__main';
+
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidParamException $e) {
@@ -196,6 +203,16 @@ class SiteController extends Controller
 
         return $this->render('resetPassword', [
             'model' => $model,
-        ]);
+            ]);
     }
+
+    public function beforeAction($action)
+    {
+        if(isset($_GET['test']))
+            $this->layout = '__main';
+        return true;
+    }
+
+    // public function beforeAction(){
+    // }
 }

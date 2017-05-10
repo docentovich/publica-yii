@@ -20,16 +20,16 @@ class m170425_001718_tbl_users extends Migration
             'id'=> $this->primaryKey(10),
             'username'=> $this->string(100)->notNull()->comment('Уникальное'),
             'user_group_id'=> $this->integer(10)->notNull()->defaultValue(1)->comment('Индекс. fkey'),
-            'first_name'=> $this->string(100)->notNull(),
+            'first_name'=> $this->string(100)->null()->defaultValue(null),
             'last_name'=> $this->string(100)->null()->defaultValue(null),
 			
             'password_hash'=> $this->char(32)->notNull(),
             'auth_key'=> $this->string(32)->null()->defaultValue(null),
-			'password_reset_token' => $this->string()->unique(),
+			'password_reset_token' => $this->string()->unique()->defaultValue(null),
 			
             'email'=> $this->string(50)->notNull(),
-            'phone'=> $this->integer(12)->notNull(),
-            'avatar'=> $this->char(32)->notNull(),
+            'phone'=> $this->integer(12)->null()->defaultValue(null),
+            'avatar'=> $this->char(32)->null()->defaultValue(null),
 			
             'respond_sms'=> $this->smallInteger(1)->notNull()->defaultValue(0),
             'respond_email'=> $this->smallInteger(1)->notNull()->defaultValue(1),
