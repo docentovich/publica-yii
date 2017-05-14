@@ -11,8 +11,8 @@ use frontend\assets\AppAsset;
 use frontend\assets\AppAssetIE9;
 // use common\widgets\Alert;
 
-AppAsset::register($this);
-AppAssetIE9::register($this);
+//AppAsset::register($this);
+//AppAssetIE9::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

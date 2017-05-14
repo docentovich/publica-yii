@@ -1,5 +1,5 @@
 <?php
-namespace backend\controllers;
+namespace modules\tosee\controllers\backend;
 
 use Yii;
 use yii\web\Controller;

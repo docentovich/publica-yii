@@ -9,12 +9,16 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
-    'controllerNamespace' => 'frontend\controllers',
+    'bootstrap' => [
+        'log',
+        'modules\tosee\Bootstrap',
+    ],
+//    'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'tosee/site/index',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
-            'baseUrl' => '',
+//            'baseUrl' => '',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -38,11 +42,21 @@ return [
             'errorAction' => 'site/error',
         ],
         
+//        'urlManager' => [
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+//            'rules' => [
+//                 '<action:\w+>' => 'site/<action>',
+//            ],
+//        ],
+
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
             'rules' => [
-                 '<action:\w+>' => 'site/<action>',
+                '/' => 'tosee/site/index',
             ],
         ],
         

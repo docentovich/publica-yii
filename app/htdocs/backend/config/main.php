@@ -9,9 +9,14 @@ $params = array_merge(
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
-    'controllerNamespace' => 'backend\controllers',
+    'defaultRoute' => 'tosee/site/index',
+//    'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'tosee' => [
+            'isBackend' => true,
+        ]
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',

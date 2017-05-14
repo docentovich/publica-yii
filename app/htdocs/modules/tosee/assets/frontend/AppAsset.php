@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\assets;
+namespace modules\tosee\assets\frontend;
 
 use yii\web\AssetBundle;
 
@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    public $baseUrl = '@web/assets';
+    public $baseUrl = '/assets';
     public $css = [
         'css/vendor.css',
         'css/main.css',

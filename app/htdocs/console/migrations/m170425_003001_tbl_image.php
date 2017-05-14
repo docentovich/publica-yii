@@ -18,10 +18,8 @@ class m170425_003001_tbl_image extends Migration
 
         $this->createTable('{{%image}}',[
             'id'=> $this->primaryKey(10),
-            'user_id'=> $this->integer(10)->notNull()->comment('Владелец. fkey'),
-            'thumbnail'=> $this->char(32)->notNull(),
+            'user_id'=> $this->integer(10)->null()->comment('Владелец. fkey'),
             'src'=> $this->char(32)->notNull(),
-            'extension'=> $this->char(4)->notNull()->defaultValue('jpg'),
             'alt'=> $this->string(70)->null()->defaultValue(null),
         ], $tableOptions);
 

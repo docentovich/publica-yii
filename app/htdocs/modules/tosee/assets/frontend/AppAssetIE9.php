@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\assets;
+namespace modules\tosee\assets\frontend;
 
 use yii\web\AssetBundle;
 
