@@ -1,7 +1,7 @@
 <?php
 use \yii\helpers\Html;
 use \components\helpers\Helpers;
-var_dump($posts);
+
 ?>
 <div class="events">
     <div class="row">
