@@ -17,7 +17,7 @@ class SiteController extends Controller
     const FUTURE = "f";
 
     /**
-     * Смотрим в будущее
+     * Смотрим в прошлое
      */
     const PAST = "p";
 
