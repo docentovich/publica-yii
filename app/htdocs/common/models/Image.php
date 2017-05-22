@@ -37,7 +37,6 @@ class Image extends \yii\db\ActiveRecord
             [['src'], 'required'],
             [['src'], 'string', 'max' => 32],
             [['alt'], 'string', 'max' => 70],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -48,19 +47,11 @@ class Image extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
             'src' => 'Src',
             'alt' => 'Alt',
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery

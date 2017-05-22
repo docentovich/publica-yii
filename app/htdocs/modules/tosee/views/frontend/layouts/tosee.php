@@ -14,7 +14,7 @@ use app\components\Header;
 
 // use common\widgets\Alert;
 
-AppAsset::register($this);
+$bundle = AppAsset::register($this);
 AppAssetIE9::register($this);
 ?>
 <?php $this->beginPage(); ?>

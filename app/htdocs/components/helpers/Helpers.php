@@ -38,6 +38,7 @@ class Helpers
      */
     public static function i($folder, $name,  $classes = []){
         $classes[] = "sp-{$folder}";
+        $classes[] = "sprite-img";
         $classes[] = "sp-{$folder}__{$name}";
         return "<i class='" . implode(" ", $classes) . "'></i>";
     }

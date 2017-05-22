@@ -42,5 +42,5 @@ RUN yes | pecl install xdebug \
 # COPY ./php.ini /usr/local/etc/php
 
 # CMD ["php-fpm"]
-# RUN php composer update -d /var/www/html
+# RUN composer update -d /var/www/html
 # RUN php yii migrate

@@ -1,4 +1,4 @@
-<?php use Helpers\Helpers; ?>
+<?php use components\helpers\Helpers; ?>
 <!-- menu -->
 <div class="menu">
     <div class="menu__group">

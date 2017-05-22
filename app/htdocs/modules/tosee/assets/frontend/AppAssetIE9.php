@@ -9,8 +9,7 @@ use yii\web\AssetBundle;
  */
 class AppAssetIE9 extends AssetBundle
 {
-    public $basePath = '@webroot/assets';
-    public $baseUrl = '@web';
+    public $sourcePath = '@modules/tosee/views/frontend/assets';
     public $css = [
     ];
     public $js = [

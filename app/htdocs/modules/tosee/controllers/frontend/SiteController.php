@@ -32,9 +32,11 @@ class SiteController extends Controller
 
         $posts = Post::find()
             //->where(["1" => "1"])
-            ->with("postData")
-            ->with("images")
+            ->with(["postData", "image"])
             ->all();
+
+
+
         return $this->render('index', compact('posts'));
     }
 }
