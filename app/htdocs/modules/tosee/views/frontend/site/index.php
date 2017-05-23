@@ -6,7 +6,7 @@ use \components\helpers\Helpers;
 <div class="events">
     <div class="row">
         <div class="events__events-list">
-            <? foreach ($posts as $post) { ?>
+            <?php foreach ($posts as $post) { ?>
                 <div class="events__event">
                     <!-- event -->
                     <div class="event">

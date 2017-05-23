@@ -3,9 +3,10 @@ namespace components\helpers;
 
 class Helpers
 {
+
     /**
-     * Трансформирует дату в привычную для чтения
-     * @sting
+     * @param string $date дата
+     * @return string
      */
     public static function dateVsDots($date)
     {
@@ -15,7 +16,8 @@ class Helpers
 
     /**
      * Возврат короткого описания
-     * @param string $desc
+     *
+     * @param string $desc описание для обрезки
      * @param integer $limit  сколько слов обрезать
      * @return string
      */
@@ -33,6 +35,7 @@ class Helpers
 
     /**
      * Возврат элемента спрайта
+     *
      * @param string $folder Имя спрайта
      * @param string $name Название изображения в спрайте
      * @param array $classes Дополнительные классы
@@ -48,6 +51,7 @@ class Helpers
 
     /**
      * Возврат фоновой картинки
+     *
      * @param string $src имя Изображения
      * @param array $params массив парраметров
      * @return string

@@ -4,6 +4,12 @@ namespace components\widgets\href;
 use yii\base\Widget;
 use yii\bootstrap\Html;
 
+/**
+ * Обертка для ссылки. Аля миксин
+ *
+ * Class Href
+ * @package components\widgets\href
+ */
 class Href extends Widget
 {
     public $url;

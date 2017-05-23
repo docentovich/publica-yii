@@ -1,6 +1,12 @@
 <?php
 namespace app\components\Helpers;
 
+/**
+ * Это пока нахуй не использую.
+ *
+ * Class Bem
+ * @package app\components\Helpers
+ */
 class Bem{
     public static $_block; //текущий блок
     public static $_element; //текущий элемень

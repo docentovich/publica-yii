@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c2df2ed-0cae-4e3e-89a2-6c367720b5eb" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/common/migrations/m170523_000347_image.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/common/migrations/m170523_000349_user_about.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/common/migrations/m170523_000350_user_like.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/common/migrations/m170523_000351_user_group.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/common/migrations/m170523_000352_categori.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/common/migrations/m170523_000353_categori_data.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/common/migrations/m170523_000354_post.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/common/migrations/m170523_000355_post_data.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/common/migrations/m170523_000356_post_to_image.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/common/migrations/m170523_000357_Relations.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/components/helpers/Bem.php" afterPath="$PROJECT_DIR$/app/htdocs/components/helpers/Bem.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/components/helpers/Helpers.php" afterPath="$PROJECT_DIR$/app/htdocs/components/helpers/Helpers.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php" afterPath="$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/components/widgets/href/Href.php" afterPath="$PROJECT_DIR$/app/htdocs/components/widgets/href/Href.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/modules/tosee/controllers/frontend/SiteController.php" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/controllers/frontend/SiteController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/parts/footer.php" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/parts/footer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/site/index.php" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/site/index.php" />
     </list>
     <ignored path="publica.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,12 +30,106 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="m170523_000357_Relations.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/htdocs/console/migrations/m170523_000357_Relations.php">
+      <file leaf-file-name="Header.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32162163">
-              <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+            <state vertical-scroll-proportion="-3.9230769">
+              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Href.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/components/widgets/href/Href.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.576923">
+              <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+              <folding>
+                <element signature="e#39#59#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SiteController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/controllers/backend/SiteController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="7.1923075">
+              <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SiteController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/controllers/frontend/SiteController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.95405406">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Bem.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/components/helpers/Bem.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.6153846">
+              <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Module.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/Module.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.5">
+              <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/bootstrap.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.5384617">
+              <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tosee.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/tosee.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="6.5384617">
+              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="footer.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/parts/footer.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.8846154">
+              <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/site/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.9230769">
+              <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+              <folding>
+                <element signature="e#6#28#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -57,16 +147,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/htdocs/Helpers/Bem.php" />
-        <option value="$PROJECT_DIR$/app/htdocs/components/Helpers/Bem.php" />
         <option value="$PROJECT_DIR$/app/htdocs/environments/dev/frontend/web/index.php" />
         <option value="$PROJECT_DIR$/app/htdocs/components/Helpers/Helpers.php" />
         <option value="$PROJECT_DIR$/app/htdocs/vendor/yiisoft/yii2/BaseYii.php" />
         <option value="$PROJECT_DIR$/app/htdocs/frontend/web/index.php" />
         <option value="$PROJECT_DIR$/app/php.ini" />
         <option value="$PROJECT_DIR$/app/htdocs/common/models/Image.php" />
-        <option value="$PROJECT_DIR$/app/htdocs/modules/tosee/controllers/frontend/SiteController.php" />
-        <option value="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/site/index.php" />
         <option value="$PROJECT_DIR$/app/htdocs/views/widgets/header/Header.php" />
         <option value="$PROJECT_DIR$/app/htdocs/components/views/widgets/header/view.php" />
         <option value="$PROJECT_DIR$/app/htdocs/components/views/widgets/header/Header.php" />
@@ -91,7 +177,6 @@
         <option value="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/site/index.php" />
         <option value="$PROJECT_DIR$/app/htdocs/backend/views/layouts/main.php" />
         <option value="$PROJECT_DIR$/app/htdocs/modules/tosee/extensions/sidebar/Sidebar.php" />
-        <option value="$PROJECT_DIR$/app/htdocs/components/widgets/href/Href.php" />
         <option value="$PROJECT_DIR$/app/htdocs/modules/tosee/widgets/sidebar/Sidebar.php" />
         <option value="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/parts/header.php" />
         <option value="$PROJECT_DIR$/app/htdocs/frontend/web/.gitignore" />
@@ -99,15 +184,20 @@
         <option value="$PROJECT_DIR$/app/htdocs/common/config/bootstrap.php" />
         <option value="$PROJECT_DIR$/app/htdocs/backend/config/main.php" />
         <option value="$PROJECT_DIR$/app/htdocs/templates/main/backend/BackendAsset.php" />
-        <option value="$PROJECT_DIR$/app/htdocs/components/helpers/Helpers.php" />
         <option value="$PROJECT_DIR$/app/htdocs/frontend/controllers/SiteController.php" />
         <option value="$PROJECT_DIR$/app/htdocs/frontend/views/site/error.php" />
         <option value="$PROJECT_DIR$/app/htdocs/composer.json" />
-        <option value="$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php" />
         <option value="$PROJECT_DIR$/app/htdocs/environments/dev/common/config/main-local.php" />
         <option value="$PROJECT_DIR$/app/htdocs/frontend/config/main.php" />
         <option value="$PROJECT_DIR$/app/Dockerfile" />
         <option value="$PROJECT_DIR$/app/htdocs/console/migrations/m170523_000357_Relations.php" />
+        <option value="$PROJECT_DIR$/app/htdocs/components/helpers/Helpers.php" />
+        <option value="$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php" />
+        <option value="$PROJECT_DIR$/app/htdocs/components/widgets/href/Href.php" />
+        <option value="$PROJECT_DIR$/app/htdocs/components/helpers/Bem.php" />
+        <option value="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/parts/footer.php" />
+        <option value="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/site/index.php" />
+        <option value="$PROJECT_DIR$/app/htdocs/modules/tosee/controllers/frontend/SiteController.php" />
       </list>
     </option>
   </component>
@@ -216,54 +306,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="publica" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="publica" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="htdocs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="console" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="publica" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="publica" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="htdocs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="console" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -367,7 +409,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -376,7 +418,7 @@
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35779122" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3192133" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2542662" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -412,7 +454,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/htdocs/components/helpers/Bem.php</url>
-          <line>3</line>
+          <line>9</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -436,30 +478,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/controllers/backend/SiteController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/Module.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23463687">
-          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/controllers/frontend/SiteController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/htdocs/composer.lock">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -472,14 +490,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.8846154">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/components/widgets/href/Href.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
-          <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -600,28 +610,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/components/helpers/Helpers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846">
-          <caret line="62" column="53" selection-start-line="62" selection-start-column="53" selection-end-line="62" selection-end-column="53" />
-          <folding>
-            <marker date="1495550806419" expanded="true" signature="1830:1852" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/htdocs/composer.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2830188">
           <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/site/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846">
-          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -638,14 +630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.3611112">
           <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.0">
-          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -696,14 +680,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.576923">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/frontend/config/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.307693">
-          <caret line="44" column="44" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -766,8 +742,118 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/htdocs/console/migrations/m170523_000357_Relations.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32162163">
-          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+        <state vertical-scroll-proportion="23.038462">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/frontend/config/main-local.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/frontend/config/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-26.0">
+          <caret line="44" column="44" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/components/helpers/Helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="12.576923">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <marker date="1495573438252" expanded="true" signature="1863:1885" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.9230769">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/components/widgets/href/Href.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.576923">
+          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          <folding>
+            <element signature="e#39#59#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/components/helpers/Bem.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6153846">
+          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/Module.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5">
+          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5384617">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/parts/footer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8846154">
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/site/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.9230769">
+          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+          <folding>
+            <element signature="e#6#28#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/tosee.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.5384617">
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/controllers/backend/SiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="7.1923075">
+          <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/controllers/frontend/SiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.95405406">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -35,8 +35,6 @@ class SiteController extends Controller
             ->with(["postData", "image"])
             ->all();
 
-
-
         return $this->render('index', compact('posts'));
     }
 }
