@@ -39,7 +39,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'tosee/site/error',
         ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
@@ -49,7 +49,6 @@ return [
             'rules' => [
                 '/' => 'tosee/site/index',
                 '<action:\w+>' => 'tosee/site/<action>',
-//                'catchAll' => ['site/offline'],
             ],
         ],
         

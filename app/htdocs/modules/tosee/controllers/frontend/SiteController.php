@@ -22,12 +22,29 @@ class SiteController extends Controller
     const PAST = "p";
 
     /**
+     * @var string Задаем лайоут
+     */
+    public $layout = "tosee";
+
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ]
+        ];
+    }
+
+
+    /**
      * Renders the index view for the module
      * @return string
      */
     public function actionIndex()
     {
-        $this->layout = "tosee";
         Yii::$app->view->params['future_past'] = SiteController::FUTURE;
 
         $posts = Post::find()
@@ -36,5 +53,12 @@ class SiteController extends Controller
             ->all();
 
         return $this->render('index', compact('posts'));
+    }
+
+
+
+    public function getPost($id)
+    {
+        return $this->action;
     }
 }
