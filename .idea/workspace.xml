@@ -2,517 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c2df2ed-0cae-4e3e-89a2-6c367720b5eb" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/bootstrap.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/validation/additional-methods.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/validation/jquery.validate.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/_animate.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/_compass.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/_css3.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/_functions.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/_layout.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/_reset-legacy.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/_reset.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/_typography.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/_utilities.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/_links.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/_lists.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/_text.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/_color.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/_general.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/_links.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/_lists.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/_sprites.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/_tables.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/_text.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/general/_reset.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/templates/main/backend/BackendAsset.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/templates/main/backend/assets/css/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/htdocs/templates/main/backend/assets/css/vendor.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/backend/views/site/error.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/backend/views/site/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/backend/views/site/login.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/models/ContactForm.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/models/PasswordResetRequestForm.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/models/ResetPasswordForm.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/models/SignupForm.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/layouts/main.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/site/about.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/site/contact.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/site/error.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/site/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/site/login.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/site/post.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/site/posts.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/site/requestPasswordResetToken.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/site/resetPassword.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/views/site/signup.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/442d5ce0/bloodhound.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/442d5ce0/bloodhound.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/442d5ce0/typeahead.bundle.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/442d5ce0/typeahead.bundle.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/442d5ce0/typeahead.jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/442d5ce0/typeahead.jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/48bda075/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/48bda075/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/48bda075/jquery.min.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/css/main.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/css/vendor.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/admin/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/default.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/dep.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/fotografer.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/logos.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/logos/probank.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/logos/publica.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/logos/shotme.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/logos/tosee.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/model.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people/avocode-kerry.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people/baba.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people/baba1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people/dep.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people/dep1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people/foto1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people/keri.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people/layer-4@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people/layer-4@3x.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/people/tema.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/area.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/by.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/bySm.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/city.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/de.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/england.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/enter.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/espanol.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/fb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/french.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/hamburger.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/hart.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/inst.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/italy.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/like.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/likeSm.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/loopa.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/porto.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/probank-grey.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/publica.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/search.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/shotme-grey.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/to-left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/to-right.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/tosee-grey.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/vk.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/ar-left-w.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/ar-left.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/ar-right-w.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/ar-right.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/hamburger.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/hamburger1.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/kalendar.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/probank-logo.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/shoutme-logo.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/time left.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/time right.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/toosee-logo.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/zoom.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/svg/zoom1.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/tosee.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/tosee/calendar.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/tosee/future.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/tosee/ico-round.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/tosee/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/tosee/past.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/js/main.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/js/vendor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/_bs/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/_bs/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/_bs/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/bootstrap-theme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/bootstrap-theme.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/flexipol-master/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/flexipol-master/example.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/flexipol-master/example/flextest.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/flexipol-master/src/flex_child.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/flexipol-master/src/flex_element.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/flexipol-master/src/flex_parent.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/flexipol-master/src/init.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/flexipol-master/vendor/parsecss.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/slick-theme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/validation/additional-methods.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/validation/jquery.validate.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/validation/jquery.validate.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5fc9d9ad/gii.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5fc9d9ad/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5fc9d9ad/main.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/832029a7/yii.activeForm.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/832029a7/yii.captcha.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/832029a7/yii.gridView.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/832029a7/yii.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/832029a7/yii.validation.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/css/bootstrap-theme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/css/bootstrap-theme.css.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/css/bootstrap-theme.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/css/bootstrap-theme.min.css.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/css/bootstrap.css.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/css/bootstrap.min.css.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/js/bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/js/npm.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/flagrus.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/ajax-loader.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/bootstrap-theme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/bootstrap-theme.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/fancybox/jquery.fancybox.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/fancybox/jquery.fancybox.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/fancybox/jquery.fancybox.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/fancybox/jquery.fancybox.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/ie/html5shiv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/ie/respond.matchmedia.addListener.src.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/ie/respond.src.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/jquery-migrate-3.0.0.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/jquery.cookie.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/jquery.min.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/jquery.mousewheel-3.0.6.pack.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/modernizr-custom.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/polyfills/background_size_emu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/polyfills/flexibility.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/polyfills/placeholders.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/ajax-loader.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/config.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/fonts/slick.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/fonts/slick.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/fonts/slick.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/fonts/slick.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/slick-theme.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/slick-theme.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/slick.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/slick.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/slick.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/slick.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/slick.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/validation/additional-methods.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/validation/additional-methods.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/validation/jquery.validate.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/_animate.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/_compass.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/_css3.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/_functions.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/_layout.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/_reset-legacy.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/_reset.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/_typography.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/_utilities.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/_links.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/_lists.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/_text.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/_color.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/_general.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/_links.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/_lists.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/_sprites.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/_tables.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/_text.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/general/_reset.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/readme.md" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/backend/views/layouts/main.php" afterPath="$PROJECT_DIR$/app/htdocs/templates/main/backend/layouts/main.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/components/views/widgets/header/Header.php" afterPath="$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/components/views/widgets/header/views/view.php" afterPath="$PROJECT_DIR$/app/htdocs/components/widgets/header/views/view.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/components/views/widgets/href/Href.php" afterPath="$PROJECT_DIR$/app/htdocs/components/widgets/href/Href.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/components/views/widgets/sidebar/Sidebar.php" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/widgets/sidebar/Sidebar.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/components/views/widgets/sidebar/views/view.php" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/widgets/sidebar/views/view.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/fonts/glyphicons-halflings-regular.eot" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/fonts/glyphicons-halflings-regular.woff" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/fonts/glyphicons-halflings-regular.woff2" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/fonts/glyphicons-halflings-regular.woff2" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/images/sprite/flagrus.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/flagrus.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/_bs/bootstrap-theme.css" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/bootstrap-theme.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/_bs/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/bootstrap-theme.min.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/_bs/bootstrap.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/bootstrap.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/ajax-loader.gif" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/ajax-loader.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/fancybox/jquery.fancybox.css" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/fancybox/jquery.fancybox.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/fancybox/jquery.fancybox.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/fancybox/jquery.fancybox.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/fancybox/jquery.fancybox.min.css" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/fancybox/jquery.fancybox.min.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/fancybox/jquery.fancybox.min.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/fancybox/jquery.fancybox.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/ie/html5shiv.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/ie/html5shiv.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/ie/respond.matchmedia.addListener.src.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/ie/respond.matchmedia.addListener.src.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/ie/respond.src.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/ie/respond.src.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/jquery-migrate-3.0.0.min.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/jquery-migrate-3.0.0.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/jquery.cookie.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/jquery.cookie.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/jquery.min.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/jquery.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/jquery.min.map" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/jquery.min.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/jquery.mousewheel-3.0.6.pack.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/jquery.mousewheel-3.0.6.pack.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/modernizr-custom.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/modernizr-custom.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/background_size_emu.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/polyfills/background_size_emu.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/flexibility.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/polyfills/flexibility.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/polyfills/placeholders.min.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/polyfills/placeholders.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/ajax-loader.gif" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/ajax-loader.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/config.rb" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/config.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/fonts/slick.eot" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/fonts/slick.eot" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/fonts/slick.svg" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/fonts/slick.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/fonts/slick.ttf" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/fonts/slick.ttf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/fonts/slick.woff" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/fonts/slick.woff" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/slick-theme.less" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/slick-theme.less" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/slick-theme.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/slick-theme.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/slick.css" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/slick.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/slick.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/slick.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/slick.less" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/slick.less" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/slick.min.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/slick.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/slick/slick.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/slick.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/5cc2a987/libs/validation/additional-methods.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/validation/additional-methods.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/css/bootstrap.css" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/bootstrap.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/assets/ca3ef03/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/bootstrap.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/.bowerrc" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/.bowerrc" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/.gitignore" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/.sass-cache/.gitkeep" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/.sass-cache/.gitkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/README.md" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/README.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/block/block.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/block/block.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/block/block.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/block/block.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/block/block.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/block/block.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/body/body.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/body/body.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/body/body.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/body/body.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/body/body.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/body/body.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/button/button.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/button/button.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/button/button.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/button/button.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/button/button.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/button/button.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/chbox/chbox.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/chbox/chbox.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/chbox/chbox.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/chbox/chbox.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/chbox/chbox.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/chbox/chbox.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/city/city.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/city/city.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/city/city.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/city/city.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/city/city.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/city/city.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/content-message/content-message.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/content-message/content-message.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/content-message/content-message.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/content-message/content-message.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/content-message/content-message.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/content-message/content-message.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/content-page/content-page.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/content-page/content-page.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/content-page/content-page.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/content-page/content-page.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/content-page/content-page.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/content-page/content-page.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/content/content.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/content/content.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/content/content.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/content/content.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/content/content.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/content/content.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/form-line/form-line.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/form-line/form-line.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/form-line/form-line.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/form-line/form-line.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/form-line/form-line.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/form-line/form-line.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/form/form.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/form/form.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/form/form.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/form/form.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/form/form.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/form/form.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/h1/h1.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/h1/h1.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/h1/h1.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/h1/h1.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/h1/h1.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/h1/h1.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/header/header.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/header/header.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/header/header.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/header/header.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/header/header.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/header/header.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/hidden-sidebar/hidden-sidebar.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/hidden-sidebar/hidden-sidebar.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/hidden-sidebar/hidden-sidebar.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/hidden-sidebar/hidden-sidebar.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/hidden-sidebar/hidden-sidebar.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/hidden-sidebar/hidden-sidebar.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/img/img.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/img/img.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/input/input.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/input/input.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/input/input.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/input/input.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/lang/lang.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/lang/lang.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/lang/lang.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/lang/lang.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/lang/lang.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/lang/lang.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/link/link.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/link/link.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/login/login.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/login/login.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/login/login.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/login/login.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/login/login.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/login/login.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/menu-block/menu-block.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/menu-block/menu-block.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/menu-block/menu-block.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/menu-block/menu-block.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/menu-block/menu-block.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/menu-block/menu-block.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/menu/menu.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/menu/menu.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/menu/menu.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/menu/menu.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/menu/menu.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/menu/menu.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/sidebar/sidebar.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/sidebar/sidebar.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/sidebar/sidebar.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/sidebar/sidebar.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/sidebar/sidebar.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/sidebar/sidebar.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/userpan/userpan.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/userpan/userpan.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/userpan/userpan.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/userpan/userpan.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/blocks/userpan/userpan.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/blocks/userpan/userpan.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/css/.getkeep" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/css/.getkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/css/main.css.map" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/css/main.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/favicon.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/favicon.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/.getkeep" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/.getkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/default.jpg" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/default.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/logo.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/logo.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/.getkeep" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/.getkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/checkbox.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/checkbox.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/city.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/city.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/de.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/de.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/england.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/england.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/espanol.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/espanol.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/exit.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/exit.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/french.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/french.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/italy.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/italy.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/pointer.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/pointer.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/porto.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/porto.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/probank.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/probank.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/publica.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/publica.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/shotme.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/shotme.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/sprite/tosee.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/sprite/tosee.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/images/tema.png" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/images/tema.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/includes/bemto.html" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/includes/bemto.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/includes/lib/bemto.html" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/includes/lib/bemto.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/includes/lib/bemto_custom_tag.html" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/includes/lib/bemto_custom_tag.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/includes/lib/bemto_tag.html" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/includes/lib/bemto_tag.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/includes/lib/helpers.html" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/includes/lib/helpers.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/includes/lib/index.html" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/includes/lib/index.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/includes/lib/settings.html" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/includes/lib/settings.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/includes/lib/tag_metadata.html" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/includes/lib/tag_metadata.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/includes/mixins.html" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/includes/mixins.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/director.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/director.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/fotograf.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/fotograf.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/includes/bemto.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/includes/bemto.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/includes/lib/bemto.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/includes/lib/bemto.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/includes/lib/bemto_custom_tag.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/includes/lib/bemto_custom_tag.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/includes/lib/bemto_tag.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/includes/lib/bemto_tag.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/includes/lib/helpers.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/includes/lib/helpers.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/includes/lib/index.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/includes/lib/index.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/includes/lib/settings.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/includes/lib/settings.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/includes/lib/tag_metadata.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/includes/lib/tag_metadata.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/includes/mixins.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/includes/mixins.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/index.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/index.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/model.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/model.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/moderator.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/moderator.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/redactor.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/redactor.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/shotme1.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/shotme1.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/shotme2.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/shotme2.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/template/footer.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/template/footer.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/template/header.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/template/header.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/jade/userpanel.jade" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/jade/userpanel.jade" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/js/.getkeep" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/js/.getkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/js/template.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/js/template.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/slick/slick-theme.css" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/slick/slick-theme.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/libs/validation/jquery.validate.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/libs/validation/jquery.validate.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/_lemonade.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/_lemonade.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/_mixins.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/_mixins.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/_animate.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/_animate.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/_core.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/_core.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/_shared.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/_shared.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/_attention-seekers.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/_attention-seekers.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/_bouncing.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/_bouncing.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/_classes.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/_classes.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/_fading.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/_fading.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/_flippers.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/_flippers.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/_lightspeed.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/_lightspeed.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/_rotating.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/_rotating.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/_specials.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/_specials.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/bouncing/_bouncing-entrances.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/bouncing/_bouncing-entrances.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/bouncing/_bouncing-exits.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/bouncing/_bouncing-exits.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/fading/_fading-entrances.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/fading/_fading-entrances.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/fading/_fading-exits.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/fading/_fading-exits.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/rotating/_rotating-entrances.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/rotating/_rotating-entrances.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/animation/animate/rotating/_rotating-exits.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/animation/animate/rotating/_rotating-exits.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/_support.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/_support.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_animation.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_animation.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_appearance.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_appearance.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_background-clip.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_background-clip.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_background-origin.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_background-origin.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_background-size.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_background-size.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_border-radius.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_border-radius.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_box-shadow.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_box-shadow.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_box-sizing.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_box-sizing.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_box.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_box.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_columns.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_columns.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_filter.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_filter.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_flexbox.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_flexbox.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_font-face.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_font-face.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_hyphenation.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_hyphenation.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_images.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_images.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_inline-block.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_inline-block.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_opacity.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_opacity.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_pie.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_pie.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_regions.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_regions.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_shared.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_shared.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_text-shadow.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_text-shadow.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_transform-legacy.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_transform-legacy.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_transform.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_transform.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_transition.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_transition.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/css3/_user-interface.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/css3/_user-interface.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/functions/_colors.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/functions/_colors.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/functions/_constants.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/functions/_constants.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/functions/_cross_browser_support.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/functions/_cross_browser_support.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/functions/_display.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/functions/_display.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/functions/_gradient_support.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/functions/_gradient_support.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/functions/_lists.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/functions/_lists.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/layout/_grid-background.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/layout/_grid-background.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/layout/_sticky-footer.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/layout/_sticky-footer.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/layout/_stretching.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/layout/_stretching.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/reset/_utilities-legacy.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/reset/_utilities-legacy.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/reset/_utilities.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/reset/_utilities.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/_vertical_rhythm.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/_vertical_rhythm.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/links/_hover-link.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/links/_hover-link.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/links/_link-colors.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/links/_link-colors.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/links/_unstyled-link.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/links/_unstyled-link.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/lists/_bullets.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/lists/_bullets.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/lists/_horizontal-list.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/lists/_horizontal-list.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/lists/_inline-block-list.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/lists/_inline-block-list.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/lists/_inline-list.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/lists/_inline-list.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/text/_ellipsis.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/text/_ellipsis.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/text/_force-wrap.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/text/_force-wrap.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/text/_nowrap.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/text/_nowrap.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/typography/text/_replacement.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/typography/text/_replacement.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/_print.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/_print.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/color/_contrast.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/color/_contrast.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/general/_clearfix.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/general/_clearfix.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/general/_float.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/general/_float.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/general/_hacks.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/general/_hacks.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/general/_min.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/general/_min.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/general/_tabs.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/general/_tabs.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/general/_tag-cloud.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/general/_tag-cloud.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/links/_hover-link.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/links/_hover-link.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/links/_link-colors.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/links/_link-colors.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/links/_unstyled-link.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/links/_unstyled-link.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/lists/_bullets.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/lists/_bullets.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/lists/_horizontal-list.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/lists/_horizontal-list.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/lists/_inline-block-list.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/lists/_inline-block-list.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/lists/_inline-list.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/lists/_inline-list.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/sprites/_base.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/sprites/_base.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/sprites/_sprite-img.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/sprites/_sprite-img.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/tables/_alternating-rows-and-columns.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/tables/_alternating-rows-and-columns.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/tables/_borders.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/tables/_borders.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/tables/_scaffolding.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/tables/_scaffolding.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/text/_ellipsis.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/text/_ellipsis.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/text/_nowrap.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/text/_nowrap.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/compass/utilities/text/_replacement.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/compass/utilities/text/_replacement.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/fonts.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/fonts.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/includes/normalize.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/includes/normalize.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/main.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/main.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/develop/scss/sprite.scss" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/develop/scss/sprite.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/gulpfile.js" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/gulpfile.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/toseeadmin/package.json" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/backend/toseeadmin/package.json" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/assets/.gitignore" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/backend/config/main.php" afterPath="$PROJECT_DIR$/app/htdocs/backend/config/main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/common/config/bootstrap.php" afterPath="$PROJECT_DIR$/app/htdocs/common/config/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/components/helpers/Helpers.php" afterPath="$PROJECT_DIR$/app/htdocs/components/helpers/Helpers.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/frontend/config/main.php" afterPath="$PROJECT_DIR$/app/htdocs/frontend/config/main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/frontend/controllers/SiteController.php" afterPath="$PROJECT_DIR$/app/htdocs/frontend/controllers/SiteController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/frontend/web/.gitignore" afterPath="$PROJECT_DIR$/app/htdocs/frontend/web/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/parts/header.php" afterPath="$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/parts/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/nginx.conf" afterPath="$PROJECT_DIR$/app/nginx.conf" />
     </list>
     <ignored path="publica.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -544,6 +35,26 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Dockerfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.185185">
+              <caret line="28" column="62" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Header.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.54864866">
+              <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/site/index.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -566,11 +77,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nginx.conf" pinned="false" current-in-tab="true">
+      <file leaf-file-name="nginx.conf" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/nginx.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3260274">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/htdocs/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.2830188">
+              <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -592,18 +113,6 @@
             <state vertical-scroll-proportion="-5.1923075">
               <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Helpers.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/htdocs/components/helpers/Helpers.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.153846">
-              <caret line="62" column="53" selection-start-line="62" selection-start-column="53" selection-end-line="62" selection-end-column="53" />
-              <folding>
-                <marker date="1495550806419" expanded="true" signature="1830:1852" placeholder="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -648,7 +157,6 @@
         <option value="$PROJECT_DIR$/app/htdocs/components/views/widgets/sidebar/Sidebar.php" />
         <option value="$PROJECT_DIR$/app/Dockerfile" />
         <option value="$PROJECT_DIR$/app/htdocs/common/config/main.php" />
-        <option value="$PROJECT_DIR$/app/htdocs/composer.json" />
         <option value="$PROJECT_DIR$/app/nginx.conf" />
         <option value="$PROJECT_DIR$/app/htdocs/common/models/UserAbout.php" />
         <option value="$PROJECT_DIR$/app/htdocs/common/models/UserGroup.php" />
@@ -672,6 +180,7 @@
         <option value="$PROJECT_DIR$/app/htdocs/frontend/controllers/SiteController.php" />
         <option value="$PROJECT_DIR$/app/htdocs/frontend/views/site/error.php" />
         <option value="$PROJECT_DIR$/app/htdocs/frontend/config/main.php" />
+        <option value="$PROJECT_DIR$/app/htdocs/composer.json" />
       </list>
     </option>
   </component>
@@ -762,6 +271,152 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="htdocs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="htdocs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tosee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="htdocs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tosee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="htdocs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tosee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="publica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="htdocs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tosee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -781,13 +436,13 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="829" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="155" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="154" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="153" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="151" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="155" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="154" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="829" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="820" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
@@ -869,12 +524,12 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2764505" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.301059" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.301059" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2542662" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -934,13 +589,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/parts/sidebarmenu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.653847">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/layouts/parts/sidebarsearch.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6153846">
@@ -969,13 +617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
-          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -1135,14 +776,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3076923">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/htdocs/components/widgets/href/Href.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.65384614">
@@ -1251,14 +884,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.148148">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.9315069">
@@ -1271,14 +896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5516224">
           <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/site/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846">
-          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1301,10 +918,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/backend/config/main.php">
+    <entry file="file://$PROJECT_DIR$/app/htdocs/frontend/config/main.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.653846">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+        <state vertical-scroll-proportion="-9.769231">
+          <caret line="61" column="14" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/nginx.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.2830188">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1319,18 +952,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/htdocs/frontend/config/main.php">
+    <entry file="file://$PROJECT_DIR$/app/htdocs/modules/tosee/views/frontend/site/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.769231">
-          <caret line="61" column="14" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
+        <state vertical-scroll-proportion="-9.153846">
+          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/nginx.conf">
+    <entry file="file://$PROJECT_DIR$/app/htdocs/backend/config/main.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3260274">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state vertical-scroll-proportion="-15.653846">
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.185185">
+          <caret line="28" column="62" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/htdocs/components/widgets/header/Header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54864866">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
           <folding />
         </state>
       </provider>
