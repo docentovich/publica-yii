@@ -15,8 +15,9 @@ use \components\helpers\Helpers;
                                 (
                                     Helpers::bgImage
                                     (
-                                        $post->image->src,
-                                        ["size" => "350X390", "block" => "event", "user_id" => $post->user_id]
+                                        $post->image->patch,
+                                        $post->image->name,
+                                        ["size" => "350X390", "block" => "event"]
                                     ), //передаем html вывода картинки
                                     "/tosee/post/{$post->id}"
                                 );

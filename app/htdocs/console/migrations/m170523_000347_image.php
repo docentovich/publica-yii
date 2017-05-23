@@ -21,7 +21,7 @@ class m170523_000347_image extends Migration
             [
                 'id' => $this->primaryKey(10),
                 'alt' => $this->string(70)->null()->defaultValue(null),
-                'patch' => $this->string(150)->null()->defaultValue(null),
+                'patch' => $this->string(150)->null()->defaultValue(''),
                 'name' => $this->string(40)->notNull(),
                 'extension' => $this->char(4)->notNull()->defaultValue('jpg'),
             ],
@@ -34,7 +34,7 @@ class m170523_000347_image extends Migration
                 [
                     'id' => '1',
                     'alt' => 'noimage',
-                    'patch' => null,
+                    'patch' => '',
                     'name' => 'noimage',
                     'extension' => 'jpg',
                 ],

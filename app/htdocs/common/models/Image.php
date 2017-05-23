@@ -8,13 +8,13 @@ use Yii;
  * This is the model class for table "{{%image}}".
  *
  * @property int $id
- * @property int $user_id Владелец. fkey
- * @property string $src
  * @property string $alt
+ * @property string $patch
+ * @property string $name
+ * @property string $extension
  *
- * @property User $user
  * @property Post[] $posts
- * @property PostImage[] $postImages
+ * @property PostToImage[] $postToImages
  * @property Post[] $posts0
  */
 class Image extends \yii\db\ActiveRecord
@@ -33,10 +33,11 @@ class Image extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'integer'],
-            [['src'], 'required'],
-            [['src'], 'string', 'max' => 32],
+            [['name'], 'required'],
             [['alt'], 'string', 'max' => 70],
+            [['patch'], 'string', 'max' => 150],
+            [['name'], 'string', 'max' => 40],
+            [['extension'], 'string', 'max' => 4],
         ];
     }
 
@@ -47,11 +48,12 @@ class Image extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'src' => 'Src',
             'alt' => 'Alt',
+            'patch' => 'Patch',
+            'name' => 'Name',
+            'extension' => 'Extension',
         ];
     }
-
 
     /**
      * @return \yii\db\ActiveQuery
@@ -64,9 +66,9 @@ class Image extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPostImages()
+    public function getPostToImages()
     {
-        return $this->hasMany(PostImage::className(), ['image_id' => 'id']);
+        return $this->hasMany(PostToImage::className(), ['image_id' => 'id']);
     }
 
     /**
@@ -74,6 +76,6 @@ class Image extends \yii\db\ActiveRecord
      */
     public function getPosts0()
     {
-        return $this->hasMany(Post::className(), ['id' => 'post_id'])->viaTable('{{%post_image}}', ['image_id' => 'id']);
+        return $this->hasMany(Post::className(), ['id' => 'post_id'])->viaTable('{{%post_to_image}}', ['image_id' => 'id']);
     }
 }

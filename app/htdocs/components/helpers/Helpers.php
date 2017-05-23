@@ -52,11 +52,12 @@ class Helpers
     /**
      * Возврат фоновой картинки
      *
-     * @param string $src имя Изображения
+     * @param string $patch путь до изображения
+     * @param string $name имя изображения
      * @param array $params массив парраметров
      * @return string
      */
-    public static function bgImage($src, $params = []){
+    public static function bgImage($patch, $name, $params = []){
 
         if(!isset($params['size'])) $params['size'] = "";
         if(isset($params['block'])) $params['classes'][] = $params['block']. "__img";
@@ -64,7 +65,7 @@ class Helpers
 //        if(isset($params['user_id'])) $params['user_id'] .= "/";
 
         $params['classes'][] = "img-well";
-        return '<i style="background-image: url(\'' . $src . $params['size'] . '.' . $params['extension'] . '\')"  class="' . implode(" ", $params['classes']) . '"></i>';
+        return '<i style="background-image: url(\'/uploads/' . $patch . $name . $params['size'] . '.' . $params['extension'] . '\')"  class="' . implode(" ", $params['classes']) . '"></i>';
     }
 
 }
