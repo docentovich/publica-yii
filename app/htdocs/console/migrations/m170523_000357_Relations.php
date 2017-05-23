@@ -14,11 +14,11 @@ class m170523_000357_Relations extends Migration
 
     public function safeUp()
     {
-        $this->addForeignKey('fk_tbl_user_profile_user_id',
-            '{{%user_profile}}','user_id',
-            '{{%user}}','id',
-            'CASCADE','CASCADE'
-         );
+//        $this->addForeignKey('fk_tbl_user_profile_user_id',
+//            '{{%user_profile}}','user_id',
+//            '{{%user}}','id',
+//            'CASCADE','CASCADE'
+//         );
         $this->addForeignKey('fk_tbl_user_about_user_id',
             '{{%user_about}}','user_id',
             '{{%user}}','id',
@@ -58,7 +58,7 @@ class m170523_000357_Relations extends Migration
 
     public function safeDown()
     {
-        $this->dropForeignKey('fk_tbl_user_profile_user_id', '{{%user_profile}}');
+//        $this->dropForeignKey('fk_tbl_user_profile_user_id', '{{%user_profile}}');
         $this->dropForeignKey('fk_tbl_user_about_user_id', '{{%user_about}}');
         $this->dropForeignKey('fk_tbl_user_like_user_id', '{{%user_like}}');
         $this->dropForeignKey('fk_tbl_post_user_id', '{{%post}}');
