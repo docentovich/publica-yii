@@ -15,6 +15,8 @@ class Helpers
 
     /**
      * Возврат короткого описания
+     * @param string $desc
+     * @param integer $limit  сколько слов обрезать
      * @return string
      */
     public static function shortDesc($desc, $limit = 0)
@@ -31,8 +33,8 @@ class Helpers
 
     /**
      * Возврат элемента спрайта
-     * @param $folder Имя спрайта
-     * @param $name Название изображения в спрайте
+     * @param string $folder Имя спрайта
+     * @param string $name Название изображения в спрайте
      * @param array $classes Дополнительные классы
      * @return string
      */
@@ -52,13 +54,13 @@ class Helpers
      */
     public static function bgImage($src, $params = []){
 
-        if(!isset($params['size'])) $params['size'] = "_450X450";
+        if(!isset($params['size'])) $params['size'] = "";
         if(isset($params['block'])) $params['classes'][] = $params['block']. "__img";
         if(!isset($params['extension'])) $params['extension'] = "jpg";
-        if(isset($params['user_id'])) $params['user_id'] .= "/";
+//        if(isset($params['user_id'])) $params['user_id'] .= "/";
 
         $params['classes'][] = "img-well";
-        return '<i style="background-image: url(\'/images/' . $params['user_id'] . $src . $params['size'] . '.' . $params['extension'] . '\')"  class="' . implode(" ", $params['classes']) . '"></i>';
+        return '<i style="background-image: url(\'' . $src . $params['size'] . '.' . $params['extension'] . '\')"  class="' . implode(" ", $params['classes']) . '"></i>';
     }
 
 }

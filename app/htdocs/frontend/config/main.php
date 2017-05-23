@@ -57,6 +57,8 @@ return [
             'enableStrictParsing' => true,
             'rules' => [
                 '/' => 'tosee/site/index',
+                '<action:\w+>' => 'tosee/site/<action>',
+//                'catchAll' => ['site/offline'],
             ],
         ],
         

@@ -1,6 +1,6 @@
 <?
-use components\views\widgets\sidebar\Sidebar;
-echo \components\views\widgets\header\Header::widget(["logo" => "publica"]); //верхняя плашечка. она едина для всех частейы
+use modules\tosee\widgets\sidebar\Sidebar;
+echo \components\widgets\header\Header::widget(["logo" => "publica"]); //верхняя плашечка. она едина для всех частейы
 ?>
 <!-- header1 -->
 <div class="header1">

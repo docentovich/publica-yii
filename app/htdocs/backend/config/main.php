@@ -50,6 +50,7 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
         
 //         'urlManager' => [
 //             'enablePrettyUrl' => true,
@@ -61,4 +62,7 @@ return [
         
     ],
     'params' => $params,
+    'layoutPath' => '@templates/main/backend/layouts',
+    'layout' => 'main',
+
 ];
