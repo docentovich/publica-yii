@@ -48,7 +48,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'tosee/site/error',
         ],
 
         

@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use console\migrations\Migration;
 
 class m170523_000357_Relations extends Migration
 {

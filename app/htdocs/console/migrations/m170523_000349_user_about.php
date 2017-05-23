@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use console\migrations\Migration;
 
 class m170523_000349_user_about extends Migration
 {
@@ -21,7 +21,7 @@ class m170523_000349_user_about extends Migration
             [
                 'user_id'=> $this->primaryKey(10),
                 'about'=> $this->text()->notNull(),
-            ],$tableOptions
+            ],$this->tableOptions
         );
 
     }

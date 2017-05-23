@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use console\migrations\Migration;
 
 class m170523_000356_post_to_image extends Migration
 {
@@ -21,7 +21,7 @@ class m170523_000356_post_to_image extends Migration
             [
                 'post_id'=> $this->integer(10)->notNull(),
                 'image_id'=> $this->integer(10)->notNull(),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->createIndex('post_id','{{%post_to_image}}',['post_id'],false);
         $this->createIndex('image_id','{{%post_to_image}}',['image_id'],false);

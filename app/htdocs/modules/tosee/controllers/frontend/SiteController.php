@@ -57,8 +57,10 @@ class SiteController extends Controller
 
 
 
-    public function getPost($id)
+    public function postAction($id)
     {
+        var_dump($id);
+        die;
         return $this->action;
     }
 }
