@@ -19,7 +19,7 @@ class UserGroup extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%userGroup}}';
+        return '{{%user_group}}';
     }
 
     /**

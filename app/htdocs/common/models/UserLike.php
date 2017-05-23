@@ -20,7 +20,7 @@ class UserLike extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%userLike}}';
+        return '{{%user_like}}';
     }
 
     /**

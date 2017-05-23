@@ -9,23 +9,31 @@ $params = array_merge(
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
-    'defaultRoute' => 'tosee/site/index',
+    'defaultRoute' => '/user/settings/profile',
 //    'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
         'tosee' => [
             'isBackend' => true,
-        ]
+        ],
+        'modules' => [
+            'user' => [
+                // following line will restrict access to profile, recovery, registration and settings controllers from backend
+                'as backend' => 'dektrium\user\filters\BackendFilter',
+            ],
+        ],
+        'rbac' => 'dektrium\rbac\RbacWebModule',
+
     ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
-        ],
+//        'user' => [
+//            'identityClass' => 'common\models\User',
+//            'enableAutoLogin' => true,
+//            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+//        ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
@@ -43,12 +51,13 @@ return [
             'errorAction' => 'site/error',
         ],
         
-        // 'urlManager' => [
-        //     'enablePrettyUrl' => true,
-        //     'showScriptName' => false,
-        //     'rules' => [
-        //     ],
-        // ],
+//         'urlManager' => [
+//             'enablePrettyUrl' => true,
+//             'showScriptName' => false,
+//             'rules' => [
+//                 '/user/settings/profile' =>
+//             ],
+//         ],
         
     ],
     'params' => $params,

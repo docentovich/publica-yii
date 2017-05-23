@@ -18,6 +18,9 @@ return [
         'tosee' => [
             'class' => 'modules\tosee\Module',
         ],
+        'user' => [
+            'class' => 'dektrium\user\Module',
+        ],
     ],
 
 ];
