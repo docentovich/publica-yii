@@ -11,13 +11,13 @@ class Header extends Widget
 {
     public $logo;
 
-    public function init()
-    {
-        parent::init();
-    }
+public function init()
+{
+    parent::init();
+}
 
-    public function run()
-    {
-        return $this->render("view", ["logo" => $this->logo]);
-    }
+public function run()
+{
+    return $this->render("view", ["logo" => $this->logo]);
+}
 }

@@ -25,11 +25,12 @@ RUN apt-get update \
 RUN apt-get install curl\
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin \
     && ln -s /usr/local/bin/composer.phar /usr/local/bin/composer \
-    && composer.phar global require --no-progress "fxp/composer-asset-plugin:~1.2.2" \
+    && composer.phar global require "fxp/composer-asset-plugin:^1.3.1"
     && composer.phar global require --no-progress "codeception/codeception=2.0.*" \
     && composer.phar global require --no-progress "codeception/specify=*" \
     && composer.phar global require --no-progress "codeception/verify=*"
 
+ RUN composer self-update
 
 # Xdebug
 RUN yes | pecl install xdebug \
