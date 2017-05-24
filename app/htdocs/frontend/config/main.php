@@ -47,8 +47,8 @@ return [
             'showScriptName' => false,
             'enableStrictParsing' => true,
             'rules' => [
-                '/' => 'tosee/site/index',
-                '<action:\w+>' => 'tosee/site/<action>',
+//                '/' => 'tosee/site/index',
+//                '/tosee/<action:\w+>' => 'tosee/site/<action>',
             ],
         ],
         

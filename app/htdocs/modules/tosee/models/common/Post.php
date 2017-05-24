@@ -90,14 +90,11 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getPostImages()
     {
-        return $this->hasMany(PostImage::className(), ['post_id' => 'id']);
+        return $this->hasMany(Image::className(), ['id' => 'image_id'])
+            ->viaTable("{{%post_to_image}}", ['post_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImages()
-    {
-        return $this->hasMany(Image::className(), ['id' => 'image_id'])->viaTable('{{%post_image}}', ['post_id' => 'id']);
-    }
+
+
+
 }

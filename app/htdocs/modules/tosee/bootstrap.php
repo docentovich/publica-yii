@@ -12,8 +12,8 @@ class Bootstrap implements BootstrapInterface
         $app->getUrlManager()->addRules(
             [
                 // объявление правил здесь
-                '' => 'tosee/default/index',
-                '<_a:(about|contacts)>' => 'tosee/site/<_a>'
+                '' => 'tosee/site/index',
+                'tosee/<action:\w+>/<id:\w+>' => 'tosee/site/<action>'
             ]
         );
     }

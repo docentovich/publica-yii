@@ -1,4 +1,4 @@
-<?
+<?php
 use modules\tosee\widgets\sidebar\Sidebar;
 echo \components\widgets\header\Header::widget(["logo" => "publica"]); //верхняя плашечка. она едина для всех частейы
 ?>
@@ -9,7 +9,8 @@ echo \components\widgets\header\Header::widget(["logo" => "publica"]); //вер�
             <div class="col-xs-24">
                 <img src="<?= $bundle->baseUrl; ?>/images/logo.png" class="header1__logo" alt="" role="presentation"/>
 
-                <div class="header1__controls1"><!-- controls1 -->
+                <div class="header1__controls1">
+                    <!-- controls1 -->
                     <div class="controls1">
                         <div rel="menu" class="controls1__conrol1">
 
@@ -26,7 +27,8 @@ echo \components\widgets\header\Header::widget(["logo" => "publica"]); //вер�
 
                             </div>
                         </div>
-                    </div><!--/ controls1 -->
+                    </div>
+                    <!--/ controls1 -->
                 </div>
 
                 <? Sidebar::begin(["id" => "menu"]); ?>

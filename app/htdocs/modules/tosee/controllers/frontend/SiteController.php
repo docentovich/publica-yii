@@ -40,6 +40,8 @@ class SiteController extends Controller
 
 
     /**
+     * Экшен вывода постов по условиям
+     *
      * Renders the index view for the module
      * @return string
      */
@@ -48,7 +50,6 @@ class SiteController extends Controller
         Yii::$app->view->params['future_past'] = SiteController::FUTURE;
 
         $posts = Post::find()
-            //->where(["1" => "1"])
             ->with(["postData", "image"])
             ->all();
 
@@ -56,11 +57,19 @@ class SiteController extends Controller
     }
 
 
-
-    public function postAction($id)
+    /**
+     * Экшен поста
+     *
+     * @param integer $id ид поста
+     * @return string
+     */
+    public function actionPost($id)
     {
-        var_dump($id);
-        die;
-        return $this->action;
+        $post = Post::find($id)
+//            ->where(["id" => ])
+            ->with(["postData", "image"])
+            ->one();
+
+        return $this->render('post', compact('post'));
     }
 }

@@ -1,7 +1,9 @@
 <?php
 namespace components\helpers;
 
-class Helpers
+use yii\helpers\Html;
+
+class Helpers extends Html
 {
 
     /**
@@ -17,20 +19,25 @@ class Helpers
     /**
      * Возврат короткого описания
      *
-     * @param string $desc описание для обрезки
-     * @param integer $limit  сколько слов обрезать
-     * @return string
+     * @param string $str строка
+     * @param int $length длина, до скольки символов обрезать
+     * @param string $postfix постфикс, который добавляется к строке
+     * @param string $encoding кодировка, по-умолчанию 'UTF-8'
+     * @return string обрезанная строка
      */
-    public static function shortDesc($desc, $limit = 0)
+    function cutStringSimbols($str, $length = 0, $postfix='...', $encoding='UTF-8')
     {
-        $desc = strip_tags(trim($desc));
-        $desc = preg_replace("/[^[:print:]]/", "", $desc);
+        $str = strip_tags(trim($str));
 
-        if($limit){
-            $desc  =  implode(' ', array_slice(str_word_count($desc,1), 0, $limit));
+        if($length == 0) return $str;
+
+        if (mb_strlen($str, $encoding) <= $length) {
+            return $str;
         }
 
-        return $desc;
+        $tmp = mb_substr($str, 0, $length, $encoding);
+        $a = mb_substr($tmp, 0, mb_strripos($tmp, ' ', 0, $encoding), $encoding) . $postfix;
+        return $a;
     }
 
     /**
@@ -38,14 +45,14 @@ class Helpers
      *
      * @param string $folder Имя спрайта
      * @param string $name Название изображения в спрайте
-     * @param array $classes Дополнительные классы
+     * @param array $class Дополнительные классы
      * @return string
      */
-    public static function i($folder, $name,  $classes = []){
-        $classes[] = "sp-{$folder}";
-        $classes[] = "sprite-img";
-        $classes[] = "sp-{$folder}__{$name}";
-        return "<i class='" . implode(" ", $classes) . "'></i>";
+    public static function i($folder, $name,  $class = []){
+        $class[] = "sp-{$folder}";
+        $class[] = "sprite-img";
+        $class[] = "sp-{$folder}__{$name}";
+        return "<i class='" . implode(" ", $class) . "'></i>";
     }
 
 
@@ -60,12 +67,22 @@ class Helpers
     public static function bgImage($patch, $name, $params = []){
 
         if(!isset($params['size'])) $params['size'] = "";
-        if(isset($params['block'])) $params['classes'][] = $params['block']. "__img";
+        if(isset($params['block'])) $params['class'] .= " " . $params['block']. "__img";
         if(!isset($params['extension'])) $params['extension'] = "jpg";
+
+        if(!isset($params['class'])) $params['class'] = "";
+        if(is_array($params['class'])) $params['class'] = implode(" ", $params['class']);
+
 //        if(isset($params['user_id'])) $params['user_id'] .= "/";
 
-        $params['classes'][] = "img-well";
-        return '<i style="background-image: url(\'/uploads/' . $patch . $name . $params['size'] . '.' . $params['extension'] . '\')"  class="' . implode(" ", $params['classes']) . '"></i>';
+        $params['class'] .= " img-well ";
+
+        //если нет файла искомого размера возмем оригинал
+        if(!file_exists(__DIR__ . "/../../frontend/web/uploads/" . $patch . $name . $params['size'] . '.' . $params['extension']))
+            $params['size'] = "_origin";
+        return '<i style="background-image: url(\'/uploads/' . $patch . $name . $params['size'] . '.' . $params['extension'] . '\')"  class="' . $params['class'] . '"></i>';
     }
+
+
 
 }
