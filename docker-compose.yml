@@ -32,6 +32,7 @@ services:
        - MYSQL_USER=root
        - MYSQL_ROOT_PASSWORD=secret
        - MYSQL_PASSWORD=secret
+       - MYSQL_DATABASE=tosee
     ports:
       - '3306:3306'
     volumes:

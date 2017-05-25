@@ -31,13 +31,13 @@ echo \components\widgets\header\Header::widget(["logo" => "publica"]); //вер�
                     <!--/ controls1 -->
                 </div>
 
-                <? Sidebar::begin(["id" => "menu"]); ?>
-                <? require_once "sidebarmenu.php"; ?>
-                <? Sidebar::end(); ?>
+                <?php Sidebar::begin(["id" => "menu"]); ?>
+                <?php require_once "sidebarmenu.php"; ?>
+                <?php Sidebar::end(); ?>
 
-                <? Sidebar::begin(["id" => "search", "modif" => "sidebar_search"]); ?>
-                <? require_once "sidebarsearch.php"; ?>
-                <? Sidebar::end(); ?>
+                <?php Sidebar::begin(["id" => "search", "modif" => "sidebar_search"]); ?>
+                <?php require_once "sidebarsearch.php"; ?>
+                <?php Sidebar::end(); ?>
             </div>
         </div>
     </div>

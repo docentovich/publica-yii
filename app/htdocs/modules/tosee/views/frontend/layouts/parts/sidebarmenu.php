@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    <? /*
+    <?php /*
     <div class="menu__group">
         <div class="menu__header">Конкурсы
         </div>
