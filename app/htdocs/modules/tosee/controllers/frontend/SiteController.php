@@ -27,6 +27,27 @@ class SiteController extends Controller
     public $layout = "tosee";
 
     /**
+     * @var int Текущая старница
+     */
+    public $page = 1;
+
+    /**
+     * @var int Итого на странице
+     */
+    public $total_items;
+
+    /**
+     * @var Будущее или прошло?
+     */
+    public $future_or_past;
+
+    /**
+     * @var int Лимит итемов на страницу
+     */
+    public $limit_per_page = 20;
+
+
+    /**
      * @inheritdoc
      */
     public function actions()
@@ -45,13 +66,16 @@ class SiteController extends Controller
      * Renders the index view for the module
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($page = 1)
     {
-        Yii::$app->view->params['future_past'] = SiteController::FUTURE;
+        $this->page  = $page;
+        
+        //передаем в лайоут будущее
+        Yii::$app->view->params['navigation_label'] = "Что будет";
 
-        $posts = Post::find()
-            ->with(["postData", "image"])
-            ->all();
+
+
+        $posts = Post::get_future_posts();
 
         return $this->render('index', compact('posts'));
     }
@@ -66,10 +90,11 @@ class SiteController extends Controller
     public function actionPost($id)
     {
         $post = Post::find($id)
-//            ->where(["id" => ])
             ->with(["postData", "image"])
             ->one();
 
         return $this->render('post', compact('post'));
     }
+    
+    
 }
