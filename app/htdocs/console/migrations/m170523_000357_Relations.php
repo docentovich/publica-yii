@@ -54,6 +54,12 @@ class m170523_000357_Relations extends Migration
             '{{%post}}','id',
             'CASCADE','CASCADE'
          );
+        $this->addForeignKey('fk_tbl_categori_data_categori_id',
+            '{{%categori_data}}','categori_id',
+            '{{%categori}}','id',
+            'CASCADE','CASCADE'
+        );
+
     }
 
     public function safeDown()
@@ -66,5 +72,6 @@ class m170523_000357_Relations extends Migration
         $this->dropForeignKey('fk_tbl_post_data_post_id', '{{%post_data}}');
         $this->dropForeignKey('fk_tbl_post_to_image_image_id', '{{%post_to_image}}');
         $this->dropForeignKey('fk_tbl_post_to_image_post_id', '{{%post_to_image}}');
+        $this->dropForeignKey('fk_tbl_categori_data_categori_id', '{{%categori_data}}');
     }
 }

@@ -8,8 +8,8 @@
                 <!-- pagination-item -->
                 <?= Html::a(
                     "<",
-                    ($current_page > 1) ? $url . "/" . ($current_page - 1) : "",
-                    ["class" => "pagination-item" . ($current_page > 1) ? "" : "pagination-item_disabled"]
+                    ($current_page > 1) ? $url . "/" . ($current_page - 1) : "#",
+                    ["class" => "pagination-item" . (($current_page > 1) ? "" : " pagination-item_disabled")]
                 );
                 /*                <a href="<?= ($current_page > 1) ? $url . "/" . ($current_page - 1) : ""; ?>" class="pagination-item <?= ($current_page > 1) ? "" : "pagination-item_disabled"; ?>"><</a> */
                 ?>
@@ -27,8 +27,8 @@
                     <!-- pagination-item -->
                     <?= HTML::a(
                         $i,
-                        ($current_page == $i) ? "" : $url . "/" . $i,
-                        ["class" => "pagination-item pagination-item_disabled" . ($current_page == $i) ? "pagination__item_disabled pagination__item_active" : ""]
+                        ($current_page == $i) ? "#" : $url . "/" . $i,
+                        ["class" => "pagination-item pagination-item_disabled" . (($current_page == $i) ? " pagination__item_disabled pagination__item_active" : "")]
                     );
                     /*                        <a href = "<?= ($current_page == $i) ? "" :  $url . " / " . $i ?>" class="pagination-item pagination-item_disabled <?= ($current_page == $i) ? "pagination - item_disabled pagination - item_active" : "" ?>" ><?= $i; ?><!--</a>--> */
                     ?>
@@ -46,8 +46,8 @@
                 <!-- pagination-item -->
                 <?= Html::a(
                     ">",
-                    ($current_page < $max_pages) ? $url . "/" . ($current_page + 1) : "",
-                    ["class" => pagination - item . ($current_page < $max_pages) ? "" : "pagination-item_disabled"]
+                    ($current_page < $max_pages) ? $url . "/" . ($current_page + 1) : "#",
+                    ["class" => "pagination-item" . (($current_page < $max_pages) ? "" : " pagination-item_disabled")]
                 );
                 /*                <a href="<?= ($current_page < $max_pages) ? $url . "/" . ($current_page + 1) : ""; ?>" class="pagination-item <?= ($current_page < $max_pages) ? "" : "pagination-item_disabled"; ?>">></a> */
                 ?>

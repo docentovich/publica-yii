@@ -96,25 +96,4 @@ class Post extends \yii\db\ActiveRecord
 
 
 
-    public static function get_future_posts($page, $items_limit){
-
-        return self::find()
-            ->with(["postData", "image"])
-            ->all();
-
-    }
-
-    public static function get_past_posts($page, $items_limit){
-
-    }
-
-
-    public static function get_range_posts($date, $page, $items_limit){
-//        if ($date == NULL) $date = date("Y-m-d");
-
-    }
-
-
-
-
 }

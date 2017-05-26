@@ -29,10 +29,10 @@ class SiteController extends Controller
     /**
      * @var int Текущая старница
      */
-    public $page = 1;
+    public $current_page = 1;
 
     /**
-     * @var int Итого на странице
+     * @var int всего итемов
      */
     public $total_items;
 
@@ -63,23 +63,96 @@ class SiteController extends Controller
     /**
      * Экшен вывода постов по условиям
      *
-     * Renders the index view for the module
+     * @param int $page
      * @return string
      */
     public function actionIndex($page = 1)
     {
-        $this->page  = $page;
+        $this->current_page  = $page;
         
         //передаем в лайоут будущее
         Yii::$app->view->params['navigation_label'] = "Что будет";
+        Yii::$app->view->params['next_url']         = "/past";
+        Yii::$app->view->params['prev_url']         = "/past";
 
+        $query = Post::find()
+            ->where("event_at >= CURDATE()");
 
+        $posts = $this->getPosts($query);
 
-        $posts = Post::get_future_posts();
-
-        return $this->render('index', compact('posts'));
+        return $this->render('index', [
+            "posts"             => $posts,
+            "url"               => "",
+            "total_items"       => $this->total_items,
+            "limit_per_page"    => $this->limit_per_page,
+            "current_page"      => $this->current_page,
+        ]);
     }
 
+    /**
+     * Экшен прошлое
+     *
+     * @param int $page
+     * @return string
+     */
+    public function actionPast($page = 1)
+    {
+        $this->current_page  = $page;
+
+        //передаем в лайоут прошлое
+        Yii::$app->view->params['navigation_label'] = "Что было";
+        Yii::$app->view->params['next_url']         = "/";
+        Yii::$app->view->params['prev_url']         = "/";
+
+        $query = Post::find()
+            ->where("event_at < CURDATE()");
+
+
+        $posts = $this->getPosts($query);
+
+        return $this->render('index', [
+            "posts"             => $posts,
+            "url"               => "past",
+            "total_items"       => $this->total_items,
+            "limit_per_page"    => $this->limit_per_page,
+            "current_page"      => $this->current_page,
+        ]);
+
+    }
+
+    /**
+     * Фильтр по диапазону дат (пока просто дата)
+     *
+     * @param $date
+     * @param int $page
+     * @return string
+     */
+    public function actionDate($date, $page = 1)
+    {
+        $this->current_page  = $page;
+
+        //передаем в лайоут дату и ссылки
+        Yii::$app->view->params['navigation_label'] = $date;
+        Yii::$app->view->params['next_url']         = "/" . date('Y-m-d', strtotime('+1 day', strtotime($date)));
+        Yii::$app->view->params['prev_url']         = "/" . date('Y-m-d', strtotime('-1 day', strtotime($date)));
+
+
+        $query = Post::find()
+            ->where(["=", "event_at", $date]);
+
+
+        $posts = $this->getPosts($query);
+
+        return $this->render('index', [
+            "posts"             => $posts,
+            "url"               => $date, //это для пагинации
+            "total_items"       => $this->total_items,
+            "limit_per_page"    => $this->limit_per_page,
+            "current_page"      => $this->current_page,
+        ]);
+
+
+    }
 
     /**
      * Экшен поста
@@ -89,12 +162,45 @@ class SiteController extends Controller
      */
     public function actionPost($id)
     {
-        $post = Post::find($id)
+        $id = (int) $id;
+
+        $post = Post::find()
+            ->where(["=", "id", $id])
             ->with(["postData", "image"])
             ->one();
 
+        $total_posts = Post::find()->count();
+
+        //передаем в лайоут прошлое
+        Yii::$app->view->params['navigation_label'] = $post->postData->title;
+        Yii::$app->view->params['next_url']         = "/post/" . ((($id + 1) < $total_posts) ? $id + 1 : 1);
+        Yii::$app->view->params['prev_url']         = "/post/" . ((($id - 1) > 0) ? $id - 1 : $total_posts);
+
         return $this->render('post', compact('post'));
     }
-    
+
+
+    /**
+     * Вспомогательный метод. Производит подсчет в $this->total_items
+     * и возварщет массив ActiveRecord
+     *
+     * @param ActiveQuery $query Обьект запроса
+     * @return array ActiveRecord.  правильно так писать или нет??
+     */
+    private function getPosts($query)
+    {
+        //всего постов
+        $countQuery = clone $query;
+        $this->total_items = $countQuery->count();
+
+        //получаем посты
+        $offset = $this->limit_per_page * ($this->current_page - 1);
+        return $query->offset($offset)
+            ->limit($this->limit_per_page)
+            ->offset($offset)
+            ->with(["postData", "image"])
+            ->all();
+    }
+
     
 }

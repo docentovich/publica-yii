@@ -19,9 +19,19 @@ class m170523_000352_categori extends Migration
         $this->createTable(
             '{{%categori}}',
             [
-                'id'=> $this->primaryKey(10),
-                'name'=> $this->char(30)->notNull(),
-            ],$this->tableOptions
+                'id' => $this->primaryKey(10),
+                'name' => $this->char(30)->notNull(),
+            ], $this->tableOptions
+        );
+
+        $this->batchInsert('{{%categori}}',
+            ["id", "name"],
+            [
+                [
+                    'id' => '1',
+                    'name' => 'Без категории',
+                ],
+            ]
         );
 
     }

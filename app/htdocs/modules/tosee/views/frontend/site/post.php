@@ -21,9 +21,9 @@ use \components\helpers\Helpers;
         ?>
 <!--        <div style="background-image: url(/images/people/dep1.jpg)" class="">-->
         <div class="single-event__content">
-            <h1 class="single-event__h1"><?= $post->postData->title; ?></h1>
+            <h1 class="single-event__h1"><?= $post->postData->sub_header; ?></h1>
 
-            <div class="single-event__desc"><?= $post->postData->sub_header; ?></div>
+            <div class="single-event__desc"><?= $post->postData->post_desc; ?></div>
             <div class="single-event__image-gal">
                 <!-- image-gal -->
                 <div class="image-gal">

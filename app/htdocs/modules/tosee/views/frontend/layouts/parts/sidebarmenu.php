@@ -1,4 +1,7 @@
-<?php use components\helpers\Helpers; ?>
+<?php
+use components\helpers\Helpers;
+use yii\jui\DatePicker
+?>
 <!-- menu -->
 <div class="menu">
     <div class="menu__group">
@@ -6,19 +9,19 @@
         </div>
         <div class="menu__content">
             <div class="menu__item">
-                <a href="/past.html" class="menu__a">
+                <a style="text-decoration: none;" href="/past" class="menu__a">
                     <span class="menu__img"><?= Helpers::i("tosee", "past", ["menu__i"]); ?></span>
                     <span class="menu__text">Что было</span>
                 </a>
             </div>
             <div class="menu__item">
-                <a href="/future.html" class="menu__a">
+                <a style="text-decoration: none;" href="/" class="menu__a">
                     <span class="menu__img"><?= Helpers::i("tosee", "future", ["menu__i"]); ?></span>
                     <span class="menu__text">Что Будет</span>
                 </a>
             </div>
             <div class="menu__item">
-                <a href="/dates.html" class="menu__a">
+                <a style="text-decoration: none;" href="/dates.html" class="menu__a">
                     <span class="menu__img"><?= Helpers::i("tosee", "calendar", ["menu__i"]); ?></span>
                     <span class="menu__text">Календарь</span>
                 </a>

@@ -41,16 +41,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'tosee/site/error',
         ],
-//        'urlManager' => [
-//            'class' => 'yii\web\UrlManager',
-//            'enablePrettyUrl' => true,
-//            'showScriptName' => false,
-//            'enableStrictParsing' => true,
-//            'rules' => [
-//                '/' => 'tosee/site/index',
-//                '/tosee/<action:\w+>' => 'tosee/site/<action>',
-//            ],
-//        ],
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => true,
+
+        ],
         
     ],
     'modules' => [

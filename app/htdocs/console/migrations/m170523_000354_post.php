@@ -21,11 +21,12 @@ class m170523_000354_post extends Migration
             [
                 'id'=> $this->primaryKey(10),
                 'user_id'=> $this->integer(10)->notNull(),
-                'event_at'=> $this->integer(16)->null()->defaultValue(null)->comment('Дата события. Для поиска timestump. Триггер для приведения к нужному виду. Индекс'),
+                'event_at'=> $this->date()->null()->defaultValue(null)->comment('Дата события. Для поиска timestump. Триггер для приведения к нужному виду. Индекс'),
                 'post_category_id'=> $this->integer(10)->notNull()->defaultValue(1)->comment('Родительская категория. не fkey'),
                 'image_id'=> $this->integer(10)->null()->defaultValue(1)->comment('Главное изображение. Ссылка на ресурс.'),
                 'status'=> $this->smallInteger(1)->notNull()->defaultValue(0)->comment('0 - на модерации 1 - одобрено 2 - отклонено 3 - заблокировано 4 - удален'),
-                'created_at'=> $this->integer(8)->notNull()->comment('Дата создания. Для вывода на страницу постов. Задается триггером'),
+                'created_at'=> $this->timestamp()->notNull()->defaultExpression("CURRENT_TIMESTAMP")->comment('Дата создания. Для вывода на страницу постов. Задается триггером'),
+
             ],$this->tableOptions
         );
         $this->createIndex('event_at','{{%post}}',['event_at'],false);

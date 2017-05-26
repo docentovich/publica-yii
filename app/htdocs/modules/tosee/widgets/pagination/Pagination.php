@@ -7,12 +7,13 @@
  */
 
 namespace modules\tosee\widgets\pagination;
+use yii\base\Widget;
 
 /**
  * Class Pagination Вывод пагинации на страницах
  * @package modules\tosee\widgets\pagination
  */
-class Pagination
+class Pagination extends Widget
 {
     /**
      * @var Колличество элементов
@@ -44,22 +45,27 @@ class Pagination
      */
     public $max_pages;
 
+    /**
+     * @var Урл
+     */
+    public $url;
+
 
     public function init()
     {
         parent::init();
 
         //лимит страниц должно быть не четным
-        $this->pages_limit = ($this->display_dots % 2) ? $this->display_dots : $this->display_dots + 1;
+        $this->pages_limit = ($this->pages_limit % 2) ? $this->pages_limit : $this->pages_limit + 1;
 
         //сколько стр всего
-        $this->max_pages = round(($this->total_items / $this->items_limit), 0, PHP_ROUND_HALF_UP);
+        $this->max_pages = ceil ($this->total_items / $this->items_limit);
     }
 
     public function run()
     {
         //первая ссылка для отображения
-        $start = 0;
+        $start = 1;
 
         //последняя отображаемая страница
         $end = $this->max_pages;
@@ -71,15 +77,16 @@ class Pagination
         $display_end_dots = false;
 
         //половина от диапазона
-        $half_of_pglimit = round(($this->pages_limit / 2), 0, PHP_ROUND_HALF_DOWN);
+        $a = ($this->pages_limit / 2);
+        $half_of_pglimit = round($a, 0, PHP_ROUND_HALF_DOWN);
 
         if ($this->display_dots) {
 
             //левый край
-            if ($this->current_page - $half_of_pglimit > 0) {
+            if (($this->current_page - $half_of_pglimit) > 0) {
 
                 //определям отображаемый старт
-                $star = $this->current_page - $half_of_pglimit;
+                $start = $this->current_page - $half_of_pglimit;
 
                 $display_start_dots = true;
             }
@@ -95,9 +102,14 @@ class Pagination
             }
         }
 
-        $current_page = $this->current_page;
-        $max_pages = $this->max_pages;
-
-        return $this->render("view", compact('display_start_dots', 'display_end_dots', 'current_page', 'star', 'end', 'max_pages'));
+        return $this->render("view", [
+            'display_start_dots'    => $display_start_dots,
+            'display_end_dots'      => $display_end_dots,
+            'current_page'          => $this->current_page,
+            'start'                 => $start,
+            'end'                   => $end,
+            'url'                   => $this->url,
+            'max_pages'             => $this->max_pages
+        ]);
     }
 }

@@ -1,7 +1,10 @@
 <?php
 use \yii\helpers\Html;
 use \components\helpers\Helpers;
-
+if( empty($posts) ){
+    echo "Нет постов для отображения";
+    return;
+}
 ?>
 <div class="events">
     <div class="row">
@@ -19,22 +22,22 @@ use \components\helpers\Helpers;
                                         $post->image->name,
                                         ["size" => "350X390", "block" => "event", "class" => "event__img img-well"]
                                     ), //передаем html вывода картинки
-                                    "/tosee/post/{$post->id}"
+                                    "/post/{$post->id}"
                                 );
                             ?>
-                            <div class="event__date"><?= date("d.m.y", $post->event_at); ?></div>
+                            <div class="event__date"><?= Helpers::dateVsDots($post->event_at); ?></div>
                         </div>
                         <div class="event__content">
                             <?= Html::a
                                 (
                                     $post->postData->title, //заголовок
-                                    "/tosee/post/{$post->id}",
+                                    "/post/{$post->id}",
                                     ["class" => "event__title"]
                                 );
                             ?>
 
                             <div class="event__description">
-                                <?= Helpers::cutStringSimbols($post->postData->post_desc, 250); ?>
+                                <?= Helpers::cutStringSimbols($post->postData->post_short_desc, 250); ?>
                             </div>
                         </div>
                     </div>
@@ -45,5 +48,9 @@ use \components\helpers\Helpers;
     </div>
 </div>
 <!--/ events -->
-
-<!--Пагинашка-->
+<?= \modules\tosee\widgets\pagination\Pagination::widget([
+   "total_items"    => $total_items,
+   "items_limit"    => $limit_per_page,
+   "current_page"   => $current_page,
+   "url"            => $url
+]);
