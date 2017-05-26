@@ -51,7 +51,14 @@ use \components\helpers\Helpers;
                                 <div class="modal__to-right">></div>
 
                                 <!--                            860x516-->
-                                <img src="/images/people/baba.jpg" class="modal__image" alt="" role="presentation"/>
+                                <?= Helpers::image(
+                                    $image->patch,
+                                    $image->name,
+                                    [
+                                        'class' => "modal__image",
+                                        "size" => "540x380",
+                                    ]
+                                ) ?>
 
                                 <div class="modal__content container-fluid">
                                     <div class="modal__line1">

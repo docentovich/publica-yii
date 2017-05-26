@@ -103,5 +103,34 @@ class Helpers extends Html
     }
 
 
+    /**
+     * Возврат обычной картинки
+     *
+     * @param string $patch путь до изображения
+     * @param string $name имя изображения
+     * @param array $params массив парраметров
+     * @return string
+     */
+    public static function image($patch, $name, $params = []){
+
+        if(!isset($params['size'])) $params['size'] = "";
+        if(isset($params['block'])) $params['class'] .= " " . $params['block']. "__img";
+        if(!isset($params['extension'])) $params['extension'] = "jpg";
+
+        if(!isset($params['class'])) $params['class'] = "";
+        if(!isset($params['alt'])) $params['alt'] = "";
+        if(is_array($params['class'])) $params['class'] = implode(" ", $params['class']);
+
+//        if(isset($params['user_id'])) $params['user_id'] .= "/";
+
+        $params['class'] .= " img-well ";
+
+        //если нет файла искомого размера возмем оригинал
+        if(!file_exists(__DIR__ . "/../../frontend/web/uploads/" . $patch . $name . $params['size'] . '.' . $params['extension']))
+            $params['size'] = "_origin";
+        return '<img alt="' . $params['alt'] . '" src=\'/uploads/' . $patch . $name . $params['size'] . '.' . $params['extension'] . '\'  class="' . $params['class'] . '"/>';
+    }
+
+
 
 }

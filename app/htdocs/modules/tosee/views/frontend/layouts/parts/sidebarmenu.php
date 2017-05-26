@@ -1,6 +1,5 @@
 <?php
 use components\helpers\Helpers;
-use yii\jui\DatePicker
 ?>
 <!-- menu -->
 <div class="menu">
