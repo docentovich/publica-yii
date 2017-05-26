@@ -24,15 +24,7 @@ class m170523_000352_categori extends Migration
             ], $this->tableOptions
         );
 
-        $this->batchInsert('{{%categori}}',
-            ["id", "name"],
-            [
-                [
-                    'id' => '1',
-                    'name' => 'Без категории',
-                ],
-            ]
-        );
+
 
     }
 

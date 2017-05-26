@@ -1,7 +1,7 @@
 <?php
-
 namespace modules\tosee\controllers\frontend;
 
+use modules\tosee\models\common\PostData;
 use Yii;
 use yii\web\Controller;
 use modules\tosee\models\common\Post;
@@ -68,12 +68,12 @@ class SiteController extends Controller
      */
     public function actionIndex($page = 1)
     {
-        $this->current_page  = $page;
-        
+        $this->current_page = $page;
+
         //передаем в лайоут будущее
         Yii::$app->view->params['navigation_label'] = "Что будет";
-        Yii::$app->view->params['next_url']         = "/past";
-        Yii::$app->view->params['prev_url']         = "/past";
+        Yii::$app->view->params['next_url'] = "/past";
+        Yii::$app->view->params['prev_url'] = "/past";
 
         $query = Post::find()
             ->where("event_at >= CURDATE()");
@@ -81,11 +81,11 @@ class SiteController extends Controller
         $posts = $this->getPosts($query);
 
         return $this->render('index', [
-            "posts"             => $posts,
-            "url"               => "",
-            "total_items"       => $this->total_items,
-            "limit_per_page"    => $this->limit_per_page,
-            "current_page"      => $this->current_page,
+            "posts" => $posts,
+            "url" => "/%i%",
+            "total_items" => $this->total_items,
+            "limit_per_page" => $this->limit_per_page,
+            "current_page" => $this->current_page,
         ]);
     }
 
@@ -97,12 +97,12 @@ class SiteController extends Controller
      */
     public function actionPast($page = 1)
     {
-        $this->current_page  = $page;
+        $this->current_page = $page;
 
         //передаем в лайоут прошлое
         Yii::$app->view->params['navigation_label'] = "Что было";
-        Yii::$app->view->params['next_url']         = "/";
-        Yii::$app->view->params['prev_url']         = "/";
+        Yii::$app->view->params['next_url'] = "/";
+        Yii::$app->view->params['prev_url'] = "/";
 
         $query = Post::find()
             ->where("event_at < CURDATE()");
@@ -111,11 +111,11 @@ class SiteController extends Controller
         $posts = $this->getPosts($query);
 
         return $this->render('index', [
-            "posts"             => $posts,
-            "url"               => "past",
-            "total_items"       => $this->total_items,
-            "limit_per_page"    => $this->limit_per_page,
-            "current_page"      => $this->current_page,
+            "posts" => $posts,
+            "url" => "/past/%i%",
+            "total_items" => $this->total_items,
+            "limit_per_page" => $this->limit_per_page,
+            "current_page" => $this->current_page,
         ]);
 
     }
@@ -129,12 +129,12 @@ class SiteController extends Controller
      */
     public function actionDate($date, $page = 1)
     {
-        $this->current_page  = $page;
+        $this->current_page = $page;
 
         //передаем в лайоут дату и ссылки
         Yii::$app->view->params['navigation_label'] = $date;
-        Yii::$app->view->params['next_url']         = "/" . date('Y-m-d', strtotime('+1 day', strtotime($date)));
-        Yii::$app->view->params['prev_url']         = "/" . date('Y-m-d', strtotime('-1 day', strtotime($date)));
+        Yii::$app->view->params['next_url'] = "/" . date('Y-m-d', strtotime('+1 day', strtotime($date)));
+        Yii::$app->view->params['prev_url'] = "/" . date('Y-m-d', strtotime('-1 day', strtotime($date)));
 
 
         $query = Post::find()
@@ -144,11 +144,11 @@ class SiteController extends Controller
         $posts = $this->getPosts($query);
 
         return $this->render('index', [
-            "posts"             => $posts,
-            "url"               => $date, //это для пагинации
-            "total_items"       => $this->total_items,
-            "limit_per_page"    => $this->limit_per_page,
-            "current_page"      => $this->current_page,
+            "posts" => $posts,
+            "url" => "$date/%i%", //это для пагинации
+            "total_items" => $this->total_items,
+            "limit_per_page" => $this->limit_per_page,
+            "current_page" => $this->current_page,
         ]);
 
 
@@ -162,7 +162,7 @@ class SiteController extends Controller
      */
     public function actionPost($id)
     {
-        $id = (int) $id;
+        $id = (int)$id;
 
         $post = Post::find()
             ->where(["=", "id", $id])
@@ -173,10 +173,40 @@ class SiteController extends Controller
 
         //передаем в лайоут прошлое
         Yii::$app->view->params['navigation_label'] = $post->postData->title;
-        Yii::$app->view->params['next_url']         = "/post/" . ((($id + 1) < $total_posts) ? $id + 1 : 1);
-        Yii::$app->view->params['prev_url']         = "/post/" . ((($id - 1) > 0) ? $id - 1 : $total_posts);
+        Yii::$app->view->params['next_url'] = "/post/" . ((($id + 1) < $total_posts) ? $id + 1 : 1);
+        Yii::$app->view->params['prev_url'] = "/post/" . ((($id - 1) > 0) ? $id - 1 : $total_posts);
 
         return $this->render('post', compact('post'));
+    }
+
+
+    public function actionSearch()
+    {
+        $keyword = Yii::$app->request->get('keyword');
+
+        $posts = Post::find()
+            ->leftJoin('{{%post_data}}', '{{%post_data}}.`post_id` = {{%post}}.`id`')
+            ->andFilterWhere(["or",
+                ["like", "title", $keyword],
+                ["like", "sub_header", $keyword],
+                ["like", "post_short_desc", $keyword],
+                ["like", "post_desc", $keyword],
+            ])
+            ->with(["postData", "image"])
+            ->all();
+
+        //передаем в лайоут прошлое
+        Yii::$app->view->params['navigation_label'] = $keyword;
+
+
+        return $this->render('index', [
+            "posts" => $posts,
+            "url" => "/serch?keyword=%i%", //это для пагинации
+            "total_items" => $this->total_items,
+            "limit_per_page" => $this->limit_per_page,
+            "current_page" => $this->current_page,
+        ]);
+
     }
 
 
@@ -202,5 +232,5 @@ class SiteController extends Controller
             ->all();
     }
 
-    
+
 }

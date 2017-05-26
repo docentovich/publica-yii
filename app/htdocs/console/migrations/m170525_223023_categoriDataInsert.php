@@ -15,13 +15,13 @@ class m170525_223023_categoriDataInsert extends Migration
     public function safeUp()
     {
         $this->batchInsert('{{%categori}}',
-                           ["id", "name"],
-                            [
-    [
-        'id' => '1',
-        'name' => 'Без категории',
-    ],
-]
+            ["id", "name"],
+            [
+                [
+                    'id' => '1',
+                    'name' => 'Без категории',
+                ],
+            ]
         );
     }
 

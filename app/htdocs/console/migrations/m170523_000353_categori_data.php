@@ -25,6 +25,11 @@ class m170523_000353_categori_data extends Migration
             ],$this->tableOptions
         );
 
+
+        $sql = "CREATE TRIGGER `insert_categori_data` AFTER INSERT ON {{%categori}}
+                 FOR EACH ROW INSERT INTO {{%categori_data}} SET categori_id = NEW.id";
+        $this->execute($sql);
+
     }
 
     public function safeDown()

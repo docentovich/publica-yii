@@ -8,10 +8,10 @@
                 <!-- pagination-item -->
                 <?= Html::a(
                     "<",
-                    ($current_page > 1) ? $url . "/" . ($current_page - 1) : "#",
+                    ($current_page > 1) ? str_replace("%i%", ($current_page - 1), $url): "#",
                     ["class" => "pagination-item" . (($current_page > 1) ? "" : " pagination-item_disabled")]
                 );
-                /*                <a href="<?= ($current_page > 1) ? $url . "/" . ($current_page - 1) : ""; ?>" class="pagination-item <?= ($current_page > 1) ? "" : "pagination-item_disabled"; ?>"><</a> */
+                /* <a href="<?= ($current_page > 1) ? $url . "/" . ($current_page - 1) : ""; ?>" class="pagination-item <?= ($current_page > 1) ? "" : "pagination-item_disabled"; ?>"><</a> */
                 ?>
                 <!--/ pagination-item -->
             </div>
@@ -27,10 +27,10 @@
                     <!-- pagination-item -->
                     <?= HTML::a(
                         $i,
-                        ($current_page == $i) ? "#" : $url . "/" . $i,
+                        ($current_page == $i) ? "#" : str_replace("%i%", $i, $url),
                         ["class" => "pagination-item pagination-item_disabled" . (($current_page == $i) ? " pagination__item_disabled pagination__item_active" : "")]
                     );
-                    /*                        <a href = "<?= ($current_page == $i) ? "" :  $url . " / " . $i ?>" class="pagination-item pagination-item_disabled <?= ($current_page == $i) ? "pagination - item_disabled pagination - item_active" : "" ?>" ><?= $i; ?><!--</a>--> */
+                    /* <a href = "<?= ($current_page == $i) ? "" :  $url . " / " . $i ?>" class="pagination-item pagination-item_disabled <?= ($current_page == $i) ? "pagination - item_disabled pagination - item_active" : "" ?>" ><?= $i; ?><!--</a>--> */
                     ?>
                     <!--/ pagination-item -->
                 </div>
@@ -46,10 +46,10 @@
                 <!-- pagination-item -->
                 <?= Html::a(
                     ">",
-                    ($current_page < $max_pages) ? $url . "/" . ($current_page + 1) : "#",
+                    ($current_page < $max_pages) ? str_replace("%i%", ($current_page + 1), $url) : "#",
                     ["class" => "pagination-item" . (($current_page < $max_pages) ? "" : " pagination-item_disabled")]
                 );
-                /*                <a href="<?= ($current_page < $max_pages) ? $url . "/" . ($current_page + 1) : ""; ?>" class="pagination-item <?= ($current_page < $max_pages) ? "" : "pagination-item_disabled"; ?>">></a> */
+                /* <a href="<?= ($current_page < $max_pages) ? $url . "/" . ($current_page + 1) : ""; ?>" class="pagination-item <?= ($current_page < $max_pages) ? "" : "pagination-item_disabled"; ?>">></a> */
                 ?>
                 <!--/ pagination-item -->
             </div>
