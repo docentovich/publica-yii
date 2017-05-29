@@ -9,17 +9,45 @@ $params = array_merge(
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
+    'homeUrl' => '/admin',
     'defaultRoute' => '/user/settings/profile',
 //    'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+//        'modules\tosee\Bootstrap',
+    ],
     'modules' => [
         'tosee' => [
             'isBackend' => true,
         ],
-        'modules' => [
-            'user' => [
-                // following line will restrict access to profile, recovery, registration and settings controllers from backend
-                'as backend' => 'dektrium\user\filters\BackendFilter',
+        'user' => [
+            // following line will restrict access to profile, recovery, registration and settings controllers from backend
+            'class' => 'dektrium\user\Module',
+//            'as backend' => [
+//                'class' => 'dektrium\user\filters\BackendFilter',
+//                'controllers' => ['profile', 'recovery', 'settings']
+//            ],
+
+            'layout' => '@templates/main/backend/layouts/main',
+            'controllerMap' => [
+                'security' => [
+                    'class' => 'dektrium\user\controllers\SecurityController',
+                    'layout' => '@templates/main/backend/layouts/login',
+                ],
+                'registration' => [
+                    'class' => 'dektrium\user\controllers\RegistrationController',
+                    'layout' =>     '@templates/main/backend/layouts/login',
+                ],
+                'recovery' => [
+                    'class' => 'dektrium\user\controllers\RecoveryController',
+                    'layout' =>     '@templates/main/backend/layouts/login',
+                ],
+                'settings' =>  'modules\users\controllers\backend\UserpanelController',
+
+            ],
+            'modelMap' => [
+                'Profile' => 'modules\users\models\Profile',
+//                'User' => 'modules\users\models\User',
             ],
         ],
         'rbac' => 'dektrium\rbac\RbacWebModule',
@@ -33,6 +61,9 @@ return [
 //            'identityClass' => 'common\models\User',
 //            'enableAutoLogin' => true,
 //            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+//        ],
+//        'user' => [
+//            'loginUrl' => ['site/login'],
 //        ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
@@ -50,19 +81,27 @@ return [
         'errorHandler' => [
             'errorAction' => 'tosee/site/error',
         ],
+        'request' => [
+            'baseUrl' => '/admin',
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
 
-        
-//         'urlManager' => [
-//             'enablePrettyUrl' => true,
-//             'showScriptName' => false,
-//             'rules' => [
-//                 '/user/settings/profile' =>
-//             ],
-//         ],
-        
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@dektrium/user/views' => '@modules/users/views/backend/site',
+//                    '@dektrium/user/views/' => '@templates/main/backend/views'
+                ],
+            ],
+        ],
+
+
     ],
     'params' => $params,
-    'layoutPath' => '@templates/main/backend/layouts',
-    'layout' => 'main',
+//    'layoutPath' => '@templates/main/backend/layouts',
+//    'layout' => 'main',
 
 ];

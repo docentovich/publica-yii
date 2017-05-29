@@ -237,7 +237,7 @@ gulp.task('build:minifiJsCss',   function () {
   // })
   ))   
   .pipe(gulpif('*.css', minifyCss()))    
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('../assets'));
 });
 
 gulp.task('build:_dist', ['build:clean'], function (callback) {
@@ -245,7 +245,7 @@ gulp.task('build:_dist', ['build:clean'], function (callback) {
 });
 
 gulp.task('build:dist', ['build:_dist'], function (callback) {
-  return runSequence(['build:minifiImg'], callback);
+  return runSequence(/*['build:minifiImg'],*/ callback);
 });
 
 //===TO DIST====
@@ -276,7 +276,7 @@ gulp.task('build:yii:copy:css',   function () {
   return gulp.src([
     'develop/libs/**'])
   .pipe(print())
-  .pipe(gulp.dest('../assets/css'));
+  .pipe(gulp.dest('../../../assets/css'));
 });
 
 //copy
@@ -286,7 +286,7 @@ gulp.task('build:yii:copy', function (callback) {
 
 //all
 gulp.task('build:yii:dist', ['build:dist'], function (callback) {
-  return runSequence(['build:yii:minifiImg', 'build:yii:copy'], callback);
+  return runSequence([/*'build:yii:minifiImg',*/ 'build:yii:copy'], callback);
 });
 
 //===TO DIST====

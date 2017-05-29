@@ -1,6 +1,7 @@
 <?php
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'language' => 'ru-RU', // 'ru-RU'
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -12,6 +13,29 @@ return [
             'password' => 'secret',
             'charset' => 'utf8',
             'tablePrefix' => 'tbl_'
+        ],
+        'i18n' => [
+            'translations' => [
+                // обрабатываются источником. В нашем случае, мы обрабатываем все, что начинается с app
+                'app*' => [
+                    'class' => yii\i18n\PhpMessageSource::className(),
+                    //
+                    'basePath' => '@app/messages',
+                    // исходный язык
+//                    'sourceLanguage' => 'ru-RU',
+                    // определяет, какой файл будет подключаться для определённой категории
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ]
+                ],
+                'common*' => [
+                    'class' => yii\i18n\PhpMessageSource::className(),
+                    //
+                    'basePath' => '@app/messages',
+
+                ],
+            ],
         ],
     ],
     'modules' => [
