@@ -14,7 +14,7 @@ class m170523_000349_user_about extends Migration
 
     public function safeUp()
     {
-        /*$tableOptions = 'ENGINE=InnoDB';
+        $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%user_about}}',
@@ -22,12 +22,12 @@ class m170523_000349_user_about extends Migration
                 'user_id'=> $this->primaryKey(10),
                 'about'=> $this->text()->notNull(),
             ],$this->tableOptions
-        );*/
+        );
 
     }
 
     public function safeDown()
     {
-        //$this->dropTable('{{%user_about}}');
+        $this->dropTable('{{%user_about}}');
     }
 }

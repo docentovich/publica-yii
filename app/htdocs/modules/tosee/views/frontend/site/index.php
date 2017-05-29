@@ -9,7 +9,7 @@ if( empty($posts) ){
 <div class="events">
     <div class="row">
         <div class="events__events-list">
-            <?php foreach ($posts->result as $post) { ?>
+            <?php foreach ($posts as $post) { ?>
                 <div class="events__event">
                     <!-- event -->
                     <div class="event">
@@ -49,8 +49,8 @@ if( empty($posts) ){
 </div>
 <!--/ events -->
 <?= \modules\tosee\widgets\pagination\Pagination::widget([
-   "total_items"    => $posts->count,
-   "items_limit"    => \modules\tosee\controllers\frontend\SiteController::$_limit_per_page,
+   "total_items"    => $total_items,
+   "items_limit"    => $limit_per_page,
    "current_page"   => $current_page,
    "url"            => $url
 ]);

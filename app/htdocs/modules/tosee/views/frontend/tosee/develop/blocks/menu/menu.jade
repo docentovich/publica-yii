@@ -14,18 +14,10 @@ mixin menu()
                             +sprite-img('tosee', 'future')
                         +e.A(href="/future/1.html").text Что Будет
                 +e.item
-                    +e.SPAN(rel="modal-container-calendar" animation="six").a._calendar
+                    +e.A(href="/dates.html").a
                         +e.img
                             +sprite-img('tosee', 'calendar')
                         +e.text Календарь
-                    #modal-container-calendar
-                        .modal-background
-                            .modal
-                                svg.modal-svg(xmlns='http://www.w3.org/2000/svg', width='100%', height='100%', preserveaspectratio='none')
-                                  rect(x='0', y='0', fill='none', width='100%', height='100%', rx='3', ry='3')
-                                +e.calendar( id="calendar" )
-
-
 
         +e.group
             +e.header Конкурсы                

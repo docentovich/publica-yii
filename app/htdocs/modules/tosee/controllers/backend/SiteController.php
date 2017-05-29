@@ -5,8 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use modules\tosee\services\postService as Post;
-
+use common\models\LoginForm;
 
 /**
  * Site controller
@@ -61,27 +60,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('editor');
+        return $this->render('index');
     }
-
-
-    public function actionAdministrator()
-    {
-        return $this->render('administrator');
-    }
-
-    public function actionModerator()
-    {
-        return $this->render('moderator');
-    }
-
-
 
     /**
      * Login action.
      *
      * @return string
-
+     */
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -97,7 +83,6 @@ class SiteController extends Controller
             ]);
         }
     }
-     */
 
     /**
      * Logout action.

@@ -1,9 +1,10 @@
 <?php
 namespace modules\tosee\controllers\frontend;
 
+use modules\tosee\models\common\PostData;
 use Yii;
 use yii\web\Controller;
-use modules\tosee\services\postService as Post;
+use modules\tosee\models\common\Post;
 
 /**
  * Default controller for the `tosee` module
@@ -21,25 +22,29 @@ class SiteController extends Controller
     const PAST = "p";
 
     /**
-     * Задаем лайоут
-     *
-     * @var string
+     * @var string Задаем лайоут
      */
     public $layout = "tosee";
 
     /**
-     * всего итемов
-     *
-     * @var int
+     * @var int Текущая старница
+     */
+    public $current_page = 1;
+
+    /**
+     * @var int всего итемов
      */
     public $total_items;
 
     /**
-     * Лимит итемов на страницу
-     *
-     * @var int
+     * @var Будущее или прошло?
      */
-    public static $_limit_per_page = 20;
+    public $future_or_past;
+
+    /**
+     * @var int Лимит итемов на страницу
+     */
+    public $limit_per_page = 20;
 
 
     /**
@@ -63,21 +68,24 @@ class SiteController extends Controller
      */
     public function actionIndex($page = 1)
     {
+        $this->current_page = $page;
 
         //передаем в лайоут будущее
         Yii::$app->view->params['navigation_label'] = "Что будет";
         Yii::$app->view->params['next_url'] = "/past";
         Yii::$app->view->params['prev_url'] = "/past";
 
-        $posts = Post::find()
-            ->page($page)
-            ->where("event_at >= CURDATE()")
-            ->getAll();
+        $query = Post::find()
+            ->where("event_at >= CURDATE()");
+
+        $posts = $this->getPosts($query);
 
         return $this->render('index', [
-            "posts"         => $posts,
-            "url"           => "/%i%",
-            "current_page"  => $page
+            "posts" => $posts,
+            "url" => "/%i%",
+            "total_items" => $this->total_items,
+            "limit_per_page" => $this->limit_per_page,
+            "current_page" => $this->current_page,
         ]);
     }
 
@@ -89,21 +97,25 @@ class SiteController extends Controller
      */
     public function actionPast($page = 1)
     {
+        $this->current_page = $page;
 
         //передаем в лайоут прошлое
         Yii::$app->view->params['navigation_label'] = "Что было";
         Yii::$app->view->params['next_url'] = "/";
         Yii::$app->view->params['prev_url'] = "/";
 
-        $posts = Post::find()
-            ->page($page)
-            ->where("event_at < CURDATE()")
-            ->getAll();
+        $query = Post::find()
+            ->where("event_at < CURDATE()");
+
+
+        $posts = $this->getPosts($query);
 
         return $this->render('index', [
-            "posts"         => $posts,
-            "url"           => "/past/%i%",
-            "current_page"  => $page
+            "posts" => $posts,
+            "url" => "/past/%i%",
+            "total_items" => $this->total_items,
+            "limit_per_page" => $this->limit_per_page,
+            "current_page" => $this->current_page,
         ]);
 
     }
@@ -117,22 +129,26 @@ class SiteController extends Controller
      */
     public function actionDate($date, $page = 1)
     {
+        $this->current_page = $page;
 
         //передаем в лайоут дату и ссылки
         Yii::$app->view->params['navigation_label'] = $date;
         Yii::$app->view->params['next_url'] = "/" . date('Y-m-d', strtotime('+1 day', strtotime($date)));
         Yii::$app->view->params['prev_url'] = "/" . date('Y-m-d', strtotime('-1 day', strtotime($date)));
-        Yii::$app->view->params['current_date'] = $date;
 
-        $posts = Post::find()
-            ->page($page)
-            ->where(["=", "event_at", $date])
-            ->getAll();
+
+        $query = Post::find()
+            ->where(["=", "event_at", $date]);
+
+
+        $posts = $this->getPosts($query);
 
         return $this->render('index', [
-            "posts"         => $posts,
-            "url"           => "$date/%i%", //это для пагинации
-            "current_page"  => $page
+            "posts" => $posts,
+            "url" => "$date/%i%", //это для пагинации
+            "total_items" => $this->total_items,
+            "limit_per_page" => $this->limit_per_page,
+            "current_page" => $this->current_page,
         ]);
 
 
@@ -150,51 +166,71 @@ class SiteController extends Controller
 
         $post = Post::find()
             ->where(["=", "id", $id])
-            ->getOne();
+            ->with(["postData", "image"])
+            ->one();
+
+        $total_posts = Post::find()->count();
 
         //передаем в лайоут прошлое
-        Yii::$app->view->params['navigation_label'] = $post->result->postData->title;
-        Yii::$app->view->params['next_url'] = "/post/" . ((($id + 1) < $post->count) ? $id + 1 : 1);
-        Yii::$app->view->params['prev_url'] = "/post/" . ((($id - 1) > 0) ? $id - 1 : $post->count);
+        Yii::$app->view->params['navigation_label'] = $post->postData->title;
+        Yii::$app->view->params['next_url'] = "/post/" . ((($id + 1) < $total_posts) ? $id + 1 : 1);
+        Yii::$app->view->params['prev_url'] = "/post/" . ((($id - 1) > 0) ? $id - 1 : $total_posts);
 
         return $this->render('post', compact('post'));
     }
 
 
-    /**
-     * Экшен поиска
-     *
-     * @return string
-     * @param int $page
-     */
-    public function actionSearch($page = 1)
+    public function actionSearch()
     {
         $keyword = Yii::$app->request->get('keyword');
 
         $posts = Post::find()
-            ->page($page)
-            ->search(
-                [
-                    ["like", "title", $keyword],
-                    ["like", "sub_header", $keyword],
-                    ["like", "post_short_desc", $keyword],
-                    ["like", "post_desc", $keyword],
-                ]
-            )
-            ->getAll();
+            ->leftJoin('{{%post_data}}', '{{%post_data}}.`post_id` = {{%post}}.`id`')
+            ->andFilterWhere(["or",
+                ["like", "title", $keyword],
+                ["like", "sub_header", $keyword],
+                ["like", "post_short_desc", $keyword],
+                ["like", "post_desc", $keyword],
+            ])
+            ->with(["postData", "image"])
+            ->all();
 
-        //передаем в лайоут ключевое слово
+        //передаем в лайоут прошлое
         Yii::$app->view->params['navigation_label'] = $keyword;
+
 
         return $this->render('index', [
             "posts" => $posts,
-            "url"   => "/serch/%i%?keyword=$keyword", //это для пагинации
-            "current_page"  => $page
+            "url" => "/serch?keyword=%i%", //это для пагинации
+            "total_items" => $this->total_items,
+            "limit_per_page" => $this->limit_per_page,
+            "current_page" => $this->current_page,
         ]);
 
     }
 
 
+    /**
+     * Вспомогательный метод. Производит подсчет в $this->total_items
+     * и возварщет массив ActiveRecord
+     *
+     * @param ActiveQuery $query Обьект запроса
+     * @return array ActiveRecord.  правильно так писать или нет??
+     */
+    private function getPosts($query)
+    {
+        //всего постов
+        $countQuery = clone $query;
+        $this->total_items = $countQuery->count();
+
+        //получаем посты
+        $offset = $this->limit_per_page * ($this->current_page - 1);
+        return $query->offset($offset)
+            ->limit($this->limit_per_page)
+            ->offset($offset)
+            ->with(["postData", "image"])
+            ->all();
+    }
 
 
 }

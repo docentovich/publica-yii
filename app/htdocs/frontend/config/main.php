@@ -9,7 +9,6 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'homeUrl' => '/',
     'bootstrap' => [
         'log',
         'modules\tosee\Bootstrap',
@@ -19,7 +18,7 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
-            'baseUrl' => '',
+//            'baseUrl' => '',
         ],
 //        'user' => [
 //            'identityClass' => 'common\models\User',

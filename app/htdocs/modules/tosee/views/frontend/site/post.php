@@ -11,8 +11,8 @@ use \components\helpers\Helpers;
 <div class="single-event">
     <div class="single-event__inner">
         <?= Helpers::bgImage(
-            $post->result->image->patch,
-            $post->result->image->name,
+            $post->image->patch,
+            $post->image->name,
             [
                 'class' => "single-event__img img-well",
                 "size" => "860x516",
@@ -21,14 +21,14 @@ use \components\helpers\Helpers;
         ?>
 <!--        <div style="background-image: url(/images/people/dep1.jpg)" class="">-->
         <div class="single-event__content">
-            <h1 class="single-event__h1"><?= $post->result->postData->sub_header; ?></h1>
+            <h1 class="single-event__h1"><?= $post->postData->sub_header; ?></h1>
 
-            <div class="single-event__desc"><?= $post->result->postData->post_desc; ?></div>
+            <div class="single-event__desc"><?= $post->postData->post_desc; ?></div>
             <div class="single-event__image-gal">
                 <!-- image-gal -->
                 <div class="image-gal">
 
-                    <?php foreach ($post->result->postImages as $image) {
+                    <?php foreach ($post->postImages as $image) {
 //                        var_dump($image);
                         ?>
                         <a href="#bs-modal0" data-fancybox="images" class="image-gal__a">
@@ -62,7 +62,8 @@ use \components\helpers\Helpers;
 
                                 <div class="modal__content container-fluid">
                                     <div class="modal__line1">
-                                        <div class="modal__title"><?= $image->alt; ?></div>
+                                        <div class="modal__title">Название картинки - alt картинки
+                                        </div>
                                         <div class="modal__likes">
                                             <div class="modal__counter">456
                                             </div>
@@ -74,7 +75,8 @@ use \components\helpers\Helpers;
                                     <div class="modal__line2">
                                         <div
                                             class="modal__line2-group modal__line2-group_h1 modal__line2-group_opacity">
-                                            <div class="modal__text"><?= Yii::$app->view->params['navigation_label'] ?></div>
+                                            <div class="modal__text">H1 поста, к которому принадлежит фото
+                                            </div>
                                         </div>
                                         <div class="modal__line2-group modal__line2-group_opacity">
                                             <div class="modal__text hidden-sm hidden-xs">Мне нравиться

@@ -27,9 +27,6 @@ AppAssetIE9::register($this);
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
-        <script>
-            var queryDate = '<?= Yii::$app->view->params['current_date'] ?? date("Y-m-d"); ?>';
-        </script>
     </head>
 
 
