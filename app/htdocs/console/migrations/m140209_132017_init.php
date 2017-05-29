@@ -36,14 +36,10 @@ class m140209_132017_init extends Migration
             'logged_in_at' => $this->integer()->null(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'user_id' => $this->integer(10)->notNull(),
-            'avatar' => $this->integer(10)->notNull()->defaultValue(1)->comment('ссылка на ресурс'),
             'respond_sms' => $this->smallInteger(1)->notNull()->defaultValue(0),
             'respond_email' => $this->smallInteger(1)->notNull()->defaultValue(1),
-            'firstname' => $this->string(100)->notNull(),
-            'lastname' => $this->integer(100)->null()->defaultValue(null),
-            'phone' => $this->integer(15)->null()->defaultValue(null),
-            'sename' => $this->integer(100)->null()->defaultValue(null),
+            'avatar' => $this->integer(10)->notNull()->defaultValue(1)->comment('ссылка на ресурс'),
+
         ], $this->tableOptions);
 
         $this->createIndex('{{%user_unique_username}}', '{{%user}}', 'username', true);
@@ -60,6 +56,10 @@ class m140209_132017_init extends Migration
             'location' => $this->string(255)->null(),
             'website' => $this->string(255)->null(),
             'bio' => $this->text()->null(),
+            'firstname' => $this->string(100)->notNull(),
+            'lastname' => $this->string(100)->null()->defaultValue(null),
+            'sename' => $this->string(100)->null()->defaultValue(null),
+            'phone' => $this->integer(15)->null()->defaultValue(null),
         ], $this->tableOptions);
 
         $this->addForeignKey('{{%fk_user_profile}}', '{{%profile}}', 'user_id', '{{%user}}', 'id', $this->cascade, $this->restrict);

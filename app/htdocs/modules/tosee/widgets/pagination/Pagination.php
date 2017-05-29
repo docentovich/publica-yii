@@ -63,7 +63,9 @@ class Pagination extends Widget
     }
 
     public function run()
+
     {
+        if($this->total_items == 0) return;
         //первая ссылка для отображения
         $start = 1;
 
