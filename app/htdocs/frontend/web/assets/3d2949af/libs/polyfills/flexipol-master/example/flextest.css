@@ -1,0 +1,73 @@
+html {
+	box-sizing: border-box;
+}
+
+* {
+	box-sizing: inherit;
+	padding: 0;
+	margin: 0;
+}
+
+*:before, *:after {
+	box-sizing: inherit;
+}
+
+.flex-container {
+	display: flex;
+	flex-flow: row wrap;
+	font-family: sans-serif;
+	align-items: center;
+	align-content: stretch;
+}
+
+.flex-item {
+	flex: 1 0 auto;
+	background: #f0f0f0;
+}
+
+figure > div {
+	display: inline-flex;
+	position: relative;
+	justify-content: center;
+	margin: .25rem;
+	font-size: 1.5em;
+	overflow: hidden;
+}
+
+figure div span {
+	display: inline-block;
+	padding: 1rem 1.5rem;
+	align-self: center;
+}
+
+.demo {
+	min-height: 500px;
+	outline: 1px dotted green;
+}
+
+.js-p-flexParent:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* CSS code to enable chrome 28 support
+.flex-container {
+	display: -webkit-flex;
+	-webkit-flex-flow: column wrap;
+	-webkit-align-items: center;
+}
+
+.flex-item {
+	-webkit-flex: 1 0 auto;
+}
+
+figure > div {
+	display: -webkit-inline-flex;
+	-webkit-justify-content: center;
+}
+
+figure div span {
+	-webkit-align-self: center;
+}
+*/
