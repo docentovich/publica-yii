@@ -82,9 +82,9 @@ class Post extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPostDatas()
+    public function getPostData()
     {
-        return $this->hasMany(PostData::className(), ['post_id' => 'id']);
+        return $this->hasOne(PostData::className(), ['post_id' => 'id']);
     }
 
     /**
