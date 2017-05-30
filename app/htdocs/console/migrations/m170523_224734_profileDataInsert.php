@@ -15,20 +15,23 @@ class m170523_224734_profileDataInsert extends Migration
     public function safeUp()
     {
         $this->batchInsert('{{%profile}}',
-                           ["user_id", "name", "public_email", "gravatar_email", "gravatar_id", "location", "website", "bio", "timezone"],
-                            [
-    [
-        'user_id' => '1',
-        'name' => null,
-        'public_email' => null,
-        'gravatar_email' => null,
-        'gravatar_id' => null,
-        'location' => null,
-        'website' => null,
-        'bio' => null,
-        'timezone' => null,
-    ],
-]
+            ["user_id", "name", "public_email", "gravatar_email", "gravatar_id", "location", "website", "bio", "timezone", 'lastname', 'phone', 'sename'],
+            [
+                [
+                    'user_id' => '1',
+                    'name' => null,
+                    'public_email' => null,
+                    'gravatar_email' => null,
+                    'gravatar_id' => null,
+                    'location' => null,
+                    'website' => null,
+                    'bio' => null,
+                    'timezone' => null,
+                    'lastname' => null,
+                    'phone' => null,
+                    'sename' => null,
+                ],
+            ]
         );
     }
 

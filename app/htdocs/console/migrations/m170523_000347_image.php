@@ -28,7 +28,7 @@ class m170523_000347_image extends Migration
             $this->tableOptions
         );
 
-        $this->addForeignKey('{{%fk_user_profile}}', '{{%profile}}', 'avatar', '{{%image}}', 'id', $this->cascade, $this->restrict);
+        $this->addForeignKey('{{%fk_profile_image}}', '{{%profile}}', 'avatar', '{{%image}}', 'id', $this->cascade, $this->restrict);
 
         $sql = "CREATE TRIGGER `insert_profile` BEFORE INSERT ON {{%profile}}
                  FOR EACH ROW BEGIN

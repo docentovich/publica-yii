@@ -1,6 +1,7 @@
 FROM php:7.0-fpm
 MAINTAINER Andrei <andrei.prozorov@mail.ru>
 
+VOLUME /app/htdocs
 #Libs
 RUN apt-get update \
       && apt-get install -y \
@@ -41,6 +42,14 @@ RUN yes | pecl install xdebug \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+# RUN chmod -R 777 /var/www/html/backend/web/assets
+# RUN chmod -R 777 /var/www/html/frontend/web/assets
+# RUN chmod -R 755 /var/www/html/frontend/web/uploads
+# RUN chmod -R 755 /var/www/html/frontend/config/main-local.php
+# RUN chmod -R 755 /var/www/html/backend/config/main-local.php
+# RUN chmod -R 755 /var/www/html/common/config/main-local.php
+
 
 # COPY ./php.ini /usr/local/etc/php
 

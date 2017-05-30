@@ -19,11 +19,11 @@ class m170523_000357_Relations extends Migration
 //            '{{%user}}','id',
 //            'CASCADE','CASCADE'
 //         );
-        $this->addForeignKey('fk_tbl_user_about_user_id',
-            '{{%user_about}}','user_id',
-            '{{%user}}','id',
-            'CASCADE','CASCADE'
-         );
+//        $this->addForeignKey('fk_tbl_user_about_user_id',
+//            '{{%user_about}}','user_id',
+//            '{{%user}}','id',
+//            'CASCADE','CASCADE'
+//         );
         $this->addForeignKey('fk_tbl_user_like_user_id',
             '{{%user_like}}','user_id',
             '{{%user}}','id',

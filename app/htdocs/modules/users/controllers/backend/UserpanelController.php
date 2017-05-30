@@ -44,115 +44,54 @@ class UserpanelController extends BaseSettingsController
     use AjaxValidationTrait;
     use EventTrait;
 
-    /**
-     * Event is triggered before updating user's profile.
-     * Triggered with \dektrium\user\events\UserEvent.
-     */
-    const EVENT_BEFORE_PROFILE_UPDATE = 'beforeProfileUpdate';
 
-    /**
-     * Event is triggered after updating user's profile.
-     * Triggered with \dektrium\user\events\UserEvent.
-     */
-    const EVENT_AFTER_PROFILE_UPDATE = 'afterProfileUpdate';
-
-    /**
-     * Event is triggered before updating user's account settings.
-     * Triggered with \dektrium\user\events\FormEvent.
-     */
-    const EVENT_BEFORE_ACCOUNT_UPDATE = 'beforeAccountUpdate';
-
-    /**
-     * Event is triggered after updating user's account settings.
-     * Triggered with \dektrium\user\events\FormEvent.
-     */
-    const EVENT_AFTER_ACCOUNT_UPDATE = 'afterAccountUpdate';
-
-    /**
-     * Event is triggered before changing users' email address.
-     * Triggered with \dektrium\user\events\UserEvent.
-     */
-    const EVENT_BEFORE_CONFIRM = 'beforeConfirm';
-
-    /**
-     * Event is triggered after changing users' email address.
-     * Triggered with \dektrium\user\events\UserEvent.
-     */
-    const EVENT_AFTER_CONFIRM = 'afterConfirm';
-
-    /**
-     * Event is triggered before disconnecting social account from user.
-     * Triggered with \dektrium\user\events\ConnectEvent.
-     */
-    const EVENT_BEFORE_DISCONNECT = 'beforeDisconnect';
-
-    /**
-     * Event is triggered after disconnecting social account from user.
-     * Triggered with \dektrium\user\events\ConnectEvent.
-     */
-    const EVENT_AFTER_DISCONNECT = 'afterDisconnect';
-
-    /**
-     * Event is triggered before deleting user's account.
-     * Triggered with \dektrium\user\events\UserEvent.
-     */
-    const EVENT_BEFORE_DELETE = 'beforeDelete';
-
-    /**
-     * Event is triggered after deleting user's account.
-     * Triggered with \dektrium\user\events\UserEvent.
-     */
-    const EVENT_AFTER_DELETE = 'afterDelete';
-
-    /** @inheritdoc */
-    public $defaultAction = 'profile';
 
     /** @var Finder */
     protected $finder;
 
 
 
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ]
-        ];
-    }
-
-
-    /** @inheritdoc */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'disconnect' => ['post'],
-                    'delete' => ['post'],
-                ],
-            ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['profile', 'account', 'networks', 'disconnect', 'delete', 'upload'],
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['confirm'],
-                        'roles' => ['?', '@'],
-                    ],
-                ],
-            ],
-        ];
-    }
+//    /**
+//     * @inheritdoc
+//     */
+//    public function actions()
+//    {
+//        return [
+//            'error' => [
+//                'class' => 'yii\web\ErrorAction',
+//            ]
+//        ];
+//    }
+//
+//
+//    /** @inheritdoc */
+//    public function behaviors()
+//    {
+//        return [
+//            'verbs' => [
+//                'class' => VerbFilter::className(),
+//                'actions' => [
+//                    'disconnect' => ['post'],
+//                    'delete' => ['post'],
+//                ],
+//            ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['profile', 'account', 'networks', 'disconnect', 'delete', 'upload'],
+//                        'roles' => ['@'],
+//                    ],
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['confirm'],
+//                        'roles' => ['?', '@'],
+//                    ],
+//                ],
+//            ],
+//        ];
+//    }
 
     /**
      * Shows profile settings form.
@@ -208,7 +147,8 @@ class UserpanelController extends BaseSettingsController
         return $this->render('profile', [
             'model_profile' => $model_profile,
             'model_settings' => $model_settings,
-            'upload' => $upload
+            'upload' => $upload,
+            'module' => $this->module,
         ]);
 
     }
@@ -338,7 +278,7 @@ class UserpanelController extends BaseSettingsController
      * @return string
      * @throws \yii\base\Exception
      */
-    public function actionUpload()
+    public function actionAvatarupload()
     {
         if (Yii::$app->request->isAjax) {
             $model = new UploadForm();

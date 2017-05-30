@@ -21,9 +21,11 @@ use yii\widgets\ActiveForm;
 $this->title = Yii::t('user', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/_alert', ['module' => $module]); ?>
+
 <div class="row">
     <div class="">
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="width: 300px; display: block; margin: auto">
             <div class="panel-heading">
                 <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
             </div>

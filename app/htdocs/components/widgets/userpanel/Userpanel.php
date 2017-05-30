@@ -5,7 +5,7 @@ use modules\users\models\Profile;
 use yii\base\Widget;
 
 /**
- * Обертка для ссылки. Аля миксин
+ * Юзерпанель
  *
  * Class Href
  * @package components\widgets\href

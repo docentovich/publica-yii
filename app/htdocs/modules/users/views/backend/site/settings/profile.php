@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-
 <div class="content-page__h1">
     <div class="h1">Профиль</div>
 </div>
@@ -67,15 +66,18 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-9 col-xs-12">
                 <?= \components\helpers\Helpers::renderImage($model_profile->image, ["class" => "form-line__img"]); ?>
 
+                <div class="button button--grey" id="upload">
                 <?= FileUpload::widget([
+                    'useDefaultButton' => false,
                     'model' => $upload,
                     'attribute' => 'file',
-                    'url' => ['/upload', 'id' => $model_profile->user->id], // your url, this is just for demo purposes,
-                    'options' => ['accept' => 'image/*'],
+                    'url' => ['/user/avatar', 'id' => $model_profile->user->id], // your url, this is just for demo purposes,
+                    'options' => [
+                        'accept' => 'image/*',
+                    ],
                     'clientOptions' => [
                         'maxFileSize' => 2000000,
                         "class" => "btn-waning"
-//                                'data-url' => '/image-upload',
                     ],
                     'clientEvents' => [
                         'fileuploaddone' => 'function(e, data) {
@@ -87,6 +89,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             }',
                     ],
                 ]); ?>
+                </div>
+                <script>
+                    $("#upload").on('click', function(){
+                        $("#upload").trigger("click");
+                    });
+                </script>
             </div>
         </div>
 

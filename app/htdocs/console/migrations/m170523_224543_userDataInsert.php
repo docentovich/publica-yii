@@ -15,7 +15,7 @@ class m170523_224543_userDataInsert extends Migration
     public function safeUp()
     {
         $this->batchInsert('{{%user}}',
-            ["id", "username", "email", "password_hash", "auth_key", "confirmed_at", "unconfirmed_email", "blocked_at", "registration_ip", "created_at", "updated_at", "user_id", "avatar", "respond_sms", "respond_email", "firstname", "lastname", "phone", "sename", "flags", "last_login_at"],
+            ["id", "username", "email", "password_hash", "auth_key", "confirmed_at", "unconfirmed_email", "blocked_at", "registration_ip", "created_at", "updated_at", "respond_sms", "respond_email", "flags", "last_login_at"],
             [
                 [
                     'id' => '1',
@@ -29,14 +29,8 @@ class m170523_224543_userDataInsert extends Migration
                     'registration_ip' => '192.168.99.1',
                     'created_at' => '1495579262',
                     'updated_at' => '1495579262',
-                    'user_id' => '0',
-                    'avatar' => '1',
                     'respond_sms' => '0',
                     'respond_email' => '1',
-                    'firstname' => '',
-                    'lastname' => null,
-                    'phone' => null,
-                    'sename' => null,
                     'flags' => '0',
                     'last_login_at' => null,
                 ],

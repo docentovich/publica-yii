@@ -38,7 +38,6 @@ class m140209_132017_init extends Migration
             'updated_at' => $this->integer()->notNull(),
             'respond_sms' => $this->smallInteger(1)->notNull()->defaultValue(0),
             'respond_email' => $this->smallInteger(1)->notNull()->defaultValue(1),
-            'avatar' => $this->integer(10)->notNull()->defaultValue(1)->comment('ссылка на ресурс'),
 
         ], $this->tableOptions);
 
@@ -60,7 +59,11 @@ class m140209_132017_init extends Migration
             'lastname' => $this->string(100)->null()->defaultValue(null),
             'sename' => $this->string(100)->null()->defaultValue(null),
             'phone' => $this->string(15)->null()->defaultValue(null),
+            'avatar' => $this->integer(10)->notNull(),
         ], $this->tableOptions);
+
+        $this->createIndex('avatar', '{{%profile}}', ['avatar'], true);
+
 
         $this->addForeignKey('{{%fk_user_profile}}', '{{%profile}}', 'user_id', '{{%user}}', 'id', $this->cascade, $this->restrict);
 

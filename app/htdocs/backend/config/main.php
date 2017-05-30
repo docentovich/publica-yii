@@ -21,7 +21,6 @@ return [
             'isBackend' => true,
         ],
         'user' => [
-            // following line will restrict access to profile, recovery, registration and settings controllers from backend
             'class' => 'dektrium\user\Module',
 //            'as backend' => [
 //                'class' => 'dektrium\user\filters\BackendFilter',
@@ -35,13 +34,14 @@ return [
                     'layout' => '@templates/main/backend/layouts/login',
                 ],
                 'registration' => [
-                    'class' => 'dektrium\user\controllers\RegistrationController',
+                    'class' => 'modules\users\controllers\backend\RegistrationController',
                     'layout' =>     '@templates/main/backend/layouts/login',
                 ],
                 'recovery' => [
                     'class' => 'dektrium\user\controllers\RecoveryController',
                     'layout' =>     '@templates/main/backend/layouts/login',
                 ],
+
                 'settings' =>  'modules\users\controllers\backend\UserpanelController',
 
             ],
@@ -105,7 +105,9 @@ return [
                 'editor'   => '/tosee/post/index',
                 'moderator'   => '/tosee/site/moderator',
                 'director'   => '/tosee/site/director',
-                'upload'    => '/user/settings/upload',
+                '/user/upload'    => '/user/settings/upload',
+                '/post/main-upload'    => '/tosee/post/main-upload',
+                '/post/additional-upload'    => '/tosee/post/addition-upload',
             ]
 
         ],

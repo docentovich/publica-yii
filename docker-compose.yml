@@ -48,4 +48,4 @@ services:
     ports:
      - "8080:80"
     volumes:
-     - /sessions
+     - /app/sessions

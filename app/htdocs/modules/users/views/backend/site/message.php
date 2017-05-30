@@ -18,4 +18,3 @@ $this->title = $title;
 ?>
 
 <?= $this->render('/_alert', ['module' => $module]);
-//     require_once "security/login.php";
