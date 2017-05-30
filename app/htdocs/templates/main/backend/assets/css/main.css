@@ -23,3 +23,11 @@
     cursor: pointer;
     overflow: hidden;
 }
+.form-line__img{
+    max-width: 160px;
+    max-height: 200px;
+}
+.content-page{
+    padding-left:20px;
+    padding-right:20px;
+}

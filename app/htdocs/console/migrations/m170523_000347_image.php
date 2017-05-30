@@ -28,18 +28,18 @@ class m170523_000347_image extends Migration
             $this->tableOptions
         );
 
-        $this->batchInsert('{{%image}}',
-            ["id", "alt", "patch", "name", "extension"],
-            [
-                [
-                    'id' => '1',
-                    'alt' => 'noimage',
-                    'patch' => '',
-                    'name' => 'noimage',
-                    'extension' => 'jpg',
-                ],
-            ]
-        );
+        $this->addForeignKey('{{%fk_user_profile}}', '{{%profile}}', 'avatar', '{{%image}}', 'id', $this->cascade, $this->restrict);
+
+        $sql = "CREATE TRIGGER `insert_profile` BEFORE INSERT ON {{%profile}}
+                 FOR EACH ROW BEGIN
+                DECLARE avatarid INT;
+                INSERT INTO {{%image}} SET name = 'noimage';
+                SET avatarid = LAST_INSERT_ID();
+                SET NEW.avatar = avatarid;
+                END
+                ";
+        $this->execute($sql);
+
 
     }
 

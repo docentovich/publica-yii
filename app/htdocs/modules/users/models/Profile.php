@@ -1,7 +1,10 @@
 <?php
 namespace modules\users\models;
 
+use common\models\Image;
 use dektrium\user\models\Profile as BaseProfile;
+use borales\extensions\phoneInput\PhoneInputBehavior;
+use borales\extensions\phoneInput\PhoneInputValidator;
 
 /**
  * This is the model class for table "profile".
@@ -21,6 +24,14 @@ use dektrium\user\models\Profile as BaseProfile;
  */
 class Profile extends BaseProfile
 {
+    public function attributeLabels()
+    {
+        return [
+            'phone' => \Yii::t('user', 'Телефон'),
+        ];
+    }
+
+
     public function scenarios()
     {
         $scenarios = parent::scenarios();
@@ -35,9 +46,26 @@ class Profile extends BaseProfile
         $rules = parent::rules();
         $rules['senameLength']   = ['sename', 'string', 'max' => 255];
         $rules['lastnameLength']   = ['lastname', 'string', 'max' => 255];
-        $rules['phoneLength']   = ['phone', 'string', 'max' => 255];
+        $rules['phone']   = ['phone', PhoneInputValidator::className()];
 
         return $rules;
+    }
+
+    /**
+     * Переформатируем телефон
+     *
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'phoneInput' => PhoneInputBehavior::className(),
+        ];
+    }
+
+    public function getImage()
+    {
+        return $this->hasOne(Image::className(), ['id' => 'avatar']);
     }
 
 

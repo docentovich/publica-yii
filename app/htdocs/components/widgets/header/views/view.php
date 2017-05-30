@@ -43,7 +43,7 @@ use components\helpers\Helpers;
                             echo Html::beginForm(['/user/security/logout'], 'post');
                             echo Html::submitButton(
                                 'Выход (' . Yii::$app->user->identity->username . ')',
-                                ['class' => 'btn-link logout']
+                                ['class' => 'btn-link logout', "style" => "color: white"]
                             );
                             echo Html::endForm();
                         }

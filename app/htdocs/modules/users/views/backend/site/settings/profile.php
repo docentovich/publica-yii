@@ -10,10 +10,10 @@
  */
 
 use yii\helpers\Html;
-//use dektrium\user\helpers\Timezone;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use kartik\file\FileInput;
+use borales\extensions\phoneInput\PhoneInput;
+use dosamigos\fileupload\FileUpload;
 
 /**
  * @var yii\web\View $this
@@ -24,84 +24,82 @@ use kartik\file\FileInput;
 
 $this->title = Yii::t('user', 'Profile settings');
 $this->params['breadcrumbs'][] = $this->title;
-//
-//if (strlen($model_profile->user->getImage()->name) > 0) {
-//    $initialPreview = [
-//        Html::img($model_profile->user->getImage()->getUrl(), [
-//            'class' => 'file-preview-image',
-//            'alt' => $model_profile->user->getImage()->alt,
-//            'title' => $model_profile->user->getImage()->alt]),
-//    ];
-//    $initialCaption = $model_profile->user->getImage()->name;
-//}
+
 ?>
 
-<div class="col-sm-10 col-xs-12 no-padding row-eq-height-sm">
-    <div class="content">
-        <div class="content__content-inner">
-            <div class="content-page">
-                <div class="content-page__h1">
-                    <div class="h1">Профиль</div>
-                </div>
-                <div class="content-page__inner">
-                    <?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
+
+<div class="content-page__h1">
+    <div class="h1">Профиль</div>
+</div>
+<div class="content-page__inner">
+    <?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
 
 
-                    <?php $form = ActiveForm::begin([
-                        'id' => 'profile-form',
-                        'options' => ['class' => 'form'],
-                        'fieldConfig' => [
-                            'template' => "<div class=\"col-sm-3 col-xs-12\">{label}</div>\n<div class=\"col-sm-9 col-xs-12\"><div class=\"\">{input}</div></div>\n<div class=\"col-sm-offset-3 col-lg-9\">{error}\n{hint}</div><div class=\"clearfix\"></div>",
-                            'labelOptions' => ['class' => 'form-line__label'],
+    <?php $form = ActiveForm::begin([
+        'id' => 'profile-form',
+        'options' => ['class' => 'form'],
+        'fieldConfig' => [
+            'template' => "<div class=\"col-sm-3 col-xs-12\">{label}</div>\n<div class=\"col-sm-9 col-xs-12\"><div class=\"\">{input}</div></div>\n<div class=\"clearfix\"></div><div class=\"col-sm-offset-3 col-lg-9\">{error}\n{hint}</div><div class=\"clearfix\"></div>",
+            'labelOptions' => ['class' => 'form-line__label'],
 //                            'inputOptions' =>  ['class' => 'form-line__text']
-                        ],
-                        'enableAjaxValidation' => true,
-                        'enableClientValidation' => false,
-                        'validateOnBlur' => false,
-                    ]); ?>
-                    <div class="form__form-block">
-
-                        <?= $form->field($model_profile, 'name') ?>
-
-                        <?= $form->field($model_profile, 'sename')->label("Фамилия") ?>
-
-                        <?= $form->field($model_profile, 'lastname')->label("Отчество") ?>
-
-                        <?= $form->field($model_profile, 'phone')->label("Телефон") ?>
-
-                        <? /*$form->field($image, 'image[]')->widget(FileInput::classname(), [
-                            'options' => [
-                                'accept' => 'image/*',
-                            ],
-                            'pluginOptions' => [
-                                'initialPreview' => $initialPreview,
-                                'showPreview' => true,
-                                'showCaption' => true,
-                                'showRemove' => true,
-                                'showUpload' => false,
-                                'initialCaption' => $initialCaption,
-                            ],
-                            'pluginEvents' => [
-                                "fileclear" => "function() { "
-                            //var request = $.post('remove-images', {model: '{$model_profile->user->id}'});
-
-                            . "request.done(function(response) {
-
-                            });
-                        }"
-                            ]
-                        ]) */?>
-
-                        <?= $form->field($model_profile, 'name') ?>
+        ],
+        'enableAjaxValidation' => true,
+        'enableClientValidation' => false,
+        'validateOnBlur' => false,
+    ]); ?>
+    <div class="form__form-block">
 
 
-                        <? /* $form->field($model_profile, 'public_email')->label('email'); ?>
+        <?= $form->field($model_profile, 'name') ?>
+
+        <?= $form->field($model_profile, 'sename')->label("Фамилия") ?>
+
+        <?= $form->field($model_profile, 'lastname')->label("Отчество") ?>
+
+        <?= $form->field($model_profile, 'phone')->label("Телефон")->widget(PhoneInput::className(), [
+            'jsOptions' => [
+                'preferredCountries' => ['ru'],
+            ]
+        ]); ?>
+
+        <div class="form-group ">
+            <div class="col-sm-3 col-xs-12"></div>
+            <div class="col-sm-9 col-xs-12">
+                <?= \components\helpers\Helpers::renderImage($model_profile->image, ["class" => "form-line__img"]); ?>
+
+                <?= FileUpload::widget([
+                    'model' => $upload,
+                    'attribute' => 'file',
+                    'url' => ['/upload', 'id' => $model_profile->user->id], // your url, this is just for demo purposes,
+                    'options' => ['accept' => 'image/*'],
+                    'clientOptions' => [
+                        'maxFileSize' => 2000000,
+                        "class" => "btn-waning"
+//                                'data-url' => '/image-upload',
+                    ],
+                    'clientEvents' => [
+                        'fileuploaddone' => 'function(e, data) {
+                        consloe.log(e, data);
+                                location.reload();
+                            }',
+                        'fileuploadfail' => 'function(e, data) {
+
+                            }',
+                    ],
+                ]); ?>
+            </div>
+        </div>
+
+    </div>
+
+
+    <? /* $form->field($model_profile, 'public_email')->label('email'); ?>
 
                         <?/* $form->field($model_profile, 'website') ?>
 
                         <?= $form->field($model_profile, 'location') */ ?>
 
-                        <?php /*$form
+    <?php /*$form
                         ->field($model_profile, 'timezone')
                         ->dropDownList(
                             ArrayHelper::map(
@@ -111,81 +109,75 @@ $this->params['breadcrumbs'][] = $this->title;
                             )
                         );*/ ?>
 
-                        <?php /*$form
+    <?php /*$form
                         ->field($model_profile, 'gravatar_email')
                         ->hint(Html::a(Yii::t('user', 'Change your avatar at Gravatar.com'), 'http://gravatar.com')) */ ?>
 
-                        <?= $form->field($model_profile, 'bio')->textarea() ?>
+    <?= $form->field($model_profile, 'bio')->textarea() ?>
 
-                    </div>
+</div>
 
-                    <div class="form__form-block">
+<div class="form__form-block">
 
-                        <div class="col-sm-3 col-xs-12">
-                            <div class="form-line__label">
-                            </div>
-                        </div>
+    <div class="col-sm-3 col-xs-12">
+        <div class="form-line__label">
+        </div>
+    </div>
 
-                        <div class="col-sm-9 col-xs-12">
-                            <div class="form-line__text" style="margin-bottom: 30px;">
-                                <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'button button--green']) ?>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                    <?php ActiveForm::end(); ?>
-
-                    <?php $form = ActiveForm::begin([
-                        'id' => 'account-form',
-                        'options' => ['class' => 'form'],
-                        'fieldConfig' => [
-                            'template' => "<div class=\"col-sm-3 col-xs-12\">{label}</div>\n<div class=\"col-sm-9 col-xs-12\"><div class=\"\">{input}</div></div>\n<div class=\"col-sm-offset-3 col-lg-9\">{error}\n{hint}</div><div class=\"clearfix\"></div>",
-                            'labelOptions' => ['class' => 'form-line__label'],
-//                            'inputOptions' =>  ['class' => 'form-line__text']
-                        ],
-                        'enableAjaxValidation' => true,
-                        'enableClientValidation' => false,
-                    ]); ?>
-
-                    <div class="form__form-block">
-
-                        <?= $form->field($model_settings, 'email') ?>
-
-                        <?= $form->field($model_settings, 'username')->label(Yii::t("user", "Псевдоним")); ?>
-                    </div>
-
-                    <div class="form__form-block">
-
-                        <?= $form->field($model_settings, 'new_password')->passwordInput() ?>
-
-                        <?= $form->field($model_settings, 'current_password')->passwordInput() ?>
-                    </div>
-
-                    <div class="form__form-block">
-
-                        <div class="col-sm-3 col-xs-12">
-                            <div class="form-line__label">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-9 col-xs-12">
-                            <div class="form-line__text">
-                                <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'button button--green']) ?>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-
-                    <?php ActiveForm::end(); ?>
-
-
-                </div>
-
-
-            </div>
+    <div class="col-sm-9 col-xs-12">
+        <div class="form-line__text" style="margin-bottom: 30px;">
+            <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'button button--green']) ?>
+            <br>
         </div>
     </div>
 </div>
+<?php ActiveForm::end(); ?>
+
+<?php $form = ActiveForm::begin([
+    'id' => 'account-form',
+    'options' => ['class' => 'form'],
+    'fieldConfig' => [
+        'template' => "<div class=\"col-sm-3 col-xs-12\">{label}</div>\n<div class=\"col-sm-9 col-xs-12\"><div class=\"\">{input}</div></div>\n<div class=\"col-sm-offset-3 col-lg-9\">{error}\n{hint}</div><div class=\"clearfix\"></div>",
+        'labelOptions' => ['class' => 'form-line__label'],
+//                            'inputOptions' =>  ['class' => 'form-line__text']
+    ],
+    'enableAjaxValidation' => true,
+    'enableClientValidation' => false,
+]); ?>
+
+<div class="form__form-block">
+
+    <?= $form->field($model_settings, 'email') ?>
+
+    <?= $form->field($model_settings, 'username')->label(Yii::t("user", "Псевдоним")); ?>
+</div>
+
+<div class="form__form-block">
+
+    <?= $form->field($model_settings, 'new_password')->passwordInput() ?>
+
+    <?= $form->field($model_settings, 'current_password')->passwordInput() ?>
+</div>
+
+<div class="form__form-block">
+
+    <div class="col-sm-3 col-xs-12">
+        <div class="form-line__label">
+        </div>
+    </div>
+
+    <div class="col-sm-9 col-xs-12">
+        <div class="form-line__text">
+            <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'button button--green']) ?>
+            <br>
+        </div>
+    </div>
+</div>
+
+<?php ActiveForm::end(); ?>
+
+
+
 
 
 

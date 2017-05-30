@@ -49,13 +49,31 @@ return [
                 'Profile' => 'modules\users\models\Profile',
 //                'User' => 'modules\users\models\User',
             ],
+
+            'urlRules' => [
+//                'upload'                     => 'upload',
+                //'profile/<username:\w+>'                    => 'profile/show',
+                //'profile/upload'                            => 'profile/imagesUpload',
+                //'<action:(login|logout)>'                   => 'security/<action>',
+                //'<action:(register|resend)>'                => 'registration/<action>',
+                //'confirm/<id:\d+>/<code:[A-Za-z0-9_-]+>'    => 'registration/confirm',
+                //'forgot'                                    => 'recovery/request',
+                //'recover/<id:\d+>/<code:[A-Za-z0-9_-]+>'    => 'recovery/reset',
+                //'settings/<action:\w+>'                     => 'settings/<action>',
+            ],
         ],
         'rbac' => 'dektrium\rbac\RbacWebModule',
 
     ],
+
     'components' => [
+//        'errorHandler' => [
+//            'errorAction' => 'tosee/site/error',
+//        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'baseUrl' => '/admin',
+
         ],
 //        'user' => [
 //            'identityClass' => 'common\models\User',
@@ -78,15 +96,18 @@ return [
                 ],
             ],
         ],
-        'errorHandler' => [
-            'errorAction' => 'tosee/site/error',
-        ],
-        'request' => [
-            'baseUrl' => '/admin',
-        ],
+
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'rules' =>[
+                'editor'   => '/tosee/post/index',
+                'moderator'   => '/tosee/site/moderator',
+                'director'   => '/tosee/site/director',
+                'upload'    => '/user/settings/upload',
+            ]
+
         ],
 
         'view' => [

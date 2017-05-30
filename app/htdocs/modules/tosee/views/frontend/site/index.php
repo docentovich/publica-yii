@@ -20,7 +20,12 @@ if( empty($posts) ){
                                     (
                                         $post->image->patch,
                                         $post->image->name,
-                                        ["size" => "350X390", "block" => "event", "class" => "event__img img-well"]
+                                        [
+                                            "size" => "350X390",
+                                            "block" => "event",
+                                            "class" => "event__img img-well",
+                                            "extension" => $post->image->extension
+                                        ]
                                     ), //передаем html вывода картинки
                                     "/post/{$post->id}"
                                 );

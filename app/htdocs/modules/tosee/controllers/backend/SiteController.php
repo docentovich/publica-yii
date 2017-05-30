@@ -13,6 +13,10 @@ use modules\tosee\services\postService as Post;
  */
 class SiteController extends Controller
 {
+
+    public $layout = "@templates/main/backend/layouts/main";
+
+
     /**
      * @inheritdoc
      */
@@ -22,23 +26,15 @@ class SiteController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+
                     [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['editor', 'moderator', 'director'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
+
         ];
     }
 
@@ -54,18 +50,20 @@ class SiteController extends Controller
         ];
     }
 
+
+
     /**
      * Displays homepage.
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionEditor()
     {
         return $this->render('editor');
     }
 
 
-    public function actionAdministrator()
+    public function actionDirector()
     {
         return $this->render('administrator');
     }
@@ -99,15 +97,5 @@ class SiteController extends Controller
     }
      */
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
 
-        return $this->goHome();
-    }
 }

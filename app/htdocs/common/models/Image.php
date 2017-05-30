@@ -16,6 +16,7 @@ use Yii;
  * @property Post[] $posts
  * @property PostToImage[] $postToImages
  * @property Post[] $posts0
+ * @property Profile[] $profiles
  */
 class Image extends \yii\db\ActiveRecord
 {
@@ -33,7 +34,6 @@ class Image extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
             [['alt'], 'string', 'max' => 70],
             [['patch'], 'string', 'max' => 150],
             [['name'], 'string', 'max' => 40],
@@ -47,11 +47,11 @@ class Image extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'alt' => 'Alt',
-            'patch' => 'Patch',
-            'name' => 'Name',
-            'extension' => 'Extension',
+            'id' => Yii::t('post', 'ID'),
+            'alt' => Yii::t('post', 'Alt'),
+            'patch' => Yii::t('post', 'Patch'),
+            'name' => Yii::t('post', 'Name'),
+            'extension' => Yii::t('post', 'Extension'),
         ];
     }
 
@@ -77,5 +77,13 @@ class Image extends \yii\db\ActiveRecord
     public function getPosts0()
     {
         return $this->hasMany(Post::className(), ['id' => 'post_id'])->viaTable('{{%post_to_image}}', ['image_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfiles()
+    {
+        return $this->hasMany(Profile::className(), ['avatar' => 'id']);
     }
 }

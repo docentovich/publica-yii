@@ -11,8 +11,9 @@
 
 namespace modules\users\controllers\backend;
 
+use common\models\UploadForm;
 use dektrium\user\Finder;
-use dektrium\user\models\Profile;
+use modules\users\models\Profile;
 use dektrium\user\models\SettingsForm;
 use dektrium\user\models\User;
 use dektrium\user\Module;
@@ -24,7 +25,12 @@ use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
-use common\models\ImageUploadForm;
+use yii\helpers\FileHelper;
+use yii\helpers\Json;
+use Yii;
+use yii\imagine\Image;
+use common\models\Image as _ImageModel;
+use dektrium\user\controllers\SettingsController as BaseSettingsController;
 
 /**
  * SettingsController manages updating user settings (e.g. profile, email and password).
@@ -33,7 +39,7 @@ use common\models\ImageUploadForm;
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class UserpanelController extends Controller
+class UserpanelController extends BaseSettingsController
 {
     use AjaxValidationTrait;
     use EventTrait;
@@ -104,17 +110,7 @@ class UserpanelController extends Controller
     /** @var Finder */
     protected $finder;
 
-    /**
-     * @param string $id
-     * @param \yii\base\Module $module
-     * @param Finder $finder
-     * @param array $config
-     */
-    public function __construct($id, $module, Finder $finder, $config = [])
-    {
-        $this->finder = $finder;
-        parent::__construct($id, $module, $config);
-    }
+
 
     /**
      * @inheritdoc
@@ -145,7 +141,7 @@ class UserpanelController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['profile', 'account', 'networks', 'disconnect', 'delete'],
+                        'actions' => ['profile', 'account', 'networks', 'disconnect', 'delete', 'upload'],
                         'roles' => ['@'],
                     ],
                     [
@@ -184,8 +180,6 @@ class UserpanelController extends Controller
         $this->trigger(self::EVENT_BEFORE_PROFILE_UPDATE, $event);
         if ($model_profile->load(\Yii::$app->request->post()) && $model_profile->save()) {
 
-
-
             \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Your profile has been updated'));
             $this->trigger(self::EVENT_AFTER_PROFILE_UPDATE, $event);
             return $this->refresh();
@@ -209,12 +203,12 @@ class UserpanelController extends Controller
 
         }
 
+        $upload = new UploadForm;
 
         return $this->render('profile', [
             'model_profile' => $model_profile,
             'model_settings' => $model_settings,
-
-
+            'upload' => $upload
         ]);
 
     }
@@ -339,30 +333,95 @@ class UserpanelController extends Controller
     }
 
     /**
-     * Removes all images that are attached to a model
+     * Загрузка картинок. надо это вынести в standelone action
      *
-     * @return  string JSON response
+     * @return string
+     * @throws \yii\base\Exception
      */
-    public function actionRemoveImages()
+    public function actionUpload()
     {
-        // Default response
-        $response = [
-            'status'    => 1,
-            'msg'       => ''
-        ];
+        if (Yii::$app->request->isAjax) {
+            $model = new UploadForm();
+            $profile = $this->finder->findProfileById(\Yii::$app->user->identity->getId());
+            $image_model = _ImageModel::find()->where(["=", "id", "1"])->one();
 
-        $post = Yii::$app->request->post();
+            $imageFile = UploadedFile::getInstance($model, 'file');
 
-        if (isset($post['model']) && !empty($post['model'])) {
-            // Load model
-            $model = $this->module->manager->findProfileById(\Yii::$app->user->identity->getId());
+            $directory = Yii::getAlias('@frontend/web/uploads') . DIRECTORY_SEPARATOR . \Yii::$app->user->identity->getId() . DIRECTORY_SEPARATOR;
 
-            // Remove the images
-            $model->removeImages();
+
+            if ($imageFile) {
+                if (!is_dir($directory)) {
+                    FileHelper::createDirectory($directory);
+                }
+
+                $uid = uniqid();
+                $fileName = $uid . '.' . $imageFile->extension;
+                $filePath = $directory . $fileName;
+                if ($imageFile->saveAs($filePath)) {
+                    $path = '/uploads/' . Yii::$app->user->identity->getId() . DIRECTORY_SEPARATOR . $fileName;
+
+                    $a  = Yii::$app->user->identity->getId();
+                    $profile->image->patch = $a;
+                    $profile->image->name = $uid;
+//                    $image_model->alt = "";
+                    $profile->image->extension = $imageFile->extension;
+                    $profile->image->save(false);
+
+
+                    $imageFile->reset();
+
+                    Image::thumbnail($filePath, 160, 200)->save($filePath . '_160x200.jpg',
+                        ['quality' => 70]);
+
+                    Image::getImagine()->open($filePath)->save($filePath . '_origin.jpg',
+                        ['quality' => 70]);
+
+                    return Json::encode([
+                        'files' => [
+                            [
+                                'name' => $fileName,
+                                'size' => $imageFile->size,
+                                'url' => $path,
+                                'thumbnailUrl' => $path,
+                                'deleteUrl' => 'image-delete?name=' . $fileName,
+                                'deleteType' => 'POST',
+                            ],
+                        ],
+                    ]);
+                }
+            }
+        }
+        return '';
+    }
+
+    /**
+     * Удаление картинок
+     *
+     * @param $name
+     * @return mixed
+     */
+    public function actionImageDelete($name)
+    {
+        $directory = Yii::getAlias('@frontend/web/upload') . DIRECTORY_SEPARATOR . Yii::$app->session->id;
+        if (is_file($directory . DIRECTORY_SEPARATOR . $name)) {
+            unlink($directory . DIRECTORY_SEPARATOR . $name);
         }
 
-        // Return validation in JSON format
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        return $response;
+        $files = FileHelper::findFiles($directory);
+        $output = [];
+        foreach ($files as $file) {
+            $fileName = basename($file);
+            $path = '/img/temp/' . Yii::$app->session->id . DIRECTORY_SEPARATOR . $fileName;
+            $output['files'][] = [
+                'name' => $fileName,
+                'size' => filesize($file),
+                'url' => $path,
+                'thumbnailUrl' => $path,
+                'deleteUrl' => 'image-delete?name=' . $fileName,
+                'deleteType' => 'POST',
+            ];
+        }
+        return Json::encode($output);
     }
 }

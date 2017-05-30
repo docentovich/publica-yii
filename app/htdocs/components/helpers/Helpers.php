@@ -1,7 +1,9 @@
 <?php
 namespace components\helpers;
 
+use yii\db\ActiveRecord;
 use yii\helpers\Html;
+use Yii;
 
 class Helpers extends Html
 {
@@ -95,10 +97,25 @@ class Helpers extends Html
 //        if(isset($params['user_id'])) $params['user_id'] .= "/";
 
         $params['class'] .= " img-well ";
+        $patch = $patch . "/";
+        $dir = Yii::getAlias('@app'). "/web/uploads/";
+
+        $extension = "jpg";
 
         //если нет файла искомого размера возмем оригинал
-        if(!file_exists(__DIR__ . "/../../frontend/web/uploads/" . $patch . $name . $params['size'] . '.' . $params['extension']))
-            $params['size'] = "_origin";
+        if(!file_exists($dir . $patch . $name . $params['size'] . "." . $extension))
+            if(!file_exists($dir . $patch . $name . '_origin'  . "." . $extension)) {
+                if (!file_exists($dir . $patch . $name . "." . $params['extension'])) {
+                    $name = "noimage";
+                    $patch = "";
+                } else {
+                    $params['size'] = "";
+                }
+            }else{
+                $params['size'] = "_origin";
+            }
+
+
         return '<i style="background-image: url(\'/uploads/' . $patch . $name . $params['size'] . '.' . $params['extension'] . '\')"  class="' . $params['class'] . '"></i>';
     }
 
@@ -123,12 +140,38 @@ class Helpers extends Html
 
 //        if(isset($params['user_id'])) $params['user_id'] .= "/";
 
+
         $params['class'] .= " img-well ";
+        $patch = $patch . "/";
+        $dir = Yii::getAlias('@frontend'). "/web/uploads/";
+
+        $extension = "jpg";
 
         //если нет файла искомого размера возмем оригинал
-        if(!file_exists(__DIR__ . "/../../frontend/web/uploads/" . $patch . $name . $params['size'] . '.' . $params['extension']))
-            $params['size'] = "_origin";
-        return '<img alt="' . $params['alt'] . '" src=\'/uploads/' . $patch . $name . $params['size'] . '.' . $params['extension'] . '\'  class="' . $params['class'] . '"/>';
+        if(!file_exists($dir . $patch . $name . $params['size'] . "." . $extension))
+            if(!file_exists($dir . $patch . $name . '_origin'  . "." . $extension)) {
+                if (!file_exists($dir . $patch . $name . "." . $params['extension'])) {
+                    $name = "noimage";
+                    $patch = "";
+                } else {
+                    $params['size'] = "";
+                }
+            }else{
+                $params['size'] = "_origin";
+            }
+
+        return '<img alt="' . $params['alt'] . '" src=\'/uploads/' . $patch  . $name . $params['size'] . '.' . $params['extension'] . '\'  class="' . $params['class'] . '"/>';
+    }
+
+    /**
+     * @param $image
+     * @param array $params
+     * @return string
+     */
+    public static function renderImage($image, $params = [])
+    {
+        $params['extension'] = $image->extension;
+        return self::image($image->patch,$image->name,$params);
     }
 
 

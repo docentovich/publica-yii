@@ -59,10 +59,11 @@ class m140209_132017_init extends Migration
             'firstname' => $this->string(100)->notNull(),
             'lastname' => $this->string(100)->null()->defaultValue(null),
             'sename' => $this->string(100)->null()->defaultValue(null),
-            'phone' => $this->integer(15)->null()->defaultValue(null),
+            'phone' => $this->string(15)->null()->defaultValue(null),
         ], $this->tableOptions);
 
         $this->addForeignKey('{{%fk_user_profile}}', '{{%profile}}', 'user_id', '{{%user}}', 'id', $this->cascade, $this->restrict);
+
 
 //        //юзер 1
 //        $this->batchInsert('{{%user}}',

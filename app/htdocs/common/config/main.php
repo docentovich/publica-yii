@@ -16,25 +16,24 @@ return [
         ],
         'i18n' => [
             'translations' => [
-                // обрабатываются источником. В нашем случае, мы обрабатываем все, что начинается с app
                 'app*' => [
                     'class' => yii\i18n\PhpMessageSource::className(),
-                    //
-                    'basePath' => '@app/messages',
-                    // исходный язык
-//                    'sourceLanguage' => 'ru-RU',
-                    // определяет, какой файл будет подключаться для определённой категории
+                    'basePath' => 'messages',
+                    'sourceLanguage' => 'en',
                     'fileMap' => [
                         'app' => 'app.php',
                         'app/error' => 'error.php',
                     ]
                 ],
-                'common*' => [
+                'post*' => [
                     'class' => yii\i18n\PhpMessageSource::className(),
-                    //
-                    'basePath' => '@app/messages',
-
+                    'basePath' => 'messages',
+                    'sourceLanguage' => 'en',
+                    'fileMap' => [
+                        'app/post' => 'post.php',
+                    ]
                 ],
+
             ],
         ],
     ],
