@@ -41,7 +41,18 @@
                 </div>
                 <div class="menu__item"><a href="/future.html" class="menu__a"><span class="menu__img"><i class="menu__i sprite-img sp-tosee sp-tosee__future"></i></span><a href="/future/1.html" class="menu__text">Что Будет</a></a>
                 </div>
-                <div class="menu__item"><a href="/dates.html" class="menu__a"><span class="menu__img"><i class="menu__i sprite-img sp-tosee sp-tosee__calendar"></i></span><span class="menu__text">Календарь</span></a>
+                <div class="menu__item"><span rel="modal-container-calendar" animation="six" class="menu__a menu__a_calendar"><span class="menu__img"><i class="menu__i sprite-img sp-tosee sp-tosee__calendar"></i></span><span class="menu__text">Календарь</span></span>
+                  <div id="modal-container-calendar">
+                    <div class="modal-background">
+                      <div class="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveaspectratio="none" class="modal-svg">
+                          <rect x="0" y="0" fill="none" width="100%" height="100%" rx="3" ry="3"></rect>
+                        </svg>
+                        <div id="calendar" class="menu__calendar">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -252,6 +263,7 @@
 <!-- build:js /js/vendor.js -->
 <script src="/libs/jquery.min.js"></script>
 <script src="/libs/bootstrap.min.js"></script>
+<script src="/libs/jquery-ui.js"></script>
 <script src="/libs/jquery-migrate-3.0.0.min.js"></script>
 <script src="/libs/jquery.mousewheel-3.0.6.pack.js"></script>
 <script src="/libs/fancybox/jquery.fancybox.min.js"></script>

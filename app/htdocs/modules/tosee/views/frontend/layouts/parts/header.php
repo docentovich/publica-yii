@@ -1,6 +1,6 @@
-<?
-use components\views\widgets\sidebar\Sidebar;
-echo \components\views\widgets\header\Header::widget(["logo" => "publica"]); //верхняя плашечка. она едина для всех частейы
+<?php
+use modules\tosee\widgets\sidebar\Sidebar;
+echo \components\widgets\header\Header::widget(["logo" => "publica"]); //верхняя плашечка. она едина для всех частейы
 ?>
 <!-- header1 -->
 <div class="header1">
@@ -9,7 +9,8 @@ echo \components\views\widgets\header\Header::widget(["logo" => "publica"]); //�
             <div class="col-xs-24">
                 <img src="<?= $bundle->baseUrl; ?>/images/logo.png" class="header1__logo" alt="" role="presentation"/>
 
-                <div class="header1__controls1"><!-- controls1 -->
+                <div class="header1__controls1">
+                    <!-- controls1 -->
                     <div class="controls1">
                         <div rel="menu" class="controls1__conrol1">
 
@@ -26,16 +27,17 @@ echo \components\views\widgets\header\Header::widget(["logo" => "publica"]); //�
 
                             </div>
                         </div>
-                    </div><!--/ controls1 -->
+                    </div>
+                    <!--/ controls1 -->
                 </div>
 
-                <? Sidebar::begin(["id" => "menu"]); ?>
-                <? require_once "sidebarmenu.php"; ?>
-                <? Sidebar::end(); ?>
+                <?php Sidebar::begin(["id" => "menu"]); ?>
+                <?php require_once "sidebarmenu.php"; ?>
+                <?php Sidebar::end(); ?>
 
-                <? Sidebar::begin(["id" => "search", "modif" => "sidebar_search"]); ?>
-                <? require_once "sidebarsearch.php"; ?>
-                <? Sidebar::end(); ?>
+                <?php Sidebar::begin(["id" => "search", "modif" => "sidebar_search"]); ?>
+                <?php require_once "sidebarsearch.php"; ?>
+                <?php Sidebar::end(); ?>
             </div>
         </div>
     </div>

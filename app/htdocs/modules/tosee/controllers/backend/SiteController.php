@@ -5,13 +5,18 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use modules\tosee\services\postService as Post;
+
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+
+    public $layout = "@templates/main/backend/layouts/main";
+
+
     /**
      * @inheritdoc
      */
@@ -21,23 +26,15 @@ class SiteController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+
                     [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['editor', 'moderator', 'director'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
+
         ];
     }
 
@@ -53,21 +50,36 @@ class SiteController extends Controller
         ];
     }
 
+
+
     /**
      * Displays homepage.
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionEditor()
     {
-        return $this->render('index');
+        return $this->render('editor');
     }
+
+
+    public function actionDirector()
+    {
+        return $this->render('administrator');
+    }
+
+    public function actionModerator()
+    {
+        return $this->render('moderator');
+    }
+
+
 
     /**
      * Login action.
      *
      * @return string
-     */
+
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -83,16 +95,7 @@ class SiteController extends Controller
             ]);
         }
     }
-
-    /**
-     * Logout action.
-     *
-     * @return string
      */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
 
-        return $this->goHome();
-    }
+
 }

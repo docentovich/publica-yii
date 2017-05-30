@@ -8,14 +8,15 @@ use Yii;
  * This is the model class for table "{{%image}}".
  *
  * @property int $id
- * @property int $user_id Владелец. fkey
- * @property string $src
  * @property string $alt
+ * @property string $patch
+ * @property string $name
+ * @property string $extension
  *
- * @property User $user
  * @property Post[] $posts
- * @property PostImage[] $postImages
+ * @property PostToImage[] $postToImages
  * @property Post[] $posts0
+ * @property Profile[] $profiles
  */
 class Image extends \yii\db\ActiveRecord
 {
@@ -33,10 +34,10 @@ class Image extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'integer'],
-            [['src'], 'required'],
-            [['src'], 'string', 'max' => 32],
             [['alt'], 'string', 'max' => 70],
+            [['patch'], 'string', 'max' => 150],
+            [['name'], 'string', 'max' => 40],
+            [['extension'], 'string', 'max' => 4],
         ];
     }
 
@@ -46,12 +47,13 @@ class Image extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'src' => 'Src',
-            'alt' => 'Alt',
+            'id' => Yii::t('post', 'ID'),
+            'alt' => Yii::t('post', 'Alt'),
+            'patch' => Yii::t('post', 'Patch'),
+            'name' => Yii::t('post', 'Name'),
+            'extension' => Yii::t('post', 'Extension'),
         ];
     }
-
 
     /**
      * @return \yii\db\ActiveQuery
@@ -64,9 +66,9 @@ class Image extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPostImages()
+    public function getPostToImages()
     {
-        return $this->hasMany(PostImage::className(), ['image_id' => 'id']);
+        return $this->hasMany(PostToImage::className(), ['image_id' => 'id']);
     }
 
     /**
@@ -74,6 +76,14 @@ class Image extends \yii\db\ActiveRecord
      */
     public function getPosts0()
     {
-        return $this->hasMany(Post::className(), ['id' => 'post_id'])->viaTable('{{%post_image}}', ['image_id' => 'id']);
+        return $this->hasMany(Post::className(), ['id' => 'post_id'])->viaTable('{{%post_to_image}}', ['image_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfiles()
+    {
+        return $this->hasMany(Profile::className(), ['avatar' => 'id']);
     }
 }

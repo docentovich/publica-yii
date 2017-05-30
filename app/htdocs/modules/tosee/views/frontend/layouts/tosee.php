@@ -27,25 +27,28 @@ AppAssetIE9::register($this);
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+        <script>
+            var queryDate = '<?= Yii::$app->view->params['current_date'] ?? date("Y-m-d"); ?>';
+        </script>
     </head>
 
 
     <body class="pageload no-js">
     <?php $this->beginBody() ?>
 
-    <? require_once "parts/header.php"; ?>
+    <?php require_once "parts/header.php"; ?>
 
     <!-- content -->
-    <div class="content">
+    <div class="content" style="min-height: calc(100vh - 210px);">
         <div class="container-fluid">
-            <? require_once "parts/navigation.php"; ?>
+            <?php require_once "parts/navigation.php"; ?>
             <?= $content ?>
-            <? require_once "parts/pagination.php"; ?>
+            <?php require_once "parts/pagination.php"; ?>
         </div>
     </div>
     <!--/ content -->
 
-    <? require_once "parts/footer.php"; ?>
+    <?php require_once "parts/footer.php"; ?>
     <?php $this->endBody() ?>
     </body>
     </html>
