@@ -8,9 +8,9 @@ RUN apt-get update \
           git \
           cron \
           libfreetype6-dev \
-          libjpeg62-turbo-dev \
           libicu-dev \
           libmcrypt-dev \
+          libjpeg62-turbo-dev \
           libpng12-dev \
           libxslt1-dev \
           zlib1g-dev \

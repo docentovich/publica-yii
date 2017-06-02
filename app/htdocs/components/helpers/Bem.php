@@ -2,21 +2,21 @@
 namespace app\components\Helpers;
 
 /**
- * Это пока нахуй не использую.
+ * Это пока не использую.
  *
  * Class Bem
  * @package app\components\Helpers
  */
 class Bem{
-    public static $_block; //текущий блок
-    public static $_element; //текущий элемень
+    public static $block; //текущий блок
+    public static $element; //текущий элемень
 
     /**
      * БЭМ блок
      * @string
      */
     public static function b($block){
-        self::$_block = $block;
+        self::$block = $block;
         return $block;
     }
 
@@ -25,8 +25,8 @@ class Bem{
      * @string
      */
     public static function e($element){
-        self::$_element = $element;
-        return self::$_block . "__" . $element;
+        self::$element = $element;
+        return self::$block . "__" . $element;
     }
 
     /**
@@ -34,7 +34,7 @@ class Bem{
      * @string
      */
     public static function m($modifaer, $delemiter = "_"){
-        return self::$_block . $delemiter . $modifaer;
+        return self::$block . $delemiter . $modifaer;
     }
 
     /**
@@ -42,6 +42,6 @@ class Bem{
      * @string
      */
     public static function me($modifaer, $delemiter = "_"){
-        return self::$_block . "__" . self::$_element . $delemiter . $modifaer;
+        return self::$block . "__" . self::$element . $delemiter . $modifaer;
     }
 }

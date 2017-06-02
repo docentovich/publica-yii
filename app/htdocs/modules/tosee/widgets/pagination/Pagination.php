@@ -50,10 +50,15 @@ class Pagination extends Widget
      */
     public $url;
 
+    public $service;
+
 
     public function init()
     {
         parent::init();
+
+        $this->total_items = $this->service->count;
+        $this->current_page = $this->service->page;
 
         //лимит страниц должно быть не четным
         $this->pages_limit = ($this->pages_limit % 2) ? $this->pages_limit : $this->pages_limit + 1;

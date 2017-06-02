@@ -123,4 +123,42 @@ class PostController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Загрузка главной картинки поста
+     *
+     * @throws \Exception Если не ajax запретить доступ
+     */
+    public function actionUploadMain(){
+        if (!Yii::$app->request->isAjax) 
+        {
+            throw new \Exception("this action can be access by ajax only");
+        }
+
+        $model = new Post();
+
+        if ($model->load(\Yii::$app->request->post() )) {
+            if($model->image->save())
+                echo $model->image->json;
+        }
+    }
+
+    /**
+     * Загрузка доп изображений
+     *
+     * @throws \Exception Если не ajax запретить доступ
+     */
+    public function actionUploadAdditional(){
+        if (!Yii::$app->request->isAjax)
+        {
+            throw new \Exception("this action can be access by ajax only");
+        }
+
+        $model = new Post();
+
+        if ($model->load(\Yii::$app->request->post() )) {
+            if($model->images->save())
+                echo $model->images->json;
+        }
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace modules\tosee\models\common;
 
+use components\beheviors\PostBeforeValidate;
 use Yii;
 use common\models\Image;
 use common\models\User;
@@ -25,6 +26,11 @@ use common\models\User;
  */
 class Post extends \yii\db\ActiveRecord
 {
+    CONST STATUS_ON_MODERATE = 0;
+    CONST STATUS_NOT_PASS_MODERATE = 1;
+    CONST STATUS_BLOCKED = 2;
+    CONST STATUS_ACTIVE = 3;
+    
     /**
      * @inheritdoc
      */
@@ -41,7 +47,7 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['user_id'], 'required'],
             [['user_id', 'post_category_id', 'image_id', 'status'], 'integer'],
-            [['event_at', 'created_at'], 'safe'],
+            [['event_at', 'created_at', 'city'], 'safe'],
             [['image_id'], 'exist', 'skipOnError' => true, 'targetClass' => Image::className(), 'targetAttribute' => ['image_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -56,10 +62,21 @@ class Post extends \yii\db\ActiveRecord
             'id' => Yii::t('post', 'ID'),
             'user_id' => Yii::t('post', 'User ID'),
             'event_at' => Yii::t('post', 'Event At'),
+            'city' => \Yii::t('user', 'City'),
             'post_category_id' => Yii::t('post', 'Post Category ID'),
             'image_id' => Yii::t('post', 'Image ID'),
             'status' => Yii::t('post', 'Status'),
             'created_at' => Yii::t('post', 'Created At'),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'class' => PostBeforeValidate::className(),
         ];
     }
 

@@ -19,6 +19,7 @@ class ImageUploadForm extends Model
      * @var UploadedFile|Null file attribute
      */
     public $image;
+    
 
     /**
      * @return array the validation rules.
