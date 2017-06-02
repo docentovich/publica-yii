@@ -4,6 +4,7 @@ namespace components\helpers;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
 use Yii;
+use yii\imagine\Image;
 
 class Helpers extends Html
 {
@@ -76,47 +77,86 @@ class Helpers extends Html
         return "<i class='" . implode(" ", $class) . "'></i>";
     }
 
+    /**
+     * Возварт отнаоистельного адреса картинки и его ресайз если нет размера. Если нет и ориганал вернуть заглушку
+     *
+     * @param string $folder Относитьельный путь от uploads
+     * @param string $name Имя изображения с расширением
+     * @param string $size требуемый размер
+     * @param string $requaered_extension требуемое расширение
+     * @return string Src картинки
+     */
+    public static function flyResize($folder, $name, $size, $requaered_extension)
+    {
+        $dir = Yii::getAlias('@app'). "/web/uploads/" . $folder . "/";
+
+        //аозварт заглушки
+        if(!file_exists($dir . $name)){
+            return "noimage_" . $size . ".png";
+        }
+
+        list($widh, $height) = explode("x", $size);
+
+        //сохраняем тумбочку
+        Image::thumbnail($dir . $name, $widh, $height)
+            ->save($dir . $name . '_' . $size . '.' . $requaered_extension, ['quality' => 80]);
+
+        return  $folder . "/" .$name . "_" . $size . "." . $requaered_extension;
+
+    }
+
+    /**
+     * Возварт src картинки
+     *
+     * @param string $folder Относитьельный путь от uploads
+     * @param string $name Имя изображения с расширением
+     * @param string $size требуемый размер
+     * @param string  $requaered_extension требуемое расширение
+     * @return string Src картинки
+     */
+    public static function imageSrc($folder, $name, $size, $requaered_extension)
+    {
+        $src = "/uploads/";
+
+        //получаем имя оригинала оттдельно от его расширения
+        list($f_name, $extension) = explode("." , $name);
+
+
+        //если нет тумбочки ресайзим, возварщаем
+        if(!file_exists( Yii::getAlias('@app'). "/web/uploads/" . $folder . $f_name . "_" . $size . $requaered_extension ))
+            $src  .=   flyResize($folder, $name, $size, $requaered_extension);
+        //если есть тумбочка вернем ее отснительный путь
+        else
+            $src  .= $folder . $f_name . "_" . $size . $requaered_extension;
+
+        return $src;
+    }
+
 
     /**
      * Возврат фоновой картинки
      *
-     * @param string $patch путь до изображения
+     * @param string $folder папка от uploads
      * @param string $name имя изображения
      * @param array $params массив парраметров
      * @return string
      */
-    public static function bgImage($patch, $name, $params = []){
+    public static function bgImage($folder, $name, $params = [])
+    {
+        //это для выписывания изображения в контейне
+        $params['class'] .= " img-well ";
 
-        if(!isset($params['size'])) $params['size'] = "";
-        if(isset($params['block'])) $params['class'] .= " " . $params['block']. "__img";
-        if(!isset($params['extension'])) $params['extension'] = "jpg";
+
+        if(!isset($params['size'])) $params['size'] = ""; //требуемый размер
+        if(isset($params['block'])) $params['class'] .= " " . $params['block']. "__img";  //добавляем класс элемента блока БЭМ
+        if(!isset($params['extension'])) $params['extension'] = "jpg"; //расширение требуемое
 
         if(!isset($params['class'])) $params['class'] = "";
         if(is_array($params['class'])) $params['class'] = implode(" ", $params['class']);
 
-//        if(isset($params['user_id'])) $params['user_id'] .= "/";
-
-        $params['class'] .= " img-well ";
-        $patch = $patch . "/";
-        $dir = Yii::getAlias('@app'). "/web/uploads/";
-
-        $extension = "jpg";
-
-        //если нет файла искомого размера возмем оригинал
-        if(!file_exists($dir . $patch . $name . $params['size'] . "." . $extension))
-            if(!file_exists($dir . $patch . $name . '_origin'  . "." . $extension)) {
-                if (!file_exists($dir . $patch . $name . "." . $params['extension'])) {
-                    $name = "noimage";
-                    $patch = "";
-                } else {
-                    $params['size'] = "";
-                }
-            }else{
-                $params['size'] = "_origin";
-            }
 
 
-        return '<i style="background-image: url(\'/uploads/' . $patch . $name . $params['size'] . '.' . $params['extension'] . '\')"  class="' . $params['class'] . '"></i>';
+        return '<i style="background-image: url(\'' . self::imageSrc($folder, $name, $params['size'], $params['extension']) . '\')"  class="' . $params['class'] . '"></i>';
     }
 
 
@@ -128,7 +168,7 @@ class Helpers extends Html
      * @param array $params массив парраметров
      * @return string
      */
-    public static function image($patch, $name, $params = []){
+    public static function image($folder, $name, $params = []){
 
         if(!isset($params['size'])) $params['size'] = "";
         if(isset($params['block'])) $params['class'] .= " " . $params['block']. "__img";
@@ -141,37 +181,17 @@ class Helpers extends Html
 //        if(isset($params['user_id'])) $params['user_id'] .= "/";
 
 
-        $params['class'] .= " img-well ";
-        $patch = $patch . "/";
-        $dir = Yii::getAlias('@frontend'). "/web/uploads/";
-
-        $extension = "jpg";
-
-        //если нет файла искомого размера возмем оригинал
-        if(!file_exists($dir . $patch . $name . $params['size'] . "." . $extension))
-            if(!file_exists($dir . $patch . $name . '_origin'  . "." . $extension)) {
-                if (!file_exists($dir . $patch . $name . "." . $params['extension'])) {
-                    $name = "noimage";
-                    $patch = "";
-                } else {
-                    $params['size'] = "";
-                }
-            }else{
-                $params['size'] = "_origin";
-            }
-
-        return '<img alt="' . $params['alt'] . '" src=\'/uploads/' . $patch  . $name . $params['size'] . '.' . $params['extension'] . '\'  class="' . $params['class'] . '"/>';
+        return '<img alt="' . $params['alt'] . '" src=\'/' . self::imageSrc($folder, $name, $params['size'], $params['extension']) . '.' . $params['extension'] . '\'  class="' . $params['class'] . '"/>';
     }
 
     /**
-     * @param $image
+     * @param $image ActiveRecord
      * @param array $params
      * @return string
      */
     public static function renderImage($image, $params = [])
     {
-        $params['extension'] = $image->extension;
-        return self::image($image->patch,$image->name,$params);
+        return self::image($image->patch, $image->name, $params);
     }
 
 

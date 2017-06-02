@@ -3,22 +3,14 @@ namespace modules\tosee\controllers\frontend;
 
 use Yii;
 use yii\web\Controller;
-use modules\tosee\services\postService as Post;
+use modules\tosee\services\frontend\postService as Post;
 
 /**
  * Default controller for the `tosee` module
  */
 class SiteController extends Controller
 {
-    /**
-     * Смотрим в будущее
-     */
-    const FUTURE = "f";
 
-    /**
-     * Смотрим в прошлое
-     */
-    const PAST = "p";
 
     /**
      * Задаем лайоут
@@ -27,21 +19,7 @@ class SiteController extends Controller
      */
     public $layout = "tosee";
 
-    /**
-     * всего итемов
-     *
-     * @var int
-     */
-    public $total_items;
-
-    /**
-     * Лимит итемов на страницу
-     *
-     * @var int
-     */
-    public static $_limit_per_page = 20;
-
-
+   
     /**
      * @inheritdoc
      */
@@ -69,15 +47,10 @@ class SiteController extends Controller
         Yii::$app->view->params['next_url'] = "/past";
         Yii::$app->view->params['prev_url'] = "/past";
 
-        $posts = Post::find()
-            ->page($page)
-            ->where("event_at >= CURDATE()")
-            ->getAll();
+        $service = (new Post())->page($page)->getFuture();
 
         return $this->render('index', [
-            "posts"         => $posts,
-            "url"           => "/%i%",
-            "current_page"  => $page
+            "service"  => $service,
         ]);
     }
 
@@ -95,15 +68,10 @@ class SiteController extends Controller
         Yii::$app->view->params['next_url'] = "/";
         Yii::$app->view->params['prev_url'] = "/";
 
-        $posts = Post::find()
-            ->page($page)
-            ->where("event_at < CURDATE()")
-            ->getAll();
+        $service = (new Post())->page($page)->getFuture();
 
         return $this->render('index', [
-            "posts"         => $posts,
-            "url"           => "/past/%i%",
-            "current_page"  => $page
+            "service"  => $service,
         ]);
 
     }
@@ -124,15 +92,10 @@ class SiteController extends Controller
         Yii::$app->view->params['prev_url'] = "/" . date('Y-m-d', strtotime('-1 day', strtotime($date)));
         Yii::$app->view->params['current_date'] = $date;
 
-        $posts = Post::find()
-            ->page($page)
-            ->where(["=", "event_at", $date])
-            ->getAll();
+        $service = (new Post)->page($page)->getByDate($date);
 
         return $this->render('index', [
-            "posts"         => $posts,
-            "url"           => "$date/%i%", //это для пагинации
-            "current_page"  => $page
+            "service" => $service,
         ]);
 
 
@@ -148,16 +111,16 @@ class SiteController extends Controller
     {
         $id = (int)$id;
 
-        $post = Post::find()
-            ->where(["=", "id", $id])
-            ->getOne();
+        $service = (new Post)->getById($id);
 
         //передаем в лайоут прошлое
         Yii::$app->view->params['navigation_label'] = $post->result->postData->title;
-        Yii::$app->view->params['next_url'] = "/post/" . ((($id + 1) < $post->count) ? $id + 1 : 1);
-        Yii::$app->view->params['prev_url'] = "/post/" . ((($id - 1) > 0) ? $id - 1 : $post->count);
+        Yii::$app->view->params['next_url'] = "/post/" . $post->next;
+        Yii::$app->view->params['prev_url'] = "/post/" . $post->prev;
 
-        return $this->render('post', compact('post'));
+        return $this->render('post', [
+            'service' => $service
+        ]);
     }
 
 
@@ -171,25 +134,13 @@ class SiteController extends Controller
     {
         $keyword = Yii::$app->request->get('keyword');
 
-        $posts = Post::find()
-            ->page($page)
-            ->search(
-                [
-                    ["like", "title", $keyword],
-                    ["like", "sub_header", $keyword],
-                    ["like", "post_short_desc", $keyword],
-                    ["like", "post_desc", $keyword],
-                ]
-            )
-            ->getAll();
+        $service = (new Post)->page($page)->search($keyword);
 
         //передаем в лайоут ключевое слово
         Yii::$app->view->params['navigation_label'] = $keyword;
 
         return $this->render('index', [
-            "posts" => $posts,
-            "url"   => "/serch/%i%?keyword=$keyword", //это для пагинации
-            "current_page"  => $page
+            "service" => $service
         ]);
 
     }

@@ -35,6 +35,7 @@ class User extends BaseUser implements IdentityInterface
         return [
             'username' => \Yii::t('user', 'Username'),
             'email' => \Yii::t('user', 'Email'),
+            'city' => \Yii::t('user', 'City'),
             'password' => \Yii::t('user', 'Password'),
             'created_at' => \Yii::t('user', 'Registration time'),
             'registered_from' => \Yii::t('user', 'Registered from'),
