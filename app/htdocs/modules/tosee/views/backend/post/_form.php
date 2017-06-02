@@ -10,9 +10,30 @@ use yii\widgets\ActiveForm;
 
 <div class="post-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= FileUpload::widget([
+    <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*']); ?>
+    <sript>
+        $("input[name='image']").on('change', function(event){
+            var $self = $(this);
+            event.stopPropagation(); // Stop stuff happening
+            event.preventDefault(); // Totally stop stuff happening
+
+            $.ajax({
+                type: "POST",
+                timeout: 50000,
+                url: '/admin/site/upload-main',
+                data: new FormData(this),
+                crossDomain: "true",
+                success: function (data) {
+                    alert('success');
+                    return false;
+                }
+            });
+        });
+    </sript>
+
+    <? /* FileUpload::widget([
         'model' => $upload,
         'attribute' => 'file',
         'url' => ['/upload/postimage', 'id' => $model_profile->user->id],
@@ -30,7 +51,7 @@ use yii\widgets\ActiveForm;
 
                             }',
         ],
-    ]); ?>
+    ]);*/ ?>
 
 
 
@@ -47,7 +68,7 @@ use yii\widgets\ActiveForm;
     <? //$form->field($model, 'periodfrom') ?>
 
 
-    <?= FileUpload::widget([
+    <? /* FileUpload::widget([
         'model' => $upload,
         'attribute' => 'file',
         'url' => ['/upload/postimage', 'id' => $model_profile->user->id],
@@ -65,7 +86,29 @@ use yii\widgets\ActiveForm;
 
                             }',
         ],
-    ]); ?>
+    ]);*/ ?>
+
+
+    <?= $form->field($model, 'images')->fileInput(['multiple' => true, 'accept' => 'image/*']); ?>
+    <sript>
+        $("input[name='image']").on('change', function(event){
+            var $self = $(this);
+            event.stopPropagation(); // Stop stuff happening
+            event.preventDefault(); // Totally stop stuff happening
+
+            $.ajax({
+                type: "POST",
+                timeout: 50000,
+                url: '/admin/site/upload-additional',
+                data: new FormData(this),
+                crossDomain: "true",
+                success: function (data) {
+                    alert('success');
+                    return false;
+                }
+            });
+        });
+    </sript>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app/post', 'Save'), ['class' => 'btn btn-success']) ?>
@@ -73,8 +116,8 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
-<!--    --><?php //foreach($model->images as $image) {
-//        echo Helper\
-//    }?>
+    <!--    --><?php //foreach($model->images as $image) {
+    //        echo Helper\
+    //    }?>
 
 </div>

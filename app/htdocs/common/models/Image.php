@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use components\beheviors\ImageUpload;
 use Yii;
 
 /**
@@ -20,6 +21,22 @@ use Yii;
  */
 class Image extends \yii\db\ActiveRecord
 {
+
+    /**
+     * @var string Сюда загружаем размер для тумбочки
+     */
+    public $size;
+
+    /**
+     * @var string Адрес тумбочки
+     */
+    public $thumb;
+
+    /**
+     * @var string JSON для ajax
+     */
+    public $json;
+
     /**
      * @inheritdoc
      */
@@ -27,6 +44,7 @@ class Image extends \yii\db\ActiveRecord
     {
         return '{{%image}}';
     }
+
 
     /**
      * @inheritdoc
@@ -36,8 +54,7 @@ class Image extends \yii\db\ActiveRecord
         return [
             [['alt'], 'string', 'max' => 70],
             [['patch'], 'string', 'max' => 150],
-            [['name'], 'string', 'max' => 40],
-            [['extension'], 'string', 'max' => 4],
+            [['name'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
         ];
     }
 
@@ -51,7 +68,13 @@ class Image extends \yii\db\ActiveRecord
             'alt' => Yii::t('post', 'Alt'),
             'patch' => Yii::t('post', 'Patch'),
             'name' => Yii::t('post', 'Name'),
-            'extension' => Yii::t('post', 'Extension'),
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'class' => ImageUpload::className(),
         ];
     }
 
