@@ -60,6 +60,18 @@ class m170523_000357_Relations extends Migration
             'CASCADE','CASCADE'
         );
 
+        $this->addForeignKey('fk_user_city_id',
+            '{{%user}}','city_id',
+            '{{%city}}','id',
+            'RESTRICT','RESTRICT'
+        );
+
+        $this->addForeignKey('fk_post_city_id',
+            '{{%post}}','city_id',
+            '{{%city}}','id',
+            'RESTRICT','RESTRICT'
+        );
+
     }
 
     public function safeDown()

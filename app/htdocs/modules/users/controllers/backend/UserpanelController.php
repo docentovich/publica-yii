@@ -50,47 +50,47 @@ class UserpanelController extends BaseSettingsController
     protected $finder;
 
 
-//    /**
-//     * @inheritdoc
-//     */
-//    public function actions()
-//    {
-//        return [
-//            'error' => [
-//                'class' => 'yii\web\ErrorAction',
-//            ]
-//        ];
-//    }
-//
-//
-//    /** @inheritdoc */
-//    public function behaviors()
-//    {
-//        return [
-//            'verbs' => [
-//                'class' => VerbFilter::className(),
-//                'actions' => [
-//                    'disconnect' => ['post'],
-//                    'delete' => ['post'],
-//                ],
-//            ],
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'rules' => [
-//                    [
-//                        'allow' => true,
-//                        'actions' => ['profile', 'account', 'networks', 'disconnect', 'delete', 'upload'],
-//                        'roles' => ['@'],
-//                    ],
-//                    [
-//                        'allow' => true,
-//                        'actions' => ['confirm'],
-//                        'roles' => ['?', '@'],
-//                    ],
-//                ],
-//            ],
-//        ];
-//    }
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ]
+        ];
+    }
+
+
+    /** @inheritdoc */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'disconnect' => ['post'],
+                    'delete' => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['profile', 'account', 'networks', 'disconnect', 'delete', 'upload'],
+                        'roles' => ['user'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['confirm'],
+                        'roles' => ['?', '@'],
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /**
      * Shows profile settings form.
@@ -99,6 +99,7 @@ class UserpanelController extends BaseSettingsController
      */
     public function actionProfile()
     {
+        //TODO Refactor!!
 
         //Профиль
 

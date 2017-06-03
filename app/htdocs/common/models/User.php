@@ -13,6 +13,7 @@ use dektrium\user\models\User as BaseUser;
  *
  * @property integer $id
  * @property string $username
+ * @property string $city
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
@@ -22,11 +23,11 @@ use dektrium\user\models\User as BaseUser;
  * @property integer $updated_at
  * @property string $password write-only password
  */
+//class User extends BaseUser implements IdentityInterface
 class User extends BaseUser implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-
     /**
      * @inheritdoc
      */

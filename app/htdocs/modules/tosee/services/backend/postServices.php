@@ -8,17 +8,10 @@
 
 namespace modules\tosee\services\backend;
 use Yii;
+use modules\tosee\models\common\Post;
 
-
-class postServices
+class postServices extends \Services
 {
-    /**
-     *  Тут храним запрос
-     *
-     * @var ActiveQuery
-     */
-    private $_query;
-
     /**
      * @var string Текущий город
      */
@@ -34,9 +27,30 @@ class postServices
             ->andWhere("=", "city", $this->city);
     }
 
-    private function getMany(){}
-    private function getOne(){}
-    public function getPosts(){}
-    public function search(){}
-    public function save(){}
+    protected function getMany($condition = [])
+    {
+        // TODO: Implement getMany() method.
+    }
+
+    protected function getOne($id)
+    {
+        // TODO: Implement getOne() method.
+    }
+
+    public function search($keyword)
+    {
+        // TODO: Implement search() method.
+    }
+
+    public function save()
+    {
+        // TODO: Implement save() method.
+    }
+
+
+
+    public function getPosts()
+    {
+
+    }
 }

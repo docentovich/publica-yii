@@ -1,4 +1,5 @@
 <?php use yii\helpers\Html;
+
 ?>
 <div class="col-sm-2 no-padding row-eq-height-sm">
     <!-- Бургер-->
@@ -13,7 +14,7 @@
     <div id="sidebar" class="sidebar">
         <div class="sidebar__close">X</div>
 
-        <?= components\widgets\userpanel\Userpanel::widget();?>
+        <?= components\widgets\userpanel\Userpanel::widget(); ?>
 
         <div class="menu">
             <div class="menu-block">
@@ -31,27 +32,36 @@
                 <div class="menu-block__img menu-block__img--tosee">
                 </div>
                 <ul class="menu-block__ul">
-                    <li class="menu-block__li <?= ($this->context->route != 'tosee/site/editor') ?: "menu-block__li--active"; ?>">
-                        <?= Html::a(
-                            "Редактор",
-                            Yii::$app->homeUrl . "/editor",
-                            ["class" => "menu-block__a"]
-                        ); ?>
-                    </li>
-                    <li class="menu-block__li <?= ($this->context->route != 'tosee/site/moderator') ?: "menu-block__li--active"; ?>">
-                        <?= Html::a(
-                            "Модератор",
-                            Yii::$app->homeUrl . "/moderator",
-                            ["class" => "menu-block__a"]
-                        ); ?>
-                    </li>
-                    <li class="menu-block__li <?= ($this->context->route != 'tosee/site/director') ?: "menu-block__li--active"; ?>">
-                        <?= Html::a(
-                            "Директор",
-                            Yii::$app->homeUrl . "/director",
-                            ["class" => "menu-block__a"]
-                        ); ?>
-                    </li>
+
+                    <?php if (Yii::$app->user->can('author')) { ?>
+                        <li class="menu-block__li <?= ($this->context->route != 'tosee/admin/editor') ?: "menu-block__li--active"; ?>">
+                            <?= Html::a(
+                                "Редактор",
+                                Yii::$app->homeUrl . "/editor",
+                                ["class" => "menu-block__a"]
+                            ); ?>
+                        </li>
+                    <?php } ?>
+
+                    <?php if (Yii::$app->user->can('moderator')) { ?>
+                        <li class="menu-block__li <?= ($this->context->route != 'tosee/admin/moderator') ?: "menu-block__li--active"; ?>">
+                            <?= Html::a(
+                                "Модератор",
+                                Yii::$app->homeUrl . "/moderator",
+                                ["class" => "menu-block__a"]
+                            ); ?>
+                        </li>
+                    <?php } ?>
+
+                    <?php if (Yii::$app->user->can('administrator')) { ?>
+                        <li class="menu-block__li <?= ($this->context->route != 'tosee/admin/director') ?: "menu-block__li--active"; ?>">
+                            <?= Html::a(
+                                "Директор",
+                                Yii::$app->homeUrl . "/director",
+                                ["class" => "menu-block__a"]
+                            ); ?>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
             <?php /*

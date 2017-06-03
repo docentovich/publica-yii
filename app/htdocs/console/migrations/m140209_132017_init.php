@@ -20,6 +20,7 @@ class m140209_132017_init extends Migration
     {
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
+            'city_id'=> $this->integer(10)->notNull(),
             'username' => $this->string(25)->notNull(),
             'email' => $this->string(255)->notNull(),
             'password_hash' => $this->string(60)->notNull(),
@@ -45,6 +46,7 @@ class m140209_132017_init extends Migration
         $this->createIndex('{{%user_unique_email}}', '{{%user}}', 'email', true);
         $this->createIndex('{{%user_confirmation}}', '{{%user}}', 'id, confirmation_token', true);
         $this->createIndex('{{%user_recovery}}', '{{%user}}', 'id, recovery_token', true);
+        $this->createIndex('{{%city_id}}', '{{%user}}', 'city_id', true);
 
         $this->createTable('{{%profile}}', [
             'user_id' => $this->integer()->notNull()->append('PRIMARY KEY'),

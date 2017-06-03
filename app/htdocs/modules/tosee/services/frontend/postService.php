@@ -12,6 +12,8 @@ use modules\tosee\controllers\frontend\SiteController;
 use modules\tosee\models\common\Post as Model;
 use modules\tosee\models\common\Post;
 use modules\tosee\PostConstnants;
+use yii\base\Exception;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Сервис постов. Вся основная логика выборки постов
@@ -22,7 +24,7 @@ use modules\tosee\PostConstnants;
  * Class Post
  * @package modules\tosee\service
  */
-class postService
+class postService extends \Services
 {
 
     /**
@@ -32,12 +34,6 @@ class postService
      */
     public $limit_per_page = 20;
 
-    /**
-     *  Тут храним запрос
-     *
-     * @var ActiveQuery
-     */
-    private $_query;
 
     /**
      * @var string Текущий город
@@ -98,7 +94,7 @@ class postService
     private function count()
     {
         //всего постов
-        $countQuery = clone $this->query;
+        $countQuery = clone $this->_query;
         $this->count = $countQuery->count();
     }
 
@@ -109,7 +105,7 @@ class postService
      *
      * @return $this
      */
-    private function getMany($condition=[])
+    protected function getMany($condition=[])
     {
         $this->count();
 
@@ -129,9 +125,10 @@ class postService
      * Считаем сколько постов, добавляем лимиты
      * Получем в переменнуд result результат из массива ActiveRecords
      *
+     * @param int $id
      * @return $this
      */
-    private function getOne($id)
+    protected function getOne($id)
     {
 
         //next
@@ -142,7 +139,7 @@ class postService
             ->one();
 
         if (empty($this->next))
-            $next = $this
+            $this->next = $this
                 ->_query
                 ->select("id")
                 ->andWhere([">", "min(id)", $id])
@@ -172,6 +169,37 @@ class postService
     }
 
     /**
+     * поиск по ключевому слову
+     * @param string $keyword
+     * @return $this
+     */
+    public function search($keyword)
+    {
+        $params =
+            [
+                ["or"],
+                ["like", "title", $keyword],
+                ["like", "sub_header", $keyword],
+                ["like", "post_short_desc", $keyword],
+                ["like", "post_desc", $keyword],
+            ];
+
+        $this->_query
+            ->leftJoin('{{%post_data}}', '{{%post_data}}.`post_id` = {{%post}}.`id`');
+
+        $this->getMany($params);
+        $this->url = "/%i%?keyword=$keyword";
+
+        return $this;
+    }
+
+
+    public function save()
+    {
+        throw new ForbiddenHttpException();
+    }
+
+    /**
      * Задать текующую страницу
      *
      * @param string $page Страница
@@ -191,7 +219,7 @@ class postService
      */
     public function getFuture()
     {
-        return $this->_query->getMany("event_at > CURDATE()");
+        $this->_query->getMany("event_at > CURDATE()");
         $this->url = "/%i%";
         return $this;
 
@@ -204,7 +232,7 @@ class postService
      */
     public function getPast()
     {
-        return $this->_query->getMany("event_at < CURDATE()");
+        $this->getMany("event_at < CURDATE()");
         $this->url = "/past/%i%";
         return $this;
 
@@ -218,7 +246,7 @@ class postService
      */
     public function getByDate($date)
     {
-        $this->_query->getMany(["=", "event_at", $date]);
+        $this->getMany(["=", "event_at", $date]);
         $this->url = "$date/%i%";
         return $this;
     }
@@ -247,30 +275,7 @@ class postService
         return $this;
     }
 
-    /**
-     * поиск по ключевому слову
-     *
-     * @return $this
-     */
-    public function search($keyword)
-    {
-        $params =
-            [
-                ["or"],
-                ["like", "title", $keyword],
-                ["like", "sub_header", $keyword],
-                ["like", "post_short_desc", $keyword],
-                ["like", "post_desc", $keyword],
-            ];
 
-        $this->_query
-            ->leftJoin('{{%post_data}}', '{{%post_data}}.`post_id` = {{%post}}.`id`');
-
-        $this->getMany($params);
-        $this->url = "/%i%?keyword=$keyword";
-
-        return $this;
-    }
 
 
 }

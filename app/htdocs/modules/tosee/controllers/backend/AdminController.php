@@ -11,7 +11,7 @@ use modules\tosee\services\postService as Post;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class AdminController extends Controller
 {
 
     public $layout = "@templates/main/backend/layouts/main";

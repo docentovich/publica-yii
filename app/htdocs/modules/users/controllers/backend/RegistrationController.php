@@ -66,6 +66,9 @@ class RegistrationController extends BaseRegistrationController
         if ($model->load(\Yii::$app->request->post()) && $model->register()) {
             $this->trigger(self::EVENT_AFTER_REGISTER, $event);
 
+            $auth = Yii::$app->getAuthManager();
+            $auth->assign( $auth->getRole("user"), $model->id);
+
             return $this->render('register', [
                 'title'  => \Yii::t('user', 'Your account has been created'),
                 'model'  => $model,

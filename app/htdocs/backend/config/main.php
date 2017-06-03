@@ -52,8 +52,7 @@ return [
 
             ],
         ],
-        'rbac' => 'dektrium\rbac\RbacWebModule',
-
+//        'rbac' => 'dektrium\rbac\RbacWebModule',
     ],
 
     'components' => [
@@ -85,12 +84,12 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' =>[
-                'editor'   => '/tosee/post/index',
-                'moderator'   => '/tosee/site/moderator',
-                'director'   => '/tosee/site/director',
-                '/user/upload'    => '/user/settings/upload',
-                '/post/main-upload'    => '/tosee/post/main-upload',
-                '/post/additional-upload'    => '/tosee/post/addition-upload',
+                'editor'                    => '/tosee/post/index',
+                'moderator'                 => '/tosee/admin/moderator',
+                'director'                  => '/tosee/admin/director',
+                '/user/upload'              => '/user/settings/upload',
+                '/post/main-upload'         => '/tosee/post/main-upload',
+                '/post/additional-upload'   => '/tosee/post/addition-upload',
             ]
 
         ],

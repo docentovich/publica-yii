@@ -21,6 +21,7 @@ class m170523_000354_post extends Migration
             [
                 'id'=> $this->primaryKey(10),
                 'user_id'=> $this->integer(10)->notNull(),
+                'city_id'=> $this->integer(10)->notNull(),
                 'event_at'=> $this->date()->null()->defaultValue(null)->comment('Дата события. Для поиска timestump. Триггер для приведения к нужному виду. Индекс'),
                 'post_category_id'=> $this->integer(10)->notNull()->defaultValue(1)->comment('Родительская категория. не fkey'),
                 'image_id'=> $this->integer(10)->null()->defaultValue(1)->comment('Главное изображение. Ссылка на ресурс.'),
@@ -33,6 +34,7 @@ class m170523_000354_post extends Migration
         $this->createIndex('category_id','{{%post}}',['post_category_id'],false);
         $this->createIndex('fk_tbl_post_user_id','{{%post}}',['user_id'],false);
         $this->createIndex('image_id','{{%post}}',['image_id'],false);
+        $this->createIndex('user_id','{{%post}}',['user_id'],false);
 
     }
 
@@ -42,6 +44,7 @@ class m170523_000354_post extends Migration
         $this->dropIndex('category_id', '{{%post}}');
         $this->dropIndex('fk_tbl_post_user_id', '{{%post}}');
         $this->dropIndex('image_id', '{{%post}}');
+        $this->dropIndex('user_id', '{{%post}}');
         $this->dropTable('{{%post}}');
     }
 }
