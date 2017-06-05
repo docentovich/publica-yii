@@ -126,26 +126,30 @@ class postService extends Services
             ->andWhere([">", "id", $id])
             ->one();
 
-        if (empty($this->next))
+        if (empty($this->next)) {
+            $clone = clone $this->_query;
             $this->next = $clone
                 ->select("id")
                 ->limit(1)
-                ->orderBy('id DESC')
+                ->orderBy('id ASC')
                 ->one();
+        }
 
-
+        $clone = clone $this->_query;
         //prev
         $this->prev = $clone
             ->select("id")
             ->andWhere(["<", "id", $id])
             ->one();
 
-        if (empty($this->prev))
+        if (empty($this->prev)) {
+            $clone = clone $this->_query;
             $this->prev = $clone
                 ->select("id")
                 ->limit(1)
-                ->orderBy('id ASC')
+                ->orderBy('id DESC')
                 ->one();
+        }
 
         //selectOne
         $this->items = $this
