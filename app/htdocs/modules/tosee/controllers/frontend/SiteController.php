@@ -114,9 +114,10 @@ class SiteController extends Controller
         $service = (new Post)->getById($id);
 
         //передаем в лайоут прошлое
-        Yii::$app->view->params['navigation_label'] = $post->result->postData->title;
-        Yii::$app->view->params['next_url'] = "/post/" . $post->next;
-        Yii::$app->view->params['prev_url'] = "/post/" . $post->prev;
+        Yii::$app->view->params['navigation_label'] = $service->items->postData->title;
+
+        Yii::$app->view->params['next_url'] = (isset($service->next)) ?  "/post/" . $service->next->id : "/" ;
+        Yii::$app->view->params['prev_url'] = (isset($service->prev)) ?  "/post/" . $service->prev->id : "/";
 
         return $this->render('post', [
             'service' => $service

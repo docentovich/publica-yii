@@ -19,7 +19,8 @@
         <div class="menu">
             <div class="menu-block">
                 <ul class="menu-block__ul">
-                    <li class="menu-block__li <?= ($this->context->route != 'user/settings/profile') ?: "menu-block__li--active"; ?>">
+
+                    <li class="menu-block__li <?= (Yii::$app->controller->module->id != 'user') ?: "menu-block__li--active"; ?>">
                         <?= Html::a(
                             "Профиль",
                             Yii::$app->homeUrl,
@@ -28,42 +29,44 @@
                     </li>
                 </ul>
             </div>
-            <div class="menu-block menu-block--padding-bot">
-                <div class="menu-block__img menu-block__img--tosee">
+            <?php if (Yii::$app->user->can('author')) { ?>
+                <div class="menu-block menu-block--padding-bot">
+                    <div class="menu-block__img menu-block__img--tosee">
+                    </div>
+                    <ul class="menu-block__ul">
+
+                        <?php if (Yii::$app->user->can('author')) { ?>
+                            <li class="menu-block__li <?= (Yii::$app->controller->id != 'author') ?: "menu-block__li--active"; ?>">
+                                <?= Html::a(
+                                    "Редактор",
+                                    Yii::$app->homeUrl . "/author",
+                                    ["class" => "menu-block__a"]
+                                ); ?>
+                            </li>
+                        <?php } ?>
+
+                        <?php if (Yii::$app->user->can('moderator')) { ?>
+                            <li class="menu-block__li <?= (Yii::$app->controller->id != 'moderator') ?: "menu-block__li--active"; ?>">
+                                <?= Html::a(
+                                    "Модератор",
+                                    Yii::$app->homeUrl . "/moderator",
+                                    ["class" => "menu-block__a"]
+                                ); ?>
+                            </li>
+                        <?php } ?>
+
+                        <?php if (Yii::$app->user->can('administrator')) { ?>
+                            <li class="menu-block__li <?= (Yii::$app->controller->id != 'director') ?: "menu-block__li--active"; ?>">
+                                <?= Html::a(
+                                    "Директор",
+                                    Yii::$app->homeUrl . "/director",
+                                    ["class" => "menu-block__a"]
+                                ); ?>
+                            </li>
+                        <?php } ?>
+                    </ul>
                 </div>
-                <ul class="menu-block__ul">
-
-                    <?php if (Yii::$app->user->can('author')) { ?>
-                        <li class="menu-block__li <?= ($this->context->route != 'tosee/admin/editor') ?: "menu-block__li--active"; ?>">
-                            <?= Html::a(
-                                "Редактор",
-                                Yii::$app->homeUrl . "/editor",
-                                ["class" => "menu-block__a"]
-                            ); ?>
-                        </li>
-                    <?php } ?>
-
-                    <?php if (Yii::$app->user->can('moderator')) { ?>
-                        <li class="menu-block__li <?= ($this->context->route != 'tosee/admin/moderator') ?: "menu-block__li--active"; ?>">
-                            <?= Html::a(
-                                "Модератор",
-                                Yii::$app->homeUrl . "/moderator",
-                                ["class" => "menu-block__a"]
-                            ); ?>
-                        </li>
-                    <?php } ?>
-
-                    <?php if (Yii::$app->user->can('administrator')) { ?>
-                        <li class="menu-block__li <?= ($this->context->route != 'tosee/admin/director') ?: "menu-block__li--active"; ?>">
-                            <?= Html::a(
-                                "Директор",
-                                Yii::$app->homeUrl . "/director",
-                                ["class" => "menu-block__a"]
-                            ); ?>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </div>
+            <?php } ?>
             <?php /*
                     <div class="menu-block menu-block--padding-bot">
                         <div class="menu-block__img menu-block__img--probank">

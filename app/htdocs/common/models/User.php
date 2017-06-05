@@ -1,12 +1,14 @@
 <?php
 namespace common\models;
 
+use components\beheviors\UserBeforValidate;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use dektrium\user\models\User as BaseUser;
+use yii\helpers\ArrayHelper;
 
 /**
  * User model
@@ -61,6 +63,7 @@ class User extends BaseUser implements IdentityInterface
     {
         return [
             TimestampBehavior::className(),
+            UserBeforValidate::className()
         ];
     }
 
@@ -72,7 +75,22 @@ class User extends BaseUser implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['city_id'], 'integer'],
+            [['city_id'], 'default', 'value' => 1],
         ];
+    }
+
+    /** @inheritdoc */
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        return ArrayHelper::merge($scenarios, [
+            'register' => ['username', 'email', 'password', 'city_id'],
+            'connect'  => ['username', 'email'],
+            'create'   => ['username', 'email', 'password'],
+            'update'   => ['username', 'email', 'password'],
+            'settings' => ['username', 'email', 'password'],
+        ]);
     }
 
     /**

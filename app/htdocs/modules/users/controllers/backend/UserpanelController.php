@@ -11,10 +11,9 @@
 
 namespace modules\users\controllers\backend;
 
-use common\models\UploadForm;
+use common\models\UploadImage;
 use dektrium\user\Finder;
 use modules\tosee\models\common\Post;
-use modules\users\models\Profile;
 use dektrium\user\models\SettingsForm;
 use dektrium\user\models\User;
 use dektrium\user\Module;
@@ -31,6 +30,7 @@ use yii\helpers\Json;
 use Yii;
 use yii\imagine\Image;
 use common\models\Image as _ImageModel;
+use common\models\Profile;
 use dektrium\user\controllers\SettingsController as BaseSettingsController;
 
 /**
@@ -79,8 +79,13 @@ class UserpanelController extends BaseSettingsController
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['profile', 'account', 'networks', 'disconnect', 'delete', 'upload'],
+                        'actions' => ['account', 'networks', 'disconnect', 'delete', 'upload-avatar'],
                         'roles' => ['user'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['profile'],
+                        'roles' => ['@'],
                     ],
                     [
                         'allow' => true,
@@ -142,7 +147,8 @@ class UserpanelController extends BaseSettingsController
 
         }
 
-        $upload = new UploadForm;
+        $upload = new UploadImage;
+
 
         return $this->render('profile', [
             'model_profile' => $model_profile,
@@ -282,69 +288,27 @@ class UserpanelController extends BaseSettingsController
      * @return string
      * @throws \Exception Если не ajax
      */
-    public function actionAvatarUpload()
+    public function actionUploadAvatar()
     {
         if (!Yii::$app->request->isAjax) {
             throw new \Exception("this action can be access by ajax only");
         }
 
-        $model = new Profile();
 
-        if ($model->load(\Yii::$app->request->post() && $model->save())) {
-            echo $model->image->json;
+        $profile = Profile::find()->where(["=", "user_id", Yii::$app->user->getId()])->one();
+
+        $upload_model = new UploadImage;
+
+        if ( $upload_model->upload(["160x200"]) ) {
+
+            $profile->image->patch = $upload_model->patch;
+            $profile->image->name = $upload_model->new_name;
+
+            if($profile->image->save()) {
+                echo json_encode($upload_model->json);
+            }
         }
 
-
-//        $model = new UploadForm();
-//        $profile = $this->finder->findProfileById(\Yii::$app->user->identity->getId());
-//        $image_model = _ImageModel::find()->where(["=", "id", "1"])->one();
-//
-//        $imageFile = UploadedFile::getInstance($model, 'file');
-//
-//        $directory = Yii::getAlias('@frontend/web/uploads') . DIRECTORY_SEPARATOR . \Yii::$app->user->identity->getId() . DIRECTORY_SEPARATOR;
-//
-//
-//        if ($imageFile) {
-//            if (!is_dir($directory)) {
-//                FileHelper::createDirectory($directory);
-//            }
-//
-//            $uid = uniqid();
-//            $fileName = $uid . '.' . $imageFile->extension;
-//            $filePath = $directory . $fileName;
-//            if ($imageFile->saveAs($filePath)) {
-//                $path = '/uploads/' . Yii::$app->user->identity->getId() . DIRECTORY_SEPARATOR . $fileName;
-//
-//                $a = Yii::$app->user->identity->getId();
-//                $profile->image->patch = $a;
-//                $profile->image->name = $uid;
-////                    $image_model->alt = "";
-//                $profile->image->extension = $imageFile->extension;
-//                $profile->image->save(false);
-//
-//
-//                $imageFile->reset();
-//
-//                Image::thumbnail($filePath, 160, 200)->save($filePath . '_160x200.jpg',
-//                    ['quality' => 70]);
-//
-//                Image::getImagine()->open($filePath)->save($filePath . '_origin.jpg',
-//                    ['quality' => 70]);
-//
-//                return Json::encode([
-//                    'files' => [
-//                        [
-//                            'name' => $fileName,
-//                            'size' => $imageFile->size,
-//                            'url' => $path,
-//                            'thumbnailUrl' => $path,
-//                            'deleteUrl' => 'image-delete?name=' . $fileName,
-//                            'deleteType' => 'POST',
-//                        ],
-//                    ],
-//                ]);
-//            }
-//        }
 
         return '';
     }

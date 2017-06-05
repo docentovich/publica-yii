@@ -1,5 +1,5 @@
 <?php
-namespace modules\users\models;
+namespace common\models;
 
 use common\models\Image;
 use dektrium\user\models\Profile as BaseProfile;
@@ -28,6 +28,7 @@ class Profile extends BaseProfile
     {
         return [
             'phone' => \Yii::t('user', 'Телефон'),
+            'Bio'   => \Yii::t('user', 'О себе'),
         ];
     }
 

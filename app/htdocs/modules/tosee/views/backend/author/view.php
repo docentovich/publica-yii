@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a(Yii::t('app/post', 'Обновить'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app/post', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app/post', 'Удалить'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -29,16 +29,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'postData.title',
+            'postData.sub_header',
             'event_at:date',
             [
                 'attribute' => 'image_id',
-                'value' => Helpers::renderImage($model->image),
+                'value' => Helpers::renderImage($model->image, ['size' => "350x390"]),
                 'label' => 'Изображение',
                 'format'=>'raw',
             ],
-            'status',
+            'postData.post_short_desc',
+            [
+                'attribute' => 'postData.post_desc',
+                'format'=>'raw',
+            ],
             'created_at:datetime',
         ],
     ]) ?>
+
+    <div class="additional-images">
+        <?php foreach($model->images as $image){ ?>
+            <?= \components\helpers\Helpers::renderImage($image, ["size" => "215x215", "class" => "add-img"]) ?>
+        <?php } ?>
+    </div>
 
 </div>

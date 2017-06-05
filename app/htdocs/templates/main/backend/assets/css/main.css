@@ -31,6 +31,19 @@
     padding-left:20px;
     padding-right:20px;
 }
-.button--grey input{
-    display: none;
+.button--upload{
+    position: relative;
+    overflow: hidden;
+}
+.button--upload input{
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.users-table td, .users-table th{
+    padding: 25px;
+
 }

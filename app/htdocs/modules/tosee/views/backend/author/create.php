@@ -10,12 +10,15 @@ $this->title = Yii::t('app/post', 'Create Post');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/post', 'Posts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="post-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+<div class="content-page__h1">
+    <h1 class="h1"><?= Html::encode($this->title) ?></h1>
+</div>
+<div class="">
     <?= $this->render('_form', [
         'model' => $model,
+        'upload' => $upload,
+        'post_data' => $post_data,
     ]) ?>
-
 </div>
+

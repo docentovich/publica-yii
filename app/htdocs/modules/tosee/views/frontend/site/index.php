@@ -1,8 +1,8 @@
 <?php
 use \yii\helpers\Html;
 use \components\helpers\Helpers;
-if( empty($posts) ){
-    echo "Нет постов для отображения";
+if( empty($service->items) ){
+    echo "<h1>Нет записей для отображения</h1>";
     return;
 }
 ?>
@@ -24,7 +24,7 @@ if( empty($posts) ){
                                             "size" => "350X390",
                                             "block" => "event",
                                             "class" => "event__img img-well",
-                                            "extension" => $post->image->extension
+//                                            "extension" => $post->image->extension
                                         ]
                                     ), //передаем html вывода картинки
                                     "/post/{$post->id}"

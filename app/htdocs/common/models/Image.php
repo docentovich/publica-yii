@@ -52,9 +52,7 @@ class Image extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['alt'], 'string', 'max' => 70],
-            [['patch'], 'string', 'max' => 150],
-            [['name'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
+            [['patch', 'alt', 'name'], 'trim'],
         ];
     }
 
@@ -71,12 +69,7 @@ class Image extends \yii\db\ActiveRecord
         ];
     }
 
-    public function behaviors()
-    {
-        return [
-            'class' => ImageUpload::className(),
-        ];
-    }
+
 
     /**
      * @return \yii\db\ActiveQuery

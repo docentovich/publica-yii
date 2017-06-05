@@ -8,12 +8,13 @@
 
 namespace modules\tosee\services\frontend;
 
-use modules\tosee\controllers\frontend\SiteController;
-use modules\tosee\models\common\Post as Model;
 use modules\tosee\models\common\Post;
-use modules\tosee\PostConstnants;
-use yii\base\Exception;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+use yii\web\Cookie;
 use yii\web\ForbiddenHttpException;
+use components\Services;
+use Yii;
+use yii\web\HttpException;
 
 /**
  * Сервис постов. Вся основная логика выборки постов
@@ -24,7 +25,7 @@ use yii\web\ForbiddenHttpException;
  * Class Post
  * @package modules\tosee\service
  */
-class postService extends \Services
+class postService extends Services
 {
 
     /**
@@ -38,19 +39,8 @@ class postService extends \Services
     /**
      * @var string Текущий город
      */
-    public $city = 'orl';
+    public $city_id = '1';
 
-    /**
-     * Сколько постов дала последняя выборка
-     *
-     * @var int
-     */
-    public $count;
-
-    /**
-     * @var array ActiveRecord
-     */
-    public $items;
 
     /**
      * @var int Страница
@@ -74,6 +64,7 @@ class postService extends \Services
 
     /**
      * Констукртор. Собираем все что нужно для вывода поста
+     * Города в куках
      *
      * postService constructor.
      * @param array $config
@@ -81,23 +72,20 @@ class postService extends \Services
      */
     public function __construct($config = [])
     {
-        if (isset(Yii::$app->session['city']))
-            $this->city = Yii::$app->session['city'];
+
+        if ( Yii::$app->request->cookies->has("city_id") )
+            $this->city_id =  Yii::$app->request->cookies->getValue("city_id");
+        else
+            Yii::$app->response->cookies->add(new  Cookie([
+                'name'  => 'city_id',
+                'value' => $this->city_id
+            ]));
 
         $this->_query = Post::find()
             ->with(["postData", "image"])
-            ->andWhere("=", "status", Post::STATUS_ACTIVE)
-            ->andWhere("=", "city", $this->city);
+            ->andWhere(["=", "status", Post::STATUS_ACTIVE])
+            ->andWhere(["=", "city_id", $this->city_id]);
     }
-
-
-    private function count()
-    {
-        //всего постов
-        $countQuery = clone $this->_query;
-        $this->count = $countQuery->count();
-    }
-
 
     /**
      * Считаем сколько постов, добавляем лимиты
@@ -105,7 +93,7 @@ class postService extends \Services
      *
      * @return $this
      */
-    protected function getMany($condition=[])
+    protected function getMany($condition = [])
     {
         $this->count();
 
@@ -114,7 +102,7 @@ class postService extends \Services
 
         //select all
         $this->items = $this->_query
-            ->andWhere($condition)
+            ->andFilterWhere($condition)
             ->limit($this->limit_per_page)
             ->offset($offset)
             ->all();
@@ -131,33 +119,32 @@ class postService extends \Services
     protected function getOne($id)
     {
 
+        $clone = clone $this->_query;
         //next
-        $this->next = $this
-            ->_query
+        $this->next = $clone
             ->select("id")
             ->andWhere([">", "id", $id])
             ->one();
 
         if (empty($this->next))
-            $this->next = $this
-                ->_query
+            $this->next = $clone
                 ->select("id")
-                ->andWhere([">", "min(id)", $id])
+                ->limit(1)
+                ->orderBy('id DESC')
                 ->one();
 
 
         //prev
-        $this->prev = $this
-            ->_query
+        $this->prev = $clone
             ->select("id")
             ->andWhere(["<", "id", $id])
             ->one();
 
         if (empty($this->prev))
-            $this->prev = $this
-                ->_query
+            $this->prev = $clone
                 ->select("id")
-                ->andWhere(["<", "max(id)", $id])
+                ->limit(1)
+                ->orderBy('id ASC')
                 ->one();
 
         //selectOne
@@ -177,11 +164,11 @@ class postService extends \Services
     {
         $params =
             [
-                ["or"],
+                "or",
                 ["like", "title", $keyword],
                 ["like", "sub_header", $keyword],
                 ["like", "post_short_desc", $keyword],
-                ["like", "post_desc", $keyword],
+                ["like", "post_desc", $keyword]
             ];
 
         $this->_query
@@ -196,7 +183,7 @@ class postService extends \Services
 
     public function save()
     {
-        throw new ForbiddenHttpException();
+        throw new HttpException(403, "Access denied");
     }
 
     /**
@@ -219,7 +206,8 @@ class postService extends \Services
      */
     public function getFuture()
     {
-        $this->_query->getMany("event_at > CURDATE()");
+        $this->_query->andWhere("event_at >= CURDATE()");
+        $this->getMany();
         $this->url = "/%i%";
         return $this;
 
@@ -232,7 +220,8 @@ class postService extends \Services
      */
     public function getPast()
     {
-        $this->getMany("event_at < CURDATE()");
+        $this->_query->andWhere("event_at <= CURDATE()");
+        $this->getMany();
         $this->url = "/past/%i%";
         return $this;
 
@@ -274,8 +263,6 @@ class postService extends \Services
         $this->getOne($id);
         return $this;
     }
-
-
 
 
 }

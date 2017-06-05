@@ -35,9 +35,10 @@ class PostBeforeValidate  extends Behavior
      */
     public function getCity()
     {
-        $user = User::find()->select("id")->where(["=", "id", \Yii::$app->user->getId()])->one();
+        $user = User::find()->select("id,city_id")->where(["=", "id", \Yii::$app->user->getId()])->one();
 
-        $this->owner->city = $user->city;
+        $this->owner->city_id = $user->city_id;
+        $this->owner->user_id = $user->id;
     }
 
 

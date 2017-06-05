@@ -21,6 +21,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use dektrium\user\controllers\RegistrationController as BaseRegistrationController;
+use Yii;
 
 
 /**
@@ -38,6 +39,20 @@ class RegistrationController extends BaseRegistrationController
     /** @var Finder */
     protected $finder;
 
+    /** @inheritdoc */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    ['allow' => true, 'actions' => ['register', 'connect'], 'roles' => ['?']],
+                    ['allow' => true, 'actions' => ['confirm', 'resend'], 'roles' => ['?', '@']],
+                ],
+            ],
+        ];
+    }
+
 
     /**
      * Displays the registration page.
@@ -49,35 +64,33 @@ class RegistrationController extends BaseRegistrationController
      */
     public function actionRegister()
     {
-//        parent::actionRegister();
 
         if (!$this->module->enableRegistration) {
             throw new NotFoundHttpException();
         }
 
         /** @var RegistrationForm $model */
-        $model = \Yii::createObject(RegistrationForm::className());
+        $model = Yii::createObject(RegistrationForm::className());
         $event = $this->getFormEvent($model);
 
         $this->trigger(self::EVENT_BEFORE_REGISTER, $event);
 
         $this->performAjaxValidation($model);
 
-        if ($model->load(\Yii::$app->request->post()) && $model->register()) {
-            $this->trigger(self::EVENT_AFTER_REGISTER, $event);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->register()) {
+                $this->trigger(self::EVENT_AFTER_REGISTER, $event);
 
-            $auth = Yii::$app->getAuthManager();
-            $auth->assign( $auth->getRole("user"), $model->id);
-
-            return $this->render('register', [
-                'title'  => \Yii::t('user', 'Your account has been created'),
-                'model'  => $model,
-                'module' => $this->module,
-            ]);
+                return $this->render('register', [
+                    'title' => Yii::t('user', 'Your account has been created'),
+                    'model' => $model,
+                    'module' => $this->module,
+                ]);
+            }
         }
 
         return $this->render('register', [
-            'model'  => $model,
+            'model' => $model,
             'module' => $this->module,
         ]);
     }
@@ -100,10 +113,10 @@ class RegistrationController extends BaseRegistrationController
 
         /** @var User $user */
         $user = \Yii::createObject([
-            'class'    => User::className(),
+            'class' => User::className(),
             'scenario' => 'connect',
             'username' => $account->username,
-            'email'    => $account->email,
+            'email' => $account->email,
         ]);
 
         $event = $this->getConnectEvent($account, $user);
@@ -118,7 +131,7 @@ class RegistrationController extends BaseRegistrationController
         }
 
         return $this->render('connect', [
-            'model'   => $user,
+            'model' => $user,
             'account' => $account,
         ]);
     }
@@ -127,7 +140,7 @@ class RegistrationController extends BaseRegistrationController
      * Confirms user's account. If confirmation was successful logs the user and shows success message. Otherwise
      * shows error message.
      *
-     * @param int    $id
+     * @param int $id
      * @param string $code
      *
      * @return string
@@ -149,7 +162,11 @@ class RegistrationController extends BaseRegistrationController
 
         $this->trigger(self::EVENT_AFTER_CONFIRM, $event);
 
-        $this->redirect(\Yii::$app->homeUrl ,302);
+        //получаем id и присваеваем роль
+        $auth = Yii::$app->getAuthManager();
+        $auth->assign($auth->getRole("user"), $id);
+
+        $this->redirect(\Yii::$app->homeUrl, 302);
 
         \Yii::$app->getSession()->setFlash('error', 'Аккаунт активирован');
 
@@ -183,7 +200,7 @@ class RegistrationController extends BaseRegistrationController
             $this->trigger(self::EVENT_AFTER_RESEND, $event);
 
             return $this->render('/message', [
-                'title'  => \Yii::t('user', 'A new confirmation link has been sent'),
+                'title' => \Yii::t('user', 'A new confirmation link has been sent'),
                 'module' => $this->module,
             ]);
         }

@@ -22,7 +22,7 @@ class ImageUpload extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_VALIDATE => 'imageUpload'
+            ActiveRecord::EVENT_BEFORE_VALIDATE => 'imageUpload'
         ];
     }
 

@@ -17,10 +17,10 @@ class BackendAsset extends AssetBundle
         'css/main.css',
     ];
     public $js = [
-//        'js/vendor.js',
+        'js/vendor.js',
         'js/main.js',
     ];
-    public $jsOptions = ['position' => \yii\web\View::POS_END];
+    public $jsOptions = ['position' => \yii\web\View::POS_BEGIN];
     public $depends = [
         'yii\web\YiiAsset',
     ];

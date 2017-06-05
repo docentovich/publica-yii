@@ -42,13 +42,13 @@ class Helpers extends Html
      * @param string $encoding кодировка, по-умолчанию 'UTF-8'
      * @return string обрезанная строка
      */
-    function cutStringSimbols($str, $length = 0, $postfix='...', $encoding='UTF-8')
+    function cutStringSimbols($str, $length = 0, $postfix = '...', $encoding = 'UTF-8')
     {
         //удаляем все лишшнее
         $str = strip_tags(trim($str));
 
         //если не щадана длинна то ничего блоее не делаем
-        if($length == 0) return $str;
+        if ($length == 0) return $str;
 
         //если символов меньше выход
         if (mb_strlen($str, $encoding) <= $length) {
@@ -70,7 +70,8 @@ class Helpers extends Html
      * @param array $class Дополнительные классы
      * @return string
      */
-    public static function i($folder, $name,  $class = []){
+    public static function i($folder, $name, $class = [])
+    {
         $class[] = "sp-{$folder}";
         $class[] = "sprite-img";
         $class[] = "sp-{$folder}__{$name}";
@@ -86,22 +87,22 @@ class Helpers extends Html
      * @param string $requaered_extension требуемое расширение
      * @return string Src картинки
      */
-    public static function flyResize($folder, $name, $size, $requaered_extension)
+    public static function flyResize($folder, $name, $extension, $size, $requaered_extension)
     {
-        $dir = Yii::getAlias('@app'). "/web/uploads/" . $folder . "/";
+        $dir = Yii::getAlias('@frontend') . "/web/uploads/" . $folder;
 
         //аозварт заглушки
-        if(!file_exists($dir . $name)){
-            return "noimage_" . $size . ".png";
+        if (!file_exists($dir . $name . "." . $extension)) {
+            return "noimage" . $size . ".png";
         }
 
         list($widh, $height) = explode("x", $size);
 
         //сохраняем тумбочку
-        Image::thumbnail($dir . $name, $widh, $height)
-            ->save($dir . $name . '_' . $size . '.' . $requaered_extension, ['quality' => 80]);
+        Image::thumbnail($dir . $name . "." . $extension, $widh, $height)
+            ->save($dir . $name . $size . '.' . $requaered_extension, ['quality' => 80]);
 
-        return  $folder . "/" .$name . "_" . $size . "." . $requaered_extension;
+        return $folder . $name . $size . "." . $requaered_extension;
 
     }
 
@@ -111,23 +112,30 @@ class Helpers extends Html
      * @param string $folder Относитьельный путь от uploads
      * @param string $name Имя изображения с расширением
      * @param string $size требуемый размер
-     * @param string  $requaered_extension требуемое расширение
+     * @param string $requaered_extension требуемое расширение
      * @return string Src картинки
      */
-    public static function imageSrc($folder, $name, $size, $requaered_extension)
+    public static function imageSrc($folder, $name, $size, $requaered_extension = "jpg")
     {
+        if ($folder != "") $folder .= "/";
+
         $src = "/uploads/";
+        if ($name == NULL)
+            return $src .= "noimage" . $size . ".png";
 
         //получаем имя оригинала оттдельно от его расширения
-        list($f_name, $extension) = explode("." , $name);
+        $temp = explode(".", $name);
+        $f_name = $temp[0];
+        $f_ext = $temp[1];
 
 
         //если нет тумбочки ресайзим, возварщаем
-        if(!file_exists( Yii::getAlias('@app'). "/web/uploads/" . $folder . $f_name . "_" . $size . $requaered_extension ))
-            $src  .=   flyResize($folder, $name, $size, $requaered_extension);
+        $temp = Yii::getAlias('@frontend') . "/web/uploads/" . $folder . $f_name . $size . "." . $requaered_extension;
+        if (!file_exists($temp))
+            $src .= self::flyResize($folder, $f_name, $f_ext, $size, $requaered_extension);
         //если есть тумбочка вернем ее отснительный путь
         else
-            $src  .= $folder . $f_name . "_" . $size . $requaered_extension;
+            $src .= $folder . $f_name . $size . "." . $requaered_extension;
 
         return $src;
     }
@@ -147,13 +155,12 @@ class Helpers extends Html
         $params['class'] .= " img-well ";
 
 
-        if(!isset($params['size'])) $params['size'] = ""; //требуемый размер
-        if(isset($params['block'])) $params['class'] .= " " . $params['block']. "__img";  //добавляем класс элемента блока БЭМ
-        if(!isset($params['extension'])) $params['extension'] = "jpg"; //расширение требуемое
+        if (!isset($params['size'])) $params['size'] = ""; //требуемый размер
+        if (isset($params['block'])) $params['class'] .= " " . $params['block'] . "__img";  //добавляем класс элемента блока БЭМ
+        if (!isset($params['extension'])) $params['extension'] = "jpg"; //расширение требуемое
 
-        if(!isset($params['class'])) $params['class'] = "";
-        if(is_array($params['class'])) $params['class'] = implode(" ", $params['class']);
-
+        if (!isset($params['class'])) $params['class'] = "";
+        if (is_array($params['class'])) $params['class'] = implode(" ", $params['class']);
 
 
         return '<i style="background-image: url(\'' . self::imageSrc($folder, $name, $params['size'], $params['extension']) . '\')"  class="' . $params['class'] . '"></i>';
@@ -168,20 +175,22 @@ class Helpers extends Html
      * @param array $params массив парраметров
      * @return string
      */
-    public static function image($folder, $name, $params = []){
+    public static function image($folder, $name, $params = [])
+    {
 
-        if(!isset($params['size'])) $params['size'] = "";
-        if(isset($params['block'])) $params['class'] .= " " . $params['block']. "__img";
-        if(!isset($params['extension'])) $params['extension'] = "jpg";
+        if (!isset($params['size'])) $params['size'] = "";
+        if (isset($params['block'])) $params['class'] .= " " . $params['block'] . "__img";
+        if (!isset($params['extension'])) $params['extension'] = "jpg";
 
-        if(!isset($params['class'])) $params['class'] = "";
-        if(!isset($params['alt'])) $params['alt'] = "";
-        if(is_array($params['class'])) $params['class'] = implode(" ", $params['class']);
+        if (!isset($params['class'])) $params['class'] = "";
+        if (!isset($params['id'])) $params['id'] = "";
+        if (!isset($params['alt'])) $params['alt'] = "";
+        if (is_array($params['class'])) $params['class'] = implode(" ", $params['class']);
 
 //        if(isset($params['user_id'])) $params['user_id'] .= "/";
 
 
-        return '<img alt="' . $params['alt'] . '" src=\'/' . self::imageSrc($folder, $name, $params['size'], $params['extension']) . '.' . $params['extension'] . '\'  class="' . $params['class'] . '"/>';
+        return '<img alt="' . $params['alt'] . '" src=\'' . self::imageSrc($folder, $name, $params['size'], $params['extension']) . '\'  class="' . $params['class'] . '" id="' . $params['id'] . '" />';
     }
 
     /**
@@ -191,9 +200,25 @@ class Helpers extends Html
      */
     public static function renderImage($image, $params = [])
     {
+        if ($image == NULL)
+            $image = new \common\models\Image(["name" => "noimage.jpg"]);
         return self::image($image->patch, $image->name, $params);
     }
 
+    /**
+     * @param $image ActiveRecord
+     * @param array $params
+     * @return string
+     */
+    public static function getImageSrc($image, $params = [])
+    {
+        if (!isset($params['size'])) $params['size'] = ""; //требуемый размер
+        if (!isset($params['extension'])) $params['extension'] = "jpg";
+
+        if ($image == NULL)
+            $image = new \common\models\Image(["name" => "noimage.jpg"]);
+        return self::imageSrc($image->patch, $image->name, $params['size'], $params['extension']);
+    }
 
 
 }

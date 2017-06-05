@@ -6,11 +6,12 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use modules\tosee\models\common\Post;
+use yii\web\HttpException;
 
 /**
  * PostSearch represents the model behind the search form of `modules\tosee\models\common\Post`.
  */
-class PostSearch extends Post
+class ModeratorPostSearch extends Post
 {
 
     public $postDataTitle;
@@ -41,9 +42,17 @@ class PostSearch extends Post
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $all=false)
     {
-        $query = Post::find()->where(["=", "user_id", Yii::$app->user->identity->getId()]);
+
+        if(!Yii::$app->user->can("moderator"))
+            throw new HttpException("Forbidden");
+        $query = Post::find();
+        if(!$all)
+             $query->where(["=", "status", Post::STATUS_ON_MODERATE]);
+
+        if(!Yii::$app->user->can("administrator"))
+            $query->andWhere(["=", "city_id", Yii::$app->user->identity->city_id]);
 
         // add conditions that should always apply here
 
@@ -78,7 +87,6 @@ class PostSearch extends Post
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
             'event_at' => $this->event_at,
             'post_category_id' => $this->post_category_id,
             'image_id' => $this->image_id,

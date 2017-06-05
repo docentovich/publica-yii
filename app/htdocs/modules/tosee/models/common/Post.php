@@ -20,7 +20,7 @@ use common\models\User;
  *
  * @property Image $image
  * @property User $user
- * @property PostData[] $postDatas
+ * @property PostData[] $postData
  * @property PostToImage[] $postToImages
  * @property Image[] $images
  */
@@ -61,12 +61,12 @@ class Post extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('post', 'ID'),
             'user_id' => Yii::t('post', 'User ID'),
-            'event_at' => Yii::t('post', 'Event At'),
-            'city' => \Yii::t('user', 'City'),
+            'event_at' => Yii::t('post', 'Дата события'),
+            'city' => \Yii::t('user', 'Город'),
             'post_category_id' => Yii::t('post', 'Post Category ID'),
             'image_id' => Yii::t('post', 'Image ID'),
-            'status' => Yii::t('post', 'Status'),
-            'created_at' => Yii::t('post', 'Created At'),
+            'status' => Yii::t('post', 'Статус'),
+            'created_at' => Yii::t('post', 'Создан'),
         ];
     }
 
@@ -119,4 +119,21 @@ class Post extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Image::className(), ['id' => 'image_id'])->viaTable('{{%post_to_image}}', ['post_id' => 'id']);
     }
+
+
+    public function getPostDataTitle()
+    {
+        return $this->postData->title;
+    }
+
+    public function getPostDataShortDesc()
+    {
+        return $this->postData->post_short_desc;
+    }
+
+    public function getPostDataDesc()
+    {
+        return $this->postData->post_desc;
+    }
+
 }

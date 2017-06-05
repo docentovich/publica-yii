@@ -4,8 +4,68 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e43fdff072036e5f2df01f24fbc9c27",
+    "content-hash": "6d915446ed3f999ccd82d909237863f3",
     "packages": [
+        {
+            "name": "2amigos/yii2-ckeditor-widget",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-ckeditor-widget.git",
+                "reference": "60e4d2dbb138706c8c2195a1b29c420bda044b19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-ckeditor-widget/zipball/60e4d2dbb138706c8c2195a1b29c420bda044b19",
+                "reference": "60e4d2dbb138706c8c2195a1b29c420bda044b19",
+                "shasum": ""
+            },
+            "require": {
+                "ckeditor/ckeditor": "dev-full/stable",
+                "yiisoft/yii2": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\ckeditor\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CKEditor widget for Yii2.",
+            "homepage": "http://yiiwheels.com/extension/ckeditor-widget",
+            "keywords": [
+                "2amigos",
+                "CKEditor",
+                "extension",
+                "widget",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2016-12-01 21:22:21"
+        },
         {
             "name": "2amigos/yii2-file-upload-widget",
             "version": "dev-master",
@@ -415,6 +475,31 @@
             ]
         },
         {
+            "name": "bower-asset/jquery-ui",
+            "version": "1.11.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jqueryui.git",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jqueryui/zipball/c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.6"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "jquery-ui.js"
+                ],
+                "bower-asset-ignore": []
+            }
+        },
+        {
             "name": "bower-asset/jquery.inputmask",
             "version": "3.3.5",
             "source": {
@@ -595,6 +680,47 @@
                 "markdown-extra"
             ],
             "time": "2017-04-04 09:40:58"
+        },
+        {
+            "name": "ckeditor/ckeditor",
+            "version": "dev-full/stable",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ckeditor/ckeditor-releases.git",
+                "reference": "b6ab4c126861b21d357a619d92b42b83fd2d291f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ckeditor/ckeditor-releases/zipball/b6ab4c126861b21d357a619d92b42b83fd2d291f",
+                "reference": "b6ab4c126861b21d357a619d92b42b83fd2d291f",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+",
+                "LGPL-2.1+",
+                "MPL-1.1+"
+            ],
+            "authors": [
+                {
+                    "name": "CKSource",
+                    "homepage": "http://cksource.com"
+                }
+            ],
+            "description": "JavaScript WYSIWYG web text editor.",
+            "homepage": "http://ckeditor.com",
+            "keywords": [
+                "CKEditor",
+                "editor",
+                "fckeditor",
+                "html",
+                "javascript",
+                "richtext",
+                "text",
+                "wysiwyg"
+            ],
+            "time": "2017-05-25 17:49:26"
         },
         {
             "name": "dektrium/yii2-rbac",
@@ -1135,53 +1261,6 @@
             "time": "2017-05-01 15:54:38"
         },
         {
-            "name": "tpmanc/yii2-imagick",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tpmanc/yii2-imagick.git",
-                "reference": "1803adeb620219452fc1ecc034c491082d1583b9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tpmanc/yii2-imagick/zipball/1803adeb620219452fc1ecc034c491082d1583b9",
-                "reference": "1803adeb620219452fc1ecc034c491082d1583b9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "tpmanc\\imagick\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "tpmanc",
-                    "email": "tpxtrime@mail.ru",
-                    "homepage": "https://tpmanc.github.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Yii 2 class for working with Imagick",
-            "homepage": "https://github.com/tpmanc/yii2-imagick",
-            "keywords": [
-                "imagick",
-                "yii",
-                "yii2"
-            ],
-            "time": "2016-09-14 10:00:00"
-        },
-        {
             "name": "yiisoft/yii2",
             "version": "dev-master",
             "source": {
@@ -1523,6 +1602,56 @@
                 "yii2"
             ],
             "time": "2017-05-24T22:43:13+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-jui",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-jui.git",
+                "reference": "63d436738e04388f5e3b52f763958bd74f5cb0d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/63d436738e04388f5e3b52f763958bd74f5cb0d0",
+                "reference": "63d436738e04388f5e3b52f763958bd74f5cb0d0",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-ui": "1.11.*@stable",
+                "yiisoft/yii2": "~2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                },
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\jui\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com"
+                }
+            ],
+            "description": "The Jquery UI extension for the Yii framework",
+            "keywords": [
+                "jQuery UI",
+                "yii2"
+            ],
+            "time": "2017-04-19T15:08:35+00:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -3809,6 +3938,53 @@
             "time": "2017-05-28 10:56:43"
         },
         {
+            "name": "tpmanc/yii2-imagick",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tpmanc/yii2-imagick.git",
+                "reference": "1803adeb620219452fc1ecc034c491082d1583b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tpmanc/yii2-imagick/zipball/1803adeb620219452fc1ecc034c491082d1583b9",
+                "reference": "1803adeb620219452fc1ecc034c491082d1583b9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "tpmanc\\imagick\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "tpmanc",
+                    "email": "tpxtrime@mail.ru",
+                    "homepage": "https://tpmanc.github.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii 2 class for working with Imagick",
+            "homepage": "https://github.com/tpmanc/yii2-imagick",
+            "keywords": [
+                "imagick",
+                "yii",
+                "yii2"
+            ],
+            "time": "2016-09-14 10:00:00"
+        },
+        {
             "name": "webmozart/assert",
             "version": "dev-master",
             "source": {
@@ -4010,7 +4186,9 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "dektrium/yii2-user": 20,
-        "dektrium/yii2-rbac": 20
+        "dektrium/yii2-rbac": 20,
+        "yiisoft/yii2-jui": 20,
+        "2amigos/yii2-ckeditor-widget": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

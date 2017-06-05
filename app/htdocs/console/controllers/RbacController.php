@@ -65,7 +65,7 @@ class RbacController extends Controller
 
 
 
-//####################################################################################
+//###################################  POSTS    #################################################
 
 
         //******  Permissions Posts  ******//
@@ -74,6 +74,8 @@ class RbacController extends Controller
         $createPost = $auth->createPermission("createPost");
         $auth->add($createPost);
         //-create post
+
+
 
 
         //update post
@@ -90,21 +92,46 @@ class RbacController extends Controller
         //-update post
 
 
+
+
         //reed post
         $reedPost = $auth->createPermission("reedPost");
         $auth->add($reedPost);
+
+
+        $reedCityPosts = $auth->createPermission("reedCityPosts");  ///просомтр нескольких постов города
+        $auth->add($reedCityPosts);
 
         $reedCityPost = $auth->createPermission("reedCityPost");
         $reedCityPost->ruleName = $cityRule->name;
         $auth->add($reedCityPost);
 
-        $reedOwnPost = $auth->createPermission("reedOwnPost");
+
+        $reedOwnPosts = $auth->createPermission("reedOwnPosts");  ///просомтр нескольких постов своих
+        $auth->add($reedOwnPosts);
+
+
+        $reedOwnPost = $auth->createPermission("reedOwnPost"); //просмотр одного своего поста. выполняеться с кондишином
         $reedOwnPost->ruleName = $authorRule->name;
         $auth->add($reedOwnPost);
         //-reed post
 
 
-        //==наследоване Permissions==
+
+        //moderate post
+        $moderatePost = $auth->createPermission("moderatePost");
+        $auth->add($moderatePost);
+
+        $moderateCityPost = $auth->createPermission("moderateCityPost");
+        $moderateCityPost->ruleName = $cityRule->name;
+        $auth->add($moderateCityPost);
+        //-moderate post
+
+
+
+
+
+        //======================наследоване Permissions========================
 
         //update post
         $auth->addChild($updateOwnPost, $updatePost);
@@ -113,21 +140,31 @@ class RbacController extends Controller
         //-update post
 
         //reed post
-        $auth->addChild($reedOwnPost, $reedPost);
+        $auth->addChild($reedOwnPost, $reedOwnPosts);
+        $auth->addChild($reedOwnPosts, $reedPost);
         //--OR--
-        $auth->addChild($reedCityPost, $reedPost);
+        $auth->addChild($reedCityPost, $reedCityPosts);
+        $auth->addChild($reedCityPosts, $reedPost);
         //-reed post
 
-        //--==наследоване Permissions==--
+        //moderate post
+        $auth->addChild($moderateCityPost, $moderatePost);
+        //-moderate post
+
+        //--==================наследоване Permissions==================--
 
 
         //---******  Permissions Posts ******---//
 
 
 
+
+
+
         //******** Permissions Posts TO Roles *****//
+        $auth->addChild($author,        $reedOwnPosts);
         $auth->addChild($author,        $reedOwnPost);
-        $auth->addChild($moderator,     $reedOwnPost);
+        $auth->addChild($moderator,     $reedCityPosts);
         $auth->addChild($moderator,     $reedCityPost);
         $auth->addChild($administrator, $reedPost);
 
@@ -140,12 +177,15 @@ class RbacController extends Controller
         $auth->addChild($moderator,     $createPost);
         $auth->addChild($administrator, $createPost);
 
+        $auth->addChild($moderator,     $moderateCityPost);
+        $auth->addChild($administrator, $moderatePost);
+
         //---***** Permissions Posts TO Roles **---//
 
 
 
 
-//####################################################################################
+//#################################  USERS   ###################################################
 
 
         //******  Permissions Назначение ролей  ******//
@@ -166,11 +206,17 @@ class RbacController extends Controller
 
 
 
-        //====наследоване ролей====
+        //==================наследоване ролей=================
         $auth->addChild($changeCityAuthor, $changeAuthor);
-        //--==наследоване ролей--==
+        //--===============наследоване ролей--============
+
 
         //--****  Permissions Назначение ролей  ****--//
+
+
+
+
+
 
         //--****  Permissions Назначение ролей TO Roles  ****--//
         $auth->addChild($moderator,     $changeCityAuthor);
@@ -180,6 +226,9 @@ class RbacController extends Controller
         //--****  Permissions Назначение ролей TO Roles  ****--//
 
 
+        //получаем id и присваеваем роль
+        $auth = Yii::$app->getAuthManager();
+        $auth->assign($auth->getRole("administrator"), 1);
 
 
         echo "Done" . PHP_EOL;

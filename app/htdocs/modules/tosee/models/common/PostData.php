@@ -33,6 +33,7 @@ class PostData extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['post_id'], 'required'],
             [['title', 'sub_header'], 'required'],
             [['sub_header', 'post_desc'], 'string'],
             [['post_like_count', 'post_view_count'], 'integer'],
@@ -48,10 +49,10 @@ class PostData extends \yii\db\ActiveRecord
     {
         return [
             'post_id' => 'Post ID',
-            'title' => 'Title',
-            'sub_header' => 'Sub Header',
-            'post_short_desc' => 'Post Short Desc',
-            'post_desc' => 'Post Desc',
+            'title' => 'Заголовок',
+            'sub_header' => 'Подзаголовок',
+            'post_short_desc' => 'Короткое поисание',
+            'post_desc' => 'Описание поста',
             'post_like_count' => 'Post Like Count',
             'post_view_count' => 'Post View Count',
         ];

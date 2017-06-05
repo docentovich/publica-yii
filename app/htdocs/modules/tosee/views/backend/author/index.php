@@ -12,12 +12,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="h1">Редактирование своих записей</h1>
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app/post', 'Create Post'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app/post', 'Создать пост'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,13 +26,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'user_id',
+//            'id',
+//            'user_id',
+            'postDataTitle',
+            'postData.post_short_desc',
             'event_at',
-            'post_category_id',
-            'image_id',
+//            'post_category_id',
+            [
+                'attribute' => 'image_id',
+                'label'    => 'Изображение',
+                'format' => 'image',
+                'value'     => function ($model, $index, $widget) {
+                              return \components\helpers\Helpers::getImageSrc($model->image, ["size" => "200x200"]);
+                }
+            ],
+
+//            'image_id',
             // 'status',
-            // 'created_at',
+             'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

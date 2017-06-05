@@ -1,5 +1,5 @@
 <?php
-
+namespace components;
 /**
  * Created by PhpStorm.
  * User: Andrey
@@ -14,6 +14,19 @@ abstract class Services
      * @var ActiveQuery
      */
     protected $_query;
+
+    /**
+     * Сколько постов дала последняя выборка
+     *
+     * @var int
+     */
+    public $count;
+
+    /**
+     * @var array ActiveRecord
+     */
+    public $items;
+
 
 
     /**
@@ -40,6 +53,19 @@ abstract class Services
 
     /**
      * Сохранение
+     *
+     * @return bool
      */
     abstract public function save();
+
+    /**
+     * Подсчет количесва и cохранение в $count
+     */
+    protected function count()
+    {
+        //всего результатов
+        $countQuery = clone $this->_query;
+        $this->count = $countQuery->count();
+    }
+
 }

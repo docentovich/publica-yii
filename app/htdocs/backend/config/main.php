@@ -44,7 +44,8 @@ return [
 
             ],
             'modelMap' => [
-                'Profile' => 'modules\users\models\Profile',
+                'Profile' => 'common\models\Profile',
+                'RegistrationForm' => 'modules\users\models\RegistrationForm',
 //                'User' => 'modules\users\models\User',
             ],
 
@@ -84,12 +85,13 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' =>[
-                'editor'                    => '/tosee/post/index',
-                'moderator'                 => '/tosee/admin/moderator',
-                'director'                  => '/tosee/admin/director',
-                '/user/upload'              => '/user/settings/upload',
-                '/post/main-upload'         => '/tosee/post/main-upload',
-                '/post/additional-upload'   => '/tosee/post/addition-upload',
+                '<_c:(author|moderator|director)>'           => '/tosee/<_c>/index',
+                '<_c:(author|moderator|director)>/<_a:[a-zA-Z\-\_]+>'  => '/tosee/<_c>/<_a>',
+                'avatar-upload'                                     => '/user/settings/upload-avatar',
+//                '/post/additional-upload'   => '/tosee/author/additional-upload',
+//                'moderator'                 => '/tosee/moderator/index',
+//                'director'                  => '/tosee/admin/director',
+//                '/post/main-upload'         => '/tosee/post/main-upload',
             ]
 
         ],
@@ -97,7 +99,7 @@ return [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    '@dektrium/user/views' => '@modules/users/views/backend/site',
+                    '@dektrium/user/views' => '@modules/users/views/backend',
                 ],
             ],
         ],

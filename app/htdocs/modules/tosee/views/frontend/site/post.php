@@ -11,8 +11,8 @@ use \components\helpers\Helpers;
 <div class="single-event">
     <div class="single-event__inner">
         <?= Helpers::bgImage(
-            $post->result->image->patch,
-            $post->result->image->name,
+            $service->items->image->patch,
+            $service->items->image->name,
             [
                 'class' => "single-event__img img-well",
                 "size" => "860x516",
@@ -21,17 +21,20 @@ use \components\helpers\Helpers;
         ?>
 <!--        <div style="background-image: url(/images/people/dep1.jpg)" class="">-->
         <div class="single-event__content">
-            <h1 class="single-event__h1"><?= $post->result->postData->sub_header; ?></h1>
+            <h1 class="single-event__h1"><?= $service->items->postData->sub_header; ?></h1>
 
-            <div class="single-event__desc"><?= $post->result->postData->post_desc; ?></div>
+            <div class="single-event__desc"><?= $service->items->postData->post_desc; ?></div>
             <div class="single-event__image-gal">
                 <!-- image-gal -->
                 <div class="image-gal">
 
-                    <?php foreach ($post->result->postImages as $image) {
+                    <?php
+                    $i = -1;
+                    foreach ($service->items->images as $image) {
+                        $i++;
 //                        var_dump($image);
                         ?>
-                        <a href="#bs-modal0" data-fancybox="images" class="image-gal__a">
+                        <a href="#bs-modal<?=$i?>" data-fancybox="images" class="image-gal__a">
                             <?= Helpers::bgImage(
                                     $image->patch,
                                     $image->name,
@@ -46,7 +49,7 @@ use \components\helpers\Helpers;
                         </a>
                         <div style="display: none">
                             <!-- modal -->
-                            <div id="bs-modal0" class="modal">
+                            <div id="bs-modal<?=$i?>" class="modal">
                                 <div class="modal__to-left"><</div>
                                 <div class="modal__to-right">></div>
 
@@ -64,8 +67,7 @@ use \components\helpers\Helpers;
                                     <div class="modal__line1">
                                         <div class="modal__title"><?= $image->alt; ?></div>
                                         <div class="modal__likes">
-                                            <div class="modal__counter">456
-                                            </div>
+                                            <div class="modal__counter">0</div>
                                             <div class="modal__hart"><i
                                                     class="modal__i sprite-img sp-sprite sp-sprite__hart"></i>
                                             </div>
