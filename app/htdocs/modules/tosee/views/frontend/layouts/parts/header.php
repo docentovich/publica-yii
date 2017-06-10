@@ -12,16 +12,16 @@ echo \components\widgets\header\Header::widget(["logo" => "publica"]); //вер�
                 <div class="header1__controls1">
                     <!-- controls1 -->
                     <div class="controls1">
-                        <div rel="menu" class="controls1__conrol1">
+                        <div rel="menu" class="controls1__conrol1 sidebar-open">
 
-                            <div class="controls1__img-wrapper">
+                            <div class="controls1__img-wrapper ">
                                 <img src="<?= $bundle->baseUrl; ?>/images/svg/hamburger1.svg" class="controls1__img" alt=""
                                      role="presentation"/>
 
                             </div>
                         </div>
-                        <div rel="search" class="controls1__conrol1">
-                            <div class="controls1__img-wrapper">
+                        <div rel="search" class="controls1__conrol1 sidebar-open">
+                            <div  class="controls1__img-wrapper ">
                                 <img src="<?= $bundle->baseUrl; ?>/images/svg/zoom1.svg" class="controls1__img controls1__img_zoom" alt=""
                                      role="presentation"/>
 
@@ -35,11 +35,10 @@ echo \components\widgets\header\Header::widget(["logo" => "publica"]); //вер�
                 <?php require_once "sidebarmenu.php"; ?>
                 <?php Sidebar::end(); ?>
 
-                <?php Sidebar::begin(["id" => "search", "modif" => "sidebar_search"]); ?>
+                <?php Sidebar::begin(["id" => "search", "modif" => "search"]); ?>
                 <?php require_once "sidebarsearch.php"; ?>
                 <?php Sidebar::end(); ?>
             </div>
         </div>
     </div>
 </div>
-<!--/ header1 -->

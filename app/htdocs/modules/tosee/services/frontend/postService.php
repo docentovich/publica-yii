@@ -102,6 +102,7 @@ class postService extends Services
 
         //select all
         $this->items = $this->_query
+//            ->with(["postData", "image"])
             ->andFilterWhere($condition)
             ->limit($this->limit_per_page)
             ->offset($offset)

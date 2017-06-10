@@ -4,6 +4,8 @@ namespace modules\tosee\controllers\frontend;
 use Yii;
 use yii\web\Controller;
 use modules\tosee\services\frontend\postService as Post;
+use yii\web\Cookie;
+use yii\web\HttpException;
 
 /**
  * Default controller for the `tosee` module
@@ -68,7 +70,7 @@ class SiteController extends Controller
         Yii::$app->view->params['next_url'] = "/";
         Yii::$app->view->params['prev_url'] = "/";
 
-        $service = (new Post())->page($page)->getFuture();
+        $service = (new Post())->page($page)->getPast();
 
         return $this->render('index', [
             "service"  => $service,
@@ -147,6 +149,19 @@ class SiteController extends Controller
     }
 
 
+    public function actionSetCity(){
+        if (!Yii::$app->request->isAjax) {
+            throw new HttpException(403 , "this action can be access by ajax only");
+        }
 
+        $id = (int) Yii::$app->request->post('id');
+
+        Yii::$app->response->cookies->add(new  Cookie([
+            'name'  => 'city_id',
+            'value' => $id
+        ]));
+
+        return '';
+    }
 
 }

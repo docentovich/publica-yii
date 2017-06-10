@@ -2,6 +2,8 @@
 namespace components\widgets\header;
 
 use yii\base\Widget;
+use common\models\City;
+use yii\helpers\ArrayHelper;
 
 /**
  * Самая врхняя плашечка
@@ -16,6 +18,8 @@ class Header extends Widget
      */
     public $logo;
 
+
+
     public function init()
     {
         parent::init();
@@ -23,6 +27,14 @@ class Header extends Widget
 
     public function run()
     {
-        return $this->render("view", ["logo" => $this->logo]);
+        $cities = City::find()->asArray()->all();
+        $cities = ArrayHelper::map($cities, 'id', 'label');
+        $current_city_id =  \Yii::$app->request->cookies->getValue("city_id");
+
+        return $this->render("view", [
+            "logo" => $this->logo,
+            "cities" => $cities,
+            "current_city_id" => $current_city_id
+        ]);
     }
 }

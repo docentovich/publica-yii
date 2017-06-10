@@ -26,7 +26,7 @@ class PostBeforeValidate  extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_BEFORE_VALIDATE => 'getCity'
+            ActiveRecord::EVENT_BEFORE_INSERT => 'getCity'
         ];
     }
 

@@ -20,6 +20,7 @@ class Bootstrap implements BootstrapInterface
                 'past/<page:\d+>'                                                               => 'tosee/site/index',
                 'search'                                                                        => 'tosee/site/search',
                 '<action:\w+>/<id:\d+>'                                                         => 'tosee/site/<action>',
+                '<action:[\w\-]+>'                                                              => 'tosee/site/<action>',
             ]
         );
     }

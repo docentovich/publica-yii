@@ -45,9 +45,8 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'required'],
-            [['user_id', 'post_category_id', 'image_id', 'status'], 'integer'],
-            [['event_at', 'created_at', 'city'], 'safe'],
+            [['post_category_id', 'image_id', 'status'], 'integer'],
+            [['event_at', 'created_at', 'user_id', 'city_id'], 'safe'],
             [['image_id'], 'exist', 'skipOnError' => true, 'targetClass' => Image::className(), 'targetAttribute' => ['image_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];

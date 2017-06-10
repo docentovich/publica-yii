@@ -12,7 +12,7 @@
 
     <!-- Меню -->
     <div id="sidebar" class="sidebar">
-        <div class="sidebar__close">X</div>
+        <div class="sidebar__close">&#10006;</div>
 
         <?= components\widgets\userpanel\Userpanel::widget(); ?>
 

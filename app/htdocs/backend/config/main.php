@@ -67,8 +67,7 @@ return [
         ],
 
         'session' => [
-            // this is the name of the session cookie used for login on the backend
-            'name' => 'advanced-backend',
+            'name' => 'advanced',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -85,13 +84,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' =>[
-                '<_c:(author|moderator|director)>'           => '/tosee/<_c>/index',
-                '<_c:(author|moderator|director)>/<_a:[a-zA-Z\-\_]+>'  => '/tosee/<_c>/<_a>',
-                'avatar-upload'                                     => '/user/settings/upload-avatar',
-//                '/post/additional-upload'   => '/tosee/author/additional-upload',
-//                'moderator'                 => '/tosee/moderator/index',
-//                'director'                  => '/tosee/admin/director',
-//                '/post/main-upload'         => '/tosee/post/main-upload',
+                '<_c:(author|moderator|director)>'                      => '/tosee/<_c>/index',
+                '<_c:(author|moderator|director)>/<_a:[a-zA-Z\-\_]+>'   => '/tosee/<_c>/<_a>',
+                'avatar-upload'                                         => '/user/settings/upload-avatar',
+                '<action:[\w\-]+>'                                      => '/user/settings/<action>',
+
             ]
 
         ],

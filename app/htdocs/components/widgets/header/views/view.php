@@ -1,7 +1,10 @@
 <?
 use yii\helpers\Html;
 use components\helpers\Helpers;
+use components\widgets\header\HeaderAsset;
+use modules\tosee\widgets\sidebar\Sidebar;
 
+$bundle = HeaderAsset::register($this);
 ?>
 <div class="header">
     <div class="container-fluid">
@@ -15,13 +18,12 @@ use components\helpers\Helpers;
                         <div class="controls__control">
                             <div class="controls__lang">
                                 &nbsp;
-                               <? // <i class="controls__i sprite-img sp-sprite sp-sprite__flagrus"></i> ?>
+                               <?php // <i class="controls__i sprite-img sp-sprite sp-sprite__flagrus"></i> ?>
                             </div>
                         </div>
                         <div class="controls__control">
-                            <div class="controls__city">
-                                &nbsp;
-                                <? //<i class="controls__i sprite-img sp-sprite sp-sprite__city"></i>?>
+                            <div class="controls__city " >
+                                <img class="controls__i  sidebar-open" rel="city" src="<?= $bundle->baseUrl ?>/images/route.svg" type=""></img>
                             </div>
                         </div>
 
@@ -50,9 +52,12 @@ use components\helpers\Helpers;
                         ?>
                         <? //<a href="/admin/enter.html" class="controls__enter"><i class="controls__i sprite-img sp-sprite sp-sprite__enter"></i></a> ?>
                     </div>
-                </div><!--/ controls -->
+                </div>
+                <!--/ controls -->
             </div>
         </div>
     </div>
 </div>
-</div><!--/ header -->
+<?php Sidebar::begin(["id" => "city", "modif" => "search"]); ?>
+<?php require_once "sidebarcity.php"; ?>
+<?php Sidebar::end(); ?>

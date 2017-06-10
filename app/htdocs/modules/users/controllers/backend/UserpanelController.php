@@ -22,6 +22,7 @@ use dektrium\user\traits\EventTrait;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\Cookie;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
@@ -79,7 +80,7 @@ class UserpanelController extends BaseSettingsController
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['account', 'networks', 'disconnect', 'delete', 'upload-avatar'],
+                        'actions' => ['account', 'networks', 'disconnect', 'delete', 'upload-avatar', 'set-city'],
                         'roles' => ['user'],
                     ],
                     [
@@ -341,5 +342,20 @@ class UserpanelController extends BaseSettingsController
             ];
         }
         return Json::encode($output);
+    }
+
+    public function actionSetCity(){
+        if (!Yii::$app->request->isAjax) {
+            throw new HttpException(403 , "this action can be access by ajax only");
+        }
+
+        $id = (int) Yii::$app->request->post('id');
+
+        Yii::$app->response->cookies->add(new  Cookie([
+            'name'  => 'city_id',
+            'value' => $id
+        ]));
+
+        return '';
     }
 }
