@@ -230,6 +230,9 @@ class RbacController extends Controller
         $auth = Yii::$app->getAuthManager();
         $auth->assign($auth->getRole("administrator"), 1);
 
+        $auth = Yii::$app->getAuthManager();
+        $auth->assign($auth->getRole("author"), 2);
+
 
         echo "Done" . PHP_EOL;
     }

@@ -36,7 +36,7 @@ class m170610_023442_userDataInsert extends Migration
         'last_login_at' => '1497041567',
     ],
     [
-        'id' => '12',
+        'id' => '2',
         'username' => 'andrey',
         'email' => 'adsd@sdsdf.ru',
         'city_id' => '1',

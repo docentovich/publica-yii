@@ -14,6 +14,13 @@ return [
                 'encryption' => 'tls',
             ],
         ],
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=db;dbname=tosee',
+            'username' => 'root',
+            'password' => 'secret',
+            'charset' => 'utf8',
+        ],
     ],
     'modules' => [
         'debug' => [

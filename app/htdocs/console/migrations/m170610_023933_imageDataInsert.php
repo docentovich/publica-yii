@@ -14,23 +14,23 @@ class m170610_023933_imageDataInsert extends Migration
 
     public function safeUp()
     {
-        $this->batchInsert('{{%image}}',
-                           ["id", "alt", "patch", "name"],
-                            [
-    [
-        'id' => '1',
-        'alt' => null,
-        'patch' => '',
-        'name' => 'noimage.jpg',
-    ],
-    [
-        'id' => '2',
-        'alt' => null,
-        'patch' => '',
-        'name' => 'noimage.jpg',
-    ],
-]
-        );
+//        $this->batchInsert('{{%image}}',
+//                           ["id", "alt", "patch", "name"],
+//                            [
+//    [
+//        'id' => '1',
+//        'alt' => null,
+//        'patch' => '',
+//        'name' => 'noimage.png',
+//    ],
+//    [
+//        'id' => '2',
+//        'alt' => null,
+//        'patch' => '',
+//        'name' => 'noimage.png',
+//    ],
+//]
+//        );
     }
 
     public function safeDown()

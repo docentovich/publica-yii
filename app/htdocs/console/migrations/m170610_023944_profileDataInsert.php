@@ -34,7 +34,7 @@ class m170610_023944_profileDataInsert extends Migration
         'timezone' => null,
     ],
     [
-        'user_id' => '12',
+        'user_id' => '2',
         'name' => 'Автор',
         'public_email' => null,
         'gravatar_email' => null,
