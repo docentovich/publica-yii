@@ -5,7 +5,7 @@ return [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=db;dbname=tosee',
             'username' => 'root',
-            'password' => 'secret',
+            'password' => '1Vv4nfkCXp',
             'charset' => 'utf8',
         ],
         'mailer' => [
