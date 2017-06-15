@@ -21,7 +21,7 @@ if( empty($service->items) ){
                                         $post->image->patch,
                                         $post->image->name,
                                         [
-                                            "size" => "350X390",
+                                            "size" => "350x390",
                                             "block" => "event",
                                             "class" => "event__img img-well",
 //                                            "extension" => $post->image->extension
