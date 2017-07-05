@@ -2,6 +2,7 @@
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language' => 'ru-RU',
+    'name' => 'Publica',
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -38,6 +39,9 @@ return [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
+        ],
+        'assetManager' => [
+            'dirMode' => 0777,
         ],
     ],
     'modules' => [

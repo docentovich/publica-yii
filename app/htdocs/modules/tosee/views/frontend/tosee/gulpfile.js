@@ -30,7 +30,8 @@ const changed        = require('gulp-changed');
 const replace        = require('gulp-replace');
 const print          = require('gulp-print');
 const spritesmith    = require('gulp.spritesmith-multi');
-var postcss    = require('gulp-postcss');
+const debug          = require('gulp-debug');
+var postcss          = require('gulp-postcss');
 // var phantomjssmith = require('phantomjssmith');
 var sprites = ['sprite', 'logos', 'tosee'];
 /*
@@ -171,8 +172,8 @@ gulp.task('sprite', function generateSpritesheets () {
 //-----WATCH-------
 gulp.task('watch', function() {
   gulp.watch('images/{' + sprites.join(',') + '}/*.{jpg,png,svg,gif}', {cwd: 'develop'}, ['sprite']);
-  gulp.watch('**/*.scss', {cwd: 'develop'}, ['scss']);
-  gulp.watch(['**/*.js', '!js/main.js'], {cwd: 'develop'}, ['js', browserSync.reload]);
+  gulp.watch('**/*.scss', {cwd: 'develop'}, ['scss', 'build']);
+  gulp.watch(['**/*.js', '!js/main.js'], {cwd: 'develop'}, ['js', 'build', browserSync.reload]);
   gulp.watch(['jade/template/**/*.jade', 'blocks/**/*.jade'], {cwd: 'develop'}, ['jadeBlocks', browserSync.reload]);
   gulp.watch(['jade/**/*.jade', '!jade/template/**/*.jade'], {cwd: 'develop'}, ['jade', browserSync.reload]);
 });
@@ -183,111 +184,122 @@ gulp.task('watch', function() {
 
 
 // ====TO DIST====
-//cleandist
+
 gulp.task('build:clean', function () {
-  return del.sync(['./dist']);
+  return del.sync(['../../../../../frontend/web/assets/*'], {force: true});
 });
 
 //copydist
-gulp.task('build:copyDist', function () {  
-  return gulp.src([
-    'develop/sendform.php', 
-    'develop/.htaccess', 
-    'develop/favicon.png',
-    // 'develop/**/*.html',
-    ])
-  .pipe(print())
-  .pipe(gulp.dest('dist'));
-});
+// gulp.task('build:copyDist', function () {  
+//   return gulp.src([
+//     'develop/sendform.php', 
+//     'develop/.htaccess', 
+//     'develop/favicon.png',
+//     // 'develop/**/*.html',
+//     ])
+//   .pipe(print())
+//   .pipe(gulp.dest('dist'));
+// });
 
 //copylibs
-gulp.task('build:copyLibs', function () {  
-  return gulp.src([
-    'develop/libs/**'])
-  .pipe(print())
-  .pipe(gulp.dest('dist/libs'));
-});
+// gulp.task('build:copyLibs', function () {  
+//   return gulp.src([
+//     'develop/libs/**'])
+//   .pipe(print())
+//   .pipe(gulp.dest('dist/libs'));
+// });
 
 
 //copy dist fonts
-gulp.task('build:copyDistFonts',  function () {  
-  return gulp.src(['develop/fonts/**/{*.eot,*.svg,*.ttf,*.eot,*.otf,*.woff2,*.woff}']
-    )
-  .pipe(print())
-  .pipe(gulp.dest('dist/fonts'));
-});
+// gulp.task('build:copyDistFonts',  function () {  
+//   return gulp.src(['develop/fonts/**/{*.eot,*.svg,*.ttf,*.eot,*.otf,*.woff2,*.woff}']
+//     )
+//   .pipe(print())
+//   .pipe(gulp.dest('dist/fonts'));
+// });
+
+
 
 //minifi img
 gulp.task('build:minifiImg',  function () { 
+  return;
   return gulp.src(['develop/images/**/{*.jpg,*.png,*.jpeg,*.gif,*.svg}'])
   .pipe(imagemin({zopflipng: false}))
   .on('error', console.log)
-  .pipe(gulp.dest('dist/images'));
+  .pipe(gulp.dest('../assets/images'));
 });
 
 gulp.task('build:minifiJsCss',   function () { 
 
-  return gulp.src('./develop/**/*.html')
+  return gulp.src('./develop/index.html')
   .pipe(print())
-  .pipe(useref({ searchPath: 'develop', base: 'develop' }))
-  .pipe(gulpif('*.js', uglify()
+  .pipe( useref({ searchPath: 'develop', base: 'develop' }) )
+  .pipe( debug() )
+  .pipe( gulpif('*.js', uglify()
   //   .on('error', function(err) {
   //   // gutil.log(gutil.colors.red('[Error]'), err.toString());
   //   // this.emit('end');
   // })
   ))   
-  .pipe(gulpif('*.css', minifyCss()))    
-  .pipe(gulp.dest('../assets'));
+  .pipe( gulpif('*.css', minifyCss()) )
+  .pipe( gulp.dest('../assets') );
 });
 
 gulp.task('build:_dist', ['build:clean'], function (callback) {
-  return runSequence(['build:copyDist', 'build:copyLibs', 'build:copyDistFonts', 'build:minifiJsCss'], callback);
+  return runSequence(['build:minifiJsCss'], callback);
 });
 
-gulp.task('build:dist', ['build:_dist'], function (callback) {
-  return runSequence(/*['build:minifiImg'],*/ callback);
+gulp.task('build', ['build:_dist'], function (callback) {
+  return runSequence(['build:minifiImg'], callback);
 });
 
 //===TO DIST====
 
-// ====TO YII====
-//minifi img
-gulp.task('build:yii:minifiImg',  function () { 
-  return gulp.src(['develop/images/**/{*.jpg,*.png,*.jpeg,*.gif,*.svg}'])
-  .pipe(imagemin({zopflipng: false}))
-  .on('error', console.log)
-  .pipe(gulp.dest('../images'));
-});
+// ====TO YII==== 
 
-//copy js
-gulp.task('build:yii:copy:js',   function () { 
+// gulp.task('build:clean', function () {
+//   // return gulp.src(['../../../../../frontend/web/assets/*'])
+//   // .pipe( debug() );
+//   del.sync(['../../../../../frontend/web/assets/*'], {force: true});
+// });
 
-  return gulp.src('./dist/js/**/*')
-  return gulp.src([
-    'develop/libs/**'])
-  .pipe(print())
-  .pipe(gulp.dest('../assets/js'));
-});
+// //minifi img
+// gulp.task('build:yii:minifiImg',  function () { 
+//   return gulp.src(['develop/images/**/{*.jpg,*.png,*.jpeg,*.gif,*.svg}'])
+//   .pipe(imagemin({zopflipng: false}))
+//   .on('error', console.log)
+//   .pipe(gulp.dest('../images'));
+// });
 
-//copy css
-gulp.task('build:yii:copy:css',   function () { 
+// //copy js
+// gulp.task('build:yii:copy:js',   function () { 
 
-  return gulp.src('./dist/css/**/*')
-  return gulp.src([
-    'develop/libs/**'])
-  .pipe(print())
-  .pipe(gulp.dest('../../../assets/css'));
-});
+//   return gulp.src('./dist/js/**/*')
+//   return gulp.src([
+//     'develop/libs/**'])
+//   .pipe(print())
+//   .pipe(gulp.dest('../assets/js'));
+// });
 
-//copy
-gulp.task('build:yii:copy', function (callback) {
-  return runSequence(['build:yii:copy:js', 'build:yii:copy:css'], callback);
-});
+// //copy css
+// gulp.task('build:yii:copy:css',   function () { 
+
+//   return gulp.src('./dist/css/**/*')
+//   return gulp.src([
+//     'develop/libs/**'])
+//   .pipe(print())
+//   .pipe(gulp.dest('../assets/css'));
+// });
+
+// //copy
+// gulp.task('build:yii:copy', function (callback) {
+//   return runSequence(['build:yii:copy:js', 'build:yii:copy:css'], callback);
+// });
 
 //all
-gulp.task('build:yii:dist', ['build:dist'], function (callback) {
-  return runSequence([/*'build:yii:minifiImg',*/ 'build:yii:copy'], callback);
-});
+// gulp.task('build:yii:dist', ['build:dist'], function (callback) {
+//   return runSequence([/*'build:yii:minifiImg',*/ 'build:yii:copy'], callback);
+// });
 
 //===TO DIST====
 
@@ -295,8 +307,8 @@ gulp.task('build:yii:dist', ['build:dist'], function (callback) {
 
 
 //build
-gulp.task('build', ['build:clean'], function (callback) {
-  return runSequence(['build:yii:dist'], callback);
-});
+// gulp.task('build', ['build:clean'], function (callback) {
+//   return runSequence(['build:yii:dist'], callback);
+// });
 
 //------------=====build======--------------------

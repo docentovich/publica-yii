@@ -205,7 +205,14 @@ a{
 .fancybox-close-small:after{
   background: none;
 }
+ 
 
-
+ 
 @import "../blocks/**/*";
-@import "../../../../bemBlocks/**/*";
+// @import "../../../../bemBlocks/**/*";
+
+h1{
+  text-align: center;
+  color: #fff;
+  font-size: 40px;
+}
