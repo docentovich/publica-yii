@@ -6,6 +6,7 @@ VOLUME /app/htdocs
 RUN apt-get update \
       && apt-get install -y \
           git \
+          openssl \
           cron \
           libfreetype6-dev \
           libicu-dev \
