@@ -170,10 +170,10 @@ class RegistrationController extends BaseRegistrationController
 
         \Yii::$app->getSession()->setFlash('error', 'Аккаунт активирован');
 
-//        return $this->render('/message', [
-//            'title'  => \Yii::t('user', 'Account confirmation'),
-//            'module' => $this->module,
-//        ]);
+        // return $this->render('/message', [
+        //  'title'  => \Yii::t('user', 'Account confirmation'),
+        //  'module' => $this->module,
+        // );
     }
 
     /**

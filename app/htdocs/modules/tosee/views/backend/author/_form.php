@@ -21,7 +21,7 @@ use dosamigos\ckeditor\CKEditor;
             'model' => $model,
             'attribute' => 'event_at',
             'language' => 'ru',
-//        'label' => 'Дата события',
+             //'label' => 'Дата события',
             'dateFormat' => 'yyyy-MM-dd',
         ]);
         ?>
