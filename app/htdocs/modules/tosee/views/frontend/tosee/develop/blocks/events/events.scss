@@ -42,21 +42,21 @@
         height: 504px;
         width: 100%;
         padding: 10px;
-        max-width: 374px;
+        max-width: 318px;
         width: 100%;
         padding: 10px;
         margin-bottom: 20px;
     }
 
-    @media (max-width: 746px){
-        &__event{
-            max-width: 48%;
-        }
-    }
-    @media (max-width: 550px){
-        &__event{
-            height: 225px;
+    // @media (max-width: 746px){
+    //     &__event{
+    //         max-width: 48%;
+    //     }
+    // }
+    // @media (max-width: 550px){
+    //     &__event{
+    //         height: 225px;
             
-        }
-    }
+    //     }
+    // }
 }

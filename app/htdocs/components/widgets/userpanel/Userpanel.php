@@ -1,4 +1,4 @@
-<?
+<?php
 namespace components\widgets\userpanel;
 
 use common\models\Profile;

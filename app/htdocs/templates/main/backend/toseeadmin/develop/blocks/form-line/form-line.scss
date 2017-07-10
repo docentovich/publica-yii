@@ -21,15 +21,17 @@
         }
         @media #{$lg},#{$md},#{$sm}{
             text-align: right;
+            margin-top: 17px;
         }
     }
 
     &__inline &__img{
-        margin-right: 43px;
+        // margin-right: 43px;
     }
 
 
     &__inline{
+
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -56,4 +58,8 @@
     }
 
     &__img{}
+}
+
+.form-group{
+    margin: 8px 0 8px 0;
 }

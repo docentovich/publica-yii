@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
 use dosamigos\ckeditor\CKEditor;
+
 /* @var $this yii\web\View */
 /* @var $model modules\tosee\models\common\Post */
 /* @var $form yii\widgets\ActiveForm */
@@ -15,7 +16,7 @@ use dosamigos\ckeditor\CKEditor;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <div style="float: right;">
-        <label>Выберите дату события</label><br>
+        <label class="control-label">Выберите дату события</label><br>
         <?= DatePicker::widget([
             'model' => $model,
             'attribute' => 'event_at',
@@ -26,9 +27,11 @@ use dosamigos\ckeditor\CKEditor;
         ?>
     </div>
 
-    <?= \components\helpers\Helpers::renderImage($model->image, ["class" => "form-line__img", "id" => "avatar"]); ?>
+    <label for="uploadimage-file" class="cursor-pointer">
+        <?= \components\helpers\Helpers::renderImage($model->image, ["class" => "form-line__img", "id" => "avatar"]); ?>
+    </label>
 
-    <div class="" id="">
+    <div class="hidden" id="">
 
         <?= $form->field($upload, 'file', [
             'template' => '{input}',
@@ -42,11 +45,11 @@ use dosamigos\ckeditor\CKEditor;
     <br>
 
 
-    <?=$form->field($post_data, 'title')->label("Заголовок") ?>
+    <?= $form->field($post_data, 'title')->label("Заголовок") ?>
 
-    <?=$form->field($post_data, 'sub_header')->label("Подзаголовок") ?>
+    <?= $form->field($post_data, 'sub_header')->label("Подзаголовок") ?>
 
-    <?=$form->field($post_data, 'post_short_desc')->label("Короткое описание")->textarea() ?>
+    <?= $form->field($post_data, 'post_short_desc')->label("Короткое описание")->textarea() ?>
 
     <?= $form->field($post_data, 'post_desc')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
@@ -54,13 +57,12 @@ use dosamigos\ckeditor\CKEditor;
     ]) ?>
 
 
-
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app/post', 'Сохранить'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app/post', 'Сохранить'), ['class' => 'button button--green']) ?>
     </div>
 
     <div class="additional-images">
-        <?php foreach($model->images as $image){ ?>
+        <?php foreach ($model->images as $image) { ?>
             <?= \components\helpers\Helpers::renderImage($image, ["size" => "215x215", "class" => "add-img"]) ?>
         <?php } ?>
     </div>
@@ -69,16 +71,16 @@ use dosamigos\ckeditor\CKEditor;
 
     <?php ActiveForm::end(); ?>
 
-
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    <div class="btn btn-success button--upload" id="upload">
+    <div class="button button--green button--upload " id="upload">
         <?= $form->field($upload, 'file', [
             'template' => '{input}',
+
             'options' => [
                 'id' => 'multiupload',
                 'tag' => null, // Don't wrap with "form-group" div
             ]
-        ])->fileInput()->label(false); ?>
+        ])->fileInput(["class" => "cursor-pointer",])->label(false); ?>
         <span>Добавить изображение</span>
     </div>
 
@@ -93,24 +95,22 @@ use dosamigos\ckeditor\CKEditor;
                 timeout: 50000,
 //                    enctype: 'multipart/form-data',
                 url: '<?= \yii\helpers\Url::toRoute(['/author/additional-upload']) ?>',
-                data:  new FormData($from[0]),
+                data: new FormData($from[0]),
                 contentType: false,
                 cache: false,
                 processData: false,
                 success: function (data) {
                     data = JSON.parse(data);
-                    if(data.url == undefined) return false;
+                    if (data.url == undefined) return false;
                     var thumb = data.thumbs["215x215"];
 
-                    $(".additional-images").append("<img class='add-img' src='"+ data.url + "/" + thumb +"' />");
-                    $("#add-img-hidden").append("<input type='hidden' name='PostToImage[image_id][]' value='"+data.id+"'/>");
+                    $(".additional-images").append("<img class='add-img' src='" + data.url + "/" + thumb + "' />");
+                    $("#add-img-hidden").append("<input type='hidden' name='PostToImage[image_id][]' value='" + data.id + "'/>");
 
                 }
             });
         });
     </script>
     <?php ActiveForm::end(); ?>
-
-
 
 </div>

@@ -23,7 +23,7 @@
 
   &__city-ico{
     float: right;
-    @include sprite($pointer);
+    // @include sprite($pointer);
     position: absolute;
     right: 9px;
     top: 10px;

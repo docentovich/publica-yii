@@ -1,5 +1,5 @@
-<?php use yii\helpers\Html;
-
+<?php
+use yii\helpers\Html;
 ?>
 <div class="col-sm-2 no-padding row-eq-height-sm">
     <!-- Бургер-->

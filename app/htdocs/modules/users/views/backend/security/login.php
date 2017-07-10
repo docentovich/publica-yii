@@ -95,7 +95,7 @@ $bundle = BackendAsset::register($this);
     <div class="login__button">
         <?= Html::submitButton(
             Yii::t('user', 'Sign in'),
-            ['class' => 'button button--green', 'tabindex' => '4']
+            ['class' => 'button button--green button--center', 'tabindex' => '4']
         ) ?>
     </div>
 

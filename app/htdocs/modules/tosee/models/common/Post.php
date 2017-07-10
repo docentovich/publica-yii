@@ -61,11 +61,12 @@ class Post extends \yii\db\ActiveRecord
             'id' => Yii::t('post', 'ID'),
             'user_id' => Yii::t('post', 'User ID'),
             'event_at' => Yii::t('post', 'Дата события'),
-            'city' => \Yii::t('user', 'Город'),
+            'city' => Yii::t('user', 'Город'),
             'post_category_id' => Yii::t('post', 'Post Category ID'),
             'image_id' => Yii::t('post', 'Image ID'),
             'status' => Yii::t('post', 'Статус'),
             'created_at' => Yii::t('post', 'Создан'),
+            'post_data_title' => Yii::t('post', 'Титл'),
         ];
     }
 

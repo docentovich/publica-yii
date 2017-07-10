@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
                 <?php if (Yii::$app->authManager->getAssignment("user", $user->id) === NULL) {
                     $form = ActiveForm::begin(); ?>
                     <input type="hidden" name="id[<?=$user->id?>]" value="user"/>
-                    <input type="submit" name="setrule" class="btn btn-success" value="задать"/>
+                    <input type="submit" name="setrule" class="button button--green" value="задать"/>
                     <?php ActiveForm::end();
                 }else { ?>
                     <button class="btn btn-link" >Задано!</button>
@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
                 <?php if (Yii::$app->authManager->getAssignment("author", $user->id) === NULL) {
                     $form = ActiveForm::begin(); ?>
                     <input type="hidden" name="id[<?=$user->id?>]" value="author"/>
-                    <input type="submit" name="setrule" class="btn btn-success" value="задать"/>
+                    <input type="submit" name="setrule" class="button button--green" value="задать"/>
                     <?php ActiveForm::end();
                 }else { ?>
                     <button class="btn btn-link" >Задано!</button>
@@ -46,7 +46,7 @@ use yii\widgets\ActiveForm;
                     <?php if (Yii::$app->authManager->getAssignment("moderator", $user->id) === NULL) {
                         $form = ActiveForm::begin(); ?>
                         <input type="hidden" name="id[<?=$user->id?>]" value="moderator"/>
-                        <input type="submit" name="setrule" class="btn btn-success" value="задать"/>
+                        <input type="submit" name="setrule" class="button button--green" value="задать"/>
                         <?php ActiveForm::end();
                     }else { ?>
                         <button class="btn btn-link" >Задано!</button>

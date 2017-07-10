@@ -68,9 +68,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-9 col-xs-12">
                 <div class="form-line__text">
                     <div class="form-line__inline">
-                        <?= \components\helpers\Helpers::renderImage($model_profile->image, ["class" => "form-line__img", "id" => "avatar"]); ?>
+                        <label for="uploadimage-file" class="cursor-pointer">
+                            <?= \components\helpers\Helpers::renderImage($model_profile->image, ["class" => "form-line__img", "id" => "avatar"]); ?>
+                        </label>
 
-                        <div class="button button--grey button--upload" id="upload">
+                        <div class="button button--grey button--upload hidden" id="upload">
 
                             <?= $form->field($upload, 'file', [
                                 'template' => '{input}',
@@ -79,8 +81,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]
                             ])->fileInput()->label(false); ?>
 
-                            <span>Выбрать</span>
                         </div>
+
 
 
                     </div>

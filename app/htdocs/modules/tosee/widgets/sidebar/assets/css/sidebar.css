@@ -3,12 +3,12 @@
     height: 100%;
     position: fixed;
     overflow-y: auto;
-    right: -110%;
-    top: 0;
+    right: 0;
+    top: -110%;
     display: block;
-    -webkit-transition: all .2s;
-    -moz-transition: all .2s;
-    transition: all .2s;
+    -webkit-transition: all .7s;
+    -moz-transition: all .7s;
+    transition: all .7s;
     background: #bfc1c4;
     z-index: 10
 }
@@ -54,7 +54,7 @@
 }
 
 .sidebar-swipe.active {
-    right: 0
+    top: 0
 }
 
 .sidebar-swipe__close {

@@ -55,8 +55,8 @@ class PostSearch extends Post
             'attributes' => [
                 'event_at',
                 'postDataTitle' => [
-                    'asc' => ['{{%post_data}}.title' => SORT_ASC],
-                    'desc' => ['{{%post_data}}.title' => SORT_DESC],
+                    'asc'   => [ '{{%post_data}}.title' => SORT_ASC ],
+                    'desc'  => [ '{{%post_data}}.title' => SORT_DESC ],
                     'label' => 'Заголовок'
                 ],
                 'created_at'

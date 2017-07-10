@@ -4,12 +4,24 @@
   min-height: 43px;
   border-radius: 9px;
   text-align: center;
+  font-size: 19px;
+  height: 43px;
+  line-height: 43px; 
+  display: block;
+
+  &--center{
+    margin: auto;
+  }
 
   &--green{
     background-color: #679178;
     border: 1px solid #dedcdc;
     color: #fff;
     max-width: 232px;
+
+    &:hover{
+      color: #fff;
+    }
   }
 
   &--grey{

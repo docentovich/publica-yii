@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app/post', 'Создать пост'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app/post', 'Создать пост'), ['create'], ['class' => 'button button--green']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,13 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-//            'id',
-//            'user_id',
-            'postDataTitle',
+            [
+                 'attribute' =>  'postDataTitle',
+                 'label'    => 'Заголовок',
+            ],
             'postData.post_short_desc',
             'event_at',
-//            'post_category_id',
             [
                 'attribute' => 'image_id',
                 'label'    => 'Изображение',
@@ -40,11 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                               return \components\helpers\Helpers::getImageSrc($model->image, ["size" => "200x200"]);
                 }
             ],
-
-//            'image_id',
-            // 'status',
              'created_at',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

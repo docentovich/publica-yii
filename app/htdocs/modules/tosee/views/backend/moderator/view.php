@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <? if ($model->status == Post::STATUS_ACTIVE) { ?>
             <?= HTML::a("Заблокировать", ['index', 'status' =>  Post::STATUS_BLOCKED, 'id' => $model->id], ['class' => 'btn btn-danger']); ?>
         <?php } elseif ($model->status == Post::STATUS_ON_MODERATE) { ?>
-            <?= HTML::a("Одобрить", ['index', 'status' => Post::STATUS_ACTIVE, 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+            <?= HTML::a("Одобрить", ['index', 'status' => Post::STATUS_ACTIVE, 'id' => $model->id], ['class' => 'button button--green']) ?>
             <?= HTML::a("Отклонить", ['index', 'status' => Post::STATUS_NOT_PASS_MODERATE, 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
         <?php } elseif ($model->status == Post::STATUS_NOT_PASS_MODERATE) { ?>
             Отклюнен

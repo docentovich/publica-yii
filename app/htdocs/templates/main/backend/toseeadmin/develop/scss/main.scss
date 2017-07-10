@@ -27,7 +27,7 @@ html{
 body{
   font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
   font-size: $base-font-size;
-  overflow-x: hidden;
+  // overflow-x: hidden;
   position: relative;
 
   @media #{$md}{
@@ -217,4 +217,20 @@ a, a:hover, a:focus, a:visited{
 .users-table td, .users-table th{
     padding: 25px;
 
+}
+
+.grid-view{
+  overflow-x: scroll;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.control-label{
+  padding-bottom: 5px;
+}
+
+.grid-view .summary{
+  margin: 17px 0 7px 0;
 }

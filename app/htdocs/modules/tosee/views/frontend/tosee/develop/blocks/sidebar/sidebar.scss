@@ -5,10 +5,10 @@
     overflow-y: auto;
     overflow-x: hidden;
 
-    right: -110%;
-    top: 0;
+    top: -110%;
+    left: 0;
     display: block;
-    transition: all .2s;
+    transition: all .7s;
     background: #bfc1c4;
     z-index: 10;
 
@@ -53,7 +53,7 @@
     }
 
     &.active{
-        right: 0px;
+        top: 0px;
     }
 
     &__close{

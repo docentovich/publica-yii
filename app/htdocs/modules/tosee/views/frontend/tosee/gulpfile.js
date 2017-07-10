@@ -172,8 +172,8 @@ gulp.task('sprite', function generateSpritesheets () {
 //-----WATCH-------
 gulp.task('watch', function() {
   gulp.watch('images/{' + sprites.join(',') + '}/*.{jpg,png,svg,gif}', {cwd: 'develop'}, ['sprite']);
-  gulp.watch('**/*.scss', {cwd: 'develop'}, ['scss', 'build']);
-  gulp.watch(['**/*.js', '!js/main.js'], {cwd: 'develop'}, ['js', 'build', browserSync.reload]);
+  gulp.watch('**/*.scss', {cwd: 'develop'}, ['scss']);
+  gulp.watch(['**/*.js', '!js/main.js'], {cwd: 'develop'}, ['js', browserSync.reload]);
   gulp.watch(['jade/template/**/*.jade', 'blocks/**/*.jade'], {cwd: 'develop'}, ['jadeBlocks', browserSync.reload]);
   gulp.watch(['jade/**/*.jade', '!jade/template/**/*.jade'], {cwd: 'develop'}, ['jade', browserSync.reload]);
 });
@@ -235,13 +235,13 @@ gulp.task('build:minifiJsCss',   function () {
   .pipe(print())
   .pipe( useref({ searchPath: 'develop', base: 'develop' }) )
   .pipe( debug() )
-  .pipe( gulpif('*.js', uglify()
+  // .pipe( gulpif('*.js', uglify()
   //   .on('error', function(err) {
   //   // gutil.log(gutil.colors.red('[Error]'), err.toString());
   //   // this.emit('end');
   // })
-  ))   
-  .pipe( gulpif('*.css', minifyCss()) )
+  // ))   
+  // .pipe( gulpif('*.css', minifyCss()) )
   .pipe( gulp.dest('../assets') );
 });
 
