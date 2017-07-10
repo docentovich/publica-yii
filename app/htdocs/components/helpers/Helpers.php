@@ -96,6 +96,7 @@ class Helpers extends Html
             return "noimage" . $size . ".png";
         }
 
+        $size = mb_strtolower($size);
         list($widh, $height) = explode("x", $size);
 
         //сохраняем тумбочку

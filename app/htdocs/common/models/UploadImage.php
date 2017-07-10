@@ -51,7 +51,7 @@ class UploadImage extends Model
         if ($this->validate()) {
 
             //поле file
-//            $file = \yii\web\UploadedFile::getInstance($this->file, 'file');
+            //$file = \yii\web\UploadedFile::getInstance($this->file, 'file');
             //уникальное имя файла
             $fileName = uniqid();
             //пусть состоит из папки аплоадов и ИД юзера

@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="form-line__text">
                     <div class="form-line__inline">
                         <label for="uploadimage-file" class="cursor-pointer">
-                            <?= \components\helpers\Helpers::renderImage($model_profile->image, ["class" => "form-line__img", "id" => "avatar"]); ?>
+                            <?= \components\helpers\Helpers::renderImage($model_profile->image, ["class" => "form-line__img", "id" => "avatar", "size" => "160x200"]); ?>
                         </label>
 
                         <div class="button button--grey button--upload hidden" id="upload">
