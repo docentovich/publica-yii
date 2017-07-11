@@ -4,7 +4,7 @@ echo \components\widgets\header\Header::widget(["logo" => "publica"]); //вер�
 ?>
 <!-- header1 -->
 <div class="header1">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-xs-24">
                 <img src="<?= $bundle->baseUrl; ?>/images/logo.png" class="header1__logo" alt="" role="presentation"/>
@@ -31,11 +31,11 @@ echo \components\widgets\header\Header::widget(["logo" => "publica"]); //вер�
                     <!--/ controls1 -->
                 </div>
 
-                <?php Sidebar::begin(["id" => "menu"]); ?>
+                <?php Sidebar::begin( ["id" => "menu"] ); ?>
                 <?php require_once "sidebarmenu.php"; ?>
                 <?php Sidebar::end(); ?>
 
-                <?php Sidebar::begin(["id" => "search", "modif" => "search"]); ?>
+                <?php Sidebar::begin( ["id" => "search", "modif" => "search"] ); ?>
                 <?php require_once "sidebarsearch.php"; ?>
                 <?php Sidebar::end(); ?>
             </div>
