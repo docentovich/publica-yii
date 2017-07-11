@@ -4,7 +4,7 @@ echo \components\widgets\header\Header::widget(["logo" => "publica"]); //вер�
 ?>
 <!-- header1 -->
 <div class="header1">
-    <div class="container">
+    <div class="container container-header">
         <div class="row">
             <div class="col-xs-24">
                 <img src="<?= $bundle->baseUrl; ?>/images/logo.png" class="header1__logo" alt="" role="presentation"/>

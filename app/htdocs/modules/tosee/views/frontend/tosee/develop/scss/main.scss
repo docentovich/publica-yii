@@ -217,3 +217,11 @@ h1{
   color: #fff;
   font-size: 40px;
 }
+
+.container-header, .container-body{
+  max-width: 975px;
+}
+
+.container-body{
+  padding: 0 4px 0 4px;
+}

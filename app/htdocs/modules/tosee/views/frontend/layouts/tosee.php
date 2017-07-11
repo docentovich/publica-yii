@@ -40,7 +40,7 @@ AppAssetIE9::register($this);
 
     <!-- content -->
     <div class="content" style="min-height: calc(100vh - 210px);">
-        <div class="container">
+        <div class="container container-body">
             <?php require_once "parts/navigation.php"; ?>
             <?= $content ?>
             <?php require_once "parts/pagination.php"; ?>
