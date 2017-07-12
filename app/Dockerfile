@@ -1,7 +1,7 @@
 FROM php:7.0-fpm
 MAINTAINER Andrei <andrei.prozorov@mail.ru>
 
-VOLUME /app/htdocs
+#VOLUME /app/htdocs
 #Libs
 RUN apt-get update \
       && apt-get install -y \

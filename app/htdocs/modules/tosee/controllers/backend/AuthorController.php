@@ -249,22 +249,27 @@ class AuthorController extends Controller
         if (!Yii::$app->request->isAjax) {
             throw new HttpException(403 , "this action can be access by ajax only");
         }
-        $image_model = new Image();
+
         $upload_model = new UploadImage;
 
-        if ($upload_model->upload(["215x215"])) {
+        if ($upload_model->multiUpload( ["215x215"] )) {
+            foreach ($upload_model->multiImages as &$image) {
 
-            $image_model->patch = $upload_model->patch;
-            $image_model->name = $upload_model->new_name;
+                $image_model = new Image();
+                $image_model->patch = $image['patch'];
+                $image_model->name = $image['new_name'];
 
-            if ($image_model->save()) {
-                $json = $upload_model->json;
-                $json['id'] = $image_model->id;
-                echo json_encode($json);
+                if ($image_model->save()) {
 
+                    $image['json']['id'] = $image_model->id;
+                    $json[] = $image['json'];
+
+                }
             }
-        }
 
+            echo json_encode($json);
+
+        }
 
         return '';
 

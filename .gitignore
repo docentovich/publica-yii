@@ -2,4 +2,5 @@
 !/app/sessions/.getkeep
 /app/mysql/*
 !/app/mysql/.getkeep
+docker-compose.yml
 .idea

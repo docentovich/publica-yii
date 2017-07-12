@@ -21,7 +21,7 @@ use dosamigos\ckeditor\CKEditor;
             'model' => $model,
             'attribute' => 'event_at',
             'language' => 'ru',
-             //'label' => 'Дата события',
+            //'label' => 'Дата события',
             'dateFormat' => 'yyyy-MM-dd',
         ]);
         ?>
@@ -73,39 +73,55 @@ use dosamigos\ckeditor\CKEditor;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="button button--green button--upload " id="upload">
-        <?= $form->field($upload, 'file', [
+        <?= $form->field($upload, 'file[]', [
             'template' => '{input}',
-
             'options' => [
                 'id' => 'multiupload',
                 'tag' => null, // Don't wrap with "form-group" div
             ]
-        ])->fileInput(["class" => "cursor-pointer",])->label(false); ?>
+        ])->fileInput(["class" => "cursor-pointer", 'multiple' => true, 'accept' => 'image/*'])->label(false); ?>
         <span>Добавить изображение</span>
     </div>
 
     <script>
         $("#upload input[type='file']").on('change', function (event) {
             var $from = $(this).parents("form");
+            var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
             event.stopPropagation(); // Stop stuff happening
             event.preventDefault(); // Totally stop stuff happening
+
+            var ajaxData = new FormData();
+            ajaxData.append('<?= Yii:: $app->getRequest()->csrfParam ?>', csrfToken);
+            ajaxData.append('action', 'uploadImages');
+            $.each($("input[type=file]"), function (i, obj) {
+                $.each(obj.files, function (j, file) {
+                    ajaxData.append('UploadImage[file][]', file);
+                })
+            });
 
             $.ajax({
                 type: "POST",
                 timeout: 50000,
 //                    enctype: 'multipart/form-data',
                 url: '<?= \yii\helpers\Url::toRoute(['/author/additional-upload']) ?>',
-                data: new FormData($from[0]),
+                data: ajaxData,
+//                data: new FormData($from[0]),
                 contentType: false,
                 cache: false,
                 processData: false,
                 success: function (data) {
-                    data = JSON.parse(data);
-                    if (data.url == undefined) return false;
-                    var thumb = data.thumbs["215x215"];
 
-                    $(".additional-images").append("<img class='add-img' src='" + data.url + "/" + thumb + "' />");
-                    $("#add-img-hidden").append("<input type='hidden' name='PostToImage[image_id][]' value='" + data.id + "'/>");
+                    data = JSON.parse(data);
+                    if (data.length == 0) return false;
+
+                    for (var key in data) {
+                        var file = data[key];
+                        var thumb = file.thumbs["215x215"];
+
+                        $(".additional-images").append("<img class='add-img' src='" + file.url + "/" + thumb + "' />");
+                        $("#add-img-hidden").append("<input type='hidden' name='PostToImage[image_id][]' value='" + file.id + "'/>");
+                    }
 
                 }
             });
