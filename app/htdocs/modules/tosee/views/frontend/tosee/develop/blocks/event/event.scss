@@ -86,13 +86,13 @@
         }
 
         &__description{
-            text-align: left;
+            // text-align: left;
         }
 
         &__title{
-            font-size: 18px;
-            margin-bottom: 2px;
-            text-align: left;
+            // font-size: 18px;
+            // margin-bottom: 2px;
+            // text-align: left;
         }
     }
 
@@ -102,12 +102,12 @@
         }
 
         &__title{
-            font-size: 17px;
+            // font-size: 17px;
         }
     }
     @media (max-width: 320px){
         &__title{
-            font-size: 15px;
+            // font-size: 15px;
         }
     }
 }

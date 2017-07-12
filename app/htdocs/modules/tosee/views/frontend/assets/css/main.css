@@ -881,19 +881,6 @@ a {
       height: 100%; }
       .event__content {
         padding: 5px; } }
-  @media (max-width: 550px) {
-    .event__description {
-      text-align: left; }
-    .event__title {
-      font-size: 18px;
-      margin-bottom: 2px;
-      text-align: left; } }
-  @media (max-width: 400px) {
-    .event__title {
-      font-size: 17px; } }
-  @media (max-width: 320px) {
-    .event__title {
-      font-size: 15px; } }
 
 .events__events-list {
   width: 100%;
