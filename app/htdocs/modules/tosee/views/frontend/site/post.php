@@ -59,7 +59,7 @@ use \components\helpers\Helpers;
                                     $image->name,
                                     [
                                         'class' => "modal__image",
-                                        "size" => "540x380",
+                                        "size" => "940x660",
                                     ]
                                 ) ?>
 
