@@ -103,7 +103,7 @@ class m170610_023054_Relations extends Migration
         $sql = "CREATE TRIGGER `insert_profile` BEFORE INSERT ON {{%profile}}
                  FOR EACH ROW BEGIN
                 DECLARE avatarid INT;
-                INSERT INTO {{%image}} SET name = 'noimage.png';
+                INSERT INTO {{%image}} SET name = NULL;
                 SET avatarid = LAST_INSERT_ID();
                 SET NEW.avatar = avatarid;
                 END

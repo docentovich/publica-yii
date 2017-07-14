@@ -798,27 +798,31 @@ a {
      -moz-box-align: start;
           align-items: flex-start; }
   .controls1__img-wrapper {
-    -webkit-box-shadow: 0 0 0 4px white;
-            box-shadow: 0 0 0 4px white;
+    -webkit-box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
     padding: 9px;
     border-radius: 7px;
     height: 64px;
     width: 64px;
     line-height: 64px;
-    vertical-align: middle;
     text-align: center;
     margin-left: 7px; }
   .controls1__img {
-    width: 35px; }
+    width: 35px;
+    height: 29px;
+    opacity: 0.5; }
     .controls1__img_zoom {
-      width: 44px; }
+      width: 44px;
+      height: 43px; }
   .controls1__conrol1 {
-    opacity: .5;
     cursor: pointer; }
     .controls1__conrol1:first-of-type {
       margin-right: 10px; }
-    .controls1__conrol1:hover {
-      opacity: 1; }
+  .controls1__conrol1:hover .controls1__img {
+    opacity: 1; }
+  .controls1__conrol1:hover .controls1__img-wrapper {
+    -webkit-box-shadow: 0 0 0 4px white;
+            box-shadow: 0 0 0 4px white; }
 
 .event {
   background-color: #ffffff;
@@ -838,14 +842,14 @@ a {
     display: block;
     width: 100%;
     height: 100%;
-    -webkit-transition: all .6s ease-in-out;
-    -moz-transition: all .6s ease-in-out;
-    transition: all .6s ease-in-out; }
+    -webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out; }
     .event__img:hover {
-      -webkit-transform: scale(1.1);
-         -moz-transform: scale(1.1);
-          -ms-transform: scale(1.1);
-              transform: scale(1.1); }
+      -webkit-transform: scale(1.05);
+         -moz-transform: scale(1.05);
+          -ms-transform: scale(1.05);
+              transform: scale(1.05); }
   .event__date {
     padding: 5px;
     background-color: rgba(140, 1, 84, 0.33);
@@ -883,34 +887,34 @@ a {
         padding: 5px; } }
 
 .events__events-list {
+  vertical-align: top;
   width: 100%;
   text-align: center;
   margin: auto;
   min-height: 300px; }
   @supports (flex-wrap: wrap) or (-moz-flex-wrap: wrap) {
     .events__events-list {
-      display: -ms-flexbox;
       display: -webkit-box;
       display: -moz-box;
+      display: -ms-flexbox;
       display: flex;
-      -ms-flex-direction: row;
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
          -moz-box-orient: horizontal;
          -moz-box-direction: normal;
+          -ms-flex-direction: row;
               flex-direction: row;
       -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-      -moz-flex-wrap: wrap;
-      -ms-flex-pack: center;
+          flex-wrap: wrap;
       -webkit-box-pack: center;
          -moz-box-pack: center;
+          -ms-flex-pack: center;
               justify-content: center;
-      -ms-flex-line-pack: stretch;
-      align-content: stretch;
-      -ms-flex-align: start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start;
       -webkit-box-align: start;
          -moz-box-align: start;
+          -ms-flex-align: start;
               align-items: flex-start; } }
 
 .events__event {
@@ -921,7 +925,8 @@ a {
   max-width: 318px;
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  vertical-align: top; }
 
 .footer {
   background-color: #363d47; }
@@ -958,7 +963,8 @@ a {
 
 .header {
   background-color: #000000;
-  padding: 6px 0 1px 0; }
+  padding: 6px 0 1px 0;
+  height: 30px; }
   .header__logo {
     float: left;
     opacity: .3;
@@ -1072,10 +1078,15 @@ a {
     right: 5px; }
   .modal__image {
     max-width: 100%;
-    max-height: 80vh;
+    max-height: 70vh;
+    max-height: -webkit-calc(100vh - 210px);
+    max-height: -moz-calc(100vh - 210px);
+    max-height: calc(100vh - 210px);
     width: auto;
     margin: 0 auto 20px auto;
     display: block; }
+  .modal__content {
+    height: 105px; }
   .modal__line1 {
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
@@ -1176,7 +1187,6 @@ a {
   .modal__line2-group_social > * {
     opacity: 0.3; }
   .modal__text {
-    width: 100%;
     color: white;
     margin-right: 10px;
     font-size: 14px; }
@@ -1200,6 +1210,12 @@ a {
         min-width: 92px; }
     .modal__line2-group_social .modal__ico {
       float: left; } }
+
+.modal {
+  max-height: 100%;
+  max-height: 100vh;
+  overflow-y: visible;
+  overflow-x: hidden; }
 
 .menu__group {
   margin: 10px auto; }
@@ -2369,22 +2385,23 @@ body.modal-active {
   position: relative;
   text-align: center; }
   .navigation__col {
-    opacity: 0.5;
     cursor: pointer;
     font-size: 36px;
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.5);
     display: inline-block; }
     .navigation__col:hover {
-      opacity: 1; }
+      color: rgba(255, 255, 255, 0.5); }
     .navigation__col_center {
       padding-top: 10px;
-      text-align: center; }
+      text-align: center;
+      letter-spacing: 2px; }
     .navigation__col_left {
       float: left; }
     .navigation__col_right {
       float: right; }
   .navigation__svg-wrapper {
-    border: 4px solid white;
+    cursor: pointer;
+    border: 4px solid rgba(255, 255, 255, 0.5);
     border-radius: 100%;
     height: 54px;
     width: 54px;
@@ -2392,9 +2409,15 @@ body.modal-active {
     text-align: center;
     vertical-align: middle;
     display: block; }
+    .navigation__svg-wrapper:hover {
+      border: 4px solid white; }
+  .navigation__svg-wrapper:hover .navigation__svg {
+    opacity: 1; }
   .navigation__svg {
     border-radius: 100%;
-    width: 20px; }
+    width: 20px;
+    height: 36px;
+    opacity: 0.5; }
   @media (max-width: 768px) {
     .navigation__col_center {
       clear: both;
@@ -2492,7 +2515,8 @@ body.modal-active {
     color: white;
     font-family: Tahoma;
     font-size: 30px;
-    font-weight: 400; }
+    font-weight: 400;
+    position: relative; }
     .search-form__input ::-webkit-input-placeholder {
       color: rgba(188, 188, 188, 0.5); }
     .search-form__input ::-moz-placeholder {
@@ -2505,7 +2529,8 @@ body.modal-active {
     position: absolute;
     right: 10px;
     top: 12px;
-    opacity: 0.5; }
+    opacity: 0.5;
+    height: 40px; }
   .search-form__svg {
     width: 39px; }
 

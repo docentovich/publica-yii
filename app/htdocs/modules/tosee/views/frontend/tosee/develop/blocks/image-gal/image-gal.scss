@@ -109,7 +109,8 @@
 
     &__image{
         max-width: 100%;
-        max-height: 80vh;
+        max-height: 70vh;
+        max-height: calc(100vh - 210px);
         width: auto;
 
         margin: 0 auto 20px auto;
@@ -117,7 +118,9 @@
 
     }
 
-    &__content{}
+    &__content{
+        height: 105px;
+    }
 
     //line 1
     &__line1{
@@ -219,6 +222,8 @@
         -webkit-align-items: center;
         -ms-flex-align: center;
         align-items: center;
+        
+
         &_h1{
             max-width: 160px;
         }
@@ -238,7 +243,7 @@
         opacity: 1;
     }
 
-    
+
     &__line2-group_social:hover  &__text{ opacity: 1;}
     &__line2-group_social &__ico:hover{opacity: 1;}
     &__line2-group_social > *{opacity: 0.3;}
@@ -246,7 +251,7 @@
     //-модификаторы разных логик опасити
 
     &__text{
-        width: 100%;
+        // width: 100%;
         color:  white;
         margin-right: 10px;
         font-size: 14px;
@@ -289,4 +294,13 @@
             }
     } 
 
+}
+
+
+
+.modal{
+    max-height: 100%;
+    max-height: 100vh;
+    overflow-y: visible;
+    overflow-x: hidden;
 }

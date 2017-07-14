@@ -17,10 +17,10 @@ services:
       context: ./app
       dockerfile: Dockerfile
     ports:
-     - "9002:9000"
-    environment:
-      PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
-      XDEBUG_CONFIG: remote_host=172.19.0.1
+     - "9000:9000"
+    #environment:
+    #  PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
+    #  XDEBUG_CONFIG: remote_host=10.0.0.10
     links:
       - db
     volumes:

@@ -86,14 +86,14 @@ use \components\helpers\Helpers;
                                                     class="modal__i sprite-img sp-sprite sp-sprite__likeSm visible-xs"></i>
                                             </div>
                                         </div>
-                                        <div class="modal__line2-group modal__line2-group_opacity">
-                                            <div class="modal__text hidden-sm hidden-xs">Купить
-                                            </div>
-                                            <div class="modal__ico"><i
-                                                    class="modal__i sprite-img sp-sprite sp-sprite__by hidden-xs"></i><i
-                                                    class="modal__i sprite-img sp-sprite sp-sprite__bySm visible-xs"></i>
-                                            </div>
-                                        </div>
+<!--                                        <div class="modal__line2-group modal__line2-group_opacity">-->
+<!--                                            <div class="modal__text hidden-sm hidden-xs">Купить-->
+<!--                                            </div>-->
+<!--                                            <div class="modal__ico"><i-->
+<!--                                                    class="modal__i sprite-img sp-sprite sp-sprite__by hidden-xs"></i><i-->
+<!--                                                    class="modal__i sprite-img sp-sprite sp-sprite__bySm visible-xs"></i>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                         <div class="modal__line2-group modal__line2-group_social">
                                             <div class="modal__text hidden-sm hidden-xs">Поделиться
                                             </div>

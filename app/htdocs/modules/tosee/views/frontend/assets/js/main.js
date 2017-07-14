@@ -318,6 +318,10 @@
 
         touch : false,
 
+        closeClickOutside : true,
+
+        loop: true,
+
         tpl: {
 
             next: '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span>NEXT</span></a>',
@@ -334,6 +338,8 @@
 
             // Hide scrollbar for fancybox bug fix
 
+            if( instance.slides[instance.prevIndex] == undefined ) return;
+
             instance.slides[instance.prevIndex].$slide.css("overflow", "hidden");
 
             slide.$slide.css("overflow", "hidden");
@@ -346,13 +352,27 @@
 
             // Restore scrollbar for fancybox bug fix
 
+            if( instance.slides[instance.prevIndex] == undefined ) return;
+
             instance.slides[instance.prevIndex].$slide.css("overflow", "");
 
             slide.$slide.css("overflow", "");
 
         }
 
-    });
+    })
+
+    
+
+    
+
+    // $("body").on("click", function(){
+
+    //     // alert();
+
+    //     $.fancybox.close();
+
+    // });
 
     
 

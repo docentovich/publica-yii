@@ -23,7 +23,7 @@ $bundle = HeaderAsset::register($this);
                         </div>
                         <div class="controls__control">
                             <div class="controls__city " >
-                                <img class="controls__i  sidebar-open" rel="city" src="<?= $bundle->baseUrl ?>/images/route.svg" type=""></img>
+                                <img class="controls__i  sidebar-open" rel="city" src="<?= $bundle->baseUrl ?>/images/route.svg" type=""/>
                             </div>
                         </div>
 

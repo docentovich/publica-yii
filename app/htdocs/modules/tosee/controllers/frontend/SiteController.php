@@ -45,6 +45,7 @@ class SiteController extends Controller
     {
 
         //передаем в лайоут будущее
+        Yii::$app->view->title = "Что будет";
         Yii::$app->view->params['navigation_label'] = "Что будет";
         Yii::$app->view->params['next_url'] = "/past";
         Yii::$app->view->params['prev_url'] = "/past";
@@ -66,6 +67,7 @@ class SiteController extends Controller
     {
 
         //передаем в лайоут прошлое
+        Yii::$app->view->title = "Что было";
         Yii::$app->view->params['navigation_label'] = "Что было";
         Yii::$app->view->params['next_url'] = "/";
         Yii::$app->view->params['prev_url'] = "/";
@@ -117,6 +119,8 @@ class SiteController extends Controller
 
         //передаем в лайоут прошлое
         Yii::$app->view->params['navigation_label'] = $service->items->postData->title;
+
+        Yii::$app->view->title = $service->items->postData->title;
 
         Yii::$app->view->params['next_url'] = (isset($service->next)) ?  "/post/" . $service->next->id : "/" ;
         Yii::$app->view->params['prev_url'] = (isset($service->prev)) ?  "/post/" . $service->prev->id : "/";

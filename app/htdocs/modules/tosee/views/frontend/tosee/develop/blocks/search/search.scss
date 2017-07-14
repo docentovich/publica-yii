@@ -15,6 +15,7 @@
         font-family: Tahoma;
         font-size: 30px;
         font-weight: 400;
+            position: relative;
 
         @include placeholder {
             color: rgba(188, 188, 188, .5);
@@ -27,6 +28,7 @@
         right: 10px;
         top: 12px;
         opacity: 0.5;
+        height: 40px;
     }
 
     &__svg{

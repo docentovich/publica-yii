@@ -21,37 +21,52 @@ $icoh: 64px;
 
     &__img-wrapper{
         // border: 6px white solid;
-        box-shadow: 0 0 0 4px white;
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
         padding: 9px;
         border-radius: 7px;
         height: $icoh;
         width: $icoh;
         line-height: $icoh;
-        vertical-align: middle;
+        // vertical-align: middle;
         text-align: center;
         margin-left: 7px;
     }
 
     &__img{
         width: 35px;
+        height: 29px;
+        opacity: 0.5;
         &_zoom{
             width: 44px;
+            height: 43px;
 
         }
     }
     &__conrol1{
-        opacity: .5;
+        // opacity: .5;
         cursor: pointer;
+        
 
 
         &:first-of-type{
             margin-right: 10px;
         }
 
-        &:hover{
-            opacity: 1;
-        }
+
+
+        
     }
 
-   
+
+    &__conrol1:hover &__img{
+        opacity: 1;
+    }
+
+    &__conrol1:hover  &__img-wrapper{
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 1);
+    }
+
+
+
+
 }
