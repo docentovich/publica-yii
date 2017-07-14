@@ -264,6 +264,9 @@ class postService extends Services
      */
     public function getById($id)
     {
+        $this->_query = Post::find()
+            ->with(["postData", "image"])
+            ->andWhere(["=", "status", Post::STATUS_ACTIVE]);
         //всего постов
         $this->getOne($id);
         return $this;
