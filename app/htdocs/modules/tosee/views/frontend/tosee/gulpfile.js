@@ -96,7 +96,7 @@ gulp.task('scss', function() {
 //-----JADE-------
 gulp.task('jade', function() {
   return gulp.src(["./develop/jade/**/*.jade", "!./develop/jade/template/**/*", "!./develop/jade/includes/**/*", "!./develop/jade/includes.jade"])
-  .pipe(changed('develop', {extension: '.html'}))
+  // .pipe(changed('develop', {extension: '.html'}))
   .pipe(print())
   .pipe(plumber())
   .pipe(jadeGlobbing())

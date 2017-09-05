@@ -1,8 +1,14 @@
 mixin header1()
-    +b.header1
-        .container-fluid
-            .row
-                .col-xs-24
-                    +e.IMG(src="/images/logo.png").logo
-                    +e.controls1
-                        +controls1
+  +b.header1._affix
+    .container.container-header
+      .row
+        +e.inner.col-xs-24
+          +e.item._control
+            +e.I.i.fa.fa-bars
+          +e.item._logo
+            +e.IMG(src="/images/logos/tosee.png").logo
+          +e.item._control
+            +e.I.i.fa.fa-search
+   
+        //- +e.controls1
+        //-   +controls1

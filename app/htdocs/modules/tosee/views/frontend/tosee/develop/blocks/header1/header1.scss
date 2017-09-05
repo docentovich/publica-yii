@@ -1,22 +1,96 @@
+$wph-logo: 17vw;
+$wpwh-ico: 10.5vw;
+$header-h-small : 7vw;
 .header1{
-    background-color: $col-bg2;
+  background-color: $col-bg2;
+  overflow: hidden;
+  transition: height 1s;
+
+  &__inner{
     padding: 17px 0 15px 0;
-    &__logo{
-        cursor: pointer;
-        max-width: 223px;
-        width: 100%;
-        float: left;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+  }
+  
+
+  &__item{
+    
+    display: inline-block; 
+
+    &_logo{ 
+      height: $wph-logo;
     }
 
-    &__controls1{
-        margin-top: 8px;
-        float: right;
+    &_control{
+      opacity: 0.5;
+      border-radius: 12px;
+      border-radius: 1vw;
+      border: 0.5vw solid #fff;
+      padding: 10px;
+      box-sizing: border-box;
+
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      
+
+      height: $wpwh-ico;
+      width:  $wpwh-ico;
+      font-size: $wpwh-ico / 2;
+
+      @media (min-width: 960px) {
+        height: 96px;
+        width:  96px;
+        font-size: 54px;
+        border-radius: 12px;
+        border-width:  6px;
+      }
+
+
     }
 
-     @media (max-width: 389px){
-        &__logo{
-            width: 50%;
-            width: 46vw;
-        }
+  } 
+ 
+  &__i{
+    display: inline-block;
+    color: #fff;
+  }
+
+  &__logo{
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+    height: inherit;
+
+
+  }
+
+
+  &_affix{
+    height: $header-h-small;
+  }
+
+  &_affix &__inner{
+    padding: 5px 0 5px 0;
+    align-content: flex-start;
+    align-items:   flex-start;
+  }
+
+  &_affix &__item{
+
+    &_control{
+      $temp :  $header-h-small - 1vw;
+      height:  $temp;
+      width:   $temp;
+
+      border-radius:  8px;
+      border-width:   3px;
+      font-size:      $temp - 3vw;
+
     }
+  }
 }
