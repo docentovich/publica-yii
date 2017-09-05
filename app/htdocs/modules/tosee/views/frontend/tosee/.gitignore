@@ -1,5 +1,6 @@
 ~*
 dist/
+node_modules/**
 .sass-cache/**/
 develop/*.html
 develop/css/main.css

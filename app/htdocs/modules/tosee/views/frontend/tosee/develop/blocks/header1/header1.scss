@@ -1,22 +1,140 @@
+$wph-logo: 17vw;
+$wpwh-ico: 10.5vw;
+
+$trans-time: 0.4s;
+
+$header-h-small : 68px;
+$base-punkt :     10px;
+
+$temp :  $header-h-small - $base-punkt;
+
 .header1{
-    background-color: $col-bg2;
-    padding: 17px 0 15px 0;
-    &__logo{
-        cursor: pointer;
-        max-width: 223px;
-        width: 100%;
-        float: left;
+  background-color: $col-bg2;
+  overflow: hidden;
+  transition: height $trans-time;
+  padding: 5px 0 5px 0;
+  height: 19vw;
+  min-height: 72px;
+
+  &__inner{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+
+
+  }
+  
+
+  &__item{
+    
+    display: inline-block; 
+
+    &_logo{ 
+      height: $wph-logo;
+
+      transition: height $trans-time;
+
     }
 
-    &__controls1{
-        margin-top: 8px;
-        float: right;
+    &_control{
+      opacity: 0.5;
+      border-radius: 13px;
+
+      border: 0.5vw solid #fff;
+      padding: 10px;
+      box-sizing: border-box;
+
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      
+
+      height: $wpwh-ico;
+      width:  $wpwh-ico;
+      font-size: $wpwh-ico / 1.7;
+
+      transition: all $trans-time;
+
+
+      @media (min-width: 960px) {
+        height: 96px;
+        width:  96px;
+        font-size: 54px;
+        border-radius: 12px;
+        border-width:  6px;
+      }
+
+      @media (max-width: 460px) {
+        height: $temp;
+        width:  $temp;
+        border-radius:  13px;
+        border-width:   4px;
+        font-size:      $temp - 3 * $base-punkt;
+      }
+
+
     }
 
-     @media (max-width: 389px){
-        &__logo{
-            width: 50%;
-            width: 46vw;
-        }
+  } 
+ 
+  &__i{
+    display: inline-block;
+    color: #fff;
+  }
+
+  &__logo{
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+    height: inherit;
+
+
+  }
+
+
+
+}
+
+
+.affix {
+  z-index: 200;
+  width:100%;
+
+
+  .header1 {
+
+    height: $header-h-small;
+    width:100%;
+
+
+    &__inner {
+      padding: 5px;
+      align-content: flex-start;
+      align-items: flex-start;
     }
+
+    &__item {
+
+      &_control {
+        height: $temp;
+        width: $temp;
+
+        border-radius: 13px;
+        border-width: 4px;
+        font-size: $temp - 3 * $base-punkt;
+
+      }
+
+      &_logo {
+        height: $temp + 5 * $base-punkt;
+      }
+    }
+
+    &__logo {
+    }
+
+  }
 }
