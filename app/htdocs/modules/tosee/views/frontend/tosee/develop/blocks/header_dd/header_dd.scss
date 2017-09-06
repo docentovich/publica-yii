@@ -1,0 +1,218 @@
+$wpwh-ico: 83px;
+
+$trans-time: 0.4s;
+
+$header-h-small : 68px;
+$base-punkt :     10px;
+
+$temp :  $header-h-small - $base-punkt;
+
+
+$globe-oter-size: 58px;
+$globe-oter-padding: 8px;
+
+$globe-oter-size-min: 45px;
+$globe-oter-padding-min: 8px;
+
+.header-dd{
+  background-color: $col-bg2;
+  // overflow: hidden;
+  transition: height $trans-time;
+  transition: top $trans-time;
+  padding: 5px 0 5px 0;
+  height: 170px;
+  min-height: 72px;
+
+  display: flex;
+  align-content: center; 
+  align-items: center;
+
+  position: fixed;
+  top: -160px;
+
+  background: #2B2A29;
+  width: 100%;
+
+  z-index: 8;
+
+
+  
+
+
+
+  .container{
+    position: relative;
+    z-index: 1;
+  }
+
+  &_dropped{
+    top: 0;
+  }
+
+  &__globe{
+    position: absolute;
+    bottom: -53px;
+    right: 0px;
+    color: #fff;
+    background: #2B2A29;
+    padding: 0 $globe-oter-padding $globe-oter-padding $globe-oter-padding;
+
+    -webkit-border-bottom-left-radius: 12px;
+    -moz-border-radius-bottomleft: 12px;
+    border-bottom-left-radius: 12px;
+
+  }
+
+  &__globe-inner{
+    opacity: 0.5;
+    border-radius: 13px;
+    border: 2px solid #fff;
+    font-size: 30px;
+
+    width: $globe-oter-size - $globe-oter-padding;
+    height: $globe-oter-size - $globe-oter-padding;
+
+    display: flex;
+    align-content: center; 
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    &:hover{
+      opacity: 1;
+    }
+
+
+  }
+
+  &__i-globe{
+    color: #fff;
+
+  }
+
+
+  &__inner{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+
+
+  }
+  
+
+  &__item{
+
+    display: inline-block; 
+
+
+    &_control{
+      opacity: 0.5;
+      border-radius: 13px;
+
+      border: 4px solid #fff;
+      padding: 10px;
+      box-sizing: border-box;
+
+      display: flex;
+      justify-content: center;
+      align-content: center; 
+      align-items: center;
+      
+
+      height: $wpwh-ico;
+      width:  $wpwh-ico;
+      font-size: $wpwh-ico / 1.7;
+
+      transition: all $trans-time;
+      cursor: pointer;
+
+      &:hover{
+        opacity: 1;
+      }
+
+
+      @media (min-width: 960px) {
+        height: 110px;
+        width:  110px;
+        font-size: 73px;
+        border-radius: 20px;
+        border-width:  6px;
+      }
+
+      @media (max-width: 460px) {
+        height: $temp;
+        width:  $temp;
+        border-radius:  13px;
+        border-width:   4px;
+        font-size:      $temp - 3 * $base-punkt;
+      }
+
+
+    }
+
+  } 
+
+  &__i{
+    display: inline-block;
+    color: #fff;
+  }
+
+  @media (min-width: 960px) {
+    height: 200px;
+    top: -190px;
+  }
+
+  @media (max-width: 1100px) {
+    &__globe{
+      padding: 0 $globe-oter-padding-min $globe-oter-padding-min $globe-oter-padding-min;
+      bottom: -1 * $globe-oter-size-min;
+    }
+
+    &__globe-inner{
+      width:  $globe-oter-size-min - $globe-oter-padding-min;
+      height: $globe-oter-size-min - $globe-oter-padding-min;
+      font-size: 20px;
+    }
+
+  }
+
+}
+
+
+
+.affix + .header-dd {
+
+  height: $header-h-small;
+  width:100%;
+
+  align-content: flex-start;
+  align-items: flex-start;
+
+
+
+  &__inner {
+    padding: 5px;
+    align-content: flex-start;
+    align-items: flex-start;
+  }
+
+  &__item {
+
+    &_control {
+      height: $temp;
+      width: $temp;
+
+      border-radius: 13px;
+      border-width: 4px;
+      font-size: $temp - 3 * $base-punkt;
+
+    }
+
+
+  }
+
+
+}

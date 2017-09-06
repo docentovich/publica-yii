@@ -1,15 +1,17 @@
-mixin header1()
- div(data-spy="affix" data-offset-top="10")
-  +b.header1
+mixin header_dd()
+  +b.header-dd
     .container.container-header
       .row
         +e.inner.col-xs-24
           +e.item._control
             +e.I.i.fa.fa-search
-          +e.item._logo
-            +e.IMG(src="/images/logos/tosee.png").logo
+          +e.item._control
+            +e.I.i.fa.fa-search
           +e.item._control(rel="menu").sidebar-rel
             +e.I.i.fa.fa-bars
+    +e.globe
+      +e.globe-inner
+        +e.I.i-globe.fa.fa-globe
 
    
         //- +e.controls1

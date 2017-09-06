@@ -1,5 +1,5 @@
-$wph-logo: 17vw;
-$wpwh-ico: 10.5vw;
+$wph-logo: 159px;
+$wpwh-ico: 83px;
 
 $trans-time: 0.4s;
 
@@ -8,13 +8,54 @@ $base-punkt :     10px;
 
 $temp :  $header-h-small - $base-punkt;
 
-.header1{
+.header1{ 
   background-color: $col-bg2;
   overflow: hidden;
   transition: height $trans-time;
   padding: 5px 0 5px 0;
-  height: 19vw;
+  height: 190px;
   min-height: 72px;
+
+  display: flex;
+  align-content: flex-end;
+  align-items: flex-end;
+  padding-bottom: 10px; 
+
+  background: #363D47 url(../../images/people.png) no-repeat center center;
+  position: relative;
+
+  &:after{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: #363D47;
+    content: "";
+
+    transition: opacity $trans-time;
+
+  }
+
+  @media (min-width: 960px) {
+    height: 220px;
+
+    
+  }
+
+  @media (max-width: 1100px) {
+    .container-header{
+      padding: 0 50px 0 50px;
+    }
+  }
+
+  .container{
+    position: relative;
+    z-index: 1;
+  }
+
 
   &__inner{
     display: flex;
@@ -36,13 +77,21 @@ $temp :  $header-h-small - $base-punkt;
 
       transition: height $trans-time;
 
+      @media (min-width: 960px) {
+        height: 159px;
+      }
+
+      @media (max-width: 460px) {
+        height: 110px ;
+      }
+
     }
 
     &_control{
       opacity: 0.5;
       border-radius: 13px;
 
-      border: 0.5vw solid #fff;
+      border: 4px solid #fff;
       padding: 10px;
       box-sizing: border-box;
 
@@ -57,13 +106,18 @@ $temp :  $header-h-small - $base-punkt;
       font-size: $wpwh-ico / 1.7;
 
       transition: all $trans-time;
+      cursor: pointer;
+
+      &:hover{
+        opacity: 1;
+      }
 
 
       @media (min-width: 960px) {
-        height: 96px;
-        width:  96px;
-        font-size: 54px;
-        border-radius: 12px;
+        height: 110px;
+        width:  110px;
+        font-size: 73px;
+        border-radius: 20px;
         border-width:  6px;
       }
 
@@ -100,7 +154,7 @@ $temp :  $header-h-small - $base-punkt;
 
 
 .affix {
-  z-index: 200;
+  z-index: 5;
   width:100%;
 
 
@@ -108,6 +162,13 @@ $temp :  $header-h-small - $base-punkt;
 
     height: $header-h-small;
     width:100%;
+
+    align-content: flex-start;
+    align-items: flex-start;
+
+    &:after{
+      opacity: 1;
+    }
 
 
     &__inner {
