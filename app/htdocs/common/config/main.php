@@ -7,14 +7,14 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'db' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=db;dbname=tosee',
-            'username' => 'root',
-            'password' => '1Vv4nfkCXp',
-            'charset' => 'utf8',
-            'tablePrefix' => 'tbl_'
-        ],
+//        'db' => [
+//            'class' => 'yii\db\Connection',
+//            'dsn' => 'mysql:host=db;dbname=tosee',
+//            'username' => 'root',
+//            'password' => '1Vv4nfkCXp',
+//            'charset' => 'utf8',
+//            'tablePrefix' => 'tbl_'
+//        ],
         'i18n' => [
             'translations' => [
                 'app*' => [

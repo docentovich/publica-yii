@@ -13,7 +13,7 @@ $temp :  $header-h-small - $base-punkt;
   overflow: hidden;
   transition: height $trans-time;
   padding: 5px 0 5px 0;
-  height: 190px;
+  height: 200px;
   min-height: 72px;
 
   display: flex;
@@ -47,7 +47,7 @@ $temp :  $header-h-small - $base-punkt;
 
   @media (max-width: 1100px) {
     .container-header{
-      padding: 0 50px 0 50px;
+      padding: 0 5px 0 5px;
     }
   }
 
@@ -88,6 +88,7 @@ $temp :  $header-h-small - $base-punkt;
     }
 
     &_control{
+
       opacity: 0.5;
       border-radius: 13px;
 
@@ -165,6 +166,8 @@ $temp :  $header-h-small - $base-punkt;
 
     align-content: flex-start;
     align-items: flex-start;
+
+    padding:0 30px 0 30px;
 
     &:after{
       opacity: 1;

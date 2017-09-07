@@ -20,7 +20,7 @@ $globe-oter-padding-min: 8px;
   transition: height $trans-time;
   transition: top $trans-time;
   padding: 5px 0 5px 0;
-  height: 170px;
+  height: 200px;
   min-height: 72px;
 
   display: flex;
@@ -28,7 +28,7 @@ $globe-oter-padding-min: 8px;
   align-items: center;
 
   position: fixed;
-  top: -160px;
+  top: -190px;
 
   background: #2B2A29;
   width: 100%;
@@ -46,7 +46,7 @@ $globe-oter-padding-min: 8px;
   }
 
   &_dropped{
-    top: 0;
+    top: 0 !important;
   }
 
   &__globe{
@@ -161,8 +161,8 @@ $globe-oter-padding-min: 8px;
   }
 
   @media (min-width: 960px) {
-    height: 200px;
-    top: -190px;
+    height: 220px;
+    top: -210px;
   }
 
   @media (max-width: 1100px) {
@@ -178,41 +178,5 @@ $globe-oter-padding-min: 8px;
     }
 
   }
-
-}
-
-
-
-.affix + .header-dd {
-
-  height: $header-h-small;
-  width:100%;
-
-  align-content: flex-start;
-  align-items: flex-start;
-
-
-
-  &__inner {
-    padding: 5px;
-    align-content: flex-start;
-    align-items: flex-start;
-  }
-
-  &__item {
-
-    &_control {
-      height: $temp;
-      width: $temp;
-
-      border-radius: 13px;
-      border-width: 4px;
-      font-size: $temp - 3 * $base-punkt;
-
-    }
-
-
-  }
-
 
 }
