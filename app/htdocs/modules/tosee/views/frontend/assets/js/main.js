@@ -199,10 +199,25 @@
     
 
     
-    
+    $('.header-dd__globe').on("click", function(){
+
+        $('.header-dd').toggleClass('header-dd_dropped');
+
+    });
 
     
     
+
+    
+    $(".sidebar-rel").on('click', function(){
+
+        var target = $(this).attr("rel");
+
+        $("#"+target).toggleClass("active");
+
+        $('html').toggleClass("no-y-scroll");
+
+    });
 
     
     

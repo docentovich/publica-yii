@@ -189,27 +189,6 @@ gulp.task('build:clean', function () {
   return del.sync(['../../../../../frontend/web/assets/*'], {force: true});
 });
 
-//copydist
-// gulp.task('build:copyDist', function () {  
-//   return gulp.src([
-//     'develop/sendform.php', 
-//     'develop/.htaccess', 
-//     'develop/favicon.png',
-//     // 'develop/**/*.html',
-//     ])
-//   .pipe(print())
-//   .pipe(gulp.dest('dist'));
-// });
-
-//copylibs
-// gulp.task('build:copyLibs', function () {  
-//   return gulp.src([
-//     'develop/libs/**'])
-//   .pipe(print())
-//   .pipe(gulp.dest('dist/libs'));
-// });
-
-
 //copy dist fonts
 // gulp.task('build:copyDistFonts',  function () {  
 //   return gulp.src(['develop/fonts/**/{*.eot,*.svg,*.ttf,*.eot,*.otf,*.woff2,*.woff}']
@@ -312,3 +291,90 @@ gulp.task('build', ['build:_dist'], function (callback) {
 // });
 
 //------------=====build======--------------------
+//------------=====build======--------------------
+//------------=====build======--------------------
+
+var app = "develop";
+
+// ====TO DIST====
+
+//cleandist
+gulp.task("build:clean", ["jadeBlocks"], function () {
+  return del.sync(["./dist"]);
+});
+
+
+
+//copydist
+gulp.task("build:copyDist", function () {
+
+  return gulp.src([
+    app + "/*.php",
+    app + "/.htaccess",
+    app + "/favicon.png",
+  ])
+      .pipe(print())
+      .pipe(gulp.dest("dist"));
+
+});
+
+
+
+//copylibs
+gulp.task("build:copyLibs", function () {
+
+  return gulp.src([
+    app + "/libs/**"])
+      .pipe(print())
+      .pipe(gulp.dest("dist/libs"));
+
+});
+
+
+
+//copy dist fonts
+gulp.task("build:copyDistFonts",  function () {
+
+  return gulp.src([app + "/fonts/**/{*.eot,*.svg,*.ttf,*.eot,*.otf,*.woff2,*.woff}"])
+      .pipe(print())
+      .pipe(gulp.dest("dist/fonts"));
+
+});
+
+
+
+//minifi img
+gulp.task("build:minifiImg",  function () {
+
+  return gulp.src([app + "/images/**/{*.jpg,*.png,*.jpeg,*.gif,*.svg}"])
+      .pipe(print())
+      .pipe(imagemin({zopflipng: false}))
+      .on("error", console.log)
+      .pipe(gulp.dest("dist/images"));
+
+});
+
+
+
+gulp.task("build:minifiJsCss",   function () {
+
+  return gulp.src(app + "/**/*.html")
+      .pipe(useref({ searchPath: app, base: app }))
+      .pipe(print())
+      .pipe(gulpif("*.js", uglify().on("error", function(err) {
+        gutil.log(gutil.colors.red("[Error]"), err.toString());
+        this.emit("end");
+      })))
+      .pipe(gulpif("*.css", minifyCss()))
+      .pipe(gulp.dest("dist"));
+
+});
+
+
+
+gulp.task("build:dist", ["build:clean"], function (callback) {
+
+  return runSequence([/*"build:copyDist",*/ "build:copyLibs", "build:copyDistFonts", "build:minifiImg", "build:minifiJsCss"], callback);
+
+});
+//===TO DIST====

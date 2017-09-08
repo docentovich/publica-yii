@@ -3,10 +3,10 @@ $wpwh-ico: 83px;
 
 $trans-time: 0.4s;
 
-$header-h-small : 68px;
+$header-h-small : 80px;
 $base-punkt :     10px;
 
-$temp :  $header-h-small - $base-punkt;
+$temp :  68px - $base-punkt;
 
 .header1{ 
   background-color: $col-bg2;
@@ -93,7 +93,7 @@ $temp :  $header-h-small - $base-punkt;
       border-radius: 13px;
 
       border: 4px solid #fff;
-      padding: 10px;
+      //padding: 10px;
       box-sizing: border-box;
 
       display: flex;
@@ -167,7 +167,8 @@ $temp :  $header-h-small - $base-punkt;
     align-content: flex-start;
     align-items: flex-start;
 
-    padding:0 30px 0 30px;
+    padding: 10px 60px;
+
 
     &:after{
       opacity: 1;
@@ -190,6 +191,7 @@ $temp :  $header-h-small - $base-punkt;
         border-width: 4px;
         font-size: $temp - 3 * $base-punkt;
 
+
       }
 
       &_logo {
@@ -198,6 +200,21 @@ $temp :  $header-h-small - $base-punkt;
     }
 
     &__logo {
+    }
+
+    @media (min-width: 460px) {
+      padding: 10px 80px;
+    }
+    @media (max-width: 360px){
+      padding: 10px 60px 10px 30px;
+
+      &__item{
+        &_control{
+          margin-top: 5px;
+          width:50px;
+          height:50px;
+        }
+      }
     }
 
   }

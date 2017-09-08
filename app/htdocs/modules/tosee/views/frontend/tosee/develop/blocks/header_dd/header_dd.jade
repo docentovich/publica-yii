@@ -3,16 +3,20 @@ mixin header_dd()
     .container.container-header
       .row
         +e.inner.col-xs-24
-          +e.item._control
-            +e.I.i.fa.fa-search
-          +e.item._control
-            +e.I.i.fa.fa-search
-          +e.item._control(rel="menu").sidebar-rel
-            +e.I.i.fa.fa-bars
+          +e.item
+            +e.item-inner._small-fz-item
+              +e.I.i.fa.fa-language
+            +e.item-label Язык
+          +e.item
+            +e.item-inner
+              +e.I.i.fa.fa-map-marker
+            +e.item-label Город
+          +e.item(rel="menu").sidebar-rel
+            +e.item-inner
+              +e.I.i.fa.fa-sign-in
+            +e.item-label Вход
     +e.globe
       +e.globe-inner
         +e.I.i-globe.fa.fa-globe
-
-   
         //- +e.controls1
         //-   +controls1
