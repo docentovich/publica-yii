@@ -1,7 +1,7 @@
 <?php
 use modules\tosee\widgets\sidebar\Sidebar;
 
-//echo \components\widgets\header\Header::widget(["logo" => "publica"]); //верхняя плашечка. она едина для всех частейы
+echo \components\widgets\header\Header::widget(); //верхняя плашечка. она едина для всех частейы
 ?>
 <!-- header1 -->
 <div class="header1">

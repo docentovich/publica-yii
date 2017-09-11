@@ -1,63 +1,47 @@
-<?
+<?php
 use yii\helpers\Html;
 use components\helpers\Helpers;
 use components\widgets\header\HeaderAsset;
 use modules\tosee\widgets\sidebar\Sidebar;
 
+/**
+ * Самая верхняя плашечка
+ * @var string $logo Логотип текущего модуля
+ * @var array $cities Массив городов
+ * @var int $current_city_id Текущий ИД города
+ */
 $bundle = HeaderAsset::register($this);
 ?>
-<div class="header">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-24">
-                <?= Html::a(Helpers::i("sprite", $logo, ["header__i"]), "/", ["class" => "header__logo"]); ?>
-                <?php //<a href="/" class="header__logo"><i class="header__i sprite-img sp-sprite sp-sprite__publica"></i></a> ?>
-                <div class="header__controls"><!-- controls -->
-                    <div class="controls">
 
-                        <div class="controls__control">
-                            <div class="controls__lang">
-                                &nbsp;
-                               <?php // <i class="controls__i sprite-img sp-sprite sp-sprite__flagrus"></i> ?>
-                            </div>
-                        </div>
-                        <div class="controls__control">
-                            <div class="controls__city " >
-                                <img class="controls__i  sidebar-open" rel="city" src="<?= $bundle->baseUrl ?>/images/route.svg" type=""/>
-                            </div>
-                        </div>
-
-                        <?php
-                        if (Yii::$app->user->isGuest) {
-                            ?>
-                            <div class="controls__control">
-                                <?php
-                                echo Html::a(
-                                    Helpers::i("sprite", "enter", ["header__i"]), "/admin", ["class" => "controls__i"],
-                                    ["class" => "controls__enter"]
-                                );
-
-                                ?>
-                            </div>
-                            <?php
-
-                        } else {
-                            echo Html::beginForm(['/user/security/logout'], 'post');
-                            echo Html::submitButton(
-                                'Выход (' . Yii::$app->user->identity->username . ')',
-                                ['class' => 'btn-link logout', "style" => "color: white"]
-                            );
-                            echo Html::endForm();
-                        }
-                        ?>
-                        <? //<a href="/admin/enter.html" class="controls__enter"><i class="controls__i sprite-img sp-sprite sp-sprite__enter"></i></a> ?>
-                    </div>
-                </div>
-                <!--/ controls -->
-            </div>
+<!-- header-dd -->
+<div class="header-dd">
+  <div class="container container-header">
+    <div class="row">
+      <div class="header-dd__inner col-xs-24">
+        <div class="header-dd__item">
+          <div class="header-dd__item-inner header-dd__item-inner_small-fz-item"><i class="header-dd__i fa fa-language"></i>
+          </div>
+          <div class="header-dd__item-label">Язык
+          </div>
         </div>
+        <div class="header-dd__item">
+          <div class="header-dd__item-inner"><i class="header-dd__i fa fa-map-marker"></i>
+          </div>
+          <div class="header-dd__item-label">Город
+          </div>
+        </div>
+        <div rel="menu" class="header-dd__item sidebar-rel">
+          <div class="header-dd__item-inner"><i class="header-dd__i fa fa-sign-in"></i>
+          </div>
+          <div class="header-dd__item-label">Вход
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="header-dd__globe">
+    <div class="header-dd__globe-inner"><i class="header-dd__i-globe fa fa-globe"></i>
+    </div>
+  </div>
 </div>
-<?php Sidebar::begin(["id" => "city", "modif" => "search"]); ?>
-<?php require_once "sidebarcity.php"; ?>
-<?php Sidebar::end(); ?>
+<!--/ header-dd -->

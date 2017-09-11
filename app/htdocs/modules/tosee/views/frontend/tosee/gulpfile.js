@@ -183,7 +183,7 @@ gulp.task('watch', function() {
 //=================build==========================
 
 
-// ====TO DIST====
+// ====TO YII====
 
 gulp.task('build:clean', function () {
   return del.sync(['../../../../../frontend/web/assets/*'], {force: true});
@@ -228,11 +228,11 @@ gulp.task('build:_dist', ['build:clean'], function (callback) {
   return runSequence(['build:minifiJsCss'], callback);
 });
 
-gulp.task('build', ['build:_dist'], function (callback) {
+gulp.task('build:yii', ['build:_dist'], function (callback) {
   return runSequence(['build:minifiImg'], callback);
 });
 
-//===TO DIST====
+//===TO YII====
 
 // ====TO YII==== 
 
