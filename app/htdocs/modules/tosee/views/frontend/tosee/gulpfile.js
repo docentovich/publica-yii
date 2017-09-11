@@ -183,10 +183,10 @@ gulp.task('watch', function() {
 //=================build==========================
 
 
-// ====TO DIST====
+// ====TO YII====
 
-gulp.task('build:clean', function () {
-  return del.sync(['../../../../../frontend/web/assets/*'], {force: true});
+gulp.task('build:yii:clean', function () {
+  // return del.sync(['../../../../../frontend/web/assets/*'], {force: true});
 });
 
 //copy dist fonts
@@ -200,7 +200,7 @@ gulp.task('build:clean', function () {
 
 
 //minifi img
-gulp.task('build:minifiImg',  function () { 
+gulp.task('build:yii:minifiImg',  function () {
   return;
   return gulp.src(['develop/images/**/{*.jpg,*.png,*.jpeg,*.gif,*.svg}'])
   .pipe(imagemin({zopflipng: false}))
@@ -208,31 +208,31 @@ gulp.task('build:minifiImg',  function () {
   .pipe(gulp.dest('../assets/images'));
 });
 
-gulp.task('build:minifiJsCss',   function () { 
+gulp.task('build:yii:minifiJsCss',   function () {
 
   return gulp.src('./develop/index.html')
   .pipe(print())
   .pipe( useref({ searchPath: 'develop', base: 'develop' }) )
   .pipe( debug() )
-  // .pipe( gulpif('*.js', uglify()
-  //   .on('error', function(err) {
-  //   // gutil.log(gutil.colors.red('[Error]'), err.toString());
-  //   // this.emit('end');
-  // })
-  // ))   
-  // .pipe( gulpif('*.css', minifyCss()) )
+  .pipe( gulpif('*.js', uglify()
+    .on('error', function(err) {
+    gutil.log(gutil.colors.red('[Error]'), err.toString());
+    this.emit('end');
+  })
+  ))
+  .pipe( gulpif('*.css', minifyCss()) )
   .pipe( gulp.dest('../assets') );
 });
 
-gulp.task('build:_dist', ['build:clean'], function (callback) {
-  return runSequence(['build:minifiJsCss'], callback);
+gulp.task('build:yii:_dist', ['build:yii:clean'], function (callback) {
+  return runSequence(['build:yii:minifiJsCss'], callback);
 });
 
-gulp.task('build', ['build:_dist'], function (callback) {
-  return runSequence(['build:minifiImg'], callback);
+gulp.task('build:yii', ['build:yii:_dist'], function (callback) {
+  return runSequence(['build:yii:minifiImg'], callback);
 });
 
-//===TO DIST====
+//===TO YII====
 
 // ====TO YII==== 
 

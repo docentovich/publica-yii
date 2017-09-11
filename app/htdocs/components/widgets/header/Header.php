@@ -1,4 +1,4 @@
-<?
+<?php
 namespace components\widgets\header;
 
 use yii\base\Widget;
@@ -13,28 +13,28 @@ use yii\helpers\ArrayHelper;
  */
 class Header extends Widget
 {
-    /**
-     * @var url логотипа плашки
-     */
-    public $logo;
+  /**
+   * @var string url логотипа плашки
+   */
+//    public $logo;
 
 
 
-    public function init()
-    {
-        parent::init();
-    }
+  public function init()
+  {
+    parent::init();
+  }
 
-    public function run()
-    {
-        $cities = City::find()->asArray()->all();
-        $cities = ArrayHelper::map($cities, 'id', 'label');
-        $current_city_id =  \Yii::$app->request->cookies->getValue("city_id");
+  public function run()
+  {
+    $cities = City::find()->asArray()->all();
+    $cities = ArrayHelper::map($cities, 'id', 'label');
+    $current_city_id =  \Yii::$app->request->cookies->getValue("city_id");
 
-        return $this->render("view", [
-            "logo" => $this->logo,
-            "cities" => $cities,
-            "current_city_id" => $current_city_id
-        ]);
-    }
+    return $this->render("view", [
+//            "logo" => $this->logo,
+        "cities" => $cities,
+        "current_city_id" => $current_city_id
+    ]);
+  }
 }

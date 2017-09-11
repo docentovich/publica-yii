@@ -18,38 +18,39 @@ $bundle = AppAsset::register($this);
 AppAssetIE9::register($this);
 ?>
 <?php $this->beginPage(); ?>
-    <!DOCTYPE html>
-    <html lang="<?= Yii::$app->language ?>">
-    <head>
-        <meta charset="<?= Yii::$app->charset ?>">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
-        <?php $this->head() ?>
-        <script>
-            var queryDate = '<?= Yii::$app->view->params['current_date'] ?? date("Y-m-d"); ?>';
-        </script>
-    </head>
+  <!DOCTYPE html>
+  <html lang="<?= Yii::$app->language ?>">
+  <head>
+    <meta charset="<?= Yii::$app->charset ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
+    <link href="https://use.fontawesome.com/9371c6073a.css" media="all" rel="stylesheet">
+    <script>
+      var queryDate = '<?= Yii::$app->view->params['current_date'] ?? date("Y-m-d"); ?>';
+    </script>
+  </head>
 
 
-    <body class="pageload no-js">
-    <?php $this->beginBody() ?>
+  <body class="pageload no-js">
+  <?php $this->beginBody() ?>
 
-    <?php require_once "parts/header.php"; ?>
+  <?php require_once "parts/header.php"; ?>
 
-    <!-- content -->
-    <div class="content" style="min-height: calc(100vh - 210px);">
-        <div class="container container-body">
-            <?php require_once "parts/navigation.php"; ?>
-            <?= $content ?>
-            <?php require_once "parts/pagination.php"; ?>
-        </div>
+  <!-- content -->
+  <div class="content" style="min-height: calc(100vh - 210px);">
+    <div class="container container-body">
+      <?php require_once "parts/navigation.php"; ?>
+      <?= $content ?>
+      <?php require_once "parts/pagination.php"; ?>
     </div>
-    <!--/ content -->
+  </div>
+  <!--/ content -->
 
-    <?php require_once "parts/footer.php"; ?>
-    <?php $this->endBody() ?>
-    </body>
-    </html>
+  <?php require_once "parts/footer.php"; ?>
+  <?php $this->endBody() ?>
+  </body>
+  </html>
 <?php $this->endPage() ?>
