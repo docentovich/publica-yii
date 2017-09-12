@@ -6,7 +6,7 @@
  * Time: 15:08
  */
 
-namespace templates\main\backend;
+namespace app\assets;
 use yii\web\AssetBundle;
 
 class BackendAsset extends AssetBundle

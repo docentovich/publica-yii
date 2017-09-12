@@ -27,9 +27,9 @@ class Module extends \yii\base\Module
         // Это здесь для того, чтобы переключаться между frontend и backend
         if ($this->isBackend === true) {
             $this->controllerNamespace = 'modules\tosee\controllers\backend';
-            $this->setViewPath('@modules/tosee/views/backend');
+            $this->setViewPath('@modules/tosee/html/backend/views');
         } else {
-            $this->setViewPath('@modules/tosee/views/frontend');
+            $this->setViewPath('@modules/tosee/html/frontend/views');
         }
     }
 }

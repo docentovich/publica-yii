@@ -8,14 +8,14 @@ use yii\helpers\Html;
 // use yii\bootstrap\Nav;
 // use yii\bootstrap\NavBar;
 // use yii\widgets\Breadcrumbs;
-use modules\tosee\assets\frontend\AppAsset;
-use modules\tosee\assets\frontend\AppAssetIE9;
+use app\assets\FrontendAsset;
+use app\assets\FrontendAssetIE9;
 use app\components\Header;
 
 // use common\widgets\Alert;
 
-$bundle = AppAsset::register($this);
-AppAssetIE9::register($this);
+$bundle = FrontendAsset::register($this);
+FrontendAssetIE9::register($this);
 ?>
 <?php $this->beginPage(); ?>
   <!DOCTYPE html>

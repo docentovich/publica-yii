@@ -1,15 +1,15 @@
 <?php
 
-namespace modules\tosee\assets\frontend;
+namespace app\assets;
 
 use yii\web\AssetBundle;
 
 /**
  * Main frontend application asset bundle.
  */
-class AppAssetIE9 extends AssetBundle
+class FrontendAssetIE9 extends AssetBundle
 {
-    public $sourcePath = '@modules/tosee/views/frontend/assets';
+    public $sourcePath = '@templates/main/frontend/assets';
     public $css = [
     ];
     public $js = [
@@ -21,3 +21,4 @@ class AppAssetIE9 extends AssetBundle
     public $jsOptions = ['condition' => 'lte IE9'];
     
 }
+

@@ -6,6 +6,9 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
+require_once(__DIR__ . '/../../templates/main/frontend/FrontendAsset.php');
+require_once(__DIR__ . '/../../templates/main/frontend/FrontendAssetIE9.php');
+
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),

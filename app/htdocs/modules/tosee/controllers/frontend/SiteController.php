@@ -19,7 +19,7 @@ class SiteController extends Controller
      *
      * @var string
      */
-    public $layout = "tosee";
+    public $layout = "@templates/main/frontend/layouts/tosee";
 
    
     /**

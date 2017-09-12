@@ -1,14 +1,14 @@
 <?php
-namespace modules\tosee\assets\frontend;
+namespace app\assets;
 
 use yii\web\AssetBundle;
 
 /**
  * Main frontend application asset bundle.
  */
-class AppAsset extends AssetBundle
+class FrontendAsset extends AssetBundle
 {
-    public $sourcePath = '@modules/tosee/views/frontend/assets';
+    public $sourcePath = '@templates/main/frontend/assets';
     public $css = [
         'css/vendor.css',
         'css/main.css',
