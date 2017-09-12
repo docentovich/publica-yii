@@ -184,3 +184,75 @@
     border-radius: 7px; }
   .affix + .header-dd .header-dd__globe {
     bottom: -36px; } }
+
+
+.city {
+  width: 100%;
+  max-width: 706px;
+  cursor: pointer
+}
+
+.city__city-text {
+  font-size: 26px;
+  height: 32px;
+  line-height: 32px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
+  color: #fff;
+}
+
+.city__city-ico {
+  float: right;
+  background-position: -109px -22px;
+  width: 32px;
+  height: 42px;
+  position: absolute;
+  right: 9px;
+  top: 10px
+}
+
+.city__drop-down,.city__drop-down-ul {
+  max-width: 706px;
+  width: 100%;
+  opacity: .5;
+  background-color: #363d47
+}
+
+.city__drop-down {
+  height: 66px;
+  border: 3px solid #fff;
+  border-radius: 9px;
+  padding: 14px 36px 14px 22px;
+  text-align: left;
+  position: relative
+}
+
+.city__drop-down-ul {
+  margin-top: 10px;
+  max-height: 645px;
+  border: 3px solid #fff;
+  border-radius: 9px;
+  overflow-y: auto;
+  overflow-x: hidden
+}
+
+.city__li {
+  padding-left: 22px;
+  text-align: left;
+  font-size: 30px
+}
+
+.controls__city .controls__i{
+  width:20px;
+}
+.city__city-text, .city__li {
+  color: #fff;
+  font-weight: 400;
+}
+
+.controls__control:hover {
+  opacity: 1;
+}

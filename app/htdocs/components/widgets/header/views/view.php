@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use components\helpers\Helpers;
 use components\widgets\header\HeaderAsset;
-use modules\tosee\widgets\sidebar\Sidebar;
+use components\widgets\sidebar\Sidebar;
 
 /**
  * Самая верхняя плашечка
@@ -19,23 +19,26 @@ $bundle = HeaderAsset::register($this);
     <div class="row">
       <div class="header-dd__inner col-xs-24">
         <div class="header-dd__item">
-          <div class="header-dd__item-inner header-dd__item-inner_small-fz-item"><i class="header-dd__i fa fa-language"></i>
+          <div class="header-dd__item-inner header-dd__item-inner_small-fz-item"><i
+                class="header-dd__i fa fa-language"></i>
           </div>
           <div class="header-dd__item-label">Язык
           </div>
         </div>
-        <div class="header-dd__item">
+        <div rel="city" class="header-dd__item sidebar-rel">
           <div class="header-dd__item-inner"><i class="header-dd__i fa fa-map-marker"></i>
           </div>
-          <div class="header-dd__item-label">Город
+          <div  class="header-dd__item-label ">Город
           </div>
         </div>
-        <div rel="menu" class="header-dd__item sidebar-rel">
-          <div class="header-dd__item-inner"><i class="header-dd__i fa fa-sign-in"></i>
-          </div>
-          <div class="header-dd__item-label">Вход
-          </div>
-        </div>
+        <a href="/admin" class="header-dd__item">
+          <span class="header-dd__item-inner">
+            <i class="header-dd__i fa fa-sign-in"></i>
+          </span>
+          <span class="header-dd__item-label">
+            Вход
+          </span>
+        </a>
       </div>
     </div>
   </div>
@@ -45,3 +48,7 @@ $bundle = HeaderAsset::register($this);
   </div>
 </div>
 <!--/ header-dd -->
+
+<?php Sidebar::begin(["id" => "city", "modif" => "search"]); ?>
+<?php require_once "sidebarcity.php"; ?>
+<?php Sidebar::end(); ?>

@@ -1,17 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Andrey
- * Date: 23.05.2017
- * Time: 15:08
- */
-
 namespace app\assets;
+
 use yii\web\AssetBundle;
 
-class BackendAsset extends AssetBundle
+/**
+ * Main frontend application asset bundle.
+ */
+class FrontendAsset extends AssetBundle
 {
-    public $sourcePath = '@templates/main/backend/assets';
+    public $sourcePath = '@templates/main/frontend/assets';
     public $css = [
         'css/vendor.css',
         'css/main.css',
@@ -20,9 +17,8 @@ class BackendAsset extends AssetBundle
         'js/vendor.js',
         'js/main.js',
     ];
-    public $jsOptions = ['position' => \yii\web\View::POS_BEGIN];
+    public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $depends = [
         'yii\web\YiiAsset',
     ];
-
 }
