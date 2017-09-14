@@ -95,10 +95,11 @@ return [
 
         ],
 
+        // вьюшки дектриума
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    '@dektrium/user/views' => '@modules/users/views/backend',
+                    '@dektrium/user/views' => '@modules/users/html/backend/views',
                 ],
             ],
         ],

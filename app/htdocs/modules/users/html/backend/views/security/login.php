@@ -13,8 +13,7 @@ use dektrium\user\widgets\Connect;
 //use dektrium\user\models\LoginForm;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use templates\main\backend\BackendAsset;
-
+use app\assets\BackendAsset;
 
 /**
  * @var yii\web\View $this

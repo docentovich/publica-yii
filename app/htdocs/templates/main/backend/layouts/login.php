@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use templates\main\backend\BackendAsset;
+use app\assets\BackendAsset;
 use app\components\Header;
 
 $bundle = BackendAsset::register($this);

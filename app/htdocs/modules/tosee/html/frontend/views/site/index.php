@@ -53,6 +53,6 @@ if( empty($service->items) ){
     </div>
 </div>
 <!--/ events -->
-<?= \modules\tosee\widgets\pagination\Pagination::widget([
+<?= \components\widgets\pagination\Pagination::widget([
    "service" => $service
 ]);
