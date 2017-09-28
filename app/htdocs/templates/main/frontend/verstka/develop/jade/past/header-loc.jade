@@ -6,12 +6,13 @@ mixin header-loc()
     html(lang='ru')
         +document-header-tosee
         body.pageload.no-js
+            +header_dd
+
             +sidebars
             //- +header
             +header1
-            +header_dd
             +content
                 +navigation('/future/1.html')
-                 | Что было
+                   | Что было
                 +events
                 block
