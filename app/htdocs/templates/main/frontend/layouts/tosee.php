@@ -29,7 +29,7 @@ FrontendAssetIE9::register($this);
     <?php $this->head() ?>
     <link href="https://use.fontawesome.com/9371c6073a.css" media="all" rel="stylesheet">
     <script>
-      var queryDate = '<?= Yii::$app->view->params['current_date'] ?? date("Y-m-d"); ?>';
+      var queryDate = '<?= ( isset(Yii::$app->view->params['current_date']) ) ? Yii::$app->view->params['current_date'] : date("Y-m-d"); ?>';
     </script>
   </head>
 
