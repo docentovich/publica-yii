@@ -3,5 +3,6 @@
 /app/mysql/*
 !/app/mysql/.getkeep
 node_modules/
+*.map
 .htaccess
 .idea
