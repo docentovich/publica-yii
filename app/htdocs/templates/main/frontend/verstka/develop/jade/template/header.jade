@@ -1,5 +1,5 @@
-include ../includes/bemto
 include ../includes/mixins
+include ../includes/bemto
 - var links = [{alias: "m", url: "index.html", "label" : "Главная"}, {alias: "w", url: "work.html", "label" : "Работа", sublines : [{url: "izber.html", "label" : "Работа с избирателями"}, {url: "zaks.html", "label" : "Работа в Законодательном Собрании Санкт-Петербурга"}] } ];
 mixin document-header-tosee()
   head
@@ -20,6 +20,8 @@ mixin document-header-tosee()
       // endbuild
       // build:css /css/main.css
       link(href='/css/main.css', rel='stylesheet')
+      link(href='/css/sidebar.css', rel='stylesheet')
+      link(href='/css/header_dd.css', rel='stylesheet')
       link(href='/css/logos.css', rel='stylesheet')
       link(href='/css/sprite.css', rel='stylesheet')
       link(href='/css/tosee.css', rel='stylesheet')
@@ -30,3 +32,6 @@ mixin document-header-tosee()
             <script src="/libs/ie/respond.matchmedia.addListener.src.js"></script>
             <script src="/libs/polyfills/background_size_emu.js"></script>
             <![endif]
+
+      script.
+          var queryDate = "2017-11-11";
