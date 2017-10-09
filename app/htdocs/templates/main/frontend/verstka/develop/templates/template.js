@@ -19,17 +19,6 @@
     });
 }(jQuery));
 
-(function($) {
-    $.fn.hasScrollBar = function() {
-        return ( ( this.get(0).scrollHeight > this.height() ) && !is_touch_device() );
-    }
-})(jQuery);
-
-function is_touch_device() {
-
-    return 'ontouchstart' in window        // works on most browsers
-        || navigator.maxTouchPoints;       // works on IE10/11 and Surface
-};
 
 (function($){
   /* ---------набор функций--------------- */
@@ -172,8 +161,7 @@ function is_touch_device() {
     $("body").removeClass("pageload");
     $("body").removeClass("no-js");
 
-    if( $("body").hasScrollBar() )
-      $("html").addClass("hasScroll");
+
 
     //=require ../blocks/**/*.js 
   });

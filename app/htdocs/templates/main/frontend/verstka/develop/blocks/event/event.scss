@@ -32,11 +32,17 @@
     &__date{
         padding: 5px;
         background-color: rgba(140, 1, 84, .33);
-        border-radius: 5px;
+
+        -webkit-border-top-right-radius: 5px;
+        -moz-border-radius-topright: 5px;
+        border-top-right-radius: 5px;
+
         color: white;
         position: absolute;
-        bottom: 12px;
-        left: 15px;
+        bottom: 0px;
+        left: 0px;
+
+        font-size:13px;
     }
 
     &__content{
@@ -54,10 +60,12 @@
     &__title{
         //color: $headers !important;
         color: #686665 !important;
-        font-size: 18px;
+        font-size: 22px;
         //margin-bottom: 15px;
         text-decoration: none !important;
         display: inline-block;
+
+        transform: scale(0.85, 1);
 
         &:hover{
             opacity: .9;
