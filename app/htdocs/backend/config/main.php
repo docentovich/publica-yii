@@ -6,7 +6,7 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
-require_once(__DIR__ . '/../../templates/main/backend/BackendAsset.php');
+require_once( __DIR__ . '/../../templates/main/backend/BackendAsset.php' );
 
 return [
     'id' => 'app-backend',

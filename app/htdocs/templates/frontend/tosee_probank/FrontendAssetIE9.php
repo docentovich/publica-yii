@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class FrontendAssetIE9 extends AssetBundle
 {
-    public $sourcePath = '@templates/main/frontend/assets';
+    public $sourcePath = __DIR__ . '/assets';
     public $css = [
     ];
     public $js = [

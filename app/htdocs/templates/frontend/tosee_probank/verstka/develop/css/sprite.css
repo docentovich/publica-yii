@@ -1,0 +1,140 @@
+.sp-sprite {
+  background-image: url(../images/sprite.png);
+}
+
+
+.sp-sprite__area {
+  background-position: -240px 0px;
+  width: 32px;
+  height: 42px;
+}
+.sp-sprite__by {
+  background-position: -110px -153px;
+  width: 46px;
+  height: 44px;
+}
+.sp-sprite__bySm {
+  background-position: -240px -43px;
+  width: 30px;
+  height: 29px;
+}
+.sp-sprite__city {
+  background-position: -154px -73px;
+  width: 14px;
+  height: 18px;
+}
+.sp-sprite__de {
+  background-position: -151px -207px;
+  width: 32px;
+  height: 19px;
+}
+.sp-sprite__england {
+  background-position: -85px -207px;
+  width: 32px;
+  height: 21px;
+}
+.sp-sprite__enter {
+  background-position: -154px -54px;
+  width: 15px;
+  height: 18px;
+}
+.sp-sprite__espanol {
+  background-position: -184px -207px;
+  width: 32px;
+  height: 19px;
+}
+.sp-sprite__fb {
+  background-position: -240px -103px;
+  width: 27px;
+  height: 28px;
+}
+.sp-sprite__flagrus {
+  background-position: -210px -126px;
+  width: 29px;
+  height: 18px;
+}
+.sp-sprite__french {
+  background-position: -118px -207px;
+  width: 32px;
+  height: 20px;
+}
+.sp-sprite__hamburger {
+  background-position: -176px -63px;
+  width: 63px;
+  height: 62px;
+}
+.sp-sprite__hart {
+  background-position: 0px -229px;
+  width: 23px;
+  height: 20px;
+}
+.sp-sprite__inst {
+  background-position: -240px -161px;
+  width: 26px;
+  height: 28px;
+}
+.sp-sprite__italy {
+  background-position: -176px -126px;
+  width: 33px;
+  height: 21px;
+}
+.sp-sprite__like {
+  background-position: -157px -153px;
+  width: 41px;
+  height: 44px;
+}
+.sp-sprite__likeSm {
+  background-position: -240px -73px;
+  width: 27px;
+  height: 29px;
+}
+.sp-sprite__loopa {
+  background-position: -199px -153px;
+  width: 39px;
+  height: 41px;
+}
+.sp-sprite__porto {
+  background-position: -240px -190px;
+  width: 32px;
+  height: 21px;
+}
+.sp-sprite__probank-grey {
+  background-position: 0px 0px;
+  width: 175px;
+  height: 53px;
+}
+.sp-sprite__publica {
+  background-position: 0px -207px;
+  width: 84px;
+  height: 21px;
+}
+.sp-sprite__search {
+  background-position: -176px 0px;
+  width: 63px;
+  height: 62px;
+}
+.sp-sprite__shotme-grey {
+  background-position: 0px -108px;
+  width: 163px;
+  height: 44px;
+}
+.sp-sprite__to-left {
+  background-position: -55px -153px;
+  width: 54px;
+  height: 53px;
+}
+.sp-sprite__to-right {
+  background-position: 0px -153px;
+  width: 54px;
+  height: 53px;
+}
+.sp-sprite__tosee-grey {
+  background-position: 0px -54px;
+  width: 153px;
+  height: 53px;
+}
+.sp-sprite__vk {
+  background-position: -240px -132px;
+  width: 27px;
+  height: 28px;
+}

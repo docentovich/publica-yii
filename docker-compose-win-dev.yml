@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  php:
+      build:
+        context: ./app
+        dockerfile: DockerfileDev
+      ports:
+       - "9000:9000"
+      environment:
+        PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
+        XDEBUG_CONFIG: remote_host=10.0.0.10
+      links:
+        - db
+      volumes:
+        - ./app/htdocs:/var/www/html
+        - ./app/php-win-dev.ini:/usr/local/etc/php/conf.d/custom.ini
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: phpmyadmin
+      environment:
+       - PMA_ARBITRARY=1
+      restart: always
+      ports:
+       - "8080:80"
+      volumes:
+       - /app/sessions

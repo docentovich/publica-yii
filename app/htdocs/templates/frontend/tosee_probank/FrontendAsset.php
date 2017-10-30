@@ -8,10 +8,10 @@ use yii\web\AssetBundle;
  */
 class FrontendAsset extends AssetBundle
 {
-    public $sourcePath = '@templates/main/frontend/assets';
+    public $sourcePath = __DIR__ . '/assets';
     public $css = [
         'css/vendor.css',
-        'css/main.css',
+        // 'css/main.css',
     ];
     public $js = [
         'js/vendor.js',
@@ -21,4 +21,11 @@ class FrontendAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
     ];
+    
+    public function registerAssetFiles( $view )
+    {
+        $temp =  ( \Yii::$app->params['project'] === TOSEE ) ? "main-tosee.css" : "main-probank.css";
+        $this->css[] = "css/" . $temp;
+        parent::registerAssetFiles( $view );
+    }
 }

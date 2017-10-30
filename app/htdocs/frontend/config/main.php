@@ -1,59 +1,66 @@
 <?php
 $params = array_merge(
-    require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php'),
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+    require( __DIR__ . '/../../common/config/params.php' ),
+    require( __DIR__ . '/../../common/config/params-local.php' ),
+    require( __DIR__ . '/params.php' ),
+    require( __DIR__ . '/params-local.php' )
 );
 
-require_once(__DIR__ . '/../../templates/main/frontend/FrontendAsset.php');
-require_once(__DIR__ . '/../../templates/main/frontend/FrontendAssetIE9.php');
 
-return [
-    'id' => 'app-frontend',
-    'basePath' => dirname(__DIR__),
-    'homeUrl' => '/',
+switch ( $_SERVER[ 'SERVER_NAME' ] ) {
+    case  TOSEE_DEV:
+    case  TOSEE_PROD:
+        $params[ 'project' ] = TOSEE;
+        $domain_params = require "main-tosee.php";
+        break;
+    case PROBANK_DEV:
+    case PROBANK_PROD :
+        $params[ 'project' ] = PROBANK;
+        $domain_params = require "main-probank.php";
+        break;
+    
+}
+$config = [
+    'id'       => 'app-frontend',
+    'basePath' => dirname( __DIR__ ),
+    'homeUrl'  => '/',
     'bootstrap' => [
         'log',
-        'modules\tosee\Bootstrap',
+        'templates\BootstrapFront',
     ],
-    'defaultRoute' => 'tosee/site/index',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
-            'baseUrl' => '',
+            'baseUrl'   => '',
         ],
-
-        'session' => [
+        'session'      => [
             'name' => 'advanced',
         ],
-        'log' => [
+        'log'          => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'targets'    => [
                 [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'class'  => 'yii\log\FileTarget',
+                    'levels' => [ 'error', 'warning' ],
                 ],
             ],
         ],
-        'errorHandler' => [
-            'errorAction' => 'tosee/site/error',
-        ],
-        'urlManager' => [
-            'class' => 'yii\web\UrlManager',
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'enableStrictParsing' => true,
-
-        ],
         
+        'urlManager'   => [
+            'class'               => 'yii\web\UrlManager',
+            'enablePrettyUrl'     => TRUE,
+            'showScriptName'      => FALSE,
+            'enableStrictParsing' => TRUE,
+        ],
     ],
-    'modules' => [
+    'modules'    => [
         'user' => [
             // following line will restrict access to admin controller from frontend application
             'as frontend' => 'dektrium\user\filters\FrontendFilter',
         ],
-//        'rbac' => 'dektrium\rbac\RbacWebModule',
+        //        'rbac' => 'dektrium\rbac\RbacWebModule',
     ],
-    'params' => $params,
+    'params'     => $params,
 ];
+
+return yii\helpers\ArrayHelper::merge( $domain_params, $config );

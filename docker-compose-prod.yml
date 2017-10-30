@@ -1,0 +1,13 @@
+version: '2'
+
+php:
+    build:
+      context: ./app
+      dockerfile: DockerfileProd
+    ports:
+     - "9000:9000"
+    links:
+      - db
+    volumes:
+      - ./app/htdocs:/var/www/html
+      - ./app/php-prod.ini:/usr/local/etc/php/conf.d/custom.ini
