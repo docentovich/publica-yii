@@ -11,14 +11,20 @@ class BootstrapFront implements BootstrapInterface
     public function bootstrap( $app )
     {
         
-        switch ( \Yii::$app->params[ 'project' ]  )
-        {
-            case PROBANK:
-            case TOSEE:
-                \Yii::setAlias('@current_template', __DIR__ . "/frontend/tosee_probank" );
-                break;
-        }
-        
+        // switch ( \Yii::$app->params[ 'project' ]  )
+        // {
+        //     case PROBANK:
+        //         \Yii::$app->view->logoRelativeSrc = "/images/logos/tosee.png";
+        //         break;
+        //
+        //     case TOSEE:
+        //         \Yii::$app->view->logoRelativeSrc = "/images/logos/probank.png";
+        //         break;
+        // }
+    
+        \Yii::setAlias('@current_template', __DIR__ . "/frontend/tosee_probank" );
+    
+    
         require_once "frontend/tosee_probank/FrontendAsset.php";
         require_once "frontend/tosee_probank/FrontendAssetIE9.php";
         

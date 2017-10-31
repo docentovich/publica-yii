@@ -1,23 +1,23 @@
 <?php
 
-namespace modules\tosee;
+namespace modules\probank;
 
 /**
- * tosee module definition class
+ * probank module definition class
  */
 class Module extends \yii\base\Module
 {
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'modules\tosee\controllers\frontend';
+    public $controllerNamespace = 'modules\probank\controllers\frontend';
 
     /**
      * @var boolean Если модуль используется для админ-панели.
      */
     public $isBackend;
     
-    public $logoSrc = "tosee.png";
+    public $logoSrc = "probank.png";
 
     /**
      * @inheritdoc
@@ -28,10 +28,10 @@ class Module extends \yii\base\Module
 
         // Это здесь для того, чтобы переключаться между frontend и backend
         if ($this->isBackend === true) {
-            $this->controllerNamespace = 'modules\tosee\controllers\backend';
-            $this->setViewPath('@modules/tosee/html/backend/views');
+            $this->controllerNamespace = 'modules\probank\controllers\backend';
+            $this->setViewPath('@modules/probank/html/backend/views');
         } else {
-            $this->setViewPath('@modules/tosee/html/frontend/views');
+            $this->setViewPath('@modules/probank/html/frontend/views');
         }
     }
 }

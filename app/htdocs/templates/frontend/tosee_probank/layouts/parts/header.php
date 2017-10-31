@@ -13,8 +13,7 @@ echo \components\widgets\header\Header::widget(); //верхняя плашеч�
             <i class="header1__i fa fa-search"></i>
           </div>
           <div class="header1__item header1__item_logo">
-            <img src="<?= $bundle->baseUrl; ?>/images/logos/tosee.png"
-                                                             class="header1__logo" alt="" role="presentation"/>
+            <img src="<?= $bundle->baseUrl . "/images/logos/" . Yii::$app->modules['project']->logoSrc ; ?>"  class="header1__logo" alt="" role="presentation"/>
           </div>
           <div rel="menu" class="header1__item header1__item_control sidebar-rel">
             <i class="header1__i fa fa-bars"></i>

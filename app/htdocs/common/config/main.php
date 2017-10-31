@@ -1,5 +1,16 @@
 <?php
 
+switch ( $_SERVER[ 'SERVER_NAME' ] ) {
+    case  TOSEE_DEV:
+    case  TOSEE_PROD:
+        $mainModule = "modules\\tosee";
+        break;
+    case PROBANK_DEV:
+    case PROBANK_PROD :
+        $mainModule = "modules\\probank";
+        break;
+    
+}
 
 return [
     'vendorPath' => dirname( dirname( __DIR__ ) ) . '/vendor',
@@ -43,12 +54,11 @@ return [
     ],
     
     'modules'   => [
-        'tosee' => [
-            'class' => 'modules\tosee\Module',
+        
+        'project' => [
+            'class' => $mainModule ."\\Module",
         ],
-        'probank' => [
-            'class' => 'modules\probank\Module',
-        ],
+        
         'user'  => [
             'class' => 'dektrium\user\Module',
         ],

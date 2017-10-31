@@ -10,12 +10,10 @@ $params = array_merge(
 switch ( $_SERVER[ 'SERVER_NAME' ] ) {
     case  TOSEE_DEV:
     case  TOSEE_PROD:
-        $params[ 'project' ] = TOSEE;
         $domain_params = require "main-tosee.php";
         break;
     case PROBANK_DEV:
     case PROBANK_PROD :
-        $params[ 'project' ] = PROBANK;
         $domain_params = require "main-probank.php";
         break;
     
@@ -24,18 +22,27 @@ $config = [
     'id'       => 'app-frontend',
     'basePath' => dirname( __DIR__ ),
     'homeUrl'  => '/',
+    
+    'defaultRoute' => 'project/site/index',
+    
     'bootstrap' => [
         'log',
         'templates\BootstrapFront',
     ],
     'components' => [
+        'errorHandler' => [
+            'errorAction' => 'project/site/error',
+        ],
+        
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'baseUrl'   => '',
         ],
+        
         'session'      => [
             'name' => 'advanced',
         ],
+        
         'log'          => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets'    => [
