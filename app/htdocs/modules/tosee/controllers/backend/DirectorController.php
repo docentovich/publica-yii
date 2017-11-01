@@ -14,7 +14,7 @@ use modules\tosee\services\backend\adminService;
 class DirectorController extends Controller
 {
 
-    public $layout = "@templates/main/backend/layouts/main";
+    public $layout = "@current_template/layouts/main";
 
 
     /**

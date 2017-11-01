@@ -1,111 +1,95 @@
 <?php
 $params = array_merge(
-    require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php'),
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+    require( __DIR__ . '/../../common/config/params.php' ),
+    require( __DIR__ . '/../../common/config/params-local.php' ),
+    require( __DIR__ . '/params.php' ),
+    require( __DIR__ . '/params-local.php' )
 );
-
-require_once( __DIR__ . '/../../templates/main/backend/BackendAsset.php' );
-
+// require_once( __DIR__ . '/../../templates/main/backend/BackendAsset.php' );
 return [
-    'id' => 'app-backend',
-    'basePath' => dirname(__DIR__),
-    'homeUrl' => '/admin',
+    'id'           => 'app-backend',
+    'basePath'     => dirname( __DIR__ ),
+    'homeUrl'      => '/admin',
     'defaultRoute' => '/user/settings/profile',
-    'bootstrap' => [
+    'bootstrap'    => [
         'log',
+        \templates\BootstrapBackend::class,
     ],
     'modules' => [
-        'tosee' => [
-            'isBackend' => true,
+        'project' => [
+            'isBackend' => TRUE,
         ],
-        'user' => [
+        'user'  => [
             'class' => 'dektrium\user\Module',
-//            'as backend' => [
-//                'class' => 'dektrium\user\filters\BackendFilter',
-//                'controllers' => ['profile', 'recovery', 'settings']
-//            ],
-
-            'layout' => '@templates/main/backend/layouts/main',
+            //            'as backend' => [
+            //                'class' => 'dektrium\user\filters\BackendFilter',
+            //                'controllers' => ['profile', 'recovery', 'settings']
+            //            ],
+            
+            'layout'        => '@current_template/layouts/main',
+            
             'controllerMap' => [
-                'security' => [
-                    'class' => 'dektrium\user\controllers\SecurityController',
-                    'layout' => '@templates/main/backend/layouts/login',
+                'security'     => [
+                    'class'  => 'dektrium\user\controllers\SecurityController',
+                    'layout' => '@current_template/layouts/login',
                 ],
                 'registration' => [
-                    'class' => 'modules\users\controllers\backend\RegistrationController',
-                    'layout' =>     '@templates/main/backend/layouts/login',
+                    'class'  => 'modules\users\controllers\backend\RegistrationController',
+                    'layout' => '@current_template/layouts/login',
                 ],
-                'recovery' => [
-                    'class' => 'dektrium\user\controllers\RecoveryController',
-                    'layout' =>     '@templates/main/backend/layouts/login',
+                'recovery'     => [
+                    'class'  => 'dektrium\user\controllers\RecoveryController',
+                    'layout' => '@current_template/layouts/login',
                 ],
-
-                'settings' =>  'modules\users\controllers\backend\UserpanelController',
-
+                'settings' => 'modules\users\controllers\backend\UserpanelController',
             ],
-            'modelMap' => [
-                'Profile' => 'common\models\Profile',
-                'RegistrationForm' => 'modules\users\models\RegistrationForm',
-//                'User' => 'modules\users\models\User',
+            'modelMap'      => [
+                'Profile'          => \common\models\Profile::class,
+                'RegistrationForm' => \modules\users\models\RegistrationForm::class,
+                'User'             => \common\models\User::class,
             ],
-
             'urlRules' => [
-
             ],
         ],
-//        'rbac' => 'dektrium\rbac\RbacWebModule',
+        //        'rbac' => 'dektrium\rbac\RbacWebModule',
     ],
-
     'components' => [
-//        'errorHandler' => [
-//            'errorAction' => 'tosee/site/error',
-//        ],
+        //        'errorHandler' => [
+        //            'errorAction' => 'tosee/site/error',
+        //        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
-            'baseUrl' => '/admin',
-
+            'baseUrl'   => '/admin',
         ],
-
         'session' => [
             'name' => 'advanced',
         ],
-        'log' => [
+        'log'     => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'targets'    => [
                 [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'class'  => 'yii\log\FileTarget',
+                    'levels' => [ 'error', 'warning' ],
                 ],
             ],
         ],
-
-
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' =>[
-                '<_c:(author|moderator|director)>'                      => '/tosee/<_c>/index',
-                '<_c:(author|moderator|director)>/<_a:[a-zA-Z\-\_]+>'   => '/tosee/<_c>/<_a>',
-                'avatar-upload'                                         => '/user/settings/upload-avatar',
-                '<action:[\w\-]+>'                                      => '/user/settings/<action>',
-
-            ]
-
+            'enablePrettyUrl' => TRUE,
+            'showScriptName'  => FALSE,
+            // 'rules'           => [
+            //
+            //     'avatar-upload'                                       => '/user/settings/upload-avatar',
+            //     '<action:[\w\-]+>'                                    => '/user/settings/<action>',
+            // ],
         ],
-
         // вьюшки дектриума
-        'view' => [
+        'view'       => [
             'theme' => [
                 'pathMap' => [
                     '@dektrium/user/views' => '@modules/users/html/backend/views',
                 ],
             ],
         ],
-
-
     ],
-    'params' => $params,
-
+    'params'     => $params,
 ];

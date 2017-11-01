@@ -11,7 +11,7 @@ use yii\web\AssetBundle;
 
 class BackendAsset extends AssetBundle
 {
-    public $sourcePath = '@templates/main/backend/assets';
+    public $sourcePath = '@current_template/assets';
     public $css = [
         'css/vendor.css',
         'css/main.css',

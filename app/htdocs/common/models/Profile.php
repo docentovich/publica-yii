@@ -24,6 +24,8 @@ use borales\extensions\phoneInput\PhoneInputValidator;
  */
 class Profile extends BaseProfile
 {
+    use UserDbConnection;
+    
     public function attributeLabels()
     {
         return [

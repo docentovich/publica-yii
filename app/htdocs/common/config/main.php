@@ -4,24 +4,24 @@ switch ( $_SERVER[ 'SERVER_NAME' ] ) {
     case  TOSEE_DEV:
     case  TOSEE_PROD:
         $mainModule = "modules\\tosee";
+        $domain_params = require "main-tosee.php";
         break;
     case PROBANK_DEV:
     case PROBANK_PROD :
         $mainModule = "modules\\probank";
+        $domain_params = require "main-probank.php";
         break;
     
 }
-
-return [
+$config = [
     'vendorPath' => dirname( dirname( __DIR__ ) ) . '/vendor',
     'language'   => 'ru-RU',
     'name'       => 'Publica',
     'components' => [
-        'cache'        => [
+        'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-
-        'i18n'         => [
+        'i18n' => [
             'translations' => [
                 'app*'  => [
                     'class'          => yii\i18n\PhpMessageSource::className(),
@@ -42,25 +42,22 @@ return [
                 ],
             ],
         ],
-        
-        'authManager'  => [
+        'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
-        
         'assetManager' => [
             'dirMode' => 0777,
         ],
-        
     ],
-    
-    'modules'   => [
-        
+    'modules' => [
         'project' => [
-            'class' => $mainModule ."\\Module",
+            'class' => $mainModule . "\\Module",
         ],
-        
-        'user'  => [
+        'user' => [
             'class' => 'dektrium\user\Module',
         ],
     ],
+    'params'     => $params,
+
 ];
+return yii\helpers\ArrayHelper::merge( $domain_params, $config );

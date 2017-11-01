@@ -1,7 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Andrey
- * Date: 30.10.2017
- * Time: 1:19
- */
+
+$params[ 'project' ] = TOSEE;
+
+
+return [
+    'bootstrap'    => [
+        'modules\tosee\Bootstrap',
+        'modules\users\Bootstrap',
+
+    ],
+];

@@ -21,7 +21,7 @@ use yii\web\NotFoundHttpException;
 
 class ModeratorController extends Controller
 {
-    public $layout = "@templates/main/backend/layouts/main";
+    public $layout = "@current_template/layouts/main";
 
     /**
      * @inheritdoc

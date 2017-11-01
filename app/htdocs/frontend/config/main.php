@@ -7,17 +7,7 @@ $params = array_merge(
 );
 
 
-switch ( $_SERVER[ 'SERVER_NAME' ] ) {
-    case  TOSEE_DEV:
-    case  TOSEE_PROD:
-        $domain_params = require "main-tosee.php";
-        break;
-    case PROBANK_DEV:
-    case PROBANK_PROD :
-        $domain_params = require "main-probank.php";
-        break;
-    
-}
+
 $config = [
     'id'       => 'app-frontend',
     'basePath' => dirname( __DIR__ ),
@@ -70,4 +60,5 @@ $config = [
     'params'     => $params,
 ];
 
-return yii\helpers\ArrayHelper::merge( $domain_params, $config );
+return  $config ;
+// return yii\helpers\ArrayHelper::merge( $domain_params, $config );

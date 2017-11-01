@@ -6,6 +6,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Connection;
 use yii\web\IdentityInterface;
 use dektrium\user\models\User as BaseUser;
 use yii\helpers\ArrayHelper;
@@ -28,8 +29,13 @@ use yii\helpers\ArrayHelper;
 //class User extends BaseUser implements IdentityInterface
 class User extends BaseUser implements IdentityInterface
 {
+    use UserDbConnection;
     const STATUS_DELETED = 0;
+    const STATUS_NOT_ACTIVE = 2;
     const STATUS_ACTIVE = 10;
+    
+   
+    
     /**
      * @inheritdoc
      */

@@ -3,7 +3,7 @@ namespace templates;
 
 use yii\base\BootstrapInterface;
 
-class BootstrapBAckend implements BootstrapInterface
+class BootstrapBackend implements BootstrapInterface
 {
     /**
      * @inheritdoc
@@ -12,6 +12,8 @@ class BootstrapBAckend implements BootstrapInterface
     {
         
         \Yii::setAlias('@current_template', __DIR__ . "/backend/main" );
-        
+    
+        require_once "backend/main/BackendAsset.php";
+    
     }
 }

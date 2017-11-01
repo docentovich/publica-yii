@@ -21,7 +21,7 @@ use yii\filters\AccessControl;
  */
 class AuthorController extends Controller
 {
-    public $layout = "@templates/main/backend/layouts/main";
+    public $layout = "@current_template/layouts/main";
 
     /**
      * @inheritdoc
