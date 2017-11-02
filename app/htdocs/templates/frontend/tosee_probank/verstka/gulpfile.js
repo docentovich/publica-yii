@@ -2,6 +2,7 @@
 
 const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
+const browserSyncCore = require('browser-sync');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const sourcemaps = require('gulp-sourcemaps');
@@ -31,120 +32,245 @@ const replace = require('gulp-replace');
 const print = require('gulp-print');
 const spritesmith = require('gulp.spritesmith-multi');
 const debug = require('gulp-debug');
+const functions = require('./functions');
 var postcss = require('gulp-postcss');
-// var phantomjssmith = require('phantomjssmith');
 var sprites = ['sprite', 'logos', 'tosee'];
-/*
- gulp.task('default', ['browser-sync', 'libs', 'watch'], function(){
 
- });
- */
+var projects = [
+  {name: 'tosee', scss: "main-tosee"},
+  {name: 'probank', scss: "main-probank"}
+];
 
-gulp.task('default', ['compile', 'watch', 'browser-sync'], function () {
+const runMultiTask = functions.runMultiTask({projects: projects});
 
+
+gulp.task('default', ['browser-sync', 'compile', 'watch'], function () {
+});
+gulp.task('compile', ['sprite', 'scss', 'js', 'jadeBlocks', 'copyLibs', 'copyImages'], function () {
 });
 
-gulp.task('compile', ['sprite', 'scss', 'js', 'jadeBlocks'], function () {
-
+//-----WATCH-------
+gulp.task('watch', function () {
+  gulp.watch('images/{' + sprites.join(',') + '}/*.{jpg,png,svg,gif}', {cwd: 'develop'}, ['sprite']);
+  gulp.watch('**/*.scss', {cwd: 'develop'}, ['scss']);
+  gulp.watch(
+      ['**/*.js', '!js/main.js'],
+      {cwd: 'develop'},
+      ['js', runMultiTask({
+        fn: function (row, i, reestr) {
+          reestr["bs_" + row.name].reload;
+        }
+      })]
+  );
+  gulp.watch(
+      ['jade/template/**/*.jade', 'blocks/**/*.jade'],
+      {cwd: 'develop'},
+      ['jadeBlocks', runMultiTask({
+        fn: function (row, i, reestr) {
+          reestr["bs_" + row.name].reload;
+        }
+      })]
+  );
+  gulp.watch(
+      ['jade/**/*.jade', '!jade/template/**/*.jade'],
+      {cwd: 'develop'},
+      ['jade', runMultiTask({
+        fn: function (row, i, reestr) {
+          reestr["bs_" + row.name].reload;
+        }
+      })]
+  );
 });
 
 
 gulp.task('browser-sync', function () {
-  browserSync.init({
-    server: {
-      baseDir: "./develop"
-    },
-    port: 8000
+
+  return runMultiTask({
+
+    fn: function (row, i, reestr) {
+
+      reestr["bs_" + row.name] = browserSyncCore.create();
+
+      reestr["bs_" + row.name].init({
+        server: {
+          baseDir: "./app/" + row.name
+        },
+        port: 8000 + i,
+        ui: {
+          port: 3001 + i
+        }
+      });
+
+    }
   });
+
 });
 
 
-gulp.task('browser-sync-dist', function () {
-  browserSync.init({
-    server: {
-      baseDir: "./dist"
-    },
-    port: 8000
-  });
+//-----copyLibs-------
+gulp.task('copyLibs', function (callback) {
+
+  return runMultiTask({
+        cb: callback,
+        fn: function (row) {
+
+          return gulp.src("./develop/libs/**/*", {base: "develop"})
+              .pipe(gulp.dest('./app/' + row.name))
+
+        }
+      }
+  );
 });
 
+//-----copyImages-------
+gulp.task('copyImages', function (callback) {
+
+  return runMultiTask({
+        cb: callback,
+        fn: function (row) {
+
+          return gulp.src("./develop/images/**/*", {base: "develop"})
+              .pipe(gulp.dest('./app/' + row.name ))
+
+        }
+      }
+  );
 
 
+});
 
 //-----JADE-------
-gulp.task('jade', function () {
-  return gulp.src(["./develop/jade/**/*.jade", "!./develop/jade/template/**/*", "!./develop/jade/includes/**/*", "!./develop/jade/includes.jade"])
-  // .pipe(changed('develop', {extension: '.html'}))
-      .pipe(print())
-      .pipe(plumber())
-      .pipe(jadeGlobbing({
-        'modules': 'src/jade/modules/**/*.jade'
-      }))
-      .pipe(jade({
-        pretty: '  ',
-      }))
+gulp.task('jade', function (callback) {
 
-      .pipe(gulp.dest('./develop'))
+  return runMultiTask({
+        cb: callback,
+        fn: function (row) {
+
+          return gulp.src([
+            "./develop/jade/pages/**/*.jade",
+            "!./develop/jade/pages/**/_*.jade"
+          ])
+              .pipe(print())
+              .pipe(plumber())
+              .pipe(jadeGlobbing({
+                'modules': 'src/jade/modules/**/*.jade'
+              }))
+              .pipe(jade({
+                pretty: '  ',
+              }))
+              .pipe(rename(function (path) {
+
+                if(path.basename.substring(0,1) === "-")
+                {
+                  path.basename = path.basename.replace("-"+row.name+"_", "");
+                }
+
+                if(path.basename.substring(0,1) === "-"){
+                  path.basename = path.basename = "~~" + path.basename;
+                }
+
+              }))
+
+              .pipe(gulp.dest('./app/' + row.name))
+
+        }
+      }
+  );
+
+
 });
 
-gulp.task('jadeBlocks', function () {
-  return gulp.src(["./develop/jade/**/*.jade", "!./develop/jade/template/**/*", "!./develop/jade/includes/**/*", "!./develop/jade/includes.jade"])
-      .pipe(plumber())
-      .pipe(jadeGlobbing({
-        'modules': './develop/widgets/**/*.jade'
-      }))
-      .pipe(print())
-      .pipe(jade({
-        pretty: '  ',
-      }))
-      .pipe(gulp.dest('./develop'))
+gulp.task('jadeBlocks', function (callback) {
+
+  return runMultiTask({
+
+    cb: callback,
+    fn: function (row) {
+
+      return gulp.src([
+        "./develop/jade/pages/**/*.jade",
+        "!./develop/jade/pages/**/_*.jade",
+      ])
+          .pipe(plumber())
+          .pipe(jadeGlobbing({
+            'modules': './develop/widgets/**/*.jade'
+          }))
+          .pipe(print())
+          .pipe(jade({
+            pretty: '  ',
+          }))
+          .pipe(gulp.dest('./app/' + row.name))
+
+    }
+  });
+
 });
 
 
 //-----SCSS-------
-gulp.task('scss:main', function () {
-  return gulp.src("./develop/scss/main.scss")
-      .pipe(plumber())
-      .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(sassGlob())
-      .pipe(print())
-      .pipe(sass.sync({
-        errLogToConsole: true
-      }))
-      .pipe(autoprefixer({
-        browsers: ['last 2 version', '> 2%', 'firefox 15', 'safari 5', 'ie 6', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
-      }))
-      .pipe(sourcemaps.write("."))
-      .pipe(gulp.dest('./develop/css'))
-      .pipe(browserSync.stream());
+gulp.task('scss:main', function (callback) {
+
+  return runMultiTask({
+
+    cb: callback,
+    fn: function (row, i, reestr) {
+
+      return gulp.src("./develop/scss/" + row.scss + ".scss")
+          .pipe(plumber())
+          .pipe(sourcemaps.init({loadMaps: true}))
+          .pipe(sassGlob())
+          .pipe(print())
+          .pipe(sass.sync({
+            errLogToConsole: true
+          }))
+          .pipe(autoprefixer({
+            browsers: ['last 2 version', '> 2%', 'firefox 15', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
+          }))
+          .pipe(sourcemaps.write("."))
+          .pipe(rename({
+            basename: "main"
+          }))
+          .pipe(gulp.dest('./app/' + row.name + '/css'))
+          .pipe(reestr["bs_" + row.name].stream())
+          .pipe(reestr["bs_" + row.name].stream());
+
+    }
+  });
 
 });
 
-gulp.task('scss:widgets', function () {
+gulp.task('scss:widgets', function (callback) {
 
-  return gulp.src("./develop/widgets/**/*.scss")
-      .pipe(plumber())
-      .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(sassGlob())
-      .pipe(print())
-      .pipe(sass.sync({
-        errLogToConsole: true
-      }))
-      .pipe(autoprefixer({
-        browsers: ['last 2 version', '> 2%', 'firefox 15', 'safari 5', 'ie 6', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
-      }))
-      .pipe(sourcemaps.write("."))
-      .pipe(rename({dirname:''}))
-      .pipe(  minifyCss() )
-      .pipe(gulp.dest("./develop/css"))
+  return runMultiTask({
+
+    cb: callback,
+    fn: function (row) {
+
+      return gulp.src("./develop/widgets/**/*.scss")
+          .pipe(plumber())
+          .pipe(sourcemaps.init({loadMaps: true}))
+          .pipe(sassGlob())
+          .pipe(print())
+          .pipe(sass.sync({
+            errLogToConsole: true
+          }))
+          .pipe(autoprefixer({
+            browsers: ['last 2 version', '> 2%', 'firefox 15', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
+          }))
+          .pipe(sourcemaps.write("."))
+          .pipe(rename({dirname: ''}))
+          .pipe(minifyCss())
+          .pipe(gulp.dest("./app/" + row.name + "/css"))
+    }
+
+  });
 
 });
 
 
 gulp.task('scss', function (callback) {
-  return runSequence( [ 'scss:main','scss:widgets' ], callback);
+  return runSequence(['scss:main', 'scss:widgets'], callback);
 });
-
 
 
 //-----JS-------
@@ -153,71 +279,76 @@ gulp.task('del:js', function () {
 });
 
 
-gulp.task('js:main', ['del:js'], function () {
+gulp.task('js:main', ['del:js'], function (callback) {
 
-  return gulp.src("./develop/templates/template.js")
-      .pipe(plumber())
-      .pipe(include())
-      .pipe(print())
-      .on('error', console.log)
-      .pipe(concat("main.js"))
-      .pipe(gulp.dest("./develop/js"));
+  return runMultiTask({
+
+    cb: callback,
+    fn: function (row) {
+      return gulp.src("./develop/templates/template.js")
+          .pipe(plumber())
+          .pipe(include())
+          .pipe(print())
+          .on('error', console.log)
+          .pipe(concat("main.js"))
+          .pipe(gulp.dest("./app/" + row.name + "/js"));
+    }
+
+  });
 
 });
 
-gulp.task('js:widgets', function () {
+gulp.task('js:widgets', function (callback) {
 
-  return gulp.src("./develop/widgets/**/*.js")
-      .pipe(plumber())
-      .pipe(print())
-      .pipe(rename({dirname:''}))
-      // .pipe( uglify() )
-      .pipe(gulp.dest("./develop/js"))
+  return runMultiTask({
+
+    cb: callback,
+    fn: function (row) {
+      return gulp.src("./develop/widgets/**/*.js")
+          .pipe(plumber())
+          .pipe(print())
+          .pipe(rename({dirname: ''}))
+          // .pipe( uglify() )
+          .pipe(gulp.dest("./app/" + row.name + "/js"))
+    }
+
+  });
 
 });
 
 gulp.task('js', ['del:js'], function (callback) {
-  return runSequence( [ 'js:main','js:widgets' ], callback);
+  return runSequence(['js:main', 'js:widgets'], callback);
 });
 
 
 //-----SPRITE-------
-gulp.task('sprite', function generateSpritesheets() {
-  // for(var i in sprites){
+gulp.task('sprite', function (callback) {
+  return runMultiTask({
 
-  //png sptite
-  // var sprite = sprites[i];
-  var spriteData = gulp.src('./develop/images/{' + sprites.join(',') + '}/*.png')
-      .pipe(print())
-      .pipe(spritesmith({
-            spritesmith: function (options) {
-              options.imgPath = '../images/' + options.imgName;
-              options.padding = 1;
-              // options.algorithm  = 'top-down';
-              // options.engine = "phantomjssmith";
-            }
-          }
-          // {
-          //   imgName: '.png',
-          //   cssName: '.scss'
-          // }
-      ));
+    cb: callback,
+    fn: function (row) {
 
-  spriteData.img.pipe(gulp.dest('./develop/images'));
-  spriteData.css.pipe(gulp.dest('./develop/css'));
-  //-png sptite
+      var spriteData = gulp.src('./develop/images/{' + sprites.join(',') + '}/*.png')
+          .pipe(print())
+          .pipe(spritesmith({
+                spritesmith: function (options) {
+                  options.imgPath = '../images/' + options.imgName;
+                  options.padding = 1;
+                  // options.algorithm  = 'top-down';
+                  // options.engine = "phantomjssmith";
+                }
+              }
+              // {
+              //   imgName: '.png',
+              //   cssName: '.scss'
+              // }
+          ));
 
-  // }
-});
+      spriteData.img.pipe(gulp.dest('./app/' + row.name + '/images'));
+      spriteData.css.pipe(gulp.dest('./app/' + row.name + '/css'));
+    }
 
-
-//-----WATCH-------
-gulp.task('watch', function () {
-  gulp.watch('images/{' + sprites.join(',') + '}/*.{jpg,png,svg,gif}', {cwd: 'develop'}, ['sprite']);
-  gulp.watch('**/*.scss', {cwd: 'develop'}, ['scss']);
-  gulp.watch(['**/*.js', '!js/main.js'], {cwd: 'develop'}, ['js', browserSync.reload]);
-  gulp.watch(['jade/template/**/*.jade', 'blocks/**/*.jade'], {cwd: 'develop'}, ['jadeBlocks', browserSync.reload]);
-  gulp.watch(['jade/**/*.jade', '!jade/template/**/*.jade'], {cwd: 'develop'}, ['jade', browserSync.reload]);
+  });
 });
 
 
@@ -227,20 +358,11 @@ gulp.task('watch', function () {
 // ====TO YII====
 
 gulp.task('build:yii:clean', function () {
-  // return del.sync(['../../../../../frontend/web/assets/*'], {force: true});
 });
-
-//copy dist fonts
-// gulp.task('build:copyDistFonts',  function () {  
-//   return gulp.src(['develop/fonts/**/{*.eot,*.svg,*.ttf,*.eot,*.otf,*.woff2,*.woff}']
-//     )
-//   .pipe(print())
-//   .pipe(gulp.dest('dist/fonts'));
-// });
 
 
 //minifi img
-gulp.task('build:yii:minifiImg', function () {
+gulp.task('build:yii:minifiImg', function (callback) {
   return;
   return gulp.src(['develop/images/**/{*.jpg,*.png,*.jpeg,*.gif,*.svg}'])
       .pipe(imagemin({zopflipng: false}))
@@ -248,20 +370,29 @@ gulp.task('build:yii:minifiImg', function () {
       .pipe(gulp.dest('../assets/images'));
 });
 
-gulp.task('build:yii:minifiJsCss', function () {
+gulp.task('build:yii:minifiJsCss', function (callback) {
 
-  return gulp.src('./develop/index.html')
-      .pipe(print())
-      .pipe(useref({searchPath: 'develop', base: 'develop'}))
-      .pipe(debug())
-      .pipe(gulpif('*.js', uglify()
-          .on('error', function (err) {
-            gutil.log(gutil.colors.red('[Error]'), err.toString());
-            this.emit('end');
-          })
-      ))
-      .pipe(gulpif('*.css', minifyCss()))
-      .pipe(gulp.dest('../assets'));
+  return runMultiTask({
+
+    cb: callback,
+    fn: function (row) {
+
+      return gulp.src('./app/' + row.name + '/index.html')
+          .pipe(print())
+          .pipe(useref({searchPath: './app/' + row.name, base: './app/' + row.name}))
+          .pipe(debug())
+          .pipe(gulpif('*.js', uglify()
+              .on('error', function (err) {
+                gutil.log(gutil.colors.red('[Error]'), err.toString());
+                this.emit('end');
+              })
+          ))
+          .pipe(gulpif('*.css', minifyCss()))
+          .pipe(gulp.dest('../assets'));
+    }
+
+  });
+
 });
 
 gulp.task('build:yii:_dist', ['build:yii:clean'], function (callback) {
@@ -332,81 +463,81 @@ gulp.task('build:yii', ['build:yii:_dist'], function (callback) {
 //------------=====build======--------------------
 //------------=====build======--------------------
 
-var app = "develop";
-
-// ====TO DIST====
-
-//cleandist
-gulp.task("build:clean", ["jadeBlocks"], function () {
-  return del.sync(["./dist"]);
-});
-
-
-//copydist
-gulp.task("build:copyDist", function () {
-
-  return gulp.src([
-    app + "/*.php",
-    app + "/.htaccess",
-    app + "/favicon.png",
-  ])
-      .pipe(print())
-      .pipe(gulp.dest("dist"));
-
-});
-
-
-//copylibs
-gulp.task("build:copyLibs", function () {
-
-  return gulp.src([
-    app + "/libs/**"])
-      .pipe(print())
-      .pipe(gulp.dest("dist/libs"));
-
-});
-
-
-//copy dist fonts
-gulp.task("build:copyDistFonts", function () {
-
-  return gulp.src([app + "/fonts/**/{*.eot,*.svg,*.ttf,*.eot,*.otf,*.woff2,*.woff}"])
-      .pipe(print())
-      .pipe(gulp.dest("dist/fonts"));
-
-});
-
-
-//minifi img
-gulp.task("build:minifiImg", function () {
-
-  return gulp.src([app + "/images/**/{*.jpg,*.png,*.jpeg,*.gif,*.svg}"])
-      .pipe(print())
-      .pipe(imagemin({zopflipng: false}))
-      .on("error", console.log)
-      .pipe(gulp.dest("dist/images"));
-
-});
-
-
-gulp.task("build:minifiJsCss", function () {
-
-  return gulp.src(app + "/**/*.html")
-      .pipe(useref({searchPath: app, base: app}))
-      .pipe(print())
-      .pipe(gulpif("*.js", uglify().on("error", function (err) {
-        gutil.log(gutil.colors.red("[Error]"), err.toString());
-        this.emit("end");
-      })))
-      .pipe(gulpif("*.css", minifyCss()))
-      .pipe(gulp.dest("dist"));
-
-});
-
-
-gulp.task("build:dist", ["build:clean"], function (callback) {
-
-  return runSequence([/*"build:copyDist",*/ "build:copyLibs", "build:copyDistFonts", "build:minifiImg", "build:minifiJsCss"], callback);
-
-});
+// var app = "develop";
+//
+// // ====TO DIST====
+//
+// //cleandist
+// gulp.task("build:clean", ["jadeBlocks"], function () {
+//   return del.sync(["./dist"]);
+// });
+//
+//
+// //copydist
+// gulp.task("build:copyDist", function () {
+//
+//   return gulp.src([
+//     app + "/*.php",
+//     app + "/.htaccess",
+//     app + "/favicon.png",
+//   ])
+//       .pipe(print())
+//       .pipe(gulp.dest("dist"));
+//
+// });
+//
+//
+// //copylibs
+// gulp.task("build:copyLibs", function () {
+//
+//   return gulp.src([
+//     app + "/libs/**"])
+//       .pipe(print())
+//       .pipe(gulp.dest("dist/libs"));
+//
+// });
+//
+//
+// //copy dist fonts
+// gulp.task("build:copyDistFonts", function () {
+//
+//   return gulp.src([app + "/fonts/**/{*.eot,*.svg,*.ttf,*.eot,*.otf,*.woff2,*.woff}"])
+//       .pipe(print())
+//       .pipe(gulp.dest("dist/fonts"));
+//
+// });
+//
+//
+// //minifi img
+// gulp.task("build:minifiImg", function () {
+//
+//   return gulp.src([app + "/images/**/{*.jpg,*.png,*.jpeg,*.gif,*.svg}"])
+//       .pipe(print())
+//       .pipe(imagemin({zopflipng: false}))
+//       .on("error", console.log)
+//       .pipe(gulp.dest("dist/images"));
+//
+// });
+//
+//
+// gulp.task("build:minifiJsCss", function () {
+//
+//   return gulp.src(app + "/**/*.html")
+//       .pipe(useref({searchPath: app, base: app}))
+//       .pipe(print())
+//       .pipe(gulpif("*.js", uglify().on("error", function (err) {
+//         gutil.log(gutil.colors.red("[Error]"), err.toString());
+//         this.emit("end");
+//       })))
+//       .pipe(gulpif("*.css", minifyCss()))
+//       .pipe(gulp.dest("dist"));
+//
+// });
+//
+//
+// gulp.task("build:dist", ["build:clean"], function (callback) {
+//
+//   return runSequence([/*"build:copyDist",*/ "build:copyLibs", "build:copyDistFonts", "build:minifiImg", "build:minifiJsCss"], callback);
+//
+// });
 //===TO DIST====
