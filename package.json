@@ -18,9 +18,11 @@
   "homepage": "https://gitlab.com/publica/tosee#README",
   "devDependencies": {
     "browser-sync": "^2.18.13",
+    "deasync": "^0.1.10",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
+    "gulp-batch": "^1.0.5",
     "gulp-changed": "^3.1.0",
     "gulp-clean-css": "^3.9.0",
     "gulp-concat": "^2.6.1",

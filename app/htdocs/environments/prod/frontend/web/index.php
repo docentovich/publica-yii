@@ -3,6 +3,14 @@
 defined('YII_DEBUG') or define('YII_DEBUG', false);
 defined('YII_ENV') or define('YII_ENV', 'prod');
 
+define("TOSEE", 1);
+define("TOSEE_DEV", "");
+define("TOSEE_PROD", "tosee.shablonkin.shn-host.ru");
+
+define("PROBANK", 2);
+define("PROBANK_DEV", "");
+define("PROBANK_PROD", "probank.shablonkin.shn-host.ru");
+
 require(__DIR__ . '/../../vendor/autoload.php');
 require(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
 require(__DIR__ . '/../../common/config/bootstrap.php');

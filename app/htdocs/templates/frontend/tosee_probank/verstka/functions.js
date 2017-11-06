@@ -17,25 +17,29 @@ module.exports = {
       if (reestr['projects'] === undefined)
         reestr['projects'] = projects;
 
-      projects.forEach(function (item, i) {
 
-        // var promise = new Promise(function (resolve, reject) {
-         return closure(item, i, reestr);
 
-          // resolve();
-        // });
+      // projects.forEach(function (item, i) {
+      var sync = true;
+      var counter = 0;
+      for (var i in projects) {
 
-        // promise
-        //     .then(
-        //         function () {
-        //           return;
-        //         },
-        //         function (error) {
-        //           new Error(error);
-        //         }
-        //     );
+        var item = projects[i];
 
-      });
+        console.log(item);
+
+        new Promise(function(resolve, reject) {
+        closure(item, counter, reestr, resolve, reject);
+        }).then(function () {
+          sync = false;
+        });
+
+        if( dto.toSync === true )
+          while(sync) {require('deasync').sleep(100); }
+
+        counter++;
+      }
+      // });
 
       return ( cb !== undefined ) ? cb() : null;
 

@@ -1,6 +1,6 @@
 <?php
 
-$params[ 'project' ] = TOSEE;
+define("PROJECT", TOSEE);
 
 
 return [

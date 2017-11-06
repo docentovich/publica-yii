@@ -1,0 +1,22 @@
+//- include ../../widgets/**/*
+include ../../blocks/publica/**/*
+include ../../blocks/common/**/*
+include ../template/header_publica
+include ../template/footer
+
+- var alias = "m"
+doctype
+html(lang='ru')
+    +document-header-tosee
+    body.pageload.no-js
+        //- +header
+        +content-home
+            +e.projects-row
+                +b.project._shotme
+                    +e.logo
+                        +e.IMG(src="/images/logos/shotme.png").i
+                    +e.content
+                        +e.IMG(src="/images/fotografer.png").img
+                        +e.text Закажи  фотографа прямо сейчас!
+        +footer1
+        +footer-scripts

@@ -1,15 +1,10 @@
 include ../../widgets/**/*
-include ../../blocks/**/*
-include ../template/header
+include ../../blocks/tosee_probank/**/*
+include ../../blocks/common/**/*
+include ../template/header_tosee_probank
 include ../template/footer
-    
-- var alias = "m"
-doctype
-html(lang='ru')
-    +document-header-tosee
-    body.pageload.no-js
-        h1 Пробанк
-        +header
-        +content-home
-        +footer1
-        +footer-scripts
+include past/_header-loc
+include past/_footer-loc
++header-loc
+            +pagination(colp, page, 1)
+        +footer-loc

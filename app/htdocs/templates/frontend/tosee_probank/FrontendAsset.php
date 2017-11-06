@@ -15,7 +15,7 @@ class FrontendAsset extends AssetBundle
     ];
     public $js = [
         'js/vendor.js',
-        'js/main.js',
+        // 'js/main.js',
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $depends = [
@@ -24,8 +24,11 @@ class FrontendAsset extends AssetBundle
     
     public function registerAssetFiles( $view )
     {
-        $temp =  ( \Yii::$app->params['project'] === TOSEE ) ? "main-tosee.css" : "main-probank.css";
-        $this->css[] = "css/" . $temp;
+        $temp =  ( PROJECT === TOSEE ) ? "tosee" : "probank";
+        
+        $this->css[] = "css/" . $temp . ".css";
+        $this->js[] = "js/" . $temp . ".js";
+        
         parent::registerAssetFiles( $view );
     }
 }

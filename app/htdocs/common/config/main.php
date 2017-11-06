@@ -57,7 +57,6 @@ $config = [
             'class' => 'dektrium\user\Module',
         ],
     ],
-    'params'     => $params,
 
 ];
 return yii\helpers\ArrayHelper::merge( $domain_params, $config );

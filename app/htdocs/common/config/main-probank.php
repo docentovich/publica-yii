@@ -1,6 +1,6 @@
 <?php
 
-$params[ 'project' ] = PROBANK;
+define("PROJECT", PROBANK);
 
 
 return [

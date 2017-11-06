@@ -1,4 +1,4 @@
-'use strict'
+-'use strict'
 
 const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
@@ -32,13 +32,43 @@ const replace = require('gulp-replace');
 const print = require('gulp-print');
 const spritesmith = require('gulp.spritesmith-multi');
 const debug = require('gulp-debug');
+const data = require('gulp-data');
+const batch = require('gulp-batch');
 const functions = require('./functions');
 var postcss = require('gulp-postcss');
-var sprites = ['sprite', 'logos', 'tosee'];
 
 var projects = [
-    {name: 'tosee', scss: "main-tosee"},
-    {name: 'probank', scss: "main-probank"}
+  {
+    name: 'publica',
+    scss: "main-publica",
+    js  : "publica_template",
+    images : "publica",
+    sprites: ['sprite', 'logos', 'tosee'],
+    datas: {"logo": "tosee.png"}
+  },{
+    name: 'tosee',
+    scss: "main-tosee",
+    js  : "tosee_template",
+    images : "tosee_probank",
+    sprites: ['sprite', 'logos', 'tosee'],
+    datas: {"logo": "tosee.png"}
+  },
+  {
+    name: 'probank',
+    scss: "main-probank",
+    js  : "probank_template",
+    images : "tosee_probank",
+    sprites: [],
+    datas: {"logo": "probank.png"}
+  },
+  {
+    name: 'shotme',
+    scss: "main-shotme",
+    js  : "probank_template",
+    images : "shotme",
+    sprites: [],
+    datas: {"logo": "probank.png"}
+  }
 ];
 
 const runMultiTask = functions.runMultiTask({projects: projects});
@@ -51,58 +81,70 @@ gulp.task('compile', ['sprite', 'scss', 'js', 'jadeBlocks', 'copyLibs', 'copyIma
 
 //-----WATCH-------
 gulp.task('watch', function () {
-    gulp.watch('images/{' + sprites.join(',') + '}/*.{jpg,png,svg,gif}', {cwd: 'develop'}, ['sprite']);
-    gulp.watch('**/*.scss', {cwd: 'develop'}, ['scss']);
-    gulp.watch(
-        ['**/*.js', '!js/main.js'],
-        {cwd: 'develop'},
-        ['js', runMultiTask({
-            fn: function (row, i, reestr) {
+  // gulp.watch('images/{' + sprites.join(',') + '}/*.{jpg,png,svg,gif}', {cwd: 'develop'}, ['sprite']);
+  gulp.watch('/develop/images/*.*', {cwd: 'develop'}, ['copyImages']);
+  gulp.watch('**/*.scss', {cwd: 'develop'}, ['scss']);
+  gulp.watch(
+      ['**/*.js', '!js/main.js'],
+      {cwd: 'develop'},
+      ['js', batch(
+          function () {
+            runMultiTask({
+              fn: function (row, i, reestr) {
                 reestr["bs_" + row.name].reload;
-            }
-        })]
-    );
-    gulp.watch(
-        ['jade/template/**/*.jade', 'blocks/**/*.jade'],
-        {cwd: 'develop'},
-        ['jadeBlocks', runMultiTask({
-            fn: function (row, i, reestr) {
+              }
+            })
+          })
+      ]);
+
+  gulp.watch(
+      ['jade/template/**/*.jade', 'blocks/**/*.jade'],
+      {cwd: 'develop'},
+      ['jadeBlocks', batch(
+          function () {
+            runMultiTask({
+              fn: function (row, i, reestr) {
                 reestr["bs_" + row.name].reload;
-            }
-        })]
-    );
-    gulp.watch(
-        ['jade/**/*.jade', '!jade/template/**/*.jade'],
-        {cwd: 'develop'},
-        ['jade', runMultiTask({
-            fn: function (row, i, reestr) {
+              }
+            })
+          })
+      ]);
+  gulp.watch(
+      ['jade/**/*.jade', '!jade/template/**/*.jade'],
+      {cwd: 'develop'},
+      ['jade', batch(
+          function () {
+            runMultiTask({
+              fn: function (row, i, reestr) {
                 reestr["bs_" + row.name].reload;
-            }
-        })]
-    );
+              }
+            })
+          })
+      ]);
+
 });
 
 
 gulp.task('browser-sync', function () {
 
-    return runMultiTask({
+  return runMultiTask({
 
-        fn: function (row, i, reestr) {
+    fn: function (row, i, reestr) {
 
-            reestr["bs_" + row.name] = browserSyncCore.create();
+      reestr["bs_" + row.name] = browserSyncCore.create();
 
-            reestr["bs_" + row.name].init({
-                server: {
-                    baseDir: "./app/" + row.name
-                },
-                port: 8000 + i,
-                ui: {
-                    port: 3001 + i
-                }
-            });
-
+      reestr["bs_" + row.name].init({
+        server: {
+          baseDir: "./app/" + row.name
+        },
+        port: 8000 + i,
+        ui: {
+          port: 3001 + i
         }
-    });
+      });
+
+    }
+  });
 
 });
 
@@ -110,269 +152,285 @@ gulp.task('browser-sync', function () {
 //-----copyLibs-------
 gulp.task('copyLibs', function (callback) {
 
-    return runMultiTask({
-            cb: callback,
-            fn: function (row) {
+  return runMultiTask({
+        cb: callback,
+        fn: function (row) {
 
-                return gulp.src("./develop/libs/**/*", {base: "develop"})
-                    .pipe(gulp.dest('./app/' + row.name))
+          return gulp.src("./develop/libs/**/*", {base: "develop"})
+              .pipe(gulp.dest('./app/' + row.name))
 
-            }
         }
-    );
+      }
+  );
 });
 
 //-----copyImages-------
-gulp.task('copyImages', function (callback) {
-
-    return runMultiTask({
-            cb: callback,
-            fn: function (row) {
-
-                return gulp.src("./develop/images/**/*", {base: "develop"})
-                    .pipe(gulp.dest('./app/' + row.name))
-
-            }
+gulp.task('copyImages:common',  function (callback) {
+  return runMultiTask({
+        cb: callback,
+        fn: function (row) {
+          return gulp.src([
+            "./develop/images/common/**/*"], {base: "develop/images/common"})
+              .pipe(gulp.dest('./app/' + row.name + "/images"))
         }
-    );
-
-
+      }
+  );
 });
+
+gulp.task('copyImages:project',  function (callback) {
+  return runMultiTask({
+        cb: callback,
+        fn: function (row) {
+          return gulp.src([
+            "./develop/images/" + row.images + "/**/*"], {base: "develop/images/" + row.images})
+              .pipe(gulp.dest('./app/' + row.name + "/images"))
+        }
+      }
+  );
+});
+
+
+gulp.task('copyImages',  function (callback) {
+  return runSequence(['copyImages:common', 'copyImages:project'], callback);
+});
+
+
 
 //-----JADE-------
 gulp.task('jade', function (callback) {
 
-    return runMultiTask({
-            cb: callback,
-            fn: function (row) {
+  return runMultiTask({
+        cb: callback,
+        fn: function (row) {
 
-                return gulp.src([
-                    "./develop/jade/pages/**/*.jade",
-                    "!./develop/jade/pages/**/_*.jade"
-                ])
-                    .pipe(print())
-                    .pipe(plumber())
-                    .pipe(jadeGlobbing({
-                        'modules': 'src/jade/modules/**/*.jade'
-                    }))
-                    .pipe(jade({
-                        pretty: '  ',
-                    }))
-                    .pipe(print())
-                    .pipe(rename(function (path) {
-                        console.log(path.basename);
-
-
-                        if (path.basename.substring(0, 1) === "-") {
-                            path.basename = path.basename.replace("-" + row.name + "_", "");
-                        }
-
-                        if (path.basename.substring(0, 1) === "-") {
-                            path.basename = path.basename = "~~" + path.basename;
-                        }
-                        console.log(path.basename);
+          return gulp.src([
+            "./develop/jade/pages/**/*.jade",
+            "!./develop/jade/pages/**/_*.jade"
+          ])
+              .pipe(print())
+              .pipe(plumber())
+              .pipe(jadeGlobbing({
+                'modules': 'src/jade/modules/**/*.jade'
+              }))
+              .pipe(jade({
+                pretty: '  ',
+              }))
+              .pipe(print())
+              .pipe(rename(function (path) {
+                console.log(path.basename);
 
 
-                    }))
+                if (path.basename.substring(0, 1) === "-") {
+                  path.basename = path.basename.replace("-" + row.name + "_", "");
+                }
 
-                    .pipe(gulp.dest('./app/' + row.name))
+                if (path.basename.substring(0, 1) === "-") {
+                  path.basename = path.basename = "~~" + path.basename;
+                }
+                console.log(path.basename);
 
-            }
+
+              }))
+
+              .pipe(gulp.dest('./app/' + row.name))
+
         }
-    );
+      }
+  );
 
 
 });
 
 gulp.task('jadeBlocks', function (callback) {
 
-    return runMultiTask({
+  return runMultiTask({
 
-        cb: callback,
-        fn: function (row) {
+    cb: callback,
+    fn: function (row) {
 
-            return gulp.src([
-                "./develop/jade/pages/**/*.jade",
-                "!./develop/jade/pages/**/_*.jade",
-            ])
-                .pipe(plumber())
-                .pipe(jadeGlobbing({
-                    'modules': './develop/widgets/**/*.jade'
-                }))
-                .pipe(print())
-                .pipe(rename(function (path) {
-                    console.log(path.basename);
-
-
-                    if (path.basename.substring(0, 1) === "-") {
-                        path.basename = path.basename.replace("-" + row.name + "_", "");
-                    }
-
-                    if (path.basename.substring(0, 1) === "-") {
-                        path.basename = path.basename = "~~" + path.basename;
-                    }
-                    console.log(path.basename);
+      return gulp.src([
+        "./develop/jade/pages/**/*.jade",
+        "!./develop/jade/pages/**/_*.jade",
+      ])
+          .pipe(plumber())
+          .pipe(jadeGlobbing({
+            'modules': './develop/widgets/**/*.jade'
+          }))
+          .pipe(data(function (file) {
+            return row.datas;
+          }))
+          .pipe(print())
+          .pipe(rename(function (path) {
+            console.log(path.basename);
 
 
-                }))
-                .pipe(jade({
-                    pretty: '  ',
-                }))
-                .pipe(gulp.dest('./app/' + row.name))
+            if (path.basename.substring(0, 1) === "-") {
+              path.basename = path.basename.replace("-" + row.name + "_", "");
+            }
 
-        }
-    });
+            if (path.basename.substring(0, 1) === "-") {
+              path.basename = path.basename = "~~" + path.basename;
+            }
+            console.log(path.basename);
+
+
+          }))
+          .pipe(jade({
+            pretty: '  ',
+          }))
+          .pipe(gulp.dest('./app/' + row.name))
+
+    }
+  });
 
 });
-
-
 
 
 //-----SCSS-------
 gulp.task('scss:main', function (callback) {
 
-    return runMultiTask({
+  return runMultiTask({
 
-        cb: callback,
-        fn: function (row, i, reestr) {
+    cb: callback,
+    fn: function (row, i, reestr) {
 
-            return gulp.src("./develop/scss/" + row.scss + ".scss")
-                .pipe(plumber())
+      return gulp.src("./develop/scss/" + row.scss + ".scss")
+          .pipe(plumber())
 
-                .pipe(sourcemaps.init({loadMaps: true}))
-                .pipe(sassGlob())
+          .pipe(sourcemaps.init({loadMaps: true}))
+          .pipe(sassGlob())
 
-                .pipe(print())
-                .pipe(sass.sync({
-                    errLogToConsole: true
-                }))
-                .pipe(autoprefixer({
-                    browsers: ['last 2 version', '> 2%', 'firefox 15', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
-                }))
-                .pipe(sourcemaps.write("."))
-                .pipe(rename({
-                    basename: "main"
-                }))
+          .pipe(print())
+          .pipe(sass.sync({
+            errLogToConsole: true
+          }))
+          .pipe(autoprefixer({
+            browsers: ['last 2 version', '> 2%', 'firefox 15', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
+          }))
+          .pipe(sourcemaps.write("."))
+          .pipe(rename({
+            basename: "main"
+          }))
 
-                .pipe(gulp.dest('./app/' + row.name + '/css'))
-                .pipe(reestr["bs_" + row.name].stream())
-                .pipe(reestr["bs_" + row.name].stream());
+          .pipe(gulp.dest('./app/' + row.name + '/css'))
+          .pipe(reestr["bs_" + row.name].stream())
+          .pipe(reestr["bs_" + row.name].stream());
 
-        }
-    });
+    }
+  });
 
 });
 
 gulp.task('scss:widgets', function (callback) {
 
-    return runMultiTask({
+  return runMultiTask({
 
-        cb: callback,
-        fn: function (row) {
+    cb: callback,
+    fn: function (row) {
 
-            return gulp.src("./develop/widgets/**/*.scss")
-                .pipe(plumber())
-                .pipe(sourcemaps.init({loadMaps: true}))
-                .pipe(sassGlob())
-                .pipe(print())
-                .pipe(sass.sync({
-                    errLogToConsole: true
-                }))
-                .pipe(autoprefixer({
-                    browsers: ['last 2 version', '> 2%', 'firefox 15', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
-                }))
-                .pipe(sourcemaps.write("."))
-                .pipe(rename({dirname: ''}))
-                .pipe(minifyCss())
-                .pipe(gulp.dest("./app/" + row.name + "/css"))
-        }
+      return gulp.src("./develop/widgets/**/*.scss")
+          .pipe(plumber())
+          .pipe(sourcemaps.init({loadMaps: true}))
+          .pipe(sassGlob())
+          .pipe(print())
+          .pipe(sass.sync({
+            errLogToConsole: true
+          }))
+          .pipe(autoprefixer({
+            browsers: ['last 2 version', '> 2%', 'firefox 15', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
+          }))
+          .pipe(sourcemaps.write("."))
+          .pipe(rename({dirname: ''}))
+          .pipe(minifyCss())
+          .pipe(gulp.dest("./app/" + row.name + "/css"))
+    }
 
-    });
+  });
 
 });
 
 
 gulp.task('scss', function (callback) {
-    return runSequence(['scss:main', 'scss:widgets'], callback);
+  return runSequence(['scss:main', 'scss:widgets'], callback);
 });
 
 
 //-----JS-------
 gulp.task('del:js', function () {
-    return del.sync(['./develop/js/*.js']);
+  return del.sync(['./develop/js/*.js']);
 });
 
 
 gulp.task('js:main', ['del:js'], function (callback) {
 
-    return runMultiTask({
+  return runMultiTask({
 
-        cb: callback,
-        fn: function (row) {
-            return gulp.src("./develop/templates/template.js")
-                .pipe(plumber())
-                .pipe(include())
-                .pipe(print())
-                .on('error', console.log)
-                .pipe(concat("main.js"))
-                .pipe(gulp.dest("./app/" + row.name + "/js"));
-        }
+    cb: callback,
+    fn: function (row) {
+      return gulp.src("./develop/templates/" + row.js + ".js")
+          .pipe(plumber())
+          .pipe(include())
+          .pipe(print())
+          .on('error', console.log)
+          .pipe(concat("main.js"))
+          .pipe(gulp.dest("./app/" + row.name + "/js"));
+    }
 
-    });
+  });
 
 });
 
 gulp.task('js:widgets', function (callback) {
 
-    return runMultiTask({
+  return runMultiTask({
 
-        cb: callback,
-        fn: function (row) {
-            return gulp.src("./develop/widgets/**/*.js")
-                .pipe(plumber())
-                .pipe(print())
-                .pipe(rename({dirname: ''}))
-                // .pipe( uglify() )
-                .pipe(gulp.dest("./app/" + row.name + "/js"))
-        }
+    cb: callback,
+    fn: function (row) {
+      return gulp.src("./develop/widgets/**/*.js")
+          .pipe(plumber())
+          .pipe(print())
+          .pipe(rename({dirname: ''}))
+          // .pipe( uglify() )
+          .pipe(gulp.dest("./app/" + row.name + "/js"))
+    }
 
-    });
+  });
 
 });
 
 gulp.task('js', ['del:js'], function (callback) {
-    return runSequence(['js:main', 'js:widgets'], callback);
+  return runSequence(['js:main', 'js:widgets'], callback);
 });
 
 
 //-----SPRITE-------
 gulp.task('sprite', function (callback) {
-    return runMultiTask({
+  return runMultiTask({
 
-        cb: callback,
-        fn: function (row) {
+    cb: callback,
+    fn: function (row) {
 
-            var spriteData = gulp.src('./develop/images/{' + sprites.join(',') + '}/*.png')
-                .pipe(print())
-                .pipe(spritesmith({
-                        spritesmith: function (options) {
-                            options.imgPath = '../images/' + options.imgName;
-                            options.padding = 1;
-                            // options.algorithm  = 'top-down';
-                            // options.engine = "phantomjssmith";
-                        }
-                    }
-                    // {
-                    //   imgName: '.png',
-                    //   cssName: '.scss'
-                    // }
-                ));
+      var spriteData = gulp.src('./develop/images/' + row.images + '/{' + row.sprites.join(',') + '}/*.png')
+          .pipe(print())
+          .pipe(spritesmith({
+                spritesmith: function (options) {
+                  options.imgPath = '../images/' + options.imgName;
+                  options.padding = 1;
+                  // options.algorithm  = 'top-down';
+                  // options.engine = "phantomjssmith";
+                }
+              }
+              // {
+              //   imgName: '.png',
+              //   cssName: '.scss'
+              // }
+          ));
 
-            spriteData.img.pipe(gulp.dest('./app/' + row.name + '/images'));
-            spriteData.css.pipe(gulp.dest('./app/' + row.name + '/css'));
-        }
+      spriteData.img.pipe(gulp.dest('./app/' + row.name + '/images'));
+      spriteData.css.pipe(gulp.dest('./app/' + row.name + '/css'));
+    }
 
-    });
+  });
 });
 
 
@@ -387,44 +445,53 @@ gulp.task('build:yii:clean', function () {
 
 //minifi img
 gulp.task('build:yii:minifiImg', function (callback) {
-    return;
-    return gulp.src(['develop/images/**/{*.jpg,*.png,*.jpeg,*.gif,*.svg}'])
-        .pipe(imagemin({zopflipng: false}))
-        .on('error', console.log)
-        .pipe(gulp.dest('../assets/images'));
+  return;
+  return gulp.src(['develop/images/**/{*.jpg,*.png,*.jpeg,*.gif,*.svg}'])
+      .pipe(imagemin({zopflipng: false}))
+      .on('error', console.log)
+      .pipe(gulp.dest('../assets/images'));
 });
 
 gulp.task('build:yii:minifiJsCss', function (callback) {
 
-    return runMultiTask({
+  return runMultiTask({
 
-        cb: callback,
-        fn: function (row) {
+    cb: callback,
+    fn: function (row,i,reestr,resolve, reject) {
 
-            return gulp.src('./app/' + row.name + '/index.html')
-                .pipe(print())
-                .pipe(useref({searchPath: './app/' + row.name, base: './app/' + row.name}))
-                .pipe(debug())
-                .pipe(gulpif('*.js', uglify()
-                    .on('error', function (err) {
-                        gutil.log(gutil.colors.red('[Error]'), err.toString());
-                        this.emit('end');
-                    })
-                ))
-                .pipe(gulpif('*.css', minifyCss()))
-                .pipe(gulp.dest('../assets'));
-        }
+      return gulp.src('./app/' + row.name + '/index.html')
 
-    });
+          .pipe(print())
+          .pipe(useref({searchPath: './app/' + row.name, base: './app/' + row.name}))
+          .pipe(debug())
+          .pipe(gulpif('*.js', uglify()
+              .on('error', function (err) {
+                gutil.log(gutil.colors.red('[Error]'), err.toString());
+                this.emit('end');
+              })
+          ))
+          .pipe(gulpif('*.css', minifyCss()))
+          .pipe(rename(function (path) {
+            console.log(path.dirname);
+            if(path.basename === "main")
+              path.basename = row.name;
+          }))
+          .on('error', reject)
+          .pipe(gulp.dest('../assets'))
+          .on('end', resolve)
+
+    }
+
+  });
 
 });
 
 gulp.task('build:yii:_dist', ['build:yii:clean'], function (callback) {
-    return runSequence(['build:yii:minifiJsCss'], callback);
+  return runSequence(['build:yii:minifiJsCss'], callback);
 });
 
 gulp.task('build:yii', ['build:yii:_dist'], function (callback) {
-    return runSequence(['build:yii:minifiImg'], callback);
+  return runSequence(['build:yii:minifiImg'], callback);
 });
 
 //===TO YII====

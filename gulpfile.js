@@ -9,7 +9,8 @@ const del            = require('del');
 
 //-----WATCH-------
 gulp.task('watch', ['del:assets'], function() {
-  gulp.watch(['./app/htdocs/**/*.css', './app/htdocs/**/*.js', '!./app/htdocs/frontend/web/assets/*', '!./app/htdocs/backend/web/assets/*', '!./app/htdocs/vendor/*'], ['del:assets']);
+  gulp.watch([
+      './app/htdocs/**/*.css', './app/htdocs/**/*.js', '!./app/htdocs/frontend/web/assets/*', '!./app/htdocs/backend/web/assets/*', '!./app/htdocs/vendor/*'], ['del:assets']);
 });
 
 //dal:assets
