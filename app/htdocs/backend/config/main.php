@@ -14,10 +14,17 @@ return [
     'bootstrap'    => [
         'log',
         \templates\BootstrapBackend::class,
+        'modules\probank\BackendBootstrap',
+        'modules\tosee\BackendBootstrap',
+
     ],
     'modules' => [
-        'project' => [
-            'isBackend' => TRUE,
+
+        'probank' => [
+            'class' => 'modules\probank\Module',
+        ],
+        'tosee'   => [
+            'class' => 'modules\tosee\Module',
         ],
         'user'  => [
             'class' => 'dektrium\user\Module',
@@ -25,9 +32,9 @@ return [
             //                'class' => 'dektrium\user\filters\BackendFilter',
             //                'controllers' => ['profile', 'recovery', 'settings']
             //            ],
-            
+
             'layout'        => '@current_template/layouts/main',
-            
+
             'controllerMap' => [
                 'security'     => [
                     'class'  => 'dektrium\user\controllers\SecurityController',

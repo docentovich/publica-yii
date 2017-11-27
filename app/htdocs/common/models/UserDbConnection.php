@@ -19,11 +19,11 @@ trait UserDbConnection
         } else {
             
             $paremeters = [
-                'dsn'         => 'mysql:host=db;dbname=tosee',
-                'username'    => 'root',
-                'password'    => '1Vv4nfkCXp',
+                'dsn'         => \Yii::$app->db->dsn,
+                'username'    => \Yii::$app->db->username,
+                'password'    => \Yii::$app->db->password,
                 'tablePrefix' => 'usr_',
-                'charset'     => 'utf8',
+                'charset'     => \Yii::$app->db->charset,
             ];
             
             return \Yii::$app->params['user_db'] = new Connection( $paremeters );

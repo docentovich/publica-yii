@@ -19,7 +19,7 @@ class UserAbout extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%user_about}}';
+        return '{{%usr_user_about}}';
     }
 
     /**

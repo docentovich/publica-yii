@@ -1,18 +1,16 @@
 <?php
 
-switch ( $_SERVER[ 'SERVER_NAME' ] ) {
-    case  TOSEE_DEV:
-    case  TOSEE_PROD:
-        $mainModule = "modules\\tosee";
-        $domain_params = require "main-tosee.php";
-        break;
-    case PROBANK_DEV:
-    case PROBANK_PROD :
-        $mainModule = "modules\\probank";
-        $domain_params = require "main-probank.php";
-        break;
-    
-}
+// switch ( $_SERVER[ 'SERVER_NAME' ] ) {
+//     case  TOSEE_DEV:
+//     case  TOSEE_PROD:
+//         $domain_params = require "main-tosee.php";
+//         break;
+//     case PROBANK_DEV:
+//     case PROBANK_PROD :
+//         $domain_params = require "main-probank.php";
+//         break;
+//
+// }
 $config = [
     'vendorPath' => dirname( dirname( __DIR__ ) ) . '/vendor',
     'language'   => 'ru-RU',
@@ -50,13 +48,13 @@ $config = [
         ],
     ],
     'modules' => [
-        'project' => [
-            'class' => $mainModule . "\\Module",
-        ],
+
         'user' => [
             'class' => 'dektrium\user\Module',
         ],
+
     ],
 
 ];
-return yii\helpers\ArrayHelper::merge( $domain_params, $config );
+// return yii\helpers\ArrayHelper::merge( $domain_params, $config );
+return $config;

@@ -1,5 +1,4 @@
-<?
-namespace components\widgets\href;
+<?php namespace components\widgets\href;
 
 use yii\base\Widget;
 use yii\bootstrap\Html;

@@ -24,7 +24,7 @@ class PostData extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%post_data}}';
+        return '{{%tosee_post_data}}';
     }
 
     /**
@@ -55,6 +55,7 @@ class PostData extends \yii\db\ActiveRecord
             'post_desc' => 'Описание поста',
             'post_like_count' => 'Post Like Count',
             'post_view_count' => 'Post View Count',
+
         ];
     }
 

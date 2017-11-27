@@ -121,9 +121,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 
-    <? /* $form->field($model_profile, 'public_email')->label('email'); ?>
+    <?php /* $form->field($model_profile, 'public_email')->label('email'); ?>
 
-                        <?/* $form->field($model_profile, 'website') ?>
+                        <?php$form->field($model_profile, 'website') ?>
 
                         <?= $form->field($model_profile, 'location') */ ?>
 

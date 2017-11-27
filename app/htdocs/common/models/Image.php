@@ -92,7 +92,7 @@ class Image extends \yii\db\ActiveRecord
      */
     public function getPosts0()
     {
-        return $this->hasMany(Post::className(), ['id' => 'post_id'])->viaTable('{{%post_to_image}}', ['image_id' => 'id']);
+        return $this->hasMany(Post::className(), ['id' => 'post_id'])->viaTable(PostToImage::tableName(), ['image_id' => 'id']);
     }
 
     /**

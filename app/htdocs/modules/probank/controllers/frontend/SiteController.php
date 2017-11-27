@@ -21,7 +21,7 @@ class SiteController extends Controller
      */
     public $layout = "@current_template/layouts/main";
 
-   
+
     /**
      * @inheritdoc
      */
@@ -113,21 +113,20 @@ class SiteController extends Controller
      */
     public function actionPost($id)
     {
-        $id = (int)$id;
 
+        $id = (int)$id;
         $service = (new Post)->getById($id);
 
         //передаем в лайоут прошлое
         Yii::$app->view->params['navigation_label'] = $service->items->postData->title;
-
         Yii::$app->view->title = $service->items->postData->title;
-
         Yii::$app->view->params['next_url'] = (isset($service->next)) ?  "/post/" . $service->next->id : "/" ;
         Yii::$app->view->params['prev_url'] = (isset($service->prev)) ?  "/post/" . $service->prev->id : "/";
 
         return $this->render('post', [
             'service' => $service
         ]);
+
     }
 
 

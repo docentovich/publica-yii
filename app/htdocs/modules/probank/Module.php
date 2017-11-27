@@ -16,7 +16,7 @@ class Module extends \yii\base\Module
      * @var boolean Если модуль используется для админ-панели.
      */
     public $isBackend;
-    
+
     public $logoSrc = "probank.png";
 
     /**
@@ -27,7 +27,7 @@ class Module extends \yii\base\Module
         parent::init();
 
         // Это здесь для того, чтобы переключаться между frontend и backend
-        if ($this->isBackend === true) {
+        if ( \Yii::$app->id === "app-backend" ) {
             $this->controllerNamespace = 'modules\probank\controllers\backend';
             $this->setViewPath('@modules/probank/html/backend/views');
         } else {

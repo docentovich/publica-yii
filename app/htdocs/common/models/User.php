@@ -29,13 +29,13 @@ use yii\helpers\ArrayHelper;
 //class User extends BaseUser implements IdentityInterface
 class User extends BaseUser implements IdentityInterface
 {
-    use UserDbConnection;
+    // use UserDbConnection;
     const STATUS_DELETED = 0;
     const STATUS_NOT_ACTIVE = 2;
     const STATUS_ACTIVE = 10;
-    
-   
-    
+
+
+
     /**
      * @inheritdoc
      */
@@ -59,7 +59,7 @@ class User extends BaseUser implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return '{{%usr_user}}';
     }
 
     /**

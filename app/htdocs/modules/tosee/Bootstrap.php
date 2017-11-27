@@ -11,14 +11,8 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap ( $app )
     {
-        if( $app->id === "app-backend"){
-            $app->getUrlManager()->addRules(
-                [
-                    '<_c:(author|moderator|director)>'                    => '/project/<_c>/index',
-                    '<_c:(author|moderator|director)>/<_a:[a-zA-Z\-\_]+>' => '/project/<_c>/<_a>',
-                ]
-            );
-        }else {
+        if( $app->id === "app-frontend"){
+
             $app->getUrlManager()->addRules(
                 [
                     // объявление правил здесь

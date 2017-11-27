@@ -177,7 +177,7 @@ class postService extends Services
             ];
 
         $this->_query
-            ->leftJoin('{{%post_data}}', '{{%post_data}}.`post_id` = {{%post}}.`id`');
+            ->leftJoin(PostData::tableName(), PostData::tableName() . '.`post_id` = {{%post}}.`id`');
 
         $this->getMany($params);
         $this->url = "/%i%?keyword=$keyword";

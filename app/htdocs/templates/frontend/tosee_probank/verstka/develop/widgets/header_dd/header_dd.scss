@@ -105,6 +105,8 @@ $globe-oter-padding-min: 8px;
   }
 
   &__inner {
+    background: none;
+    border: none;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;

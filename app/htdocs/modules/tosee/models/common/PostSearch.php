@@ -14,6 +14,9 @@ class PostSearch extends Post
 {
 
     public $postDataTitle;
+
+
+
     /**
      * @inheritdoc
      */
@@ -55,8 +58,8 @@ class PostSearch extends Post
             'attributes' => [
                 'event_at',
                 'postDataTitle' => [
-                    'asc'   => [ '{{%post_data}}.title' => SORT_ASC ],
-                    'desc'  => [ '{{%post_data}}.title' => SORT_DESC ],
+                    'asc'   => [ PostData::tableName() . '.title' => SORT_ASC ],
+                    'desc'  => [ PostData::tableName() . '.title' => SORT_DESC ],
                     'label' => 'Заголовок'
                 ],
                 'created_at'
@@ -66,7 +69,7 @@ class PostSearch extends Post
         $this->load($params);
 
         $query->joinWith(['postData' => function ($q) {
-            $q->where('{{%post_data}}.title LIKE "%' . $this->postDataTitle . '%" ');
+            $q->where( PostData::tableName() . '.title LIKE "%' . $this->postDataTitle . '%" ');
         }]);
 
         if (!$this->validate()) {

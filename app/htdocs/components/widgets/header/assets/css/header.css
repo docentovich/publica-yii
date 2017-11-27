@@ -137,6 +137,8 @@
   .header-dd__item-label {
     display: none; } }
 .header-dd__item {
+  background: none;
+  border: none;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;

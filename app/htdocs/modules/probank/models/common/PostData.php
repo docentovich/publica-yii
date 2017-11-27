@@ -24,7 +24,7 @@ class PostData extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%post_data}}';
+        return '{{%probank_post_data}}';
     }
 
     /**

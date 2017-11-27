@@ -3,6 +3,7 @@
 namespace modules\probank\models\common;
 
 use Yii;
+use common\models\Image;
 
 /**
  * This is the model class for table "{{%post_to_image}}".
@@ -20,7 +21,7 @@ class PostToImage extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%post_to_image}}';
+        return '{{%probank_post_to_image}}';
     }
 
     /**

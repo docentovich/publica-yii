@@ -24,8 +24,17 @@ use borales\extensions\phoneInput\PhoneInputValidator;
  */
 class Profile extends BaseProfile
 {
-    use UserDbConnection;
-    
+    // use UserDbConnection;
+
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%usr_profile}}';
+    }
+
     public function attributeLabels()
     {
         return [

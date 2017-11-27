@@ -30,13 +30,13 @@ class Post extends \yii\db\ActiveRecord
     CONST STATUS_NOT_PASS_MODERATE = 1;
     CONST STATUS_BLOCKED = 2;
     CONST STATUS_ACTIVE = 3;
-    
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%post}}';
+        return '{{%probank_post}}';
     }
 
     /**
@@ -117,7 +117,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getImages()
     {
-        return $this->hasMany(Image::className(), ['id' => 'image_id'])->viaTable('{{%post_to_image}}', ['post_id' => 'id']);
+        return $this->hasMany(Image::className(), ['id' => 'image_id'])->viaTable(PostToImage::tableName(), ['post_id' => 'id']);
     }
 
 

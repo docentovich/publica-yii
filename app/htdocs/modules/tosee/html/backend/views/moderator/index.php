@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 <!--    <p>-->
-<!--        --><?//= Html::a(Yii::t('app/post', 'Создать пост'), ['create'], ['class' => 'btn btn-success']) ?>
+<!--        --><?php //= Html::a(Yii::t('app/post', 'Создать пост'), ['create'], ['class' => 'btn btn-success']) ?>
 <!--    </p>-->
 
     <?= GridView::widget([
@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model, $key, $index, $column) {
 
                     ob_start(); ?>
-                    <? if ($model->status == Post::STATUS_ACTIVE) { ?>
+                    <?php if ($model->status == Post::STATUS_ACTIVE) { ?>
                         <?= HTML::a("Заблокировать", ['index', 'status' =>  Post::STATUS_BLOCKED, 'id' => $model->id], ['class' => 'btn btn-danger']); ?>
                     <?php } elseif ($model->status == Post::STATUS_ON_MODERATE) { ?>
                         <?= HTML::a("Одобрить", ['index', 'status' => Post::STATUS_ACTIVE, 'id' => $model->id], ['class' => 'button button--green']) ?>

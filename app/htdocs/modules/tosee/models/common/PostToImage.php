@@ -20,7 +20,7 @@ class PostToImage extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%post_to_image}}';
+        return '{{%tosee_post_to_image}}';
     }
 
     /**

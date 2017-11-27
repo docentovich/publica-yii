@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-view">
     <p>
-        <? if ($model->status == Post::STATUS_ACTIVE) { ?>
+        <?php if ($model->status == Post::STATUS_ACTIVE) { ?>
             <?= HTML::a("Заблокировать", ['index', 'status' =>  Post::STATUS_BLOCKED, 'id' => $model->id], ['class' => 'btn btn-danger']); ?>
         <?php } elseif ($model->status == Post::STATUS_ON_MODERATE) { ?>
             <?= HTML::a("Одобрить", ['index', 'status' => Post::STATUS_ACTIVE, 'id' => $model->id], ['class' => 'button button--green']) ?>

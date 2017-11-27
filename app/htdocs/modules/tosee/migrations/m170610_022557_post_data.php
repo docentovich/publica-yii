@@ -17,7 +17,7 @@ class m170610_022557_post_data extends Migration
         $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
-            '{{%post_data}}',
+            PostData::tableName(),
             [
                 'post_id'=> $this->primaryKey(10)->comment('fkey'),
                 'title'=> $this->string(255)->null()->defaultValue(null),
@@ -28,13 +28,13 @@ class m170610_022557_post_data extends Migration
                 'post_view_count'=> $this->integer(15)->notNull()->defaultValue(0),
             ],$tableOptions
         );
-        $this->createIndex('post_id','{{%post_data}}',['post_id'],false);
+        $this->createIndex('post_id',PostData::tableName(),['post_id'],false);
 
     }
 
     public function safeDown()
     {
-        $this->dropIndex('post_id', '{{%post_data}}');
+        $this->dropIndex('post_id', PostData::tableName());
         $this->dropTable('{{%post_data}}');
     }
 }
