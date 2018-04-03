@@ -1,0 +1,16 @@
+mixin header1()
+ div(data-spy="affix" data-offset-top="10")
+  +b.header1
+    .container.container-header
+      .row
+        +e.inner.col-xs-24
+          +e.item._control
+            +e.I.i.fa.fa-search
+          +e.item._logo
+            +e.IMG(src="/images/logos/#{logo}").logo
+          +e.item._control(rel="menu").sidebar-rel
+            +e.I.i.fa.fa-bars
+
+   
+        //- +e.controls1
+        //-   +controls1

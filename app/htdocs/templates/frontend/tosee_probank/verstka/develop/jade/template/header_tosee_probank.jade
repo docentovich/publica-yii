@@ -1,0 +1,37 @@
+include ../includes/mixins
+include ../includes/bemto
+- var links = [{alias: "m", url: "index.html", "label" : "Главная"}, {alias: "w", url: "work.html", "label" : "Работа", sublines : [{url: "izber.html", "label" : "Работа с избирателями"}, {url: "zaks.html", "label" : "Работа в Законодательном Собрании Санкт-Петербурга"}] } ];
+mixin document-header-tosee()
+  head
+      meta(charset='utf-8')
+      meta(name='description', content='')
+      meta(name='keywords', content='')
+      meta(content='IE=edge')&attributes({'http-equiv': "X-UA-Compatible"})
+      meta(name='viewport', content='width=1350, initial-scale=1, maximun-scale=5, user-scalable=no')
+
+      title Landing Page
+
+      link(rel='icon', href='/favicon.png', type='image/x-icon')
+
+      // build:css /css/vendor.css    
+      link(href='/libs/bootstrap.css', rel='stylesheet')
+      link(href='/libs/fancybox/jquery.fancybox.css', rel='stylesheet')
+      //- link(href='/libs/jquery-ui.css', rel='stylesheet')
+      // endbuild
+      // build:css /css/main.css
+      link(href='/css/main.css', rel='stylesheet')
+      link(href='/css/sidebar.css', rel='stylesheet')
+      link(href='/css/header_dd.css', rel='stylesheet')
+      link(href='/css/logos.css', rel='stylesheet')
+      link(href='/css/sprite.css', rel='stylesheet')
+      link(href='/css/tosee.css', rel='stylesheet')
+      // endbuild 
+      //[if lte IE 9]>
+            <script src="/libs/ie/html5shiv.js"></script>
+            <script src="/libs/ie/respond.src.js"></script>
+            <script src="/libs/ie/respond.matchmedia.addListener.src.js"></script>
+            <script src="/libs/polyfills/background_size_emu.js"></script>
+            <![endif]
+
+      script.
+          var queryDate = "2017-11-11";

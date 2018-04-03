@@ -1,0 +1,58 @@
+.events{
+    &__events-list{
+
+        @supports (-webkit-flex-wrap: wrap) or
+        (-ms-flex-wrap: wrap) or
+        (flex-wrap: wrap) or
+        (-moz-flex-wrap: wrap) {
+             display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: flex-start;
+            align-items: flex-start;
+        }
+
+        vertical-align: top;
+
+
+        width: 100%;
+
+        // @include flex-flow(row wrap);
+
+        text-align: center;
+        // max-width: 80%;
+        margin: auto; 
+        min-height: 300px;
+        // padding: 0 4px;
+
+        // @media #{$lg} {
+        //      padding: 0 14px;
+        // }
+    }
+
+    &__event{
+        display: inline-block;
+        // float: left;
+        //height: 504px;
+        width: 100%;
+        padding: 10px;
+        max-width: 318px;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        vertical-align: top;
+    }
+
+    // @media (max-width: 746px){
+    //     &__event{
+    //         max-width: 48%;
+    //     }
+    // }
+    // @media (max-width: 550px){
+    //     &__event{
+    //         height: 225px;
+            
+    //     }
+    // }
+}

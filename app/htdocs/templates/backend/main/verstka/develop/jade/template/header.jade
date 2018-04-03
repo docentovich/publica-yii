@@ -1,0 +1,32 @@
+include ../includes/bemto
+include ../includes/mixins
+- var rUrl = '/admin'; //-это базовый относительный адрес сайта
+- var _rUrl = (rUrl == '') ? '' : rUrl + '/'; //-это базовый относительный адрес сайта
+- var links = [ {img : '', links : [{alias: "up", url: "/userpanel", "label" : "Профиль"}]}, {img : 'tosee', links : [ {alias: "red", url: "/redactor", "label" : "Редактор"}, {alias: "mod", url: "/moderator", "label" : "Модератор"}, {alias: "dir", url: "/director", "label" : "Директор"} ]},  {img : 'probank', links : [ {alias: "foto", url: "/fotograf", "label" : "Фотограф"}, {alias: "model", url: "/model", "label" : "Модель"} ]}, {img : 'shotme', links : [ {alias: "shme1", url: "/shotme1", "label" : "Меню шотми 1"}, {alias: "shme2", url: "/shotme2", "label" : "Меню шотми 2"} ]} ]; //меню состоит из блоков. разбиваем конструкцию по блокам следовательно. вводим названия каринок со справтов. есл название пустое то справйт не выодим
+mixin doc-header()
+  head
+      meta(charset='utf-8')
+      meta(name='description', content='')
+      meta(name='keywords', content='')
+      meta(content='IE=edge')&attributes({'http-equiv': "X-UA-Compatible"})
+      meta(name='viewport', content='width=device-width, initial-scale=1')
+
+      title Landing Page
+       
+      link(rel='icon', href='/favicon.png', type='image/x-icon')
+
+      | <!-- build:css css/vendor.css    -->
+      link(href='/libs/bootstrap.css', rel='stylesheet')
+      link(href='/libs/fancybox/jquery.fancybox.css', rel='stylesheet')
+      // endbuild
+      | 
+      | <!-- build:css css/main.css-->
+      link(href='/css/main.css', rel='stylesheet')
+      // endbuild 
+      //[if lte IE 9]>
+            <script src="#{_rUrl}libs/ie/html5shiv.js"></script>
+            <script src="#{_rUrl}libs/ie/respond.src.js"></script>
+            <script src="#{_rUrl}libs/ie/respond.matchmedia.addListener.src.js"></script>
+            <script src="#{_rUrl}libs/polyfills/background_size_emu.js"></script>
+            <![endif]
+      block

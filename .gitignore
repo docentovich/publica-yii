@@ -1,0 +1,9 @@
+/app/sessions/*
+!/app/sessions/.getkeep
+/app/mysql/*
+!/app/mysql/.getkeep
+node_modules/
+*.map
+.htaccess
+.idea
+.DS_Store

@@ -1,0 +1,8 @@
+~*
+dist/
+node_modules/**
+.sass-cache/**/
+develop/event.html
+develop/css/main.css
+develop/css/main.map
+develop/js/main.js

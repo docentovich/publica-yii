@@ -1,0 +1,6 @@
+mixin single-event(img)
+    +b.single-event
+        +e.inner
+            +e(style="background-image: url(#{img})").img.img-well
+            +e.content
+                block

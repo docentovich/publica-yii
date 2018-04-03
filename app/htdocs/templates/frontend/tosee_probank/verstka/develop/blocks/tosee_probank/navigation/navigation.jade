@@ -1,0 +1,22 @@
+mixin navigation(url)
+    - if (url == undefined) url = '';
+    .row
+        .col-xs-24
+            +b.navigation                
+                
+                +e.col._center
+                    block
+                +e.A(href="#{url}" ).col._left
+                    +e.svg-wrapper
+                        +e.svg
+                            svg(xmlns='http://www.w3.org/2000/svg', viewbox='0 0 94.12 168.42')
+                              path.cls-1(d='M279.6,163.5a9.9,9.9,0,0,0-14,0l-74.3,74.3a9.9,9.9,0,0,0,0,14l74.3,74.3a9.9,9.9,0,0,0,14-14l-67.3-67.3,67.3-67.3A10,10,0,0,0,279.6,163.5Z', transform='translate(-188.4 -160.6)')
+
+                    //- +sprite-img('sprite', 'to-left')
+                +e.A(href="#{url}" ).col._right
+                    +e.svg-wrapper
+                        +e.svg
+                            svg(xmlns='http://www.w3.org/2000/svg', viewbox='0 0 94.12 168.42')
+                              path.cls-1(d='M210,326.1a9.9,9.9,0,0,0,14,0l74.3-74.3a9.9,9.9,0,0,0,0-14L224,163.5a9.9,9.9,0,0,0-14,14l67.3,67.3L210,312.1A10,10,0,0,0,210,326.1Z', transform='translate(-207.08 -160.57)')
+
+                   //- +sprite-img('sprite', 'to-right')

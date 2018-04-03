@@ -1,0 +1,82 @@
+@import "../../scss/varibles.scss";
+
+.sidebar{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    top: -110%;
+    left: 0;
+    display: block;
+    transition: all .7s;
+    background: #bfc1c4;
+    z-index: 10;
+
+    &_search &__close{
+        color: #fff;
+        text-shadow: none;
+    }
+    &_search{
+        background: #363d47;
+    }
+
+    
+
+
+    &__sidebar-inner-relative{
+        width: 100%;
+        height: 100%;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-justify-content: space-around;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+        -webkit-align-content: center;
+        -ms-flex-line-pack: center;
+        align-content: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        position: relative;
+    }
+    &__sidebar-inner{
+        width: 50%;
+        margin: auto;
+    }
+
+    &.active{
+        top: 0px;
+    }
+
+    &__close{
+        position: absolute;
+        opacity: .5;
+        color: #000;
+        right: 10px;
+        top: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        font-family: Arial;
+        text-shadow: 1px 0px 0 #fff;
+
+        &:hover{
+            opacity: 1;
+        }
+    }
+
+    @media #{$xsm}{
+        &__sidebar-inner{
+            width: 90%;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+mixin login()
+    +b.login
+        +e.logo
+            +img("logo.png")
+
+        +e.FORM.center(action="#{rUrl}/userpanel.html")
+            +e.input
+                +input("Логин")
+            +e.input
+                +input("Пароль")
+            +e.button
+                +button.--green Вход
+
+        +e.footer
+            +e.A.footer-a(href="#").--remember Вспомнить пароль
+            +e.A.footer-a(href="#").--register Регистрация

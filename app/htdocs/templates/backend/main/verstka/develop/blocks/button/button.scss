@@ -1,0 +1,39 @@
+.button{
+  
+  width: 100%;
+  min-height: 43px;
+  border-radius: 9px;
+  text-align: center;
+  font-size: 19px;
+  height: 43px;
+  line-height: 43px; 
+  display: block;
+
+  &--center{
+    margin: auto;
+  }
+
+  &--green{
+    background-color: #679178;
+    border: 1px solid #dedcdc;
+    color: #fff;
+    max-width: 245px;
+
+    &:hover{
+      color: #fff;
+    }
+  }
+
+  &--grey{
+    background-color: #ebeaea;
+    border: 1px solid #dedcdc;
+    color: rgba(0, 0, 0, .5);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 48px;
+
+    width: 100%;
+    max-width: 232px;
+  }
+
+}

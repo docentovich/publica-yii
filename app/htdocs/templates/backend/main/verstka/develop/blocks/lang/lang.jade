@@ -1,0 +1,16 @@
+//-сайдбар выезжающий
+-var langs = [{id : "en" , lbl :'Englesh', ico : "england"}, {id : "de" , lbl : 'Deutch', ico : 'de'}, {id : "esp" , lbl :'Español', ico : 'espanol'}, {id : "fr" , lbl : 'Le français', ico : 'french'}, {id : "port" , lbl :'Português', ico : 'porto'}, {id : "it" , lbl : 'Italiano', ico : 'italy'}]
+mixin lang()
+    +b.lang 
+      
+        +e.drop-down#lang-dd
+            +e.drop-down-inner
+                +e.lang-ico.--flagrus
+                +e.text Русский
+
+        +e.drop-down-ul#lang-dd-ul(style="display: none;")
+            for lang in langs
+                +e.LI.li(rel="#{lang.id}") 
+                    +e.drop-down-inner                    
+                        +e(class="lang-ico --#{lang.ico}")
+                        +e.text #{lang.lbl}

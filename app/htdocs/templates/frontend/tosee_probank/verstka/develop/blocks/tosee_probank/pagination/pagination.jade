@@ -1,0 +1,30 @@
+mixin pagination(col, url, current_page)
+    -if (current_page == undefined) current_page = 1;
+    .row
+        .col-xs-24
+            +b.pagination        
+                +e.item
+                    -var disabled = (current_page < 2) ? true : false;
+                    +pagination-item("<", "/" + url + "/" + (current_page - 1) + ".html", disabled )
+                     | <
+
+                if (current_page - 2) > 1
+                    +e.dots ...
+
+                -for( var i = 1; i < col+1; i++ ){
+                -var plus = (current_page < 4) ? 3 - current_page : 0;
+                -var minus = (current_page > (col - 4)) ? 3 - (col - current_page) : 0;
+                -if ( (i < (current_page - (2 + minus)))  || (i > (current_page + (2 + plus)) ) ) continue;
+                -var disabled = (current_page == i) ? true : false;
+                +e.item
+                    +pagination-item( i,  "/" + url + "/"  + i + ".html", disabled, (i == current_page) )
+                     | #{i}
+                -}
+
+                if (current_page+2) < col
+                    +e.dots ...
+
+                +e.item
+                    -var disabled = (current_page > (col-2)) ? true : false;
+                    +pagination-item( ">",  "/" + url + "/"  + (current_page + 1) + ".html", disabled )
+                     | >
