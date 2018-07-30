@@ -12,7 +12,7 @@ RUN apt-get update \
           libicu-dev \
           libmcrypt-dev \
           libjpeg62-turbo-dev \
-          libpng12-dev \
+          libpng-dev \
           libxslt1-dev \
           zlib1g-dev \
           --no-install-recommends \

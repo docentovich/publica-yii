@@ -32,7 +32,7 @@ module.exports = {
         closure(item, counter, reestr, resolve, reject);
         }).then(function () {
           sync = false;
-        });
+        }).catch(e => console.log(e));
 
         if( dto.toSync === true )
           while(sync) {require('deasync').sleep(100); }

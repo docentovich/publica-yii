@@ -24,8 +24,9 @@ class FrontendAsset extends AssetBundle
     
     public function registerAssetFiles( $view )
     {
-        $temp =  ( PROJECT === TOSEE ) ? "tosee" : "probank";
-        
+        $temp =  "tosee_probank";
+//        $temp =  ( PROJECT === TOSEE ) ? "tosee_" : "probank";
+
         $this->css[] = "css/" . $temp . ".css";
         $this->js[] = "js/" . $temp . ".js";
         

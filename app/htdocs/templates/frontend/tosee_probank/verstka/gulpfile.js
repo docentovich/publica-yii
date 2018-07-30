@@ -1,4 +1,4 @@
--'use strict'
+'use strict'
 
 const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
@@ -38,21 +38,21 @@ const functions = require('./functions');
 var postcss = require('gulp-postcss');
 
 var projects = [
-  {
+  /*{
     name: 'publica',
     scss: "main-publica",
     js  : "publica_template",
     images : "publica",
     sprites: ['sprite', 'logos', 'tosee'],
     datas: {"logo": "tosee.png"}
-  },{
-    name: 'tosee',
+  },*/{
+    name: 'tosee_probank',
     scss: "main-tosee",
     js  : "tosee_template",
     images : "tosee_probank",
     sprites: ['sprite', 'logos', 'tosee'],
     datas: {"logo": "tosee.png"}
-  },
+  }/*,
   {
     name: 'probank',
     scss: "main-probank",
@@ -68,7 +68,7 @@ var projects = [
     images : "shotme",
     sprites: [],
     datas: {"logo": "probank.png"}
-  }
+  }*/
 ];
 
 const runMultiTask = functions.runMultiTask({projects: projects});
@@ -313,8 +313,7 @@ gulp.task('scss:main', function (callback) {
           }))
 
           .pipe(gulp.dest('./app/' + row.name + '/css'))
-          .pipe(reestr["bs_" + row.name].stream())
-          .pipe(reestr["bs_" + row.name].stream());
+          // .pipe(reestr["bs_" + row.name] ? reestr["bs_" + row.name].stream() : {});
 
     }
   });
@@ -461,6 +460,7 @@ gulp.task('build:yii:minifiJsCss', function (callback) {
 
       return gulp.src('./app/' + row.name + '/index.html')
 
+          .pipe(plumber())
           .pipe(print())
           .pipe(useref({searchPath: './app/' + row.name, base: './app/' + row.name}))
           .pipe(debug())
