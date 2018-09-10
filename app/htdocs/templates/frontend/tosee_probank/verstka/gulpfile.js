@@ -38,14 +38,14 @@ const functions = require('./functions');
 var postcss = require('gulp-postcss');
 
 var projects = [
-  /*{
+  {
     name: 'publica',
     scss: "main-publica",
     js  : "publica_template",
     images : "publica",
     sprites: ['sprite', 'logos', 'tosee'],
     datas: {"logo": "tosee.png"}
-  },*/{
+  }/*,{
     name: 'tosee_probank',
     scss: "main-tosee",
     js  : "tosee_template",
@@ -76,7 +76,7 @@ const runMultiTask = functions.runMultiTask({projects: projects});
 
 gulp.task('default', ['browser-sync', 'compile', 'watch'], function () {
 });
-gulp.task('compile', ['sprite', 'scss', 'js', 'jadeBlocks', 'copyLibs', 'copyImages'], function () {
+gulp.task('compile', ['scss', 'js', 'jadeBlocks', 'copyLibs', 'copyImages'], function () {
 });
 
 //-----WATCH-------
@@ -403,34 +403,34 @@ gulp.task('js', ['del:js'], function (callback) {
 
 
 //-----SPRITE-------
-gulp.task('sprite', function (callback) {
-  return runMultiTask({
-
-    cb: callback,
-    fn: function (row) {
-
-      var spriteData = gulp.src('./develop/images/' + row.images + '/{' + row.sprites.join(',') + '}/*.png')
-          .pipe(print())
-          .pipe(spritesmith({
-                spritesmith: function (options) {
-                  options.imgPath = '../images/' + options.imgName;
-                  options.padding = 1;
-                  // options.algorithm  = 'top-down';
-                  // options.engine = "phantomjssmith";
-                }
-              }
-              // {
-              //   imgName: '.png',
-              //   cssName: '.scss'
-              // }
-          ));
-
-      spriteData.img.pipe(gulp.dest('./app/' + row.name + '/images'));
-      spriteData.css.pipe(gulp.dest('./app/' + row.name + '/css'));
-    }
-
-  });
-});
+// gulp.task('sprite', function (callback) {
+//   return runMultiTask({
+//
+//     cb: callback,
+//     fn: function (row) {
+//
+//       var spriteData = gulp.src('./develop/images/' + row.images + '/{' + row.sprites.join(',') + '}/*.png')
+//           .pipe(print())
+//           .pipe(spritesmith({
+//                 spritesmith: function (options) {
+//                   options.imgPath = '../images/' + options.imgName;
+//                   options.padding = 1;
+//                   // options.algorithm  = 'top-down';
+//                   // options.engine = "phantomjssmith";
+//                 }
+//               }
+//               // {
+//               //   imgName: '.png',
+//               //   cssName: '.scss'
+//               // }
+//           ));
+//
+//       spriteData.img.pipe(gulp.dest('./app/' + row.name + '/images'));
+//       spriteData.css.pipe(gulp.dest('./app/' + row.name + '/css'));
+//     }
+//
+//   });
+// });
 
 
 //=================build==========================

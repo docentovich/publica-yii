@@ -1,6 +1,6 @@
 include ../includes/mixins
 include ../includes/bemto
-- var links = [{alias: "m", url: "index.html", "label" : "Главная"}, {alias: "w", url: "work.html", "label" : "Работа", sublines : [{url: "izber.html", "label" : "Работа с избирателями"}, {url: "zaks.html", "label" : "Работа в Законодательном Собрании Санкт-Петербурга"}] } ];
+
 mixin document-header-tosee()
   head
       meta(charset='utf-8')
@@ -14,18 +14,10 @@ mixin document-header-tosee()
       link(rel='icon', href='/favicon.png', type='image/x-icon')
 
       // build:css /css/vendor.css    
-      //- link(href='/libs/bootstrap.css', rel='stylesheet')
-      //- link(href='/libs/fancybox/jquery.fancybox.css', rel='stylesheet')
-      //- link(href='/libs/jquery-ui.css', rel='stylesheet')
       // endbuild
       // build:css /css/main.css
       link(href='/css/main.css', rel='stylesheet')
-      //- link(href='/css/sidebar.css', rel='stylesheet')
-      //- link(href='/css/header_dd.css', rel='stylesheet')
-      //- link(href='/css/logos.css', rel='stylesheet')
-      //- link(href='/css/sprite.css', rel='stylesheet')
-      //- link(href='/css/tosee.css', rel='stylesheet')
-      // endbuild 
+      // endbuild
       //[if lte IE 9]>
             <script src="/libs/ie/html5shiv.js"></script>
             <script src="/libs/ie/respond.src.js"></script>
