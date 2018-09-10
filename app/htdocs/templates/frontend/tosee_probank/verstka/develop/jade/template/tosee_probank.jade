@@ -1,7 +1,7 @@
 include ../includes/mixins
 include ../includes/bemto
 
-mixin document-header-tosee()
+html
   head
       meta(charset='utf-8')
       meta(name='description', content='')
@@ -14,10 +14,14 @@ mixin document-header-tosee()
       link(rel='icon', href='/favicon.png', type='image/x-icon')
 
       // build:css /css/vendor.css    
+      link(href='/libs/bootstrap.css', rel='stylesheet')
+      link(href='/libs/fancybox/jquery.fancybox.css', rel='stylesheet')
+      //- link(href='/libs/jquery-ui.css', rel='stylesheet')
       // endbuild
       // build:css /css/main.css
       link(href='/css/main.css', rel='stylesheet')
-      // endbuild
+      link(href='/css/tosee.css', rel='stylesheet')
+      // endbuild 
       //[if lte IE 9]>
             <script src="/libs/ie/html5shiv.js"></script>
             <script src="/libs/ie/respond.src.js"></script>
@@ -25,5 +29,5 @@ mixin document-header-tosee()
             <script src="/libs/polyfills/background_size_emu.js"></script>
             <![endif]
 
-      //- script.
-      //-     var queryDate = "2017-11-11";
+      script.
+          var queryDate = "2017-11-11";
