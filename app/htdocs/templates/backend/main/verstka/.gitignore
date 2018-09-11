@@ -1,7 +1,0 @@
-~*
-dist/
-.sass-cache/**/
-develop/model.html
-develop/css/main.css
-develop/css/main.map
-develop/js/main.js
