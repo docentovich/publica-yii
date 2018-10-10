@@ -32,5 +32,5 @@ services:
       links:
         - db
       volumes:
-        - ./app/htdocs:/var/www/html
-        - ./app/php-prod.ini:/usr/local/etc/php/conf.d/custom.ini
+        - ./app:/var/www/html
+        - ./php-prod.ini:/usr/local/etc/php/conf.d/custom.ini
