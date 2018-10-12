@@ -1,23 +1,5 @@
 <?php
-define("TOSEE", 1);
-define("TOSEE_DEV", "tosee.loc");
-define("TOSEE_PROD", "tosee.shablonkin.shn-host.ru");
 
-define("PROBANK", 2);
-define("PROBANK_DEV", "probank.loc");
-define("PROBANK_PROD", "publicayii-probank.shablonkin.shn-host.ru");
-
-switch ($_SERVER['SERVER_NAME']) {
-    case  TOSEE_DEV:
-    case  TOSEE_PROD:
-        $domain_params = require "main-tosee.php";
-        break;
-    case PROBANK_DEV:
-    case PROBANK_PROD :
-        $domain_params = require "main-probank.php";
-        break;
-
-}
 $config = [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language' => 'ru-RU',
@@ -60,5 +42,4 @@ $config = [
         ],
     ],
 ];
-// return yii\helpers\ArrayHelper::merge( $domain_params, $config );
 return $config;

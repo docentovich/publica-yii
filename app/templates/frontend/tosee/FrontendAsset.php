@@ -10,12 +10,12 @@ class FrontendAsset extends AssetBundle
 {
     public $sourcePath;
     public $css = [
-        'css/vendor.css',
-        // 'css/main.css',
+        'bundle/vendor.css',
+        'css/main.css',
     ];
     public $js = [
-        'js/vendor.js',
-        // 'js/main.js',
+        'bundle/vendor.js',
+        'js/main.js',
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $depends = [
@@ -25,15 +25,20 @@ class FrontendAsset extends AssetBundle
     public function __construct(array $config = [])
     {
         parent::__construct($config);
-        $this->sourcePath = __DIR__ . "/assets'";
+        $this->sourcePath = "@templates/frontend/tosee/assets";
     }
 
-    public function registerAssetFiles( $view )
-    {
+//    public function registerAssetFiles( $view )
+//    {
+//        parent::registerAssetFiles( $view );
+//    }
 
-        $this->css[] = "css/main.css";
-        $this->js[] = "js/main.js";
-        
-        parent::registerAssetFiles( $view );
+    public function init()
+    {
+        parent::init();
+        // resetting BootstrapAsset to not load own css files
+        \Yii::$app->assetManager->bundles['yii\web\JqueryAsset'] = [
+            'js' => []
+        ];
     }
 }

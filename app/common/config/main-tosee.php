@@ -1,6 +1,5 @@
 <?php
 
-define("PROJECT", TOSEE);
 
 return [
     'bootstrap' => [
