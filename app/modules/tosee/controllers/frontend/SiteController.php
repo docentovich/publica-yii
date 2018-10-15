@@ -1,9 +1,10 @@
 <?php
 namespace modules\tosee\controllers\frontend;
 
+use modules\tosee\DTO\PostServiceConfig;
 use Yii;
 use yii\web\Controller;
-use modules\tosee\services\frontend\postService as Post;
+use modules\tosee\services\frontend\PostService as Post;
 use yii\web\Cookie;
 use yii\web\HttpException;
 
@@ -13,7 +14,6 @@ use yii\web\HttpException;
 class SiteController extends Controller
 {
 
-
     /**
      * Задаем лайоут
      *
@@ -21,7 +21,6 @@ class SiteController extends Controller
      */
     public $layout = "@current_template/layouts/main";
 
-   
     /**
      * @inheritdoc
      */
@@ -43,17 +42,8 @@ class SiteController extends Controller
      */
     public function actionIndex($page = 1)
     {
-
-        //передаем в лайоут будущее
-        Yii::$app->view->title = "Что будет";
-        Yii::$app->view->params['navigation_label'] = "Что будет";
-        Yii::$app->view->params['next_url'] = "/past";
-        Yii::$app->view->params['prev_url'] = "/past";
-
-        $service = (new Post())->page($page)->getFuture();
-
         return $this->render('index', [
-            "service"  => $service,
+            "service"   => (new Post(new PostServiceConfig()))->posts(),
         ]);
     }
 
@@ -65,19 +55,10 @@ class SiteController extends Controller
      */
     public function actionPast($page = 1)
     {
-
-        //передаем в лайоут прошлое
-        Yii::$app->view->title = "Что было";
-        Yii::$app->view->params['navigation_label'] = "Что было";
-        Yii::$app->view->params['next_url'] = "/";
-        Yii::$app->view->params['prev_url'] = "/";
-
-        $service = (new Post())->page($page)->getPast();
-
         return $this->render('index', [
-            "service"  => $service,
+            "service"  => (new Post())->page($page)->getPast(),
+            "action"    => SiteController::ACTION_PAST
         ]);
-
     }
 
     /**

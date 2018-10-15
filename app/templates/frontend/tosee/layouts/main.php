@@ -27,8 +27,8 @@ $this->beginPage(); ?>
         <div class="navigation-panel">
           <div class="navigation-part">
             <div class="menu">
-              <div class="hamburger toggle-overlay" id="service-menu" rel="service-menu"><img src="/images/icons/burger.svg"/></div>
-              <div class="toggle-drop-down-action-panel base-logo" id="services" rel="services"><img src="/images/logo-inline/tosee.svg"/></div>
+              <div class="hamburger toggle-overlay" id="service-menu" rel="service-menu"><img src="<?= $bundle->baseUrl; ?>/images/icons/burger.svg"/></div>
+              <div class="toggle-drop-down-action-panel base-logo" id="services" rel="services"><img src="<?= $bundle->baseUrl; ?>/images/logo-inline/tosee.svg"/></div>
             </div>
           </div>
           <div class="navigation-part">
@@ -49,11 +49,11 @@ $this->beginPage(); ?>
           </div>
         </div>
         <div class="action-panel" id="drop-down-services"><a class="drop-down-service" href="http://publica.shablonkin.shn-host.ru/">
-            <div class="drop-down-service-image drop-down-service--publica"><img src="/images/logo-inline/publica.svg"/></div>
+            <div class="drop-down-service-image drop-down-service--publica"><img src="<?= $bundle->baseUrl; ?>/images/logo-inline/publica.svg"/></div>
             <div class="drop-down-service-description"></div></a><a class="drop-down-service" href="http://probank.shablonkin.shn-host.ru/">
-            <div class="drop-down-service-image drop-down-service--probank"><img src="/images/logo-inline/probank.svg"/></div>
+            <div class="drop-down-service-image drop-down-service--probank"><img src="<?= $bundle->baseUrl; ?>/images/logo-inline/probank.svg"/></div>
             <div class="drop-down-service-description">Модели</div></a><a class="drop-down-service" href="http://shotme.shablonkin.shn-host.ru/">
-            <div class="drop-down-service-image drop-down-service--shootme"><img src="/images/logo-inline/shootme.svg"/></div>
+            <div class="drop-down-service-image drop-down-service--shootme"><img src="<?= $bundle->baseUrl; ?>/images/logo-inline/shootme.svg"/></div>
             <div class="drop-down-service-description">Фотографы</div></a>
         </div>
       </div>
@@ -121,35 +121,35 @@ $this->beginPage(); ?>
         <div class="posts masonry">
           <div class="grid-sizer"></div>
           <div class="gutter-sizer"></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/2.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/2.jpg"/>
               <div class="post-description">1 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/3.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/3.jpg"/>
               <div class="post-description">2 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/4.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/4.jpg"/>
               <div class="post-description">3 концерт софии ротару, концерт софии ротару, концерт софии ротару, концерт софии ротару, </div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/5.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/5.jpg"/>
               <div class="post-description">4 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/6.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/6.jpg"/>
               <div class="post-description">5 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/2.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/2.jpg"/>
               <div class="post-description">6 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/3.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/3.jpg"/>
               <div class="post-description">7 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/4.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/4.jpg"/>
               <div class="post-description">8 концерт софии ротару, концерт софии ротару, концерт софии ротару, концерт софии ротару, </div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/5.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/5.jpg"/>
               <div class="post-description">9 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/6.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/6.jpg"/>
               <div class="post-description">10 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/2.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/2.jpg"/>
               <div class="post-description">11 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/3.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/3.jpg"/>
               <div class="post-description">12 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/4.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/4.jpg"/>
               <div class="post-description">13 концерт софии ротару, концерт софии ротару, концерт софии ротару, концерт софии ротару, </div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/5.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/5.jpg"/>
               <div class="post-description">14 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="/images/posts/6.jpg"/>
+          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/6.jpg"/>
               <div class="post-description">15 концерт софии ротару</div></a></div>
         </div>
       </div>

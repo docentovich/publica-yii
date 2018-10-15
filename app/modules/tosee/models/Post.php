@@ -24,7 +24,7 @@ use common\models\User;
  * @property PostToImage[] $postToImages
  * @property Image[] $images
  */
-class Post extends \yii\db\ActiveRecord
+class Post extends yii\db\ActiveRecord
 {
     CONST STATUS_ON_MODERATE = 0;
     CONST STATUS_NOT_PASS_MODERATE = 1;

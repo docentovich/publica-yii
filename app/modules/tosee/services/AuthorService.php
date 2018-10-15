@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: andrey
- * Date: 02.06.17
- * Time: 20:24
- */
 
 namespace modules\tosee\services\backend;
 

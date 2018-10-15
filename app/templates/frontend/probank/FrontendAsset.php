@@ -1,4 +1,5 @@
 <?php
+
 namespace app\assets;
 
 use yii\web\AssetBundle;
@@ -25,7 +26,7 @@ class FrontendAsset extends AssetBundle
     public function __construct(array $config = [])
     {
         parent::__construct($config);
-        $this->sourcePath = "@templates/frontend/tosee/assets";
+        $this->sourcePath = "@templates/frontend/probank/assets";
     }
 
     public function init()

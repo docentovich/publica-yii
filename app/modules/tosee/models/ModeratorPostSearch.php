@@ -5,7 +5,6 @@ namespace modules\tosee\models\common;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use modules\tosee\models\common\Post;
 use yii\web\HttpException;
 
 /**
@@ -13,7 +12,6 @@ use yii\web\HttpException;
  */
 class ModeratorPostSearch extends Post
 {
-
     public $postDataTitle;
     /**
      * @inheritdoc

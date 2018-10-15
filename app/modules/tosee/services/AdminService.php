@@ -15,7 +15,7 @@ use components\Services;
 
 
 
-class adminService extends Services
+class AdminService extends Services
 {
     /**
      * @var string Текущий город

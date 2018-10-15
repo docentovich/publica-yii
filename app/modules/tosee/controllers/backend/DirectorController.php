@@ -5,7 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use modules\tosee\services\backend\adminService;
+use modules\tosee\services\backend\AdminService;
 
 
 /**
@@ -54,7 +54,7 @@ class DirectorController extends Controller
 
     public function actionIndex()
     {
-        $users = new adminService;
+        $users = new AdminService;
         $post_requst = Yii::$app->request->post();
         if(isset($post_requst['setrule']))
         {

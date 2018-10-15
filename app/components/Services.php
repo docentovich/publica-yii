@@ -28,36 +28,6 @@ abstract class Services
     public $items;
 
 
-
-    /**
-     * Много записей
-     *
-     * @param array $condition
-     */
-    abstract protected function getMany($condition=[]);
-
-    /**
-     * Одна запись
-     *
-     * @param int $id
-     */
-    abstract protected function getOne($id);
-
-    /**
-     * Поиск
-     *
-     * @param string $keyword
-     * @return array ActiveRecord
-     */
-    abstract public function search($keyword);
-
-    /**
-     * Сохранение
-     *
-     * @return bool
-     */
-    abstract public function save();
-
     /**
      * Подсчет количесва и cохранение в $count
      */
