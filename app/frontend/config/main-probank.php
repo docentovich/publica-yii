@@ -2,11 +2,11 @@
 
 return [
     'bootstrap' => [
-        'modules\probank\FrontendBootstrap',
+        'app\modules\probank\FrontendBootstrap',
     ],
     'modules'   => [
         'project' => [
-            'class' => 'modules\probank\Module',
+            'class' => 'app\modules\probank\Module',
         ],
 
     ],

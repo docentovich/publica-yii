@@ -28,8 +28,8 @@ $config = [
 
     'bootstrap' => [
         'log',
-        'templates\BootstrapFront',
-        'modules\users\Bootstrap',
+        'app\templates\BootstrapFront',
+        'app\modules\users\Bootstrap',
     ],
     'components' => [
         'errorHandler' => [

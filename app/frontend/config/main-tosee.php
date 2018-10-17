@@ -2,11 +2,11 @@
 
 return [
     'bootstrap' => [
-        'modules\tosee\FrontendBootstrap',
+        'app\modules\tosee\FrontendBootstrap',
     ],
     'modules'   => [
         'project'   => [
-            'class' => 'modules\tosee\Module',
+            'class' => 'app\modules\tosee\Module',
         ],
     ],
 ];

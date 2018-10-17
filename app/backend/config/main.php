@@ -13,17 +13,17 @@ return [
     'defaultRoute' => '/user/settings/profile',
     'bootstrap'    => [
         'log',
-        \templates\BootstrapBackend::class,
-        'modules\probank\BackendBootstrap',
-        'modules\tosee\BackendBootstrap',
+        \app\templates\BootstrapBackend::class,
+        'app\modules\probank\BackendBootstrap',
+        'app\modules\tosee\BackendBootstrap',
     ],
     'modules' => [
 
         'probank' => [
-            'class' => 'modules\probank\Module',
+            'class' => 'app\modules\probank\Module',
         ],
         'tosee'   => [
-            'class' => 'modules\tosee\Module',
+            'class' => 'app\modules\tosee\Module',
         ],
         'user'  => [
             'class' => 'dektrium\user\Module',
@@ -40,18 +40,18 @@ return [
                     'layout' => '@current_template/layouts/login',
                 ],
                 'registration' => [
-                    'class'  => 'modules\users\controllers\backend\RegistrationController',
+                    'class'  => 'app\modules\users\controllers\backend\RegistrationController',
                     'layout' => '@current_template/layouts/login',
                 ],
                 'recovery'     => [
                     'class'  => 'dektrium\user\controllers\RecoveryController',
                     'layout' => '@current_template/layouts/login',
                 ],
-                'settings' => 'modules\users\controllers\backend\UserpanelController',
+                'settings' => 'app\modules\users\controllers\backend\UserpanelController',
             ],
             'modelMap'      => [
                 'Profile'          => \common\models\Profile::class,
-                'RegistrationForm' => \modules\users\models\RegistrationForm::class,
+                'RegistrationForm' => \app\modules\users\models\RegistrationForm::class,
                 'User'             => \common\models\User::class,
             ],
             'urlRules' => [

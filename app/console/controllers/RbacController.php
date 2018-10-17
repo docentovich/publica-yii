@@ -10,7 +10,7 @@ namespace console\controllers;
 
 
 use common\models\User;
-use modules\tosee\models\common\Post;
+use app\modules\tosee\models\common\Post;
 use console\rbac\AuthorRule;
 use console\rbac\CityRule;
 use yii\base\Controller;
