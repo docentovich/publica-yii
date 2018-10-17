@@ -1,7 +1,7 @@
-/app/sessions/*
-!/app/sessions/.getkeep
-/app/mysql/*
-!/app/mysql/.getkeep
+/sessions/*
+!/sessions/.getkeep
+/mysql/*
+!/mysql/.getkeep
 node_modules/
 *.map
 .htaccess
