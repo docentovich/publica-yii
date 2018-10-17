@@ -29,6 +29,7 @@ $config = [
     'bootstrap' => [
         'log',
         'templates\BootstrapFront',
+        'modules\users\Bootstrap',
     ],
     'components' => [
         'errorHandler' => [

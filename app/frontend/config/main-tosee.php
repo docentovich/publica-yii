@@ -2,8 +2,7 @@
 
 return [
     'bootstrap' => [
-        'modules\tosee\Bootstrap',
-        'modules\users\Bootstrap',
+        'modules\tosee\FrontendBootstrap',
     ],
     'modules'   => [
         'project'   => [

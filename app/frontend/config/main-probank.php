@@ -2,8 +2,7 @@
 
 return [
     'bootstrap' => [
-        'modules\probank\Bootstrap',
-        'modules\users\Bootstrap',
+        'modules\probank\FrontendBootstrap',
     ],
     'modules'   => [
         'project' => [

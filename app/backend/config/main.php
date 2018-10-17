@@ -5,7 +5,7 @@ $params = array_merge(
     require( __DIR__ . '/params.php' ),
     require( __DIR__ . '/params-local.php' )
 );
-// require_once( __DIR__ . '/../../templates/main/backend/BackendAsset.php' );
+
 return [
     'id'           => 'app-backend',
     'basePath'     => dirname( __DIR__ ),
@@ -16,7 +16,6 @@ return [
         \templates\BootstrapBackend::class,
         'modules\probank\BackendBootstrap',
         'modules\tosee\BackendBootstrap',
-
     ],
     'modules' => [
 

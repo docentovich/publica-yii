@@ -1,9 +1,11 @@
 <?php
 
-namespace modules\tosee\services\frontend;
+namespace modules\tosee\services;
 
 use modules\tosee\DTO\PostServiceConfig;
 use modules\tosee\models\common\Post;
+use yii\db\Query;
+use yii\db\QueryBuilder;
 use yii\web\Cookie;
 use components\Services;
 use Yii;
@@ -56,9 +58,10 @@ class PostService extends Services
     public $url;
 
     /**
-     * @var \TransportModel
+     * @var Query
      */
-    public $transport_model;
+    public $prepared_query;
+    public $config;
 
     /**
      * Констукртор. Собираем все что нужно для вывода поста
@@ -68,8 +71,12 @@ class PostService extends Services
      * @param array $config
      * @return PostService
      */
-    public function __construct(PostServiceConfig $config)
-    {
+    public function __construct()
+    {}
+
+    private function prepare(PostServiceConfig $config){
+        $this->config = $config;
+
         if (Yii::$app->request->cookies->has("city_id")) {
             $this->city_id = Yii::$app->request->cookies->getValue("city_id");
         } else {
@@ -79,13 +86,10 @@ class PostService extends Services
             ]));
         }
 
-        $this->transport_model = new \TransportModel(
-            $config,
-            Post::find()
-                ->with(["postData", "image"])
-                ->andWhere(["=", "status", Post::STATUS_ACTIVE])
-                ->andWhere(["=", "city_id", $this->city_id])
-        );
+        $this->prepared_query = Post::find()
+            ->with(["postData", "image"])
+            ->andWhere(["=", "status", Post::STATUS_ACTIVE])
+            ->andWhere(["=", "city_id", $this->city_id]);
 
         $compare_method = '';
         switch ($config->action) {
@@ -100,12 +104,18 @@ class PostService extends Services
                 break;
         }
 
-        $this->transport_model->query->andWhere("event_at ${$compare_method} {$config->date}");
+        $this->prepared_query->andWhere("event_at ${$compare_method} {$config->date}");
     }
 
-    public function posts()
+    public function posts(PostServiceConfig $config)
     {
-        return $this->transport_model->executeAll();
+        $this->prepare($config);
+
+        return new \TransportModel(
+            $this->config,
+            $this->prepared_query,
+            $this->prepared_query->all()
+        );
     }
 
     public function post()

@@ -37,11 +37,12 @@ services:
   db:
         image: mysql:5.7.23
         environment:
-           - MYSQL_USER=root
+#           - MYSQL_USER=root
            - MYSQL_ROOT_PASSWORD=1Vv4nfkCXp
-           - MYSQL_PASSWORD=1Vv4nfkCXp
+#           - MYSQL_PASSWORD=1Vv4nfkCXp
            - MYSQL_DATABASE=tosee
            - TZ=Europe/Moscow
+        command: --innodb_use_native_aio=0
         ports:
           - '3306:3306'
         volumes:

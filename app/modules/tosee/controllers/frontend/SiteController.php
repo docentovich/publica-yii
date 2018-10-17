@@ -4,7 +4,7 @@ namespace modules\tosee\controllers\frontend;
 use modules\tosee\DTO\PostServiceConfig;
 use Yii;
 use yii\web\Controller;
-use modules\tosee\services\frontend\PostService as Post;
+use modules\tosee\services\frontend\PostService;
 use yii\web\Cookie;
 use yii\web\HttpException;
 
@@ -43,7 +43,7 @@ class SiteController extends Controller
     public function actionIndex($page = 1)
     {
         return $this->render('index', [
-            "service"   => (new Post(new PostServiceConfig()))->posts(),
+            "service"   => YII::$app->postService->posts(new PostServiceConfig())
         ]);
     }
 

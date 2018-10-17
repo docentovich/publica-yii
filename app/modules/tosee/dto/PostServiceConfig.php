@@ -2,7 +2,7 @@
 
 namespace modules\tosee\DTO;
 
-class PostServiceConfig implements \DTO
+class PostServiceConfig implements \config
 {
     const ACTION_FUTURE = 1;
     const ACTION_PAST = 2;

@@ -1,3 +1,5 @@
 <?php
 
-interface DTO{}
+interface DTO{
+
+}

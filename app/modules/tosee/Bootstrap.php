@@ -11,22 +11,35 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap ( $app )
     {
-        if( $app->id === "app-frontend"){
+//        define("TOSEE", 1);
+//        define("TOSEE_DEV", "tosee.loc");
+//        define("TOSEE_PROD", "tosee.shablonkin.shn-host.ru");
+//
+//        define("PROBANK", 2);
+//        define("PROBANK_DEV", "probank.loc");
+//        define("PROBANK_PROD", "publicayii-probank.shablonkin.shn-host.ru");
+//
+//        switch ($_SERVER['SERVER_NAME']) {
+//            case  TOSEE_DEV:
+//            case  TOSEE_PROD:
+//                define("PROJECT", TOSEE);
+//                break;
+//            case PROBANK_DEV:
+//            case PROBANK_PROD :
+//                define("PROJECT", PROBANK);
+//                break;
+//        }
 
-            $app->getUrlManager()->addRules(
-                [
-                    // объявление правил здесь
-                    ''                                                                        => 'project/site/index',
-                    '<page:\d+>'                                                              => 'project/site/index',
-                    '<date:[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])>'            => 'project/site/date',
-                    '<date:[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])>/<page:\d+>' => 'project/site/date',
-                    'past'                                                                    => 'project/site/past',
-                    'past/<page:\d+>'                                                         => 'project/site/index',
-                    'search'                                                                  => 'project/site/search',
-                    '<action:\w+>/<id:\d+>'                                                   => 'project/site/<action>',
-                    '<action:[\w\-]+>'                                                        => 'project/site/<action>',
-                ]
-            );
-        }
+        define("TOSEE", 1);
+        define("TOSEE_DEV", "tosee.loc");
+        define("TOSEE_PROD", "tosee.shablonkin.shn-host.ru");
+        define("PROJECT", TOSEE);
+
+
+        $app->setComponents([
+            'postService' => [
+                'class' => 'modules\tosee\services\PostService'
+            ]
+        ]);
     }
 }

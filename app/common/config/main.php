@@ -1,5 +1,17 @@
 <?php
 
+switch ($_SERVER['SERVER_NAME']) {
+    case  TOSEE_DEV:
+    case  TOSEE_PROD:
+        $domain_params = require "main-tosee.php";
+        break;
+    case PROBANK_DEV:
+    case PROBANK_PROD :
+        $domain_params = require "main-probank.php";
+        break;
+
+}
+
 $config = [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language' => 'ru-RU',
@@ -34,7 +46,7 @@ $config = [
         ],
         'assetManager' => [
             'dirMode' => 0777,
-        ],
+        ]
     ],
     'modules' => [
         'user' => [
@@ -46,4 +58,4 @@ $config = [
 if (YII_ENV_DEV) {
     $config['components']['assetManager']['forceCopy'] = true;
 }
-return $config;
+return yii\helpers\ArrayHelper::merge($domain_params, $config);
