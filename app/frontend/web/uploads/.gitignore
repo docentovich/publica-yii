@@ -1,3 +1,5 @@
 */*
-*.jpg
-!noimage*
+*
+!.gitignore
+!noimage.png
+!noimage_origin.jpg

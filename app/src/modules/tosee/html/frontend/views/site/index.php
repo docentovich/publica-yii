@@ -1,56 +1,40 @@
 <?php
-
-use yii\helpers\Html;
-use app\helpers\Helpers;
-
-if (empty($service->items)) {
-    echo "<h1>Нет записей для отображения</h1>";
-    return;
-}
+/**
+ * @var \app\dto\TransportModel $postModel
+ */
 ?>
-    <div class="events">
-        <div class="row">
-            <div class="events__events-list">
-                <?php foreach ($service->items as $post) { ?>
-                    <div class="events__event">
-                        <!-- event -->
-                        <div class="event">
-                            <div class="event__image-wrap">
-                                <?= Html::a(
-                                    Helpers::bgImage(
-                                        $post->image->patch,
-                                        $post->image->name,
-                                        [
-                                            "size" => "350x390",
-                                            "block" => "event",
-                                            "class" => "event__img img-well",
-//                                            "extension" => $post->image->extension
-                                        ]), //передаем html вывода картинки
-                                    "/post/{$post->id}");
-                                ?>
-                                <div class="event__date"><?= Helpers::dateVsDots($post->event_at); ?></div>
-                            </div>
-                            <div class="event__content">
-                                <?= Html::a
-                                (
-                                    $post->postData->title, //заголовок
-                                    "/post/{$post->id}",
-                                    ["class" => "event__title"]
-                                );
-                                ?>
 
-                                <div class="event__description">
-                                    <?= Helpers::cutStringSimbols($post->postData->post_short_desc, 250); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/ event -->
-                    </div>
-                <?php } ?>
-            </div>
+<div class="content-wrapper">
+    <div class="content">
+        <div id="waiting"><i class="fa fa-spinner fa-spin"></i></div>
+        <div class="posts masonry">
+            <div class="grid-sizer"></div>
+            <div class="gutter-sizer"></div>
+
+            <?php
+            /**
+             * @var \app\modules\tosee\models\Post $post
+             */
+            foreach ($postModel->result as $post): ?>
+                <div class="item-post item-masonry" style="display: none">
+                    <a href="/post.html">
+                        <?=
+                        \yii\helpers\Html::a(
+                            \app\helpers\Helpers::image(
+                                'post/' . $post->image->patch,
+                                $post->image->name,
+                                [
+                                    "size" => "550x614",
+                                    "block" => "event",
+                                    "class" => "event__img img-well",
+                                ]), //передаем html вывода картинки
+                                "/post/{$post->id}"
+                        ); ?>
+                        <div class="post-description"><?= $post->getPostDataShortDesc(); ?></div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+
         </div>
     </div>
-    <!--/ events -->
-<?= \app\widgets\pagination\Pagination::widget([
-    "service" => $service
-]);
+</div>

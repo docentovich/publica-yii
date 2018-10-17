@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var string $content
+ */
 use app\assets\FrontendAsset;
 use app\assets\FrontendAssetIE9;
 
@@ -115,45 +118,7 @@ $this->beginPage(); ?>
         </ul>
       </div>
     </div>
-    <div class="content-wrapper">
-      <div class="content">
-        <div id="waiting"><i class="fa fa-spinner fa-spin"></i></div>
-        <div class="posts masonry">
-          <div class="grid-sizer"></div>
-          <div class="gutter-sizer"></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/2.jpg"/>
-              <div class="post-description">1 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/3.jpg"/>
-              <div class="post-description">2 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/4.jpg"/>
-              <div class="post-description">3 концерт софии ротару, концерт софии ротару, концерт софии ротару, концерт софии ротару, </div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/5.jpg"/>
-              <div class="post-description">4 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/6.jpg"/>
-              <div class="post-description">5 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/2.jpg"/>
-              <div class="post-description">6 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/3.jpg"/>
-              <div class="post-description">7 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/4.jpg"/>
-              <div class="post-description">8 концерт софии ротару, концерт софии ротару, концерт софии ротару, концерт софии ротару, </div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/5.jpg"/>
-              <div class="post-description">9 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/6.jpg"/>
-              <div class="post-description">10 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/2.jpg"/>
-              <div class="post-description">11 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/3.jpg"/>
-              <div class="post-description">12 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/4.jpg"/>
-              <div class="post-description">13 концерт софии ротару, концерт софии ротару, концерт софии ротару, концерт софии ротару, </div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/5.jpg"/>
-              <div class="post-description">14 концерт софии ротару</div></a></div>
-          <div class="item-post item-masonry" style="display: none"><a href="/post.html"><img src="<?= $bundle->baseUrl; ?>/images/posts/6.jpg"/>
-              <div class="post-description">15 концерт софии ротару</div></a></div>
-        </div>
-      </div>
-    </div>
+    <?= $content; ?>
     <!-- CDN-->
     <script
             src="https://code.jquery.com/jquery-2.2.4.min.js"

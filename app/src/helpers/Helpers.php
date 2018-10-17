@@ -90,10 +90,10 @@ class Helpers extends Html
     public static function flyResize($folder, $name, $extension, $size, $requaered_extension)
     {
         $dir = Yii::getAlias('@frontend') . "/web/uploads/" . $folder;
-
+        $a = $dir . $name . "." . $extension;
         //аозварт заглушки
         if (!file_exists($dir . $name . "." . $extension)) {
-            return "noimage" . $size . ".png";
+            return self::imageSrc("", "noimage.png", $size, "png");
         }
 
         $size = mb_strtolower($size);
@@ -132,11 +132,14 @@ class Helpers extends Html
 
         //если нет тумбочки ресайзим, возварщаем
         $temp = Yii::getAlias('@frontend') . "/web/uploads/" . $folder . $f_name . $size . "." . $requaered_extension;
-        if (!file_exists($temp))
-            $src .= self::flyResize($folder, $f_name, $f_ext, $size, $requaered_extension);
-        //если есть тумбочка вернем ее отснительный путь
-        else
+        if (!file_exists($temp)) {
+            $image_src_temp = self::flyResize($folder, $f_name, $f_ext, $size, $requaered_extension);
+            $image_src_temp = trim($image_src_temp, '/uploads');
+            $src = '/uploads/' . $image_src_temp;
+            //если есть тумбочка вернем ее отснительный путь
+        }else{
             $src .= $folder . $f_name . $size . "." . $requaered_extension;
+        }
 
         return $src;
     }
@@ -178,18 +181,13 @@ class Helpers extends Html
      */
     public static function image($folder, $name, $params = [])
     {
-
         if (!isset($params['size'])) $params['size'] = "";
         if (isset($params['block'])) $params['class'] .= " " . $params['block'] . "__img";
         if (!isset($params['extension'])) $params['extension'] = "jpg";
-
         if (!isset($params['class'])) $params['class'] = "";
         if (!isset($params['id'])) $params['id'] = "";
         if (!isset($params['alt'])) $params['alt'] = "";
         if (is_array($params['class'])) $params['class'] = implode(" ", $params['class']);
-
-//        if(isset($params['user_id'])) $params['user_id'] .= "/";
-
 
         return '<img alt="' . $params['alt'] . '" src=\'' . self::imageSrc($folder, $name, $params['size'], $params['extension']) . '\'  class="' . $params['class'] . '" id="' . $params['id'] . '" />';
     }
