@@ -13,15 +13,11 @@ class TransportModel extends \app\abstractions\ImmutableDTO
 {
     /**
      * TransportModel constructor.
-     * @param \app\interfaces\config $config
-     * @param \yii\db\Query $query
-     * @param \yii\db\ActiveRecord|mixed $result
+     * @param ConfigQuery $configQuery
+     * @param $result
      */
-    public function __construct(
-        \app\interfaces\config $config,
-        \yii\db\Query $query,
-        $result)
+    public function __construct(ConfigQuery $configQuery, $result)
     {
-        parent::__construct(compact('config', 'query', 'result'));
+        parent::__construct(compact('configQuery', 'result'));
     }
 }
