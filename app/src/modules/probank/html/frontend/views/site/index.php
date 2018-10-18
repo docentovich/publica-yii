@@ -42,7 +42,7 @@ if( empty($service->items) ){
                             ?>
 
                             <div class="event__description">
-                                <?= Helpers::cutStringSimbols($post->postData->post_short_desc, 250); ?>
+                                <?= Helpers::cutStringSymbols($post->postData->post_short_desc, 250); ?>
                             </div>
                         </div>
                     </div>
