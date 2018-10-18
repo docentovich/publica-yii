@@ -13,6 +13,7 @@ class PostServiceConfig implements \app\interfaces\config
 
     public $action;
     public $page;
+    public $id;
     /**
      * @var \DateTime|mixed
      */
@@ -22,6 +23,7 @@ class PostServiceConfig implements \app\interfaces\config
     {
         $this->date =  $config['date'] ?? new \DateTime();
         $this->page =  $config['page'] ?? 1;
-        $this->action =  $config['action_status'] ?? PostServiceConfig::ACTION_FUTURE;
+        $this->action =  $config['action'] ?? PostServiceConfig::ACTION_FUTURE;
+        $this->id =  $config['id'] ?? null;
     }
 }

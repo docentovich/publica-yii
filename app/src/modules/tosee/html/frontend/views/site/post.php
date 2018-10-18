@@ -1,124 +1,727 @@
-<?php
-/**
- * Вид поста
- */
-
-use app\helpers\Helpers;
-
-?>
-
-<!-- single-event -->
-<div class="single-event">
-    <div class="single-event__inner">
-        <?= Helpers::bgImage(
-            $service->items->image->patch,
-            $service->items->image->name,
-            [
-                'class' => "single-event__img img-well",
-                "size" => "860x516",
-            ]
-        );
-        ?>
-<!--        <div style="background-image: url(/images/people/dep1.jpg)" class="">-->
-        <div class="single-event__content">
-            <h1 class="single-event__h1"><?= $service->items->postData->sub_header; ?></h1>
-
-            <div class="single-event__desc"><?= $service->items->postData->post_desc; ?></div>
-            <div class="single-event__image-gal">
-                <!-- image-gal -->
-                <div class="image-gal">
-
-                    <?php
-                    $i = -1;
-                    foreach ($service->items->images as $image) {
-                        $i++;
-//                        var_dump($image);
-                        ?>
-                        <a href="#bs-modal<?=$i?>" data-fancybox="images" class="image-gal__a">
-                            <?= Helpers::bgImage(
-                                    $image->patch,
-                                    $image->name,
-                                    [
-                                        'class' => "image-gal__image",
-                                        "size" => "215x215",
-                                    ]
-                                );
-                            ?>
-<!--                            <span style="background-image: url(/images/people/baba.jpg)"-->
-<!--                                  class="image-gal__image"></span>-->
+<div class="content-wrapper">
+    <div class="content">
+        <div id="waiting"><i class="fa fa-spinner fa-spin"></i></div>
+        <div class="single-post">
+            <div class="post-header"><a href="#">
+                    <div class="chevron-left"></div></a><a href="#">
+                    <div class="chevron-right"></div></a>
+                <div class="title">Концерт в орле</div>
+                <div class="sub-title">25.05.05</div>
+            </div>
+            <div class="post-body">
+                <div class="post-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                <div class="post-additional-photos masonry">
+                    <div class="grid-sizer"></div>
+                    <div class="gutter-sizer"></div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-0">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
                         </a>
-                        <div style="display: none">
-                            <!-- modal -->
-                            <div id="bs-modal<?=$i?>" class="modal">
-                                <div class="modal__to-left"><</div>
-                                <div class="modal__to-right">></div>
-
-                                <!--                            860x516-->
-                                <?= Helpers::image(
-                                    $image->patch,
-                                    $image->name,
-                                    [
-                                        'class' => "modal__image",
-                                        "size" => "940x660",
-                                    ]
-                                ) ?>
-
-                                <div class="modal__content container-fluid">
-                                    <div class="modal__line1">
-                                        <div class="modal__title"><?= $image->alt; ?></div>
-                                        <div class="modal__likes">
-                                            <div class="modal__counter">0</div>
-                                            <div class="modal__hart"><i
-                                                    class="modal__i sprite-img sp-sprite sp-sprite__hart"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal__line2">
-                                        <div
-                                            class="modal__line2-group modal__line2-group_h1 modal__line2-group_opacity">
-                                            <div class="modal__text"><?= Yii::$app->view->params['navigation_label'] ?></div>
-                                        </div>
-                                        <div class="modal__line2-group modal__line2-group_opacity">
-                                            <div class="modal__text hidden-sm hidden-xs">Мне нравиться
-                                            </div>
-                                            <div class="modal__ico"><i
-                                                    class="modal__i sprite-img sp-sprite sp-sprite__like hidden-xs"></i><i
-                                                    class="modal__i sprite-img sp-sprite sp-sprite__likeSm visible-xs"></i>
-                                            </div>
-                                        </div>
-<!--                                        <div class="modal__line2-group modal__line2-group_opacity">-->
-<!--                                            <div class="modal__text hidden-sm hidden-xs">Купить-->
-<!--                                            </div>-->
-<!--                                            <div class="modal__ico"><i-->
-<!--                                                    class="modal__i sprite-img sp-sprite sp-sprite__by hidden-xs"></i><i-->
-<!--                                                    class="modal__i sprite-img sp-sprite sp-sprite__bySm visible-xs"></i>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-                                        <div class="modal__line2-group modal__line2-group_social">
-                                            <div class="modal__text hidden-sm hidden-xs">Поделиться
-                                            </div>
-                                            <div class="modal__ico"><i
-                                                    class="modal__i sprite-img sp-sprite sp-sprite__fb"></i>
-                                            </div>
-                                            <div class="modal__ico"><i
-                                                    class="modal__i sprite-img sp-sprite sp-sprite__vk"></i>
-                                            </div>
-                                            <div class="modal__ico"><i
-                                                    class="modal__i sprite-img sp-sprite sp-sprite__inst"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ modal -->
-                        </div>
-                    <?php } ?>
-
-
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-1">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-2">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-3">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-4">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-6">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-7">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-8">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-9">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-10">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-12">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-13">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-14">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-15">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
+                    <div class="item-photo item-masonry" style="display: none">
+                        <a class="item-photo-a" data-fancybox="gallery" href="#modal-16">
+                            <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                        </a>
+                    </div>
                 </div>
-                <!--/ image-gal -->
+            </div>
+        </div>
+        <div style="display: none">
+            <div class="modal-window" id="modal-0">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="0-info"></i><i class="icon-comments modal-tab-control" rel="0-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-0-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-0-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-1">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="1-info"></i><i class="icon-comments modal-tab-control" rel="1-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-1-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-1-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-2">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="2-info"></i><i class="icon-comments modal-tab-control" rel="2-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-2-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-2-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-3">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="3-info"></i><i class="icon-comments modal-tab-control" rel="3-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-3-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-3-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-4">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="4-info"></i><i class="icon-comments modal-tab-control" rel="4-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-4-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-4-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-6">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="6-info"></i><i class="icon-comments modal-tab-control" rel="6-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-6-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-6-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-7">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="7-info"></i><i class="icon-comments modal-tab-control" rel="7-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-7-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-7-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-8">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="8-info"></i><i class="icon-comments modal-tab-control" rel="8-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-8-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-8-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-9">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="9-info"></i><i class="icon-comments modal-tab-control" rel="9-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-9-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-9-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-10">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="10-info"></i><i class="icon-comments modal-tab-control" rel="10-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-10-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-10-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-12">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="12-info"></i><i class="icon-comments modal-tab-control" rel="12-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-12-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-12-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-13">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="13-info"></i><i class="icon-comments modal-tab-control" rel="13-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-13-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-13-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-14">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="14-info"></i><i class="icon-comments modal-tab-control" rel="14-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-14-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-14-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-15">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="15-info"></i><i class="icon-comments modal-tab-control" rel="15-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-15-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-15-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-window" id="modal-16">
+                <div class="modal-header">
+                    <div class="modal-image">
+                        <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                    </div>
+                    <div class="modal-controls">
+                        <div class="left-controls"><i class="icon-info modal-tab-control" rel="16-info"></i><i class="icon-comments modal-tab-control" rel="16-comments"></i></div>
+                        <div class="right-controls"><i class="icon-like"></i><i class="icon-share"></i><i class="icon-buy"></i></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tab" id="tab-16-comments">
+                        <div class="modal-likes">
+                            <div class="fa fa-heart"></div>
+                            <div class="likes-counter">544</div>
+                        </div>
+                        <div class="modal-comments modal-inner-body">
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-avatar">
+                                    <?= \yii\helpers\Html::img( "/uploads/post/2/59494728a2ead[320x200].jpg" ) ?>
+                                </div>
+                                <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-tab" style="display: none" id="tab-16-info">
+                        <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!--/ single-event -->
