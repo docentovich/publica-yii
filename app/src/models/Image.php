@@ -1,8 +1,8 @@
 <?php
 
-namespace common\models;
+namespace app\models;
 
-use components\beheviors\ImageUpload;
+use app\beheviors\ImageUpload;
 use Yii;
 
 /**
@@ -10,7 +10,7 @@ use Yii;
  *
  * @property int $id
  * @property string $alt
- * @property string $patch
+ * @property string $path
  * @property string $name
  * @property string $extension
  *
@@ -21,7 +21,6 @@ use Yii;
  */
 class Image extends \yii\db\ActiveRecord
 {
-
     /**
      * @var string Сюда загружаем размер для тумбочки
      */
@@ -52,7 +51,7 @@ class Image extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['patch', 'alt', 'name'], 'trim'],
+            [['path', 'alt', 'name'], 'trim'],
         ];
     }
 
@@ -64,7 +63,7 @@ class Image extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('post', 'ID'),
             'alt' => Yii::t('post', 'Alt'),
-            'patch' => Yii::t('post', 'Patch'),
+            'path' => Yii::t('post', 'Patch'),
             'name' => Yii::t('post', 'Name'),
         ];
     }
@@ -102,4 +101,15 @@ class Image extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Profile::className(), ['avatar' => 'id']);
     }
+
+    public function getFullPath(){
+        return $this->path . "/" . $this->name;
+    }
+
+    public function getImageSizeOf($size){
+        list($file_name, $file_extension) = explode('.', $this->name);
+        return "{$this->path}/{$file_name}[{$size}].$file_extension";
+    }
+
+
 }
