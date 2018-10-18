@@ -6,7 +6,7 @@
  * Time: 17:55
  */
 
-namespace app\widgets\pagination;
+namespace app\widgets\____pagination;
 use yii\base\Widget;
 
 /**
