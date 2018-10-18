@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace app\models;
 
 use yii\base\Model;
 use yii\web\UploadedFile;
@@ -31,7 +31,7 @@ class UploadImage extends Model
     /**
      * @var string путь
      */
-    public $patch;
+    public $path;
 
     public $json;
     public $url;
@@ -85,7 +85,7 @@ class UploadImage extends Model
                 }
 
 
-                $this->patch = \Yii::$app->user->getId();
+                $this->path = \Yii::$app->user->getId();
                 $this->new_name = $fileName . "." . $this->file->extension;
 
 
@@ -140,7 +140,7 @@ class UploadImage extends Model
                     }
 
 
-                    $patch = \Yii::$app->user->getId();
+                    $path = \Yii::$app->user->getId();
                     $new_name = $fileName . "." . $file->extension;
 
 
@@ -151,7 +151,7 @@ class UploadImage extends Model
                         'thumbs' => $thumbs,
                     ];
 
-                    $this->multiImages[] = ["patch" => $patch, "new_name" => $new_name, "json" => $json];
+                    $this->multiImages[] = ["path" => $path, "new_name" => $new_name, "json" => $json];
 
                 }
                 return true;

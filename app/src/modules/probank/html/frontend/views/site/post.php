@@ -11,7 +11,7 @@ use app\helpers\Helpers;
 <div class="single-event">
     <div class="single-event__inner">
         <?= Helpers::bgImage(
-            $service->items->image->patch,
+            $service->items->image->path,
             $service->items->image->name,
             [
                 'class' => "single-event__img img-well",
@@ -36,7 +36,7 @@ use app\helpers\Helpers;
                         ?>
                         <a href="#bs-modal<?=$i?>" data-fancybox="images" class="image-gal__a">
                             <?= Helpers::bgImage(
-                                    $image->patch,
+                                    $image->path,
                                     $image->name,
                                     [
                                         'class' => "image-gal__image",
@@ -55,7 +55,7 @@ use app\helpers\Helpers;
 
                                 <!--                            860x516-->
                                 <?= Helpers::image(
-                                    $image->patch,
+                                    $image->path,
                                     $image->name,
                                     [
                                         'class' => "modal__image",

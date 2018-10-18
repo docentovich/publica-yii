@@ -18,7 +18,7 @@ if( empty($service->items) ){
                                 (
                                     Helpers::bgImage
                                     (
-                                        $post->image->patch,
+                                        $post->image->path,
                                         $post->image->name,
                                         [
                                             "size" => "350x390",
@@ -53,6 +53,6 @@ if( empty($service->items) ){
     </div>
 </div>
 <!--/ events -->
-<?= \app\widgets\pagination\Pagination::widget([
+<?= \app\widgets\____pagination\Pagination::widget([
    "service" => $service
 ]);

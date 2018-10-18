@@ -39,7 +39,7 @@ class ImageUpload extends Behavior
         Image::thumbnail($filePatch, $widh, $height) //сохраняем тумбочку
             ->save($filePatch . "/" . $fileName . '_' . $this->owner->size . '.jpg', ['quality' => 80]);
         $this->owner->name  = $file->name . "." . $file->extension;  //сохраняем в модель имя файла
-        $this->owner->patch = Yii::$app->user->getId(); // сохраняем в модель jnyjcbnktmysq genm
+        $this->owner->path = Yii::$app->user->getId(); // сохраняем в модель jnyjcbnktmysq genm
         $this->owner->json = json_encode([ // через модель передаем JSON для ajax
             'url' => '/uploads/' . Yii::$app->user->getId(),
             'thumb' => $fileName . '_' . $this->owner->size . '.jpg'
