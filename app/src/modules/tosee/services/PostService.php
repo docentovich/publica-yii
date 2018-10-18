@@ -2,8 +2,10 @@
 
 namespace app\modules\tosee\services;
 
+use app\dto\ConfigQuery;
 use app\modules\tosee\dto\PostServiceConfig;
 use app\modules\tosee\models\Post;
+use League\Pipeline\Pipeline;
 use yii\db\Query;
 use yii\web\Cookie;
 use Yii;
@@ -29,12 +31,10 @@ class PostService extends \app\abstractions\Services
     public $limit_per_page = 20;
 
 
-
     /**
      * @var string Текущий город
      */
     public $city_id = '1';
-
 
 
     /**
@@ -50,7 +50,21 @@ class PostService extends \app\abstractions\Services
         parent::__construct();
     }
 
-    private function prepareQuery(PostServiceConfig $config): Query
+    public function action(PostServiceConfig $config): \app\dto\TransportModel
+    {
+        switch ($config->action) {
+            case PostServiceConfig::ACTION_PAST:
+            case PostServiceConfig::ACTION_FUTURE:
+            case PostServiceConfig::ACTION_BY_DATE:
+                return $this->postsByDate($config);
+            case PostServiceConfig::ACTION_SEARCH:
+                return $this->postsByKeyword($config);
+            case PostServiceConfig::ACTION_SINGLE_POST:
+                return $this->postsById($config);
+        }
+    }
+
+    public function prepareQuery(ConfigQuery $configQuery): ConfigQuery
     {
         if (Yii::$app->request->cookies->has("city_id")) {
             $this->city_id = Yii::$app->request->cookies->getValue("city_id");
@@ -61,13 +75,16 @@ class PostService extends \app\abstractions\Services
             ]));
         }
 
-        $query = Post::find()
-            ->with(["postData", "image"])
-            ->andWhere(["=", "status", Post::STATUS_ACTIVE])
-            ->andWhere(["=", "city_id", $this->city_id]);
+        $configQuery->query->with(["postData", "image"])
+                ->andWhere(["=", "status", Post::STATUS_ACTIVE])
+                ->andWhere(["=", "city_id", $this->city_id]);
+        return $configQuery;
+    }
 
+    public function prepareQueryByDate(ConfigQuery $configQuery): ConfigQuery
+    {
         $compare_method = '';
-        switch ($config->action) {
+        switch ($configQuery->config->action) {
             case PostServiceConfig::ACTION_FUTURE:
                 $compare_method .= '>=';
                 break;
@@ -79,20 +96,39 @@ class PostService extends \app\abstractions\Services
                 break;
         }
 
-        return $query->andWhere("event_at {$compare_method} {$config->date->format('Y-m-d')}");
+        $configQuery->query->andWhere("event_at {$compare_method} {$configQuery->config->date->format('Y-m-d')}");
+        return $configQuery;
     }
 
-    public function posts(PostServiceConfig $config): \app\dto\TransportModel
+    public function prepareQueryById(ConfigQuery $configQuery): ConfigQuery
     {
-        $query = $this->prepareQuery($config);
-
-        return new \app\dto\TransportModel($config, $query, $query->all());
+        $configQuery->query->andWhere(['id' => $configQuery->config->id]);
+        return $configQuery;
     }
 
-    public function post(): \app\dto\TransportModel
+    public function postsByDate(PostServiceConfig $config): \app\dto\TransportModel
     {
-        return $this->transport_model->executeOne();
+        /** @var ConfigQuery $configQuery */
+        $configQuery = (new Pipeline())
+            ->pipe([$this, 'prepareQuery'])
+            ->pipe([$this, 'prepareQueryByDate'])
+            ->process(new ConfigQuery($config, Post::find()));
+
+        return new \app\dto\TransportModel($configQuery, $configQuery->query->all());
     }
+
+    public function postsById(PostServiceConfig $config): \app\dto\TransportModel
+    {
+        /** @var ConfigQuery $configQuery */
+        $configQuery = (new Pipeline())
+            ->pipe([$this, 'prepareQuery'])
+            ->pipe([$this, 'prepareQueryById'])
+            ->process(new ConfigQuery($config, Post::find()));
+
+        return new \app\dto\TransportModel($configQuery, $configQuery->query->one());
+    }
+
+
 
     /**
      * Считаем сколько постов, добавляем лимиты

@@ -1,6 +1,8 @@
 <?php
+
 namespace app\modules\tosee\controllers\frontend;
 
+use app\dto\TransportModel;
 use app\modules\tosee\dto\PostServiceConfig;
 use Yii;
 use yii\web\Controller;
@@ -33,6 +35,12 @@ class SiteController extends Controller
         ];
     }
 
+    private function getTransportModel($config = [])
+    {
+        return YII::$app->postService->action(
+            new PostServiceConfig($config)
+        );
+    }
 
     /**
      * Экшен вывода постов по условиям
@@ -42,9 +50,8 @@ class SiteController extends Controller
      */
     public function actionIndex($page = 1)
     {
-        $postModel = YII::$app->postService->posts(new PostServiceConfig());
         return $this->render('index', [
-            "postModel"   => $postModel
+            "postModel" => $this->getTransportModel(['action' => PostServiceConfig::ACTION_FUTURE])
         ]);
     }
 
@@ -57,8 +64,7 @@ class SiteController extends Controller
     public function actionPast($page = 1)
     {
         return $this->render('index', [
-            "service"  => (new Post())->page($page)->getPast(),
-            "action"    => SiteController::ACTION_PAST
+            "postModel" => $this->getTransportModel(['action' => PostServiceConfig::ACTION_PAST])
         ]);
     }
 
@@ -71,20 +77,9 @@ class SiteController extends Controller
      */
     public function actionDate($date, $page = 1)
     {
-
-        //передаем в лайоут дату и ссылки
-        Yii::$app->view->params['navigation_label'] = $date;
-        Yii::$app->view->params['next_url'] = "/" . date('Y-m-d', strtotime('+1 day', strtotime($date)));
-        Yii::$app->view->params['prev_url'] = "/" . date('Y-m-d', strtotime('-1 day', strtotime($date)));
-        Yii::$app->view->params['current_date'] = $date;
-
-        $service = (new Post)->page($page)->getByDate($date);
-
         return $this->render('index', [
-            "service" => $service,
+            "postModel" => $this->getTransportModel(['action' => PostServiceConfig::ACTION_BY_DATE, 'date' => $date])
         ]);
-
-
     }
 
     /**
@@ -95,20 +90,8 @@ class SiteController extends Controller
      */
     public function actionPost($id)
     {
-        $id = (int)$id;
-
-        $service = (new Post)->getById($id);
-
-        //передаем в лайоут прошлое
-        Yii::$app->view->params['navigation_label'] = $service->items->postData->title;
-
-        Yii::$app->view->title = $service->items->postData->title;
-
-        Yii::$app->view->params['next_url'] = (isset($service->next)) ?  "/post/" . $service->next->id : "/" ;
-        Yii::$app->view->params['prev_url'] = (isset($service->prev)) ?  "/post/" . $service->prev->id : "/";
-
         return $this->render('post', [
-            'service' => $service
+            "postModel" => $this->getTransportModel(['action' => PostServiceConfig::ACTION_SINGLE_POST, 'id' => (int)$id])
         ]);
     }
 
@@ -121,29 +104,25 @@ class SiteController extends Controller
      */
     public function actionSearch($page = 1)
     {
-        $keyword = Yii::$app->request->get('keyword');
-
-        $service = (new Post)->page($page)->search($keyword);
-
-        //передаем в лайоут ключевое слово
-        Yii::$app->view->params['navigation_label'] = $keyword;
-
         return $this->render('index', [
-            "service" => $service
+            "postModel" => $this->getTransportModel([
+                'action' => PostServiceConfig::ACTION_SEARCH,
+                'keyword' => Yii::$app->request->get('keyword')
+            ])
         ]);
-
     }
 
 
-    public function actionSetCity(){
+    public function actionSetCity()
+    {
         if (!Yii::$app->request->isAjax) {
-            throw new HttpException(403 , "this action can be access by ajax only");
+            throw new HttpException(403, "this action can be access by ajax only");
         }
 
-        $id = (int) Yii::$app->request->post('id');
+        $id = (int)Yii::$app->request->post('id');
 
         Yii::$app->response->cookies->add(new  Cookie([
-            'name'  => 'city_id',
+            'name' => 'city_id',
             'value' => $id
         ]));
 
