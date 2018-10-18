@@ -20,16 +20,8 @@
                     <a href="/post.html">
                         <?=
                         \yii\helpers\Html::a(
-                            \app\helpers\Helpers::image(
-                                'post/' . $post->image->patch,
-                                $post->image->name,
-                                [
-                                    "size" => "550x614",
-                                    "block" => "event",
-                                    "class" => "event__img img-well",
-                                ]), //передаем html вывода картинки
-                                "/post/{$post->id}"
-                        ); ?>
+                            \yii\helpers\Html::img( "/uploads/post/{$post->image->getImageSizeOf('500x500')}" ),
+                            "/post/{$post->id}"); ?>
                         <div class="post-description"><?= $post->getPostDataShortDesc(); ?></div>
                     </a>
                 </div>
