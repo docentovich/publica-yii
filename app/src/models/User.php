@@ -1,7 +1,7 @@
 <?php
-namespace common\models;
+namespace app\models;
 
-use components\beheviors\UserBeforValidate;
+use app\beheviors\UserBeforValidate;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;

@@ -2,8 +2,8 @@
 
 namespace app\modules\tosee\controllers\backend;
 
-use common\models\Image;
-use common\models\UploadImage;
+use app\models\Image;
+use app\models\UploadImage;
 use app\modules\tosee\models\common\PostData;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Yii;
@@ -101,7 +101,7 @@ class AuthorController extends Controller
 
                 if ($model->save()) {
 
-                    $mainImage = new Image(["patch" => $upload->patch, "name" => $upload->new_name]);
+                    $mainImage = new Image(["path" => $upload->path, "name" => $upload->new_name]);
                     $mainImage->save();
 
                     $model->link("postData", $post_data);
@@ -156,7 +156,7 @@ class AuthorController extends Controller
             if ($post_data->load(Yii::$app->request->post())) {
 
                 if ($upload->upload(["350x390"])) {
-                    $model->image->patch = $upload->patch;
+                    $model->image->path = $upload->path;
                     $model->image->name = $upload->new_name;
                     $model->image->save();
                 }
@@ -256,7 +256,7 @@ class AuthorController extends Controller
             foreach ($upload_model->multiImages as &$image) {
 
                 $image_model = new Image();
-                $image_model->patch = $image['patch'];
+                $image_model->path = $image['path'];
                 $image_model->name = $image['new_name'];
 
                 if ($image_model->save()) {

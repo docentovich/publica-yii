@@ -8,7 +8,7 @@
 
 namespace app\modules\probank\services\backend;
 
-use common\models\User;
+use app\models\User;
 use Yii;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use app\Services;

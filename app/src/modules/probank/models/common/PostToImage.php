@@ -3,7 +3,7 @@
 namespace app\modules\probank\models\common;
 
 use Yii;
-use common\models\Image;
+use app\models\Image;
 
 /**
  * This is the model class for table "{{%post_to_image}}".

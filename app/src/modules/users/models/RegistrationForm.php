@@ -12,7 +12,7 @@
 namespace app\modules\users\models;
 
 use dektrium\user\traits\ModuleTrait;
-use common\models\User;
+use app\models\User;
 use Yii;
 use yii\base\Model;
 

@@ -1,7 +1,7 @@
 <?php
 namespace app\widgets\userpanel;
 
-use common\models\Profile;
+use app\models\Profile;
 use yii\base\Widget;
 
 /**

@@ -8,7 +8,7 @@
 
 namespace app\beheviors;
 use yii\base\Behavior;
-use common\models\User;
+use app\models\User;
 use yii\db\ActiveRecord;
 
 

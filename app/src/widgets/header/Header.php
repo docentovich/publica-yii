@@ -2,7 +2,7 @@
 namespace app\widgets\header;
 
 use yii\base\Widget;
-use common\models\City;
+use app\models\City;
 use yii\helpers\ArrayHelper;
 
 /**

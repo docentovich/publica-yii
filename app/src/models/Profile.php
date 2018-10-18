@@ -1,7 +1,7 @@
 <?php
-namespace common\models;
+namespace app\models;
 
-use common\models\Image;
+use app\models\Image;
 use dektrium\user\models\Profile as BaseProfile;
 use borales\extensions\phoneInput\PhoneInputBehavior;
 use borales\extensions\phoneInput\PhoneInputValidator;

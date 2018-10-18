@@ -11,7 +11,7 @@
 
 namespace app\modules\users\controllers\backend;
 
-use common\models\UploadImage;
+use app\models\UploadImage;
 use dektrium\user\Finder;
 use app\modules\tosee\models\common\Post;
 use dektrium\user\models\SettingsForm;
@@ -30,8 +30,8 @@ use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use Yii;
 use yii\imagine\Image;
-use common\models\Image as _ImageModel;
-use common\models\Profile;
+use app\models\Image as _ImageModel;
+use app\models\Profile;
 use dektrium\user\controllers\SettingsController as BaseSettingsController;
 
 /**
@@ -302,7 +302,7 @@ class UserpanelController extends BaseSettingsController
 
         if ( $upload_model->upload(["160x200"]) ) {
 
-            $profile->image->patch = $upload_model->patch;
+            $profile->image->path = $upload_model->path;
             $profile->image->name = $upload_model->new_name;
 
             if($profile->image->save()) {

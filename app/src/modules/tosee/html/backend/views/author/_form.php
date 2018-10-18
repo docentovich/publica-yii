@@ -8,7 +8,7 @@ use dosamigos\ckeditor\CKEditor;
 /* @var $this yii\web\View */
 /* @var $model app\modules\tosee\models\common\Post */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $upload common\models\UploadImage */
+/* @var $upload app\models\UploadImage */
 ?>
 
 <div class="post-form">

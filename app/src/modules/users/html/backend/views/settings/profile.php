@@ -20,7 +20,7 @@ use dosamigos\fileupload\FileUpload;
  * @var yii\widgets\ActiveForm $form
  * @var dektrium\user\models\Profile $model_profile
  * @var dektrium\user\models\Settings $model_settings
- * @var \common\models\UploadImage $upload
+ * @var \app\models\UploadImage $upload
  */
 
 $this->title = Yii::t('user', 'Profile settings');

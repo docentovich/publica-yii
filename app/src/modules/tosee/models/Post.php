@@ -4,8 +4,8 @@ namespace app\modules\tosee\models;
 
 use app\beheviors\PostBeforeValidate;
 use Yii;
-use common\models\Image;
-use common\models\User;
+use app\models\Image;
+use app\models\User;
 
 /**
  * This is the model class for table "{{%post}}".

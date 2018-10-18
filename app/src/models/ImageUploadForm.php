@@ -6,7 +6,7 @@
  * Time: 3:46
  */
 
-namespace common\models;
+namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
