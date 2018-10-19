@@ -2,6 +2,7 @@
 
 namespace app\modules\tosee\models;
 
+use app\abstractions\UpperCaseToUnderscoreGetter;
 use app\beheviors\PostBeforeValidate;
 use Yii;
 use app\models\Image;
@@ -13,6 +14,7 @@ use app\models\User;
  * @property int $id
  * @property int $user_id
  * @property string $event_at Дата события. Для поиска timestump. Триггер для приведения к нужному виду. Индекс
+ * @property string $eventAt
  * @property int $post_category_id Родительская категория. не fkey
  * @property int $image_id Главное изображение. Ссылка на ресурс.
  * @property int $status 0 - на модерации 1 - одобрено 2 - отклонено 3 - заблокировано 4 - удален
@@ -20,12 +22,13 @@ use app\models\User;
  *
  * @property Image $image
  * @property User $user
- * @property PostData[] $postData
+ * @property PostData $postData
  * @property PostToImage[] $postToImages
  * @property Image[] $images
  */
 class Post extends yii\db\ActiveRecord
 {
+    use UpperCaseToUnderscoreGetter;
     CONST STATUS_ON_MODERATE = 0;
     CONST STATUS_NOT_PASS_MODERATE = 1;
     CONST STATUS_BLOCKED = 2;
