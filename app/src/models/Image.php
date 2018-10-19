@@ -63,11 +63,10 @@ class Image extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('post', 'ID'),
             'alt' => Yii::t('post', 'Alt'),
-            'path' => Yii::t('post', 'Patch'),
+            'path' => Yii::t('post', 'Path'),
             'name' => Yii::t('post', 'Name'),
         ];
     }
-
 
 
     /**
@@ -106,7 +105,7 @@ class Image extends \yii\db\ActiveRecord
         return $this->path . "/" . $this->name;
     }
 
-    public function getImageSizeOf($size){
+    public function getFullPathImageSizeOf($size){
         list($file_name, $file_extension) = explode('.', $this->name);
         return "{$this->path}/{$file_name}[{$size}].$file_extension";
     }
