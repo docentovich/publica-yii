@@ -20,43 +20,62 @@ function fn($name, $extension)
 
 function checkFileExist($file_name_and_dir, $file_extension)
 {
-    if (file_exists($response_file_path = pathOf(fn($file_name_and_dir, $file_extension)))) { // if  exist
+    try {
+        return _checkFileExist($file_name_and_dir, $file_extension);
+    } catch (Exception $e) {
+        return _checkFileExist("noimage", 'jpg');
+    }
+}
+
+function _checkFileExist($file_name_and_dir, $file_extension)
+{
+    if (file_exists($response_file_path = pathOf(fn($file_name_and_dir, $file_extension)))) {
+        // if  exist
         return $response_file_path;
     }
 
-    preg_match('/(.*)\[(.*)\]/', $file_name_and_dir, $matches);
+    preg_match('/(.*)\[((\d+x\d+)|(Rx\d+)|(\d+xR))\]/', $file_name_and_dir, $matches);
 
     if (!isset($matches[2])) {
         // user request file with out size suffix but we have not found it before? so return noimage
-        return checkFileExist("noimage", $file_extension);
+        throw new \app\Exceptions\IncorrectImageSizeRequest();
     }
 
     list(, $file_name_original, $size) = $matches;
 
     if (!in_array($size, \app\constants\Constants::ALLOWED_IMAGE_SIZES)) {
         // not allowed size
-        return checkFileExist("noimage", $file_extension);
+        throw new \app\Exceptions\IncorrectImageSizeRequest;
     }
 
+    if (!file_exists(pathOf(fn($file_name_original, $file_extension)))) {
+        // if not exist origin
+        throw new \app\Exceptions\NoOriginImageRequest;
+    }
 
-    if (!file_exists(pathOf(fn($file_name_original, $file_extension)))) { // if not exist origin
-        return checkFileExist("noimage[{$size}]", $file_extension);
-    } else {
+    try {
         return resizeFileFromOriginal(
             pathOf($file_name_original),
             $size,
             $file_extension
         );
+    } catch (Exception $e) {
+        throw new Exception();
     }
+
+
 }
 
 function resizeFileFromOriginal($original_file_and_dir, $size, $file_extension)
 {
     $size = mb_strtolower($size);
-    list($width, $height) = explode("x", $size);
+    list($width, $height) = explode("x", str_replace('r', 100000, $size) );
+
     $return_file_name_and_dir = fn("{$original_file_and_dir}[{$size}]", $file_extension);
     // save
-    \yii\imagine\Image::thumbnail(fn($original_file_and_dir, $file_extension), $width, $height)
+    \yii\imagine\Image::getImagine()
+        ->open(fn($original_file_and_dir, $file_extension))
+        ->thumbnail(new \Imagine\Image\Box($width, $height))
         ->save($return_file_name_and_dir, ['quality' => 90]);
 
     return $return_file_name_and_dir;
