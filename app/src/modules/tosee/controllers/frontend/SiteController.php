@@ -2,11 +2,9 @@
 
 namespace app\modules\tosee\controllers\frontend;
 
-use app\dto\TransportModel;
 use app\modules\tosee\dto\PostServiceConfig;
 use Yii;
 use yii\web\Controller;
-use app\modules\tosee\services\PostService;
 use yii\web\Cookie;
 use yii\web\HttpException;
 
@@ -35,7 +33,7 @@ class SiteController extends Controller
         ];
     }
 
-    private function getTransportModel($config = [])
+    private function getTransportModel($config = []): \app\dto\PostTransportModel
     {
         return YII::$app->postService->action(
             new PostServiceConfig($config)

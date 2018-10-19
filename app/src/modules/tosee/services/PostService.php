@@ -6,7 +6,6 @@ use app\dto\ConfigQuery;
 use app\modules\tosee\dto\PostServiceConfig;
 use app\modules\tosee\models\Post;
 use League\Pipeline\Pipeline;
-use yii\db\Query;
 use yii\web\Cookie;
 use Yii;
 use yii\web\HttpException;
@@ -24,18 +23,9 @@ class PostService extends \app\abstractions\Services
 {
 
     /**
-     * Лимит итемов на страницу
-     *
-     * @var int
-     */
-    public $limit_per_page = 20;
-
-
-    /**
      * @var string Текущий город
      */
     public $city_id = '1';
-
 
     /**
      * Констукртор. Собираем все что нужно для вывода поста
@@ -50,7 +40,7 @@ class PostService extends \app\abstractions\Services
         parent::__construct();
     }
 
-    public function action(PostServiceConfig $config): \app\dto\TransportModel
+    public function action(PostServiceConfig $config): \app\dto\PostTransportModel
     {
         switch ($config->action) {
             case PostServiceConfig::ACTION_PAST:
@@ -106,7 +96,7 @@ class PostService extends \app\abstractions\Services
         return $configQuery;
     }
 
-    public function postsByDate(PostServiceConfig $config): \app\dto\TransportModel
+    public function postsByDate(PostServiceConfig $config): \app\dto\PostTransportModel
     {
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
@@ -114,10 +104,10 @@ class PostService extends \app\abstractions\Services
             ->pipe([$this, 'prepareQueryByDate'])
             ->process(new ConfigQuery($config, Post::find()));
 
-        return new \app\dto\TransportModel($configQuery, $configQuery->query->all());
+        return new \app\dto\PostTransportModel($configQuery, $configQuery->query->all());
     }
 
-    public function postsById(PostServiceConfig $config): \app\dto\TransportModel
+    public function postsById(PostServiceConfig $config): \app\dto\PostTransportModel
     {
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
@@ -125,7 +115,7 @@ class PostService extends \app\abstractions\Services
             ->pipe([$this, 'prepareQueryById'])
             ->process(new ConfigQuery($config, Post::find()));
 
-        return new \app\dto\TransportModel($configQuery, $configQuery->query->one());
+        return new \app\dto\PostTransportModel($configQuery, $configQuery->query->one());
     }
 
 
@@ -208,7 +198,7 @@ class PostService extends \app\abstractions\Services
      * @param string $keyword
      * @return $this
      */
-    public function search($keyword): \app\dto\TransportModel
+    public function search($keyword): \app\dto\PostTransportModel
     {
         $params =
             [
