@@ -4,8 +4,8 @@ return [
     'bootstrap' => [
         'app\modules\tosee\FrontendBootstrap',
     ],
-    'modules'   => [
-        'project'   => [
+    'modules' => [
+        'project' => [
             'class' => 'app\modules\tosee\Module',
         ],
     ],

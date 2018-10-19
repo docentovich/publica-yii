@@ -27,11 +27,6 @@ return [
         ],
         'user'  => [
             'class' => 'dektrium\user\Module',
-            //            'as backend' => [
-            //                'class' => 'dektrium\user\filters\BackendFilter',
-            //                'controllers' => ['profile', 'recovery', 'settings']
-            //            ],
-
             'layout'        => '@current_template/layouts/main',
 
             'controllerMap' => [
@@ -50,19 +45,15 @@ return [
                 'settings' => 'app\modules\users\controllers\backend\UserpanelController',
             ],
             'modelMap'      => [
-                'Profile'          => \common\models\Profile::class,
+                'Profile'          => \app\models\Profile::class,
                 'RegistrationForm' => \app\modules\users\models\RegistrationForm::class,
-                'User'             => \common\models\User::class,
+                'User'             => \app\models\User::class,
             ],
             'urlRules' => [
             ],
         ],
-        //        'rbac' => 'dektrium\rbac\RbacWebModule',
     ],
     'components' => [
-        //        'errorHandler' => [
-        //            'errorAction' => 'tosee/site/error',
-        //        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
             'baseUrl'   => '/admin',
@@ -82,11 +73,6 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => TRUE,
             'showScriptName'  => FALSE,
-            // 'rules'           => [
-            //
-            //     'avatar-upload'                                       => '/user/settings/upload-avatar',
-            //     '<action:[\w\-]+>'                                    => '/user/settings/<action>',
-            // ],
         ],
         // вьюшки дектриума
         'view'       => [

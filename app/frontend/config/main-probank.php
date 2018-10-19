@@ -4,10 +4,9 @@ return [
     'bootstrap' => [
         'app\modules\probank\FrontendBootstrap',
     ],
-    'modules'   => [
+    'modules' => [
         'project' => [
             'class' => 'app\modules\probank\Module',
         ],
-
     ],
 ];

@@ -15,7 +15,6 @@ switch ( $_SERVER[ 'SERVER_NAME' ] ) {
     case PROBANK_PROD :
         $domain_params = require "main-probank.php";
         break;
-
 }
 
 
@@ -67,7 +66,6 @@ $config = [
             // following line will restrict access to admin controller from frontend application
             'as frontend' => 'dektrium\user\filters\FrontendFilter',
         ],
-        //        'rbac' => 'dektrium\rbac\RbacWebModule',
     ],
     'params'     => $params,
 ];
