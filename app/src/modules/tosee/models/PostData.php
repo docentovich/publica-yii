@@ -2,6 +2,7 @@
 
 namespace app\modules\tosee\models;
 
+use app\abstractions\UpperCaseToUnderscoreGetter;
 use Yii;
 
 /**
@@ -19,6 +20,8 @@ use Yii;
  */
 class PostData extends \yii\db\ActiveRecord
 {
+    use UpperCaseToUnderscoreGetter;
+
     /**
      * @inheritdoc
      */
