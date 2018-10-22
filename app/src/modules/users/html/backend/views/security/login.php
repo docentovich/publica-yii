@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Dektrium project.
- *
- * (c) Dektrium project <http://github.com/dektrium>
- *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
- */
-
 use dektrium\user\widgets\Connect;
 //use dektrium\user\models\LoginForm;
 use yii\helpers\Html;
@@ -44,15 +35,6 @@ $bundle = BackendAsset::register($this);
         'class' => 'login__center',
     ]) ?>
 
-    <?php /*if ($module->debug): ?>
-        <?= $form->field($model, 'login', [
-            'inputOptions' => [
-                'autofocus' => 'autofocus',
-                'class' => 'login__input',
-                'tabindex' => '1']])->dropDownList(LoginForm::loginList());
-        ?>
-
-    <?php else: */ ?>
     <div class="login__input">
         <?= $form->field($model,
             'login',
@@ -67,13 +49,7 @@ $bundle = BackendAsset::register($this);
         )->label(false);
         ?>
     </div>
-    <?php // endif ?>
 
-    <?php /* if ($module->debug): ?>
-        <div class="alert alert-warning">
-            <?= Yii::t('user', 'Password is not necessary because the module is in DEBUG mode.'); ?>
-        </div>
-    <?php else: */ ?>
     <div class="login__input">
         <?= $form->field(
             $model,

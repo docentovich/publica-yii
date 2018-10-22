@@ -16,8 +16,7 @@ $this->beginPage(); ?>
     <meta name="keywords" content=""/>
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Landing Page</title>
-    <link rel="icon" href="/favicon.png" type="image/x-icon"/>
+    <title><?= Html::encode($this->title) ?></title>
     <!-- CDN-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
     <!-- --CDN---->
