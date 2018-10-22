@@ -6,17 +6,34 @@ $params = array_merge(
     require( __DIR__ . '/params-local.php' )
 );
 
-switch ( $_SERVER[ 'SERVER_NAME' ] ) {
-    case  TOSEE_DEV:
-    case  TOSEE_PROD:
-        $domain_params = require "main-tosee.php";
+switch (PROJECT) {
+    case  TOSEE:
+        $domain_params = [
+            'bootstrap' => [
+                'app\modules\tosee\Bootstrap',
+                'app\modules\tosee\FrontendBootstrap',
+            ],
+            'modules' => [
+                'project' => [
+                    'class' => 'app\modules\tosee\Module',
+                ]
+            ]
+        ];
         break;
-    case PROBANK_DEV:
-    case PROBANK_PROD :
-        $domain_params = require "main-probank.php";
+    case PROBANK:
+        $domain_params = [
+            'bootstrap' => [
+                'app\modules\probank\Bootstrap',
+                'app\modules\probank\FrontendBootstrap',
+            ],
+            'modules' => [
+                'project' => [
+                    'class' => 'app\modules\probank\Module',
+                ]
+            ]
+        ];
         break;
 }
-
 
 $config = [
     'id'       => 'app-frontend',

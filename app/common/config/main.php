@@ -1,22 +1,5 @@
 <?php
 
-switch (PROJECT) {
-    case  TOSEE:
-        $domain_params = [
-            'bootstrap' => [
-                'app\modules\tosee\Bootstrap',
-            ],
-        ];
-        break;
-    case PROBANK:
-        $domain_params = [
-            'bootstrap' => [
-                'app\modules\probank\Bootstrap',
-            ],
-        ];
-        break;
-}
-
 $config = [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language' => 'ru-RU',
@@ -63,4 +46,5 @@ $config = [
 if (YII_ENV_DEV) {
     $config['components']['assetManager']['forceCopy'] = true;
 }
-return yii\helpers\ArrayHelper::merge($domain_params, $config);
+
+return $config;
