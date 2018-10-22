@@ -14,11 +14,10 @@ use Yii;
  * @property string $name
  * @property string $extension
  *
- * @property Post[] $posts
- * @property PostToImage[] $postToImages
- * @property Post[] $posts0
  * @property Profile[] $profiles
  * @property Comments[] comments
+ * @property int likes
+ * @property string desc
  */
 class Image extends \yii\db\ActiveRecord
 {
@@ -67,31 +66,6 @@ class Image extends \yii\db\ActiveRecord
             'path' => Yii::t('post', 'Path'),
             'name' => Yii::t('post', 'Name'),
         ];
-    }
-
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPosts()
-    {
-        return $this->hasMany(Post::className(), ['image_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPostToImages()
-    {
-        return $this->hasMany(PostToImage::className(), ['image_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPosts0()
-    {
-        return $this->hasMany(Post::className(), ['id' => 'post_id'])->viaTable(PostToImage::tableName(), ['image_id' => 'id']);
     }
 
     /**

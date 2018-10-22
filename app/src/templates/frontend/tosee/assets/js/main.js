@@ -1,52 +1,40 @@
 (function ($) {
 //=require ./js/*.js
-(function ($) {
-
-    /** remove body classes **/
-    $('body').removeClass('no-js');
-    $('body').imagesLoaded(function () {
-        setTimeout(function () {
-            $('body').removeClass('pageload');
-        }, 5);
-    });
-
-    /** check if mobile **/
+/** remove body classes **/
+$('body').removeClass('no-js');
+$('body').imagesLoaded(function () {
     setTimeout(function () {
-        if (window.mobileAndTabletcheck && window.mobileAndTabletcheck()) {
-            $('body').addClass('mobile');
+        $('body').removeClass('pageload');
+    }, 5);
+});
 
-            if (!window.mobilecheck()) {
-                $('body').addClass('tablet');
-            }
+/** check if mobile **/
+setTimeout(function () {
+    if (window.mobileAndTabletcheck && window.mobileAndTabletcheck()) {
+        $('body').addClass('mobile');
+
+        if (!window.mobilecheck()) {
+            $('body').addClass('tablet');
         }
-    });
+    }
+});
 
 
-    /** waiting hide **/
-    $('body').imagesLoaded(function () {
-        $('#waiting').hide();
-    });
-
-
-})(jQuery);
-
-
-(function ($) {
-
-    /** fancybox gallary **/
-    $('body').imagesLoaded(function () {
-        setTimeout(function () {
-            $('[data-fancybox="gallery"]').fancybox({
-                helpers: {
-                    overlay: {locked: false}
-                },
-                touch: false
-            });
-        }, 5);
-    });
-
-
-})(jQuery);
+/** waiting hide **/
+$('body').imagesLoaded(function () {
+    $('#waiting').hide();
+});
+/** fancybox gallary **/
+$('body').imagesLoaded(function () {
+    setTimeout(function () {
+        $('[data-fancybox="gallery"]').fancybox({
+            helpers: {
+                overlay: {locked: false}
+            },
+            touch: false
+        });
+    }, 5);
+});
 
 
 /** controls on click */
@@ -109,39 +97,28 @@ function hideOtherOverlay(rel) {
     $('.overlay:not(#' + rel + '-overlay)').removeClass('is-open');
 }
 
-(function ($) {
+/** mask **/
+$(document).ready(function () {
+    $('input[type="tel"]').inputmask({'mask': '(999) 999-99-99'});
+    $('input[data-inputmask]').inputmask();
+});
+/** masonry show **/
+$('body').imagesLoaded(function () {
+    $('.item-masonry').show();
+});
 
-    /** mask **/
-    $(document).ready(function () {
-        $('input[type="tel"]').inputmask({"mask": "(999) 999-99-99"});
-        $('input[data-inputmask]').inputmask();
-    });
-
-
-})(jQuery);
-
-
-(function ($) {
-
-    /** masonry show **/
-    $('body').imagesLoaded(function () {
-        $('.item-masonry').show();
-    });
-
-    $('body').imagesLoaded(function () {
-        setTimeout(function () {
-            $('.masonry').masonry({
-                itemSelector: '.item-masonry',
-                columnWidth: '.grid-sizer',
-                gutter: '.gutter-sizer',
-                fitWidth: true,
-                horizontalOrder: true,
-                resize: true
-            });
-        }, 5);
-    });
-
-})(jQuery);
+$('body').imagesLoaded(function () {
+    setTimeout(function () {
+        $('.masonry').masonry({
+            itemSelector: '.item-masonry',
+            columnWidth: '.grid-sizer',
+            gutter: '.gutter-sizer',
+            fitWidth: true,
+            horizontalOrder: true,
+            resize: true
+        });
+    }, 5);
+});
 
 
 window.mobilecheck = function() {
@@ -158,24 +135,19 @@ window.mobileAndTabletcheck = function() {
 $( document ).ready(function() {
     $('.modal-tab-control').on('click', function(){
         var rel = $(this).attr('rel');
-        $('.modal-tab').hide();
+        $(this).parents('.modal-window').find('.modal-tab').hide();
         $('#tab-' + rel).show();
         $('.modal-tab-control').removeClass('is-active');
         $(this).addClass('is-active');
     })
 });
-(function ($) {
-
-    /** trigger click **/
-    $(document).ready(function () {
-        $('.trigger-click').on('click', function () {
-            var rel = $(this).attr('rel');
-            $('#' + rel).trigger('click');
-        });
+/** trigger click **/
+$(document).ready(function () {
+    $('.trigger-click').on('click', function () {
+        var rel = $(this).attr('rel');
+        $('#' + rel).trigger('click');
     });
-
-
-})(jQuery);
+});
 
 
 })(jQuery);

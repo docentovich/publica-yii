@@ -20,8 +20,8 @@ class ImmutableDTO implements \app\interfaces\dto
         }
     }
 
-    public function __set($key, $val){
+    public function __set($key, $val)
+    {
         return;
     }
-
 }

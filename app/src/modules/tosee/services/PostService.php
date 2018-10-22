@@ -66,9 +66,8 @@ class PostService extends \app\abstractions\Services
         }
 
         $configQuery->query->with(["postData", "image"])
-//                ->leftJoin('post', ['post.author_id' => 'author.id']) // the table name and the condition for 'ON'
-                ->andWhere(["=", "status", Post::STATUS_ACTIVE])
-                ->andWhere(["=", "city_id", $this->city_id]);
+            ->andWhere(["=", "status", Post::STATUS_ACTIVE])
+            ->andWhere(["=", "city_id", $this->city_id]);
         return $configQuery;
     }
 
@@ -116,10 +115,34 @@ class PostService extends \app\abstractions\Services
             ->pipe([$this, 'prepareQueryById'])
             ->process(new ConfigQuery($config, Post::find()));
 
-        return new \app\dto\PostTransportModel($configQuery, $configQuery->query->one());
+        $post = $configQuery->query->one();
+
+        $prevPost = $this->siblingPost('<', $post);
+        $nextPost = $this->siblingPost('>', $post);
+
+
+        return new \app\dto\PostTransportModel(
+            $configQuery,
+            $post,
+            $this->postLink($prevPost),
+            $this->postLink($nextPost)
+        );
     }
 
+    private function siblingPost($compare, $post)
+    {
+        return \Yii::$app->db->cache(function () use ($post, $compare) {
+            return Post::find()
+                ->andWhere([$compare, 'id', $post->id])
+                ->andWhere(['=', 'status', Post::STATUS_ACTIVE])
+                ->one();
+        }, 60);
+    }
 
+    private function postLink($model)
+    {
+        return ($model) ? "/post/{$model->id}" : '#';
+    }
 
     /**
      * Считаем сколько постов, добавляем лимиты

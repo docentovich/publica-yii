@@ -8,11 +8,11 @@
         <div id="waiting"><i class="fa fa-spinner fa-spin"></i></div>
         <div class="single-post">
             <div class="post-header">
-                <a href="<?= ($postModel->result->prevPost) ? "/post/{$postModel->result->prevPost->id}" : '#'; ?>">
+                <a href="<?= $postModel->prevLink; ?>">
                     <div class="chevron-left"></div>
                 </a>
 
-                <a href="<?= ($postModel->result->nextPost) ? "/post/{$postModel->result->nextPost->id}" : '#'; ?>">
+                <a href="<?= $postModel->nextLink; ?>">
                     <div class="chevron-right"></div>
                 </a>
 
@@ -62,8 +62,8 @@
                         </div>
                         <div class="modal-controls">
                             <div class="left-controls">
-                                <i class="icon-info modal-tab-control" rel="0-info"></i>
-                                <i class="icon-comments modal-tab-control" rel="0-comments"></i>
+                                <i class="icon-info modal-tab-control" rel="<?= $key ?>-info"></i>
+                                <i class="icon-comments modal-tab-control" rel="<?= $key ?>-comments"></i>
                             </div>
                             <div class="right-controls">
                                 <i class="icon-like"></i>
@@ -73,10 +73,10 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <div class="modal-tab modal-comments" id="tab-0-comments">
+                        <div class="modal-tab modal-comments" id="tab-<?= $key ?>-comments">
                             <div class="modal-likes">
                                 <div class="fa fa-heart"></div>
-                                <div class="likes-counter">544</div>
+                                <div class="likes-counter"><?= $image->likes ?></div>
                             </div>
                             <div class=" modal-inner-body">
 
@@ -91,14 +91,13 @@
                                         </div>
                                     </div>
                                 <?php } ?>
+                                <div class="comment"></div>
 
                             </div>
                         </div>
-                        <div class="modal-tab modal-info" style="display: none" id="tab-0-info">
-                            <div class=" modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                minim
-                                veniam, quis nostrud exercitation ullamco
+                        <div class="modal-tab modal-info" style="display: none" id="tab-<?= $key ?>-info">
+                            <div class=" modal-inner-body">
+                                <?= $image->desc ?>
                             </div>
                         </div>
                     </div>

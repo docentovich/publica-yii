@@ -134,16 +134,6 @@ class Post extends yii\db\ActiveRecord
             ->with(['comments']);
     }
 
-//    /**
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getComments()
-//    {
-//        return $this->hasMany(Comments::className(), ['id' => 'image_id'])
-//            ->viaTable(Image::tableName(), ['id' => 'image_id'])
-//            ->viaTable(PostToImage::tableName(), ['post_id' => 'id']);
-//    }
-
     public function getPostDataShortDesc()
     {
         return $this->postData->post_short_desc;
@@ -152,26 +142,6 @@ class Post extends yii\db\ActiveRecord
     public function getPostDataDesc()
     {
         return $this->postData->post_desc;
-    }
-
-    public function getNextPost()
-    {
-        return \Yii::$app->db->cache(function () {
-            return Post::find()
-                ->andWhere(['>', 'id', $this->id])
-                ->andWhere(['=', 'status', self::STATUS_ACTIVE])
-                ->one();
-        }, 60);
-    }
-
-    public function getPrevPost()
-    {
-        return Yii::$app->db->cache(function () {
-            return Post::find()
-                ->andWhere(['<', 'id', $this->id])
-                ->andWhere(['=', 'status', self::STATUS_ACTIVE])
-                ->one();
-        }, 60);
     }
 
 }
