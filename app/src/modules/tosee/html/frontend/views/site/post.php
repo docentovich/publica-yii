@@ -7,11 +7,15 @@
     <div class="content">
         <div id="waiting"><i class="fa fa-spinner fa-spin"></i></div>
         <div class="single-post">
-            <div class="post-header"><a href="#">
+            <div class="post-header">
+                <a href="<?= ($postModel->result->prevPost) ? "/post/{$postModel->result->prevPost->id}" : '#'; ?>">
                     <div class="chevron-left"></div>
-                </a><a href="#">
+                </a>
+
+                <a href="<?= ($postModel->result->nextPost) ? "/post/{$postModel->result->nextPost->id}" : '#'; ?>">
                     <div class="chevron-right"></div>
                 </a>
+
                 <div class="title"><?= $postModel->result->postData->title; ?></div>
                 <div class="sub-title"><?= $postModel->result->eventAt; ?></div>
             </div>
@@ -53,7 +57,6 @@
                                     "lg" => "1500x500",
                                 ]
                             ]) ?>
-<!--                            --><?//= \yii\helpers\Html::img("/uploads/post/{$image->getFullPathImageSizeOf('770x500')}") ?>
                         </div>
                         <div class="modal-controls">
                             <div class="left-controls">
@@ -74,27 +77,19 @@
                                 <div class="likes-counter">544</div>
                             </div>
                             <div class="modal-comments modal-inner-body">
-                                <div class="comment">
-                                    <div class="comment-avatar">
-                                        <?= \yii\helpers\Html::img("/uploads/post/2/59494728a2ead[320x200].jpg") ?>
+
+                                <?php foreach ($image->comments as $comment) { ?>
+                                    <div class="comment">
+                                        <div class="comment-avatar">
+                                            <?= \yii\helpers\Html::img("/uploads/{$comment->avatar0->getFullPathImageSizeOf('40x40')}") ?>
+                                        </div>
+                                        <div class="comment-description">
+                                            <strong><?= $comment->title ?></strong>
+                                            <span><?= $comment->text ?></span>
+                                        </div>
                                     </div>
-                                    <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span>
-                                    </div>
-                                </div>
-                                <div class="comment">
-                                    <div class="comment-avatar">
-                                        <?= \yii\helpers\Html::img("/uploads/post/2/59494728a2ead[320x200].jpg") ?>
-                                    </div>
-                                    <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span>
-                                    </div>
-                                </div>
-                                <div class="comment">
-                                    <div class="comment-avatar">
-                                        <?= \yii\helpers\Html::img("/uploads/post/2/59494728a2ead[320x200].jpg") ?>
-                                    </div>
-                                    <div class="comment-description"><strong>user name</strong><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</span>
-                                    </div>
-                                </div>
+                                <?php } ?>
+
                             </div>
                         </div>
                         <div class="modal-tab" style="display: none" id="tab-0-info">

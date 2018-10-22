@@ -18,6 +18,7 @@ use Yii;
  * @property PostToImage[] $postToImages
  * @property Post[] $posts0
  * @property Profile[] $profiles
+ * @property Comments[] comments
  */
 class Image extends \yii\db\ActiveRecord
 {
@@ -108,6 +109,14 @@ class Image extends \yii\db\ActiveRecord
     public function getFullPathImageSizeOf($size){
         list($file_name, $file_extension) = explode('.', $this->name);
         return "{$this->path}/{$file_name}[{$size}].$file_extension";
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComments()
+    {
+        return $this->hasMany(Comments::className(), ['image_id' => 'id']);
     }
 
 

@@ -4,6 +4,7 @@ namespace app\modules\tosee\models;
 
 use app\abstractions\UpperCaseToUnderscoreGetter;
 use app\beheviors\PostBeforeValidate;
+use app\models\Comments;
 use Yii;
 use app\models\Image;
 use app\models\User;
@@ -19,7 +20,8 @@ use app\models\User;
  * @property int $image_id Главное изображение. Ссылка на ресурс.
  * @property int $status 0 - на модерации 1 - одобрено 2 - отклонено 3 - заблокировано 4 - удален
  * @property string $created_at Дата создания. Для вывода на страницу постов. Задается триггером
- *
+ * @property Post nextPost
+ * @property Post prevPost
  * @property Image $image
  * @property User $user
  * @property PostData $postData
@@ -33,6 +35,7 @@ class Post extends yii\db\ActiveRecord
     CONST STATUS_NOT_PASS_MODERATE = 1;
     CONST STATUS_BLOCKED = 2;
     CONST STATUS_ACTIVE = 3;
+    private $cache = [];
 
     /**
      * @inheritdoc
@@ -115,18 +118,18 @@ class Post extends yii\db\ActiveRecord
         return $this->hasMany(PostToImage::className(), ['post_id' => 'id']);
     }
 
+    public function getPostDataTitle()
+    {
+        return $this->postData->title;
+    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getImages()
     {
         return $this->hasMany(Image::className(), ['id' => 'image_id'])->viaTable(PostToImage::tableName(), ['post_id' => 'id']);
-    }
-
-
-    public function getPostDataTitle()
-    {
-        return $this->postData->title;
     }
 
     public function getPostDataShortDesc()
@@ -137,6 +140,26 @@ class Post extends yii\db\ActiveRecord
     public function getPostDataDesc()
     {
         return $this->postData->post_desc;
+    }
+
+    public function getNextPost()
+    {
+        return \Yii::$app->db->cache(function () {
+            return Post::find()
+                ->andWhere(['>', 'id', $this->id])
+                ->andWhere(['=', 'status', self::STATUS_ACTIVE])
+                ->one();
+        }, 60);
+    }
+
+    public function getPrevPost()
+    {
+        return Yii::$app->db->cache(function () {
+            return Post::find()
+                ->andWhere(['<', 'id', $this->id])
+                ->andWhere(['=', 'status', self::STATUS_ACTIVE])
+                ->one();
+        }, 60);
     }
 
 }
