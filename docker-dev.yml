@@ -7,7 +7,7 @@ services:
        - "9000:9000"
       environment:
         PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
-#        XDEBUG_CONFIG: remote_host=127.0.0.1
+        XDEBUG_CONFIG: remote_host=${DBG_IP}
       links:
         - db
       volumes:
