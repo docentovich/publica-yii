@@ -1,72 +1,110 @@
-<?php
-use yii\helpers\Html;
-use app\helpers\Helpers;
-use app\widgets\header\HeaderAsset;
-use app\widgets\sidebar\Sidebar;
-
-/**
- * Самая верхняя плашечка
- *
- * @var string $logo         Логотип текущего модуля
- * @var array $cities        Массив городов
- * @var int $current_city_id Текущий ИД города
- */
-$bundle = HeaderAsset::register( $this );
-?>
-
-<!-- header-dd -->
-<div class="header-dd-outer">
-  <div class="header-dd">
-    <div class="container container-header">
-      <div class="row">
-        <div class="header-dd__inner col-xs-24">
-          <div class="header-dd__item">
-            <div class="header-dd__item-inner header-dd__item-inner_small-fz-item"><i
-                  class="header-dd__i fa fa-language"></i>
+<header>
+    <div id="header-inner">
+        <div class="navigation-panel">
+            <div class="navigation-part">
+                <div class="menu">
+                    <div class="hamburger toggle-overlay" id="service-menu" rel="service-menu">
+                        <img src="<?= $bundle->baseUrl; ?>/images/icons/burger.svg"/>
+                    </div>
+                    <div class="toggle-drop-down-action-panel base-logo" id="services" rel="services">
+                        <img src="<?= $bundle->baseUrl; ?>/images/logo-inline/tosee.svg"/>
+                    </div>
+                </div>
             </div>
-            <div class="header-dd__item-label">Язык
+            <div class="navigation-part">
+                <div class="controls">
+                    <div class="toggle-drop-down-action-panel control" id="search" rel="search">
+                        <i class="icon-search"></i>
+                    </div>
+                    <div class="toggle-drop-down-action-panel control" id="geo" rel="geo">
+                        <i class="icon-geo"></i>
+                    </div>
+                    <div class="toggle-drop-down-action-panel control" id="enter" rel="enter">
+                        <a href="/admin">
+                            <i class="icon-enter"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div rel="city" class="header-dd__item sidebar-open">
-            <div class="header-dd__item-inner"><i class="header-dd__i fa fa-map-marker"></i>
-            </div>
-            <div class="header-dd__item-label ">Город
-            </div>
-          </div>
-            
-            <?php if ( Yii::$app->id !== "app-backend" ) { ?>
-              <a href="/admin" class="header-dd__item">
-        <span class="header-dd__item-inner">
-        <i class="header-dd__i fa fa-sign-in"></i>
-        </span>
-                <span class="header-dd__item-label">
-        Вход
-        </span>
-              </a>
-            <?php } else { ?>
-                
-                <?= Html::beginForm( [ '/user/security/logout' ], 'post' ); ?>
-                
-                <?= Html::button(
-                //                'Выход (' . Yii::$app->user->identity->username . ')',
-                    '<span class="header-dd__item-inner"><i class="header-dd__i fa fa-sign-in"></i></span><span class="header-dd__item-label">Выход</span>',
-                    [ 'class' => 'header-dd__item', 'type' => 'submit' ]
-                ); ?>
-                
-                <?php echo Html::endForm(); ?>
-            
-            <?php } ?>
         </div>
-      </div>
+        <div class="action-panel toggle-overlay" id="drop-down-geo" rel="geo">
+            <div class="action-panel-control">
+                <i class="icon-geo"></i><span>Орел. Russia</span>
+            </div>
+        </div>
+        <div class="action-panel" id="drop-down-search">
+            <div class="action-panel-control">
+                <div id="search-placeholder"><i class="icon-search"></i>
+                    <span>Найти на сайте</span></div>
+                <input type="text" value="" id="search-input" rel="search"/>
+            </div>
+        </div>
+        <div class="action-panel" id="drop-down-services">
+            <a class="drop-down-service"  href="http://publica.shablonkin.shn-host.ru/">
+                <div class="drop-down-service-image drop-down-service--publica">
+                    <img src="<?= $bundle->baseUrl; ?>/images/logo-inline/publica.svg"/>
+                </div>
+                <div class="drop-down-service-description"></div>
+            </a>
+            <a class="drop-down-service" href="http://probank.shablonkin.shn-host.ru/">
+                <div class="drop-down-service-image drop-down-service--probank">
+                    <img src="<?= $bundle->baseUrl; ?>/images/logo-inline/probank.svg"/></div>
+                <div class="drop-down-service-description">Модели</div>
+            </a>
+            <a class="drop-down-service" href="http://shotme.shablonkin.shn-host.ru/">
+                <div class="drop-down-service-image drop-down-service--shootme">
+                    <img src="<?= $bundle->baseUrl; ?>/images/logo-inline/shootme.svg"/></div>
+                <div class="drop-down-service-description">Фотографы</div>
+            </a>
+        </div>
     </div>
-    <div class="header-dd__globe">
-      <div class="header-dd__globe-inner"><i class="header-dd__i-globe fa fa-globe"></i>
-      </div>
-    </div>
-  </div>
+</header>
+<div class="overlay" id="geo-overlay">
+    <ul class="overlay-list">
+        <li>Москва</li>
+        <li>Санкт-Петербург</li>
+        <li>Орел</li>
+        <li>Хацапетовка</li>
+        <li>Ньюйорк</li>
+        <li>Токио</li>
+        <li>Вырица</li>
+        <li>Орел</li>
+        <li>Хацапетовка</li>
+        <li>Ньюйорк</li>
+        <li>Токио</li>
+        <li>Вырица</li>
+    </ul>
 </div>
-<!--/ header-dd -->
-
-<?php Sidebar::begin( [ "id" => "city", "modif" => "search" ] ); ?>
-<?php require_once "sidebarcity.php"; ?>
-<?php Sidebar::end(); ?>
+<div class="overlay" id="search-overlay">
+    <ul class="overlay-list">
+        <li>
+            В Лондоне объяснили условия
+            въезда Абрамовича по
+            израильскому гражданству
+        </li>
+        <li>
+            Лавров рассекретил
+            переговоры Путина и Обамы по
+            Украине в 2014 году
+        </li>
+        <li>
+            В аэропорту Лондона на
+            12 часов был задержан ребенок
+            из России
+        </li>
+        <li>
+            Шарапова вышла во
+            второй круг Roland Garros
+        </li>
+        <li>
+            Саакашвили привал ЕС
+            ввести санкции против
+            Порошенко: будет некуда бежать
+        </li>
+        <li>
+            Экс-главу Котельников
+            доставили в суд
+        </li>
+    </ul>
+</div>
+<?= $content; ?>

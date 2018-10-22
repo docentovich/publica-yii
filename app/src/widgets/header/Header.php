@@ -1,9 +1,9 @@
 <?php
+
 namespace app\widgets\header;
 
 use yii\base\Widget;
-use app\models\City;
-use yii\helpers\ArrayHelper;
+use yii\web\AssetBundle;
 
 /**
  * Самая врхняя плашечка
@@ -13,28 +13,24 @@ use yii\helpers\ArrayHelper;
  */
 class Header extends Widget
 {
-  /**
-   * @var string url логотипа плашки
-   */
-//    public $logo;
+    /**
+     * @var AssetBundle;
+     */
+    public $bundle;
 
+    public function init()
+    {
+        parent::init();
+        ob_start();
+    }
 
+    public function run()
+    {
+        $content = ob_get_clean();
 
-  public function init()
-  {
-    parent::init();
-  }
-
-  public function run()
-  {
-    $cities = City::find()->asArray()->all();
-    $cities = ArrayHelper::map($cities, 'id', 'label');
-    $current_city_id =  \Yii::$app->request->cookies->getValue("city_id");
-
-    return $this->render("view", [
-//            "logo" => $this->logo,
-        "cities" => $cities,
-        "current_city_id" => $current_city_id
-    ]);
-  }
+        return $this->render("view", [
+            "content" => $content,
+            "bundle" => $this->bundle
+        ]);
+    }
 }
