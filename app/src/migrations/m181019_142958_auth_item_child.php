@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_142958_auth_item_child extends Migration
 {
@@ -14,14 +14,14 @@ class m181019_142958_auth_item_child extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%auth_item_child}}',
             [
                 'parent'=> $this->string(64)->notNull(),
                 'child'=> $this->string(64)->notNull(),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->createIndex('child','{{%auth_item_child}}',['child'],false);
         $this->addPrimaryKey('pk_on_tbl_auth_item_child','{{%auth_item_child}}',['parent','child']);

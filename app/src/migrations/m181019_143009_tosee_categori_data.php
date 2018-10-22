@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143009_tosee_categori_data extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_143009_tosee_categori_data extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%tosee_categori_data}}',
@@ -22,7 +22,7 @@ class m181019_143009_tosee_categori_data extends Migration
                 'categori_id'=> $this->primaryKey(10),
                 'categori_desc'=> $this->text()->notNull(),
                 'categori_short_desc'=> $this->string(255)->notNull(),
-            ],$tableOptions
+            ],$this->tableOptions
         );
 
     }

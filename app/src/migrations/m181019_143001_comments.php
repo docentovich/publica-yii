@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143001_comments extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_143001_comments extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%comments}}',
@@ -23,7 +23,7 @@ class m181019_143001_comments extends Migration
                 'avatar'=> $this->integer(10)->null()->defaultValue(null),
                 'title'=> $this->string(255)->notNull(),
                 'text'=> $this->text()->notNull(),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->createIndex('avatar','{{%comments}}',['avatar'],false);
 

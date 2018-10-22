@@ -43,8 +43,4 @@ $config = [
     ],
 ];
 
-if (YII_ENV_DEV) {
-    $config['components']['assetManager']['forceCopy'] = true;
-}
-
 return $config;

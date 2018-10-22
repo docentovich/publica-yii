@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143015_usr_token extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_143015_usr_token extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%usr_token}}',
@@ -23,7 +23,7 @@ class m181019_143015_usr_token extends Migration
                 'code'=> $this->string(32)->notNull(),
                 'created_at'=> $this->integer(11)->notNull(),
                 'type'=> $this->smallInteger(6)->notNull(),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->createIndex('tbl_token_unique','{{%usr_token}}',['user_id','code','type'],true);
         $this->addPrimaryKey('pk_on_tbl_usr_token','{{%usr_token}}',['user_id','code','type']);

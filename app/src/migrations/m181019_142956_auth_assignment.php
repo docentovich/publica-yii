@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_142956_auth_assignment extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_142956_auth_assignment extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%auth_assignment}}',
@@ -22,7 +22,7 @@ class m181019_142956_auth_assignment extends Migration
                 'item_name'=> $this->string(64)->notNull(),
                 'user_id'=> $this->string(64)->notNull(),
                 'created_at'=> $this->integer(11)->null()->defaultValue(null),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->addPrimaryKey('pk_on_tbl_auth_assignment','{{%auth_assignment}}',['item_name','user_id']);
 

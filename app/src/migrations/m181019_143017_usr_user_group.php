@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143017_usr_user_group extends Migration
 {
@@ -14,14 +14,14 @@ class m181019_143017_usr_user_group extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%usr_user_group}}',
             [
                 'id'=> $this->primaryKey(10),
                 'name'=> $this->char(30)->notNull(),
-            ],$tableOptions
+            ],$this->tableOptions
         );
 
     }

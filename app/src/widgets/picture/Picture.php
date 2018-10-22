@@ -46,7 +46,7 @@ class Picture extends Widget
                 <source srcset="<?= "{$this->originalImageName}[{$size}].{$this->originalImageExtension}" ?>"
                         media="<?= $media ?>">
             <?php } ?>
-            <?= \yii\helpers\Html::img("{$this->src}") ?>
+            <?= \yii\helpers\Html::img($this->src) ?>
         </picture>
         <?php return ob_get_clean();
     }

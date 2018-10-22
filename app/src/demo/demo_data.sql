@@ -3,112 +3,15 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: db
--- Время создания: Окт 19 2018 г., 14:32
+-- Время создания: Окт 22 2018 г., 09:51
 -- Версия сервера: 5.7.23
 -- Версия PHP: 7.2.8
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+-- SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- SET AUTOCOMMIT = 0;
+-- START TRANSACTION;
+-- SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- База данных: `tosee`
---
-
---
--- Дамп данных таблицы `tbl_auth_assignment`
---
-
-INSERT INTO `tbl_auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('administrator', '1', 1497557956),
-('author', '2', 1525972413),
-('author', '3', 1497975735),
-('user', '10', 1527170462),
-('user', '11', 1499954677),
-('user', '9', 1499688797);
-
---
--- Дамп данных таблицы `tbl_auth_item`
---
-
-INSERT INTO `tbl_auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
-('administrator', 1, NULL, NULL, NULL, 1497557956, 1497557956),
-('author', 1, NULL, NULL, NULL, 1497557956, 1497557956),
-('changeAuthor', 2, NULL, NULL, NULL, 1497557956, 1497557956),
-('changeCityAuthor', 2, NULL, 'isCityModerator', NULL, 1497557956, 1497557956),
-('changeModerator', 2, NULL, NULL, NULL, 1497557956, 1497557956),
-('createPost', 2, NULL, NULL, NULL, 1497557956, 1497557956),
-('guest', 1, NULL, NULL, NULL, 1497557956, 1497557956),
-('moderateCityPost', 2, NULL, 'isCityModerator', NULL, 1497557956, 1497557956),
-('moderatePost', 2, NULL, NULL, NULL, 1497557956, 1497557956),
-('moderator', 1, NULL, NULL, NULL, 1497557956, 1497557956),
-('reedCityPost', 2, NULL, 'isCityModerator', NULL, 1497557956, 1497557956),
-('reedCityPosts', 2, NULL, NULL, NULL, 1497557956, 1497557956),
-('reedOwnPost', 2, NULL, 'isAuthor', NULL, 1497557956, 1497557956),
-('reedOwnPosts', 2, NULL, NULL, NULL, 1497557956, 1497557956),
-('reedPost', 2, NULL, NULL, NULL, 1497557956, 1497557956),
-('updateCityPost', 2, NULL, 'isCityModerator', NULL, 1497557956, 1497557956),
-('updateOwnPost', 2, NULL, 'isAuthor', NULL, 1497557956, 1497557956),
-('updatePost', 2, NULL, NULL, NULL, 1497557956, 1497557956),
-('user', 1, NULL, NULL, NULL, 1497557956, 1497557956);
-
---
--- Дамп данных таблицы `tbl_auth_item_child`
---
-
-INSERT INTO `tbl_auth_item_child` (`parent`, `child`) VALUES
-('moderator', 'author'),
-('administrator', 'changeAuthor'),
-('changeCityAuthor', 'changeAuthor'),
-('moderator', 'changeCityAuthor'),
-('administrator', 'changeModerator'),
-('administrator', 'createPost'),
-('author', 'createPost'),
-('moderator', 'createPost'),
-('user', 'guest'),
-('moderator', 'moderateCityPost'),
-('administrator', 'moderatePost'),
-('moderateCityPost', 'moderatePost'),
-('administrator', 'moderator'),
-('moderator', 'reedCityPost'),
-('moderator', 'reedCityPosts'),
-('reedCityPost', 'reedCityPosts'),
-('author', 'reedOwnPost'),
-('author', 'reedOwnPosts'),
-('reedOwnPost', 'reedOwnPosts'),
-('administrator', 'reedPost'),
-('reedCityPosts', 'reedPost'),
-('reedOwnPosts', 'reedPost'),
-('moderator', 'updateCityPost'),
-('author', 'updateOwnPost'),
-('moderator', 'updateOwnPost'),
-('administrator', 'updatePost'),
-('updateCityPost', 'updatePost'),
-('updateOwnPost', 'updatePost'),
-('author', 'user');
-
---
--- Дамп данных таблицы `tbl_auth_rule`
---
-
-INSERT INTO `tbl_auth_rule` (`name`, `data`, `created_at`, `updated_at`) VALUES
-('isAuthor', 0x4f3a32333a22636f6e736f6c655c726261635c417574686f7252756c65223a333a7b733a343a226e616d65223b733a383a226973417574686f72223b733a393a22637265617465644174223b693a313439373535373935363b733a393a22757064617465644174223b693a313439373535373935363b7d, 1497557956, 1497557956),
-('isCityModerator', 0x4f3a32313a22636f6e736f6c655c726261635c4369747952756c65223a333a7b733a343a226e616d65223b733a31353a226973436974794d6f64657261746f72223b733a393a22637265617465644174223b693a313439373535373935363b733a393a22757064617465644174223b693a313439373535373935363b7d, 1497557956, 1497557956);
-
---
--- Дамп данных таблицы `tbl_city`
---
-
-INSERT INTO `tbl_city` (`id`, `name`, `label`) VALUES
-(1, 'orl', 'Орел'),
-(2, 'spb', 'Санкт-Петербург');
 
 --
 -- Дамп данных таблицы `tbl_image`
@@ -181,35 +84,38 @@ INSERT INTO `tbl_image` (`id`, `alt`, `path`, `name`) VALUES
 (67, '', '1', '5966038643196.jpg'),
 (68, '', '11', '59677f0b16e98.jpg');
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+INSERT INTO `tbl_usr_user` (`id`, `username`, `email`, `city_id`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `respond_sms`, `respond_email`, `flags`, `last_login_at`, `status`) VALUES
+(2, 'andrey', 'adsd@sdsdf.ru', 1, '$2y$10$5LDHyEah7VA5WgvQJvoZE.4niWt43TWoluZqG6o2S1V1Pfq5BGja.', 'MknBR7sw7wy-L07e1VqwWXF5VzU4cA7d', 1496589202, NULL, NULL, '192.168.99.1', 1496589188, 1496589188, 0, 1, 0, 1527170407, 2),
+(3, 'Oleg', 'okorel@mail.ru', 1, '$2y$10$tAbeFq/OuQnJalDof9.WbuUP7lG0qisdozU7wp0lqOkihqwhHfFtq', 'CBQw6SanDGfeUaZkgZR4Yf5rf4X-0bGs', NULL, NULL, NULL, '95.107.7.77', 1497973954, 1497973954, 0, 1, 0, NULL, 2),
+(10, 'adminn', 'andrei.prozorov@mail.ru', 1, '$2y$10$gy.PTKfdRwqjarc78sFHp.j3/tj9UQZg2g2Fn3.YNeBjMmNAI6fBC', 'N5tpqVEXLQz8fwtNQN7QxkLqBYv2cp0a', 1499689043, NULL, NULL, '94.25.228.24', 1499689029, 1499689029, 0, 1, 0, NULL, 2),
+(11, 'cooltolia', 'cooltolia@p33.org', 1, '$2y$10$J4SnuyPxitgOjNgJ9C94de9miOpYCnAGyiuL0cnIHpTNGEDDP7E9e', '16w3yvlvChS8VAzgFylHbl4MSAkqcTYV', 1499954677, NULL, NULL, '185.115.96.43', 1499954661, 1499954661, 0, 1, 0, 1499955106, 2);
+
 --
--- Дамп данных таблицы `tbl_migration`
+-- Дамп данных таблицы `tbl_usr_profile`
 --
 
-INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
-('m000000_000000_base', 1497557026),
-('m170610_023037_auth_assignment', 1497557029),
-('m170610_023038_auth_item', 1497557029),
-('m170610_023039_auth_item_child', 1497557029),
-('m170610_023040_auth_rule', 1497557029),
-('m170610_023041_categori', 1497557029),
-('m170610_023042_categori_data', 1497557030),
-('m170610_023043_city', 1497557030),
-('m170610_023044_image', 1497557030),
-('m170610_023045_post', 1497557030),
-('m170610_023046_post_data', 1497557030),
-('m170610_023047_post_to_image', 1497557031),
-('m170610_023048_profile', 1497557031),
-('m170610_023049_social_account', 1497557032),
-('m170610_023050_token', 1497557032),
-('m170610_023051_user', 1497557033),
-('m170610_023052_user_group', 1497557033),
-('m170610_023053_user_like', 1497557033),
-('m170610_023054_Relations', 1497557037),
-('m170610_023359_categoriDataInsert', 1497557037),
-('m170610_023416_cityDataInsert', 1497557037),
-('m170610_023442_userDataInsert', 1497557037),
-('m170610_023933_imageDataInsert', 1497557037),
-('m170610_023944_profileDataInsert', 1497557037);
+INSERT INTO `tbl_usr_profile` (`user_id`, `name`, `public_email`, `gravatar_email`, `gravatar_id`, `location`, `website`, `bio`, `firstname`, `lastname`, `sename`, `phone`, `avatar`, `timezone`) VALUES
+(1, 'Директор', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', 1, NULL),
+(2, 'Автор', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', 2, NULL),
+(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 4, NULL),
+(10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 48, NULL),
+(11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 68, NULL);
+
+
+
+
+--
+-- Дамп данных таблицы `tbl_comments`
+--
+
+INSERT INTO `tbl_comments` (`id`, `avatar`, `image_id`, `title`, `text`) VALUES
+(1, 12, 7, 'fgfgh', 'fghfg');
+
 
 --
 -- Дамп данных таблицы `tbl_probank_categori`
@@ -218,12 +124,11 @@ INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
 INSERT INTO `tbl_probank_categori` (`id`, `name`) VALUES
 (1, 'Без категории');
 
---
--- Дамп данных таблицы `tbl_tosee_categori`
---
+-- --------------------------------------------------------
 
-INSERT INTO `tbl_tosee_categori` (`id`, `name`) VALUES
-(1, 'Без категории');
+--
+-- Структура таблицы `tbl_tosee_post`
+--
 
 --
 -- Дамп данных таблицы `tbl_tosee_post`
@@ -243,6 +148,8 @@ INSERT INTO `tbl_tosee_post` (`id`, `user_id`, `city_id`, `event_at`, `post_cate
 (11, 1, 1, '2017-07-20', 1, 41, 3, '2017-06-20 17:25:43'),
 (12, 1, 1, '2017-07-21', 1, 57, 3, '2017-07-11 18:21:47');
 
+-- --------------------------------------------------------
+
 --
 -- Дамп данных таблицы `tbl_tosee_post_data`
 --
@@ -260,6 +167,9 @@ INSERT INTO `tbl_tosee_post_data` (`post_id`, `title`, `sub_header`, `post_short
 (10, 'Остановка дрова', 'Остановка дрова', 'По своей сути рыбатекст является альтернативой традиционному lorem ipsum', '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым для визуально-слухового восприятия.</p>\r\n\r\n<p>По своей сути рыбатекст является альтернативой традиционному lorem ipsum, который вызывает у некторых людей недоумение при попытках прочитать рыбу текст. В отличии от lorem ipsum, текст рыба на русском языке наполнит любой макет непонятным смыслом и придаст неповторимый колорит советских времен.</p>\r\n', 0, 0),
 (11, 'Пляж', 'Пляж', 'Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце', '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым для визуально-слухового восприятия.</p>\r\n\r\n<p>По своей сути рыбатекст является альтернативой традиционному lorem ipsum, который вызывает у некторых людей недоумение при попытках прочитать рыбу текст. В отличии от lorem ipsum, текст рыба на русском языке наполнит любой макет непонятным смыслом и придаст неповторимый колорит советских времен.</p>\r\n', 0, 0),
 (12, 'Новая новость', 'Новая новость', 'Новая новость', '<p>Новая новостьНовая новостьНовая новостьНовая новостьНовая новостьНовая новостьНовая новостьНовая новость</p>\r\n', 0, 0);
+
+-- --------------------------------------------------------
+
 
 --
 -- Дамп данных таблицы `tbl_tosee_post_to_image`
@@ -302,37 +212,17 @@ INSERT INTO `tbl_tosee_post_to_image` (`post_id`, `image_id`) VALUES
 (12, 55),
 (12, 56);
 
---
--- Дамп данных таблицы `tbl_usr_profile`
---
 
-INSERT INTO `tbl_usr_profile` (`user_id`, `name`, `public_email`, `gravatar_email`, `gravatar_id`, `location`, `website`, `bio`, `firstname`, `lastname`, `sename`, `phone`, `avatar`, `timezone`) VALUES
-(1, 'Директор', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', 1, NULL),
-(2, 'Автор', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', 2, NULL),
-(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 4, NULL),
-(10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 48, NULL),
-(11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 68, NULL);
-
---
--- Дамп данных таблицы `tbl_usr_token`
---
-
-INSERT INTO `tbl_usr_token` (`user_id`, `code`, `created_at`, `type`) VALUES
-(3, 'JcIllU9wahc8pKrKDKwovmD_k3zzJ1x7', 1497974035, 1),
-(3, 'TKOWxs4mrBT8IPnDklJdO2_aPywmE2dA', 1497973954, 0);
-
---
--- Дамп данных таблицы `tbl_usr_user`
---
-
-INSERT INTO `tbl_usr_user` (`id`, `username`, `email`, `city_id`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `respond_sms`, `respond_email`, `flags`, `last_login_at`, `status`) VALUES
-(1, 'admin', 'admin@tosee.com', 1, '$2y$10$goIuzOiYuFARUWpuQmMUFOTbWG0W8kyUjnZmH2LugORqmhNrURtCW', 'afx4DQVHxQ25-wSkjcLN_MIoEJdLLVqO', 1495579273, NULL, NULL, '192.168.99.1', 1495579262, 1513947985, 0, 1, 0, 1527170424, 10),
-(2, 'andrey', 'adsd@sdsdf.ru', 1, '$2y$10$5LDHyEah7VA5WgvQJvoZE.4niWt43TWoluZqG6o2S1V1Pfq5BGja.', 'MknBR7sw7wy-L07e1VqwWXF5VzU4cA7d', 1496589202, NULL, NULL, '192.168.99.1', 1496589188, 1496589188, 0, 1, 0, 1527170407, 2),
-(3, 'Oleg', 'okorel@mail.ru', 1, '$2y$10$tAbeFq/OuQnJalDof9.WbuUP7lG0qisdozU7wp0lqOkihqwhHfFtq', 'CBQw6SanDGfeUaZkgZR4Yf5rf4X-0bGs', NULL, NULL, NULL, '95.107.7.77', 1497973954, 1497973954, 0, 1, 0, NULL, 2),
-(10, 'adminn', 'andrei.prozorov@mail.ru', 1, '$2y$10$gy.PTKfdRwqjarc78sFHp.j3/tj9UQZg2g2Fn3.YNeBjMmNAI6fBC', 'N5tpqVEXLQz8fwtNQN7QxkLqBYv2cp0a', 1499689043, NULL, NULL, '94.25.228.24', 1499689029, 1499689029, 0, 1, 0, NULL, 2),
-(11, 'cooltolia', 'cooltolia@p33.org', 1, '$2y$10$J4SnuyPxitgOjNgJ9C94de9miOpYCnAGyiuL0cnIHpTNGEDDP7E9e', '16w3yvlvChS8VAzgFylHbl4MSAkqcTYV', 1499954677, NULL, NULL, '185.115.96.43', 1499954661, 1499954661, 0, 1, 0, 1499955106, 2);
-COMMIT;
+INSERT INTO `tbl_auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
+('author', '2', 1525972413),
+('author', '3', 1497975735),
+('user', '10', 1527170462),
+('user', '11', 1499954677),
+('user', '9', 1499688797);
+-- --------------------------------------------------------
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+

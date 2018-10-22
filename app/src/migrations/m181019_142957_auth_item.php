@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_142957_auth_item extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_142957_auth_item extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%auth_item}}',
@@ -26,7 +26,7 @@ class m181019_142957_auth_item extends Migration
                 'data'=> $this->binary()->null()->defaultValue(null),
                 'created_at'=> $this->integer(11)->null()->defaultValue(null),
                 'updated_at'=> $this->integer(11)->null()->defaultValue(null),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->createIndex('rule_name','{{%auth_item}}',['rule_name'],false);
         $this->createIndex('idx-auth_item-type','{{%auth_item}}',['type'],false);

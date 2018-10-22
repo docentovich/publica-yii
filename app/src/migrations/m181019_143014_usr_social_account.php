@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143014_usr_social_account extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_143014_usr_social_account extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%usr_social_account}}',
@@ -28,7 +28,7 @@ class m181019_143014_usr_social_account extends Migration
                 'created_at'=> $this->integer(11)->null()->defaultValue(null),
                 'email'=> $this->string(255)->null()->defaultValue(null),
                 'username'=> $this->string(255)->null()->defaultValue(null),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->createIndex('tbl_account_unique','{{%usr_social_account}}',['provider','client_id'],true);
         $this->createIndex('tbl_account_unique_code','{{%usr_social_account}}',['code'],true);

@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143005_probank_post extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_143005_probank_post extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%probank_post}}',
@@ -27,7 +27,7 @@ class m181019_143005_probank_post extends Migration
                 'image_id'=> $this->integer(10)->null()->defaultValue(null)->comment('Главное изображение. Ссылка на ресурс.'),
                 'status'=> $this->smallInteger(1)->notNull()->defaultValue(0)->comment('0 - на модерации 1 - одобрено 2 - отклонено 3 - заблокировано 4 - удален'),
                 'created_at'=> $this->timestamp()->notNull()->defaultExpression("CURRENT_TIMESTAMP")->comment('Дата создания. Для вывода на страницу постов. Задается триггером'),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->createIndex('event_at','{{%probank_post}}',['event_at'],false);
         $this->createIndex('category_id','{{%probank_post}}',['post_category_id'],false);

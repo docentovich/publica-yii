@@ -39,6 +39,7 @@
                                 ]) ?>
                             </a>
                         </div>
+
                     <?php } ?>
 
                 </div>
@@ -57,6 +58,7 @@
                                     "lg" => "1500x500",
                                 ]
                             ]) ?>
+
                         </div>
                         <div class="modal-controls">
                             <div class="left-controls">
@@ -71,12 +73,12 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <div class="modal-tab" id="tab-0-comments">
+                        <div class="modal-tab modal-comments" id="tab-0-comments">
                             <div class="modal-likes">
                                 <div class="fa fa-heart"></div>
                                 <div class="likes-counter">544</div>
                             </div>
-                            <div class="modal-comments modal-inner-body">
+                            <div class=" modal-inner-body">
 
                                 <?php foreach ($image->comments as $comment) { ?>
                                     <div class="comment">
@@ -92,8 +94,8 @@
 
                             </div>
                         </div>
-                        <div class="modal-tab" style="display: none" id="tab-0-info">
-                            <div class="modal-info modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        <div class="modal-tab modal-info" style="display: none" id="tab-0-info">
+                            <div class=" modal-inner-body">Lorem ipsum dolor sit amet, consectetur adipiscing
                                 elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
                                 minim
                                 veniam, quis nostrud exercitation ullamco

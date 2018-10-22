@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143016_usr_user extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_143016_usr_user extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%usr_user}}',
@@ -36,7 +36,7 @@ class m181019_143016_usr_user extends Migration
                 'flags'=> $this->integer(11)->notNull()->defaultValue(0),
                 'last_login_at'=> $this->integer(11)->null()->defaultValue(null),
                 'status'=> $this->smallInteger(2)->notNull()->defaultValue(2),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->createIndex('tbl_user_unique_username','{{%usr_user}}',['username'],true);
         $this->createIndex('tbl_user_unique_email','{{%usr_user}}',['email'],true);

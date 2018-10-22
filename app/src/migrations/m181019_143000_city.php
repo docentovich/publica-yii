@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143000_city extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_143000_city extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%city}}',
@@ -22,7 +22,7 @@ class m181019_143000_city extends Migration
                 'id'=> $this->primaryKey(10),
                 'name'=> $this->string(5)->null()->defaultValue(null),
                 'label'=> $this->string(30)->null()->defaultValue(null),
-            ],$tableOptions
+            ],$this->tableOptions
         );
 
     }

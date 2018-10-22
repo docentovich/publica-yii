@@ -66,6 +66,7 @@ class PostService extends \app\abstractions\Services
         }
 
         $configQuery->query->with(["postData", "image"])
+//                ->leftJoin('post', ['post.author_id' => 'author.id']) // the table name and the condition for 'ON'
                 ->andWhere(["=", "status", Post::STATUS_ACTIVE])
                 ->andWhere(["=", "city_id", $this->city_id]);
         return $configQuery;

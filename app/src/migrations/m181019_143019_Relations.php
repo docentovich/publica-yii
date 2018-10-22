@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143019_Relations extends Migration
 {
@@ -24,16 +24,7 @@ class m181019_143019_Relations extends Migration
             '{{%auth_rule}}','name',
             'CASCADE','CASCADE'
          );
-        $this->addForeignKey('fk_tbl_auth_item_child_child',
-            '{{%auth_item_child}}','child',
-            '{{%auth_item}}','name',
-            'CASCADE','CASCADE'
-         );
-        $this->addForeignKey('fk_tbl_auth_item_child_parent',
-            '{{%auth_item_child}}','parent',
-            '{{%auth_item}}','name',
-            'CASCADE','CASCADE'
-         );
+
         $this->addForeignKey('fk_tbl_comments_avatar',
             '{{%comments}}','avatar',
             '{{%image}}','id',
@@ -145,8 +136,6 @@ class m181019_143019_Relations extends Migration
     {
         $this->dropForeignKey('fk_tbl_auth_assignment_item_name', '{{%auth_assignment}}');
         $this->dropForeignKey('fk_tbl_auth_item_rule_name', '{{%auth_item}}');
-        $this->dropForeignKey('fk_tbl_auth_item_child_child', '{{%auth_item_child}}');
-        $this->dropForeignKey('fk_tbl_auth_item_child_parent', '{{%auth_item_child}}');
         $this->dropForeignKey('fk_tbl_comments_avatar', '{{%comments}}');
         $this->dropForeignKey('fk_tbl_probank_categori_data_categori_id', '{{%probank_categori_data}}');
         $this->dropForeignKey('fk_tbl_probank_post_post_category_id', '{{%probank_post}}');

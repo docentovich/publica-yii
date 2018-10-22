@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143013_usr_profile extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_143013_usr_profile extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%usr_profile}}',
@@ -33,7 +33,7 @@ class m181019_143013_usr_profile extends Migration
                 'phone'=> $this->string(15)->null()->defaultValue(null),
                 'avatar'=> $this->integer(10)->notNull(),
                 'timezone'=> $this->string(40)->null()->defaultValue(null),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->createIndex('avatar','{{%usr_profile}}',['avatar'],true);
 

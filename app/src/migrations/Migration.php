@@ -1,5 +1,5 @@
 <?php
-namespace console\migrations;
+namespace app\migrations;
 
 use Yii;
 

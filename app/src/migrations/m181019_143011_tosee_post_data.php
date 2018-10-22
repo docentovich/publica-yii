@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143011_tosee_post_data extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_143011_tosee_post_data extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%tosee_post_data}}',
@@ -26,7 +26,7 @@ class m181019_143011_tosee_post_data extends Migration
                 'post_desc'=> $this->text()->null()->defaultValue(null),
                 'post_like_count'=> $this->integer(10)->notNull()->defaultValue(0),
                 'post_view_count'=> $this->integer(15)->notNull()->defaultValue(0),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->createIndex('post_id','{{%tosee_post_data}}',['post_id'],false);
 

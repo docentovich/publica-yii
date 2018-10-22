@@ -129,8 +129,20 @@ class Post extends yii\db\ActiveRecord
      */
     public function getImages()
     {
-        return $this->hasMany(Image::className(), ['id' => 'image_id'])->viaTable(PostToImage::tableName(), ['post_id' => 'id']);
+        return $this->hasMany(Image::className(), ['id' => 'image_id'])
+            ->viaTable(PostToImage::tableName(), ['post_id' => 'id'])
+            ->with(['comments']);
     }
+
+//    /**
+//     * @return \yii\db\ActiveQuery
+//     */
+//    public function getComments()
+//    {
+//        return $this->hasMany(Comments::className(), ['id' => 'image_id'])
+//            ->viaTable(Image::tableName(), ['id' => 'image_id'])
+//            ->viaTable(PostToImage::tableName(), ['post_id' => 'id']);
+//    }
 
     public function getPostDataShortDesc()
     {

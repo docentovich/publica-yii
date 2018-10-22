@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_142959_auth_rule extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_142959_auth_rule extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%auth_rule}}',
@@ -23,7 +23,7 @@ class m181019_142959_auth_rule extends Migration
                 'data'=> $this->binary()->null()->defaultValue(null),
                 'created_at'=> $this->integer(11)->null()->defaultValue(null),
                 'updated_at'=> $this->integer(11)->null()->defaultValue(null),
-            ],$tableOptions
+            ],$this->tableOptions
         );
         $this->addPrimaryKey('pk_on_tbl_auth_rule','{{%auth_rule}}',['name']);
 

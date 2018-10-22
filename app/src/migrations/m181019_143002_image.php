@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\db\Migration;
+use app\migrations\Migration;
 
 class m181019_143002_image extends Migration
 {
@@ -14,7 +14,7 @@ class m181019_143002_image extends Migration
 
     public function safeUp()
     {
-        $tableOptions = 'ENGINE=InnoDB';
+        // $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
             '{{%image}}',
@@ -23,7 +23,7 @@ class m181019_143002_image extends Migration
                 'alt'=> $this->string(70)->null()->defaultValue(null),
                 'path'=> $this->string(150)->null()->defaultValue(''),
                 'name'=> $this->string(40)->null()->defaultValue(null),
-            ],$tableOptions
+            ],$this->tableOptions
         );
 
     }

@@ -1,9 +1,9 @@
 <?php
 
 use yii\db\Schema;
-use console\migrations\Migration;
+use app\migrations\Migration;
 
-class m170610_023359_categoriDataInsert extends Migration
+class m181022_092837_tosee_categoriDataInsert extends Migration
 {
 
     public function init()
@@ -14,7 +14,7 @@ class m170610_023359_categoriDataInsert extends Migration
 
     public function safeUp()
     {
-        $this->batchInsert('{{%categori}}',
+        $this->batchInsert('{{%tosee_categori}}',
                            ["id", "name"],
                             [
     [
@@ -27,6 +27,6 @@ class m170610_023359_categoriDataInsert extends Migration
 
     public function safeDown()
     {
-        //$this->truncateTable('{{%categori}} CASCADE');
+//        $this->truncateTable('{{%tosee_categori}} CASCADE');
     }
 }
