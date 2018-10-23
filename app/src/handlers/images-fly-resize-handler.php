@@ -23,7 +23,7 @@ function checkFileExist($file_name_and_dir, $file_extension)
     try {
         return _checkFileExist($file_name_and_dir, $file_extension);
     } catch (Exception $e) {
-        return _checkFileExist("noimage", 'jpg');
+        return _checkFileExist("noimage", 'png');
     }
 }
 
@@ -38,19 +38,19 @@ function _checkFileExist($file_name_and_dir, $file_extension)
 
     if (!isset($matches[2])) {
         // user request file with out size suffix but we have not found it before? so return noimage
-        throw new \app\Exceptions\IncorrectImageSizeRequest();
+        throw new \app\exceptions\IncorrectImageSizeRequest();
     }
 
     list(, $file_name_original, $size) = $matches;
 
     if (!in_array($size, \app\constants\Constants::ALLOWED_IMAGE_SIZES)) {
         // not allowed size
-        throw new \app\Exceptions\IncorrectImageSizeRequest;
+        throw new \app\exceptions\IncorrectImageSizeRequest;
     }
 
     if (!file_exists(pathOf(fn($file_name_original, $file_extension)))) {
         // if not exist origin
-        throw new \app\Exceptions\NoOriginImageRequest;
+        throw new \app\exceptions\NoOriginImageRequest;
     }
 
     try {
