@@ -32,9 +32,19 @@ $filtered_projects = array_filter(
                             <i class="icon-geo"></i>
                         </div>
                         <div class="toggle-drop-down-action-panel control" id="enter" rel="enter">
-                            <a href="/admin">
-                                <i class="icon-enter"></i>
-                            </a>
+                            <?php if ( Yii::$app->id !== "app-backend" ) { ?>
+                                <a href="/admin">
+                                    <i class="icon-enter"></i>
+                                </a>
+                            <?php } else {
+                                 echo \yii\helpers\Html::beginForm( [ '/user/security/logout' ], 'post' );
+                                 echo \yii\helpers\Html::button(
+                                    '<i class="icon-enter"></i>',
+                                    ["class" => "button-only-icon", 'type' => 'submit']
+                                );
+                                 echo \yii\helpers\Html::endForm();
+
+                             } ?>
                         </div>
                     </div>
                 </div>
