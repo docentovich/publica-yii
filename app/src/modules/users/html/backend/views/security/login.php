@@ -16,86 +16,61 @@ $this->title = Yii::t('user', 'Sign in');
 $this->params['breadcrumbs'][] = $this->title;
 $bundle = BackendAsset::register($this);
 
-?>
+echo $this->render('/_alert', ['module' => Yii::$app->getModule('user')]); ?>
 
-<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
+<?php $form = ActiveForm::begin([
+    'id' => 'login-form',
+    'enableAjaxValidation' => true,
+    'enableClientValidation' => false,
+    'validateOnBlur' => false,
+    'validateOnType' => false,
+    'validateOnChange' => false,
+]) ?>
+
+<div class="form-row">
+    <?= $form->field($model, 'login',
+        ['inputOptions' => [
+            'autofocus' => 'autofocus',
+            'tabindex' => '1',
+            'placeholder' => 'Логин',
+        ]]
+    )->label(false);
+    ?>
+</div>
+
+<div class="form-row">
+    <?= $form->field($model, 'password',
+        ['inputOptions' => [
+            'tabindex' => '2',
+            'placeholder' => 'Пароль',
+        ]])
+        ->passwordInput()
+        ->label(false); ?>
+</div>
 
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'enableAjaxValidation' => true,
-        'enableClientValidation' => false,
-        'validateOnBlur' => false,
-        'validateOnType' => false,
-        'validateOnChange' => false,
-    ]) ?>
+<div class="form-row form-button">
+    <?= Html::submitButton(
+        "<i class=\"icon-enter\"></i><span>" . Yii::t('user', 'Sign in') . "</span>"
+    ) ?>
+</div>
 
-    <div class="form-row">
-        <?= $form->field($model,
-            'login',
-            ['inputOptions' => [
-                'autofocus' => 'autofocus',
-                'tabindex' => '1',
-                'placeholder' => 'Логин',
-                "style" => "padding: 12px 0 12px 18px;"
+<div class="form-row form-links">
+    <?= Html::a(
+        Yii::t('user', 'Регистрация'),
+        ['/user/registration/register']
+    );
+    ?>
 
-            ]]
-        )->label(false);
-        ?>
-    </div>
+    <?= Html::a(
+        Yii::t('user', 'Forgot password?'),
+        ['/user/recovery/request']
+    );
+    ?>
+</div>
+<?php ActiveForm::end(); ?>
 
-    <div class="form-row">
-        <?= $form->field(
-            $model,
-            'password',
-            ['inputOptions' => [
-                'tabindex' => '2',
-                'placeholder' => 'Пароль',
-                "style" => "padding: 12px 0 12px 18px;"
-
-            ]])
-            ->passwordInput()
-            ->label(false); ?>
-    </div>
-    <?php //endif ?>
-
-    <?php //= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '3']) ?>
-    <div class="login__button">
-        <?= Html::submitButton(
-            Yii::t('user', 'Sign in'),
-            ['class' => 'button button--green button--center', 'tabindex' => '4']
-        ) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-    <div class="login__footer">
-    <?php //if ($module->enableConfirmation): ?>
-
-        <?=  Html::a(
-                Yii::t('user', 'Forgot password?'),
-                ['/user/recovery/request'],
-                [
-                    'tabindex' => '5',
-                    'class' => 'login__footer-a login__footer-a--remember'
-                ]
-            );
-        ?>
-
-    <?php //endif ?>
-    <?php //if ($module->enableRegistration): ?>
-        <?=  Html::a(
-            Yii::t('user', 'Регистрация'),
-            ['/user/registration/register'],
-            [
-                'tabindex' => '5',
-                'class' => 'login__footer-a login__footer-a--register'
-            ]
-        );
-        ?>
-
-    <?php //endif ?>
-    </div>
-
-    <?= Connect::widget([
-        'baseAuthUrl' => ['/user/security/auth'],
-    ]) ?>
+<!---->
+<? //= Connect::widget([
+//    'baseAuthUrl' => ['/user/security/auth'],
+//]) ?>
