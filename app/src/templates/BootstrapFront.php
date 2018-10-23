@@ -13,15 +13,15 @@ class BootstrapFront implements BootstrapInterface
     {
         switch (PROJECT) {
             case PROBANK:
-                require_once "frontend/probank/FrontendAsset.php";
-                require_once "frontend/probank/FrontendAssetIE9.php";
-                \Yii::setAlias('@current_template', __DIR__ . "/frontend/probank" );
+                require_once "probank/FrontendAsset.php";
+                require_once "probank/FrontendAssetIE9.php";
+                \Yii::setAlias('@current_template', __DIR__ . "/probank" );
                 break;
 
             case TOSEE:
-                require_once "frontend/tosee/FrontendAsset.php";
-                require_once "frontend/tosee/FrontendAssetIE9.php";
-                \Yii::setAlias('@current_template', __DIR__ . "/frontend/tosee" );
+                require_once "tosee/FrontendAsset.php";
+                require_once "tosee/FrontendAssetIE9.php";
+                \Yii::setAlias('@current_template', __DIR__ . "/tosee" );
                 break;
         }
     }

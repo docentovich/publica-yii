@@ -27,11 +27,8 @@ return [
             ],
         ],
 
-        'user' => [
-            'class' => 'yii\web\User',
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => false,
-            'enableSession' => false,
+        'user'  => [
+            'class' => 'dektrium\user\Module',
         ],
 
     ],

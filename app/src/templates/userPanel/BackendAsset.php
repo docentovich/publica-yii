@@ -1,33 +1,24 @@
 <?php
 
 namespace app\assets;
-
 use yii\web\AssetBundle;
 
-/**
- * Main frontend application asset bundle.
- */
-class FrontendAsset extends AssetBundle
+class BackendAsset extends AssetBundle
 {
-    public $sourcePath;
+    public $sourcePath = '@current_template/assets';
     public $css = [
-        'bundle/vendor.css',
         'css/main.css',
+        'bundle/vendor.css',
     ];
     public $js = [
-        'bundle/vendor.js',
         'js/main.js',
+        'bundle/vendor.js',
     ];
+
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $depends = [
         'yii\web\YiiAsset',
     ];
-
-    public function __construct(array $config = [])
-    {
-        parent::__construct($config);
-        $this->sourcePath = "@templates/frontend/probank/assets";
-    }
 
     public function init()
     {
@@ -37,4 +28,5 @@ class FrontendAsset extends AssetBundle
             'js' => []
         ];
     }
+
 }

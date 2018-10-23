@@ -20,10 +20,6 @@ $bundle = BackendAsset::register($this);
 
 <?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
 
-<div class="login">
-    <div class="login__logo">
-        <img src="<?= $bundle->baseUrl; ?>/images/logo.png" class="login__img" alt="" role="presentation"/>
-    </div>
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
@@ -32,15 +28,13 @@ $bundle = BackendAsset::register($this);
         'validateOnBlur' => false,
         'validateOnType' => false,
         'validateOnChange' => false,
-        'class' => 'login__center',
     ]) ?>
 
-    <div class="login__input">
+    <div class="form-row">
         <?= $form->field($model,
             'login',
             ['inputOptions' => [
                 'autofocus' => 'autofocus',
-                'class' => 'input',
                 'tabindex' => '1',
                 'placeholder' => 'Логин',
                 "style" => "padding: 12px 0 12px 18px;"
@@ -50,12 +44,11 @@ $bundle = BackendAsset::register($this);
         ?>
     </div>
 
-    <div class="login__input">
+    <div class="form-row">
         <?= $form->field(
             $model,
             'password',
             ['inputOptions' => [
-                'class' => 'input',
                 'tabindex' => '2',
                 'placeholder' => 'Пароль',
                 "style" => "padding: 12px 0 12px 18px;"
@@ -106,4 +99,3 @@ $bundle = BackendAsset::register($this);
     <?= Connect::widget([
         'baseAuthUrl' => ['/user/security/auth'],
     ]) ?>
-</div>
