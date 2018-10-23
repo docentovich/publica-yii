@@ -23,7 +23,7 @@ $bundle = BackendAsset::register($this);
     <body class="pageload">
     <?php $this->beginBody() ?>
 
-    <?php \app\widgets\header\Header::begin(["bundle" => $bundle]); ?>
+    <?php \app\widgets\header\Header::begin(["project" => "publica"]); ?>
     <div class="overlay" id="service-menu-overlay">
         <div class="service-overlay-wrapper">
             <ul class="tosee-menu">

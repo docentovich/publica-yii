@@ -13,10 +13,8 @@ use yii\web\AssetBundle;
  */
 class Header extends Widget
 {
-    /**
-     * @var AssetBundle;
-     */
-    public $bundle;
+    /** @var string */
+    public $project;
 
     public function init()
     {
@@ -30,7 +28,8 @@ class Header extends Widget
 
         return $this->render("view", [
             "content" => $content,
-            "bundle" => $this->bundle
+            "currentProject" => $this->project,
+            "projects" => ['tosee', 'publica', 'probank', 'shootme']
         ]);
     }
 }
