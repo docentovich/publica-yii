@@ -11,6 +11,10 @@ use borales\extensions\phoneInput\PhoneInputValidator;
  *
  * @property integer $user_id
  * @property string  $name
+ * @property string  $firstname
+ * @property string  $sename
+ * @property string  $lastname
+ * @property string  $fullName
  * @property string  $public_email
  * @property string  $gravatar_email
  * @property string  $gravatar_id
@@ -19,13 +23,13 @@ use borales\extensions\phoneInput\PhoneInputValidator;
  * @property string  $bio
  * @property string  $timezone
  * @property User    $user
+ * @property Image   $avatar0
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com
  */
 class Profile extends BaseProfile
 {
     // use UserDbConnection;
-
 
     /**
      * @inheritdoc
@@ -75,10 +79,16 @@ class Profile extends BaseProfile
         ];
     }
 
-    public function getImage()
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAvatar0()
     {
         return $this->hasOne(Image::className(), ['id' => 'avatar']);
     }
 
+    public function getFullName(){
+        return implode(" ", [$this->firstname, $this->sename, $this->lastname]);
+    }
 
 }

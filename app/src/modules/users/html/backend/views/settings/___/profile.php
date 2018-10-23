@@ -1,12 +1,3 @@
-<?php
-/**
- * @var \app\models\User $identity
- */
-
-$identity = \Yii::$app->user->identity;
-
-?>
-
 <div class="profile">
     <div class="user-avatar-name">
         <div class="user-name"><?= $identity->profile->fullName; ?></div>

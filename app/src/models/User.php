@@ -5,8 +5,6 @@ use app\beheviors\UserBeforValidate;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
-use yii\db\Connection;
 use yii\web\IdentityInterface;
 use dektrium\user\models\User as BaseUser;
 use yii\helpers\ArrayHelper;
@@ -24,17 +22,15 @@ use yii\helpers\ArrayHelper;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property Profile $profile
  * @property string $password write-only password
  */
-//class User extends BaseUser implements IdentityInterface
 class User extends BaseUser implements IdentityInterface
 {
     // use UserDbConnection;
     const STATUS_DELETED = 0;
     const STATUS_NOT_ACTIVE = 2;
     const STATUS_ACTIVE = 10;
-
-
 
     /**
      * @inheritdoc
@@ -157,7 +153,7 @@ class User extends BaseUser implements IdentityInterface
         }
 
         $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        $expire = \Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
 
@@ -193,7 +189,7 @@ class User extends BaseUser implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
+        return \Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
     /**
@@ -203,7 +199,7 @@ class User extends BaseUser implements IdentityInterface
      */
     public function setPassword($password)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->password_hash = \Yii::$app->security->generatePasswordHash($password);
     }
 
     /**
@@ -211,7 +207,7 @@ class User extends BaseUser implements IdentityInterface
      */
     public function generateAuthKey()
     {
-        $this->auth_key = Yii::$app->security->generateRandomString();
+        $this->auth_key = \Yii::$app->security->generateRandomString();
     }
 
     /**
@@ -219,7 +215,7 @@ class User extends BaseUser implements IdentityInterface
      */
     public function generatePasswordResetToken()
     {
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+        $this->password_reset_token = \Yii::$app->security->generateRandomString() . '_' . time();
     }
 
     /**
@@ -228,5 +224,12 @@ class User extends BaseUser implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfile(){
+        return $this->hasOne(Profile::class, ['user_id'=> 'id']);
     }
 }
