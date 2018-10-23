@@ -1,51 +1,57 @@
 <?php
+/**
+ * @var string $content
+ */
 
-/* @var $this \yii\web\View */
-/* @var $content string */
+$bundle = \app\assets\BackendAsset::register($this);
 
-use yii\helpers\Html;
-use app\assets\BackendAsset;
-use app\components\Header;
+$this->beginPage(); ?>
+    <html>
+    <head>
+        <meta charset="<?= Yii::$app->charset ?>">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?= \yii\helpers\Html::csrfMetaTags() ?>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title><?= \yii\helpers\Html::encode($this->title) ?></title>
+        <!-- CDN-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+              integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+              crossorigin="anonymous"/>
+        <!-- --CDN---->
+        <?php $this->head() ?>
+    </head>
+    <body class="pageload">
+    <?php $this->beginBody() ?>
 
-$bundle = BackendAsset::register($this);
-?>
-<?php $this->beginPage(); ?>
-  <!DOCTYPE html>
-  <html lang="<?= Yii::$app->language ?>">
-  <head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://use.fontawesome.com/9371c6073a.css" media="all" rel="stylesheet">
-
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-  </head>
-  <body class="pageload no-js">
-  <?php $this->beginBody() ?>
-  <?php echo \app\widgets\header\Header::widget(/*["logo" => "publica"]*/); ?>
-
-
-  <div class="row-eq-height-sm">
-    <?php require_once "parts/header.php"; ?>
-
-    <!-- content -->
-    <div class="col-sm-10 col-xs-12 no-padding row-eq-height-sm">
-      <div class="content">
-        <div class="content__content-inner">
-          <div class="content-page">
-            <?= $content ?>
-          </div>
+    <?php \app\widgets\header\Header::begin(["project" => "tosee"]); ?>
+    <div class="overlay overlay--user-panel" id="service-menu-overlay">
+        <div class="service-overlay-wrapper">
+            <ul class="user-panel-menu">
+                <li><a href="/profile.html">Профиль</a></li>
+                <li><a href="/my/comments.html">Мои комментарии</a></li>
+                <li><a href="/my/orders.html">Мои заказы</a></li>
+                <li><a href="/my/calendar.html">Мой календарь</a></li>
+                <li><a href="/my/rating.html">Мой рейтинг</a></li>
+                <li><a href="/roles/journalist.html">Журналист</a></li>
+                <li><a href="/roles/model.html">Модель</a></li>
+                <li><a href="/roles/photographer.html">Фотораф</a></li>
+            </ul>
+            <a class="feedback" href="#"><span>Обратная связь</span><span
+                        class="small">(сообщение в администрацию сайта)</span></a>
         </div>
-      </div>
     </div>
-    <!--/ content -->
+    <?php \app\widgets\header\Header::end(); ?>
 
-  </div>
-
-  <?php require_once "parts/footer.php"; ?>
-  <?php $this->endBody() ?>
-  </body>
-  </html>
+    <div class="content-wrapper">
+        <div class="content"><?= $content ?>?</div>
+    </div>
+    <!-- CDN-->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <!-- --CDN---->
+    <?php $this->endBody() ?>
+    </body>
+    </html>
 <?php $this->endPage() ?>
