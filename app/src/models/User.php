@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use app\beheviors\UserBeforValidate;
@@ -20,6 +21,7 @@ use yii\helpers\ArrayHelper;
  * @property string $email
  * @property string $auth_key
  * @property integer $status
+ * @property integer $phone
  * @property integer $created_at
  * @property integer $updated_at
  * @property Profile $profile
@@ -32,6 +34,12 @@ class User extends BaseUser implements IdentityInterface
     const STATUS_NOT_ACTIVE = 2;
     const STATUS_ACTIVE = 10;
 
+    const SCENARIO_REGISTER = 'register';
+    const SCENARIO_CONNECT = 'connect';
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_UPDATE = 'update';
+    const SCENARIO_SETTINGS = 'settings';
+
     /**
      * @inheritdoc
      */
@@ -42,6 +50,7 @@ class User extends BaseUser implements IdentityInterface
             'email' => \Yii::t('user', 'Email'),
             'city' => \Yii::t('user', 'City'),
             'password' => \Yii::t('user', 'Password'),
+            'phone' => \Yii::t('user', 'Phone'),
             'created_at' => \Yii::t('user', 'Registration time'),
             'registered_from' => \Yii::t('user', 'Registered from'),
             'unconfirmed_email' => \Yii::t('user', 'Unconfirmed email'),
@@ -79,6 +88,12 @@ class User extends BaseUser implements IdentityInterface
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
             [['city_id'], 'integer'],
             [['city_id'], 'default', 'value' => 1],
+
+            /** email */
+            ['email', 'email'],
+            /** phone */
+            ['phone', 'match', 'pattern' => '(\+[0-9]{1,3})?\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}']
+
         ];
     }
 
@@ -87,11 +102,11 @@ class User extends BaseUser implements IdentityInterface
     {
         $scenarios = parent::scenarios();
         return ArrayHelper::merge($scenarios, [
-            'register' => ['username', 'email', 'password', 'city_id'],
-            'connect'  => ['username', 'email'],
-            'create'   => ['username', 'email', 'password'],
-            'update'   => ['username', 'email', 'password'],
-            'settings' => ['username', 'email', 'password'],
+            self::SCENARIO_REGISTER => ['username', 'email', 'password', 'city_id'],
+            self::SCENARIO_CONNECT => ['username', 'email'],
+            self::SCENARIO_CREATE => ['username', 'email', 'password'],
+            self::SCENARIO_UPDATE => ['username', 'email', 'password'],
+            self::SCENARIO_SETTINGS => ['username', 'email', 'password'],
         ]);
     }
 
@@ -120,6 +135,19 @@ class User extends BaseUser implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public static function findMeTo($scenario)
+    {
+        $model = (static::findOne(['id' => \Yii::$app->user->getId()]));
+        $model->scenario = $scenario;
+        return $model;
+    }
+
+    public function save($runValidation = true, $attributeNames = null)
+    {
+        $this->password = \Yii::$app->getSecurity()->generatePasswordHash($this->password);
+        return parent::save($runValidation, $attributeNames);
     }
 
     /**
@@ -152,7 +180,7 @@ class User extends BaseUser implements IdentityInterface
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = \Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
@@ -229,7 +257,8 @@ class User extends BaseUser implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProfile(){
-        return $this->hasOne(Profile::class, ['user_id'=> 'id']);
+    public function getProfile()
+    {
+        return $this->hasOne(Profile::class, ['user_id' => 'id']);
     }
 }

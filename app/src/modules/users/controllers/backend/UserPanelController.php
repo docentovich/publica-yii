@@ -12,25 +12,21 @@
 namespace app\modules\users\controllers\backend;
 
 use app\models\UploadImage;
+use app\models\UserForm;
 use dektrium\user\Finder;
-use app\modules\tosee\models\common\Post;
 use dektrium\user\models\SettingsForm;
-use dektrium\user\models\User;
+use app\models\User;
 use dektrium\user\Module;
 use dektrium\user\traits\AjaxValidationTrait;
 use dektrium\user\traits\EventTrait;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\web\Controller;
 use yii\web\Cookie;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use Yii;
-use yii\imagine\Image;
-use app\models\Image as _ImageModel;
 use app\models\Profile;
 use dektrium\user\controllers\SettingsController as BaseSettingsController;
 
@@ -41,7 +37,7 @@ use dektrium\user\controllers\SettingsController as BaseSettingsController;
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class UserpanelController extends BaseSettingsController
+class UserPanelController extends BaseSettingsController
 {
     use AjaxValidationTrait;
     use EventTrait;
@@ -80,7 +76,7 @@ class UserpanelController extends BaseSettingsController
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['account', 'networks', 'disconnect', 'delete', 'upload-avatar', 'set-city'],
+                        'actions' => ['account', 'post-user-form', 'networks', 'disconnect', 'delete', 'upload-avatar', 'set-city'],
                         'roles' => ['user'],
                     ],
                     [
@@ -99,6 +95,37 @@ class UserpanelController extends BaseSettingsController
     }
 
     /**
+     * @return UserForm|bool
+     */
+    private function userFormModel()
+    {
+        $user_form_model = new UserForm();
+        $user_form_model->load(\Yii::$app->request->post());
+        return ($user_form_model->validate()) ? $user_form_model : false;
+    }
+
+    private function userSave()
+    {
+        if (!($user_form_model = $this->userFormModel())) {
+            return false;
+        }
+
+        /** @var \app\models\User $user_model */
+        $user_model = (User::findMeTo(User::SCENARIO_UPDATE));
+        return ($user_model->load($user_form_model->toArray(), '') && $user_model->save());
+    }
+
+    public function actionPostUserForm()
+    {
+        if (Yii::$app->request->isAjax) {
+            return $this->userFormModel();
+        } else {
+            $this->refresh();
+            return $this->userSave();
+        }
+    }
+
+    /**
      * Shows profile settings form.
      *
      * @return string|\yii\web\Response
@@ -109,55 +136,60 @@ class UserpanelController extends BaseSettingsController
 
         //Профиль
 
-        $model_profile = $this->finder->findProfileById(\Yii::$app->user->identity->getId());
+//        /*$model_profile = $this->finder->findProfileById(\Yii::$app->user->identity->getId());
+//
+//
+//        if ($model_profile == null) {
+//            $model_profile = \Yii::createObject(Profile::className());
+//            $model_profile->link('user', \Yii::$app->user->identity);
+//        }
+//        $model_profile->link('user', \Yii::$app->user->identity);
+//
+//        $event = $this->getProfileEvent($model_profile);
+//
+//        $this->performAjaxValidation($model_profile);
+//
+//        $this->trigger(self::EVENT_BEFORE_PROFILE_UPDATE, $event);
+//        if ($model_profile->load(\Yii::$app->request->post()) && $model_profile->save()) {
+//
+//            \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Your profile has been updated'));
+//            $this->trigger(self::EVENT_AFTER_PROFILE_UPDATE, $event);
+//            return $this->refresh();
+//        }
+//
+//
+//        //Settings
+//        /** @var SettingsForm $model */
+//        $model_settings = \Yii::createObject(SettingsForm::className());
+//
+//        $event = $this->getFormEvent($model_settings);
+//
+//        $this->performAjaxValidation($model_settings);
+//
+//        $this->trigger(self::EVENT_BEFORE_ACCOUNT_UPDATE, $event);
+//        if ($model_settings->load(\Yii::$app->request->post()) && $model_settings->save()) {
+//
+//            \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Your account details have been updated'));
+//            $this->trigger(self::EVENT_AFTER_ACCOUNT_UPDATE, $event);
+//            return $this->refresh();
+//
+//        }
+//
+//        $upload = new UploadImage;
+//
+//
+//        return $this->render('profile', [
+//            'model_profile' => $model_profile,
+//            'model_settings' => $model_settings,
+//            'upload' => $upload,
+//            'module' => $this->module,
+//        ]);*/
 
-
-        if ($model_profile == null) {
-            $model_profile = \Yii::createObject(Profile::className());
-            $model_profile->link('user', \Yii::$app->user->identity);
-        }
-        $model_profile->link('user', \Yii::$app->user->identity);
-
-        $event = $this->getProfileEvent($model_profile);
-
-        $this->performAjaxValidation($model_profile);
-
-        $this->trigger(self::EVENT_BEFORE_PROFILE_UPDATE, $event);
-        if ($model_profile->load(\Yii::$app->request->post()) && $model_profile->save()) {
-
-            \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Your profile has been updated'));
-            $this->trigger(self::EVENT_AFTER_PROFILE_UPDATE, $event);
-            return $this->refresh();
-        }
-
-
-        //Settings
-        /** @var SettingsForm $model */
-        $model_settings = \Yii::createObject(SettingsForm::className());
-
-        $event = $this->getFormEvent($model_settings);
-
-        $this->performAjaxValidation($model_settings);
-
-        $this->trigger(self::EVENT_BEFORE_ACCOUNT_UPDATE, $event);
-        if ($model_settings->load(\Yii::$app->request->post()) && $model_settings->save()) {
-
-            \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Your account details have been updated'));
-            $this->trigger(self::EVENT_AFTER_ACCOUNT_UPDATE, $event);
-            return $this->refresh();
-
-        }
-
-        $upload = new UploadImage;
-
+        $r = \Yii::$app;
 
         return $this->render('profile', [
-            'model_profile' => $model_profile,
-            'model_settings' => $model_settings,
-            'upload' => $upload,
-            'module' => $this->module,
+            'user_form' => new UserForm(),
         ]);
-
     }
 
     /**
@@ -300,12 +332,12 @@ class UserpanelController extends BaseSettingsController
 
         $upload_model = new UploadImage;
 
-        if ( $upload_model->upload(["160x200"]) ) {
+        if ($upload_model->upload(["160x200"])) {
 
             $profile->image->path = $upload_model->path;
             $profile->image->name = $upload_model->new_name;
 
-            if($profile->image->save()) {
+            if ($profile->image->save()) {
                 echo json_encode($upload_model->json);
             }
         }
@@ -344,15 +376,16 @@ class UserpanelController extends BaseSettingsController
         return Json::encode($output);
     }
 
-    public function actionSetCity(){
+    public function actionSetCity()
+    {
         if (!Yii::$app->request->isAjax) {
-            throw new HttpException(403 , "this action can be access by ajax only");
+            throw new HttpException(403, "this action can be access by ajax only");
         }
 
-        $id = (int) Yii::$app->request->post('id');
+        $id = (int)Yii::$app->request->post('id');
 
         Yii::$app->response->cookies->add(new  Cookie([
-            'name'  => 'city_id',
+            'name' => 'city_id',
             'value' => $id
         ]));
 

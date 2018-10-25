@@ -8,4 +8,9 @@ class Constants{
         "768x500", "1200x500", "1500x500", // modal base image
         "270xR"
     ];
+
+    const LANGUAGE_RU = 'ru-RU';
+    const LANGUAGE_EN = 'en';
+    const LANGUAGE_SHORT_RU = 'ru';
+    const LANGUAGE_SHORT_EN = 'en';
 }

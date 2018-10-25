@@ -7,6 +7,8 @@ composer start :
 	$ docker-compose -f docker-compose.yml -f docker-compose-mac-prod.yml up
 	
 	$ DBG_IP=192.168.56.1 docker-compose -f docker-dev.yml up -d
+	$ SET DBG_IP=10.0.75.1 && docker-compose -f docker-dev.yml up -d 
+	$ docker-compose -f docker-dev.yml down
     $ docker exec -ti publicayii_php_1 /bin/sh
     $ php yii migrate up --migrationPath=src/migrations
 notes:

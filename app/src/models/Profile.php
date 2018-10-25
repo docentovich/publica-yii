@@ -42,8 +42,8 @@ class Profile extends BaseProfile
     public function attributeLabels()
     {
         return [
-            'phone' => \Yii::t('user', 'Телефон'),
-            'Bio'   => \Yii::t('user', 'О себе'),
+            'phone' => \Yii::t('app/user', 'phone'),
+            'bio'   => \Yii::t('app/user', 'bio'),
         ];
     }
 

@@ -10,12 +10,13 @@ return [
     'id'           => 'app-backend',
     'basePath'     => dirname( __DIR__ ),
     'homeUrl'      => '/admin',
-    'defaultRoute' => '/user/settings/profile',
+//    'defaultRoute' => '/user/settings/profile',
     'bootstrap'    => [
         'log',
         \app\templates\BootstrapBackend::class,
         'app\modules\probank\BackendBootstrap',
         'app\modules\tosee\BackendBootstrap',
+        'app\modules\users\Bootstrap',
     ],
     'modules' => [
 
@@ -42,7 +43,7 @@ return [
                     'class'  => 'dektrium\user\controllers\RecoveryController',
                     'layout' => '@current_template/layouts/login',
                 ],
-                'settings' => 'app\modules\users\controllers\backend\UserpanelController',
+                'settings' => 'app\modules\users\controllers\backend\UserPanelController',
             ],
             'modelMap'      => [
                 'Profile'          => \app\models\Profile::class,

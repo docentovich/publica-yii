@@ -18,15 +18,9 @@ class BackendAsset extends AssetBundle
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $depends = [
         'yii\web\YiiAsset',
+        'app\templates\ImagesLoadedAssets',
+        'app\templates\FontAwesome',
+        'app\templates\DatePickerAssets',
     ];
-
-    public function init()
-    {
-        parent::init();
-        // resetting BootstrapAsset to not load own css files
-        \Yii::$app->assetManager->bundles['yii\web\JqueryAsset'] = [
-            'js' => []
-        ];
-    }
 
 }

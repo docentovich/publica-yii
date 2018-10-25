@@ -20,6 +20,8 @@ class FrontendAsset extends AssetBundle
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $depends = [
         'yii\web\YiiAsset',
+        'app\templates\ImagesLoadedAssets',
+        'app\templates\FontAwesome',
     ];
 
     public function __construct(array $config = [])
@@ -28,12 +30,4 @@ class FrontendAsset extends AssetBundle
         $this->sourcePath = "@templates/tosee/assets";
     }
 
-    public function init()
-    {
-        parent::init();
-        // resetting BootstrapAsset to not load own css files
-        \Yii::$app->assetManager->bundles['yii\web\JqueryAsset'] = [
-            'js' => []
-        ];
-    }
 }
