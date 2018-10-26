@@ -40,6 +40,16 @@ class SiteController extends Controller
         );
     }
 
+    public function actionGenPwd()
+    {
+        if(YII_ENV_DEV){
+            return \Yii::$app->getSecurity()->generatePasswordHash(
+                \Yii::$app->request->get('pwd')
+            );
+        }
+        return '';
+    }
+
     /**
      * Экшен вывода постов по условиям
      *

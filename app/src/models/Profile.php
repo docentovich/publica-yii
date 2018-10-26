@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use app\models\Image;
@@ -10,20 +11,20 @@ use borales\extensions\phoneInput\PhoneInputValidator;
  * This is the model class for table "profile".
  *
  * @property integer $user_id
- * @property string  $name
- * @property string  $firstname
- * @property string  $sename
- * @property string  $lastname
- * @property string  $fullName
- * @property string  $public_email
- * @property string  $gravatar_email
- * @property string  $gravatar_id
- * @property string  $location
- * @property string  $website
- * @property string  $bio
- * @property string  $timezone
- * @property User    $user
- * @property Image   $avatar0
+ * @property string $name
+ * @property string $firstname
+ * @property string $sename
+ * @property string $lastname
+ * @property string $fullName
+ * @property string $public_email
+ * @property string $gravatar_email
+ * @property string $gravatar_id
+ * @property string $location
+ * @property string $website
+ * @property string $bio
+ * @property string $timezone
+ * @property User $user
+ * @property Image $avatar0
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com
  */
@@ -42,29 +43,31 @@ class Profile extends BaseProfile
     public function attributeLabels()
     {
         return [
-            'phone' => \Yii::t('app/user', 'phone'),
-            'bio'   => \Yii::t('app/user', 'bio'),
+            'phone' => \Yii::t('app/user', 'Phone'),
+            'public_email' => \Yii::t('app/user', 'Email'),
+            'firstname' => \Yii::t('app/user', 'First Name'),
+            'sename' => \Yii::t('app/user', 'Se Name'),
+            'lastname' => \Yii::t('app/user', 'Last Name'),
         ];
     }
 
 
     public function scenarios()
     {
-        $scenarios = parent::scenarios();
-        $scenarios['create'][]   = ['sename','lastname','phone'];
-        $scenarios['update'][]   = ['sename','lastname','phone'];
-        $scenarios['register'][] = ['sename','lastname','phone'];
-        return $scenarios;
+        return [
+            'create' => ['sename', 'lastname', 'phone'],
+            'update' => ['sename', 'lastname', 'phone'],
+            'register' => ['sename', 'lastname', 'phone'],
+        ];
     }
 
     public function rules()
     {
-        $rules = parent::rules();
-        $rules['senameLength']   = ['sename', 'string', 'max' => 255];
-        $rules['lastnameLength']   = ['lastname', 'string', 'max' => 255];
-        $rules['phone']   = ['phone', PhoneInputValidator::className()];
-
-        return $rules;
+        return [
+            'senameLength' => ['sename', 'string', 'max' => 255],
+            'lastnameLength' => ['lastname', 'string', 'max' => 255],
+            'phone' => ['phone', PhoneInputValidator::className()],
+        ];
     }
 
     /**
@@ -87,7 +90,8 @@ class Profile extends BaseProfile
         return $this->hasOne(Image::className(), ['id' => 'avatar']);
     }
 
-    public function getFullName(){
+    public function getFullName()
+    {
         return implode(" ", [$this->firstname, $this->sename, $this->lastname]);
     }
 

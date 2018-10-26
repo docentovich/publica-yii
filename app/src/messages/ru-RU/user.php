@@ -9,4 +9,10 @@ return [
     'Password required' => 'Введи пароль, да',
     'Passwords don\'t match' => 'Пароли не совпадают',
     'Phone' => 'Телефон',
+    'Changed successful' => 'Успешно изменено',
+    'User already exist' => 'Пользователь уже существует',
+    'Email' => 'Email',
+    'First Name' => 'Имя',
+    'Se Name' => 'Фамилия',
+    'Last Name' => 'Отчество',
 ];

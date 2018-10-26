@@ -13,6 +13,7 @@ namespace app\modules\users\controllers\backend;
 
 use app\models\UploadImage;
 use app\models\UserForm;
+use app\widgets\alert\Alert;
 use dektrium\user\Finder;
 use dektrium\user\models\SettingsForm;
 use app\models\User;
@@ -94,35 +95,19 @@ class UserPanelController extends BaseSettingsController
         ];
     }
 
-    /**
-     * @return UserForm|bool
-     */
-    private function userFormModel()
-    {
-        $user_form_model = new UserForm();
-        $user_form_model->load(\Yii::$app->request->post());
-        return ($user_form_model->validate()) ? $user_form_model : false;
-    }
-
-    private function userSave()
-    {
-        if (!($user_form_model = $this->userFormModel())) {
-            return false;
-        }
-
-        /** @var \app\models\User $user_model */
-        $user_model = (User::findMeTo(User::SCENARIO_UPDATE));
-        return ($user_model->load($user_form_model->toArray(), '') && $user_model->save());
-    }
-
     public function actionPostUserForm()
     {
-        if (Yii::$app->request->isAjax) {
-            return $this->userFormModel();
-        } else {
+        $user_form_model = new UserForm();
+        $this->performAjaxValidation( $user_form_model );
+
+        if( $user_form_model->load(\Yii::$app->request->post()) && $user_form_model->validate() ){
+            /** @var \app\models\User $user_model */
+            $user_model = (User::findMeTo(User::SCENARIO_UPDATE));
             $this->refresh();
-            return $this->userSave();
+            return ($user_model->load($user_form_model->toArray(), '') && $user_model->save());
         }
+
+        return false;
     }
 
     /**
@@ -184,8 +169,6 @@ class UserPanelController extends BaseSettingsController
 //            'upload' => $upload,
 //            'module' => $this->module,
 //        ]);*/
-
-        $r = \Yii::$app;
 
         return $this->render('profile', [
             'user_form' => new UserForm(),
@@ -334,10 +317,10 @@ class UserPanelController extends BaseSettingsController
 
         if ($upload_model->upload(["160x200"])) {
 
-            $profile->image->path = $upload_model->path;
-            $profile->image->name = $upload_model->new_name;
+            $profile->avatar0->path = $upload_model->path;
+            $profile->avatar0->name = $upload_model->new_name;
 
-            if ($profile->image->save()) {
+            if ($profile->avatar0->save()) {
                 echo json_encode($upload_model->json);
             }
         }

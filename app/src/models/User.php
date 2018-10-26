@@ -3,9 +3,11 @@
 namespace app\models;
 
 use app\beheviors\UserBeforValidate;
+use app\widgets\alert\Alert;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use yii\db\IntegrityException;
 use yii\web\IdentityInterface;
 use dektrium\user\models\User as BaseUser;
 use yii\helpers\ArrayHelper;
@@ -110,6 +112,15 @@ class User extends BaseUser implements IdentityInterface
         ]);
     }
 
+    public function scenariosSuccessMessages()
+    {
+        return [
+            self::SCENARIO_CREATE => \Yii::t('app/user', 'Created successful'),
+            self::SCENARIO_UPDATE => \Yii::t('app/user', 'Changed successful'),
+        ];
+    }
+
+
     /**
      * @inheritdoc
      */
@@ -137,9 +148,21 @@ class User extends BaseUser implements IdentityInterface
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findUniqueByUserName($username)
+    {
+        return static::findOne(['username' => $username]);
+    }
+
     public static function findMeTo($scenario)
     {
-        $model = (static::findOne(['id' => \Yii::$app->user->getId()]));
+        /** @var User $model */
+        $model = clone \Yii::$app->user->identity;
         $model->scenario = $scenario;
         return $model;
     }
@@ -147,7 +170,25 @@ class User extends BaseUser implements IdentityInterface
     public function save($runValidation = true, $attributeNames = null)
     {
         $this->password = \Yii::$app->getSecurity()->generatePasswordHash($this->password);
-        return parent::save($runValidation, $attributeNames);
+
+        try {
+            if (parent::save($runValidation, $attributeNames)) {
+                \Yii::$app->session->setFlash(
+                    Alert::MESSAGE_SUCCESS,
+                    $this->scenariosSuccessMessages()[$this->scenario]
+                );
+                return true;
+            }
+        } catch (IntegrityException $e) {
+            \Yii::$app->session->setFlash(
+                Alert::MESSAGE_DANGER,
+                \Yii::t('app/user', 'User already exist')
+            );
+        } catch (\Exception $e) {
+
+        }
+
+        return false;
     }
 
     /**

@@ -17,6 +17,7 @@ class FrontendBootstrap implements BootstrapInterface
                 [
                     // объявление правил здесь
                     ''                                                                        => 'project/site/index',
+                    'gen'                                                                     => 'project/site/gen-pwd',
                     '<page:\d+>'                                                              => 'project/site/index',
                     '<date:[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])>'            => 'project/site/date',
                     '<date:[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])>/<page:\d+>' => 'project/site/date',
