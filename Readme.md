@@ -11,6 +11,9 @@ composer start :
 	$ docker-compose -f docker-dev.yml down
     $ docker exec -ti publicayii_php_1 /bin/sh
     $ php yii migrate up --migrationPath=src/migrations
+    $ php yii migrate/down 1 --migrationPath=src/migrations
+    $ php yii migrate create <name> --migrationPath=src/migrations
+    $ php yii migrate/create profile_avtar_default_null --migrationPath=src/migrations
 notes:
 
 > docker-compose exec mysql bash error:  https://github.com/laradock/laradock/issues/1173

@@ -29,7 +29,7 @@
                 <div class="item-photo item-masonry" style="display: none">
                     <a class="item-photo-a" data-fancybox="gallery" href="#modal-<?= $key ?>">
                         <?= \app\widgets\picture\Alert::widget([
-                            "src" => "/uploads/post/{$image->getFullPathImageSizeOf('200x150')}",
+                            "src" => "/uploads/post/{$image->getPathImageSizeOf('200x150')}",
                             "points" => [
                                 "sm, md" => "280x200",
                                 "lg" => "390x280",
@@ -50,7 +50,7 @@
             <div class="modal-header">
                 <div class="modal-image">
                     <?= \app\widgets\picture\Alert::widget([
-                        "src" => "/uploads/post/{$image->getFullPathImageSizeOf('768x500')}",
+                        "src" => "/uploads/post/{$image->getPathImageSizeOf('768x500')}",
                         "points" => [
                             "sm, md" => "1200x500",
                             "lg" => "1500x500",
@@ -81,7 +81,7 @@
                         <?php foreach ($image->comments as $comment) { ?>
                             <div class="comment">
                                 <div class="comment-avatar">
-                                    <?= \yii\helpers\Html::img("/uploads/{$comment->avatar0->getFullPathImageSizeOf('40x40')}") ?>
+                                    <?= \yii\helpers\Html::img("/uploads/{$comment->avatar0->getPathImageSizeOf('40x40')}") ?>
                                 </div>
                                 <div class="comment-description">
                                     <strong><?= $comment->title ?></strong>

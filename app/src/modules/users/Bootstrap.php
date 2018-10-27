@@ -14,8 +14,10 @@ class Bootstrap implements BootstrapInterface
         if( $app->id === "app-backend"){
             $app->getUrlManager()->addRules(
                 [
-                    'GET /' => '/user/settings/profile',
-                    'POST /' => '/user/settings/post-user-form',
+                    '/' => '/user/settings/profile',
+                    'save-user' => '/user/settings/save-user-form',
+                    'save-profile' => '/user/settings/save-profile-form',
+                    'profile/upload-avatar'    => '/user/settings/upload-avatar',
                     'avatar-upload'    => '/user/settings/upload-avatar',
                     '<action:[\w\-]+>' => '/user/settings/<action>',
                 ]

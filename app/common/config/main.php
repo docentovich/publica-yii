@@ -5,6 +5,9 @@ $config = [
     'sourceLanguage' => 'en',
     'language' => 'ru-RU',
     'name' => 'Publica',
+    'bootstrap' => [
+        'common\config\Aliases'
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',

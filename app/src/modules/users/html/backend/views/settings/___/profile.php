@@ -3,7 +3,7 @@
         <div class="user-name"><?= $identity->profile->fullName; ?></div>
         <div class="user-avatar dark-icon">
             <?php if ($identity->profile->avatar) {
-                echo \yii\helpers\Html::img("/uploads/" . $identity->profile->avatar0->getFullPathImageSizeOf('270xR'));
+                echo \yii\helpers\Html::img("/uploads/" . $identity->profile->avatar0->getPathImageSizeOf('270xR'));
             } else { ?>
                 <i class="fa fa-user"></i>
             <?php } ?>

@@ -17,7 +17,7 @@
             <a href="/post.html">
                 <?=
                 \yii\helpers\Html::a(
-                    \yii\helpers\Html::img("/uploads/post/{$post->image->getFullPathImageSizeOf('500x500')}"),
+                    \yii\helpers\Html::img("/uploads/post/{$post->image->getPathImageSizeOf('500x500')}"),
                     "/post/{$post->id}"); ?>
                 <div class="post-description"><?= $post->getPostDataShortDesc(); ?></div>
             </a>

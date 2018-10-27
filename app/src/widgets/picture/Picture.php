@@ -22,7 +22,6 @@ class Picture extends Widget
 
     public function init()
     {
-        parent::init();
         list($image_name, $this->originalImageExtension) = explode('.', $this->src);
         preg_match('/(.*)\[(.*)\]/', $image_name, $matches);
         list(, $this->originalImageName, $this->baseSize) = $matches;

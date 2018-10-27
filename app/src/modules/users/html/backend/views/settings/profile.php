@@ -7,7 +7,8 @@ use yii\widgets\ActiveForm;
  * @var \app\models\UserForm $user_form
  */
 $identity = \Yii::$app->user->identity;
-
+$profile = $identity->profile;
+$profile->scenario = \app\models\Profile::SCENARIO_UPDATE;
 ?>
 
 <div class="profile">
@@ -16,7 +17,7 @@ $identity = \Yii::$app->user->identity;
         <div class="user-name"><?= $identity->profile->fullName; ?></div>
         <div class="user-avatar dark-icon">
             <?php if ($identity->profile->avatar) {
-                echo \yii\helpers\Html::img("/uploads/" . $identity->profile->avatar0->getFullPathImageSizeOf('270xR'));
+                echo \yii\helpers\Html::img("/uploads/" . $identity->profile->avatar0->getPathImageSizeOf('270xR'));
             } else { ?>
                 <i class="fa fa-user"></i>
             <?php } ?>
@@ -25,11 +26,11 @@ $identity = \Yii::$app->user->identity;
 
     <div class="profile-body">
 
-        <?php $form = ActiveForm::begin([
-            'id' => 'profile-form',
+        <?php $user_active_form = ActiveForm::begin([
+            'action' => '/admin/save-user',
+            'id' => 'user-form',
             'options' => [
                 'class' => 'form',
-                'enctype' => 'multipart/form-data'
             ],
             'fieldConfig' => [
                 'template' => "{label}\n{input}\n
@@ -48,13 +49,16 @@ $identity = \Yii::$app->user->identity;
                 <?= \app\widgets\alert\Alert::widget(); ?>
             </div>
 
-            <?= $form->field($user_form, 'username')
-                ->label(\Yii::t('app/user', 'Login {sub_level}',
-                    ['sub_level' => \Yii::t('app/user', 'sub_level')])); ?>
+            <?= $user_active_form->field($user_form, 'username')
+                ->label(
+                    \Yii::t('app/user', 'Login {sub_level}',
+                        ['sub_level' => \Yii::t('app/user', 'sub_level')]
+                    )
+                ); ?>
 
-            <?= $form->field($user_form, 'password')->passwordInput(); ?>
+            <?= $user_active_form->field($user_form, 'password')->passwordInput(); ?>
 
-            <?= $form->field($user_form, 'password_repeat')->passwordInput(); ?>
+            <?= $user_active_form->field($user_form, 'password_repeat')->passwordInput(); ?>
 
         </div>
 
@@ -69,7 +73,9 @@ $identity = \Yii::$app->user->identity;
 
     </div>
 
-    <?php $form = ActiveForm::begin([
+    <?php $profile_active_form = ActiveForm::begin([
+        'action' => '/admin/save-profile',
+        'id' => 'profile-form',
         'options' => [
             'class' => 'form',
             'enctype' => 'multipart/form-data'
@@ -81,60 +87,41 @@ $identity = \Yii::$app->user->identity;
                 'class' => 'form-row'
             ],
         ],
-    ]); ?>
+        'enableAjaxValidation' => true,
+        'enableClientValidation' => true,
+    ]);
+
+    ?>
 
     <div class="profile-body">
         <div class="form-block">
             <h2>Служебная информация **</h2>
 
-            <?= $form->field($identity->profile, 'phone')
+            <?= $profile_active_form->field($profile, 'phone')
                 ->textInput([
                     'placeholder' => '123-456-78-90',
                     'type' => 'tel',
                     'pattern' => '(\+[0-9]{1,3})?\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}'
                 ]); ?>
-            <?= $form->field($identity->profile, 'public_email')
-                ->textInput(["pattern" => "(\+[0-9]{1,3})?\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}"]); ?>
-            <?= $form->field($identity->profile, 'firstname'); ?>
-            <?= $form->field($identity->profile, 'sename'); ?>
-            <?= $form->field($identity->profile, 'lastname'); ?>
+            <?= $profile_active_form->field($profile, 'public_email')
+                ->textInput(["type" => "email"]); ?>
+            <?= $profile_active_form->field($profile, 'firstname'); ?>
+            <?= $profile_active_form->field($profile, 'sename'); ?>
+            <?= $profile_active_form->field($profile, 'lastname'); ?>
 
-
-            <!--            --><? //= \dosamigos\fileupload\FileUpload::widget([
-            //                'model' => $identity->profile->avatar0,
-            //                'attribute' => 'name',
-            //                'url' => "/uploads/{$identity->profile->avatar0->getFullPath()}" ,// your url, this is just for demo purposes,
-            //                'options' => ['accept' => 'image/*'],
-            //                'clientOptions' => [
-            //                    'maxFileSize' => 2000000
-            //                ],
-            //                'clientEvents' => [
-            //                    'fileuploaddone' => 'function(e, data) {
-            //                                debugger;
-            //                                console.log(e);
-            //                                console.log(data);
-            //                            }',
-            //                    'fileuploadfail' => 'function(e, data) {
-            //                                debugger;
-            //                                console.log(e);
-            //                                console.log(data);
-            //                            }',
-            //                ],
-            //            ]); ?>
-
+            <?= \ImageAjaxUpload\UploadWidget::widget(
+                [
+                    'model' => $identity->profile->avatar0 ?? new \app\models\Image(['scenario' => \app\models\Image::SCENARIO_LOAD_FILE]),
+                    'attribute' => 'relativeUploadPath',
+                    'action' => '/admin/profile/upload-avatar',
+                    'multiply' => false,
+                    'onUploadFinished' => 'function() { $(\'#waiting\').hide(); }',
+                    'onUploadStart' => 'function() { $(\'#waiting\').show(); }'
+                ]
+            ); ?>
 
             <div class="form-row form--upload" id="upload">
                 <label>Загрузить изображение</label>
-                <div class="form-avatar trigger-click dark-icon" rel="upload-input">
-                    <?= \yii\helpers\Html::img("/uploads/{$identity->profile->avatar0->getFullPathImageSizeOf('100x100')}"); ?>
-                </div>
-
-                <?= $form->field(new \app\models\UploadImage(), 'file', [
-                    'template' => '{input}',
-                    'options' => [
-                        'tag' => null, // Don't wrap with "form-group" div
-                    ]
-                ])->fileInput()->label(false); ?>
             </div>
         </div>
     </div>
@@ -153,42 +140,5 @@ $identity = \Yii::$app->user->identity;
     </div>
 
     <?php ActiveForm::end(); ?>
-
-    <script defer>
-
-        setTimeout(function () {
-
-            $('#upload input[type=\'file\']').on('change', function (event) {
-                debugger;
-                var $from = $(this).parents('form');
-                event.stopPropagation(); // Stop stuff happening
-                event.preventDefault(); // Totally stop stuff happening
-
-                $.ajax({
-                    type: 'POST',
-                    timeout: 50000,
-//                    enctype: 'multipart/form-data',
-                    url: '/admin/avatar-upload',
-                    data: new FormData($from[0]),
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    success: function (data) {
-                        debugger;
-
-                        data = JSON.parse(data);
-                        if (data.url == undefined) return false;
-                        $('#avatar').attr('src', data.url + '/' + data.original);
-                        var thumb = data.thumbs['160x200'];
-                        $('#upload img').attr('src', data.url + '/' + thumb)
-
-                    }
-                });
-            });
-
-        }, 1000);
-
-    </script>
-
 
 </div>

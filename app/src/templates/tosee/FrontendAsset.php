@@ -8,7 +8,7 @@ use yii\web\AssetBundle;
  */
 class FrontendAsset extends AssetBundle
 {
-    public $sourcePath;
+    public $sourcePath  = "@templates/tosee/assets";
     public $css = [
         'css/main.css',
         'bundle/vendor.css',
@@ -24,10 +24,9 @@ class FrontendAsset extends AssetBundle
         'app\templates\FontAwesome',
     ];
 
-    public function __construct(array $config = [])
-    {
-        parent::__construct($config);
-        $this->sourcePath = "@templates/tosee/assets";
-    }
+//    public function __construct(array $config = [])
+//    {
+//        parent::__construct($config);
+//    }
 
 }

@@ -11,7 +11,7 @@
 
 namespace app\modules\users\controllers\backend;
 
-use app\models\UploadImage;
+use app\models\Image;
 use app\models\UserForm;
 use app\widgets\alert\Alert;
 use dektrium\user\Finder;
@@ -20,6 +20,7 @@ use app\models\User;
 use dektrium\user\Module;
 use dektrium\user\traits\AjaxValidationTrait;
 use dektrium\user\traits\EventTrait;
+use ImageAjaxUpload\UploadAction;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Cookie;
@@ -56,7 +57,11 @@ class UserPanelController extends BaseSettingsController
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ]
+            ],
+            'upload-avatar' => [
+                'class' => UploadAction::class,
+//                'upload_dir' => \Yii::getAlias('@uploads') . '/' . \Yii::$app->user->getId()
+            ],
         ];
     }
 
@@ -77,7 +82,7 @@ class UserPanelController extends BaseSettingsController
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['account', 'post-user-form', 'networks', 'disconnect', 'delete', 'upload-avatar', 'set-city'],
+                        'actions' => ['account', 'save-user-form', 'save-profile-form', 'networks', 'disconnect', 'delete', 'upload-avatar', 'set-city'],
                         'roles' => ['user'],
                     ],
                     [
@@ -95,15 +100,37 @@ class UserPanelController extends BaseSettingsController
         ];
     }
 
-    public function actionPostUserForm()
+    public function actionSaveProfileForm()
+    {
+        /** @var Profile $profile_model */
+        $profile_model = \Yii::$app->user->identity->profile;
+        $profile_model->scenario = Profile::SCENARIO_UPDATE;
+        $this->performAjaxValidation($profile_model);
+
+        $profile_model->load(\Yii::$app->request->post());
+
+        if ($profile_model->validate()) {
+            $image_model = new Image(['scenario' => 'loadFile']);
+            $image_model->load(\Yii::$app->request->post());
+
+            if ($image_model->prepareFromRelativeUploadPath() && $image_model->validate() && $image_model->save()) {
+                $profile_model->link('avatar0', $image_model);
+            }
+            $profile_model->save();
+        }
+
+        $this->redirect(['/']);
+    }
+
+    public function actionSaveUserForm()
     {
         $user_form_model = new UserForm();
-        $this->performAjaxValidation( $user_form_model );
+        $this->performAjaxValidation($user_form_model);
 
-        if( $user_form_model->load(\Yii::$app->request->post()) && $user_form_model->validate() ){
+        if ($user_form_model->load(\Yii::$app->request->post()) && $user_form_model->validate()) {
             /** @var \app\models\User $user_model */
             $user_model = (User::findMeTo(User::SCENARIO_UPDATE));
-            $this->refresh();
+            $this->redirect('/admin/');
             return ($user_model->load($user_form_model->toArray(), '') && $user_model->save());
         }
 

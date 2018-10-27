@@ -30,7 +30,9 @@ use borales\extensions\phoneInput\PhoneInputValidator;
  */
 class Profile extends BaseProfile
 {
-    // use UserDbConnection;
+    const SCENARIO_UPDATE = 'update';
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_REGISTER = 'register';
 
     /**
      * @inheritdoc
@@ -55,17 +57,20 @@ class Profile extends BaseProfile
     public function scenarios()
     {
         return [
-            'create' => ['sename', 'lastname', 'phone'],
-            'update' => ['sename', 'lastname', 'phone'],
-            'register' => ['sename', 'lastname', 'phone'],
+            self::SCENARIO_CREATE => ['sename', 'lastname', 'phone'],
+            self::SCENARIO_UPDATE => ['firstname', 'sename', 'lastname', 'phone', 'avatar'],
+            self::SCENARIO_REGISTER => ['sename', 'lastname', 'phone'],
         ];
     }
 
     public function rules()
     {
         return [
-            'senameLength' => ['sename', 'string', 'max' => 255],
-            'lastnameLength' => ['lastname', 'string', 'max' => 255],
+            'sename' => ['sename', 'string', 'max' => 255, 'tooLong' => \Yii::t('app/user', 'Se name maximunm {max} symbols')],
+            'senameLength' => ['sename', 'required', 'message' => \Yii::t('app/user', 'Sename name is required')],
+            'lastnameLength' => ['lastname', 'string', 'max' => 255, 'tooLong' => \Yii::t('app/user', 'Last name maximunm {max} symbols')],
+            'lastname' => ['lastname', 'required', 'message' => \Yii::t('app/user', 'Last name is required')],
+            'firstname' => ['firstname', 'required', 'message' => \Yii::t('app/user', 'First name is required')],
             'phone' => ['phone', PhoneInputValidator::className()],
         ];
     }

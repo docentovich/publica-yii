@@ -10,7 +10,6 @@ return [
     'id'           => 'app-backend',
     'basePath'     => dirname( __DIR__ ),
     'homeUrl'      => '/admin',
-//    'defaultRoute' => '/user/settings/profile',
     'bootstrap'    => [
         'log',
         \app\templates\BootstrapBackend::class,
@@ -74,6 +73,12 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => TRUE,
             'showScriptName'  => FALSE,
+        ],
+        'urlManagerFrontEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
         ],
         // вьюшки дектриума
         'view'       => [
