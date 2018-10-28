@@ -34,7 +34,9 @@ class UploadWidget extends Widget
     {
         ?>
         <div class="image-ajax-upload" multiply="<?= $this->multiply ?>">
-            <?= $this->activeForm->field(new UploadModel(), 'file')->fileInput(['style' => 'display: none']); ?>
+
+            <?= $this->activeForm->field(new UploadModel(), 'file')
+                ->fileInput(['style' => 'display: none'])->label(false); ?>
 
             <?php foreach ($this->modelParameter as $model_src_field) { ?>
                 <?= \yii\helpers\Html::img($model_src_field); ?>
