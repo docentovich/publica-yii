@@ -111,12 +111,13 @@ $profile->scenario = \app\models\Profile::SCENARIO_UPDATE;
 
             <?= \ImageAjaxUpload\UploadWidget::widget(
                 [
+                    'activeForm' => $profile_active_form,
                     'model' => $identity->profile->avatar0 ?? new \app\models\Image(['scenario' => \app\models\Image::SCENARIO_LOAD_FILE]),
                     'attribute' => 'relativeUploadPath',
-                    'action' => '/admin/profile/upload-avatar',
+//                    'action' => '/admin/profile/upload-avatar',
                     'multiply' => false,
-                    'onUploadFinished' => 'function() { $(\'#waiting\').hide(); }',
-                    'onUploadStart' => 'function() { $(\'#waiting\').show(); }'
+//                    'onUploadFinished' => 'function() { $(\'#waiting\').hide(); }',
+//                    'onUploadStart' => 'function() { $(\'#waiting\').show(); }'
                 ]
             ); ?>
 

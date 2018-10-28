@@ -21,6 +21,7 @@ use dektrium\user\Module;
 use dektrium\user\traits\AjaxValidationTrait;
 use dektrium\user\traits\EventTrait;
 use ImageAjaxUpload\UploadAction;
+use ImageAjaxUpload\UploadModel;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Cookie;
@@ -31,6 +32,7 @@ use yii\helpers\Json;
 use Yii;
 use app\models\Profile;
 use dektrium\user\controllers\SettingsController as BaseSettingsController;
+use yii\web\UploadedFile;
 
 /**
  * SettingsController manages updating user settings (e.g. profile, email and password).
@@ -112,9 +114,9 @@ class UserPanelController extends BaseSettingsController
         if ($profile_model->validate()) {
             $image_model = $profile_model->avatar0 ?? new Image();
             $image_model->scenario = Image::SCENARIO_LOAD_FILE;
-            $image_model->load(\Yii::$app->request->post());
+            $image_model->load((new UploadModel())->upload(\Yii::$app->user->getId()), '');
 
-            if ($image_model->prepareFromRelativeUploadPath() && $image_model->validate() && $image_model->save()) {
+            if ($image_model->validate() && $image_model->save()) {
                 $profile_model->link('avatar0', $image_model);
             }
             $profile_model->save();
@@ -332,30 +334,30 @@ class UserPanelController extends BaseSettingsController
      * @return string
      * @throws \Exception Если не ajax
      */
-    public function actionUploadAvatar()
-    {
-        if (!Yii::$app->request->isAjax) {
-            throw new \Exception("this action can be access by ajax only");
-        }
-
-
-        $profile = Profile::find()->where(["=", "user_id", Yii::$app->user->getId()])->one();
-
-        $upload_model = new UploadImage;
-
-        if ($upload_model->upload(["160x200"])) {
-
-            $profile->avatar0->path = $upload_model->path;
-            $profile->avatar0->name = $upload_model->new_name;
-
-            if ($profile->avatar0->save()) {
-                echo json_encode($upload_model->json);
-            }
-        }
-
-
-        return '';
-    }
+//    public function actionUploadAvatar()
+//    {
+//        if (!Yii::$app->request->isAjax) {
+//            throw new \Exception("this action can be access by ajax only");
+//        }
+//
+//
+//        $profile = Profile::find()->where(["=", "user_id", Yii::$app->user->getId()])->one();
+//
+//        $upload_model = new UploadImage;
+//
+//        if ($upload_model->upload(["160x200"])) {
+//
+//            $profile->avatar0->path = $upload_model->path;
+//            $profile->avatar0->name = $upload_model->new_name;
+//
+//            if ($profile->avatar0->save()) {
+//                echo json_encode($upload_model->json);
+//            }
+//        }
+//
+//
+//        return '';
+//    }
 
     /**
      * Удаление картинок
