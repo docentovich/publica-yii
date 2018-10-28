@@ -110,7 +110,8 @@ class UserPanelController extends BaseSettingsController
         $profile_model->load(\Yii::$app->request->post());
 
         if ($profile_model->validate()) {
-            $image_model = new Image(['scenario' => 'loadFile']);
+            $image_model = $profile_model->avatar0 ?? new Image();
+            $image_model->scenario = Image::SCENARIO_LOAD_FILE;
             $image_model->load(\Yii::$app->request->post());
 
             if ($image_model->prepareFromRelativeUploadPath() && $image_model->validate() && $image_model->save()) {
