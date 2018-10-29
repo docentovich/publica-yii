@@ -13,6 +13,10 @@ use yii\web\AssetBundle;
  */
 class Header extends Widget
 {
+    const PROJECT_PUBLICA = 'publica';
+    const PROJECT_TOSEE = 'publica';
+    const PROJECT_PROBANK = 'publica';
+    const PROJECT_SHOOTME = 'publica';
     /** @var string */
     public $project;
 
@@ -29,7 +33,12 @@ class Header extends Widget
         return $this->render("view", [
             "content" => $content,
             "currentProject" => $this->project,
-            "projects" => ['tosee', 'publica', 'probank', 'shootme']
+            "projects" => [
+                self::PROJECT_PUBLICA,
+                self::PROJECT_TOSEE,
+                self::PROJECT_PROBANK,
+                self::PROJECT_SHOOTME,
+            ]
         ]);
     }
 }

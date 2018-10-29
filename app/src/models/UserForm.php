@@ -11,7 +11,7 @@ use yii\base\Model;
  */
 class UserForm extends Model
 {
-    public $username;
+    private $_username;
     /** @var string */
     public $password;
     /** @var string */
@@ -41,11 +41,22 @@ class UserForm extends Model
         ];
     }
 
-    public function __construct(array $config = [])
+    public function getUsername()
     {
-        $this->username = \Yii::$app->user->identity->username;
-        parent::__construct($config);
+        return \Yii::$app->user->identity->username;
     }
 
+    public function setUsername($username)
+    {
+        return $this->_username = $username;
+    }
+
+    public function toArray(array $fields = [], array $expand = [], $recursive = true)
+    {
+        return [
+            'username' => $this->_username,
+            'password' =>  $this->password = \Yii::$app->getSecurity()->generatePasswordHash($this->password)
+        ];
+    }
 
 }

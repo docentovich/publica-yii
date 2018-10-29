@@ -23,7 +23,7 @@ switch (PROJECT) {
     case PROBANK:
         $domain_params = [
             'bootstrap' => [
-                'app\modules\probank\Bootstrap',
+                'app\modules\probank\BootstrapFrontend',
                 'app\modules\probank\FrontendBootstrap',
             ],
             'modules' => [
@@ -40,7 +40,7 @@ $config = [
     'basePath' => dirname( __DIR__ ),
     'homeUrl'  => '/',
 
-    'defaultRoute' => 'project/site/index',
+    'defaultRoute' => 'project/front/index',
 
     'bootstrap' => [
         'log',
@@ -49,7 +49,7 @@ $config = [
     ],
     'components' => [
         'errorHandler' => [
-            'errorAction' => 'project/site/error',
+            'errorAction' => 'project/front/error',
         ],
 
         'request' => [

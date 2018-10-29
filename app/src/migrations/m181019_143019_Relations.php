@@ -14,16 +14,16 @@ class m181019_143019_Relations extends Migration
 
     public function safeUp()
     {
-        $this->addForeignKey('fk_tbl_auth_assignment_item_name',
-            '{{%auth_assignment}}','item_name',
-            '{{%auth_item}}','name',
-            'CASCADE','CASCADE'
-         );
-        $this->addForeignKey('fk_tbl_auth_item_rule_name',
-            '{{%auth_item}}','rule_name',
-            '{{%auth_rule}}','name',
-            'CASCADE','CASCADE'
-         );
+//        $this->addForeignKey('fk_tbl_auth_assignment_item_name',
+//            '{{%auth_assignment}}','item_name',
+//            '{{%auth_item}}','name',
+//            'CASCADE','CASCADE'
+//         );
+//        $this->addForeignKey('fk_tbl_auth_item_rule_name',
+//            '{{%auth_item}}','rule_name',
+//            '{{%auth_rule}}','name',
+//            'CASCADE','CASCADE'
+//         );
 
         $this->addForeignKey('fk_tbl_comments_avatar',
             '{{%comments}}','avatar',
@@ -134,8 +134,8 @@ class m181019_143019_Relations extends Migration
 
     public function safeDown()
     {
-        $this->dropForeignKey('fk_tbl_auth_assignment_item_name', '{{%auth_assignment}}');
-        $this->dropForeignKey('fk_tbl_auth_item_rule_name', '{{%auth_item}}');
+//        $this->dropForeignKey('fk_tbl_auth_assignment_item_name', '{{%auth_assignment}}');
+//        $this->dropForeignKey('fk_tbl_auth_item_rule_name', '{{%auth_item}}');
         $this->dropForeignKey('fk_tbl_comments_avatar', '{{%comments}}');
         $this->dropForeignKey('fk_tbl_probank_categori_data_categori_id', '{{%probank_categori_data}}');
         $this->dropForeignKey('fk_tbl_probank_post_post_category_id', '{{%probank_post}}');

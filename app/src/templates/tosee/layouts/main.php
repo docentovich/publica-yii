@@ -3,16 +3,18 @@
  * @var string $content
  */
 
-use app\assets\FrontendAsset;
-use app\assets\FrontendAssetIE9;
+use app\assets\Asset;
+use app\assets\AssetIE9;
 
-$bundle = FrontendAsset::register($this);
-FrontendAssetIE9::register($this);
+$bundle = Asset::register($this);
+AssetIE9::register($this);
 
 $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 ?>
 
-    <?php \app\widgets\header\Header::begin(["project" => "tosee"]); ?>
+<?php \app\widgets\header\Header::begin([
+    "project" => \app\widgets\header\Header::PROJECT_TOSEE
+]); ?>
     <div class="overlay" id="service-menu-overlay">
         <div class="service-overlay-wrapper">
             <ul class="tosee-menu">
@@ -22,7 +24,7 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
             </ul>
         </div>
     </div>
-    <?php \app\widgets\header\Header::end(); ?>
+<?php \app\widgets\header\Header::end(); ?>
 
     <div class="content-wrapper">
         <div class="content">

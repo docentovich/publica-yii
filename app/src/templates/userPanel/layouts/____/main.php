@@ -4,10 +4,10 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use app\assets\BackendAsset;
+use app\assets\Asset;
 use app\components\Header;
 
-$bundle = BackendAsset::register($this);
+$bundle = Asset::register($this);
 ?>
 <?php $this->beginPage(); ?>
   <!DOCTYPE html>

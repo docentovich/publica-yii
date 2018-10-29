@@ -12,7 +12,6 @@ class BaseTemplate
     private $view;
     /** @var AssetBundle */
     private $bundle;
-    private $extended_content;
 
     public function __construct(View $view, AssetBundle $bundle)
     {
