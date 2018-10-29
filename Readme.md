@@ -1,19 +1,36 @@
-composer start :
+###### composer start :
 
-	$ cd ~/docker/publica && docker-compose -f docker-compose.yml -f docker-compose-win-dev.yml up
-	$ docker-compose -f docker-compose.yml -f docker-compose-win-dev.yml up
-	$ docker-compose -f docker-compose.yml -f docker-compose-mac-dev.yml up
-	$ docker-compose -f docker-compose.yml -f docker-compose-win-prod.yml up
-	$ docker-compose -f docker-compose.yml -f docker-compose-mac-prod.yml up
-	
+native: 
+
 	$ DBG_IP=192.168.56.1 docker-compose -f docker-dev.yml up -d
-	$ SET DBG_IP=10.0.75.1 && docker-compose -f docker-dev.yml up -d 
+toolbox:
+
+	$ SET DBG_IP=10.0.75.1 && docker-compose -f docker-dev.yml up -d
+stop:
+
 	$ docker-compose -f docker-dev.yml down
+enter container:
+
     $ docker exec -ti publicayii_php_1 /bin/sh
+init app:
+
+    $ composer install
+    $ php yii init
+    $ composer dump-autoload
     $ php yii migrate up --migrationPath=src/migrations
+    
+init rbac:
+
+    $ php yii migrate --migrationPath=@yii/rbac/migrations
+    $ php yii rbac/init
+    
+else commands:
+
     $ php yii migrate/down 1 --migrationPath=src/migrations
-    $ php yii migrate create <name> --migrationPath=src/migrations
-    $ php yii migrate/create profile_avtar_default_null --migrationPath=src/migrations
-notes:
+    $ php yii migrate/down all --migrationPath=src/migrations
+    $ php yii migrate/create <name> --migrationPath=src/migrations
+    
+    
+###### notes:
 
 > docker-compose exec mysql bash error:  https://github.com/laradock/laradock/issues/1173
