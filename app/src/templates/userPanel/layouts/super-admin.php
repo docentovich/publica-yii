@@ -7,7 +7,9 @@ $bundle = \app\assets\Asset::register($this);
 
 $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 ?>
-<?php \app\widgets\header\Header::begin(["project" => "tosee"]); ?>
+<?php \app\widgets\header\Header::begin([
+    "project" => \app\widgets\header\Header::PROJECT_PUBLICA
+]); ?>
     <div class="overlay overlay--user-panel" id="service-menu-overlay">
         <div class="service-overlay-wrapper">
             <ul class="user-panel-menu">
