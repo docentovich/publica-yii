@@ -105,14 +105,14 @@ class UserPanelController extends BaseSettingsController
     public function actionSaveProfileForm()
     {
         /** @var Profile $profile_model */
-        $profile_model = \Yii::$app->user->identity->profile;
+        $profile_model = \Yii::$app->user->identity->myProfile;
         $profile_model->scenario = Profile::SCENARIO_UPDATE;
         $this->performAjaxValidation($profile_model);
 
         $profile_model->load(\Yii::$app->request->post());
 
         if ($profile_model->validate()) {
-            $image_model = $profile_model->avatar0 ?? new Image();
+            $image_model = $profile_model->myAvatar;
             $image_model->scenario = Image::SCENARIO_LOAD_FILE;
             $image_model->load((new UploadModel())->upload(\Yii::$app->user->getId()), '');
 
@@ -147,60 +147,11 @@ class UserPanelController extends BaseSettingsController
      */
     public function actionProfile()
     {
-        //TODO Refactor!!
-
-        //Профиль
-
-//        /*$model_profile = $this->finder->findProfileById(\Yii::$app->user->identity->getId());
-//
-//
-//        if ($model_profile == null) {
-//            $model_profile = \Yii::createObject(Profile::className());
-//            $model_profile->link('user', \Yii::$app->user->identity);
-//        }
-//        $model_profile->link('user', \Yii::$app->user->identity);
-//
-//        $event = $this->getProfileEvent($model_profile);
-//
-//        $this->performAjaxValidation($model_profile);
-//
-//        $this->trigger(self::EVENT_BEFORE_PROFILE_UPDATE, $event);
-//        if ($model_profile->load(\Yii::$app->request->post()) && $model_profile->save()) {
-//
-//            \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Your profile has been updated'));
-//            $this->trigger(self::EVENT_AFTER_PROFILE_UPDATE, $event);
-//            return $this->refresh();
-//        }
-//
-//
-//        //Settings
-//        /** @var SettingsForm $model */
-//        $model_settings = \Yii::createObject(SettingsForm::className());
-//
-//        $event = $this->getFormEvent($model_settings);
-//
-//        $this->performAjaxValidation($model_settings);
-//
-//        $this->trigger(self::EVENT_BEFORE_ACCOUNT_UPDATE, $event);
-//        if ($model_settings->load(\Yii::$app->request->post()) && $model_settings->save()) {
-//
-//            \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Your account details have been updated'));
-//            $this->trigger(self::EVENT_AFTER_ACCOUNT_UPDATE, $event);
-//            return $this->refresh();
-//
-//        }
-//
-//        $upload = new UploadImage;
-//
-//
-//        return $this->render('profile', [
-//            'model_profile' => $model_profile,
-//            'model_settings' => $model_settings,
-//            'upload' => $upload,
-//            'module' => $this->module,
-//        ]);*/
+        $identity = \Yii::$app->user->identity;
 
         return $this->render('profile', [
+            'identity' => $identity,
+            'profile' => Profile::findMyProfile(['scenario' => \app\models\Profile::SCENARIO_UPDATE]),
             'user_form' => new UserForm(),
         ]);
     }
@@ -210,29 +161,29 @@ class UserPanelController extends BaseSettingsController
      *
      * @return string|\yii\web\Response
      */
-    public function actionAccount()
-    {
-        /** @var SettingsForm $model */
-        $model = \Yii::createObject(SettingsForm::className());
-        $event = $this->getFormEvent($model);
-
-        $this->performAjaxValidation($model);
-
-        $this->trigger(self::EVENT_BEFORE_ACCOUNT_UPDATE, $event);
-
-
-        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-
-            \Yii::$app->session->setFlash('success', \Yii::t('user', 'Your account details have been updated'));
-            $this->trigger(self::EVENT_AFTER_ACCOUNT_UPDATE, $event);
-            return $this->refresh();
-
-        }
-
-        return $this->render('account', [
-            'model' => $model,
-        ]);
-    }
+//    public function actionAccount()
+//    {
+//        /** @var SettingsForm $model */
+//        $model = \Yii::createObject(SettingsForm::className());
+//        $event = $this->getFormEvent($model);
+//
+//        $this->performAjaxValidation($model);
+//
+//        $this->trigger(self::EVENT_BEFORE_ACCOUNT_UPDATE, $event);
+//
+//
+//        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
+//
+//            \Yii::$app->session->setFlash('success', \Yii::t('user', 'Your account details have been updated'));
+//            $this->trigger(self::EVENT_AFTER_ACCOUNT_UPDATE, $event);
+//            return $this->refresh();
+//
+//        }
+//
+//        return $this->render('account', [
+//            'model' => $model,
+//        ]);
+//    }
 
     /**
      * Attempts changing user's email address.
@@ -243,34 +194,34 @@ class UserPanelController extends BaseSettingsController
      * @return string
      * @throws \yii\web\HttpException
      */
-    public function actionConfirm($id, $code)
-    {
-        $user = $this->finder->findUserById($id);
-
-        if ($user === null || $this->module->emailChangeStrategy == Module::STRATEGY_INSECURE) {
-            throw new NotFoundHttpException();
-        }
-
-        $event = $this->getUserEvent($user);
-
-        $this->trigger(self::EVENT_BEFORE_CONFIRM, $event);
-        $user->attemptEmailChange($code);
-        $this->trigger(self::EVENT_AFTER_CONFIRM, $event);
-
-        return $this->redirect(['account']);
-    }
+//    public function actionConfirm($id, $code)
+//    {
+//        $user = $this->finder->findUserById($id);
+//
+//        if ($user === null || $this->module->emailChangeStrategy == Module::STRATEGY_INSECURE) {
+//            throw new NotFoundHttpException();
+//        }
+//
+//        $event = $this->getUserEvent($user);
+//
+//        $this->trigger(self::EVENT_BEFORE_CONFIRM, $event);
+//        $user->attemptEmailChange($code);
+//        $this->trigger(self::EVENT_AFTER_CONFIRM, $event);
+//
+//        return $this->redirect(['account']);
+//    }
 
     /**
      * Displays list of connected network accounts.
      *
      * @return string
      */
-    public function actionNetworks()
-    {
-        return $this->render('networks', [
-            'user' => \Yii::$app->user->identity,
-        ]);
-    }
+//    public function actionNetworks()
+//    {
+//        return $this->render('networks', [
+//            'user' => \Yii::$app->user->identity,
+//        ]);
+//    }
 
     /**
      * Disconnects a network account from user.
@@ -281,25 +232,25 @@ class UserPanelController extends BaseSettingsController
      * @throws \yii\web\NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionDisconnect($id)
-    {
-        $account = $this->finder->findAccount()->byId($id)->one();
-
-        if ($account === null) {
-            throw new NotFoundHttpException();
-        }
-        if ($account->user_id != \Yii::$app->user->id) {
-            throw new ForbiddenHttpException();
-        }
-
-        $event = $this->getConnectEvent($account, $account->user);
-
-        $this->trigger(self::EVENT_BEFORE_DISCONNECT, $event);
-        $account->delete();
-        $this->trigger(self::EVENT_AFTER_DISCONNECT, $event);
-
-        return $this->redirect(['networks']);
-    }
+//    public function actionDisconnect($id)
+//    {
+//        $account = $this->finder->findAccount()->byId($id)->one();
+//
+//        if ($account === null) {
+//            throw new NotFoundHttpException();
+//        }
+//        if ($account->user_id != \Yii::$app->user->id) {
+//            throw new ForbiddenHttpException();
+//        }
+//
+//        $event = $this->getConnectEvent($account, $account->user);
+//
+//        $this->trigger(self::EVENT_BEFORE_DISCONNECT, $event);
+//        $account->delete();
+//        $this->trigger(self::EVENT_AFTER_DISCONNECT, $event);
+//
+//        return $this->redirect(['networks']);
+//    }
 
     /**
      * Completely deletes user's account.
@@ -307,26 +258,26 @@ class UserPanelController extends BaseSettingsController
      * @return \yii\web\Response
      * @throws \Exception
      */
-    public function actionDelete()
-    {
-        if (!$this->module->enableAccountDelete) {
-            throw new NotFoundHttpException(\Yii::t('user', 'Not found'));
-        }
-
-        /** @var User $user */
-        $user = \Yii::$app->user->identity;
-        $event = $this->getUserEvent($user);
-
-        \Yii::$app->user->logout();
-
-        $this->trigger(self::EVENT_BEFORE_DELETE, $event);
-        $user->delete();
-        $this->trigger(self::EVENT_AFTER_DELETE, $event);
-
-        \Yii::$app->session->setFlash('info', \Yii::t('user', 'Your account has been completely deleted'));
-
-        return $this->goHome();
-    }
+//    public function actionDelete()
+//    {
+//        if (!$this->module->enableAccountDelete) {
+//            throw new NotFoundHttpException(\Yii::t('user', 'Not found'));
+//        }
+//
+//        /** @var User $user */
+//        $user = \Yii::$app->user->identity;
+//        $event = $this->getUserEvent($user);
+//
+//        \Yii::$app->user->logout();
+//
+//        $this->trigger(self::EVENT_BEFORE_DELETE, $event);
+//        $user->delete();
+//        $this->trigger(self::EVENT_AFTER_DELETE, $event);
+//
+//        \Yii::$app->session->setFlash('info', \Yii::t('user', 'Your account has been completely deleted'));
+//
+//        return $this->goHome();
+//    }
 
     /**
      * Загрузка автарок.

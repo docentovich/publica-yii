@@ -26,7 +26,8 @@ use yii\helpers\ArrayHelper;
  * @property integer $phone
  * @property integer $created_at
  * @property integer $updated_at
- * @property Profile $profile
+ * @property Profile|null $profile
+ * @property Profile $myProfile
  * @property string $password write-only password
  */
 class User extends BaseUser implements IdentityInterface
@@ -301,5 +302,13 @@ class User extends BaseUser implements IdentityInterface
     public function getProfile()
     {
         return $this->hasOne(Profile::class, ['user_id' => 'id']);
+    }
+
+    /**
+     * @return Profile
+     */
+    public function getMyProfile()
+    {
+        return  $this->profile ?? new Profile();
     }
 }

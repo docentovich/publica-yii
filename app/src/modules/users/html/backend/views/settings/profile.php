@@ -5,19 +5,17 @@ use yii\widgets\ActiveForm;
 /**
  * @var \app\models\User $identity
  * @var \app\models\UserForm $user_form
+ * @var \app\models\Profile $profile
  */
-$identity = \Yii::$app->user->identity;
-$profile = $identity->profile;
-$profile->scenario = \app\models\Profile::SCENARIO_UPDATE;
 ?>
 
 <div class="profile">
 
     <div class="user-avatar-name">
-        <div class="user-name"><?= $identity->profile->fullName; ?></div>
+        <div class="user-name"><?= $profile->fullName; ?></div>
         <div class="user-avatar dark-icon">
-            <?php if ($identity->profile->avatar) {
-                echo \yii\helpers\Html::img("/uploads/" . $identity->profile->avatar0->getPathImageSizeOf('270xR'));
+            <?php if ($profile->avatar) {
+                echo \yii\helpers\Html::img("/uploads/" . $profile->avatar0->getPathImageSizeOf('Rx270'));
             } else { ?>
                 <i class="fa fa-user"></i>
             <?php } ?>
@@ -112,7 +110,7 @@ $profile->scenario = \app\models\Profile::SCENARIO_UPDATE;
             <?= \ImageAjaxUpload\UploadWidget::widget(
                 [
                     'activeForm' => $profile_active_form,
-                    'model' => $identity->profile->avatar0 ?? new \app\models\Image(['scenario' => \app\models\Image::SCENARIO_LOAD_FILE]),
+                    'model' => $profile->myAavatar,
                     'attribute' => 'relativeUploadPath',
                     'multiply' => false,
                 ]

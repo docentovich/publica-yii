@@ -41,10 +41,9 @@ class UserForm extends Model
         ];
     }
 
-    public function __construct(array $config = [])
+    public function getUsername()
     {
-        $this->username = \Yii::$app->user->identity->username;
-        parent::__construct($config);
+        return $this->username = \Yii::$app->user->identity->username;
     }
 
 
