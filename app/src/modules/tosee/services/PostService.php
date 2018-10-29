@@ -27,7 +27,7 @@ class PostService extends \app\abstractions\Services
      */
     public $city_id = '1';
 
-     public function action(PostServiceConfig $config): \app\dto\PostTransportModel
+    public function action(PostServiceConfig $config): \app\dto\PostTransportModel
     {
         switch ($config->action) {
             case PostServiceConfig::ACTION_PAST:
@@ -131,78 +131,6 @@ class PostService extends \app\abstractions\Services
         return ($model) ? "/post/{$model->id}" : '#';
     }
 
-    /**
-     * Считаем сколько постов, добавляем лимиты
-     * Получем в переменнуд result результат из массива ActiveRecords
-     *
-     * @return $this
-     */
-//    protected function getMany($condition = [])
-//    {
-//        $this->count();
-//
-//        //оступ
-//        $offset = $this->limit_per_page * ($this->page - 1);
-//
-//        //select all
-//        $this->items = $this->_query
-////            ->with(["postData", "image"])
-//            ->andFilterWhere($condition)
-//            ->limit($this->limit_per_page)
-//            ->offset($offset)
-//            ->all();
-//
-//    }
-
-    /**
-     * Считаем сколько постов, добавляем лимиты
-     * Получем в переменнуд result результат из массива ActiveRecords
-     *
-     * @param int $id
-     * @return $this
-     */
-//    protected function getOne($id)
-//    {
-//
-//        $clone = clone $this->_query;
-//        //next
-//        $this->next = $clone
-//            ->select("id")
-//            ->andWhere([">", "id", $id])
-//            ->one();
-//
-//        if (empty($this->next)) {
-//            $clone = clone $this->_query;
-//            $this->next = $clone
-//                ->select("id")
-//                ->limit(1)
-//                ->orderBy('id ASC')
-//                ->one();
-//        }
-//
-//        $clone = clone $this->_query;
-//        //prev
-//        $this->prev = $clone
-//            ->select("id")
-//            ->andWhere(["<", "id", $id])
-//            ->one();
-//
-//        if (empty($this->prev)) {
-//            $clone = clone $this->_query;
-//            $this->prev = $clone
-//                ->select("id")
-//                ->limit(1)
-//                ->orderBy('id DESC')
-//                ->one();
-//        }
-//
-//        //selectOne
-//        $this->items = $this
-//            ->_query
-//            ->andWhere(["=", "id", $id])
-//            ->one();
-//
-//    }
 
     /**
      * поиск по ключевому слову
@@ -211,14 +139,13 @@ class PostService extends \app\abstractions\Services
      */
     public function search($keyword): \app\dto\PostTransportModel
     {
-        $params =
-            [
-                "or",
-                ["like", "title", $keyword],
-                ["like", "sub_header", $keyword],
-                ["like", "post_short_desc", $keyword],
-                ["like", "post_desc", $keyword]
-            ];
+        $params = [
+            "or",
+            ["like", "title", $keyword],
+            ["like", "sub_header", $keyword],
+            ["like", "post_short_desc", $keyword],
+            ["like", "post_desc", $keyword]
+        ];
 
         $this->_query
             ->leftJoin(PostData::tableName(), PostData::tableName() . '.`post_id` = {{%post}}.`id`');
@@ -246,76 +173,5 @@ class PostService extends \app\abstractions\Services
         $this->page = $page;
         return $this;
     }
-
-
-    /**
-     * Будующее
-     *
-     * @return $this
-     */
-//    public function getFuture()
-//    {
-//        $this->_query->andWhere("event_at >= CURDATE()");
-//        $this->getMany();
-//        $this->url = "/%i%";
-//        return $this;
-//
-//    }
-
-    /**
-     * Прошлое
-     *
-     * @return $this
-     */
-//    public function getPast()
-//    {
-//        $this->_query->andWhere("event_at <= CURDATE()");
-//        $this->getMany();
-//        $this->url = "/past/%i%";
-//        return $this;
-//
-//    }
-
-
-    /**
-     * По дате
-     *
-     * @param $date
-     * @return $this
-     */
-//    public function getByDate($date)
-//    {
-//        $this->getMany(["=", "event_at", $date]);
-//        $this->url = "$date/%i%";
-//        return $this;
-//    }
-
-    /**
-     * По периоду
-     *
-     * @param $periodStarts
-     * @param $periodEnds
-     */
-    public function getByPeriod($periodStarts, $periodEnds)
-    {
-
-    }
-
-    /**
-     * По ид
-     *
-     * @param $id
-     * @return $this
-     */
-//    public function getById($id)
-//    {
-//        $this->_query = Post::find()
-//            ->with(["postData", "image"])
-//            ->andWhere(["=", "status", Post::STATUS_ACTIVE]);
-//        //всего постов
-//        $this->getOne($id);
-//        return $this;
-//    }
-
 
 }

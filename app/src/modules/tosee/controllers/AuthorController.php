@@ -217,25 +217,6 @@ class AuthorController extends Controller
     }
 
     /**
-     * Загрузка главной картинки поста
-     *
-     * @throws \Exception Если не ajax запретить доступ
-     */
-//    public function actionUploadMain()
-//    {
-//        if (!Yii::$app->request->isAjax) {
-//            throw new \Exception("this action can be access by ajax only");
-//        }
-//
-//        $model = new Post();
-//
-//        if ($model->load(Yii::$app->request->post())) {
-//            if ($model->image->save())
-//                echo $model->image->json;
-//        }
-//    }
-
-    /**
      * Загрузка доп изображений
      *
      * @throws \Exception Если не ajax запретить доступ
