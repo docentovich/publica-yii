@@ -10,7 +10,7 @@ class BootstrapBackend implements BootstrapInterface
      */
     public function bootstrap( $app )
     {
-        \Yii::setAlias('@current_template', __DIR__ . "/userPanel" );
-        require_once "userPanel/BackendAsset.php";
+        \Yii::setAlias('@current_template', __DIR__ . "/userPanel");
+        require_once "userPanel/Asset.php";
     }
 }

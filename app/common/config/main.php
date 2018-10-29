@@ -46,7 +46,7 @@ $config = [
     ],
     'modules' => [
         'user' => [
-            'class' => 'dektrium\user\Module',
+            'class' => 'app\modules\users\Module',
         ],
     ],
 ];

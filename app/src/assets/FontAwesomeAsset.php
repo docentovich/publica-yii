@@ -4,10 +4,10 @@ namespace app\assets;
 
 use yii\web\AssetBundle;
 
-class ImagesLoadedAsset extends AssetBundle
+class FontAwesomeAsset extends AssetBundle
 {
     public $sourcePath;
-    public $js = [
-        'imagesloaded.js'
+    public $css = [
+        'font-awesome.css'
     ];
 }

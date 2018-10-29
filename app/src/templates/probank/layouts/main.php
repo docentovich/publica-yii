@@ -1,9 +1,9 @@
 <?php
-use app\assets\FrontendAsset;
-use app\assets\FrontendAssetIE9;
+use app\assets\Asset;
+use app\assets\AssetIE9;
 
-$bundle = FrontendAsset::register($this);
-FrontendAssetIE9::register($this);
+$bundle = Asset::register($this);
+AssetIE9::register($this);
 
 $this->beginPage(); ?>
 <html>

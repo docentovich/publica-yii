@@ -10,7 +10,7 @@ class Module extends \yii\base\Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'app\modules\tosee\controllers\frontend';
+    public $controllerNamespace = 'app\modules\tosee\controllers';
 
     /**
      * @var boolean Если модуль используется для админ-панели.
@@ -25,13 +25,13 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-
+        $this->controllerNamespace ;
         // Это здесь для того, чтобы переключаться между frontend и backend
-        if ( \Yii::$app->id === "app-backend" ) {
-            $this->controllerNamespace = 'app\modules\tosee\controllers\backend';
-            $this->setViewPath('@modules/tosee/html/backend/views');
-        } else {
-            $this->setViewPath('@modules/tosee/html/frontend/views');
-        }
+//        if ( \Yii::$app->id === "app-backend" ) {
+//            $this->controllerNamespace = 'app\modules\tosee\controllers\backend';
+//            $this->setViewPath('@modules/tosee/views');
+//        } else {
+//            $this->setViewPath('@modules/tosee/views');
+//        }
     }
 }

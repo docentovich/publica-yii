@@ -27,20 +27,7 @@ class PostService extends \app\abstractions\Services
      */
     public $city_id = '1';
 
-    /**
-     * Констукртор. Собираем все что нужно для вывода поста
-     * Города в куках
-     *
-     * postService constructor.
-     * @param array $config
-     * @return PostService
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    public function action(PostServiceConfig $config): \app\dto\PostTransportModel
+     public function action(PostServiceConfig $config): \app\dto\PostTransportModel
     {
         switch ($config->action) {
             case PostServiceConfig::ACTION_PAST:

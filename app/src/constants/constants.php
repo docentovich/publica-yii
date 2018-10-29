@@ -6,7 +6,7 @@ class Constants{
         "500x500", "320x200", "770x500",
         "200x150", "390x280", "280x200", // post additional images
         "768x500", "1200x500", "1500x500", // modal base image
-        "270xR",
+        "Rx270",
         "100x100",
     ];
 

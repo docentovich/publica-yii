@@ -18,7 +18,6 @@ return [
         'app\modules\users\Bootstrap',
     ],
     'modules' => [
-
         'probank' => [
             'class' => 'app\modules\probank\Module',
         ],
@@ -26,23 +25,13 @@ return [
             'class' => 'app\modules\tosee\Module',
         ],
         'user'  => [
-            'class' => 'dektrium\user\Module',
-            'layout'        => '@current_template/layouts/main',
+            'class' => 'app\modules\users\Module',
+            'layout'        => '@current_template/layouts/user',
 
             'controllerMap' => [
-                'security'     => [
-                    'class'  => 'dektrium\user\controllers\SecurityController',
-                    'layout' => '@current_template/layouts/login',
+                'settings' => [
+                    'class'  => 'app\modules\users\controllers\UserPanelController',
                 ],
-                'registration' => [
-                    'class'  => 'app\modules\users\controllers\backend\RegistrationController',
-                    'layout' => '@current_template/layouts/login',
-                ],
-                'recovery'     => [
-                    'class'  => 'dektrium\user\controllers\RecoveryController',
-                    'layout' => '@current_template/layouts/login',
-                ],
-                'settings' => 'app\modules\users\controllers\backend\UserPanelController',
             ],
             'modelMap'      => [
                 'Profile'          => \app\models\Profile::class,
@@ -84,7 +73,7 @@ return [
         'view'       => [
             'theme' => [
                 'pathMap' => [
-                    '@dektrium/user/views' => '@modules/users/html/backend/views',
+                    '@dektrium/user/views' => '@modules/users/views',
                 ],
             ],
         ],

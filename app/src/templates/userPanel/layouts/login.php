@@ -1,7 +1,7 @@
 <?php
 
-use app\assets\BackendAsset;
-$bundle = BackendAsset::register($this);
+use app\assets\Asset;
+$bundle = Asset::register($this);
 
 $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 ?>
