@@ -170,8 +170,6 @@ class User extends BaseUser implements IdentityInterface
 
     public function save($runValidation = true, $attributeNames = null)
     {
-        $this->password = \Yii::$app->getSecurity()->generatePasswordHash($this->password);
-
         try {
             if (parent::save($runValidation, $attributeNames)) {
                 \Yii::$app->session->setFlash(

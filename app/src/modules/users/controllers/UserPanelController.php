@@ -115,11 +115,13 @@ class UserPanelController extends BaseSettingsController
         if ($user_form_model->load(\Yii::$app->request->post()) && $user_form_model->validate()) {
             /** @var \app\models\User $user_model */
             $user_model = (User::findMeTo(User::SCENARIO_UPDATE));
-            $this->redirect('/admin/');
-            return ($user_model->load($user_form_model->toArray(), '') && $user_model->save());
+
+            if ($user_model->load($user_form_model->toArray(), '') && $user_model->validate()){
+                $user_model->save();
+            }
         }
 
-        return false;
+        $this->redirect(['/']);
     }
 
     /**

@@ -50,13 +50,15 @@ class AuthorController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PostSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        $searchModel = new PostSearch();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//
+//        return $this->render('index', [
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider,
+//        ]);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index');
     }
 
     /**
@@ -216,39 +218,4 @@ class AuthorController extends Controller
         }
     }
 
-    /**
-     * Загрузка доп изображений
-     *
-     * @throws \Exception Если не ajax запретить доступ
-     */
-    public function actionAdditionalUpload()
-    {
-        if (!Yii::$app->request->isAjax) {
-            throw new HttpException(403 , "this action can be access by ajax only");
-        }
-
-        $upload_model = new UploadImage;
-
-        if ($upload_model->multiUpload( ["215x215"] )) {
-            foreach ($upload_model->multiImages as &$image) {
-
-                $image_model = new Image();
-                $image_model->path = $image['path'];
-                $image_model->name = $image['new_name'];
-
-                if ($image_model->save()) {
-
-                    $image['json']['id'] = $image_model->id;
-                    $json[] = $image['json'];
-
-                }
-            }
-
-            echo json_encode($json);
-
-        }
-
-        return '';
-
-    }
 }
