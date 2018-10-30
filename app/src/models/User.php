@@ -107,8 +107,8 @@ class User extends BaseUser implements IdentityInterface
         return ArrayHelper::merge($scenarios, [
             self::SCENARIO_REGISTER => ['username', 'email', 'password', 'city_id'],
             self::SCENARIO_CONNECT => ['username', 'email'],
-            self::SCENARIO_CREATE => ['username', 'email', 'password'],
-            self::SCENARIO_UPDATE => ['username', 'email', 'password'],
+            self::SCENARIO_CREATE => ['username', 'email', 'password', 'password_hash'],
+            self::SCENARIO_UPDATE => ['username', 'email', 'password', 'password_hash'],
             self::SCENARIO_SETTINGS => ['username', 'email', 'password'],
         ]);
     }
@@ -170,6 +170,7 @@ class User extends BaseUser implements IdentityInterface
 
     public function save($runValidation = true, $attributeNames = null)
     {
+        /** TODO to service */
         try {
             if (parent::save($runValidation, $attributeNames)) {
                 \Yii::$app->session->setFlash(
@@ -265,11 +266,16 @@ class User extends BaseUser implements IdentityInterface
      *
      * @param string $password
      */
-    public function setPassword($password)
-    {
-        $this->password_hash = \Yii::$app->security->generatePasswordHash($password);
-    }
-
+//    public function setPassword($password)
+//    {
+//        $this->password_hash = \Yii::$app->security->generatePasswordHash($password);
+//        $this->password = $password;
+//    }
+//
+//    public function getPassword_hash($password)
+//    {
+//        return $this->password_hash = \Yii::$app->security->generatePasswordHash($this->password);
+//    }
     /**
      * Generates "remember me" authentication key
      */

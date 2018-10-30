@@ -18,6 +18,8 @@ init app:
     $ php yii init
     $ composer dump-autoload
     $ php yii migrate up --migrationPath=src/migrations
+    $ php yii migrate up --migrationPath=src/migrations && php yii migrate --migrationPath=@yii/rbac/migrations
+    
     
 init rbac:
 

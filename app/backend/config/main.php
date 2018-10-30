@@ -28,11 +28,6 @@ return [
             'class' => 'app\modules\users\Module',
             'layout'        => '@current_template/layouts/user',
 
-            'controllerMap' => [
-                'settings' => [
-                    'class'  => 'app\modules\users\controllers\UserPanelController',
-                ],
-            ],
             'modelMap'      => [
                 'Profile'          => \app\models\Profile::class,
                 'RegistrationForm' => \app\modules\users\models\RegistrationForm::class,

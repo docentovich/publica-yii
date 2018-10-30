@@ -7,6 +7,7 @@ use yii\base\Model;
 
 /**
  * Class UserForm
+ * @property mixed $username
  * @package app\models
  */
 class UserForm extends Model
@@ -43,7 +44,7 @@ class UserForm extends Model
 
     public function getUsername()
     {
-        return \Yii::$app->user->identity->username;
+        return $this->_username ?? \Yii::$app->user->identity->username;
     }
 
     public function setUsername($username)
@@ -55,7 +56,7 @@ class UserForm extends Model
     {
         return [
             'username' => $this->_username,
-            'password' =>  $this->password = \Yii::$app->getSecurity()->generatePasswordHash($this->password)
+            'password' =>  $this->password
         ];
     }
 

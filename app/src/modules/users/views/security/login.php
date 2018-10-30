@@ -16,7 +16,7 @@ $bundle = Asset::register($this);
 ?>
 <div class="login">
     <div class="login-form">
-        <?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]); ?>
+        <?= \app\widgets\alert\Alert::widget(); ?>
 
         <?php $form = ActiveForm::begin([
             'id' => 'login-form',
