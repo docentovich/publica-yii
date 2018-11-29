@@ -7,6 +7,7 @@ namespace app\dto;
  * builded query and result between service and view
  *
  * Class TransportModel
+ * @property ConfigQuery $configQuery
  * @package app\dto
  */
 class TransportModel extends \app\abstractions\ImmutableDTO

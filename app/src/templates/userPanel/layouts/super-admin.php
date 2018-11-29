@@ -2,9 +2,9 @@
 /**
  * @var string $content
  */
+use yii\helpers\Html;
 
 $bundle = \app\assets\Asset::register($this);
-
 $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 ?>
 <?php \app\widgets\header\Header::begin([
@@ -13,7 +13,10 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
     <div class="overlay overlay--user-panel" id="service-menu-overlay">
         <div class="service-overlay-wrapper">
             <ul class="user-panel-menu">
-                <li><a href="/profile.html">Профиль</a></li>
+                <li><?= Html::a(
+                        "Профиль",
+                        Yii::$app->homeUrl . "/"
+                    ); ?></li>
                 <li><a href="/my/comments.html">Мои комментарии</a></li>
                 <li><a href="/my/orders.html">Мои заказы</a></li>
                 <li><a href="/my/calendar.html">Мой календарь</a></li>

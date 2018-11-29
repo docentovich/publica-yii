@@ -3,8 +3,9 @@
  * @var string $content
  */
 
-$bundle = \app\assets\Asset::register($this);
+use yii\helpers\Html;
 
+$bundle = \app\assets\Asset::register($this);
 $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 ?>
 <?php \app\widgets\header\Header::begin([
@@ -13,17 +14,34 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
     <div class="overlay overlay--user-panel" id="service-menu-overlay">
         <div class="service-overlay-wrapper">
             <ul class="user-panel-menu">
-                <li><a href="/profile.html">Профиль</a></li>
-                <li><a href="/my/comments.html">Мои комментарии</a></li>
-                <li><a href="/my/orders.html">Мои заказы</a></li>
-                <li><a href="/my/calendar.html">Мой календарь</a></li>
-                <li><a href="/my/rating.html">Мой рейтинг</a></li>
-                <li><a href="/roles/journalist.html">Журналист</a></li>
-                <li><a href="/roles/model.html">Модель</a></li>
-                <li><a href="/roles/photographer.html">Фотораф</a></li>
+                <?php if (\Yii::$app->user->can('comments')) { ?>
+                    <li><?= Html::a("Мои комментарии", Yii::$app->homeUrl . "/my/comments"); ?></li>
+                <?php } ?>
+                <?php if (\Yii::$app->user->can('orders')) { ?>
+                    <li><?= Html::a("Мои заказы", Yii::$app->homeUrl . "/my/orders"); ?></li>
+                <?php } ?>
+                <?php if (\Yii::$app->user->can('calendar')) { ?>
+                    <li><?= Html::a("Мой календарь", Yii::$app->homeUrl . "/my/calendar"); ?></li>
+                <?php } ?>
+                <?php if (\Yii::$app->user->can('rating')) { ?>
+                    <li><?= Html::a("Мой рейтинг", Yii::$app->homeUrl . "/my/rating"); ?></li>
+                <?php } ?>
+                <?php if (\Yii::$app->user->can('author')) { ?>
+                    <li><?= Html::a("Журналист", Yii::$app->homeUrl . "/roles/journalist"); ?></li>
+                <?php } ?>
+                <?php if (\Yii::$app->user->can('model')) { ?>
+                    <li><?= Html::a("Модель", Yii::$app->homeUrl . "/roles/model"); ?></li>
+                <?php } ?>
+                <?php if (\Yii::$app->user->can('photograph')) { ?>
+                    <li><?= Html::a("Фотораф", Yii::$app->homeUrl . "/roles/photographer"); ?></li>
+                <?php } ?>
             </ul>
-            <a class="feedback" href="#"><span>Обратная связь</span><span
-                        class="small">(сообщение в администрацию сайта)</span></a>
+            <?= Html::a(
+                "<span>Обратная связь</span><span class=\"small\">(сообщение в администрацию сайта)</span>",
+                "mailto:tomail@mail.ru",
+                ["class" => "feedback"]
+            );
+            ?>
         </div>
     </div>
 <?php \app\widgets\header\Header::end(); ?>
