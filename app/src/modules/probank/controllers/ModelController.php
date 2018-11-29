@@ -6,7 +6,7 @@ use yii\web\Controller;
 
 class ModelController extends Controller
 {
-    public $layout = "@current_template/layouts/main";
+    public $layout = "@current_template/layouts/user";
 
     public function actionIndex()
     {
