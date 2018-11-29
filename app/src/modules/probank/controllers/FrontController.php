@@ -13,15 +13,7 @@ use yii\web\HttpException;
  */
 class FrontController extends Controller
 {
-
-
-    /**
-     * Задаем лайоут
-     *
-     * @var string
-     */
     public $layout = "@current_template/layouts/main";
-
 
     /**
      * @inheritdoc

@@ -16,7 +16,6 @@ use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use Yii;
 use app\models\Profile;
-use dektrium\user\controllers\SettingsController as BaseSettingsController;
 
 /**
  * SettingsController manages updating user settings (e.g. profile, email and password).
@@ -25,7 +24,7 @@ use dektrium\user\controllers\SettingsController as BaseSettingsController;
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class SettingsController extends BaseSettingsController
+class SettingsController extends \dektrium\user\controllers\SettingsController
 {
     use AjaxValidationTrait;
     use EventTrait;
