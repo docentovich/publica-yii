@@ -15,6 +15,7 @@ class Bootstrap implements BootstrapInterface
             $app->getUrlManager()->addRules(
                 [
                     '/' => '/user/settings/profile',
+                    'choose-role' => '/user/register/choose-role',
                     'save-user' => '/user/settings/save-user-form',
                     'save-profile' => '/user/settings/save-profile-form',
                     'profile/upload-avatar'    => '/user/settings/upload-avatar',
