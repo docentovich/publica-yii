@@ -93,6 +93,7 @@ class User extends BaseUser implements IdentityInterface
             [['city_id'], 'default', 'value' => 1],
 
             /** email */
+            [['email'], 'required'],
             ['email', 'email'],
             /** phone */
             ['phone', 'match', 'pattern' => '(\+[0-9]{1,3})?\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}']
@@ -116,6 +117,7 @@ class User extends BaseUser implements IdentityInterface
     public function scenariosSuccessMessages()
     {
         return [
+            self::SCENARIO_REGISTER => \Yii::t('app/user', 'Registered successful'),
             self::SCENARIO_CREATE => \Yii::t('app/user', 'Created successful'),
             self::SCENARIO_UPDATE => \Yii::t('app/user', 'Changed successful'),
         ];

@@ -2,6 +2,9 @@
 
 namespace app\modules\users\controllers;
 
+use app\models\Profile;
+use app\models\User;
+use app\models\UserForm;
 use dektrium\user\Finder;
 use dektrium\user\models\RegistrationForm;
 use dektrium\user\traits\AjaxValidationTrait;
@@ -36,7 +39,7 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
                 'class' => AccessControl::className(),
                 'rules' => [
                     ['allow' => true, 'actions' => ['register', 'connect'], 'roles' => ['?']],
-                    ['allow' => true, 'actions' => ['confirm', 'resend'], 'roles' => ['?', '@']],
+                    ['allow' => true, 'actions' => ['confirm', 'resend', 'choose-role'], 'roles' => ['?', '@']],
                 ],
             ],
         ];
@@ -55,30 +58,34 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
      */
     public function actionRegister()
     {
-        if (!$this->module->enableRegistration) {
-            throw new NotFoundHttpException();
-        }
-
-        /** @var RegistrationForm $model */
-        $model = Yii::createObject(RegistrationForm::className());
-        $event = $this->getFormEvent($model);
+        $user_form_model = new UserForm();
+        $event = $this->getFormEvent($user_form_model);
         $this->trigger(self::EVENT_BEFORE_REGISTER, $event);
-        $this->performAjaxValidation($model);
-        $title = null;
+        $this->performAjaxValidation($user_form_model);
+        $title = '';
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->register()) {
+        if ($user_form_model->load(\Yii::$app->request->post()) && $user_form_model->validate()) {
+            /** @var \app\models\User $user_model */
+            $user_model = new User();
+            $user_model->scenario = User::SCENARIO_REGISTER;
+
+            $user_model->load($user_form_model->toArray(), '');
+            if ( $user_model->validate() && $user_model->save() ){
                 $this->trigger(self::EVENT_AFTER_REGISTER, $event);
 
                 $title = Yii::t('user', 'Your account has been created');
                 $this->redirect(Url::toRoute(['choose-role', 'id' => 'contact']), 302);
+                return;
             }
         }
 
+        /** @var User $identity */
+        $identity = \Yii::$app->user->identity;
+
         return $this->render('register', [
             'title' => $title,
-            'model' => $model,
-            'module' => $this->module,
+            'identity' => $identity,
+            'user_form' => $user_form_model
         ]);
     }
 

@@ -17,6 +17,7 @@ class UserForm extends Model
     public $password;
     /** @var string */
     public $password_repeat;
+    public $email;
 
     public function attributeLabels()
     {
@@ -24,6 +25,7 @@ class UserForm extends Model
             'username' => \Yii::t('app/user', 'Login {sub_level}',
                 ['sub_level' => \Yii::t('app/user', 'sub_level')]
             ),
+            'email' => \Yii::t('app/user', 'Email'),
             'password' => \Yii::t('app/user', 'Password'),
             'password_repeat' => \Yii::t('app/user', 'Repeat password'),
         ];
@@ -35,6 +37,8 @@ class UserForm extends Model
         return [
             ['username', 'required', 'message' => \Yii::t('app/user', 'Login required')],
             /** password */
+            ['email', 'required', 'message' => \Yii::t('app/user', 'Email required')],
+            ['email', 'email'],
             ['password', 'required', 'message' => \Yii::t('app/user', 'Password required')],
             ['password_repeat', 'required', 'message' => \Yii::t('app/user', 'Repeat password')],
             ['password', 'string', 'min' => 6, 'tooShort' =>  \Yii::t('app/user', "Password should contain at least {min, number}.")],
@@ -44,7 +48,10 @@ class UserForm extends Model
 
     public function getUsername()
     {
-        return $this->_username ?? \Yii::$app->user->identity->username;
+        return $this->_username ??
+            (\Yii::$app->user->identity
+                ? \Yii::$app->user->identity->username
+                : null);
     }
 
     public function setUsername($username)
@@ -56,7 +63,8 @@ class UserForm extends Model
     {
         return [
             'username' => $this->_username,
-            'password' =>  $this->password
+            'password' =>  $this->password,
+            'email' =>  $this->email
         ];
     }
 

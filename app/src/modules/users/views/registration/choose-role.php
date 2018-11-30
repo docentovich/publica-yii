@@ -1,1 +1,1 @@
-<?php
+<?= \app\widgets\alert\Alert::widget(); ?>

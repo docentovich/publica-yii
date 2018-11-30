@@ -16,41 +16,64 @@ use yii\widgets\ActiveForm;
  * @var yii\web\View $this
  * @var dektrium\user\models\User $model
  * @var dektrium\user\Module $module
+ * @var \app\models\UserForm $user_form
  */
 
 $this->title = Yii::t('user', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?= $this->render('/_alert', ['module' => $module]); ?>
 
-<div class="row">
-    <div class="">
-        <div class="panel panel-default" style="width: 300px; display: block; margin: auto">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
+<div class="profile">
+
+    <div class="profile-body">
+
+        <?php $user_active_form = ActiveForm::begin([
+            'action' => '',
+            'id' => 'user-form',
+            'options' => [
+                'class' => 'form',
+            ],
+            'fieldConfig' => [
+                'template' => "{label}\n{input}\n
+                                <div class=\"form-error\">{error}\n{hint}</div>",
+                'options' => [
+                    'class' => 'form-row'
+                ],
+            ],
+            'enableAjaxValidation' => true,
+            'enableClientValidation' => true,
+        ]); ?>
+        <div class="form-block">
+            <h2>Регистрация</h2>
+
+            <div class="from-block">
+                <?= \app\widgets\alert\Alert::widget(); ?>
             </div>
-            <div class="panel-body">
-                <?php $form = ActiveForm::begin([
-                    'id' => 'registration-form',
-                    'enableAjaxValidation' => true,
-                    'enableClientValidation' => false,
-                ]); ?>
 
-                <?= $form->field($model, 'email') ?>
+            <?= $user_active_form->field($user_form, 'email') ?>
 
-                <?= $form->field($model, 'username') ?>
+            <?= $user_active_form->field($user_form, 'username')
+                ->label(
+                    \Yii::t('app/user', 'Login {sub_level}',
+                        ['sub_level' => \Yii::t('app/user', 'sub_level')]
+                    )
+                ); ?>
 
-                <?php if ($module->enableGeneratingPassword == false): ?>
-                    <?= $form->field($model, 'password')->passwordInput() ?>
-                <?php endif ?>
+            <?= $user_active_form->field($user_form, 'password')->passwordInput(); ?>
 
-                <?= Html::submitButton(Yii::t('user', 'Sign up'), ['class' => 'btn btn-success btn-block']) ?>
+            <?= $user_active_form->field($user_form, 'password_repeat')->passwordInput(); ?>
 
-                <?php ActiveForm::end(); ?>
+        </div>
+
+        <div class="form-block">
+            <div class="form-submit-button">
+                <?= \yii\helpers\Html::submitButton(Yii::t('app', 'register')) ?>
             </div>
         </div>
-        <p class="text-center">
-            <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>
-        </p>
+
+        <?php ActiveForm::end(); ?>
+
+
     </div>
+
 </div>

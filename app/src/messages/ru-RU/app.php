@@ -1,4 +1,5 @@
 <?php
 return [
-    'change' => 'изменить'
+    'change' => 'изменить',
+    'register' => 'регистрация'
 ];
