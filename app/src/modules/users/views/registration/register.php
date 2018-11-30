@@ -21,6 +21,8 @@ use yii\widgets\ActiveForm;
 
 $this->title = Yii::t('user', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
+
+var_dump(\Yii::$app->user->identity);
 ?>
 
 <div class="profile">

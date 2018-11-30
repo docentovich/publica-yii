@@ -72,10 +72,13 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
             $user_model->load($user_form_model->toArray(), '');
             if ( $user_model->validate() && $user_model->save() ){
                 $this->trigger(self::EVENT_AFTER_REGISTER, $event);
+                Yii::$app->getUser()->switchIdentity($user_model);
+                $a = Yii::$app->getUser();
 
                 $title = Yii::t('user', 'Your account has been created');
-                $this->redirect(Url::toRoute(['choose-role', 'id' => 'contact']), 302);
-                return;
+                $this->redirect(['/']);
+//                $this->redirect(Url::toRoute(['choose-role', 'id' => 'contact']), 302);
+//                return;
             }
         }
 
