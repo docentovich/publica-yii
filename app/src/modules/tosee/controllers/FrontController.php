@@ -33,9 +33,9 @@ class FrontController extends Controller
         ];
     }
 
-    private function getTransportModel($config = []): \app\dto\PostTransportModel
+    private function getTransportModel($config = []): \app\modules\tosee\dto\PostTransportModel
     {
-        return YII::$app->postService->action(
+        return \Yii::$app->postService->action(
             new PostServiceConfig($config)
         );
     }
