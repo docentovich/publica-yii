@@ -27,7 +27,11 @@ class PostService extends \app\abstractions\Services
      */
     public $city_id = '1';
 
-    public function action(PostServiceConfig $config): \app\dto\PostTransportModel
+    /**
+     * @param PostServiceConfig $config
+     * @return \app\modules\tosee\dto\PostTransportModel
+     */
+    public function action(\app\interfaces\config $config): \app\dto\TransportModel
     {
         switch ($config->action) {
             case PostServiceConfig::ACTION_PAST:
@@ -83,7 +87,7 @@ class PostService extends \app\abstractions\Services
         return $configQuery;
     }
 
-    public function postsByDate(PostServiceConfig $config): \app\dto\PostTransportModel
+    private function postsByDate(PostServiceConfig $config): \app\modules\tosee\dto\PostTransportModel
     {
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
@@ -91,10 +95,10 @@ class PostService extends \app\abstractions\Services
             ->pipe([$this, 'prepareQueryByDate'])
             ->process(new ConfigQuery($config, Post::find()));
 
-        return new \app\dto\PostTransportModel($configQuery, $configQuery->query->all());
+        return new \app\modules\tosee\dto\PostTransportModel($configQuery, $configQuery->query->all());
     }
 
-    public function postsById(PostServiceConfig $config): \app\dto\PostTransportModel
+    private function postsById(PostServiceConfig $config): \app\modules\tosee\dto\PostTransportModel
     {
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
@@ -108,7 +112,7 @@ class PostService extends \app\abstractions\Services
         $nextPost = $this->siblingPost('>', $post);
 
 
-        return new \app\dto\PostTransportModel(
+        return new \app\modules\tosee\dto\PostTransportModel(
             $configQuery,
             $post,
             $this->postLink($prevPost),
@@ -137,7 +141,7 @@ class PostService extends \app\abstractions\Services
      * @param string $keyword
      * @return $this
      */
-    public function search($keyword): \app\dto\PostTransportModel
+    private function search($keyword): \app\modules\tosee\dto\PostTransportModel
     {
         $params = [
             "or",
@@ -157,7 +161,7 @@ class PostService extends \app\abstractions\Services
     }
 
 
-    public function save()
+    private function save()
     {
         throw new HttpException(403, "Access denied");
     }
@@ -168,7 +172,7 @@ class PostService extends \app\abstractions\Services
      * @param string $page Страница
      * @return $this postServices
      */
-    public function page($page)
+    private function page($page)
     {
         $this->page = $page;
         return $this;
