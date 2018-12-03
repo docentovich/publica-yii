@@ -129,7 +129,10 @@ class User extends BaseUser implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        $condition = (\Yii::$app->getModule('user')->enableUnconfirmedLogin)
+            ? ['id' => $id]
+            : ['id' => $id, 'status' => self::STATUS_ACTIVE];
+        return static::findOne($condition);
     }
 
     /**
@@ -148,7 +151,10 @@ class User extends BaseUser implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        $condition = (\Yii::$app->getModule('user')->enableUnconfirmedLogin)
+            ? ['username' => $username]
+            : ['username' => $username, 'status' => self::STATUS_ACTIVE];
+        return static::findOne($condition);
     }
 
     /**
@@ -170,28 +176,6 @@ class User extends BaseUser implements IdentityInterface
         return $model;
     }
 
-    public function save($runValidation = true, $attributeNames = null)
-    {
-        /** TODO to service */
-        try {
-            if (parent::save($runValidation, $attributeNames)) {
-                \Yii::$app->session->setFlash(
-                    Alert::MESSAGE_SUCCESS,
-                    $this->scenariosSuccessMessages()[$this->scenario]
-                );
-                return true;
-            }
-        } catch (IntegrityException $e) {
-            \Yii::$app->session->setFlash(
-                Alert::MESSAGE_DANGER,
-                \Yii::t('app/user', 'User already exist')
-            );
-        } catch (\Exception $e) {
-
-        }
-
-        return false;
-    }
 
     /**
      * Finds user by password reset token
@@ -205,10 +189,10 @@ class User extends BaseUser implements IdentityInterface
             return null;
         }
 
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
-        ]);
+        $condition = (\Yii::$app->getModule('user')->enableUnconfirmedLogin)
+            ? ['password_reset_token' => $token]
+            : ['password_reset_token' => $token, 'status' => self::STATUS_ACTIVE];
+        return static::findOne($condition);
     }
 
     /**
@@ -264,21 +248,6 @@ class User extends BaseUser implements IdentityInterface
     }
 
     /**
-     * Generates password hash from password and sets it to the model
-     *
-     * @param string $password
-     */
-//    public function setPassword($password)
-//    {
-//        $this->password_hash = \Yii::$app->security->generatePasswordHash($password);
-//        $this->password = $password;
-//    }
-//
-//    public function getPassword_hash($password)
-//    {
-//        return $this->password_hash = \Yii::$app->security->generatePasswordHash($this->password);
-//    }
-    /**
      * Generates "remember me" authentication key
      */
     public function generateAuthKey()
@@ -315,6 +284,18 @@ class User extends BaseUser implements IdentityInterface
      */
     public function getMyProfile()
     {
-        return  $this->profile ?? new Profile();
+        return $this->profile ?? new Profile();
+    }
+
+    /**
+     * @param  array $data
+     * @return User
+     */
+    public static function registerNewUser($data = [], $form_name = '')
+    {
+        $user = new self();
+        $user->scenario = self::SCENARIO_REGISTER;
+        $user->load($data, $form_name);
+        return $user;
     }
 }
