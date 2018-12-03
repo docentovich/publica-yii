@@ -9,20 +9,18 @@
  * file that was distributed with this source code.
  */
 
-use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
  * @var dektrium\user\models\User $model
  * @var dektrium\user\Module $module
- * @var \app\models\UserForm $user_form
+ * @var \app\modules\users\dto\UserTransportModel $transport_model
  */
 
 $this->title = Yii::t('user', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
 
-var_dump(\Yii::$app->user->identity);
 ?>
 
 <div class="profile">
@@ -52,18 +50,18 @@ var_dump(\Yii::$app->user->identity);
                 <?= \app\widgets\alert\Alert::widget(); ?>
             </div>
 
-            <?= $user_active_form->field($user_form, 'email') ?>
+            <?= $user_active_form->field($transport_model->config->user_form_model, 'email') ?>
 
-            <?= $user_active_form->field($user_form, 'username')
+            <?= $user_active_form->field($transport_model->config->user_form_model, 'username')
                 ->label(
                     \Yii::t('app/user', 'Login {sub_level}',
                         ['sub_level' => \Yii::t('app/user', 'sub_level')]
                     )
                 ); ?>
 
-            <?= $user_active_form->field($user_form, 'password')->passwordInput(); ?>
+            <?= $user_active_form->field($transport_model->configQuery->config->user_form_model, 'password')->passwordInput(); ?>
 
-            <?= $user_active_form->field($user_form, 'password_repeat')->passwordInput(); ?>
+            <?= $user_active_form->field($transport_model->configQuery->config->user_form_model, 'password_repeat')->passwordInput(); ?>
 
         </div>
 

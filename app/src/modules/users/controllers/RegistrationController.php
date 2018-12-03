@@ -2,14 +2,13 @@
 
 namespace app\modules\users\controllers;
 
-use app\models\Profile;
-use app\models\User;
-use app\models\UserForm;
+use app\modules\users\dto\UserServiceConfig;
+use app\widgets\alert\Alert;
 use dektrium\user\Finder;
-use dektrium\user\models\RegistrationForm;
 use dektrium\user\traits\AjaxValidationTrait;
 use dektrium\user\traits\EventTrait;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use Yii;
@@ -45,6 +44,32 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
         ];
     }
 
+    private function EVENTS($const)
+    {
+        $self = $this;
+        return function ($event) use ($self, $const) {
+            $this->trigger($const, $event);
+        };
+    }
+
+    private function prepareConfig($config = []): UserServiceConfig
+    {
+        $self = $this;
+        $config = ArrayHelper::merge($config,
+            [
+                'EVENT_AFTER_REGISTER' => $this->EVENTS(self::EVENT_AFTER_REGISTER),
+                'EVENT_BEFORE_REGISTER' => $this->EVENTS(self::EVENT_BEFORE_REGISTER),
+                'performAjaxValidation' => function ($form_model) use ($self) {
+                    return $self->performAjaxValidation($form_model);
+                },
+                'getFormEvent' => function ($form_model) use ($self) {
+                    return $self->getFormEvent($form_model);
+                }
+            ]
+        );
+        return new UserServiceConfig($config);
+    }
+
 
     /**
      * Displays the registration page.
@@ -58,37 +83,15 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
      */
     public function actionRegister()
     {
-        $user_form_model = new UserForm();
-        $event = $this->getFormEvent($user_form_model);
-        $this->trigger(self::EVENT_BEFORE_REGISTER, $event);
-        $this->performAjaxValidation($user_form_model);
-        $title = '';
-
-        if ($user_form_model->load(\Yii::$app->request->post()) && $user_form_model->validate()) {
-            /** @var \app\models\User $user_model */
-            $user_model = new User();
-            $user_model->scenario = User::SCENARIO_REGISTER;
-
-            $user_model->load($user_form_model->toArray(), '');
-            if ( $user_model->validate() && $user_model->save() ){
-                $this->trigger(self::EVENT_AFTER_REGISTER, $event);
-                Yii::$app->getUser()->switchIdentity($user_model);
-                $a = Yii::$app->getUser();
-
-                $title = Yii::t('user', 'Your account has been created');
-                $this->redirect(['/']);
-//                $this->redirect(Url::toRoute(['choose-role', 'id' => 'contact']), 302);
-//                return;
-            }
-        }
-
-        /** @var User $identity */
-        $identity = \Yii::$app->user->identity;
+        $transport_model = \Yii::$app->userService->action(
+            $this->prepareConfig([
+                'action' => UserServiceConfig::ACTION_REGISTRATION,
+            ])
+        );
 
         return $this->render('register', [
-            'title' => $title,
-            'identity' => $identity,
-            'user_form' => $user_form_model
+            'identity' => \Yii::$app->user->identity,
+            'transport_model' => $transport_model
         ]);
     }
 
@@ -126,6 +129,24 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
 
     public function actionChooseRole()
     {
+        $role = \Yii::$app->getRequest()->getQueryParam('role');
+        if(isset($role) && !in_array($role, ['author', 'model', 'photograph'])){
+            $role = false;
+            \Yii::$app->session->setFlash(
+                Alert::MESSAGE_DANGER,
+                \Yii::t('user', 'The role must be either \'author\' or \'model\' or \'photographer\'')
+            );
+        }
+        if ($role) {
+            $auth_manager = Yii::$app->getAuthManager();
+            $auth_manager->assign($auth_manager->getRole($role), \Yii::$app->user->getId());
+            \Yii::$app->session->setFlash(
+                Alert::MESSAGE_SUCCESS,
+                ['position' => 'top', 'message' => \Yii::t('user', 'You have successfully changed the role!')]
+            );
+            \Yii::$app->getResponse()->redirect(Url::toRoute(['/']), 302);
+            return;
+        }
         return $this->render('choose-role');
     }
 }
