@@ -10,17 +10,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="profile">
-
-    <div class="user-avatar-name">
-        <div class="user-name"><?= $profile->fullName; ?></div>
-        <div class="user-avatar dark-icon">
-            <?php if ($profile->avatar) {
-                echo \yii\helpers\Html::img("/uploads/" . $profile->avatar0->getPathImageSizeOf('Rx270'));
-            } else { ?>
-                <i class="fa fa-user"></i>
-            <?php } ?>
-        </div>
-    </div>
+    <?= \app\widgets\UserHeader::widget(); ?>
 
     <div class="profile-body">
 
@@ -44,7 +34,7 @@ use yii\widgets\ActiveForm;
             <h2>Общая информаци *</h2>
 
             <div class="from-block">
-                <?= \app\widgets\alert\Alert::widget(); ?>
+                <?= \app\widgets\Alert::widget(); ?>
             </div>
 
             <?= $user_active_form->field($user_form, 'username')
