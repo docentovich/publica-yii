@@ -7,22 +7,55 @@ use app\models\User;
 use app\models\UserForm;
 use app\modules\users\dto\UserServiceConfig;
 use app\modules\users\dto\UserTransportModel;
-use app\widgets\alert\Alert;
+use app\widgets\Alert;
 use yii\db\IntegrityException;
 use yii\helpers\Url;
 
 class UserService extends \app\abstractions\Services
 {
+    const EVENT_BEFORE_REGISTER = 'beforeRegister';
+    const EVENT_AFTER_REGISTER = 'afterRegister';
     /**
      * @param UserServiceConfig $config
      * @return UserTransportModel
     */
     public function action(\app\interfaces\config $config): \app\dto\TransportModel
     {
+        $this->beforeAction($config);
         switch ($config->action) {
             case UserServiceConfig::ACTION_REGISTRATION:
                 return new UserTransportModel(new ConfigQuery($config), $this->registration($config));
+            case UserServiceConfig::ACTION_CHOOSE_ROLE:
+                return new UserTransportModel(new ConfigQuery($config), $this->chooseRole($config));
         }
+    }
+
+    /**
+     * Decorate all actions call.
+     * @param UserServiceConfig $config
+     */
+    private function beforeAction(\app\interfaces\config $config)
+    {
+        $this->on(self::EVENT_BEFORE_REGISTER, function($event) use ($config){
+            if(isset($config->EVENT_BEFORE_REGISTER)){
+                $config->EVENT_BEFORE_REGISTER($event);
+            }
+        });
+        $this->on(self::EVENT_AFTER_REGISTER, function($event) use ($config){
+            if(isset($config->EVENT_AFTER_REGISTER)) {
+                $config->EVENT_AFTER_REGISTER($event);
+            }
+        });
+    }
+
+    public function init()
+    {
+        parent::init();
+        $this->on(self::EVENT_AFTER_REGISTER, function($event){
+            $id = $event->getForm()->id; // registered user id
+            $auth_manager = \Yii::$app->getAuthManager();
+            $auth_manager->assign($auth_manager->getRole("user"), $id);
+        });
     }
 
     /**
@@ -35,10 +68,10 @@ class UserService extends \app\abstractions\Services
      */
     private function registration(UserServiceConfig $config)
     {
-        $config->user_form_model = new UserForm();
+        $config->user_form_model = new UserForm(['scenario' => UserForm::SCENARIO_REGISTER]);
         $event = $config->getFormEvent($config->user_form_model);
-        $config->EVENT_BEFORE_REGISTER($event);
         $config->performAjaxValidation($config->user_form_model);
+        $this->trigger(self::EVENT_BEFORE_REGISTER, $event);
         $return = ['title' => ''];
 
         if ($config->user_form_model->load(\Yii::$app->request->post()) && $config->user_form_model->validate()) {
@@ -46,22 +79,35 @@ class UserService extends \app\abstractions\Services
             $user = User::registerNewUser($config->user_form_model->toArray());
 
             if ($this->saveUser($user)){
-                $config->EVENT_AFTER_REGISTER($event);
-
+                // it's a hack. i need to send users id to EVENT_AFTER_REGISTER
+                // but i receive it normally in EVENT_AFTER_CONFIRM.
+                // To forward id through event system i change UserForm Model. Now
+                // it contains id and send it in event object.
+                $config->user_form_model->id = $user->id;
+                $event = $config->getFormEvent($config->user_form_model);
+                $this->trigger(self::EVENT_AFTER_REGISTER, $event);
                 if(!\Yii::$app->getModule('user')->enableUnconfirmedLogin){
-                    /** TODO implements logic when user confirm is required  */
+                    // TODO implements logic when user confirm is required
                 }else{ // login if  user confirm is not required
                     \Yii::$app->getUser()->login($user);
                     \Yii::$app->getResponse()->redirect(Url::toRoute(['choose-role']), 302);
+                    \Yii::$app->end();
                 }
 
-                $return = ['title' => \Yii::t('user', 'Your account has been created')];
+                $return = ['title' => \Yii::t('app/user', 'Your account has been created')];
             }
         }
 
         return $return;
     }
 
+    /**
+     * Save user and slash some messages to user
+     *
+     * @param User $user
+     * @return bool
+     * @throws \Exception
+     */
     private function saveUser(User $user)
     {
         if(!$user->validate()){
@@ -76,6 +122,8 @@ class UserService extends \app\abstractions\Services
                 return true;
             }
         } catch (IntegrityException $e) {
+            // TODO normal check if user name or email already exist
+            // now the system does not distinguish what column are no unique
             \Yii::$app->session->setFlash(
                 Alert::MESSAGE_DANGER,
                 \Yii::t('app/user', 'User already exist')
@@ -85,5 +133,28 @@ class UserService extends \app\abstractions\Services
         }
 
         return false;
+    }
+
+
+    private function chooseRole(UserServiceConfig $config)
+    {
+        $role = \Yii::$app->getRequest()->getQueryParam('role');
+        if(isset($role) && !in_array($role, ['author', 'model', 'photograph'])){
+            $role = false;
+            \Yii::$app->session->setFlash(
+                Alert::MESSAGE_DANGER,
+                \Yii::t('app/user', 'The role must be either \'author\' or \'model\' or \'photographer\'')
+            );
+        }
+        if ($role) {
+            $auth_manager = \Yii::$app->getAuthManager();
+            $auth_manager->assign($auth_manager->getRole($role), \Yii::$app->user->getId());
+            \Yii::$app->session->setFlash(
+                Alert::MESSAGE_SUCCESS,
+                ['position' => 'top', 'message' => \Yii::t('app/user', 'You have successfully changed the role!')]
+            );
+            \Yii::$app->getResponse()->redirect(Url::toRoute(['/']), 302);
+            \Yii::$app->end();
+        }
     }
 }

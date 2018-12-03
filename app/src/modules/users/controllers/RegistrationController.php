@@ -3,7 +3,6 @@
 namespace app\modules\users\controllers;
 
 use app\modules\users\dto\UserServiceConfig;
-use app\widgets\alert\Alert;
 use dektrium\user\Finder;
 use dektrium\user\traits\AjaxValidationTrait;
 use dektrium\user\traits\EventTrait;
@@ -52,6 +51,12 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
         };
     }
 
+    /**
+     * Wrap the dekctrium controller's event handlers into the object, and send to service
+     *
+     * @param array $config
+     * @return UserServiceConfig
+     */
     private function prepareConfig($config = []): UserServiceConfig
     {
         $self = $this;
@@ -64,7 +69,7 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
                 },
                 'getFormEvent' => function ($form_model) use ($self) {
                     return $self->getFormEvent($form_model);
-                }
+                },
             ]
         );
         return new UserServiceConfig($config);
@@ -129,24 +134,10 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
 
     public function actionChooseRole()
     {
-        $role = \Yii::$app->getRequest()->getQueryParam('role');
-        if(isset($role) && !in_array($role, ['author', 'model', 'photograph'])){
-            $role = false;
-            \Yii::$app->session->setFlash(
-                Alert::MESSAGE_DANGER,
-                \Yii::t('user', 'The role must be either \'author\' or \'model\' or \'photographer\'')
-            );
-        }
-        if ($role) {
-            $auth_manager = Yii::$app->getAuthManager();
-            $auth_manager->assign($auth_manager->getRole($role), \Yii::$app->user->getId());
-            \Yii::$app->session->setFlash(
-                Alert::MESSAGE_SUCCESS,
-                ['position' => 'top', 'message' => \Yii::t('user', 'You have successfully changed the role!')]
-            );
-            \Yii::$app->getResponse()->redirect(Url::toRoute(['/']), 302);
-            return;
-        }
+        $this->layout = "@current_template/layouts/user";
+        \Yii::$app->userService->action(
+            $this->prepareConfig(['action' =>  UserServiceConfig::ACTION_CHOOSE_ROLE])
+        );
         return $this->render('choose-role');
     }
 }
