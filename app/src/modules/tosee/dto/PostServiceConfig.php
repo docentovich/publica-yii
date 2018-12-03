@@ -2,7 +2,14 @@
 
 namespace app\modules\tosee\dto;
 
-class PostServiceConfig implements \app\interfaces\config
+use app\abstractions\ServiceConfig;
+
+/**
+ * Class PostServiceConfig
+ * @property mixed $action;
+ * @package app\modules\tosee\dto
+ */
+class PostServiceConfig extends ServiceConfig
 {
     const ACTION_FUTURE = 1;
     const ACTION_PAST = 2;
@@ -11,7 +18,6 @@ class PostServiceConfig implements \app\interfaces\config
     const ACTION_DATE_PICKER = 5;
     const ACTION_BY_DATE = 6;
 
-    public $action;
     public $page;
     public $id;
     /**

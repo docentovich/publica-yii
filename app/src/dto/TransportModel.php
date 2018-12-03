@@ -1,6 +1,7 @@
 <?php
 
 namespace app\dto;
+use app\interfaces\config;
 
 /**
  * Transport Model is DTO immutable object, which transports configuration of query
@@ -8,9 +9,10 @@ namespace app\dto;
  *
  * Class TransportModel
  * @property ConfigQuery $configQuery
+ * @property \app\interfaces\config $config
  * @package app\dto
  */
-class TransportModel extends \app\abstractions\ImmutableDTO
+class TransportModel extends \app\abstractions\Immutable
 {
     /**
      * TransportModel constructor.
@@ -20,5 +22,13 @@ class TransportModel extends \app\abstractions\ImmutableDTO
     public function __construct(ConfigQuery $configQuery, $result)
     {
         parent::__construct(compact('configQuery', 'result'));
+    }
+
+    public function __get($key)
+    {
+        if($key==='config' && isset($this->_params['configQuery']) && isset($this->_params['configQuery']->config)){
+            return $this->_params['configQuery']->config;
+        }
+        return parent::__get($key);
     }
 }

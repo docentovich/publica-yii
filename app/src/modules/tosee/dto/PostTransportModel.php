@@ -1,13 +1,15 @@
 <?php
 
-namespace app\dto;
+namespace app\modules\tosee\dto;
+
+use app\dto\ConfigQuery;
 
 /**
  * Class PostTransportModel
  * @property  \app\modules\tosee\models\Post $result
  * @package app\dto
  */
-class PostTransportModel extends TransportModel
+class PostTransportModel extends \app\dto\TransportModel
 {
     /** @var null|string */
     public $prevLink;
