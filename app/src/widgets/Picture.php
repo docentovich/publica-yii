@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\picture;
+namespace app\widgets;
 
 use yii\base\Widget;
 
