@@ -110,7 +110,7 @@ class SettingsController extends \dektrium\user\controllers\SettingsController
     public function actionSaveUserForm()
     {
         /** TODO to service */
-        $user_form_model = new UserForm();
+        $user_form_model = new UserForm(['scenario' => UserForm::SCENARIO_UPDATE]);
         $this->performAjaxValidation($user_form_model);
 
         if ($user_form_model->load(\Yii::$app->request->post()) && $user_form_model->validate()) {

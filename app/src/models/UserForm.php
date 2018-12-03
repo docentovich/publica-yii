@@ -4,6 +4,7 @@ namespace app\models;
 
 
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class UserForm
@@ -12,6 +13,10 @@ use yii\base\Model;
  */
 class UserForm extends Model
 {
+    const SCENARIO_REGISTER = 'register';
+    const SCENARIO_UPDATE = 'update';
+
+    public $id = null;
     private $_username;
     /** @var string */
     public $password;
@@ -31,6 +36,16 @@ class UserForm extends Model
         ];
     }
 
+    public function scenarios()
+    {
+        return ArrayHelper::merge(
+            parent::scenarios(),
+            [
+                self::SCENARIO_REGISTER => ['username', 'email', 'password'],
+                self::SCENARIO_UPDATE => ['username', 'password'],
+            ]);
+    }
+
 
     public function rules()
     {
@@ -41,7 +56,7 @@ class UserForm extends Model
             ['email', 'email'],
             ['password', 'required', 'message' => \Yii::t('app/user', 'Password required')],
             ['password_repeat', 'required', 'message' => \Yii::t('app/user', 'Repeat password')],
-            ['password', 'string', 'min' => 6, 'tooShort' =>  \Yii::t('app/user', "Password should contain at least {min, number}.")],
+            ['password', 'string', 'min' => 6, 'tooShort' => \Yii::t('app/user', "Password should contain at least {min, number}.")],
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => \Yii::t('app/user', "Passwords don't match")],
         ];
     }
@@ -63,8 +78,8 @@ class UserForm extends Model
     {
         return [
             'username' => $this->_username,
-            'password' =>  $this->password,
-            'email' =>  $this->email
+            'password' => $this->password,
+            'email' => $this->email
         ];
     }
 

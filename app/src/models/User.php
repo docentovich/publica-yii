@@ -3,11 +3,8 @@
 namespace app\models;
 
 use app\beheviors\UserBeforValidate;
-use app\widgets\alert\Alert;
-use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
-use yii\db\IntegrityException;
 use yii\web\IdentityInterface;
 use dektrium\user\models\User as BaseUser;
 use yii\helpers\ArrayHelper;
@@ -49,15 +46,15 @@ class User extends BaseUser implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'username' => \Yii::t('user', 'Username'),
-            'email' => \Yii::t('user', 'Email'),
-            'city' => \Yii::t('user', 'City'),
-            'password' => \Yii::t('user', 'Password'),
-            'phone' => \Yii::t('user', 'Phone'),
-            'created_at' => \Yii::t('user', 'Registration time'),
-            'registered_from' => \Yii::t('user', 'Registered from'),
-            'unconfirmed_email' => \Yii::t('user', 'Unconfirmed email'),
-            'current_password' => \Yii::t('user', 'Current password'),
+            'username' => \Yii::t('app/user', 'Username'),
+            'email' => \Yii::t('app/user', 'Email'),
+            'city' => \Yii::t('app/user', 'City'),
+            'password' => \Yii::t('app/user', 'Password'),
+            'phone' => \Yii::t('app/user', 'Phone'),
+            'created_at' => \Yii::t('app/user', 'Registration time'),
+            'registered_from' => \Yii::t('app/user', 'Registered from'),
+            'unconfirmed_email' => \Yii::t('app/user', 'Unconfirmed email'),
+            'current_password' => \Yii::t('app/user', 'Current password'),
         ];
     }
 
@@ -105,11 +102,11 @@ class User extends BaseUser implements IdentityInterface
     public function scenarios()
     {
         $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_UPDATE] =  ['username', 'password', 'password_hash'];
         return ArrayHelper::merge($scenarios, [
             self::SCENARIO_REGISTER => ['username', 'email', 'password', 'city_id'],
             self::SCENARIO_CONNECT => ['username', 'email'],
             self::SCENARIO_CREATE => ['username', 'email', 'password', 'password_hash'],
-            self::SCENARIO_UPDATE => ['username', 'email', 'password', 'password_hash'],
             self::SCENARIO_SETTINGS => ['username', 'email', 'password'],
         ]);
     }
