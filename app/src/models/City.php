@@ -41,9 +41,9 @@ class City extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('post', 'ID'),
-            'name' => Yii::t('post', 'Name'),
-            'label' => Yii::t('post', 'Label'),
+            'id' => Yii::t('app/tosee', 'ID'),
+            'name' => Yii::t('app/tosee', 'Name'),
+            'label' => Yii::t('app/tosee', 'Label'),
         ];
     }
 

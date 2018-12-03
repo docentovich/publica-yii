@@ -10,13 +10,13 @@ use app\assets\Asset;
  * @var dektrium\user\Module $module
  */
 
-$this->title = Yii::t('user', 'Sign in');
+$this->title = Yii::t('app/user', 'Sign in');
 $this->params['breadcrumbs'][] = $this->title;
 $bundle = Asset::register($this);
 ?>
 <div class="login">
     <div class="login-form">
-        <?= \app\widgets\alert\Alert::widget(); ?>
+        <?= \app\widgets\Alert::widget(); ?>
 
         <?php $form = ActiveForm::begin([
             'id' => 'login-form',
@@ -51,19 +51,19 @@ $bundle = Asset::register($this);
 
         <div class="form-row form-button">
             <?= Html::submitButton(
-                "<i class=\"icon-enter\"></i><span>" . Yii::t('user', 'Sign in') . "</span>"
+                "<i class=\"icon-enter\"></i><span>" . Yii::t('app/user', 'Sign in') . "</span>"
             ) ?>
         </div>
 
         <div class="form-row form-links">
             <?= Html::a(
-                Yii::t('user', 'Регистрация'),
+                Yii::t('app/user', 'Регистрация'),
                 ['/user/registration/register']
             );
             ?>
 
             <?= Html::a(
-                Yii::t('user', 'Forgot password?'),
+                Yii::t('app/user', 'Forgot password?'),
                 ['/user/recovery/request']
             );
             ?>

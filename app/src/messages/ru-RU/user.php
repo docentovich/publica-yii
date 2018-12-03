@@ -15,4 +15,5 @@ return [
     'First Name' => 'Имя',
     'Se Name' => 'Фамилия',
     'Last Name' => 'Отчество',
+    'Add article' => 'Добавить статью'
 ];

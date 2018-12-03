@@ -15,25 +15,39 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
         <div class="service-overlay-wrapper">
             <ul class="user-panel-menu">
                 <?php if (\Yii::$app->user->can('comments')) { ?>
-                    <li><?= Html::a("Мои комментарии", Yii::$app->homeUrl . "/my/comments"); ?></li>
+                    <li><?= Html::a(
+                            \Yii::t('app/user', 'My comments'),
+                            ["/my/comments"]); ?></li>
                 <?php } ?>
                 <?php if (\Yii::$app->user->can('orders')) { ?>
-                    <li><?= Html::a("Мои заказы", Yii::$app->homeUrl . "/my/orders"); ?></li>
+                    <li><?= Html::a(
+                            \Yii::t('app/user', 'My orders'),
+                            ["/my/orders"]); ?></li>
                 <?php } ?>
                 <?php if (\Yii::$app->user->can('calendar')) { ?>
-                    <li><?= Html::a("Мой календарь", Yii::$app->homeUrl . "/my/calendar"); ?></li>
+                    <li><?= Html::a(
+                            \Yii::t('app/user', 'My calendar'),
+                            ["/my/calendar"]); ?></li>
                 <?php } ?>
                 <?php if (\Yii::$app->user->can('rating')) { ?>
-                    <li><?= Html::a("Мой рейтинг", Yii::$app->homeUrl . "/my/rating"); ?></li>
+                    <li><?= Html::a(
+                            \Yii::t('app/user', 'Rate'),
+                            ["/my/rating"]); ?></li>
                 <?php } ?>
                 <?php if (\Yii::$app->user->can('author')) { ?>
-                    <li><?= Html::a("Журналист", Yii::$app->homeUrl . "/roles/journalist"); ?></li>
+                    <li><?= Html::a(
+                            \Yii::t('app/user', 'Journalist'),
+                            ["/author"]); ?></li>
                 <?php } ?>
                 <?php if (\Yii::$app->user->can('model')) { ?>
-                    <li><?= Html::a("Модель", Yii::$app->homeUrl . "/roles/model"); ?></li>
+                    <li><?= Html::a(
+                            \Yii::t('app/user', 'Model'),
+                            ["/roles/model"]); ?></li>
                 <?php } ?>
                 <?php if (\Yii::$app->user->can('photograph')) { ?>
-                    <li><?= Html::a("Фотораф", Yii::$app->homeUrl . "/roles/photographer"); ?></li>
+                    <li><?= Html::a(
+                            \Yii::t('app/user', 'Photographer'),
+                            ["/roles/photographer"]); ?></li>
                 <?php } ?>
             </ul>
             <?= Html::a(
@@ -48,7 +62,7 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 
     <div class="content-wrapper">
         <div class="content">
-            <?= \app\widgets\alert\Alert::widget(['position' => 'top']); ?>
+            <?= \app\widgets\Alert::widget(['position' => 'top']); ?>
             <div id="waiting"><i class="fa fa-spinner fa-spin"></i></div>
             <?= $content ?>
         </div>

@@ -21,6 +21,9 @@ $config = [
                         'app' => 'app.php',
                         'app/error' => 'error.php',
                         'app/user' => 'user.php',
+                        'app/tosee' => 'tosee.php',
+                        'app/probank' => 'probank.php',
+                        'app/shotme' => 'shotme.php',
                     ],
                 ]
             ],

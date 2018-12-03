@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
  * @var \app\modules\users\dto\UserTransportModel $transport_model
  */
 
-$this->title = Yii::t('user', 'Sign up');
+$this->title = Yii::t('app/user', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2>Регистрация</h2>
 
             <div class="from-block">
-                <?= \app\widgets\alert\Alert::widget(); ?>
+                <?= \app\widgets\Alert::widget(); ?>
             </div>
 
             <?= $user_active_form->field($transport_model->config->user_form_model, 'email') ?>
