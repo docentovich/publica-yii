@@ -28,7 +28,7 @@
             <?php foreach ($postModel->result->images as $key => $image) { ?>
                 <div class="item-photo item-masonry" style="display: none">
                     <a class="item-photo-a" data-fancybox="gallery" href="#modal-<?= $key ?>">
-                        <?= \app\widgets\picture\Alert::widget([
+                        <?= \app\widgets\picture\Picture::widget([
                             "src" => "/uploads/post/{$image->getPathImageSizeOf('200x150')}",
                             "points" => [
                                 "sm, md" => "280x200",
