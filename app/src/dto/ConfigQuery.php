@@ -13,7 +13,7 @@ class ConfigQuery implements  \app\interfaces\dto
     /** @var \app\interfaces\config */
     public $config;
 
-    public function __construct($config, $query)
+    public function __construct($config, $query = null)
     {
         $this->config = $config;
         $this->query = $query;
