@@ -42,10 +42,17 @@ $config = [
                     'css' => [],
                 ],
             ],
-        ]
+        ],
+        'postService' => [
+            'class' => 'app\modules\tosee\services\PostService'
+        ],
+        'userService' => [
+            'class' => 'app\modules\users\services\UserService'
+        ],
     ],
     'modules' => [
         'user' => [
+            'enableUnconfirmedLogin' => true,
             'class' => 'app\modules\users\Module',
         ],
     ],
