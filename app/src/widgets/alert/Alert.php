@@ -10,6 +10,7 @@ class Alert extends Widget
     const MESSAGE_DANGER = 'danger';
     const MESSAGE_WARNING = 'warning';
     const MESSAGE_INFO = 'info';
+    public $position;
 
     public function init()
     {
@@ -30,7 +31,16 @@ class Alert extends Widget
     {
         if (\Yii::$app->session->getAllFlashes()) { ?>
             <div class="my-alert">
-                <?php foreach (\Yii::$app->session->getAllFlashes() as $type => $message) { ?>
+                <?php foreach (\Yii::$app->session->getAllFlashes() as $type => $message) {
+                    if(is_array($message)){
+                        if($message['position'] !== $this->position){
+                            break;
+                        }
+                        $message = $message['message'];
+                    }elseif(isset($this->position)){
+                        break;
+                    }
+                    ?>
                     <?php if ($this->checkType($type)) { ?>
                         <?= \yii\bootstrap\Alert::widget([
                             'options' => ['class' => 'alert-dismissible alert-' . $type],

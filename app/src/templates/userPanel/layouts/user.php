@@ -48,6 +48,7 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 
     <div class="content-wrapper">
         <div class="content">
+            <?= \app\widgets\alert\Alert::widget(['position' => 'top']); ?>
             <div id="waiting"><i class="fa fa-spinner fa-spin"></i></div>
             <?= $content ?>
         </div>
