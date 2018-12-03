@@ -20,43 +20,43 @@ use yii\bootstrap\Nav;
     ],
     'items' => [
         [
-            'label' => Yii::t('user', 'Users'),
+            'label' => Yii::t('app/user', 'Users'),
             'url' => ['/user/admin/index'],
         ],
         [
-            'label' => Yii::t('user', 'Roles'),
+            'label' => Yii::t('app/user', 'Roles'),
             'url' => ['/rbac/role/index'],
             'visible' => isset(Yii::$app->extensions['dektrium/yii2-rbac']),
         ],
         [
-            'label' => Yii::t('user', 'Permissions'),
+            'label' => Yii::t('app/user', 'Permissions'),
             'url' => ['/rbac/permission/index'],
             'visible' => isset(Yii::$app->extensions['dektrium/yii2-rbac']),
         ],
         [
-            'label' => \Yii::t('user', 'Rules'),
+            'label' => \Yii::t('app/user', 'Rules'),
             'url'   => ['/rbac/rule/index'],
             'visible' => isset(Yii::$app->extensions['dektrium/yii2-rbac']),
         ],
         [
-            'label' => Yii::t('user', 'Create'),
+            'label' => Yii::t('app/user', 'Create'),
             'items' => [
                 [
-                    'label' => Yii::t('user', 'New user'),
+                    'label' => Yii::t('app/user', 'New user'),
                     'url' => ['/user/admin/create'],
                 ],
                 [
-                    'label' => Yii::t('user', 'New role'),
+                    'label' => Yii::t('app/user', 'New role'),
                     'url' => ['/rbac/role/create'],
                     'visible' => isset(Yii::$app->extensions['dektrium/yii2-rbac']),
                 ],
                 [
-                    'label' => Yii::t('user', 'New permission'),
+                    'label' => Yii::t('app/user', 'New permission'),
                     'url' => ['/rbac/permission/create'],
                     'visible' => isset(Yii::$app->extensions['dektrium/yii2-rbac']),
                 ],
                 [
-                    'label' => \Yii::t('user', 'New rule'),
+                    'label' => \Yii::t('app/user', 'New rule'),
                     'url'   => ['/rbac/rule/create'],
                     'visible' => isset(Yii::$app->extensions['dektrium/yii2-rbac']),
                 ]

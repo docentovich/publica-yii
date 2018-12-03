@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
  * @var dektrium\user\models\SettingsForm $model
  */
 
-$this->title = Yii::t('user', 'Account settings');
+$this->title = Yii::t('app/user', 'Account settings');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="form-group">
                     <div class="col-lg-offset-3 col-lg-9">
-                        <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?><br>
+                        <?= Html::submitButton(Yii::t('app/user', 'Save'), ['class' => 'btn btn-block btn-success']) ?><br>
                     </div>
                 </div>
 
@@ -68,18 +68,18 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php if ($model->module->enableAccountDelete): ?>
             <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?= Yii::t('user', 'Delete account') ?></h3>
+                    <h3 class="panel-title"><?= Yii::t('app/user', 'Delete account') ?></h3>
                 </div>
                 <div class="panel-body">
                     <p>
-                        <?= Yii::t('user', 'Once you delete your account, there is no going back') ?>.
-                        <?= Yii::t('user', 'It will be deleted forever') ?>.
-                        <?= Yii::t('user', 'Please be certain') ?>.
+                        <?= Yii::t('app/user', 'Once you delete your account, there is no going back') ?>.
+                        <?= Yii::t('app/user', 'It will be deleted forever') ?>.
+                        <?= Yii::t('app/user', 'Please be certain') ?>.
                     </p>
-                    <?= Html::a(Yii::t('user', 'Delete account'), ['delete'], [
+                    <?= Html::a(Yii::t('app/user', 'Delete account'), ['delete'], [
                         'class' => 'btn btn-danger',
                         'data-method' => 'post',
-                        'data-confirm' => Yii::t('user', 'Are you sure? There is no going back'),
+                        'data-confirm' => Yii::t('app/user', 'Are you sure? There is no going back'),
                     ]) ?>
                 </div>
             </div>
