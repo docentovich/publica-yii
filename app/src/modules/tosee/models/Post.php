@@ -64,15 +64,15 @@ class Post extends yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('post', 'ID'),
-            'user_id' => Yii::t('post', 'User ID'),
-            'event_at' => Yii::t('post', 'Дата события'),
-            'city' => Yii::t('user', 'Город'),
-            'post_category_id' => Yii::t('post', 'Post Category ID'),
-            'image_id' => Yii::t('post', 'Image ID'),
-            'status' => Yii::t('post', 'Статус'),
-            'created_at' => Yii::t('post', 'Создан'),
-            'postDataTitle' => Yii::t('post', 'Заголовок поста'),
+            'id' => Yii::t('app/tosee', 'ID'),
+            'user_id' => Yii::t('app/tosee', 'User ID'),
+            'event_at' => Yii::t('app/tosee', 'Дата события'),
+            'city' => Yii::t('app/user', 'Город'),
+            'post_category_id' => Yii::t('app/tosee', 'Post Category ID'),
+            'image_id' => Yii::t('app/tosee', 'Image ID'),
+            'status' => Yii::t('app/tosee', 'Статус'),
+            'created_at' => Yii::t('app/tosee', 'Создан'),
+            'postDataTitle' => Yii::t('app/tosee', 'Заголовок поста'),
         ];
     }
 

@@ -28,7 +28,7 @@
             <?php foreach ($postModel->result->images as $key => $image) { ?>
                 <div class="item-photo item-masonry" style="display: none">
                     <a class="item-photo-a" data-fancybox="gallery" href="#modal-<?= $key ?>">
-                        <?= \app\widgets\picture\Picture::widget([
+                        <?= \app\widgets\Picture::widget([
                             "src" => "/uploads/post/{$image->getPathImageSizeOf('200x150')}",
                             "points" => [
                                 "sm, md" => "280x200",
@@ -49,7 +49,7 @@
         <div class="modal-window" id="modal-<?= $key ?>">
             <div class="modal-header">
                 <div class="modal-image">
-                    <?= \app\widgets\picture\Alert::widget([
+                    <?= \app\widgets\Picture::widget([
                         "src" => "/uploads/post/{$image->getPathImageSizeOf('768x500')}",
                         "points" => [
                             "sm, md" => "1200x500",

@@ -4,6 +4,7 @@ namespace app\modules\tosee\controllers;
 
 use app\models\Image;
 use app\models\UploadImage;
+use app\modules\tosee\models\PostSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -17,7 +18,7 @@ use yii\filters\AccessControl;
  */
 class AuthorController extends Controller
 {
-    public $layout = "@current_template/layouts/main";
+    public $layout = "@current_template/layouts/user";
 
     /**
      * @inheritdoc
@@ -35,7 +36,7 @@ class AuthorController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'update', 'delete', 'create', 'additional-upload'],
+                        'actions' => ['my-articles', 'index', 'view', 'update', 'delete', 'create', 'additional-upload'],
                         'allow' => true,
                         'roles' => ['author'],
                     ],
@@ -45,20 +46,22 @@ class AuthorController extends Controller
     }
 
     /**
-     * Lists all Post models.
      * @return mixed
      */
     public function actionIndex()
     {
-//        $searchModel = new PostSearch();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//
-//        return $this->render('index', [
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider,
-//        ]);
-
         return $this->render('index');
+    }
+
+    public function actionMyArticles()
+    {
+        $searchModel = new PostSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('my-posts', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
