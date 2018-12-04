@@ -4,7 +4,10 @@ namespace app\modules\tosee\controllers;
 
 use app\models\Image;
 use app\models\UploadImage;
+use app\modules\tosee\models\Post;
+use app\modules\tosee\models\PostData;
 use app\modules\tosee\models\PostSearch;
+use ImageAjaxUpload\UploadModel;
 use Yii;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -91,20 +94,22 @@ class AuthorController extends Controller
         //TODO REFACTOR!
         $model = new Post();
         $post_data = new PostData();
-        $upload = new UploadImage();
+
+//        $image_model = $profile_model->myAvatar;
+//        $image_model->scenario = Image::SCENARIO_LOAD_FILE;
+//        $image_model->load((new UploadModel())->upload(\Yii::$app->user->getId()), '');
+
+        $upload = new UploadModel();
 
         $post = Yii::$app->request->post();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($post_data->load(Yii::$app->request->post())) {
-
-                $upload->upload(["350x390"]);
+                $upload->upload(\Yii::$app->user->getId());
 
                 if ($model->save()) {
-
-                    $mainImage = new Image(["path" => $upload->path, "name" => $upload->new_name]);
+                    $mainImage = new Image(["path" => $upload->uploaded['path'], "name" => $upload->uploaded['new_name']]);
                     $mainImage->save();
-
                     $model->link("postData", $post_data);
                     $model->link("image", $mainImage);
 
@@ -117,16 +122,14 @@ class AuthorController extends Controller
 
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
-
             }
         }
 
 
-        return $this->render('create', [
+        return $this->render('add-edit-post', [
             'model' => $model,
             'post_data' => $post_data,
             'upload' => $upload,
-
         ]);
 
     }
