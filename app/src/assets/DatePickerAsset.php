@@ -9,14 +9,14 @@ class DatePickerAsset extends AssetBundle
 {
     public $sourcePath;
     public $js = [
-        'datepicker.js'
+        'div-datepicker.js'
     ];
 
     public function __construct(array $config = [])
     {
         $this->js[] = (\Yii::$app->language === Constants::LANGUAGE_RU)
-            ? 'datepicker-ru.js'
-            : 'datepicker-en.js';
+            ? 'div-datepicker-ru.js'
+            : 'div-datepicker-en.js';
         parent::__construct($config);
     }
 }

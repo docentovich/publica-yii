@@ -22,7 +22,6 @@ class Asset extends AssetBundle
         'yii\web\YiiAsset',
         'app\assets\ImagesLoadedAsset',
         'app\assets\FontAwesomeAsset',
-        'app\assets\DatePickerAsset',
     ];
 
 }

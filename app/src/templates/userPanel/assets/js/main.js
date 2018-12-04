@@ -1,6 +1,6 @@
 (function ($) {
 $(document).ready(function () {
-    $('.datepicker').datepicker({
+    $('.div-datepicker').datepicker({
         language: "ru"
     });
 
