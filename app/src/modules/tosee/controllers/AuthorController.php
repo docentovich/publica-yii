@@ -2,11 +2,13 @@
 
 namespace app\modules\tosee\controllers;
 
+use app\models\City;
 use app\models\Image;
 use app\models\UploadImage;
 use app\modules\tosee\models\Post;
 use app\modules\tosee\models\PostData;
 use app\modules\tosee\models\PostSearch;
+use app\traits\AjaxValidationTrait;
 use ImageAjaxUpload\UploadModel;
 use Yii;
 use yii\web\Controller;
@@ -21,6 +23,7 @@ use yii\filters\AccessControl;
  */
 class AuthorController extends Controller
 {
+    use AjaxValidationTrait;
     public $layout = "@current_template/layouts/user";
 
     /**
@@ -94,6 +97,9 @@ class AuthorController extends Controller
         //TODO REFACTOR!
         $model = new Post();
         $post_data = new PostData();
+        $this->performAjaxValidation($model);
+        $this->performAjaxValidation($post_data);
+
 
 //        $image_model = $profile_model->myAvatar;
 //        $image_model->scenario = Image::SCENARIO_LOAD_FILE;
@@ -126,10 +132,10 @@ class AuthorController extends Controller
         }
 
 
-        return $this->render('add-edit-post', [
+        return $this->render('add-post', [
             'model' => $model,
             'post_data' => $post_data,
-            'upload' => $upload,
+            'upload' => $upload
         ]);
 
     }

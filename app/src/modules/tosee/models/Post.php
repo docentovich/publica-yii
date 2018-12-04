@@ -18,6 +18,7 @@ use app\models\User;
  * @property string $eventAt
  * @property int $post_category_id Родительская категория. не fkey
  * @property int $image_id Главное изображение. Ссылка на ресурс.
+ * @property int $city_id
  * @property int $status 0 - на модерации 1 - одобрено 2 - отклонено 3 - заблокировано 4 - удален
  * @property string $created_at Дата создания. Для вывода на страницу постов. Задается триггером
  * @property Post nextPost
@@ -51,6 +52,7 @@ class Post extends yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['event_at', 'city_id'], 'required'],
             [['post_category_id', 'image_id', 'status'], 'integer'],
             [['event_at', 'created_at', 'user_id', 'city_id'], 'safe'],
             [['image_id'], 'exist', 'skipOnError' => true, 'targetClass' => Image::className(), 'targetAttribute' => ['image_id' => 'id']],
@@ -67,7 +69,7 @@ class Post extends yii\db\ActiveRecord
             'id' => Yii::t('app/tosee', 'ID'),
             'user_id' => Yii::t('app/tosee', 'User ID'),
             'event_at' => Yii::t('app/tosee', 'Дата события'),
-            'city' => Yii::t('app/user', 'Город'),
+            'city_id' => Yii::t('app/user', 'Город'),
             'post_category_id' => Yii::t('app/tosee', 'Post Category ID'),
             'image_id' => Yii::t('app/tosee', 'Image ID'),
             'status' => Yii::t('app/tosee', 'Статус'),
