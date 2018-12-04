@@ -6,7 +6,7 @@ use app\abstractions\ServiceConfig;
 
 /**
  * Class UserServiceConfig
- * @property \yii\base\Model $userFormModel
+ * @property \app\models\UserForm $userFormModel
  * @property mixed $action
  * @package app\modules\users\dto
  */
