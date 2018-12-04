@@ -44,6 +44,9 @@ class UserService extends \app\abstractions\Services
     {
         parent::init();
         $this->on(self::EVENT_AFTER_REGISTER, function($event){
+            if(!isset($event->userForm, $event->userForm->id)){
+                return;
+            }
             /** @var UserFormEvent $event */
             $id = $event->userForm->id; // registered user id
             $auth_manager = \Yii::$app->getAuthManager();
