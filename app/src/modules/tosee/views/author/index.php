@@ -6,3 +6,4 @@
             <?= \yii\helpers\Html::a(\Yii::t('app/user', 'My article'), ["/author/my-articles"]); ?>
         </div>
     </div>
+</div>
