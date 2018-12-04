@@ -16,6 +16,7 @@ class UploadModel extends Model
     const SCENARIO_MULTI_FILE = 'smf';
     public $file;
     public $files;
+    public $uploaded;
 
     /**
      * @return array the validation rules.
@@ -82,7 +83,7 @@ class UploadModel extends Model
         //сохраняем оригинал
         $file->saveAs($full_file_name);
 
-        return [
+        return $this->uploaded = [
             'url' => $upload_url . '/' . $file_name,
             'relative_path' => $relative_upload_dir . '/' . $file_name,
             'path' => $relative_upload_dir,
