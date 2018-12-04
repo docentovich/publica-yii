@@ -50,18 +50,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= \app\widgets\Alert::widget(); ?>
             </div>
 
-            <?= $user_active_form->field($transport_model->config->user_form_model, 'email') ?>
+            <?= $user_active_form->field($transport_model->config->userFormModel, 'email') ?>
 
-            <?= $user_active_form->field($transport_model->config->user_form_model, 'username')
+            <?= $user_active_form->field($transport_model->config->userFormModel, 'username')
                 ->label(
                     \Yii::t('app/user', 'Login {sub_level}',
                         ['sub_level' => \Yii::t('app/user', 'sub_level')]
                     )
                 ); ?>
 
-            <?= $user_active_form->field($transport_model->configQuery->config->user_form_model, 'password')->passwordInput(); ?>
+            <?= $user_active_form->field($transport_model->configQuery->config->userFormModel, 'password')->passwordInput(); ?>
 
-            <?= $user_active_form->field($transport_model->configQuery->config->user_form_model, 'password_repeat')->passwordInput(); ?>
+            <?= $user_active_form->field($transport_model->configQuery->config->userFormModel, 'password_repeat')->passwordInput(); ?>
 
         </div>
 

@@ -7,6 +7,7 @@ use app\models\User;
 use app\models\UserForm;
 use app\modules\users\dto\UserServiceConfig;
 use app\modules\users\dto\UserTransportModel;
+use app\modules\users\events\UserFormEvent;
 use app\widgets\Alert;
 use yii\db\IntegrityException;
 use yii\helpers\Url;
@@ -36,23 +37,15 @@ class UserService extends \app\abstractions\Services
      */
     private function beforeAction(\app\interfaces\config $config)
     {
-        $this->on(self::EVENT_BEFORE_REGISTER, function($event) use ($config){
-            if(isset($config->EVENT_BEFORE_REGISTER)){
-                $config->EVENT_BEFORE_REGISTER($event);
-            }
-        });
-        $this->on(self::EVENT_AFTER_REGISTER, function($event) use ($config){
-            if(isset($config->EVENT_AFTER_REGISTER)) {
-                $config->EVENT_AFTER_REGISTER($event);
-            }
-        });
+
     }
 
     public function init()
     {
         parent::init();
         $this->on(self::EVENT_AFTER_REGISTER, function($event){
-            $id = $event->getForm()->id; // registered user id
+            /** @var UserFormEvent $event */
+            $id = $event->userForm->id; // registered user id
             $auth_manager = \Yii::$app->getAuthManager();
             $auth_manager->assign($auth_manager->getRole("user"), $id);
         });
@@ -68,24 +61,20 @@ class UserService extends \app\abstractions\Services
      */
     private function registration(UserServiceConfig $config)
     {
-        $config->user_form_model = new UserForm(['scenario' => UserForm::SCENARIO_REGISTER]);
-        $event = $config->getFormEvent($config->user_form_model);
-        $config->performAjaxValidation($config->user_form_model);
-        $this->trigger(self::EVENT_BEFORE_REGISTER, $event);
+        $this->trigger(self::EVENT_BEFORE_REGISTER);
         $return = ['title' => ''];
 
-        if ($config->user_form_model->load(\Yii::$app->request->post()) && $config->user_form_model->validate()) {
+        if ($config->userFormModel->load(\Yii::$app->request->post()) && $config->userFormModel->validate()) {
             /** @var \app\models\User $user */
-            $user = User::registerNewUser($config->user_form_model->toArray());
+            $user = User::registerNewUser($config->userFormModel->toArray());
 
             if ($this->saveUser($user)){
                 // it's a hack. i need to send users id to EVENT_AFTER_REGISTER
                 // but i receive it normally in EVENT_AFTER_CONFIRM.
                 // To forward id through event system i change UserForm Model. Now
                 // it contains id and send it in event object.
-                $config->user_form_model->id = $user->id;
-                $event = $config->getFormEvent($config->user_form_model);
-                $this->trigger(self::EVENT_AFTER_REGISTER, $event);
+                $config->userFormModel->id = $user->id;
+                $this->trigger(self::EVENT_AFTER_REGISTER, new UserFormEvent(['userForm' => $config->userFormModel]));
                 if(!\Yii::$app->getModule('user')->enableUnconfirmedLogin){
                     // TODO implements logic when user confirm is required
                 }else{ // login if  user confirm is not required

@@ -2,7 +2,10 @@
 
 namespace app\modules\users\controllers;
 
+use app\models\UserForm;
 use app\modules\users\dto\UserServiceConfig;
+use app\modules\users\events\UserFormEvent;
+use app\modules\users\services\UserService;
 use dektrium\user\Finder;
 use dektrium\user\traits\AjaxValidationTrait;
 use dektrium\user\traits\EventTrait;
@@ -43,14 +46,6 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
         ];
     }
 
-    private function EVENTS($const)
-    {
-        $self = $this;
-        return function ($event) use ($self, $const) {
-            $this->trigger($const, $event);
-        };
-    }
-
     /**
      * Wrap the dekctrium controller's event handlers into the object, and send to service
      *
@@ -62,8 +57,6 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
         $self = $this;
         $config = ArrayHelper::merge($config,
             [
-                'EVENT_AFTER_REGISTER' => $this->EVENTS(self::EVENT_AFTER_REGISTER),
-                'EVENT_BEFORE_REGISTER' => $this->EVENTS(self::EVENT_BEFORE_REGISTER),
                 'performAjaxValidation' => function ($form_model) use ($self) {
                     return $self->performAjaxValidation($form_model);
                 },
@@ -88,9 +81,23 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
      */
     public function actionRegister()
     {
+        $self = $this;
+        $user_form_model = new UserForm(['scenario' => UserForm::SCENARIO_REGISTER]);
+        $this->performAjaxValidation($user_form_model);
+
+        \Yii::$app->userService->on(UserService::EVENT_AFTER_REGISTER, function($serviceEvent) use ($self){
+            /** @var UserFormEvent $serviceEvent */
+            $event = $this->getFormEvent($serviceEvent->userForm);
+            $self->trigger(RegistrationController::EVENT_AFTER_REGISTER, $event);
+        });
+        \Yii::$app->userService->on(UserService::EVENT_BEFORE_REGISTER, function($serviceEvent) use ($self, $user_form_model){
+            $event = $this->getFormEvent($user_form_model);
+            $self->trigger(RegistrationController::EVENT_BEFORE_REGISTER, $event);
+        });
         $transport_model = \Yii::$app->userService->action(
             $this->prepareConfig([
                 'action' => UserServiceConfig::ACTION_REGISTRATION,
+                'userFormModel' => $user_form_model
             ])
         );
 
