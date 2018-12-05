@@ -8,6 +8,7 @@ class Asset extends AssetBundle
     public $sourcePath = '@current_template/assets';
     public $css = [
         'css/main.css',
+        'css/additional-styles.css',
         'css/tables.css',
         'css/base.css',
         'bundle/vendor.css',

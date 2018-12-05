@@ -56,14 +56,13 @@ class PostData extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'post_id' => 'Post ID',
-            'title' => 'Заголовок',
-            'sub_header' => 'Подзаголовок',
-            'post_short_desc' => 'Короткое поисание',
-            'post_desc' => 'Описание поста',
-            'post_like_count' => 'Post Like Count',
-            'post_view_count' => 'Post View Count',
-
+            'post_id' => \Yii::t('app/tosee', 'Post ID'),
+            'title' => \Yii::t('app/tosee', 'Заголовок'),
+            'sub_header' => \Yii::t('app/tosee', 'Подзаголовок'),
+            'post_short_desc' => \Yii::t('app/tosee', 'Sub header'),
+            'post_desc' => \Yii::t('app/tosee', 'Text'),
+            'post_like_count' => \Yii::t('app/tosee', 'Post Like Count'),
+            'post_view_count' => \Yii::t('app/tosee', 'Post View Count'),
         ];
     }
 

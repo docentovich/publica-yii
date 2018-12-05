@@ -2,8 +2,6 @@
 
 namespace app\modules\tosee\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%post_to_image}}".
  *

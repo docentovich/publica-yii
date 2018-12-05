@@ -1,17 +1,17 @@
 <?php
 /**
- * @var \app\modules\tosee\models\Post $model
- * @var \app\modules\tosee\models\PostData $post_data
+ * @var \app\modules\tosee\models\Post $post
  */
 
 
 use yii\widgets\ActiveForm;
+
 ?>
 <?php $form = ActiveForm::begin([
-//    'action' => '/admin/save-user',
-    'id' => 'user-form',
+    'id' => 'post-form',
     'options' => [
         'class' => 'form',
+        'enctype' => 'multipart/form-data'
     ],
     'fieldConfig' => [
         'template' => "<div class=\"form-row\">
@@ -26,65 +26,37 @@ use yii\widgets\ActiveForm;
     'enableClientValidation' => true,
 ]); ?>
     <div class="form-block">
-        <?= $form->field($post_data, 'title') ?>
+        <?= $form->field($post->postData0, 'title') ?>
 
-<!--        <div class="form-row">-->
-<!--            <label class="control-label">Lfnf</label><br>-->
-<!--            --><?//= $form->field(\yii\jui\DatePicker::widget([
-//                'model' => $model,
-//                'attribute' => 'event_at',
-//                'language' => 'ru-RU',
-//                'dateFormat' => 'yyyy-MM-dd',
-//            ]);
-//            ?>
-<!--        </div>-->
-
-
-        <?= $form->field($model, 'event_at')->widget(\yii\jui\DatePicker::classname(), [
+        <?= $form->field($post, 'event_at')->widget(\yii\jui\DatePicker::classname(), [
             'language' => 'ru-RU',
             'dateFormat' => 'yyyy-MM-dd',
-        ])  ?>
+        ]) ?>
 
 
-        <?= $form->field($post_data, 'title') ?>
+        <?= $form->field($post, 'city_id')->dropDownList(\app\models\City::asArray()) ?>
 
-        <?= $form->field($model, 'city_id')->dropDownList(\app\models\City::asArray()) ?>
+        <?= $form->field($post->image0, 'relativeUploadPath')
+            ->widget(\ImageAjaxUpload\UploadWidget::className(), [
+                'multiply' => false,
+                'options' => ['class' => 'MS250x250']
+            ]); ?>
 
-        <div class="form-row">
-            <label>Место (город)</label>
-            <input type="text"/>
-        </div>
-        <div class="form-row form--upload">
-            <label>Заглавное фото</label>
-            <div class="form-avatar trigger-click dark-icon" rel="upload-input"><i class="fa fa-user"></i></div>
-            <input type="file" name="pic" accept="image/*" style="display: none" id="upload-input"/>
-        </div>
-        <div class="form-row">
-            <label>Введение</label>
-            <input type="text"/>
-        </div>
-        <div class="form-row">
-            <label>Текст</label>
-            <textarea></textarea>
-        </div>
-        <div class="form-row">
-            <label>Фотоглерея</label>
-            <div class="form-photo-gallery">
-                <div class="form-photo-gallery-item"><img src="/images/avatars/2.jpg"/></div>
-                <div class="form-photo-gallery-item"><img src="https://dummyimage.com/1000x400/000/fff"/></div>
-                <div class="form-photo-gallery-item"><img src="/images/avatars/5.jpg"/></div>
-                <div class="form-photo-gallery-item"><img src="/images/avatars/2.jpg"/></div>
-                <div class="form-photo-gallery-item"><img src="/images/avatars/2.jpg"/></div>
-                <div class="form-photo-gallery-item"><img src="https://dummyimage.com/1000x400/000/fff"/></div>
-                <div class="form-photo-gallery-item"><img src="/images/avatars/5.jpg"/></div>
-                <div class="form-photo-gallery-item"><img src="/images/avatars/2.jpg"/></div>
-            </div>
-        </div>
+        <?= $form->field($post->postData0, 'post_short_desc') ?>
+
+        <?= $form->field($post->postData0, 'post_desc')->textarea() ?>
+
+        <?= $form->field($post->additionalImages0, 'relativeUploadPathOrNull')
+            ->widget(\ImageAjaxUpload\UploadWidget::className(), [
+                'multiply' => true,
+                'options' => ['class' => 'MS100'],
+                'instance' => 1
+            ])->label(''); ?>
     </div>
     <div class="form-block form-control">
         <div class="form-row">
             <div class="form-submit-button">
-                <button>Отправить на модерацию</button>
+                <?= \yii\helpers\Html::submitButton(Yii::t('app', 'send to moderate')) ?>
             </div>
         </div>
     </div>

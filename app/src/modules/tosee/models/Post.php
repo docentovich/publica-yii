@@ -4,7 +4,6 @@ namespace app\modules\tosee\models;
 
 use app\abstractions\UpperCaseToUnderscoreGetter;
 use app\beheviors\PostBeforeValidate;
-use app\models\Comments;
 use Yii;
 use app\models\Image;
 use app\models\User;
@@ -23,11 +22,13 @@ use app\models\User;
  * @property string $created_at Дата создания. Для вывода на страницу постов. Задается триггером
  * @property Post nextPost
  * @property Post prevPost
- * @property Image $image
+ * @property Image|null $image
+ * @property Image $image0
  * @property User $user
- * @property PostData $postData
- * @property PostToImage[] $postToImages
- * @property Image[] $images
+ * @property PostData|null $postData
+ * @property PostData $postData0
+ * @property Image|null $additionalImages
+ * @property Image $additionalImages0
  */
 class Post extends yii\db\ActiveRecord
 {
@@ -75,6 +76,7 @@ class Post extends yii\db\ActiveRecord
             'status' => Yii::t('app/tosee', 'Статус'),
             'created_at' => Yii::t('app/tosee', 'Создан'),
             'postDataTitle' => Yii::t('app/tosee', 'Заголовок поста'),
+            'relativeUploadPath' => Yii::t('app/tosee', 'Заголовное фото')
         ];
     }
 
@@ -96,6 +98,17 @@ class Post extends yii\db\ActiveRecord
         return $this->hasOne(Image::className(), ['id' => 'image_id']);
     }
 
+
+    /**
+     * @return Image
+     */
+    public function getImage0()
+    {
+        $image = $this->image ?? new Image();
+        $image->setRelativeUploadPathLabel($this->getAttributeLabel('relativeUploadPath'));
+        return $image;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -112,38 +125,49 @@ class Post extends yii\db\ActiveRecord
         return $this->hasOne(PostData::className(), ['post_id' => 'id']);
     }
 
+    public function  getPostData0()
+    {
+        return $this->postData ?? new PostData();
+    }
+
+//    /**
+//     * @return \yii\db\ActiveQuery
+//     */
+//    public function getPostToImages()
+//    {
+//        return $this->hasMany(PostToImage::className(), ['post_id' => 'id']);
+//    }
+//
+//    public function getPostDataTitle()
+//    {
+//        return $this->postData->title;
+//    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPostToImages()
-    {
-        return $this->hasMany(PostToImage::className(), ['post_id' => 'id']);
-    }
-
-    public function getPostDataTitle()
-    {
-        return $this->postData->title;
-    }
-
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImages()
+    public function getAdditionalImages()
     {
         return $this->hasMany(Image::className(), ['id' => 'image_id'])
             ->viaTable(PostToImage::tableName(), ['post_id' => 'id'])
             ->with(['comments']);
     }
 
-    public function getPostDataShortDesc()
+    public function getAdditionalImages0()
     {
-        return $this->postData->post_short_desc;
+        $additionalImages = $this->additionalImages;
+        return (!empty($additionalImages)) ? $additionalImages : new Image();
     }
 
-    public function getPostDataDesc()
-    {
-        return $this->postData->post_desc;
-    }
+//    public function getPostDataShortDesc()
+//    {
+//        return $this->postData->post_short_desc;
+//    }
+//
+//    public function getPostDataDesc()
+//    {
+//        return $this->postData->post_desc;
+//    }
 
 }

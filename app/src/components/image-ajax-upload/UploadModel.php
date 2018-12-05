@@ -14,9 +14,33 @@ class UploadModel extends Model
 {
     const SCENARIO_SINGLE_FILE = 'ssf';
     const SCENARIO_MULTI_FILE = 'smf';
-    public $file;
-    public $files;
+    private $_file;
+    private $_files;
+    private $_file0;
+    private $_files0;
+    private $_file1;
+    private $_files1;
     public $uploaded;
+    public $instance = '';
+
+    public function __get($name)
+    {
+        if(property_exists ($this, '_' . $name . $this->instance)){
+            return $this->{'_' . $name . $this->instance};
+        }
+        return parent::__get($name);
+    }
+
+    public function __set($name, $value)
+    {
+        try {
+            if (property_exists($this, '_' . $name . $this->instance)) {
+                return $this->{'_' . $name . $this->instance} = $value;
+            }
+        }catch (\Exception $e){
+        }
+        return parent::__set($name, $value);
+    }
 
     /**
      * @return array the validation rules.
@@ -24,11 +48,16 @@ class UploadModel extends Model
     public function rules()
     {
         return [
-            [['file'], 'required'],
-            [['file'], 'file', 'extensions' => 'jpg,jpeg,gif,png'],
-            [['files'], 'required'],
-            [['files'], 'file', 'extensions' => 'jpg,jpeg,gif,png', 'maxFiles' => 8],
+            [['file' . $this->instance], 'required'],
+            [['file' . $this->instance], 'file', 'extensions' => 'jpg,jpeg,gif,png'],
+            [['files' . $this->instance], 'required'],
+            [['files' . $this->instance], 'file', 'extensions' => 'jpg,jpeg,gif,png', 'maxFiles' => 8],
         ];
+    }
+
+    public function attributeLabels()
+    {
+        return ['file' => 'file'];
     }
 
     public function scenarios()
@@ -47,7 +76,7 @@ class UploadModel extends Model
     public function upload($relative_upload_dir, $file = null)
     {
         $this->scenario = self::SCENARIO_SINGLE_FILE;
-        $this->file = ($file !== null) ? $this->file : UploadedFile::getInstance($this, 'file');
+        $this->file = ($file !== null) ? $this->file : UploadedFile::getInstance($this, 'file' . $this->instance);
         if (!$this->validate()) {
             return false;
         }
@@ -93,8 +122,8 @@ class UploadModel extends Model
 
     public function multiUpload($relative_upload_dir)
     {
-        $this->files = UploadedFile::getInstances($this, 'files');
         $this->scenario = self::SCENARIO_MULTI_FILE;
+        $this->files = UploadedFile::getInstances($this, 'files' . $this->instance);
 
         if (!$this->validate()) {
             return false;

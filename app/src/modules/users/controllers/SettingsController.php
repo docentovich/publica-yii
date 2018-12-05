@@ -96,7 +96,9 @@ class SettingsController extends \dektrium\user\controllers\SettingsController
         if ($profile_model->validate()) {
             $image_model = $profile_model->myAvatar;
             $image_model->scenario = Image::SCENARIO_LOAD_FILE;
-            $image_model->load((new UploadModel())->upload(\Yii::$app->user->getId()), '');
+            $image_model->load(
+                (new UploadModel())->upload(\Yii::$app->user->getId()), ''
+            );
 
             if ($image_model->validate() && $image_model->save()) {
                 $profile_model->link('avatar0', $image_model);
@@ -117,7 +119,7 @@ class SettingsController extends \dektrium\user\controllers\SettingsController
             /** @var \app\models\User $user_model */
             $user_model = (User::findMeTo(User::SCENARIO_UPDATE));
 
-            if ($user_model->load($user_form_model->toArray(), '') && $user_model->validate()){
+            if ($user_model->load($user_form_model->toArray(), '') && $user_model->validate()) {
                 $user_model->save();
             }
         }

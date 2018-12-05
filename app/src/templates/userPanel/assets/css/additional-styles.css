@@ -1,0 +1,23 @@
+#profile-form .image-ajax-upload img, .image-ajax-upload.MS250x250 img{
+    max-width: 250px;
+    max-height: 250px;
+}
+
+.image-ajax-upload.MS100x100 img{
+    max-width: 100px;
+    max-height: 100px;
+}
+.image-ajax-upload.MS100 img{
+    max-width: 500px;
+    max-height: 100px;
+}
+html{
+    background: #000;
+}
+body{
+    background: #fff;
+}
+
+.user-avatar img{
+    max-width: 100%;
+}

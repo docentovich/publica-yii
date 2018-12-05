@@ -97,14 +97,10 @@ use yii\widgets\ActiveForm;
             <?= $profile_active_form->field($profile, 'sename'); ?>
             <?= $profile_active_form->field($profile, 'lastname'); ?>
 
-            <?= \ImageAjaxUpload\UploadWidget::widget(
-                [
-                    'activeForm' => $profile_active_form,
-                    'model' => $profile->myAvatar,
-                    'attribute' => 'relativeUploadPath',
+            <?= $profile_active_form->field($profile->myAvatar, 'relativeUploadPath')
+                ->widget(\ImageAjaxUpload\UploadWidget::className(), [
                     'multiply' => false,
-                ]
-            ); ?>
+                ])->label(\Yii::t('app/user', 'avatar')); ?>
 
             <div class="form-row form--upload" id="upload">
                 <label>Загрузить изображение</label>

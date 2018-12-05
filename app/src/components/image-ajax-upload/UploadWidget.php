@@ -3,41 +3,84 @@
 namespace ImageAjaxUpload;
 
 use yii\base\Model;
-use yii\bootstrap\ActiveField;
-use yii\helpers\BaseHtml;
-use yii\jui\Widget;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\jui\InputWidget;
 use yii\widgets\ActiveForm;
 
-class UploadWidget extends Widget
+/**
+ * Class UploadWidget
+ * ex:
+ * <?= $form->field($model->image, 'relativeUploadPath')
+ *      ->widget(\ImageAjaxUpload\UploadWidget::className(), [
+ *          'multiply' => false,
+ *      ]); ?>
+ *
+ * where $model->image is model implemented @see ImageInterface
+ * and second parameter always 'relativeUploadPath'
+ * @package ImageAjaxUpload
+ */
+class UploadWidget extends InputWidget
 {
     /** @var Model */
     public $model;
-    /** @var ActiveForm */
-    public $activeForm;
+    /** @var string */
     public $attribute;
+    /**
+     * allows multiply or single upload
+     * @var bool
+     */
     public $multiply = true;
-
-    private $modelParameter;
+    /** @var array uploaded images */
+    private $values = [];
+    public $options = [];
+    public $instance = '';
 
     public function init()
     {
-        $this->modelParameter = $this->model->{$this->attribute};
-        if (!is_array($this->modelParameter)) {
-            $this->modelParameter = [$this->modelParameter];
+        if (!isset($this->model)) {
+            throw new \Exception('The model mast set');
+        }
+        if (!($this->model instanceof ImageInterface)) {
+            throw new \Exception('The model mast implements ' . ImageInterface::class);
+        }
+        $this->values = Html::getAttributeValue($this->model, $this->attribute);
+
+        if (!is_array($this->values)) {
+            $this->values = [$this->values];
         }
 
-        UploadAsset::register($this->getView());
     }
 
     public function run()
     {
+        $assets = UploadAsset::register($this->getView());
+        $input_options = ArrayHelper::merge(
+            ['style' => 'display: none'],
+            (($this->multiply) ? ['multiply' => true] : [])
+        );
+        $upload_model = new UploadModel();
+        /**
+         * model of active field is @see UploadModel
+         * all upload operations placed in there
+         */
         ?>
-        <div class="image-ajax-upload" multiply="<?= $this->multiply ?>">
-            <?= $this->activeForm->field(new UploadModel(), 'file')
-                ->fileInput(['style' => 'display: none'])->label(false); ?>
-            <?php foreach ($this->modelParameter as $model_src_field) { ?>
-                <?= \yii\helpers\Html::img($model_src_field); ?>
-            <?php } ?>
+        <div class="image-ajax-upload <?= $this->options['class'] ?? '' ?>" multiply="<?= $this->multiply ?>">
+            <?= Html::activeFileInput(
+                $upload_model,
+                'file' . (($this->multiply) ? 's' : '') . $this->instance . (($this->multiply) ? '[]' : ''),
+                $input_options
+            ) ?>
+            <div class="images">
+                <?php
+                foreach ($this->values as $field) {
+                    echo \yii\helpers\Html::img($field);
+                }
+                if ($this->multiply) {
+                    echo \yii\helpers\Html::img($assets->baseUrl . '/img/plus.png');
+                }
+                ?>
+            </div>
         </div>
         <?php
     }

@@ -95,47 +95,42 @@ class AuthorController extends Controller
     public function actionCreate()
     {
         //TODO REFACTOR!
-        $model = new Post();
-        $post_data = new PostData();
-        $this->performAjaxValidation($model);
-        $this->performAjaxValidation($post_data);
+        $post = new Post();
+        $this->performAjaxValidation($post);
+        $this->performAjaxValidation($post->postData0);
 
+        if ($post->load(Yii::$app->request->post()) && $post->validate()) {
+            if ($post->postData0->load(Yii::$app->request->post())) {
+                $main_image = $post->image0;
+                $main_image->load(
+                    (new UploadModel())->upload(\Yii::$app->user->getId()), ''
+                );
+                $additional_images = $post->additionalImages0;
+                $additional_images->load(
+                    (new UploadModel(['instance' => 1]))->multiUpload(\Yii::$app->user->getId()), ''
+                );
 
-//        $image_model = $profile_model->myAvatar;
-//        $image_model->scenario = Image::SCENARIO_LOAD_FILE;
-//        $image_model->load((new UploadModel())->upload(\Yii::$app->user->getId()), '');
-
-        $upload = new UploadModel();
-
-        $post = Yii::$app->request->post();
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($post_data->load(Yii::$app->request->post())) {
-                $upload->upload(\Yii::$app->user->getId());
-
-                if ($model->save()) {
+                if ($post->save()) {
                     $mainImage = new Image(["path" => $upload->uploaded['path'], "name" => $upload->uploaded['new_name']]);
                     $mainImage->save();
-                    $model->link("postData", $post_data);
-                    $model->link("image", $mainImage);
+                    $post->link("postData0", $post->postData0);
+                    $post->link("image", $mainImage);
 
                     if (isset($post['PostToImage']))
                         foreach ($post['PostToImage']['image_id'] as $image_id) {
                             $image_id = (int)$image_id;
                             $addidtional = Image::findOne(["=", "id", $image_id]);
-                            $model->link("images", $addidtional);
+                            $post->link("images", $addidtional);
                         }
 
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['view', 'id' => $post->id]);
                 }
             }
         }
 
 
         return $this->render('add-post', [
-            'model' => $model,
-            'post_data' => $post_data,
-            'upload' => $upload
+            'post' => $post,
         ]);
 
     }

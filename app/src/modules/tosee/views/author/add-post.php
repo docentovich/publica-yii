@@ -2,9 +2,7 @@
     <div class="add-article">
         <h2 class="form-title">Добавить событие</h2>
         <?= $this->render('_post-form', [
-            'model' => $model,
-            'post_data' => $post_data,
-            'upload' => $upload,
+            'post' => $post,
         ]) ?>
     </div>
 </div>
