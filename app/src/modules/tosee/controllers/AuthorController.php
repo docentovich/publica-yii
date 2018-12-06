@@ -136,41 +136,50 @@ class AuthorController extends Controller
         $this->performAjaxValidation($post->postDataNN);
 
         if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
-            if ($post->postDataNN->load(Yii::$app->request->post()) && $post->postDataNN->validate() && $post->postDataNN->save()) {
-                $post->link('postData', $post->postDataNN);
-            }
-
-            // main image. get current, replace bay load, save, link
-            $main_image = $post->imageNN;
-            $main_image->load(
-                (new UploadModel())->upload(\Yii::$app->user->getId())->toArray(), ''
-            );
-            if ($main_image->validate() && $main_image->save()) {
-                $post->link('image', $main_image);
-            }
-
-            // try to delete all related additional images
-            // then create new once by array map, save, link,
-            try {
-                foreach ($post->postToImages as $relatedImg) {
-                    $relatedImg->delete();
-                }
-            } catch (\Exception $e) {
-
-            }
-            array_map(
-                function ($item) use ($post) {
-                    /** @var UploadDTO $item */
-                    $image = new Image();
-                    $image->load($item->toArray(), '');
-                    if ($image->validate() && $image->save()) {
-                        $post->link('additionalImages', $image);
-                    }
-                }, (new UploadModel(['instance' => 1]))->multiUpload(\Yii::$app->user->getId())
-            );
+            $this->savePostData($post);
+            $this->saveMainPhoto($post);
+            $this->saveAdditionalPhoto($post);
 
             $this->redirect(['edit', 'id' => $post->id]);
             \Yii::$app->end();
+        }
+    }
+
+    private function saveAdditionalPhoto(Post $post)
+    {
+        // prepare images objects and if there are some images to save
+        // set isNeedDelete = true to delete all old related images
+        array_map(
+            function ($item) use ($post) {
+                /** @var UploadDTO $item */
+                $image = new Image();
+                $image->load($item->toArray(), '');
+                if ($image->validate()) {
+                    $image->save();
+                    $post->link('additionalImages', $image);
+                }
+            },
+            (new UploadModel(['instance' => 1]))->multiUpload(\Yii::$app->user->getId())
+        );
+    }
+
+    private function savePostData(Post $post)
+    {
+        if ($post->postDataNN->load(Yii::$app->request->post()) && $post->postDataNN->validate() ) {
+            $post->link('postData', $post->postDataNN);
+        }
+    }
+
+    private function saveMainPhoto(Post $post)
+    {
+        // main image. get current, replace bay load, save, link
+        $main_image = $post->imageNN;
+        $main_image->load(
+            (new UploadModel())->upload(\Yii::$app->user->getId())->toArray(), ''
+        );
+        if ($main_image->validate()) {
+            $main_image->save();
+            $post->link('image', $main_image);
         }
     }
 

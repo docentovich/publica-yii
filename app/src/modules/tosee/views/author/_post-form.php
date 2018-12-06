@@ -32,7 +32,6 @@ use yii\widgets\ActiveForm;
             'dateFormat' => 'yyyy-MM-dd',
         ]) ?>
 
-
         <?= $form->field($post, 'city_id')->dropDownList(\app\models\City::asArray()) ?>
 
         <?= $form->field($post, 'imageNN')
@@ -41,7 +40,7 @@ use yii\widgets\ActiveForm;
                 'options' => ['class' => 'MS250x250']
             ])->label(''); ?>
 
-        <?= $form->field($post->postDataNN, 'post_short_desc') ?>
+        <?= $form->field($post->postDataNN, 'sub_header') ?>
 
         <?= $form->field($post->postDataNN, 'post_desc')->textarea() ?>
 

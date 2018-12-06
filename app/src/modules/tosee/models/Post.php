@@ -39,6 +39,7 @@ class Post extends yii\db\ActiveRecord
     CONST STATUS_BLOCKED = 2;
     CONST STATUS_ACTIVE = 3;
     private $cache = [];
+    private $_postData;
 
     /**
      * @inheritdoc
@@ -128,7 +129,7 @@ class Post extends yii\db\ActiveRecord
 
     public function  getPostDataNN()
     {
-        return $this->postData ?? new PostData();
+        return  $this->_postData ?? ( $this->_postData = ($this->postData ?? new PostData()) );
     }
 
     /**

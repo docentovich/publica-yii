@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
  * ex:
  * <?= $form->field($model->image, 'relativeUploadPath')
  *      ->widget(\ImageAjaxUpload\UploadWidget::className(), [
+ *          'relativePathAttribute' => 'relativeUploadPath',  // param in model of @see ImageInterface. param returns puth relate of /upload/ folder to image upload folder
  *          'multiply' => false,
  *      ]); ?>
  *

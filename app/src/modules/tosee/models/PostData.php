@@ -41,11 +41,10 @@ class PostData extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['post_id'], 'required'],
             [['title', 'sub_header'], 'required'],
             [['sub_header', 'post_desc'], 'string'],
             [['post_like_count', 'post_view_count'], 'integer'],
-            [['title', 'post_short_desc'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Post::className(), 'targetAttribute' => ['post_id' => 'id']],
         ];
     }
