@@ -37,6 +37,7 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
     public function scenarios()
     {
         return [
+            self::SCENARIO_DEFAULT => ['name', 'path'],
             self::SCENARIO_LOAD_FILE => ['name', 'path']
         ];
     }
@@ -47,6 +48,8 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
     public function rules()
     {
         return [
+            [['path', 'name'], 'required'],
+            [['path', 'name'], 'string', 'length' => [1]],
             [['path', 'alt', 'name'], 'trim'],
         ];
     }
