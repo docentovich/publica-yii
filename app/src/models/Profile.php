@@ -25,7 +25,7 @@ use borales\extensions\phoneInput\PhoneInputValidator;
  * @property string $timezone
  * @property User $user
  * @property Image|null $avatar0
- * @property Image $myAvatar
+ * @property Image $avatarNN
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com
  */
@@ -104,7 +104,7 @@ class Profile extends BaseProfile
     /**
      * @return \app\models\Image
      */
-    public function getMyAvatar()
+    public function getAvatarNN()
     {
         return $this->avatar0 ?? new Image();
     }

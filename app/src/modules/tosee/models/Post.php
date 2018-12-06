@@ -23,13 +23,13 @@ use app\models\User;
  * @property Post nextPost
  * @property Post prevPost
  * @property Image|null $image
- * @property Image $image0
+ * @property Image $imageNN
  * @property User $user
  * @property PostData|null $postData
- * @property PostData $postData0
+ * @property PostData $postDataNN
  * @property Image|null $additionalImages
- * @property Image $additionalImages0
- * @property PostToImage|null $postToImages
+ * @property Image $additionalImagesNN
+ * @property PostToImage[]|null $postToImages
  */
 class Post extends yii\db\ActiveRecord
 {
@@ -103,7 +103,7 @@ class Post extends yii\db\ActiveRecord
     /**
      * @return Image
      */
-    public function getImage0()
+    public function getImageNN()
     {
         $image = $this->image ?? new Image();
         $image->setRelativeUploadPathLabel($this->getAttributeLabel('relativeUploadPath'));
@@ -126,7 +126,7 @@ class Post extends yii\db\ActiveRecord
         return $this->hasOne(PostData::className(), ['post_id' => 'id']);
     }
 
-    public function  getPostData0()
+    public function  getPostDataNN()
     {
         return $this->postData ?? new PostData();
     }
@@ -138,12 +138,6 @@ class Post extends yii\db\ActiveRecord
     {
         return $this->hasMany(PostToImage::className(), ['post_id' => 'id']);
     }
-//
-//    public function getPostDataTitle()
-//    {
-//        return $this->postData->title;
-//    }
-
 
     /**
      * @return \yii\db\ActiveQuery
@@ -155,20 +149,11 @@ class Post extends yii\db\ActiveRecord
             ->with(['comments']);
     }
 
-    public function getAdditionalImages0()
+    public function getAdditionalImagesNN()
     {
         $additionalImages = $this->additionalImages;
         return (!empty($additionalImages)) ? $additionalImages : new Image();
     }
 
-//    public function getPostDataShortDesc()
-//    {
-//        return $this->postData->post_short_desc;
-//    }
-//
-//    public function getPostDataDesc()
-//    {
-//        return $this->postData->post_desc;
-//    }
 
 }

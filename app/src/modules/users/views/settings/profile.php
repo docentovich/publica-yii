@@ -97,7 +97,7 @@ use yii\widgets\ActiveForm;
             <?= $profile_active_form->field($profile, 'sename'); ?>
             <?= $profile_active_form->field($profile, 'lastname'); ?>
 
-            <?= $profile_active_form->field($profile->myAvatar, 'relativeUploadPath')
+            <?= $profile_active_form->field($profile, 'avatarNN')
                 ->widget(\ImageAjaxUpload\UploadWidget::className(), [
                     'multiply' => false,
                 ])->label(\Yii::t('app/user', 'avatar')); ?>
