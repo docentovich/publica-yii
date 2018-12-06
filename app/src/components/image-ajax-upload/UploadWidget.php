@@ -32,22 +32,34 @@ class UploadWidget extends InputWidget
      */
     public $multiply = true;
     /** @var array uploaded images */
-    private $values = [];
     public $options = [];
     public $instance = '';
+    public $relativePathAttribute = 'relativeUploadPath';
+    private $_images = [];
+    /**
+     * @var ImageInterface|ImageInterface[]
+     */
+    private $_imagesModel;
 
     public function init()
     {
-        if (!isset($this->model)) {
+        if (!isset($this->model->{$this->attribute})) {
             throw new \Exception('The model mast set');
         }
-        if (!($this->model instanceof ImageInterface)) {
+        $this->_imagesModel = $this->model->{$this->attribute};
+
+        if (!is_array($this->_imagesModel)){
+            $this->_imagesModel = [$this->_imagesModel];
+        }
+
+        if (!($this->_imagesModel[0] instanceof ImageInterface)) {
             throw new \Exception('The model mast implements ' . ImageInterface::class);
         }
-        $this->values = Html::getAttributeValue($this->model, $this->attribute);
 
-        if (!is_array($this->values)) {
-            $this->values = [$this->values];
+        foreach($this->_imagesModel as $imageModel){
+            /** @var ImageInterface  $imageModel */
+            $value = Html::getAttributeValue($imageModel, $this->relativePathAttribute);
+            $this->_images[] = (object) ['model' => $imageModel, 'value' => $value];
         }
 
     }
@@ -77,8 +89,8 @@ class UploadWidget extends InputWidget
             ) ?>
             <div class="images">
                 <?php
-                foreach ($this->values as $field) {
-                    echo ($field) ? \yii\helpers\Html::img($field) : '';
+                foreach ($this->_images as $image) {
+                    echo ($image) ? \yii\helpers\Html::img($image->value) : '';
                 }
                 if ($this->multiply) {
                     echo \yii\helpers\Html::img($assets->baseUrl . '/img/plus.png');
