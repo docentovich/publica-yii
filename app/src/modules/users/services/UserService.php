@@ -67,6 +67,7 @@ class UserService extends \app\abstractions\Services
         $this->trigger(self::EVENT_BEFORE_REGISTER);
         $return = ['title' => ''];
 
+        /** TODO condition is controller part of code */
         if ($config->userFormModel->load(\Yii::$app->request->post()) && $config->userFormModel->validate()) {
             /** @var \app\models\User $user */
             $user = User::registerNewUser($config->userFormModel->toArray());
