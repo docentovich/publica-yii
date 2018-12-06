@@ -3,7 +3,6 @@
  * @var \app\modules\tosee\models\Post $post
  */
 
-
 use yii\widgets\ActiveForm;
 
 ?>
@@ -26,7 +25,7 @@ use yii\widgets\ActiveForm;
     'enableClientValidation' => true,
 ]); ?>
     <div class="form-block">
-        <?= $form->field($post->postData0, 'title') ?>
+        <?= $form->field($post->postDataNN, 'title') ?>
 
         <?= $form->field($post, 'event_at')->widget(\yii\jui\DatePicker::classname(), [
             'language' => 'ru-RU',
@@ -36,18 +35,19 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($post, 'city_id')->dropDownList(\app\models\City::asArray()) ?>
 
-        <?= $form->field($post->image0, 'relativeUploadPath')
+        <?= $form->field($post, 'imageNN')
             ->widget(\ImageAjaxUpload\UploadWidget::className(), [
                 'multiply' => false,
                 'options' => ['class' => 'MS250x250']
-            ]); ?>
+            ])->label(''); ?>
 
-        <?= $form->field($post->postData0, 'post_short_desc') ?>
+        <?= $form->field($post->postDataNN, 'post_short_desc') ?>
 
-        <?= $form->field($post->postData0, 'post_desc')->textarea() ?>
+        <?= $form->field($post->postDataNN, 'post_desc')->textarea() ?>
 
-        <?= $form->field($post->additionalImages0, 'relativeUploadPathOrNull')
+        <?= $form->field($post, 'additionalImagesNN')
             ->widget(\ImageAjaxUpload\UploadWidget::className(), [
+                'relativePathAttribute' => 'relativeUploadPathOrNull',
                 'multiply' => true,
                 'options' => ['class' => 'MS100'],
                 'instance' => 1

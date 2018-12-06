@@ -13,6 +13,7 @@ class BackendBootstrap implements BootstrapInterface
         if( $app->id === "app-backend"){
             $app->getUrlManager()->addRules(
                 [
+                    '<_c:(author|moderator|director)>/<_a:[a-zA-Z\-\_]+>/<id:\d+>' => '/tosee/<_c>/<_a>',
                     '<_c:(author|moderator|director)>'                    => '/tosee/<_c>/index',
                     '<_c:(author|moderator|director)>/<_a:[a-zA-Z\-\_]+>' => '/tosee/<_c>/<_a>',
                 ]

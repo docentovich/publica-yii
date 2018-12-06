@@ -43,7 +43,6 @@ class AuthorController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['my-articles', 'index', 'view', 'update', 'delete', 'create', 'additional-upload'],
                         'allow' => true,
                         'roles' => ['author'],
                     ],
@@ -76,122 +75,103 @@ class AuthorController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+//    public function actionView($id)
+//    {
+//        $model = $this->findModel($id);
+//
+//        if (!Yii::$app->user->can("updatePost", ["post" => $model]))
+//            throw new HttpException(403, "You can't edit post");
+//
+//        return $this->render('view', [
+//            'model' => $this->findModel($id),
+//        ]);
+//    }
+
+    /**
+     * Creates a new Post model.
+     *
+     * @return string
+     * @throws \yii\base\ExitException
+     */
+    public function actionCreate()
     {
-        $model = $this->findModel($id);
+        $post = new Post();
+        $this->savePost($post);
 
-        if (!Yii::$app->user->can("updatePost", ["post" => $model]))
-            throw new HttpException(403, "You can't edit post");
-
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+        return $this->render('add-post', [
+            'post' => $post,
         ]);
     }
 
     /**
      * Creates a new Post model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     *
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     * @throws \yii\base\ExitException
      */
-    public function actionCreate()
+    public function actionEdit($id)
     {
-        $post = new Post();
-        $this->performAjaxValidation($post);
-        $this->performAjaxValidation($post->postData0);
+        $post = $this->findModel($id);
+        $this->savePost($post);
 
-        if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
-            if ($post->postData0->load(Yii::$app->request->post())) {
-
-                // main image. get current, replace bay load, save, link
-                $main_image = $post->image0;
-                $main_image->load(
-                    (new UploadModel())->upload(\Yii::$app->user->getId())->toArray(), ''
-                );
-                $main_image->save();
-                $post->link('image', $main_image);
-
-                // try to delete all related additional images
-                // then create new once by array map, save, link,
-                try {
-                    $post->postToImages->delete();
-                } catch (\Exception $e) {
-
-                }
-                array_map(function ($item) use ($post) {
-                    /** @var UploadDTO $item */
-                    $image = new Image($item->toArray());
-                    $image->save();
-                    $post->link('getAdditionalImages', $image);
-                },
-                    (new UploadModel(['instance' => 1]))->multiUpload(\Yii::$app->user->getId()));
-
-
-                $post->save(); // save linked images
-                return $this->redirect(['view', 'id' => $post->id]);
-            }
-        }
-
-
-        return $this->render('add-post', [
+        return $this->render('update-post', [
             'post' => $post,
         ]);
-
     }
 
     /**
-     * Updates an existing Post model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
+     * Update or create the post
+     * If is successful, the browser will be redirected to the 'view' page.
+     *
+     * @param Post $post
+     * @return \yii\web\Response|void
+     * @throws \yii\base\ExitException
      */
-    public function actionUpdate($id)
+    public function savePost(Post $post)
     {
-        //TODO REFACTOR!
+        /** TODO to service */
+        $this->performAjaxValidation($post);
+        $this->performAjaxValidation($post->postDataNN);
 
-        $model = $this->findModel($id);
+        if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
+            if ($post->postDataNN->load(Yii::$app->request->post()) && $post->postDataNN->validate() && $post->postDataNN->save()) {
+                $post->link('postData', $post->postDataNN);
+            }
 
-        if (!Yii::$app->user->can("updatePost", ["post" => $model]))
-            throw new HttpException(403, "You can't edit post");
+            // main image. get current, replace bay load, save, link
+            $main_image = $post->imageNN;
+            $main_image->load(
+                (new UploadModel())->upload(\Yii::$app->user->getId())->toArray(), ''
+            );
+            if ($main_image->validate() && $main_image->save()) {
+                $post->link('image', $main_image);
+            }
 
-
-        $upload = new UploadImage();
-        $post_data = $model->postData;
-
-
-        $post = Yii::$app->request->post();
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($post_data->load(Yii::$app->request->post())) {
-
-                if ($upload->upload(["350x390"])) {
-                    $model->image->path = $upload->path;
-                    $model->image->name = $upload->new_name;
-                    $model->image->save();
+            // try to delete all related additional images
+            // then create new once by array map, save, link,
+            try {
+                foreach ($post->postToImages as $relatedImg) {
+                    $relatedImg->delete();
                 }
-
-                if ($model->save()) {
-                    $post_data->save();
-
-                    if (isset($post['PostToImage']))
-                        foreach ($post['PostToImage']['image_id'] as $image_id) {
-                            $image_id = (int)$image_id;
-                            $addidtional = Image::findOne(["=", "id", $image_id]);
-                            $model->link("images", $addidtional);
-                        }
-
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
+            } catch (\Exception $e) {
 
             }
+            array_map(
+                function ($item) use ($post) {
+                    /** @var UploadDTO $item */
+                    $image = new Image();
+                    $image->load($item->toArray(), '');
+                    if ($image->validate() && $image->save()) {
+                        $post->link('additionalImages', $image);
+                    }
+                }, (new UploadModel(['instance' => 1]))->multiUpload(\Yii::$app->user->getId())
+            );
+
+            $this->redirect(['edit', 'id' => $post->id]);
+            \Yii::$app->end();
         }
-
-
-        return $this->render('update', [
-            'model' => $model,
-            'post_data' => $model->postData,
-            'upload' => $upload,
-        ]);
-
     }
 
     /**
