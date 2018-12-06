@@ -9,6 +9,7 @@ use app\modules\tosee\models\Post;
 use app\modules\tosee\models\PostData;
 use app\modules\tosee\models\PostSearch;
 use app\traits\AjaxValidationTrait;
+use ImageAjaxUpload\UploadDTO;
 use ImageAjaxUpload\UploadModel;
 use Yii;
 use yii\web\Controller;
@@ -80,7 +81,7 @@ class AuthorController extends Controller
         $model = $this->findModel($id);
 
         if (!Yii::$app->user->can("updatePost", ["post" => $model]))
-            throw new HttpException(403 ,"You can't edit post");
+            throw new HttpException(403, "You can't edit post");
 
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -94,37 +95,39 @@ class AuthorController extends Controller
      */
     public function actionCreate()
     {
-        //TODO REFACTOR!
         $post = new Post();
         $this->performAjaxValidation($post);
         $this->performAjaxValidation($post->postData0);
 
-        if ($post->load(Yii::$app->request->post()) && $post->validate()) {
+        if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
             if ($post->postData0->load(Yii::$app->request->post())) {
+
+                // main image. get current, replace bay load, save, link
                 $main_image = $post->image0;
                 $main_image->load(
-                    (new UploadModel())->upload(\Yii::$app->user->getId()), ''
+                    (new UploadModel())->upload(\Yii::$app->user->getId())->toArray(), ''
                 );
-                $additional_images = $post->additionalImages0;
-                $additional_images->load(
-                    (new UploadModel(['instance' => 1]))->multiUpload(\Yii::$app->user->getId()), ''
-                );
+                $main_image->save();
+                $post->link('image', $main_image);
 
-                if ($post->save()) {
-                    $mainImage = new Image(["path" => $upload->uploaded['path'], "name" => $upload->uploaded['new_name']]);
-                    $mainImage->save();
-                    $post->link("postData0", $post->postData0);
-                    $post->link("image", $mainImage);
+                // try to delete all related additional images
+                // then create new once by array map, save, link,
+                try {
+                    $post->postToImages->delete();
+                } catch (\Exception $e) {
 
-                    if (isset($post['PostToImage']))
-                        foreach ($post['PostToImage']['image_id'] as $image_id) {
-                            $image_id = (int)$image_id;
-                            $addidtional = Image::findOne(["=", "id", $image_id]);
-                            $post->link("images", $addidtional);
-                        }
-
-                    return $this->redirect(['view', 'id' => $post->id]);
                 }
+                array_map(function ($item) use ($post) {
+                    /** @var UploadDTO $item */
+                    $image = new Image($item->toArray());
+                    $image->save();
+                    $post->link('getAdditionalImages', $image);
+                },
+                    (new UploadModel(['instance' => 1]))->multiUpload(\Yii::$app->user->getId()));
+
+
+                $post->save(); // save linked images
+                return $this->redirect(['view', 'id' => $post->id]);
             }
         }
 
@@ -148,7 +151,7 @@ class AuthorController extends Controller
         $model = $this->findModel($id);
 
         if (!Yii::$app->user->can("updatePost", ["post" => $model]))
-            throw new HttpException(403 ,"You can't edit post");
+            throw new HttpException(403, "You can't edit post");
 
 
         $upload = new UploadImage();
@@ -202,7 +205,7 @@ class AuthorController extends Controller
         $model = $this->findModel($id);
 
         if (!Yii::$app->user->can("updatePost", ["post" => $model]))
-            throw new HttpException(403 ,"You can't edit post");
+            throw new HttpException(403, "You can't edit post");
 
         $model->delete();
 

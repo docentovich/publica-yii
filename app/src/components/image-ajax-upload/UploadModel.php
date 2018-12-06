@@ -71,14 +71,14 @@ class UploadModel extends Model
     /**
      * @param string $relative_upload_dir
      * @param UploadedFile $file
-     * @return array|bool
+     * @return UploadDTO
      */
     public function upload($relative_upload_dir, $file = null)
     {
         $this->scenario = self::SCENARIO_SINGLE_FILE;
         $this->file = ($file !== null) ? $this->file : UploadedFile::getInstance($this, 'file' . $this->instance);
         if (!$this->validate()) {
-            return false;
+            return new UploadDTO();
         }
 
         return $this->_upload($relative_upload_dir, $this->file);
@@ -87,7 +87,7 @@ class UploadModel extends Model
     /**
      * @param $relative_upload_dir
      * @param UploadedFile $file
-     * @return array
+     * @return UploadDTO
      */
     private function _upload($relative_upload_dir, $file)
     {
@@ -112,21 +112,25 @@ class UploadModel extends Model
         //сохраняем оригинал
         $file->saveAs($full_file_name);
 
-        return $this->uploaded = [
+        return new UploadDTO([
             'url' => $upload_url . '/' . $file_name,
             'relative_path' => $relative_upload_dir . '/' . $file_name,
             'path' => $relative_upload_dir,
             'name' => $file_name,
-        ];
+        ]);
     }
 
+    /**
+     * @param $relative_upload_dir
+     * @return UploadDTO[]
+     */
     public function multiUpload($relative_upload_dir)
     {
         $this->scenario = self::SCENARIO_MULTI_FILE;
         $this->files = UploadedFile::getInstances($this, 'files' . $this->instance);
 
         if (!$this->validate()) {
-            return false;
+            return [new UploadDTO()];
         }
 
         $uploadedFiles = [];

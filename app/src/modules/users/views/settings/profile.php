@@ -102,9 +102,6 @@ use yii\widgets\ActiveForm;
                     'multiply' => false,
                 ])->label(\Yii::t('app/user', 'avatar')); ?>
 
-            <div class="form-row form--upload" id="upload">
-                <label>Загрузить изображение</label>
-            </div>
         </div>
     </div>
 

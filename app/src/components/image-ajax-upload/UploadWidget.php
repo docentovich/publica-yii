@@ -54,10 +54,11 @@ class UploadWidget extends InputWidget
 
     public function run()
     {
+        $id = uniqid();
         $assets = UploadAsset::register($this->getView());
         $input_options = ArrayHelper::merge(
             ['style' => 'display: none'],
-            (($this->multiply) ? ['multiply' => true] : [])
+            (($this->multiply) ? ['multiple' => true] : [])
         );
         $upload_model = new UploadModel();
         /**
@@ -65,16 +66,19 @@ class UploadWidget extends InputWidget
          * all upload operations placed in there
          */
         ?>
-        <div class="image-ajax-upload <?= $this->options['class'] ?? '' ?>" multiply="<?= $this->multiply ?>">
+        <div id="<?=$id?>" class="image-ajax-upload <?= $this->options['class'] ?? '' ?>" multiply="<?= $this->multiply ?>">
+            <?= Html::fileInput('', '',
+                 ArrayHelper::merge(['class' => 'trigger'], $input_options)
+            ); ?>
             <?= Html::activeFileInput(
                 $upload_model,
                 'file' . (($this->multiply) ? 's' : '') . $this->instance . (($this->multiply) ? '[]' : ''),
-                $input_options
+                ArrayHelper::merge(['class' => 'uploader', 'id' => "ui_$id"], $input_options)
             ) ?>
             <div class="images">
                 <?php
                 foreach ($this->values as $field) {
-                    echo \yii\helpers\Html::img($field);
+                    echo ($field) ? \yii\helpers\Html::img($field) : '';
                 }
                 if ($this->multiply) {
                     echo \yii\helpers\Html::img($assets->baseUrl . '/img/plus.png');

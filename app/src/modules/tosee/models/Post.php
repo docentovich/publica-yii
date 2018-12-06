@@ -29,6 +29,7 @@ use app\models\User;
  * @property PostData $postData0
  * @property Image|null $additionalImages
  * @property Image $additionalImages0
+ * @property PostToImage|null $postToImages
  */
 class Post extends yii\db\ActiveRecord
 {
@@ -130,13 +131,13 @@ class Post extends yii\db\ActiveRecord
         return $this->postData ?? new PostData();
     }
 
-//    /**
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getPostToImages()
-//    {
-//        return $this->hasMany(PostToImage::className(), ['post_id' => 'id']);
-//    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPostToImages()
+    {
+        return $this->hasMany(PostToImage::className(), ['post_id' => 'id']);
+    }
 //
 //    public function getPostDataTitle()
 //    {

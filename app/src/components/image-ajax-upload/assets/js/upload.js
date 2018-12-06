@@ -2,44 +2,40 @@ $(".image-ajax-upload img").on("click", function (event) {
     event.preventDefault(); // Totally stop stuff happening
     event.stopPropagation(); // Stop stuff happening
 
-    $(this).closest('.image-ajax-upload').find("input[type=\"file\"]").trigger("click");
+    $(this).closest('.image-ajax-upload').find("input[type=\"file\"].trigger").trigger("click");
 });
 
-$(".image-ajax-upload input[type=\"file\"]").on("change", function (event) {
+$(".image-ajax-upload input[type=\"file\"].trigger").on("change", function (event) {
     event.preventDefault(); // Totally stop stuff happening
     event.stopPropagation(); // Stop stuff happening
-    if(this.block === true)
-    {
-        this.block = false;
-        return;
+
+    var self = this;
+    var $imageAjaxUpload = $(this).closest('.image-ajax-upload');
+    var multiply = !!parseInt($imageAjaxUpload.attr('multiply'));
+    var id = $imageAjaxUpload.attr('id');
+    if (!multiply) {
+        this.fileStorage = null;
     }
-    // this.fileStorage = this.fileStorage || [];
-    this.fileStorage = this.fileStorage || new ClipboardEvent('').clipboardData || // Firefox bug?
-        new DataTransfer();                              // specs compliant
+    this.fileStorage = this.fileStorage
+        || new ClipboardEvent('').clipboardData // Firefox bug?
+        || new DataTransfer();                  // specs compliant
+    var uploaderInput = $(this).siblings('input[type="file"].uploader').get(0);
 
-
-    if (this.files && this.files[0]) {
-        var self = this;
-        var newFile = this.files[0];
-        var $imageAjaxUpload = $(this).closest('.image-ajax-upload');
-        var multiply = !!parseInt( $imageAjaxUpload.attr('multiply') );
+    $(this.files).each(function () {
         var reader = new FileReader();
-        if(multiply) {
-            this.fileStorage.items.add(this.files[0]);
-        }
+        self.fileStorage.items.add(this);
 
         reader.onload = function (e) {
-            if(!multiply){
+            if (!multiply) {
                 $imageAjaxUpload.children('div.images').children('img').attr('src', e.target.result);
+                uploaderInput.files = self.fileStorage.files;
             }
-            else{
-                var img = '<img src="' + e.target.result + '"/>';
-                $imageAjaxUpload.children('div.images').prepend(img);
-                self.block = !(self.files.length === self.fileStorage.files.length);
-                self.files = self.fileStorage.files;
+            else {
+                $imageAjaxUpload.children('div.images').prepend('<img src="' + e.target.result + '"/>');
+                uploaderInput.files = self.fileStorage.files;
             }
         };
 
-        reader.readAsDataURL(this.files[0]);
-    }
+        reader.readAsDataURL(this);
+    });
 });

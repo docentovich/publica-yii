@@ -97,7 +97,7 @@ class SettingsController extends \dektrium\user\controllers\SettingsController
             $image_model = $profile_model->myAvatar;
             $image_model->scenario = Image::SCENARIO_LOAD_FILE;
             $image_model->load(
-                (new UploadModel())->upload(\Yii::$app->user->getId()), ''
+                (new UploadModel())->upload(\Yii::$app->user->getId())->toArray(), ''
             );
 
             if ($image_model->validate() && $image_model->save()) {
