@@ -12,6 +12,5 @@ use app\abstractions\ServiceConfig;
  */
 class UserServiceConfig extends ServiceConfig
 {
-    const ACTION_REGISTRATION = 1;
-    const ACTION_CHOOSE_ROLE = 2;
+
 }

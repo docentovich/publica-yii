@@ -26,6 +26,7 @@ class FrontendBootstrap implements BootstrapInterface
                     'search'                                                                  => 'project/front/search',
                     '<action:\w+>/<id:\d+>'                                                   => 'project/front/<action>',
                     '<action:[\w\-]+>'                                                        => 'project/front/<action>',
+                    '<action:[a-zA-Z\-\_]+>/<date:[\d\-]+>'                                   => '/project/front/<action>',
                 ]
             );
         }

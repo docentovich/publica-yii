@@ -3,6 +3,8 @@
 namespace app\modules\tosee\dto;
 
 use app\abstractions\ServiceConfig;
+use app\modules\tosee\models\Post;
+use app\modules\tosee\services\PostService;
 
 /**
  * Class PostServiceConfig
@@ -11,13 +13,8 @@ use app\abstractions\ServiceConfig;
  */
 class PostServiceConfig extends ServiceConfig
 {
-    const ACTION_FUTURE = 1;
-    const ACTION_PAST = 2;
-    const ACTION_SEARCH = 3;
-    const ACTION_SINGLE_POST = 4;
-    const ACTION_DATE_PICKER = 5;
-    const ACTION_BY_DATE = 6;
-
+    /** @var Post */
+    public $post;
     public $page;
     public $id;
     /**
@@ -29,7 +26,8 @@ class PostServiceConfig extends ServiceConfig
     {
         $this->date =  $config['date'] ?? new \DateTime();
         $this->page =  $config['page'] ?? 1;
-        $this->action =  $config['action'] ?? PostServiceConfig::ACTION_FUTURE;
+        $this->action =  $config['action'] ?? PostService::ACTION_FUTURE;
         $this->id =  $config['id'] ?? null;
+        $this->post = $config['post'] ?? null;
     }
 }

@@ -3,6 +3,7 @@
         <h2 class="form-title">Обновить событие</h2>
         <?= $this->render('_post-form', [
             'post' => $post,
+            'button_text' => \Yii::t('app/tosee', 'Update')
         ]) ?>
     </div>
 </div>

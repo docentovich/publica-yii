@@ -55,7 +55,7 @@ use yii\widgets\ActiveForm;
     <div class="form-block form-control">
         <div class="form-row">
             <div class="form-submit-button">
-                <?= \yii\helpers\Html::submitButton(Yii::t('app', 'send to moderate')) ?>
+                <?= \yii\helpers\Html::submitButton($button_text) ?>
             </div>
         </div>
     </div>

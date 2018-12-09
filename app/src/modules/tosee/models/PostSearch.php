@@ -11,10 +11,7 @@ use yii\data\ActiveDataProvider;
  */
 class PostSearch extends \app\modules\tosee\models\Post
 {
-
     public $postDataTitle;
-
-
 
     /**
      * @inheritdoc
@@ -27,14 +24,14 @@ class PostSearch extends \app\modules\tosee\models\Post
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
-    }
+//    /**
+//     * @inheritdoc
+//     */
+//    public function scenarios()
+//    {
+//        // bypass scenarios() implementation in the parent class
+//        return Model::scenarios();
+//    }
 
     /**
      * Creates data provider instance with search query applied
@@ -45,12 +42,14 @@ class PostSearch extends \app\modules\tosee\models\Post
      */
     public function search($params)
     {
-        $query = Post::find()->where(["=", "user_id", Yii::$app->user->identity->getId()]);
+        $a = Yii::$app->request->queryParams;
+        $query = PostSearch::find()->where(["=", "user_id", Yii::$app->user->identity->getId()]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['attributes' => ['created_at']]
         ]);
 
         $dataProvider->setSort([
@@ -64,11 +63,13 @@ class PostSearch extends \app\modules\tosee\models\Post
                 'created_at'
             ]
         ]);
-
-        $this->load($params);
-
-        $query->joinWith(['postData' => function ($q) {
-            $q->where( PostData::tableName() . '.title LIKE "%' . $this->postDataTitle . '%" ');
+        if( !$this->load($params) )
+        {
+            return $dataProvider;
+        }
+        $self = $this;
+        $query->joinWith(['postData' => function ($q) use ($self) {
+            $q->where( PostData::tableName() . '.title LIKE "%' . $self->postDataTitle . '%" ');
         }]);
 
         if (!$this->validate()) {

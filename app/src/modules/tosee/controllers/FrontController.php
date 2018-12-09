@@ -2,7 +2,10 @@
 
 namespace app\modules\tosee\controllers;
 
+use app\modules\tosee\dto\ImagesServiceConfig;
 use app\modules\tosee\dto\PostServiceConfig;
+use app\modules\tosee\services\ImagesService;
+use app\modules\tosee\services\PostService;
 use Yii;
 use yii\web\Controller;
 use yii\web\Cookie;
@@ -33,7 +36,7 @@ class FrontController extends Controller
         ];
     }
 
-    private function getTransportModel($config = []): \app\modules\tosee\dto\PostTransportModel
+    private function getPostTransportModel($config = []): \app\modules\tosee\dto\PostTransportModel
     {
         return \Yii::$app->postService->action(
             new PostServiceConfig($config)
@@ -42,7 +45,7 @@ class FrontController extends Controller
 
     public function actionGenPwd()
     {
-        if(YII_ENV_DEV){
+        if (YII_ENV_DEV) {
             return \Yii::$app->getSecurity()->generatePasswordHash(
                 \Yii::$app->request->get('pwd')
             );
@@ -59,7 +62,7 @@ class FrontController extends Controller
     public function actionIndex($page = 1)
     {
         return $this->render('index', [
-            "postModel" => $this->getTransportModel(['action' => PostServiceConfig::ACTION_FUTURE])
+            "postModel" => $this->getPostTransportModel(['action' => PostService::ACTION_FUTURE])
         ]);
     }
 
@@ -72,7 +75,7 @@ class FrontController extends Controller
     public function actionPast($page = 1)
     {
         return $this->render('index', [
-            "postModel" => $this->getTransportModel(['action' => PostServiceConfig::ACTION_PAST])
+            "postModel" => $this->getPostTransportModel(['action' => PostService::ACTION_PAST])
         ]);
     }
 
@@ -83,10 +86,13 @@ class FrontController extends Controller
      * @param int $page
      * @return string
      */
-    public function actionDate($date, $page = 1)
+    public function actionDate($date)
     {
         return $this->render('index', [
-            "postModel" => $this->getTransportModel(['action' => PostServiceConfig::ACTION_BY_DATE, 'date' => $date])
+            "postModel" => $this->getPostTransportModel([
+                'action' => PostService::ACTION_BY_DATE,
+                'date' => new \DateTime($date)
+            ])
         ]);
     }
 
@@ -99,7 +105,7 @@ class FrontController extends Controller
     public function actionPost($id)
     {
         return $this->render('post', [
-            "postModel" => $this->getTransportModel(['action' => PostServiceConfig::ACTION_SINGLE_POST, 'id' => (int)$id])
+            "postModel" => $this->getPostTransportModel(['action' => PostService::ACTION_SINGLE_POST, 'id' => (int)$id])
         ]);
     }
 
@@ -113,11 +119,28 @@ class FrontController extends Controller
     public function actionSearch($page = 1)
     {
         return $this->render('index', [
-            "postModel" => $this->getTransportModel([
-                'action' => PostServiceConfig::ACTION_SEARCH,
+            "postModel" => $this->getPostTransportModel([
+                'action' => PostService::ACTION_SEARCH,
                 'keyword' => Yii::$app->request->get('keyword')
             ])
         ]);
+    }
+
+
+    public function actionLike($image_id)
+    {
+        if (!Yii::$app->request->isAjax) {
+            throw new \Exception('request mast be ajax');
+        }
+
+        Yii::$app->imageService->action(
+            new ImagesServiceConfig([
+                'action' => ImagesService::ACTION_LIKE,
+                'user_id' => \Yii::$app->user->getId()
+            ])
+        );
+
+        Yii::$app->end(200);
     }
 
 

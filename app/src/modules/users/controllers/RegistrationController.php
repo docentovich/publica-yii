@@ -98,12 +98,14 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
             $self->trigger(RegistrationController::EVENT_BEFORE_REGISTER, $event);
         });
 
-        $transport_model = \Yii::$app->userService->action(
-            $this->prepareConfig([
-                'action' => UserServiceConfig::ACTION_REGISTRATION,
-                'userFormModel' => $user_form_model
-            ])
-        );
+        if ($user_form_model->load(\Yii::$app->request->post()) && $user_form_model->validate()) {
+            $transport_model = \Yii::$app->userService->action(
+                $this->prepareConfig([
+                    'action' => UserService::ACTION_REGISTRATION,
+                    'userFormModel' => $user_form_model
+                ])
+            );
+        }
 
         return $this->render('register', [
             'identity' => \Yii::$app->user->identity,
@@ -147,7 +149,7 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
     {
         $this->layout = "@current_template/layouts/user";
         \Yii::$app->userService->action(
-            $this->prepareConfig(['action' =>  UserServiceConfig::ACTION_CHOOSE_ROLE])
+            $this->prepareConfig(['action' =>  UserService::ACTION_CHOOSE_ROLE])
         );
         return $this->render('choose-role');
     }

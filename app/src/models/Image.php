@@ -2,9 +2,11 @@
 
 namespace app\models;
 
+use app\modules\tosee\models\Like;
 use ImageAjaxUpload\ImageInterface;
 use ImageAjaxUpload\UploadModelTrait;
 use Yii;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%image}}".
@@ -16,10 +18,10 @@ use Yii;
  * @property string $extension
  * @property Profile[] $profiles
  * @property Comments[] comments
- * @property int likes
  * @property string $relativeUploadPath
  * @property string $path0
  * @property string desc
+ * @property Like|null $likes
  */
 class Image extends \yii\db\ActiveRecord implements ImageInterface
 {
@@ -107,6 +109,10 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
         return $this->path . "/" . $this->name;
     }
 
+    /**
+     * @param string $size  e.g 200x200
+     * @return string url
+     */
     public function getPathImageSizeOf($size)
     {
         if ($this->name === null) {
@@ -116,12 +122,28 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
         return "{$this->path}/{$file_name}[{$size}].$file_extension";
     }
 
+    public function getUrlImageSizeOf($size)
+    {
+        return  Url::to('/uploads/' . $this->getPathImageSizeOf($size), true);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getComments()
     {
         return $this->hasMany(Comments::className(), ['image_id' => 'id']);
+    }
+
+    public function getLikes()
+    {
+        return $this->hasMany(Like::className(), ['image_id' => 'id']);
+    }
+
+    public function getMyLike()
+    {
+        return $this->hasMany(Like::className(), ['image_id' => 'id'])
+            ->andOnCondition(['user_id' => \Yii::$app->user->getId()]);
     }
 
 }

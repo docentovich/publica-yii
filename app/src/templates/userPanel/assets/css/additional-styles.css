@@ -21,3 +21,29 @@ body{
 .user-avatar img{
     max-width: 100%;
 }
+
+table th {
+    text-align: center;
+}
+
+a[data-sort]{
+    text-decoration: underline;
+}
+
+a[data-sort]:after{
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    content: "\f0dc";
+    display: inline;
+}
+
+a.desc[data-sort]:after {
+    content: "\f0dd";
+}
+a.asc[data-sort]:after{
+    content: "\f0de";
+}
+
+body{
+    padding-top: 43px;
+}

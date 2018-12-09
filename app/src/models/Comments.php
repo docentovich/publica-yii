@@ -2,20 +2,21 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%comments}}".
  *
  * @property int $id
- * @property int $avatar
+ * @property int $user_id
  * @property string $title
  * @property string $text
+ * @property User $user
  *
  * @property Image $avatar0
  */
 class Comments extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+
     /**
      * @inheritdoc
      */
@@ -51,11 +52,8 @@ class Comments extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAvatar0()
+    public function getUser()
     {
-        return $this->hasOne(Image::className(), ['id' => 'avatar']);
+        return $this->hasOne(User::class, ['id' => 'user_id'])->with(['profile']);
     }
 }

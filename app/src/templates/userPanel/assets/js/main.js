@@ -67,7 +67,7 @@ $('body').imagesLoaded(function () {
             gutter: '.gutter-sizer',
             fitWidth: true,
             horizontalOrder: true,
-            resize: true
+            resize: false
         });
     }, 5);
 });

@@ -2,7 +2,6 @@
 
 namespace app\modules\tosee\models;
 
-use app\abstractions\UpperCaseToUnderscoreGetter;
 use app\beheviors\PostBeforeValidate;
 use Yii;
 use app\models\Image;
@@ -14,7 +13,6 @@ use app\models\User;
  * @property int $id
  * @property int $user_id
  * @property string $event_at Дата события. Для поиска timestump. Триггер для приведения к нужному виду. Индекс
- * @property string $eventAt
  * @property int $post_category_id Родительская категория. не fkey
  * @property int $image_id Главное изображение. Ссылка на ресурс.
  * @property int $city_id
@@ -33,11 +31,11 @@ use app\models\User;
  */
 class Post extends yii\db\ActiveRecord
 {
-    use UpperCaseToUnderscoreGetter;
     CONST STATUS_ON_MODERATE = 0;
     CONST STATUS_NOT_PASS_MODERATE = 1;
     CONST STATUS_BLOCKED = 2;
     CONST STATUS_ACTIVE = 3;
+    CONST STATUS_DELETED = 4;
     private $cache = [];
     private $_postData;
 
@@ -78,7 +76,8 @@ class Post extends yii\db\ActiveRecord
             'status' => Yii::t('app/tosee', 'Статус'),
             'created_at' => Yii::t('app/tosee', 'Создан'),
             'postDataTitle' => Yii::t('app/tosee', 'Заголовок поста'),
-            'relativeUploadPath' => Yii::t('app/tosee', 'Заголовное фото')
+            'relativeUploadPath' => Yii::t('app/tosee', 'Заголовное фото'),
+            'image' => Yii::t('app/tosee', 'Заголовное фото')
         ];
     }
 
@@ -97,7 +96,7 @@ class Post extends yii\db\ActiveRecord
      */
     public function getImage()
     {
-        return $this->hasOne(Image::className(), ['id' => 'image_id']);
+        return $this->hasOne(Image::className(), ['id' => 'image_id'])->with('likes', 'myLike');
     }
 
 

@@ -2,7 +2,7 @@
 
 native: 
 
-	$ DBG_IP=192.168.56.1 docker-compose -f docker-dev.yml up -d
+	$ DBG_IP=192.168.99.1 docker-compose -f docker-dev.yml up -d
 toolbox:
 
 	$ SET DBG_IP=10.0.75.1 && docker-compose -f docker-dev.yml up -d

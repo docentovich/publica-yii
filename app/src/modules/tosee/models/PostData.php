@@ -2,7 +2,6 @@
 
 namespace app\modules\tosee\models;
 
-use app\abstractions\UpperCaseToUnderscoreGetter;
 use Yii;
 
 /**
@@ -11,11 +10,8 @@ use Yii;
  * @property int $post_id fkey
  * @property string $title
  * @property string $sub_header Подзаголовок
- * @property string $subHeader Подзаголовок
  * @property string $post_short_desc
- * @property string $postShortDesc
  * @property string $post_desc
- * @property string $postDesc
  * @property int $post_like_count
  * @property int $postLikeCount
  * @property int $postViewCount
@@ -25,7 +21,6 @@ use Yii;
  */
 class PostData extends \yii\db\ActiveRecord
 {
-    use UpperCaseToUnderscoreGetter;
 
     /**
      * @inheritdoc

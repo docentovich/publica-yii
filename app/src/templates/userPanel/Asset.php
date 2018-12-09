@@ -14,8 +14,9 @@ class Asset extends AssetBundle
         'bundle/vendor.css',
     ];
     public $js = [
-        'js/main.js',
         'bundle/vendor.js',
+        'js/main.js',
+        'js/additional.js',
     ];
 
     public $jsOptions = ['position' => \yii\web\View::POS_END];

@@ -17,11 +17,30 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 ]); ?>
     <div class="overlay" id="service-menu-overlay">
         <div class="service-overlay-wrapper">
-            <ul class="tosee-menu">
-                <li>Что было?</li>
-                <li>Что будет?</li>
-                <li>Календарь</li>
-            </ul>
+            <div id="sidebar-menu" class="is-active">
+                <ul class="tosee-menu">
+                    <li>
+                        <?= \yii\helpers\Html::a(
+                            \Yii::t('app/tosee', 'What will be'),
+                            \yii\helpers\Url::to('/')
+                        ); ?>
+                    </li>
+                    <li>
+                        <?= \yii\helpers\Html::a(
+                            \Yii::t('app/tosee', 'What was'),
+                            \yii\helpers\Url::to('past')
+                        ); ?>
+                    </li>
+                    <li>
+                        <span id="calendar-href"><?= \Yii::t('app/tosee', 'Calendar') ?></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sidebar-calendar">
+                <div id="calendar-back"><i class="fas fa-long-arrow-alt-left" id=""></i></div>
+                <div class="div-datepicker" data-provide="datepicker"></div>
+            </div>
         </div>
     </div>
 <?php \app\widgets\header\Header::end(); ?>

@@ -10,7 +10,7 @@ $filtered_projects = array_filter(
         return $item !== $currentProject;
     });
 ?>
-    <div  style="box-sizing: content-box">
+    <div style="box-sizing: content-box">
         <header style="box-sizing: content-box">
             <div id="header-inner">
                 <div class="navigation-panel">
@@ -20,7 +20,10 @@ $filtered_projects = array_filter(
                                 <i class="icon-burger"></i>
                             </div>
                             <div class="toggle-drop-down-action-panel base-logo" id="services" rel="services">
-                                <?= \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$currentProject}.svg"); ?>
+                                <?= \yii\helpers\Html::a(
+                                        \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$currentProject}.svg"),
+                                        '/'
+                                ); ?>
                             </div>
                         </div>
                     </div>

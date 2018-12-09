@@ -5,22 +5,26 @@
 ?>
 
 <div class="posts masonry">
-    <div class="grid-sizer"></div>
+    <?php if(count($postModel->result) < 2) { ?>
+        <div class="grid-sizer" style="width: 100%"></div>
+    <?php } else { ?>
+        <div class="grid-sizer"></div>
+    <?php } ?>
     <div class="gutter-sizer"></div>
 
     <?php
-    /**
-     * @var \app\modules\tosee\models\Post $post
-     */
-    foreach ($postModel->result as $post): ?>
-        <div class="item-post item-masonry" style="display: none">
-            <a href="/post.html">
+
+    foreach ($postModel->result as $post):
+        /**
+         * @var \app\modules\tosee\models\Post $post
+         */
+        ?>
+        <div class="item-post item-masonry" style="display: none; <?= (count($postModel->result) < 2) ? 'width: 100%;' : '' ?> ">
                 <?=
                 \yii\helpers\Html::a(
-                    \yii\helpers\Html::img("/uploads/post/{$post->image->getPathImageSizeOf('500x500')}"),
+                    \yii\helpers\Html::img("{$post->image->relativeUploadPath}"),
                     "/post/{$post->id}"); ?>
-                <div class="post-description"><?= $post->getPostDataShortDesc(); ?></div>
-            </a>
+                <div class="post-description"><?= $post->postData->sub_header; ?></div>
         </div>
     <?php endforeach; ?>
 

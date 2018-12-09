@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\beheviors\UserBeforValidate;
+use app\modules\tosee\models\Like;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\web\IdentityInterface;
@@ -25,6 +26,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $updated_at
  * @property Profile|null $profile
  * @property Profile $myProfile
+ * @property Like|null $likes
  * @property string $password write-only password
  */
 class User extends BaseUser implements IdentityInterface
@@ -282,6 +284,11 @@ class User extends BaseUser implements IdentityInterface
     public function getMyProfile()
     {
         return $this->profile ?? new Profile();
+    }
+
+    public function getLikes()
+    {
+        return $this->hasMany(Like::className(), ['user_id' => 'id']);
     }
 
     /**

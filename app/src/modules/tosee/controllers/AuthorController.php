@@ -2,16 +2,16 @@
 
 namespace app\modules\tosee\controllers;
 
-use app\models\City;
 use app\models\Image;
-use app\models\UploadImage;
+use app\modules\tosee\dto\PostServiceConfig;
 use app\modules\tosee\models\Post;
-use app\modules\tosee\models\PostData;
 use app\modules\tosee\models\PostSearch;
+use app\modules\tosee\services\PostService;
 use app\traits\AjaxValidationTrait;
 use ImageAjaxUpload\UploadDTO;
 use ImageAjaxUpload\UploadModel;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
@@ -61,6 +61,7 @@ class AuthorController extends Controller
 
     public function actionMyArticles()
     {
+        /** @var ActiveDataProvider $dataProvider */
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -69,23 +70,6 @@ class AuthorController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
-    /**
-     * Displays a single Post model.
-     * @param integer $id
-     * @return mixed
-     */
-//    public function actionView($id)
-//    {
-//        $model = $this->findModel($id);
-//
-//        if (!Yii::$app->user->can("updatePost", ["post" => $model]))
-//            throw new HttpException(403, "You can't edit post");
-//
-//        return $this->render('view', [
-//            'model' => $this->findModel($id),
-//        ]);
-//    }
 
     /**
      * Creates a new Post model.
@@ -111,7 +95,7 @@ class AuthorController extends Controller
      * @throws NotFoundHttpException
      * @throws \yii\base\ExitException
      */
-    public function actionEdit($id)
+    public function actionUpdate($id)
     {
         $post = $this->findModel($id);
         $this->savePost($post);
@@ -121,67 +105,17 @@ class AuthorController extends Controller
         ]);
     }
 
-    /**
-     * Update or create the post
-     * If is successful, the browser will be redirected to the 'view' page.
-     *
-     * @param Post $post
-     * @return \yii\web\Response|void
-     * @throws \yii\base\ExitException
-     */
-    public function savePost(Post $post)
-    {
-        /** TODO to service */
-        $this->performAjaxValidation($post);
-        $this->performAjaxValidation($post->postDataNN);
+   private function savePost(Post $post)
+   {
+       $this->performAjaxValidation($post);
+       $this->performAjaxValidation($post->postDataNN);
 
-        if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
-            $this->savePostData($post);
-            $this->saveMainPhoto($post);
-            $this->saveAdditionalPhoto($post);
-
-            $this->redirect(['edit', 'id' => $post->id]);
-            \Yii::$app->end();
-        }
-    }
-
-    private function saveAdditionalPhoto(Post $post)
-    {
-        // prepare images objects and if there are some images to save
-        // set isNeedDelete = true to delete all old related images
-        array_map(
-            function ($item) use ($post) {
-                /** @var UploadDTO $item */
-                $image = new Image();
-                $image->load($item->toArray(), '');
-                if ($image->validate()) {
-                    $image->save();
-                    $post->link('additionalImages', $image);
-                }
-            },
-            (new UploadModel(['instance' => 1]))->multiUpload(\Yii::$app->user->getId())
-        );
-    }
-
-    private function savePostData(Post $post)
-    {
-        if ($post->postDataNN->load(Yii::$app->request->post()) && $post->postDataNN->validate() ) {
-            $post->link('postData', $post->postDataNN);
-        }
-    }
-
-    private function saveMainPhoto(Post $post)
-    {
-        // main image. get current, replace bay load, save, link
-        $main_image = $post->imageNN;
-        $main_image->load(
-            (new UploadModel())->upload(\Yii::$app->user->getId())->toArray(), ''
-        );
-        if ($main_image->validate()) {
-            $main_image->save();
-            $post->link('image', $main_image);
-        }
-    }
+       if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
+           return \Yii::$app->postService->action(
+               new PostServiceConfig(['action' => PostService::ACTION_SAVE_POST, 'post' => $post])
+           );
+       }
+   }
 
     /**
      * Deletes an existing Post model.
@@ -191,6 +125,7 @@ class AuthorController extends Controller
      */
     public function actionDelete($id)
     {
+        /** TODO to service */
         $model = $this->findModel($id);
 
         if (!Yii::$app->user->can("updatePost", ["post" => $model]))
