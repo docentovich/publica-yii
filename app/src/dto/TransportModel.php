@@ -2,6 +2,7 @@
 
 namespace app\dto;
 use app\interfaces\config;
+use yii\helpers\ArrayHelper;
 
 /**
  * Transport Model is DTO immutable object, which transports configuration of query
@@ -10,6 +11,7 @@ use app\interfaces\config;
  * Class TransportModel
  * @property ConfigQuery $configQuery
  * @property \app\interfaces\config $config
+ * @property mixed $result
  * @package app\dto
  */
 class TransportModel extends \app\abstractions\Immutable
@@ -26,7 +28,7 @@ class TransportModel extends \app\abstractions\Immutable
 
     public function __get($key)
     {
-        if($key==='config' && isset($this->_params['configQuery']) && isset($this->_params['configQuery']->config)){
+        if(($key==='config') && ArrayHelper::getValue($this->_params, 'configQuery.config')){
             return $this->_params['configQuery']->config;
         }
         return parent::__get($key);

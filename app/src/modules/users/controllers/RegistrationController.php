@@ -86,26 +86,24 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
         $this->performAjaxValidation($user_form_model);
 
         // bind on service event decktrium event
-        \Yii::$app->userService->on(UserService::EVENT_AFTER_REGISTER, function($serviceEvent) use ($self){
-            /** @var UserFormEvent $serviceEvent  */
+        \Yii::$app->userService->on(UserService::EVENT_AFTER_REGISTER, function ($serviceEvent) use ($self) {
+            /** @var UserFormEvent $serviceEvent */
             $event = $this->getFormEvent($serviceEvent->userForm);
             $self->trigger(RegistrationController::EVENT_AFTER_REGISTER, $event);
         });
 
         // bind on service event decktrium event
-        \Yii::$app->userService->on(UserService::EVENT_BEFORE_REGISTER, function($serviceEvent) use ($self, $user_form_model){
+        \Yii::$app->userService->on(UserService::EVENT_BEFORE_REGISTER, function ($serviceEvent) use ($self, $user_form_model) {
             $event = $this->getFormEvent($user_form_model);
             $self->trigger(RegistrationController::EVENT_BEFORE_REGISTER, $event);
         });
 
-        if ($user_form_model->load(\Yii::$app->request->post()) && $user_form_model->validate()) {
-            $transport_model = \Yii::$app->userService->action(
-                $this->prepareConfig([
-                    'action' => UserService::ACTION_REGISTRATION,
-                    'userFormModel' => $user_form_model
-                ])
-            );
-        }
+        $transport_model = \Yii::$app->userService->action(
+            $this->prepareConfig([
+                'action' => UserService::ACTION_REGISTRATION,
+                'userFormModel' => $user_form_model
+            ])
+        );
 
         return $this->render('register', [
             'identity' => \Yii::$app->user->identity,
@@ -149,7 +147,7 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
     {
         $this->layout = "@current_template/layouts/user";
         \Yii::$app->userService->action(
-            $this->prepareConfig(['action' =>  UserService::ACTION_CHOOSE_ROLE])
+            $this->prepareConfig(['action' => UserService::ACTION_CHOOSE_ROLE])
         );
         return $this->render('choose-role');
     }

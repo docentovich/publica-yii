@@ -49,16 +49,33 @@ $config = [
         'postService' => [
             'class' => 'app\modules\tosee\services\PostService'
         ],
+        'imagesService' => [
+            'class' => 'app\modules\tosee\services\ImagesService'
+        ],
         'userService' => [
             'class' => 'app\modules\users\services\UserService'
         ],
     ],
     'modules' => [
-        'user' => [
-            'enableUnconfirmedLogin' => true,
+        'user'  => [
             'class' => 'app\modules\users\Module',
+            'enableUnconfirmedLogin' => true,
+
+            'layout'        => '@current_template/layouts/user',
+
+            'modelMap'      => [
+                'Profile'          => \app\models\Profile::class,
+                'RegistrationForm' => \app\modules\users\models\RegistrationForm::class,
+                'User'             => \app\models\User::class,
+            ],
+            'urlRules' => [
+            ],
         ],
     ],
 ];
+
+if(YII_ENV == YII_ENV_DEV){
+    unset($config['components']['cache']);
+}
 
 return $config;

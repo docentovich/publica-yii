@@ -16,10 +16,17 @@ use yii\db\ActiveRecord;
  */
 class Like extends ActiveRecord
 {
-    /** @var integer */
-    public $image_id;
-    /** @var integer */
-    public $user_id;
+    public static function tableName()
+    {
+        return '{{%likes}}';
+    }
+
+    public function rules()
+    {
+        return [
+            [['image_id', 'user_id'], 'integer'],
+        ];
+    }
 
     public function getImage()
     {

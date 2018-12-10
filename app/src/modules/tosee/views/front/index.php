@@ -22,7 +22,7 @@
         <div class="item-post item-masonry" style="display: none; <?= (count($postModel->result) < 2) ? 'width: 100%;' : '' ?> ">
                 <?=
                 \yii\helpers\Html::a(
-                    \yii\helpers\Html::img("{$post->image->relativeUploadPath}"),
+                    \yii\helpers\Html::img($post->imageNN->relativeUploadPath),
                     "/post/{$post->id}"); ?>
                 <div class="post-description"><?= $post->postData->sub_header; ?></div>
         </div>

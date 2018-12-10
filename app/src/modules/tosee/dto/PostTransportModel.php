@@ -15,13 +15,11 @@ class PostTransportModel extends \app\dto\TransportModel
     public $prevLink;
     /** @var null|string */
     public $nextLink;
-    public $canLike = false;
 
-    public function __construct(ConfigQuery $configQuery, $result, $prevLink = null, $nextLink = null, $canLike)
+    public function __construct(ConfigQuery $configQuery, $result, $prevLink = null, $nextLink = null)
     {
         $this->prevLink = $prevLink;
         $this->nextLink = $nextLink;
-        $this->canLike = $canLike;
 
         parent::__construct($configQuery, $result);
     }

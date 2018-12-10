@@ -44,9 +44,13 @@ use yii\widgets\ActiveForm;
                     )
                 ); ?>
 
+            <?= $user_active_form->field($user_form, 'email')
+                ->textInput(["type" => "email"]); ?>
+
             <?= $user_active_form->field($user_form, 'password')->passwordInput(); ?>
 
             <?= $user_active_form->field($user_form, 'password_repeat')->passwordInput(); ?>
+
 
         </div>
 
@@ -91,8 +95,7 @@ use yii\widgets\ActiveForm;
                     'type' => 'tel',
                     'pattern' => '(\+[0-9]{1,3})?\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}'
                 ]); ?>
-            <?= $profile_active_form->field($profile, 'public_email')
-                ->textInput(["type" => "email"]); ?>
+
             <?= $profile_active_form->field($profile, 'firstname'); ?>
             <?= $profile_active_form->field($profile, 'sename'); ?>
             <?= $profile_active_form->field($profile, 'lastname'); ?>

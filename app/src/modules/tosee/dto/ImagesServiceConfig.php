@@ -12,8 +12,4 @@ use app\abstractions\ServiceConfig;
  */
 class ImagesServiceConfig extends ServiceConfig
 {
-    /** @var integer */
-    public $id;
-    /** @var integer */
-    public $user_id;
 }

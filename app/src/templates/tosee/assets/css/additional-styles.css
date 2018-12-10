@@ -60,3 +60,12 @@
 body{
     padding-top: 43px;
 }
+
+.icon-like.my-like{
+    font-family: "Font Awesome 5 Free" !important;
+    font-weight: 600;
+}
+
+.icon-like.my-like:before{
+    content: "\f004";
+}

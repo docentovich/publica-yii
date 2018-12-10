@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'image',
                 'value' => function ($model, $index, $widget) {
                     /** @var \app\modules\tosee\models\PostSearch $model */
-                    return $model->image->getUrlImageSizeOf("200x200");
+                    return $model->imageNN->getUrlImageSizeOf("200x200");
                 },
             ],
             [

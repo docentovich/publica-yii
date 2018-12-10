@@ -3,6 +3,7 @@
 namespace app\modules\tosee\controllers;
 
 use app\modules\tosee\dto\ImagesServiceConfig;
+use app\modules\tosee\dto\ImagesTransportModel;
 use app\modules\tosee\dto\PostServiceConfig;
 use app\modules\tosee\services\ImagesService;
 use app\modules\tosee\services\PostService;
@@ -127,20 +128,27 @@ class FrontController extends Controller
     }
 
 
-    public function actionLike($image_id)
+    public function actionLike()
     {
         if (!Yii::$app->request->isAjax) {
             throw new \Exception('request mast be ajax');
         }
+        $data = Yii::$app->request->post();
 
-        Yii::$app->imageService->action(
+        /** @var ImagesTransportModel $transporModel */
+        $transporModel = Yii::$app->imagesService->action(
             new ImagesServiceConfig([
                 'action' => ImagesService::ACTION_LIKE,
-                'user_id' => \Yii::$app->user->getId()
+                'user_id' => \Yii::$app->user->getId(),
+                'id' => $data['image_id']
             ])
         );
 
-        Yii::$app->end(200);
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        return [
+            'action' => $transporModel->result['action'],
+        ];
     }
 
 

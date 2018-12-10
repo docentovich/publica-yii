@@ -3,8 +3,10 @@
 namespace app\modules\tosee\services;
 
 use app\dto\ConfigQuery;
+use app\models\Image;
 use app\modules\tosee\dto\PostServiceConfig;
 use app\modules\tosee\models\Post;
+use ImageAjaxUpload\UploadModel;
 use League\Pipeline\Pipeline;
 use yii\helpers\Url;
 use yii\web\Cookie;
@@ -103,8 +105,7 @@ class PostService extends \app\abstractions\Services
             $configQuery,
             $post,
             $this->postLink($prevPost),
-            $this->postLink($nextPost),
-            (Yii::$app->user->can('user') && )
+            $this->postLink($nextPost)
         );
     }
 

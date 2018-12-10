@@ -67,7 +67,11 @@
                         <i class="icon-comments modal-tab-control" rel="<?= $key ?>-comments"></i>
                     </div>
                     <div class="right-controls">
-                        <i class="icon-like"></i>
+                        <i data-likes="<?= $image->likes ?>"
+                           data-image-id="<?= $image->id ?>"
+                           class="icon-like
+                                <?= (!empty($image->myLike)) ? 'my-like' : ''; ?>
+                                <?= (\Yii::$app->user->can('user')) ? 'like-action' : ''; ?>"></i>
                         <i class="icon-share"></i>
                         <i class="icon-buy"></i>
                     </div>
@@ -75,9 +79,15 @@
             </div>
             <div class="modal-body">
                 <div class="modal-tab modal-comments" style="display: none" id="tab-<?= $key ?>-comments">
-                    <div class="modal-likes">
+                    <div data-likes="<?= $image->likes ?>"
+                         data-image-id="<?= $image->id ?>"
+                         class="modal-likes
+                            <?= (!empty($image->myLike)) ? 'my-like' : ''; ?>
+                            <?= (\Yii::$app->user->can('user')) ? 'like-action' : ''; ?>">
                         <div class="fa fa-heart"></div>
-                        <div class="likes-counter"><?= $image->likes ?></div>
+                        <div class="likes-counter">
+                            <?= $image->likes; ?>
+                        </div>
                     </div>
                     <div class="modal-inner-body">
                         <?php foreach ($image->comments as $comment) { ?>

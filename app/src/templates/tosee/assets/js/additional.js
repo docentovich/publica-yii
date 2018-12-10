@@ -37,3 +37,32 @@ Date.prototype.yyyymmdd = function() {
         return false;
     });
 })(jQuery);
+
+
+(function ($) {
+    // like
+    $('.like-action').on('click', function (event) {
+
+        var imageId = $(this).data('imageId');
+        var self = this;
+        $.ajax({
+            method: "POST",
+            url: "/like",
+            data: {image_id: imageId}
+        }).done(function(data) {
+            if(data.action === 'unLike'){
+                $(self).removeClass('my-like');
+            }else{
+                $(self).addClass('my-like');
+            }
+            $(self).data('likes',
+                parseInt( $(self).data('likes') ) + ((data.action === 'like') ? 1 : -1)
+            );
+            var likeActions = $(document).find('.like-action[data-image-id="' + imageId + '"]');
+            likeActions.each(function () {
+                $counter = $(this).find('.likes-counter');
+                $($counter).html($(self).data('likes'));
+            });
+        });
+    })
+})(jQuery);

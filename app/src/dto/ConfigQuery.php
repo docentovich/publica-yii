@@ -23,9 +23,6 @@ class ConfigQuery implements  \app\interfaces\dto
         if(($name === 'config') && !($value instanceof config)){
             throw new \Exception('config mast implements ' . config::class);
         }
-        if(($name === 'query') && !($value instanceof ActiveQuery)){
-            throw new \Exception('config mast implements ' . ActiveQuery::class);
-        }
 
         $name = '_' . $name;
         $this->{$name} = $value;

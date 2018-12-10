@@ -96,7 +96,7 @@ class Post extends yii\db\ActiveRecord
      */
     public function getImage()
     {
-        return $this->hasOne(Image::className(), ['id' => 'image_id'])->with('likes', 'myLike');
+        return $this->hasOne(Image::className(), ['id' => 'image_id']);
     }
 
 

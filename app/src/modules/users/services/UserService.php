@@ -72,25 +72,27 @@ class UserService extends \app\abstractions\Services
         $this->trigger(self::EVENT_BEFORE_REGISTER);
         $return = ['title' => ''];
 
-        /** @var \app\models\User $user */
-        $user = User::registerNewUser($config->userFormModel->toArray());
+        if ($config->userFormModel->load(\Yii::$app->request->post()) && $config->userFormModel->validate()) {
+            /** @var \app\models\User $user */
+            $user = User::registerNewUser($config->userFormModel->toArray());
 
-        if ($this->saveUser($user)) {
-            // it's a hack. i need to send users id to EVENT_AFTER_REGISTER
-            // but i receive it normally in EVENT_AFTER_CONFIRM.
-            // To forward id through event system i change UserForm Model. Now
-            // it contains id and send it in event object.
-            $config->userFormModel->id = $user->id;
-            $this->trigger(self::EVENT_AFTER_REGISTER, new UserFormEvent(['userForm' => $config->userFormModel]));
-            if (!\Yii::$app->getModule('user')->enableUnconfirmedLogin) {
-                // TODO implements logic when user confirm is required
-            } else { // login if  user confirm is not required
-                \Yii::$app->getUser()->login($user);
-                \Yii::$app->getResponse()->redirect(Url::toRoute(['choose-role']), 302);
-                \Yii::$app->end();
+            if ($this->saveUser($user)) {
+                // it's a hack. i need to send users id to EVENT_AFTER_REGISTER
+                // but i receive it normally in EVENT_AFTER_CONFIRM.
+                // To forward id through event system i change UserForm Model. Now
+                // it contains id and send it in event object.
+                $config->userFormModel->id = $user->id;
+                $this->trigger(self::EVENT_AFTER_REGISTER, new UserFormEvent(['userForm' => $config->userFormModel]));
+                if (!\Yii::$app->getModule('user')->enableUnconfirmedLogin) {
+                    // TODO implements logic when user confirm is required
+                } else { // login if  user confirm is not required
+                    \Yii::$app->getUser()->login($user);
+                    \Yii::$app->getResponse()->redirect(Url::toRoute(['choose-role']), 302);
+                    \Yii::$app->end();
+                }
+
+                $return = ['title' => \Yii::t('app/user', 'Your account has been created')];
             }
-
-            $return = ['title' => \Yii::t('app/user', 'Your account has been created')];
         }
 
 

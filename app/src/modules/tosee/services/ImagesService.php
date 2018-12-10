@@ -40,14 +40,20 @@ class ImagesService extends \app\abstractions\Services
     /**
      * @param ImagesServiceConfig $config
      * @return ImagesTransportModel
+     * @throws \yii\db\StaleObjectException
      */
     public function actionLike(ImagesServiceConfig $config): ImagesTransportModel
     {
-        $response = true;
-        try {
-            new Like(['image_id' => $config->id, 'user_id' => $config->user_id]);
-        }catch (\Exception $e){
-            $response = false;
+        $response = [];
+        $like = Like::findOne(['image_id' => $config->id, 'user_id' => $config->user_id]);
+        if(!$like){
+            $like = new Like();
+            $like->load(['image_id' => $config->id, 'user_id' => $config->user_id], '');
+            $like->save();
+            $response = ['action' => 'like'];
+        }else{
+            $like->delete();
+            $response = ['action' => 'unLike'];
         }
 
         return new ImagesTransportModel(new ConfigQuery($config), $response);

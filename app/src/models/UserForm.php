@@ -9,6 +9,7 @@ use yii\helpers\ArrayHelper;
 /**
  * Class UserForm
  * @property mixed $username
+ * @property mixed $email
  * @package app\models
  */
 class UserForm extends Model
@@ -18,11 +19,11 @@ class UserForm extends Model
 
     public $id = null;
     private $_username;
+    private $_email;
     /** @var string */
     public $password;
     /** @var string */
     public $password_repeat;
-    public $email;
 
     public function attributeLabels()
     {
@@ -66,6 +67,13 @@ class UserForm extends Model
         return $this->_username ??
             (\Yii::$app->user->identity
                 ? \Yii::$app->user->identity->username
+                : null);
+    }
+    public function getEmail()
+    {
+        return $this->_email ??
+            (\Yii::$app->user->identity
+                ? \Yii::$app->user->identity->email
                 : null);
     }
 

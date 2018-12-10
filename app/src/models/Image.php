@@ -22,6 +22,7 @@ use yii\helpers\Url;
  * @property string $path0
  * @property string desc
  * @property Like|null $likes
+ * @property Like[]|null $myLike
  */
 class Image extends \yii\db\ActiveRecord implements ImageInterface
 {
@@ -137,7 +138,7 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
 
     public function getLikes()
     {
-        return $this->hasMany(Like::className(), ['image_id' => 'id']);
+        return  $this->hasMany(Like::className(), ['image_id' => 'id'])->count();
     }
 
     public function getMyLike()

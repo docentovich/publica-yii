@@ -24,18 +24,7 @@ return [
         'tosee'   => [
             'class' => 'app\modules\tosee\Module',
         ],
-        'user'  => [
-            'class' => 'app\modules\users\Module',
-            'layout'        => '@current_template/layouts/user',
 
-            'modelMap'      => [
-                'Profile'          => \app\models\Profile::class,
-                'RegistrationForm' => \app\modules\users\models\RegistrationForm::class,
-                'User'             => \app\models\User::class,
-            ],
-            'urlRules' => [
-            ],
-        ],
     ],
     'components' => [
         'request' => [
