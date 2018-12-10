@@ -17,6 +17,7 @@ class PostServiceConfig extends ServiceConfig
     public $post;
     public $page;
     public $id;
+    public $keyword;
     /**
      * @var \DateTime|mixed
      */

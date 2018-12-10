@@ -7,6 +7,8 @@ use yii\web\View;
 
 class Picture extends Widget
 {
+    /** TODO lazyLoad images aftrr vieweport */
+    /** TODO lazyLoad images move to separete folder cause have asset */
     const POINTS = [
         "xsm" => "(max-width: 768px)",
         "sm" => "(min-width: 768px) and (max-width: 992px)",

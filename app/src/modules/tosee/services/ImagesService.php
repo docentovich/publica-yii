@@ -44,6 +44,7 @@ class ImagesService extends \app\abstractions\Services
      */
     public function actionLike(ImagesServiceConfig $config): ImagesTransportModel
     {
+        /** @var TODO refactor */
         $response = [];
         $like = Like::findOne(['image_id' => $config->id, 'user_id' => $config->user_id]);
         if(!$like){

@@ -113,27 +113,25 @@ class PostService extends \app\abstractions\Services
      * `Action`
      * поиск по ключевому слову
      *
-     * @param string $keyword
-     * @return $this
+     * @param $keyword
+     * @return \app\modules\tosee\dto\PostTransportModel
+     * @throws \Throwable
      */
-    private function actionPostsByKeyword($keyword): \app\modules\tosee\dto\PostTransportModel
+    private function actionPostsByKeyword($config): \app\modules\tosee\dto\PostTransportModel
     {
-        /** TODO implements method */
-        $params = [
-            "or",
-            ["like", "title", $keyword],
-            ["like", "sub_header", $keyword],
-            ["like", "post_short_desc", $keyword],
-            ["like", "post_desc", $keyword]
-        ];
+        /** @var ConfigQuery $configQuery */
+        $configQuery = (new Pipeline())
+            ->pipe([$this, 'prepareQuery'])
+            ->pipe([$this, 'prepareQueryByKeyWord'])
+            ->process(new ConfigQuery($config, Post::find()));
+
+        return new \app\modules\tosee\dto\PostTransportModel($configQuery, $this->all($configQuery));
+
 
         $this->_query
             ->leftJoin(PostData::tableName(), PostData::tableName() . '.`post_id` = {{%post}}.`id`');
 
         $this->getMany($params);
-        $this->url = "/%i%?keyword=$keyword";
-
-        return $this;
     }
 
     /**
@@ -204,6 +202,29 @@ class PostService extends \app\abstractions\Services
         }
 
         $configQuery->query->andWhere([$compare_method, "event_at", $post_config->date->format('Y-m-d')]);
+        return $configQuery;
+    }
+
+    /**
+     * `Query pipe`
+     * Prepare query condition for dated queries
+     *
+     * @param ConfigQuery $configQuery
+     * @return ConfigQuery
+     */
+    public function prepareQueryByKeyWord(ConfigQuery $configQuery): ConfigQuery
+    {
+        /** @var PostServiceConfig $post_config */
+        $post_config = $configQuery->config;
+        $params = [
+            "or",
+            ["like", "title", $post_config->keyword],
+            ["like", "sub_header", $post_config->keyword],
+            ["like", "post_short_desc", $post_config->keyword],
+            ["like", "post_desc", $post_config->keyword]
+        ];
+
+        $configQuery->query->params($params);
         return $configQuery;
     }
 
