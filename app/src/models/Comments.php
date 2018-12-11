@@ -1,15 +1,18 @@
 <?php
 
 namespace app\models;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%comments}}".
  *
  * @property int $id
  * @property int $user_id
+ * @property int $image_id
  * @property string $title
  * @property string $text
- * @property User $user
+ * @property User|null $user
+ * @property User $userNN
  *
  * @property Image $avatar0
  */
@@ -31,11 +34,10 @@ class Comments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['avatar'], 'integer'],
-            [['title', 'text'], 'required'],
-            [['text'], 'string'],
-            [['title'], 'string', 'max' => 255],
-            [['avatar'], 'exist', 'skipOnError' => true, 'targetClass' => Image::className(), 'targetAttribute' => ['avatar' => 'id']],
+            [['image_id', 'user_id'], 'integer'],
+            [['text'], 'required'],
+            [['text', 'title'], 'string'],
+            [['image_id'], 'exist',  'targetClass' => Image::className(), 'targetAttribute' => ['image_id' => 'id']],
         ];
     }
 
@@ -46,7 +48,8 @@ class Comments extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'avatar' => 'Avatar',
+            'user_id' => 'User',
+            'image_id' => 'Image',
             'title' => 'Title',
             'text' => 'Text',
         ];
@@ -55,5 +58,20 @@ class Comments extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'user_id'])->with(['profile']);
+    }
+
+    public function getUserNN()
+    {
+        return $this->user ?? new User();
+    }
+
+    public function toArray(array $fields = [], array $expand = [], $recursive = true)
+    {
+        return ArrayHelper::merge(
+            parent::toArray(),
+            [
+                "user" => $this->userNN->toArray()
+            ]
+        );
     }
 }

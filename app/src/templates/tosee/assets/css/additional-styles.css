@@ -69,3 +69,12 @@ body{
 .icon-like.my-like:before{
     content: "\f004";
 }
+
+.modal-inner-body .comment-avatar{
+    position: static !important;
+}
+.modal-inner-body .comments{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}

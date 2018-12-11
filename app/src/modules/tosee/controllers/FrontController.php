@@ -2,6 +2,7 @@
 
 namespace app\modules\tosee\controllers;
 
+use app\models\Comments;
 use app\modules\tosee\dto\ImagesServiceConfig;
 use app\modules\tosee\dto\ImagesTransportModel;
 use app\modules\tosee\dto\PostServiceConfig;
@@ -149,6 +150,27 @@ class FrontController extends Controller
         return [
             'action' => $transporModel->result['action'],
         ];
+    }
+
+    public function actionComment()
+    {
+        if (!Yii::$app->request->isAjax) {
+            throw new \Exception('request mast be ajax');
+        }
+        $comment = new Comments();
+        $comment->load(Yii::$app->request->post());
+
+        /** @var ImagesTransportModel $transportModel */
+        $transportModel = Yii::$app->imagesService->action(
+            new ImagesServiceConfig([
+                'action' => ImagesService::ACTION_COMMENT,
+                'comment' => $comment
+            ])
+        );
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        return $transportModel->result;
     }
 
 

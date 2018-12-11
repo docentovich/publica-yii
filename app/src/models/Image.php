@@ -6,6 +6,7 @@ use app\modules\tosee\models\Like;
 use ImageAjaxUpload\ImageInterface;
 use ImageAjaxUpload\UploadModelTrait;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 /**
@@ -20,6 +21,7 @@ use yii\helpers\Url;
  * @property Comments[] comments
  * @property string $relativeUploadPath
  * @property string $path0
+ * @property string $path0OrNull
  * @property string desc
  * @property Like|null $likes
  * @property Like[]|null $myLike
@@ -145,6 +147,17 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
     {
         return $this->hasMany(Like::className(), ['image_id' => 'id'])
             ->andOnCondition(['user_id' => \Yii::$app->user->getId()]);
+    }
+
+    public function toArray(array $fields = [], array $expand = [], $recursive = true)
+    {
+        return ArrayHelper::merge(
+          parent::toArray(),
+          [
+              "url_or_null" => Url::to('/uploads/' . $this->path0OrNull ),
+              "url_or_no_image" => Url::to('/uploads/' . $this->path0 )
+          ]
+        );
     }
 
 }

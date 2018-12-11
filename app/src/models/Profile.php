@@ -6,6 +6,7 @@ use app\models\Image;
 use dektrium\user\models\Profile as BaseProfile;
 use borales\extensions\phoneInput\PhoneInputBehavior;
 use borales\extensions\phoneInput\PhoneInputValidator;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "profile".
@@ -107,5 +108,16 @@ class Profile extends BaseProfile
     public function getAvatarNN()
     {
         return $this->avatar0 ?? new Image();
+    }
+
+    public function toArray(array $fields = [], array $expand = [], $recursive = true)
+    {
+        return ArrayHelper::merge(
+            parent::toArray(),
+            [
+                "avatar" => $this->avatarNN->toArray(),
+                "avatar_url" => $this->avatarNN->getUrlImageSizeOf("50x50")
+            ]
+        );
     }
 }

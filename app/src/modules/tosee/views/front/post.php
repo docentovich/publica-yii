@@ -2,6 +2,9 @@
 /**
  * @var \app\modules\tosee\dto\PostTransportModel $postModel
  */
+
+use yii\widgets\Pjax;
+
 ?>
 
 <div class="single-post">
@@ -25,6 +28,7 @@
             <div class="grid-sizer"></div>
             <div class="gutter-sizer"></div>
 
+
             <?php foreach ($postModel->result->additionalImages as $key => $image) {
                 /** @var \app\models\Image $image */
                 ?>
@@ -39,8 +43,8 @@
                         ]) ?>
                     </a>
                 </div>
-
             <?php } ?>
+
 
         </div>
     </div>
@@ -74,6 +78,7 @@
                                 <?= (\Yii::$app->user->can('user')) ? 'like-action' : ''; ?>"></i>
                         <i class="icon-share"></i>
                         <i class="icon-buy"></i>
+                        <button class="button" data-sharer="somesharer" data-width="800" data-height="600" data-title="Checkout Sharer.js!" data-url="https://ellisonleao.github.io/sharer.js/">Share!</button>
                     </div>
                 </div>
             </div>
@@ -89,21 +94,69 @@
                             <?= $image->likes; ?>
                         </div>
                     </div>
-                    <div class="modal-inner-body">
-                        <?php foreach ($image->comments as $comment) { ?>
-                            <div class="comment">
-                                <div class="comment-avatar">
-                                    <?= \yii\helpers\Html::img($comment->user->profile->avatarNN->getUrlImageSizeOf('40x40')) ?>
-                                </div>
-                                <div class="comment-description">
-                                    <strong><?= $comment->title ?></strong>
-                                    <span><?= $comment->text ?></span>
-                                </div>
-                            </div>
-                        <?php } ?>
-                        <div class="comment"></div>
 
+                    <!--Comment-->
+                    <div class="modal-inner-body">
+
+                        <div class="comments" id="comments-of-<?= $image->id ?>">
+                            <?php foreach ($image->comments as $comment) { ?>
+                                <div class="comment">
+                                    <div class="comment-avatar">
+                                        <?= \yii\helpers\Html::img($comment->user->profile->avatarNN->getUrlImageSizeOf('40x40')) ?>
+                                    </div>
+                                    <div class="comment-description">
+                                        <strong><?= $comment->title ?></strong>
+                                        <span><?= $comment->text ?></span>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                        <div class="comment-form">
+                            <?php $new_comment = new \app\models\Comments(); ?>
+                            <?php $comment_form = \yii\widgets\ActiveForm::begin([
+                                'action' => '/comment',
+                                'id' => "comment-form-{$image->id}",
+                                'options' => [
+                                    'class' => 'form form-ajax',
+                                    'onsuccess' => "function(data) {
+                                            var comment = $('<div class=\"comment new-comment\" style=\'display: none\'>
+                                                            <div class=\"comment-avatar\">
+                                                                <img src=\'' + data.comment.user.profile.avatar_url + '\'/>
+                                                            </div>
+                                                            <div class=\"comment-description\">
+                                                                <span>' + data.comment.text + '</span>
+                                                            </div>
+                                                        </div>');
+                                            $('#comments-of-{$image->id}').append(comment);
+                                            $('#comments-text-{$image->id}').val('');
+                                            comment.slideDown(\"slow\");
+                                    }",
+                                    'onerror' => "function(data) {
+                                     }"
+                                ],
+                                'enableClientValidation' => true,
+                            ]); ?>
+                            <div class="comment-text">
+                                <?= $comment_form->field($new_comment, 'text')
+                                    ->textarea(['id' => "comments-text-{$image->id}"])
+                                    ->label(false); ?>
+                            </div>
+
+                            <?= $comment_form->field($new_comment, 'image_id', [
+                                'template' => "{input}",
+                                "options" => ['tag' => false]
+                            ])
+                                ->hiddenInput(['value' => $image->id])
+                                ->label(false); ?>
+
+
+                            <?= \yii\helpers\Html::submitButton(\Yii::t('app/tosee', 'Comment')); ?>
+                            <?php \yii\widgets\ActiveForm::end(); ?>
+                        </div>
                     </div>
+                    <!--// Comment-->
+
                 </div>
                 <div class="modal-tab modal-info" id="tab-<?= $key ?>-info">
                     <div class=" modal-inner-body">

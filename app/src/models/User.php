@@ -26,6 +26,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $updated_at
  * @property Profile|null $profile
  * @property Profile $myProfile
+ * @property Profile $profileNN
  * @property Like|null $likes
  * @property string $password write-only password
  */
@@ -104,7 +105,7 @@ class User extends BaseUser implements IdentityInterface
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_UPDATE] =  ['username', 'password', 'password_hash'];
+        $scenarios[self::SCENARIO_UPDATE] = ['username', 'password', 'password_hash'];
         return ArrayHelper::merge($scenarios, [
             self::SCENARIO_REGISTER => ['username', 'email', 'password', 'city_id'],
             self::SCENARIO_CONNECT => ['username', 'email'],
@@ -286,6 +287,14 @@ class User extends BaseUser implements IdentityInterface
         return $this->profile ?? new Profile();
     }
 
+    /**
+     * @return Profile
+     */
+    public function getProfileNN()
+    {
+        return $this->profile ?? new Profile();
+    }
+
     public function getLikes()
     {
         return $this->hasMany(Like::className(), ['user_id' => 'id']);
@@ -301,5 +310,15 @@ class User extends BaseUser implements IdentityInterface
         $user->scenario = self::SCENARIO_REGISTER;
         $user->load($data, $form_name);
         return $user;
+    }
+
+    public function toArray(array $fields = [], array $expand = [], $recursive = true)
+    {
+        return ArrayHelper::merge(
+            parent::toArray(),
+            [
+                "profile" => $this->profileNN->toArray()
+            ]
+        );
     }
 }
