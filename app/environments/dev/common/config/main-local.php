@@ -1,5 +1,5 @@
 <?php
-return [
+$config = [
     'components' => [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -33,5 +33,14 @@ return [
                 'sender' => ['publica.mail@yandex.ru' => 'Publica']
             ],
         ],
+    ],
+    'bootstrap' => [
+        'debug'
     ]
 ];
+
+if (YII_ENV_DEV) {
+    $config['components']['assetManager']['forceCopy'] = true;
+}
+
+return $config;
