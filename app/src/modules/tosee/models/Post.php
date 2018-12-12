@@ -6,6 +6,8 @@ use app\beheviors\PostBeforeValidate;
 use Yii;
 use app\models\Image;
 use app\models\User;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%post}}".
@@ -115,7 +117,7 @@ class Post extends yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     /**
@@ -123,12 +125,12 @@ class Post extends yii\db\ActiveRecord
      */
     public function getPostData()
     {
-        return $this->hasOne(PostData::className(), ['post_id' => 'id']);
+        return $this->hasOne(PostData::class, ['post_id' => 'id']);
     }
 
-    public function  getPostDataNN()
+    public function getPostDataNN()
     {
-        return  $this->_postData ?? ( $this->_postData = ($this->postData ?? new PostData()) );
+        return $this->_postData ?? ($this->_postData = ($this->postData ?? new PostData()));
     }
 
     /**
@@ -136,7 +138,7 @@ class Post extends yii\db\ActiveRecord
      */
     public function getPostToImages()
     {
-        return $this->hasMany(PostToImage::className(), ['post_id' => 'id']);
+        return $this->hasMany(PostToImage::class, ['post_id' => 'id']);
     }
 
     /**
@@ -144,7 +146,7 @@ class Post extends yii\db\ActiveRecord
      */
     public function getAdditionalImages()
     {
-        return $this->hasMany(Image::className(), ['id' => 'image_id'])
+        return $this->hasMany(Image::class, ['id' => 'image_id'])
             ->viaTable(PostToImage::tableName(), ['post_id' => 'id'])
             ->with(['comments']);
     }
@@ -155,5 +157,12 @@ class Post extends yii\db\ActiveRecord
         return (!empty($additionalImages)) ? $additionalImages : new Image();
     }
 
-
+    public function toArray(array $fields = [], array $expand = [], $recursive = true)
+    {
+        return ArrayHelper::merge(
+            parent::toArray(),
+            ["post_data" => $this->postDataNN->toArray()],
+            ["front_url" => ($this->id) ? Url::to(['front/post', "id" => $this->id], true) : null]
+        );
+    }
 }

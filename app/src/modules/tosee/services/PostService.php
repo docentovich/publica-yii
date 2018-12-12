@@ -95,10 +95,18 @@ class PostService extends \app\abstractions\Services
 
         $post = $this->one($configQuery);
         $prevPost = \Yii::$app->db->cache(function () use ($post) {
-            return $this->siblingPost('<', $post);
+            try{
+                return $this->siblingPost('<', $post);
+            }catch (\Exception $e){
+                return null;
+            }
         });
         $nextPost = \Yii::$app->db->cache(function () use ($post) {
-            return $this->siblingPost('>', $post);
+            try{
+                return $this->siblingPost('>', $post);
+            }catch (\Exception $e){
+                return null;
+            }
         });
 
         return new \app\modules\tosee\dto\PostTransportModel(
@@ -124,14 +132,9 @@ class PostService extends \app\abstractions\Services
             ->pipe([$this, 'prepareQuery'])
             ->pipe([$this, 'prepareQueryByKeyWord'])
             ->process(new ConfigQuery($config, Post::find()));
+        $result = $configQuery->query->all();
 
-        return new \app\modules\tosee\dto\PostTransportModel($configQuery, $this->all($configQuery));
-
-
-        $this->_query
-            ->leftJoin(PostData::tableName(), PostData::tableName() . '.`post_id` = {{%post}}.`id`');
-
-        $this->getMany($params);
+        return new \app\modules\tosee\dto\PostTransportModel($configQuery, $result);
     }
 
     /**
@@ -214,17 +217,23 @@ class PostService extends \app\abstractions\Services
      */
     public function prepareQueryByKeyWord(ConfigQuery $configQuery): ConfigQuery
     {
-        /** @var PostServiceConfig $post_config */
+        /**
+         * @var PostServiceConfig $post_config
+         */
         $post_config = $configQuery->config;
-        $params = [
+        $condition = [
             "or",
-            ["like", "title", $post_config->keyword],
-            ["like", "sub_header", $post_config->keyword],
-            ["like", "post_short_desc", $post_config->keyword],
-            ["like", "post_desc", $post_config->keyword]
+            ["like", "postData.title", $post_config->keyword],
+            ["like", "postData.sub_header", $post_config->keyword],
+            ["like", "postData.post_short_desc", $post_config->keyword],
+            ["like", "postData.post_desc", $post_config->keyword]
         ];
 
-        $configQuery->query->params($params);
+        $configQuery->query
+            ->joinWith(['postData' => function($q){
+                $q->alias('postData');
+            }])
+            ->andOnCondition($condition);
         return $configQuery;
     }
 

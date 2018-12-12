@@ -13,6 +13,7 @@ class HeaderAssets extends  AssetBundle
     ];
     public $js = [
         'js/index.js',
+        'js/additional.js',
     ];
 
     public $jsOptions = ['position' => \yii\web\View::POS_END];

@@ -6,6 +6,7 @@ use app\models\Comments;
 use app\modules\tosee\dto\ImagesServiceConfig;
 use app\modules\tosee\dto\ImagesTransportModel;
 use app\modules\tosee\dto\PostServiceConfig;
+use app\modules\tosee\models\Post;
 use app\modules\tosee\services\ImagesService;
 use app\modules\tosee\services\PostService;
 use Yii;
@@ -106,26 +107,39 @@ class FrontController extends Controller
      */
     public function actionPost($id)
     {
+        $postModel = $this->getPostTransportModel(['action' => PostService::ACTION_SINGLE_POST, 'id' => (int)$id]);
+        if($postModel->result === null){
+            throw new \yii\web\NotFoundHttpException('Post not found');
+        }
         return $this->render('post', [
-            "postModel" => $this->getPostTransportModel(['action' => PostService::ACTION_SINGLE_POST, 'id' => (int)$id])
+            "postModel" => $postModel
         ]);
     }
 
 
     /**
-     * Экшен поиска
-     *
-     * @return string
-     * @param int $page
+     * @return array
+     * @throws \Exception
      */
-    public function actionSearch($page = 1)
+    public function actionSearch()
     {
-        return $this->render('index', [
-            "postModel" => $this->getPostTransportModel([
-                'action' => PostService::ACTION_SEARCH,
-                'keyword' => Yii::$app->request->get('keyword')
-            ])
+        if (!Yii::$app->request->isAjax) {
+            throw new \Exception('request mast be ajax');
+        }
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $transportModel = $this->getPostTransportModel([
+            'action' => PostService::ACTION_SEARCH,
+            'keyword' => Yii::$app->request->get('keyword')
         ]);
+
+        return [
+            'action' => 'search',
+            'result' => array_map(function(Post $post) {
+                return $post->toArray();
+            }, $transportModel->result)
+        ];
     }
 
 
@@ -134,6 +148,8 @@ class FrontController extends Controller
         if (!Yii::$app->request->isAjax) {
             throw new \Exception('request mast be ajax');
         }
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $data = Yii::$app->request->post();
 
         /** @var ImagesTransportModel $transporModel */
@@ -145,7 +161,6 @@ class FrontController extends Controller
             ])
         );
 
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         return [
             'action' => $transporModel->result['action'],
@@ -157,6 +172,8 @@ class FrontController extends Controller
         if (!Yii::$app->request->isAjax) {
             throw new \Exception('request mast be ajax');
         }
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
         $comment = new Comments();
         $comment->load(Yii::$app->request->post());
 
@@ -167,8 +184,6 @@ class FrontController extends Controller
                 'comment' => $comment
             ])
         );
-
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         return $transportModel->result;
     }

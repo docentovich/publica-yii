@@ -9,6 +9,7 @@ use app\modules\tosee\services\PostService;
 /**
  * Class PostServiceConfig
  * @property mixed $action;
+ * @property string $keyword;
  * @package app\modules\tosee\dto
  */
 class PostServiceConfig extends ServiceConfig
@@ -17,7 +18,6 @@ class PostServiceConfig extends ServiceConfig
     public $post;
     public $page;
     public $id;
-    public $keyword;
     /**
      * @var \DateTime|mixed
      */
@@ -30,5 +30,7 @@ class PostServiceConfig extends ServiceConfig
         $this->action =  $config['action'] ?? PostService::ACTION_FUTURE;
         $this->id =  $config['id'] ?? null;
         $this->post = $config['post'] ?? null;
+        unset($config['date'],$config['page'],$config['action'],$config['id'],$config['post']);
+        parent::__construct($config);
     }
 }
