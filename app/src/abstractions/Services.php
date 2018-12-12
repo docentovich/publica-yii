@@ -20,7 +20,7 @@ abstract class Services extends \yii\base\Component
      * @return ActiveRecord[]
      * @throws \Throwable
      */
-    protected function all(ConfigQuery $configQuery): array
+    protected function all(ConfigQuery $configQuery)
     {
         return \Yii::$app->db->cache(function () use ($configQuery) {
             return $configQuery->query->all();
@@ -34,7 +34,7 @@ abstract class Services extends \yii\base\Component
      * @return ActiveRecord[]
      * @throws \Throwable
      */
-    protected function count(ConfigQuery $configQuery): array
+    protected function count(ConfigQuery $configQuery)
     {
         return \Yii::$app->db->cache(function () use ($configQuery) {
             return $configQuery->query->count();
@@ -47,7 +47,7 @@ abstract class Services extends \yii\base\Component
      * @return ActiveRecord
      * @throws \Throwable
      */
-    protected function one(ConfigQuery $configQuery): ActiveRecord
+    protected function one(ConfigQuery $configQuery)
     {
         return \Yii::$app->db->cache(function () use ($configQuery) {
             return $configQuery->query->one();
