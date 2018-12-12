@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%city}}".
@@ -12,7 +11,7 @@ use yii\helpers\ArrayHelper;
  * @property string $name
  * @property string $label
  *
- * @property Post[] $posts
+ * @property \app\modules\tosee\models\Post[] $posts
  * @property User[] $users
  */
 class City extends \yii\db\ActiveRecord
@@ -61,11 +60,11 @@ class City extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasMany(User::className(), ['city_id' => 'id']);
+        return $this->hasMany(User::class, ['city_id' => 'id']);
     }
 
-    public static function asArray()
-    {
-        return  ArrayHelper::map(self::find()->all(), 'id', 'label');
+    public static function findDefault(){
+        return self::findOne(['id' => 1]);
     }
+
 }

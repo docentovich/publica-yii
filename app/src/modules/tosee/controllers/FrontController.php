@@ -2,6 +2,7 @@
 
 namespace app\modules\tosee\controllers;
 
+use app\models\City;
 use app\models\Comments;
 use app\modules\tosee\dto\ImagesServiceConfig;
 use app\modules\tosee\dto\ImagesTransportModel;
@@ -189,20 +190,18 @@ class FrontController extends Controller
     }
 
 
-    public function actionSetCity()
+    public function actionSetCity($id)
     {
-        if (!Yii::$app->request->isAjax) {
-            throw new HttpException(403, "this action can be access by ajax only");
+        if(City::findOne(["id" => $id]) === null){
+            throw new \Exception('incorrect city', 404);
         }
-
-        $id = (int)Yii::$app->request->post('id');
-
         Yii::$app->response->cookies->add(new  Cookie([
             'name' => 'city_id',
             'value' => $id
         ]));
 
-        return '';
+        \Yii::$app->response->redirect(['/']);
+        \Yii::$app->end();
     }
 
 }

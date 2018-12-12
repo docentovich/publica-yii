@@ -3,6 +3,8 @@ $bundle = \app\widgets\header\HeaderAssets::register($this);
 /**
  * @var string $currentProject
  * @var array $projects
+ * @var \app\models\City[] $cities
+ * @var \app\models\City $current_city
  */
 $filtered_projects = array_filter(
     $projects,
@@ -21,8 +23,8 @@ $filtered_projects = array_filter(
                             </div>
                             <div class="toggle-drop-down-action-panel base-logo" id="services" rel="services">
                                 <?= \yii\helpers\Html::a(
-                                        \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$currentProject}.svg"),
-                                        '/'
+                                    \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$currentProject}.svg"),
+                                    '/'
                                 ); ?>
                             </div>
                         </div>
@@ -55,13 +57,13 @@ $filtered_projects = array_filter(
                 </div>
                 <div class="action-panel toggle-overlay" id="drop-down-geo" rel="geo">
                     <div class="action-panel-control">
-                        <i class="icon-geo"></i><span>Орел. Russia</span>
+                        <i class="icon-geo"></i><span><?= \Yii::t('app/cities', $current_city->label);?></span>
                     </div>
                 </div>
                 <div class="action-panel" id="drop-down-search">
                     <div class="action-panel-control">
                         <div id="search-placeholder"><i class="icon-search"></i>
-                            <span>Найти на сайте</span></div>
+                            <span><?= \Yii::t('app/tosee', 'search on website');?></span></div>
                         <input type="text" value="" id="search-input" rel="search"/>
                     </div>
                 </div>
@@ -81,22 +83,17 @@ $filtered_projects = array_filter(
         </header>
     </div>
     <div class="overlay" id="geo-overlay">
-        <ul class="overlay-list">
-            <li>Москва</li>
-            <li>Санкт-Петербург</li>
-            <li>Орел</li>
-            <li>Хацапетовка</li>
-            <li>Ньюйорк</li>
-            <li>Токио</li>
-            <li>Вырица</li>
-            <li>Орел</li>
-            <li>Хацапетовка</li>
-            <li>Ньюйорк</li>
-            <li>Токио</li>
-            <li>Вырица</li>
+        <ul class="overlay-list" id="">
+            <?php foreach ($cities as $city) { ?>
+
+                <?= \yii\helpers\Html::a(
+                        "<li>" . \Yii::t("app/cities",$city->label) . "</li>",
+                        ['front/set-city', "id" => $city->id]
+                ); ?>
+            <?php } ?>
         </ul>
     </div>
     <div class="overlay" id="search-overlay">
-        <ul id="search-results-list"  class="overlay-list"></ul>
+        <ul id="search-results-list" class="overlay-list"></ul>
     </div>
 <?= $content; ?>

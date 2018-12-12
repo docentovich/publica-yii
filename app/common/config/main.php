@@ -35,6 +35,7 @@ $config = [
                         'app/tosee' => 'tosee.php',
                         'app/probank' => 'probank.php',
                         'app/shotme' => 'shotme.php',
+                        'app/cities' => 'cities.php',
                     ],
                 ]
             ],
