@@ -27,7 +27,8 @@
         "yiisoft/yii2-jui": "^2.0@dev",
         "2amigos/yii2-ckeditor-widget": "^1.0@dev",
         "league/pipeline": "^0.3.0",
-        "toriphes/yii2-widget-lazyload": "*"
+        "toriphes/yii2-widget-lazyload": "*",
+        "dmirogin/yii2-js-urlmanager": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
