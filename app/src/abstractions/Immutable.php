@@ -2,13 +2,15 @@
 
 namespace app\abstractions;
 
+use yii\helpers\ArrayHelper;
+
 class Immutable implements \app\interfaces\dto
 {
     protected $_params = [];
 
     public function __construct($params)
     {
-        $this->_params = $params;
+        $this->_params = ArrayHelper::merge($this->_params, $params);
     }
 
     public function __get($key)
