@@ -1,17 +1,19 @@
 ###### composer start :
 
-native: 
-
-	$ DBG_IP=192.168.99.1 docker-compose -f docker-dev.yml up -d
 toolbox:
 
+	$ DBG_IP=192.168.99.1 docker-compose -f docker-dev.yml up -d
+	
+native: 
+
 	$ SET DBG_IP=10.0.75.1 && docker-compose -f docker-dev.yml up -d
+	
 stop:
 
 	$ docker-compose -f docker-dev.yml down
 enter container:
 
-    $ docker exec -ti publicayii_php_1 /bin/sh
+    $ docker exec -ti publica-yii_php_1 /bin/sh
 init app:
 
     $ composer install
