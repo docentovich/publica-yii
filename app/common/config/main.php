@@ -6,9 +6,14 @@ $config = [
     'language' => 'ru-RU',
     'name' => 'Publica',
     'bootstrap' => [
-        'common\config\Aliases'
+        'common\config\Aliases',
+        'jsUrlManager'
     ],
     'components' => [
+        'jsUrlManager' => [
+            'class' => \dmirogin\js\urlmanager\JsUrlManager::class,
+            'configurationStringPosition' => \yii\web\View::POS_END,
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
