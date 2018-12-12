@@ -6,7 +6,7 @@ use app\dto\ConfigQuery;
 
 /**
  * Class PostTransportModel
- * @property  \app\modules\tosee\models\Post $result
+ * @property  \app\modules\tosee\models\Post|\app\modules\tosee\models\Post[] $result
  * @package app\dto
  */
 class PostTransportModel extends \app\dto\TransportModel

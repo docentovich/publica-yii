@@ -42,7 +42,6 @@ class PostSearch extends \app\modules\tosee\models\Post
      */
     public function search($params)
     {
-        $a = Yii::$app->request->queryParams;
         $query = PostSearch::find()->where(["=", "user_id", Yii::$app->user->identity->getId()]);
 
         // add conditions that should always apply here

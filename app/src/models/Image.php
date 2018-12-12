@@ -145,7 +145,7 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
 
     public function getMyLike()
     {
-        return $this->hasMany(Like::className(), ['image_id' => 'id'])
+        return $this->hasMany(Like::class, ['image_id' => 'id'])
             ->andOnCondition(['user_id' => \Yii::$app->user->getId()]);
     }
 
