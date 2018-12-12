@@ -7,12 +7,18 @@ $config = [
     'name' => 'Publica',
     'bootstrap' => [
         'common\config\Aliases',
-        'jsUrlManager'
     ],
     'components' => [
+        'urlManager'   => [
+            'class'               => 'yii\web\UrlManager',
+            'enablePrettyUrl'     => TRUE,
+            'showScriptName'      => FALSE,
+            'enableStrictParsing' => TRUE,
+            'rules' => [],
+            'suffix' => ''
+        ],
         'jsUrlManager' => [
             'class' => \dmirogin\js\urlmanager\JsUrlManager::class,
-            'configurationStringPosition' => \yii\web\View::POS_END,
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -70,8 +76,6 @@ $config = [
                 'Profile'          => \app\models\Profile::class,
                 'RegistrationForm' => \app\modules\users\models\RegistrationForm::class,
                 'User'             => \app\models\User::class,
-            ],
-            'urlRules' => [
             ],
         ],
     ],

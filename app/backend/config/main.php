@@ -16,6 +16,7 @@ return [
         'app\modules\probank\BackendBootstrap',
         'app\modules\tosee\BackendBootstrap',
         'app\modules\users\Bootstrap',
+        'jsUrlManager'  // need to be after all bootstrap adding rules
     ],
     'modules' => [
         'probank' => [
@@ -42,10 +43,6 @@ return [
                     'levels' => [ 'error', 'warning' ],
                 ],
             ],
-        ],
-        'urlManager' => [
-            'enablePrettyUrl' => TRUE,
-            'showScriptName'  => FALSE,
         ],
         'urlManagerFrontEnd' => [
             'class' => 'yii\web\urlManager',

@@ -46,6 +46,7 @@ $config = [
         'log',
         'app\templates\BootstrapFront',
         'app\modules\users\Bootstrap',
+        'jsUrlManager'  // need to be after all bootstrap adding rules
     ],
     'components' => [
         'errorHandler' => [
@@ -69,13 +70,6 @@ $config = [
                     'levels' => [ 'error', 'warning' ],
                 ],
             ],
-        ],
-
-        'urlManager'   => [
-            'class'               => 'yii\web\UrlManager',
-            'enablePrettyUrl'     => TRUE,
-            'showScriptName'      => FALSE,
-            'enableStrictParsing' => TRUE,
         ],
     ],
     'modules'    => [
