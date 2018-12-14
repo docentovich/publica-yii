@@ -81,21 +81,20 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
      */
     public function actionRegister()
     {
-        $self = $this;
         $user_form_model = new UserForm(['scenario' => UserForm::SCENARIO_REGISTER]);
         $this->performAjaxValidation($user_form_model);
 
         // bind on service event decktrium event
-        \Yii::$app->userService->on(UserService::EVENT_AFTER_REGISTER, function ($serviceEvent) use ($self) {
+        \Yii::$app->userService->on(UserService::EVENT_AFTER_REGISTER, function ($serviceEvent) {
             /** @var UserFormEvent $serviceEvent */
             $event = $this->getFormEvent($serviceEvent->userForm);
-            $self->trigger(RegistrationController::EVENT_AFTER_REGISTER, $event);
+            $this->trigger(RegistrationController::EVENT_AFTER_REGISTER, $event);
         });
 
         // bind on service event decktrium event
-        \Yii::$app->userService->on(UserService::EVENT_BEFORE_REGISTER, function ($serviceEvent) use ($self, $user_form_model) {
+        \Yii::$app->userService->on(UserService::EVENT_BEFORE_REGISTER, function ($serviceEvent) use ($user_form_model) {
             $event = $this->getFormEvent($user_form_model);
-            $self->trigger(RegistrationController::EVENT_BEFORE_REGISTER, $event);
+            $this->trigger(RegistrationController::EVENT_BEFORE_REGISTER, $event);
         });
 
         $transport_model = \Yii::$app->userService->action(
