@@ -11,8 +11,8 @@ use yii\helpers\ArrayHelper;
  * @property int $image_id
  * @property string $title
  * @property string $text
- * @property User|null $user
- * @property User $userNN
+ * @property User|null $author
+ * @property User $authorNN
  *
  * @property Image $avatar0
  */
@@ -55,14 +55,14 @@ class Comments extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getUser()
+    public function getAuthor()
     {
         return $this->hasOne(User::class, ['id' => 'user_id'])->with(['profile']);
     }
 
-    public function getUserNN()
+    public function getAuthorNN()
     {
-        return $this->user ?? new User();
+        return $this->author ?? new User();
     }
 
     public function toArray(array $fields = [], array $expand = [], $recursive = true)
@@ -70,7 +70,7 @@ class Comments extends \yii\db\ActiveRecord
         return ArrayHelper::merge(
             parent::toArray(),
             [
-                "user" => $this->userNN->toArray()
+                "user" => $this->authorNN->toArray()
             ]
         );
     }

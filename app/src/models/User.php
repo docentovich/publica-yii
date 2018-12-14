@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\beheviors\UserBeforValidate;
 use app\modules\tosee\models\Like;
+use app\modules\tosee\models\UserViaPostsCommentsRelation;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\web\IdentityInterface;
@@ -26,13 +27,14 @@ use yii\helpers\ArrayHelper;
  * @property integer $updated_at
  * @property Profile|null $profile
  * @property Profile $myProfile
+ * @property Comments[] $myComments
  * @property Profile $profileNN
  * @property Like|null $likes
  * @property string $password write-only password
  */
 class User extends BaseUser implements IdentityInterface
 {
-    // use UserDbConnection;
+    use UserViaPostsCommentsRelation;
     const STATUS_DELETED = 0;
     const STATUS_NOT_ACTIVE = 2;
     const STATUS_ACTIVE = 10;
@@ -97,7 +99,6 @@ class User extends BaseUser implements IdentityInterface
             ['email', 'email'],
             /** phone */
             ['phone', 'match', 'pattern' => '(\+[0-9]{1,3})?\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}']
-
         ];
     }
 
@@ -297,7 +298,7 @@ class User extends BaseUser implements IdentityInterface
 
     public function getLikes()
     {
-        return $this->hasMany(Like::className(), ['user_id' => 'id']);
+        return $this->hasMany(Like::class, ['user_id' => 'id']);
     }
 
     /**
@@ -306,16 +307,25 @@ class User extends BaseUser implements IdentityInterface
      */
     public static function registerNewUser($data = [], $form_name = '')
     {
-        $user = new self();
-        $user->scenario = self::SCENARIO_REGISTER;
+        $user = new self(["scenario" => self::SCENARIO_REGISTER]);
         $user->load($data, $form_name);
         return $user;
+    }
+
+    public function getMyComments()
+    {
+        return ArrayHelper::merge($this->commentsViaPosts, []);
     }
 
     public function toArray(array $fields = [], array $expand = [], $recursive = true)
     {
         return ArrayHelper::merge(
-            parent::toArray(),
+            [
+                "id" => $this->id,
+                "city" => $this->city,
+                "email" => $this->email,
+                "phone" => $this->phone,
+            ],
             [
                 "profile" => $this->profileNN->toArray()
             ]

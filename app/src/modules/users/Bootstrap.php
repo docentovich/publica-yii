@@ -20,6 +20,7 @@ class Bootstrap implements BootstrapInterface
                     'save-profile' => '/user/settings/save-profile-form',
                     'profile/upload-avatar'    => '/user/settings/upload-avatar',
                     'avatar-upload'    => '/user/settings/upload-avatar',
+                    'my/<action:[\w\-]+>'    => '/user/user-panel/<action>',
                     '<action:[\w\-]+>' => '/user/settings/<action>',
                 ]
             );

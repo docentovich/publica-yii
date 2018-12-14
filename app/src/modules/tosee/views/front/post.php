@@ -105,7 +105,7 @@ use yii\widgets\Pjax;
                             <?php foreach ($image->comments as $comment) { ?>
                                 <div class="comment">
                                     <div class="comment-avatar">
-                                        <?= \yii\helpers\Html::img($comment->user->profile->avatarNN->getUrlImageSizeOf('40x40')) ?>
+                                        <?= \yii\helpers\Html::img($comment->author->profile->avatarNN->getUrlImageSizeOf('40x40')) ?>
                                     </div>
                                     <div class="comment-description">
                                         <strong><?= $comment->title ?></strong>
@@ -126,7 +126,7 @@ use yii\widgets\Pjax;
                                         'onsuccess' => "function(data) {
                                             var comment = $('<div class=\"comment new-comment\" style=\'display: none\'>
                                                             <div class=\"comment-avatar\">
-                                                                <img src=\'' + data.comment.user.profile.avatar_url + '\'/>
+                                                                <img src=\'' + data.comment.author.profile.avatar_url + '\'/>
                                                             </div>
                                                             <div class=\"comment-description\">
                                                                 <span>' + data.comment.text + '</span>
