@@ -83,7 +83,7 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
      */
     public function getProfiles()
     {
-        return $this->hasMany(Profile::className(), ['avatar' => 'id']);
+        return $this->hasMany(Profile::class, ['avatar' => 'id']);
     }
 
     public function getRelativeUploadPath(): string
@@ -135,12 +135,12 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
      */
     public function getComments()
     {
-        return $this->hasMany(Comments::className(), ['image_id' => 'id']);
+        return $this->hasMany(Comments::class, ['image_id' => 'id']);
     }
 
     public function getLikes()
     {
-        return  $this->hasMany(Like::className(), ['image_id' => 'id'])->count();
+        return  $this->hasMany(Like::class, ['image_id' => 'id'])->count();
     }
 
     public function getMyLike()

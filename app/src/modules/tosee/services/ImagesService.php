@@ -77,7 +77,7 @@ class ImagesService extends \app\abstractions\Services
         }
         $comment = $config->comment;
         $comment->save();
-        $comment->link('user', \Yii::$app->user->identity);
+        $comment->link('author', \Yii::$app->user->identity);
 
         $response = [
             'action' => 'saved',

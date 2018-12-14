@@ -17,6 +17,13 @@ $config = [
             'rules' => [],
             'suffix' => ''
         ],
+
+        'urlManagerFrontEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
         'jsUrlManager' => [
             'class' => \dmirogin\js\urlmanager\JsUrlManager::class,
         ],

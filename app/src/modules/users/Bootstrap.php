@@ -11,6 +11,12 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap ( $app )
     {
+        $app->getUrlManager()->addRules(
+            [
+                '<controller:(city)>/<action:[\w\-]+>/<id:\d+>'    => '/user/<controller>/<action>',
+                '<controller:(city)>/<action:[\w\-]+>'    => '/user/<controller>/<action>',
+            ]
+        );
         if( $app->id === "app-backend"){
             $app->getUrlManager()->addRules(
                 [
@@ -20,7 +26,9 @@ class Bootstrap implements BootstrapInterface
                     'save-profile' => '/user/settings/save-profile-form',
                     'profile/upload-avatar'    => '/user/settings/upload-avatar',
                     'avatar-upload'    => '/user/settings/upload-avatar',
-                    'my/<action:[\w\-]+>'    => '/user/user-panel/<action>',
+
+                    'my/<controller:[\w\-]+>/<action:[\w\-]+>'    => '/user/<controller>/<action>',
+                    'my/<controller:[\w\-]+>'    => '/user/<controller>/index',
                     '<action:[\w\-]+>' => '/user/settings/<action>',
                 ]
             );

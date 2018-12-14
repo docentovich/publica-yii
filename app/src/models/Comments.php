@@ -70,7 +70,7 @@ class Comments extends \yii\db\ActiveRecord
         return ArrayHelper::merge(
             parent::toArray(),
             [
-                "user" => $this->authorNN->toArray()
+                "author" => $this->authorNN->toArray()
             ]
         );
     }

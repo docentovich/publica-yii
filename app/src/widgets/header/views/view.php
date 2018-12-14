@@ -57,13 +57,13 @@ $filtered_projects = array_filter(
                 </div>
                 <div class="action-panel toggle-overlay" id="drop-down-geo" rel="geo">
                     <div class="action-panel-control">
-                        <i class="icon-geo"></i><span><?= \Yii::t('app/cities', $current_city->label);?></span>
+                        <i class="icon-geo"></i><span><?= \Yii::t('app/cities', $current_city->label); ?></span>
                     </div>
                 </div>
                 <div class="action-panel" id="drop-down-search">
                     <div class="action-panel-control">
                         <div id="search-placeholder"><i class="icon-search"></i>
-                            <span><?= \Yii::t('app/tosee', 'search on website');?></span></div>
+                            <span><?= \Yii::t('app/tosee', 'search on website'); ?></span></div>
                         <input type="text" value="" id="search-input" rel="search"/>
                     </div>
                 </div>
@@ -85,10 +85,13 @@ $filtered_projects = array_filter(
     <div class="overlay" id="geo-overlay">
         <ul class="overlay-list" id="">
             <?php foreach ($cities as $city) { ?>
-
                 <?= \yii\helpers\Html::a(
-                        "<li>" . \Yii::t("app/cities",$city->label) . "</li>",
-                        ['front/set-city', "id" => $city->id]
+                    "<li>" . \Yii::t("app/cities", $city->label) . "</li>",
+                    [
+                        '/user/city/set-city',
+                        'id' => $city->id,
+                        'back' => \yii\helpers\Url::to(Yii::$app->request->url, true)
+                    ]
                 ); ?>
             <?php } ?>
         </ul>
@@ -96,4 +99,5 @@ $filtered_projects = array_filter(
     <div class="overlay" id="search-overlay">
         <ul id="search-results-list" class="overlay-list"></ul>
     </div>
+
 <?= $content; ?>

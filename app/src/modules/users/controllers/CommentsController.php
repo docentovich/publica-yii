@@ -13,10 +13,10 @@ class CommentsController extends UserPanelController
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['comment-pic'],
+                        'actions' => ['index'],
                         'allow' => true,
                         'roles' => ['user'],
                     ],
@@ -25,12 +25,10 @@ class CommentsController extends UserPanelController
         ];
     }
 
-    public function actionCommentPic($image_id)
+    public function actionIndex()
     {
-
-    }
-    public function actionShowPicComments($image_id)
-    {
-
+        return $this->render('comments', [
+            'comments' => \Yii::$app->user->identity->myComments
+        ]);
     }
 }

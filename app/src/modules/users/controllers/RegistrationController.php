@@ -37,7 +37,7 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     ['allow' => true, 'actions' => ['register', 'connect'], 'roles' => ['?']],
                     ['allow' => true, 'actions' => ['confirm', 'resend', 'choose-role'], 'roles' => ['?', '@']],

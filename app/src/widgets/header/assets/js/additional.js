@@ -17,18 +17,21 @@ function debounce(func, wait, immediate) { // TODO move ti main js
 
 $('#search-input').on('keyup', debounce(function () {
     var $this = $(this);
+    if(!$this.val() || ($this.val() && ($this.val().length < 4) )){
+        return;
+    }
     var url = UrlManager.createUrl('/search', {keyword: $this.val()});
+    var $search_results_list = $('#search-results-list');
+    $search_results_list.html('');
+
     $.post(url, function (data) {
-        debugger;
         if (!data || (data && data.result === undefined)) {
             return;
         }
 
         var searchResult = function (result) {
-            var url = UrlManager.createUrl('project/front/<action>', {action: 'post', id: result.id});
-            return $('<li><a href="' + url + '">' + result.post_data.title + '</a></li>');
+            return $('<li><a href="' + result.url + '">' + result.post_data.title + '</a></li>');
         };
-        var $search_results_list = $('#search-results-list');
 
         data.result.forEach(function (result) {
             $search_results_list.append(searchResult(result));

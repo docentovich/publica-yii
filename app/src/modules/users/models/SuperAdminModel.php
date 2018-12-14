@@ -2,12 +2,10 @@
 
 namespace app\modules\users\models;
 
-use yii\db\ActiveRecord;
-
-abstract class SuperAdminModel extends ActiveRecord
+interface SuperAdminModel
 {
-    abstract public function approve();
-    abstract public function ban();
-    abstract public function deleteItem();
-    abstract public function messages();
+    public function approve();
+    public function ban();
+    public function deleteItem();
+    public function messages();
 }

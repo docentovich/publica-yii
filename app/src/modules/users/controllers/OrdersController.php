@@ -2,6 +2,7 @@
 
 namespace app\modules\users\controllers;
 
+use app\models\Orders;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
@@ -14,33 +15,32 @@ class OrdersController extends UserPanelController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'create' => ['POST'],
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['show-my'],
                         'allow' => true,
                         'roles' => ['user'],
-                    ],
-                    [
-                        'actions' => ['show'],
-                        'allow' => true,
-                        'roles' => ['administrator'],
                     ],
                 ],
             ],
         ];
     }
 
-    public function actionShow()
+    public function actionIndex()
     {
-
+        $myOrdersModel = new Orders(['myId' => \Yii::$app->user->getId()]);
+        return $this->render('orders-list', [
+            "orders" => $myOrdersModel->allOrders()->all(),
+            "sales" => $myOrdersModel->allSales()->all(),
+        ]);
     }
+
     public function actionShowMy()
     {
 

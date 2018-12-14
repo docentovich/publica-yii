@@ -2,21 +2,17 @@
 
 namespace app\modules\tosee\controllers;
 
-use app\models\Image;
 use app\modules\tosee\dto\PostServiceConfig;
 use app\modules\tosee\models\Post;
 use app\modules\tosee\models\PostSearch;
 use app\modules\tosee\services\PostService;
 use app\traits\AjaxValidationTrait;
-use ImageAjaxUpload\UploadDTO;
-use ImageAjaxUpload\UploadModel;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
-use yii\web\HttpException;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\NotFoundHttpException;
 
 
 /**
@@ -75,7 +71,6 @@ class AuthorController extends Controller
      * Creates a new Post model.
      *
      * @return string
-     * @throws \yii\base\ExitException
      */
     public function actionCreate()
     {
@@ -105,23 +100,32 @@ class AuthorController extends Controller
         ]);
     }
 
-   private function savePost(Post $post)
-   {
-       $this->performAjaxValidation($post);
-       $this->performAjaxValidation($post->postDataNN);
+    /**
+     * @param Post $post
+     * @return mixed
+     * @throws \yii\base\ExitException
+     */
+    private function savePost(Post $post)
+    {
+        $this->performAjaxValidation($post);
+        $this->performAjaxValidation($post->postDataNN);
 
-       if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
-           return \Yii::$app->postService->action(
-               new PostServiceConfig(['action' => PostService::ACTION_SAVE_POST, 'post' => $post])
-           );
-       }
-   }
+        if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
+            return \Yii::$app->postService->action(
+                new PostServiceConfig(['action' => PostService::ACTION_SAVE_POST, 'post' => $post])
+            );
+        }
+    }
 
     /**
      * Deletes an existing Post model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return \yii\web\Response
+     * @throws HttpException
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -151,5 +155,4 @@ class AuthorController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
 }

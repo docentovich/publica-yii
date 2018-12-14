@@ -38,7 +38,6 @@ class User extends BaseUser implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_NOT_ACTIVE = 2;
     const STATUS_ACTIVE = 10;
-
     const SCENARIO_REGISTER = 'register';
     const SCENARIO_CONNECT = 'connect';
     const SCENARIO_CREATE = 'create';
@@ -322,9 +321,7 @@ class User extends BaseUser implements IdentityInterface
         return ArrayHelper::merge(
             [
                 "id" => $this->id,
-                "city" => $this->city,
                 "email" => $this->email,
-                "phone" => $this->phone,
             ],
             [
                 "profile" => $this->profileNN->toArray()
