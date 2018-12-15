@@ -29,11 +29,11 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
                             \Yii::t('app/user', 'My calendar'),
                             ["/my/calendar"]); ?></li>
                 <?php } ?>
-                <?php if (\Yii::$app->user->can('rating')) { ?>
-                    <li><?= Html::a(
-                            \Yii::t('app/user', 'Rate'),
-                            ["/my/rating"]); ?></li>
-                <?php } ?>
+<!--                --><?php //if (\Yii::$app->user->can('rating')) { ?>
+<!--                    <li>--><?//= Html::a(
+//                            \Yii::t('app/user', 'Rate'),
+//                            ["/my/rating"]); ?><!--</li>-->
+<!--                --><?php //} ?>
                 <?php if (\Yii::$app->user->can('author')) { ?>
                     <li><?= Html::a(
                             \Yii::t('app/user', 'Journalist'),
@@ -51,7 +51,8 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
                 <?php } ?>
             </ul>
             <?= Html::a(
-                "<span>Обратная связь</span><span class=\"small\">(сообщение в администрацию сайта)</span>",
+                "<span>" . \Yii::t('app/user', 'Feedback') . "</span>
+                      <span class=\"small\">(" . \Yii::t('app/user', 'message to the site administration') . ")</span>",
                 "mailto:tomail@mail.ru",
                 ["class" => "feedback"]
             );

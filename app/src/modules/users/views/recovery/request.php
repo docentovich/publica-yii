@@ -21,25 +21,37 @@ use yii\widgets\ActiveForm;
 $this->title = Yii::t('app/user', 'Recover your password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="row">
-    <div class="">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-            </div>
-            <div class="panel-body">
-                <?php $form = ActiveForm::begin([
-                    'id' => 'password-recovery-form',
-                    'enableAjaxValidation' => true,
-                    'enableClientValidation' => false,
-                ]); ?>
 
-                <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+<div class="login">
+    <div class="login-form">
+        <?php $form = ActiveForm::begin([
+            'id' => 'password-recovery-form',
+            'enableAjaxValidation' => true,
+            'enableClientValidation' => false,
+            'options' => [
+                'class' => 'form',
+            ],
+            'fieldConfig' => [
+                'template' => "{label}\n{input}\n
+                            <div class=\"form-error\">{error}\n{hint}</div>",
+                'options' => [
+                    'class' => 'form-row'
+                ],
+            ],
+        ]); ?>
 
-                <?= Html::submitButton(Yii::t('app/user', 'Continue'), ['class' => 'btn btn-primary btn-block']) ?><br>
-
-                <?php ActiveForm::end(); ?>
-            </div>
+        <div class="panel-heading">
+            <h3 style="color: #fff"><?= Html::encode($this->title) ?></h3>
         </div>
+
+        <?= $form->field($model, 'email')->textInput(['autofocus' => true])
+            ->input('email', ['placeholder' => Yii::t('app/user', "Enter Your Email")])
+            ->label('') ?>
+
+        <div class="form-row" style="margin-top: 25px;">
+            <?= Html::submitButton(Yii::t('app/user', 'Continue'), ['class' => 'submit']) ?><br>
+        </div>
+
+        <?php ActiveForm::end(); ?>
     </div>
 </div>

@@ -20,6 +20,8 @@ class UserService extends \app\abstractions\Services
     const ACTION_REGISTRATION = 1;
     const ACTION_CHOOSE_ROLE = 2;
 
+    const SPECIALIST_ROLES = ['author', 'model', 'photograph'];
+
     /**
      * @param UserServiceConfig $config
      * @return UserTransportModel
@@ -102,7 +104,7 @@ class UserService extends \app\abstractions\Services
     private function actionChooseRole(UserServiceConfig $config)
     {
         $role = \Yii::$app->getRequest()->getQueryParam('role');
-        if (isset($role) && !in_array($role, ['author', 'model', 'photograph'])) {
+        if (isset($role) && !in_array($role, self::SPECIALIST_ROLES)) {
             $role = false;
             \Yii::$app->session->setFlash(
                 Alert::MESSAGE_DANGER,
@@ -111,6 +113,8 @@ class UserService extends \app\abstractions\Services
         }
         if ($role) {
             $auth_manager = \Yii::$app->getAuthManager();
+            $this->revokeRoles();
+
             $auth_manager->assign($auth_manager->getRole($role), \Yii::$app->user->getId());
             \Yii::$app->session->setFlash(
                 Alert::MESSAGE_SUCCESS,
@@ -121,6 +125,16 @@ class UserService extends \app\abstractions\Services
         }
 
         return new UserTransportModel(new ConfigQuery($config), []);
+    }
+
+    private function revokeRoles()
+    {
+        $auth_manager = \Yii::$app->getAuthManager();
+
+        foreach (self::SPECIALIST_ROLES as $roleName){
+            $role = $auth_manager->getRole($roleName);
+            $auth_manager->revoke($role, \Yii::$app->user->getId());
+        }
     }
 
     /**

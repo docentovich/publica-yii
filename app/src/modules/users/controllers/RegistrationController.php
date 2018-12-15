@@ -30,7 +30,7 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
     /** @var Finder */
     protected $finder;
 
-    public $layout = "@current_template/layouts/login";
+    public $layout = "@current_template/layouts/user";
 
     /** @inheritdoc */
     public function behaviors()

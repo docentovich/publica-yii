@@ -51,6 +51,8 @@ class ModelController extends Controller
         if ($portfolio->load(\Yii::$app->request->post()) && $portfolio->validate() && $portfolio->save()) {
             $this->saveMainPhoto($portfolio);
             $this->saveAdditionalPhoto($portfolio);
+            $this->refresh();
+            \Yii::$app->end();
         }
         return $this->render('portfolio', ['model' => $portfolio]);
     }

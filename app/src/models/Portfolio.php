@@ -84,20 +84,21 @@ class Portfolio extends \yii\db\ActiveRecord
         return $this->mainPhoto ?? new Image();
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPortfolioAdditionalImages()
-    {
-        return $this->hasMany(PortfolioAdditionalImages::class, ['portfolio_id' => 'id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getImages()
+    public function getAdditionalImages()
     {
-        return $this->hasMany(Image::class, ['id' => 'image_id'])->viaTable('{{%probank_portfolio_additional_images}}', ['portfolio_id' => 'id']);
+        return $this->hasMany(Image::class, ['id' => 'image_id'])
+            ->viaTable(PortfolioAdditionalImages::tableName(), ['portfolio_id' => 'id'])
+            ->with(['comments']);
+    }
+
+    public function getAdditionalImagesNN()
+    {
+        $additionalImages = $this->additionalImages;
+        return (!empty($additionalImages)) ? $additionalImages : new Image();
     }
 
     /**

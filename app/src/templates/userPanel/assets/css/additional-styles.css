@@ -47,3 +47,29 @@ a.asc[data-sort]:after{
 body{
     padding-top: 43px;
 }
+
+.login .form-row input[type='text'],
+.login .form-row input[type='email'],
+.login .form-row input[type='password']{
+    height: 42px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.login .form-row .submit{
+    height:42px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.login .form-row{
+    height: auto;
+}
+
+
+.login .form .form-row label, .login .help-block{
+    color: #fff;
+}

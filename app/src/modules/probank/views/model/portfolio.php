@@ -36,15 +36,15 @@ use yii\widgets\ActiveForm;
             ->widget(\ImageAjaxUpload\UploadWidget::class, [
                 'multiply' => false,
                 'options' => ['class' => 'MS250x250']
-            ])->label(''); ?>
+            ])->label(\Yii::t('app/probank', 'Main photo')); ?>
 
-        <?= $form->field($post, 'additionalImagesNN')
+        <?= $form->field($model, 'additionalImagesNN')
             ->widget(\ImageAjaxUpload\UploadWidget::class, [
                 'relativePathAttribute' => 'relativeUploadPathOrNull',
                 'multiply' => true,
                 'options' => ['class' => 'MS100'],
                 'instance' => 1
-            ])->label(''); ?>
+            ])->label(\Yii::t('app/probank', 'Additional photos')); ?>
 
     </div>
 
