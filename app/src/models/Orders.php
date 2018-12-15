@@ -4,7 +4,6 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "tbl_orders".
@@ -29,7 +28,7 @@ class Orders extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'tbl_orders';
+        return '{{%orders}}';
     }
 
     /**
@@ -92,6 +91,6 @@ class Orders extends \yii\db\ActiveRecord
                 'seller_id' => $this->myId ?? \Yii::$app->user->getId(),
                 'status' => self::STATUS_ACTIVE
             ])
-            ->with('seller');
+            ->with('customers');
     }
 }

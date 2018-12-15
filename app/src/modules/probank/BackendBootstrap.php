@@ -10,12 +10,13 @@ class BackendBootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-
-        if( $app->id === "app-backend"){
+        if ($app->id === "app-backend") {
             $app->getUrlManager()->addRules(
                 [
-                    '<_c:(photographer|model)>'                    => '/probank/<_c>/index',
-                    '<_c:(photographer|model)>/<_a:[a-zA-Z\-\_]+>' => '/probank/<_c>/<_a>',
+                    'search' => '/probank/post/search',
+                    '<controller:(model|photographer)>/<action:[a-zA-Z\-\_]+>/<id:\d+>' => '/probank/<controller>/<action>',
+                    '<controller:(model|photographer)>/<action:[a-zA-Z\-\_]+>' => '/probank/<controller>/<action>',
+                    '<controller:(model|photographer)>' => '/probank/<controller>/index',
                 ]
             );
         }

@@ -37,17 +37,17 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
                 <?php if (\Yii::$app->user->can('author')) { ?>
                     <li><?= Html::a(
                             \Yii::t('app/user', 'Journalist'),
-                            ["/author"]); ?></li>
+                            ["/tosee/author/index"]); ?></li>
                 <?php } ?>
                 <?php if (\Yii::$app->user->can('model')) { ?>
                     <li><?= Html::a(
                             \Yii::t('app/user', 'Model'),
-                            ["/roles/model"]); ?></li>
+                            ["/probank/model/index"]); ?></li>
                 <?php } ?>
                 <?php if (\Yii::$app->user->can('photograph')) { ?>
                     <li><?= Html::a(
                             \Yii::t('app/user', 'Photographer'),
-                            ["/roles/photographer"]); ?></li>
+                            ["/probank/photographer/index"]); ?></li>
                 <?php } ?>
             </ul>
             <?= Html::a(

@@ -19,12 +19,5 @@ class Module extends \yii\base\Module
 
     public $logoSrc = "tosee.png";
 
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-        $this->controllerNamespace;
-    }
+
 }

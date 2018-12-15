@@ -15,9 +15,9 @@ class BackendBootstrap implements BootstrapInterface
             $app->getUrlManager()->addRules(
                 [
                     'search' => '/tosee/post/search',
-                    '<_c:(author|moderator|director)>/<_a:[a-zA-Z\-\_]+>/<id:\d+>' => '/tosee/<_c>/<_a>',
-                    '<_c:(author|moderator|director)>' => '/tosee/<_c>/index',
-                    '<_c:(author|moderator|director)>/<_a:[a-zA-Z\-\_]+>' => '/tosee/<_c>/<_a>',
+                    '<controller:(author)>/<action:[a-zA-Z\-\_]+>/<id:\d+>' => '/tosee/<controller>/<action>',
+                    '<controller:(author)>' => '/tosee/<controller>/index',
+                    '<controller:(author)>/<action:[a-zA-Z\-\_]+>' => '/tosee/<controller>/<action>',
                 ]
             );
         }

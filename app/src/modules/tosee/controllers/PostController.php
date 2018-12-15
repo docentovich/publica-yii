@@ -54,7 +54,7 @@ class PostController extends Controller
                     ], [
                         'actions' => ['gen-pwd', 'index', 'past', 'date', 'post', 'search'],
                         'allow' => true,
-                        'roles' => ['guest'],
+                        'roles' => ['?', '@'],
                     ]
                 ],
             ],

@@ -45,7 +45,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($post->postDataNN, 'post_desc')->textarea() ?>
 
         <?= $form->field($post, 'additionalImagesNN')
-            ->widget(\ImageAjaxUpload\UploadWidget::className(), [
+            ->widget(\ImageAjaxUpload\UploadWidget::class, [
                 'relativePathAttribute' => 'relativeUploadPathOrNull',
                 'multiply' => true,
                 'options' => ['class' => 'MS100'],

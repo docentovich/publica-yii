@@ -23,7 +23,7 @@ switch (PROJECT) {
     case PROBANK:
         $domain_params = [
             'bootstrap' => [
-                'app\modules\probank\BootstrapFrontend',
+                'app\modules\probank\FrontendBootstrap',
                 'app\modules\probank\FrontendBootstrap',
             ],
             'modules' => [
@@ -49,6 +49,9 @@ $config = [
         'jsUrlManager'  // need to be after all bootstrap adding rules
     ],
     'components' => [
+        'user' => [
+            'loginUrl' => '/admin/user/login'
+        ],
         'errorHandler' => [
             'errorAction' => 'project/front/error',
         ],
