@@ -86,12 +86,12 @@ class Post extends yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'class' => PostBeforeValidate::className(),
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            'class' => PostBeforeValidate::className(),
+//        ];
+//    }
 
     /**
      * @return \yii\db\ActiveQuery

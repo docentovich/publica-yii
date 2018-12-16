@@ -22,9 +22,9 @@ abstract class Services extends \yii\base\Component
      */
     protected function all(ConfigQuery $configQuery)
     {
-        return \Yii::$app->db->cache(function () use ($configQuery) {
+//        return \Yii::$app->db->cache(function () use ($configQuery) {
             return $configQuery->query->all();
-        });
+//        });
     }
 
     /**
@@ -36,9 +36,9 @@ abstract class Services extends \yii\base\Component
      */
     protected function count(ConfigQuery $configQuery)
     {
-        return \Yii::$app->db->cache(function () use ($configQuery) {
+//        return \Yii::$app->db->cache(function () use ($configQuery) {
             return $configQuery->query->count();
-        });
+//        });
     }
     /**
      * `Helper`
@@ -49,8 +49,8 @@ abstract class Services extends \yii\base\Component
      */
     protected function one(ConfigQuery $configQuery)
     {
-        return \Yii::$app->db->cache(function () use ($configQuery) {
+//        return \Yii::$app->db->cache(function () use ($configQuery) {
             return $configQuery->query->one();
-        });
+//        });
     }
 }

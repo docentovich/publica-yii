@@ -25,6 +25,16 @@ services:
             - '3306:3306'
           volumes:
            - ../mysql:/var/lib/mysql
+  phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        environment:
+         - PMA_ARBITRARY=1
+        restart: always
+        ports:
+         - "8090:80"
+        volumes:
+         - C:\Users\AProzorov\prj\sessions
   php:
       image: docentovich/php.7.fpm-develop
       ports:
