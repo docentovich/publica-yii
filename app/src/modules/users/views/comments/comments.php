@@ -6,7 +6,7 @@
         ?>
         <div class="comment">
             <div class="avatar">
-                <?= \yii\helpers\Html::img($comment->author->profile->avatarNN->getUrlImageSizeOf('100x100')); ?>
+                <?= $comment->author->profile->avatarNN->getImgSizeOf('100x100'); ?>
             </div>
             <div class="text">
                 <div class="name">

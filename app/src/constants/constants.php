@@ -9,12 +9,23 @@ class Constants{
         "200x200", "500xR", "450xR", // post main image
         "200x150", "390x280", "280x200", "200xR", "390xR", "280xR", // post additional images
         "768x500", "1200x500", "1500x500", // modal base image
+        "40x40", "50x50", // comments avatar
         "Rx270",
         "100x100",
     ];
 
+    const NO_IMAGE = 'noimage.svg';
+
     static public function NO_IMAGE() {
-        return Url::to('/uploads/noimage.jpg', true);
+        return Url::to('/uploads/' . self::NO_IMAGE, true);
+    }
+
+    static public function WAITING_IMAGE(){
+        return Url::to('/uploads/waiting.gif', true);
+    }
+
+    static public function INVISIBLE_IMAGE(){
+        return Url::to('/uploads/invisible.png', true);
     }
 
     const LANGUAGE_RU = 'ru-RU';

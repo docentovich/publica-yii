@@ -60,12 +60,13 @@ class Picture extends Widget
         ob_start(); ?>
         <picture>
             <?php foreach ($this->sizes as $media => $size) { ?>
-                <source data-attr="srcset" <?= $this->lazyLoadFn ? 'data-src' : 'srcset' ?>="<?= "{$this->filePath}/{$this->originalImageName}[{$size}].{$this->originalImageExtension}" ?>"
+                <source class="<?= $this->lazyLoadFn ? 'loading' : '' ?>"
+                        data-attr="srcset" <?= $this->lazyLoadFn ? 'data-src' : 'srcset' ?>="<?= "{$this->filePath}/{$this->originalImageName}[{$size}].{$this->originalImageExtension}" ?>"
                 media="<?= $media ?>">
             <?php } ?>
-            <img <?= $this->lazyLoadFn ? "src='" . \app\constants\Constants::NO_IMAGE() . "'" : ''; ?>
-                    data-attr="src"
-            <?= $this->lazyLoadFn ? 'data-src' : 'src' ?>="<?= $this->src ?>" alt=""/>
+            <img class="<?= $this->lazyLoadFn ? 'loading' : '' ?>"
+                <?= $this->lazyLoadFn ? "src='" . \app\constants\Constants::INVISIBLE_IMAGE() . "'" : ''; ?>
+                 data-attr="src" <?= $this->lazyLoadFn ? 'data-src' : 'src' ?>="<?= $this->src ?>" alt=""/>
         </picture>
 
         <?php return ob_get_clean();

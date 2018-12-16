@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app/post', 'Создать пост'), ['create'], ['class' => 'button button--green']) ?>
     </p>
+    <div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -57,18 +58,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
             ],
             [
-                'class' => \yii\grid\ActionColumn::className(),
+                'class' => \yii\grid\ActionColumn::class,
                 'buttons' => [
                     'update' => function ($url, $model, $key) {
-                        $icon = Html::tag('span', '', ['class' => "fas fa-pen"]);
+                        $icon = Html::tag('i', '', ['class' => "fa fa-pencil"]);
                         return Html::a($icon, $url);
                     },
                     'delete' => function ($url, $model, $key) {
-                        $icon = Html::tag('span', '', ['class' => "fas fa-minus-circle"]);
+                        $icon = Html::tag('i', '', ['class' => "fa fa-minus-circle"]);
                         return Html::a($icon, $url);
                     },
                 ]
             ],
         ],
     ]); ?>
+    </div>
 </div>

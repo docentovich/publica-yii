@@ -2,11 +2,13 @@
 
 namespace app\models;
 
+use app\constants\Constants;
 use app\modules\tosee\models\Like;
 use ImageAjaxUpload\ImageInterface;
 use ImageAjaxUpload\UploadModelTrait;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
@@ -99,7 +101,7 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
     public function getPath0()
     {
         if ($this->name === null) {
-            return 'noimage.png';
+            return Constants::NO_IMAGE;
         }
         return $this->path . "/" . $this->name;
     }
@@ -119,7 +121,7 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
     public function getPathImageSizeOf($size)
     {
         if ($this->name === null) {
-            return 'noimage.png';
+            return Constants::NO_IMAGE;
         }
         list($file_name, $file_extension) = explode('.', $this->name);
         return "{$this->path}/{$file_name}[{$size}].$file_extension";
@@ -158,6 +160,13 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
               "url_or_no_image" => Url::to('/uploads/' . $this->path0 )
           ]
         );
+    }
+
+
+    public function getImgSizeOf($size)
+    {
+        $url = $this->getUrlImageSizeOf($size);
+        return Html::img($url, ['class' => ($this->name === null) ? 'no-image' : '']);
     }
 
 }

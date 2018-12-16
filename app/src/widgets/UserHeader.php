@@ -18,10 +18,10 @@ class UserHeader extends Widget
         $user = \Yii::$app->user->identity ?? new User();
         ?>
         <div class="user-avatar-name">
-            <div class="user-name"><?= $user->profile->fullName; ?></div>
+            <div class="user-name"><?= $user->profileNN->fullName; ?></div>
             <div class="user-avatar dark-icon">
-                <?php if ($user->profile->avatar) {
-                    echo \yii\helpers\Html::img("/uploads/" . $user->profile->avatar0->getPathImageSizeOf('Rx270'));
+                <?php if ($user->profileNN->avatar) {
+                    echo \yii\helpers\Html::img("/uploads/" . $user->profileNN->avatar0->getPathImageSizeOf('Rx270'));
                 } else { ?>
                     <i class="fa fa-user"></i>
                 <?php } ?>

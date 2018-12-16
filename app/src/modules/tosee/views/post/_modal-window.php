@@ -36,7 +36,6 @@
                                 <?= (!empty($image->myLike)) ? 'my-like' : ''; ?>
                                 <?= (\Yii::$app->user->can('user')) ? 'like-action' : ''; ?>"></i>
                 <i class="icon-share"></i>
-                <i class="icon-buy"></i>
             </div>
         </div>
         <!--// Tabs-controls-->
@@ -67,7 +66,7 @@
                     <?php foreach ($image->comments as $comment) { ?>
                         <div class="comment">
                             <div class="comment-avatar">
-                                <?= \yii\helpers\Html::img($comment->author->profile->avatarNN->getUrlImageSizeOf('40x40')) ?>
+                                <?= $comment->author->profile->avatarNN->getImgSizeOf('40x40') ?>
                             </div>
                             <div class="comment-description">
                                 <strong><?= $comment->title ?></strong>
@@ -78,7 +77,7 @@
                 </div>
 
                 <?php if (\Yii::$app->user->can('user')) {
-                    $this->render('_comments-form', ['image' => $image]);
+                    include "_comments-form.php";
                 } ?>
             </div>
             <!--// Comment-->

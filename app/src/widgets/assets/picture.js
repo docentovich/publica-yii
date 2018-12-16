@@ -4,7 +4,12 @@
             var src = $(this).data('src');
             var attr = $(this).data('attr');
             $(this).attr(attr, src);
-            $(this).removeAttr('data-src');
+            var self = this;
+            $(this).on('load', function () {
+                $(self).removeAttr('data-src');
+                $(self).removeClass('loading');
+            });
+
         });
 
     });

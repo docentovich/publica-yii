@@ -70,7 +70,9 @@ class City extends \yii\db\ActiveRecord
 
     public static function asArray()
     {
-        return  ArrayHelper::map(self::find()->all(), 'id', 'label');
+        return  ArrayHelper::map(self::find()->all(), 'id', function ($val){
+            return \Yii::t('app/cities', $val->label);
+        });
     }
 
 }

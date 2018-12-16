@@ -89,11 +89,10 @@ use yii\widgets\ActiveForm;
         <div class="form-block">
             <h2>Служебная информация **</h2>
 
-            <?= $profile_active_form->field($profile, 'phone')
+            <?= $profile_active_form->field($profile, 'phone', ['enableClientValidation' => false])
                 ->textInput([
-                    'placeholder' => '123-456-78-90',
+                    'placeholder' => '+7(123)456-78-90',
                     'type' => 'tel',
-                    'pattern' => '(\+[0-9]{1,3})?\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}'
                 ]); ?>
 
             <?= $profile_active_form->field($profile, 'firstname'); ?>

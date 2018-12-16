@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     <div class="form-block">
         <?= $form->field($post->postDataNN, 'title') ?>
 
-        <?= $form->field($post, 'event_at')->widget(\yii\jui\DatePicker::classname(), [
+        <?= $form->field($post, 'event_at')->widget(\yii\jui\DatePicker::class, [
             'language' => 'ru-RU',
             'dateFormat' => 'yyyy-MM-dd',
         ]) ?>
@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($post, 'city_id')->dropDownList(\app\models\City::asArray()) ?>
 
         <?= $form->field($post, 'imageNN')
-            ->widget(\ImageAjaxUpload\UploadWidget::className(), [
+            ->widget(\ImageAjaxUpload\UploadWidget::class, [
                 'multiply' => false,
                 'options' => ['class' => 'MS250x250']
             ])->label(''); ?>

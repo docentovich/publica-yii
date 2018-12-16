@@ -28,7 +28,7 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
                     <li>
                         <?= \yii\helpers\Html::a(
                             \Yii::t('app/tosee', 'What was'),
-                            \yii\helpers\Url::to('past')
+                            \yii\helpers\Url::to('/past')
                         ); ?>
                     </li>
                     <li>

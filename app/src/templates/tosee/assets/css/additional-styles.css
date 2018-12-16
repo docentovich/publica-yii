@@ -62,7 +62,7 @@ body{
 }
 
 .icon-like.my-like{
-    font-family: "Font Awesome 5 Free" !important;
+    font-family: FontAwesome !important;
     font-weight: 600;
 }
 
@@ -77,4 +77,15 @@ body{
     display: table;
     width: 100%;
     table-layout: fixed;
+}
+
+img.loading{
+    background: transparent url(/uploads/waiting.gif) no-repeat scroll center center;
+}
+.modal-window img.loading{
+    background: transparent url(/uploads/waiting-white.gif) no-repeat scroll center center;
+}
+
+img.no-image{
+    border-radius: 0 !important;
 }

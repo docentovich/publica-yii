@@ -73,7 +73,7 @@ class Profile extends BaseProfile
             'lastnameLength' => ['lastname', 'string', 'max' => 255, 'tooLong' => \Yii::t('app/user', 'Last name maximunm {max} symbols')],
             'lastname' => ['lastname', 'required', 'message' => \Yii::t('app/user', 'Last name is required')],
             'firstname' => ['firstname', 'required', 'message' => \Yii::t('app/user', 'First name is required')],
-            'phone' => ['phone', PhoneInputValidator::className()],
+            'phone' => ['phone', PhoneInputValidator::class],
         ];
     }
 

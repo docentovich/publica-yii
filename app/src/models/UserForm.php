@@ -42,8 +42,8 @@ class UserForm extends Model
         return ArrayHelper::merge(
             parent::scenarios(),
             [
-                self::SCENARIO_REGISTER => ['username', 'email', 'password'],
-                self::SCENARIO_UPDATE => ['username', 'password'],
+                self::SCENARIO_REGISTER => ['username', 'email', 'password', 'password_repeat'],
+                self::SCENARIO_UPDATE => ['username', 'email', 'password', 'password_repeat'],
             ]);
     }
 
@@ -80,6 +80,10 @@ class UserForm extends Model
     public function setUsername($username)
     {
         return $this->_username = $username;
+    }
+    public function setEmail($email)
+    {
+        return $this->_email = $email;
     }
 
     public function toArray(array $fields = [], array $expand = [], $recursive = true)

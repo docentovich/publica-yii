@@ -51,7 +51,7 @@ $('body').imagesLoaded(function () {
 
 /** mask **/
 $(document).ready(function () {
-    $('input[type="tel"]').inputmask({'mask': '(999) 999-99-99'});
+    $('input[type="tel"]').inputmask({'mask': '+7(999) 999-99-99'});
     $('input[data-inputmask]').inputmask();
 });
 /** masonry show **/

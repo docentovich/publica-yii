@@ -69,13 +69,17 @@ function _checkFileExist($file_name_and_dir, $file_extension)
 function resizeFileFromOriginal($original_file_and_dir, $size, $file_extension)
 {
     $size = mb_strtolower($size);
+    // if we scaling only one side whe need use inset algotitm
+    $resize_algoritm = (strpos($size, 'r')  !== false)
+        ?  \Imagine\Image\ImageInterface::THUMBNAIL_INSET
+        : \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
     list($width, $height) = explode("x", str_replace('r', 100000, $size) );
 
     $return_file_name_and_dir = fn("{$original_file_and_dir}[{$size}]", $file_extension);
     // save
     \yii\imagine\Image::getImagine()
         ->open(fn($original_file_and_dir, $file_extension))
-        ->thumbnail(new \Imagine\Image\Box($width, $height))
+        ->thumbnail(new \Imagine\Image\Box($width, $height), $resize_algoritm)
         ->save($return_file_name_and_dir, ['quality' => 90]);
 
     return $return_file_name_and_dir;

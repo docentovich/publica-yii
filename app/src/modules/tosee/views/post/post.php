@@ -51,11 +51,7 @@
 <div style="display: none">
 
     <?php foreach ($postModel->result->additionalImages as $key => $image) {
-        $this->render('_modal-window', [
-            'key' => $key,
-            'image' => $image,
-
-        ]);
+        include '_modal-window.php';
     } ?>
 
 </div>

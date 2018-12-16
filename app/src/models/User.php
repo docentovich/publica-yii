@@ -105,7 +105,7 @@ class User extends BaseUser implements IdentityInterface
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_UPDATE] = ['username', 'password', 'password_hash'];
+        $scenarios[self::SCENARIO_UPDATE] = ['username', 'email', 'password', 'password_hash'];
         return ArrayHelper::merge($scenarios, [
             self::SCENARIO_REGISTER => ['username', 'email', 'password', 'city_id'],
             self::SCENARIO_CONNECT => ['username', 'email'],
@@ -284,7 +284,7 @@ class User extends BaseUser implements IdentityInterface
      */
     public function getMyProfile()
     {
-        return $this->profile ?? new Profile();
+        return $this->profile ?? new Profile(['user_id' => \Yii::$app->user->getId()]);
     }
 
     /**

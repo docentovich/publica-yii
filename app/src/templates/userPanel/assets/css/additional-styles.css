@@ -32,16 +32,16 @@ a[data-sort]{
 
 a[data-sort]:after{
     font-weight: 900;
-    font-family: "Font Awesome 5 Free";
-    content: "\f0dc";
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f07d";
     display: inline;
 }
 
 a.desc[data-sort]:after {
-    content: "\f0dd";
+    content: "\f176";
 }
 a.asc[data-sort]:after{
-    content: "\f0de";
+    content: "\f175";
 }
 
 body{
@@ -72,4 +72,12 @@ body{
 
 .login .form .form-row label, .login .help-block{
     color: #fff;
+}
+
+.form .intl-tel-input{
+    width: 100%;
+}
+
+img.no-image{
+    border-radius: 0 !important;
 }
