@@ -8,9 +8,9 @@ use yii\data\ActiveDataProvider;
 use yii\web\HttpException;
 
 /**
- * PostSearch represents the model behind the search form of `app\modules\tosee\models\common\Post`.
+ * ToseePostSearch represents the model behind the search form of `app\modules\tosee\models\ToseePost`.
  */
-class ModeratorPostSearch extends Post
+class ModeratorPostSearch extends ToseePost
 {
     public $postDataTitle;
     /**
@@ -45,9 +45,9 @@ class ModeratorPostSearch extends Post
 
         if(!Yii::$app->user->can("moderator"))
             throw new HttpException("Forbidden");
-        $query = Post::find();
+        $query = ToseePost::find();
         if(!$all)
-             $query->where(["=", "status", Post::STATUS_ON_MODERATE]);
+             $query->where(["=", "status", ToseePost::STATUS_ON_MODERATE]);
 
         if(!Yii::$app->user->can("administrator"))
             $query->andWhere(["=", "city_id", Yii::$app->user->identity->city_id]);

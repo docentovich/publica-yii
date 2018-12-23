@@ -48,7 +48,7 @@ class ModelController extends Controller
         $portfolio = $this->findModel(['user_id' => \Yii::$app->user->getId()]);
         $this->performAjaxValidation($portfolio);
 
-        if ($portfolio->load(\Yii::$app->request->post()) && $portfolio->validate() && $portfolio->save()) {
+        if ($portfolio->load(\Yii::$app->request->specialist()) && $portfolio->validate() && $portfolio->save()) {
             $this->saveMainPhoto($portfolio);
             $this->saveAdditionalPhoto($portfolio);
             $this->refresh();

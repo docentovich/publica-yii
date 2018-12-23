@@ -7,9 +7,9 @@ use app\models\Comments;
 use app\modules\tosee\dto\ImagesServiceConfig;
 use app\modules\tosee\dto\ImagesTransportModel;
 use app\modules\tosee\dto\PostServiceConfig;
-use app\modules\tosee\models\Post;
+use app\modules\tosee\models\ToseePost;
 use app\modules\tosee\services\ImagesService;
-use app\modules\tosee\services\PostService;
+use app\modules\tosee\services\ToseePostService;
 use app\traits\AjaxValidationTrait;
 use Yii;
 use yii\filters\AccessControl;
@@ -107,7 +107,7 @@ class PostController extends Controller
     public function actionIndex($page = 1)
     {
         return $this->render('index', [
-            "postModel" => $this->getPostTransportModel(['action' => PostService::ACTION_FUTURE])
+            "postModel" => $this->getPostTransportModel(['action' => ToseePostService::ACTION_FUTURE])
         ]);
     }
 
@@ -120,7 +120,7 @@ class PostController extends Controller
     public function actionPast($page = 1)
     {
         return $this->render('index', [
-            "postModel" => $this->getPostTransportModel(['action' => PostService::ACTION_PAST])
+            "postModel" => $this->getPostTransportModel(['action' => ToseePostService::ACTION_PAST])
         ]);
     }
 
@@ -135,7 +135,7 @@ class PostController extends Controller
     {
         return $this->render('index', [
             "postModel" => $this->getPostTransportModel([
-                'action' => PostService::ACTION_BY_DATE,
+                'action' => ToseePostService::ACTION_BY_DATE,
                 'date' => new \DateTime($date)
             ])
         ]);
@@ -214,7 +214,7 @@ class PostController extends Controller
         }
 
         $transportModel = $this->getPostTransportModel([
-            'action' => PostService::ACTION_SEARCH,
+            'action' => ToseePostService::ACTION_SEARCH,
             'keyword' => $keyword
         ]);
         /** @var UrlManager $url_manager */
@@ -222,7 +222,7 @@ class PostController extends Controller
 
         return [
             'action' => 'search',
-            'result' => array_map(function(Post $post) use ($url_manager) {
+            'result' => array_map(function(ToseePost $post) use ($url_manager) {
                 return ArrayHelper::merge(
                     $post->toArray(),
                     [
@@ -240,7 +240,7 @@ class PostController extends Controller
      */
     public function actionPost($id)
     {
-        $postModel = $this->getPostTransportModel(['action' => PostService::ACTION_SINGLE_POST, 'id' => (int)$id]);
+        $postModel = $this->getPostTransportModel(['action' => ToseePostService::ACTION_SINGLE_POST, 'id' => (int)$id]);
         if($postModel->result === null){
             throw new NotFoundHttpException('Post not found');
         }

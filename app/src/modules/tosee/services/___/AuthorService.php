@@ -5,7 +5,7 @@ namespace app\modules\tosee\services\backend;
 use app\Services;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Yii;
-use app\modules\tosee\models\common\Post;
+use app\modules\tosee\models\ToseePost;
 use yii\web\HttpException;
 
 class authorService extends Services
@@ -20,7 +20,7 @@ class authorService extends Services
         //Берем город из identity
         $this->city_id = Yii::$app->user->identity->city_id;
 
-        $this->_query = Post::find()
+        $this->_query = ToseePost::find()
             ->with(["postData", "image"]);
 
     }
@@ -59,7 +59,7 @@ class authorService extends Services
      */
     public function save()
     {
-        $model = new Post();
+        $model = new ToseePost();
 
         if ($model->load( Yii::$app->request->post() )) {
             if( Yii::$app->user->can("updatePost", ["post" => $model]) ) //апдейтим только свои посты
@@ -79,7 +79,7 @@ class authorService extends Services
 
         foreach($post_requst as $post_id => $new_status){
             $new_status = (int)$new_status;
-            $post = new Post(["id" => $post_id]);
+            $post = new ToseePost(["id" => $post_id]);
 
             if( Yii::$app->user->can("moderatePost", ["object" => $post])){
                 $post->status = $new_status;
@@ -95,7 +95,7 @@ class authorService extends Services
      */
     public function getOnModerate()
     {
-        $this->_query->andWhere(["=", "status", Post::STATUS_ON_MODERATE]);
+        $this->_query->andWhere(["=", "status", ToseePost::STATUS_ON_MODERATE]);
 
         return $this->getAllPosts();
     }

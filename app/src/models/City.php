@@ -12,7 +12,7 @@ use yii\helpers\ArrayHelper;
  * @property string $name
  * @property string $label
  *
- * @property \app\modules\tosee\models\Post[] $posts
+ * @property \app\models\Post[] $posts
  * @property User[] $users
  */
 class City extends \yii\db\ActiveRecord

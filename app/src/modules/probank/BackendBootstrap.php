@@ -13,7 +13,7 @@ class BackendBootstrap implements BootstrapInterface
         if ($app->id === "app-backend") {
             $app->getUrlManager()->addRules(
                 [
-                    'search' => '/probank/post/search',
+                    'search' => '/probank/specialist/search',
                     '<controller:(model|photographer)>/<action:[a-zA-Z\-\_]+>/<id:\d+>' => '/probank/<controller>/<action>',
                     '<controller:(model|photographer)>/<action:[a-zA-Z\-\_]+>' => '/probank/<controller>/<action>',
                     '<controller:(model|photographer)>' => '/probank/<controller>/index',

@@ -16,7 +16,7 @@
 
     foreach ($postModel->result as $post):
         /**
-         * @var \app\modules\tosee\models\Post $post
+         * @var \app\modules\tosee\models\ToseePost $post
          */
         ?>
         <div class="item-post item-masonry" style="display: none; <?= (count($postModel->result) < 2) ? 'width: 100%;' : '' ?> ">

@@ -3,9 +3,9 @@
 namespace app\modules\tosee\controllers;
 
 use app\modules\tosee\dto\PostServiceConfig;
-use app\modules\tosee\models\Post;
-use app\modules\tosee\models\PostSearch;
-use app\modules\tosee\services\PostService;
+use app\modules\tosee\models\ToseePost;
+use app\modules\tosee\models\ToseePostSearch;
+use app\modules\tosee\services\ToseePostService;
 use app\traits\AjaxValidationTrait;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -16,7 +16,7 @@ use yii\web\NotFoundHttpException;
 
 
 /**
- * PostController implements the CRUD actions for Post model.
+ * PostController implements the CRUD actions for ToseePost model.
  */
 class AuthorController extends Controller
 {
@@ -58,7 +58,7 @@ class AuthorController extends Controller
     public function actionMyArticles()
     {
         /** @var ActiveDataProvider $dataProvider */
-        $searchModel = new PostSearch();
+        $searchModel = new ToseePostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('my-posts', [
@@ -68,13 +68,13 @@ class AuthorController extends Controller
     }
 
     /**
-     * Creates a new Post model.
+     * Creates a new ToseePost model.
      *
      * @return string
      */
     public function actionCreate()
     {
-        $post = new Post();
+        $post = new ToseePost();
         $this->savePost($post);
 
         return $this->render('add-post', [
@@ -83,7 +83,7 @@ class AuthorController extends Controller
     }
 
     /**
-     * Creates a new Post model.
+     * Creates a new ToseePost model.
      *
      * @param $id
      * @return string
@@ -101,24 +101,24 @@ class AuthorController extends Controller
     }
 
     /**
-     * @param Post $post
+     * @param ToseePost $post
      * @return mixed
      * @throws \yii\base\ExitException
      */
-    private function savePost(Post $post)
+    private function savePost(ToseePost $post)
     {
         $this->performAjaxValidation($post);
         $this->performAjaxValidation($post->postDataNN);
 
         if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
             return \Yii::$app->postService->action(
-                new PostServiceConfig(['action' => PostService::ACTION_SAVE_POST, 'post' => $post])
+                new PostServiceConfig(['action' => ToseePostService::ACTION_SAVE_POST, 'post' => $post])
             );
         }
     }
 
     /**
-     * Deletes an existing Post model.
+     * Deletes an existing ToseePost model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param $id
      * @return \yii\web\Response
@@ -141,15 +141,15 @@ class AuthorController extends Controller
     }
 
     /**
-     * Finds the Post model based on its primary key value.
+     * Finds the ToseePost model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Post the loaded model
+     * @return ToseePost the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Post::findOne($id)) !== null) {
+        if (($model = ToseePost::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

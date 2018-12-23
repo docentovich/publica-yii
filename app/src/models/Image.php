@@ -3,7 +3,7 @@
 namespace app\models;
 
 use app\constants\Constants;
-use app\modules\tosee\models\Like;
+use app\models\Like;
 use ImageAjaxUpload\ImageInterface;
 use ImageAjaxUpload\UploadModelTrait;
 use Yii;

@@ -3,8 +3,8 @@
 namespace app\models;
 
 use app\beheviors\UserBeforValidate;
-use app\modules\tosee\models\Like;
-use app\modules\tosee\models\UserViaPostsCommentsRelation;
+use app\models\Like;
+use app\models\UserViaPostsCommentsRelation;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\web\IdentityInterface;

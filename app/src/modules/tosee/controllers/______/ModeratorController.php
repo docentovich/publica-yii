@@ -2,9 +2,9 @@
 
 namespace app\modules\tosee\controllers;
 
-use app\modules\tosee\models\common\ModeratorPostSearch;
-use app\modules\tosee\models\common\Post;
-use app\modules\tosee\models\common\PostSearch;
+use app\modules\tosee\models\ModeratorPostSearch;
+use app\modules\tosee\models\ToseePost;
+use app\modules\tosee\models\ToseePostSearch;
 use yii\BaseYii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -37,7 +37,7 @@ class ModeratorController extends Controller
     }
 
     /**
-     * Lists all Post models.
+     * Lists all ToseePost models.
      * @return mixed
      */
     public function actionIndex()
@@ -70,7 +70,7 @@ class ModeratorController extends Controller
     }
 
     /**
-     * Lists all Post models.
+     * Lists all ToseePost models.
      * @return mixed
      */
     public function actionAll()
@@ -86,7 +86,7 @@ class ModeratorController extends Controller
     }
 
     /**
-     * Displays a single Post model.
+     * Displays a single ToseePost model.
      * @param integer $id
      * @return mixed
      */
@@ -100,14 +100,14 @@ class ModeratorController extends Controller
 
 
     /**
-     * Finds the Post model based on its primary key value.
+     * Finds the ToseePost model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id* @return Post the loaded model
+     * @param integer $id* @return ToseePost the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Post::findOne($id)) !== null) {
+        if (($model = ToseePost::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

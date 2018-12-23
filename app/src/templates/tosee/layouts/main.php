@@ -13,7 +13,7 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 ?>
 
 <?php \app\widgets\header\Header::begin([
-    "project" => \app\widgets\header\Header::PROJECT_TOSEE
+    "project" => yii\helpers\ArrayHelper::getValue(\Yii::$app->params, 'projects.tosee.name')
 ]); ?>
     <div class="overlay" id="service-menu-overlay">
         <div class="service-overlay-wrapper">
