@@ -1,34 +1,41 @@
 <?php
-$bundle = \app\widgets\header\HeaderAssets::register($this);
 /**
  * @var string $currentProject
- * @var array $projects
  * @var \app\models\City[] $cities
  * @var \app\models\City $current_city
  */
+$bundle = \app\widgets\header\HeaderAssets::register($this);
+/** @var array $projects
+ * @see /app/common/config/params-local.php
+ */
+$projects = \Yii::$app->params['projects'];
 $filtered_projects = array_filter(
     $projects,
-    function ($item) use ($currentProject) {
-        return $item !== $currentProject;
-    });
+    function ($key) use ($currentProject) {
+        return $key !== $currentProject;
+    },
+    ARRAY_FILTER_USE_KEY);
 ?>
     <div style="box-sizing: content-box">
         <header style="box-sizing: content-box">
             <div id="header-inner">
                 <div class="navigation-panel">
+                    <!--Left-->
                     <div class="navigation-part">
                         <div class="menu">
                             <div class="hamburger toggle-overlay" id="service-menu" rel="service-menu">
                                 <i class="icon-burger"></i>
                             </div>
+                            <!--Logo-->
                             <div class="toggle-drop-down-action-panel base-logo" id="services" rel="services">
-                                <?= \yii\helpers\Html::a(
-                                    \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$currentProject}.svg"),
-                                    '/'
-                                ); ?>
+                                <?= \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$currentProject}.svg"); ?>
                             </div>
+                            <!--// Logo-->
                         </div>
                     </div>
+                    <!--// Left-->
+
+                    <!--Right-->
                     <div class="navigation-part">
                         <div class="controls">
                             <div class="toggle-drop-down-action-panel control" id="search" rel="search">
@@ -54,6 +61,8 @@ $filtered_projects = array_filter(
                             </div>
                         </div>
                     </div>
+                    <!--// Right-->
+
                 </div>
                 <div class="action-panel toggle-overlay" id="drop-down-geo" rel="geo">
                     <div class="action-panel-control">
@@ -67,18 +76,22 @@ $filtered_projects = array_filter(
                         <input type="text" value="" id="search-input" rel="search"/>
                     </div>
                 </div>
+
+                <!--DropDown projects logos-->
                 <div class="action-panel" id="drop-down-services">
-
-                    <?php foreach ($filtered_projects as $project) { ?>
-                        <a class="drop-down-service" href="http://publica.shablonkin.shn-host.ru/">
-                            <div class="drop-down-service-image drop-down-service--publica">
-                                <?= \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$project}.svg"); ?>
-                            </div>
-                            <div class="drop-down-service-description"></div>
-                        </a>
+                    <?php foreach ($filtered_projects as $project) {
+                        echo \yii\helpers\Html::a(
+                            "<div class=\"drop-down-service-image drop-down-service--publica\">"
+                                    . \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$project['logo']}") .
+                                    "</div>
+                                 <div class=\"drop-down-service-description\"></div>",
+                            $project['url'],
+                            ["class" => "drop-down-service"])
+                        ?>
                     <?php } ?>
-
                 </div>
+                <!--// DropDown projects logos-->
+
             </div>
         </header>
     </div>

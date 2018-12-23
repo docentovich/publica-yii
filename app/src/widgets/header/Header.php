@@ -13,10 +13,6 @@ use yii\base\Widget;
  */
 class Header extends Widget
 {
-    const PROJECT_PUBLICA = 'publica';
-    const PROJECT_TOSEE = 'publica';
-    const PROJECT_PROBANK = 'publica';
-    const PROJECT_SHOOTME = 'publica';
     /** @var string */
     public $project;
 
@@ -37,13 +33,7 @@ class Header extends Widget
             "content" => $content,
             "currentProject" => $this->project,
             "cities" => City::find()->all(),
-            "current_city" => $current_city,
-            "projects" => [
-                self::PROJECT_PUBLICA,
-                self::PROJECT_TOSEE,
-                self::PROJECT_PROBANK,
-                self::PROJECT_SHOOTME,
-            ]
+            "current_city" => $current_city
         ]);
     }
 }
