@@ -7,7 +7,7 @@ class Constants{
     const ALLOWED_IMAGE_SIZES = [
         "500x500", "320x200", "770x500",
         "200x200", "500xR", "450xR", // post main image
-        "200x150", "390x280", "280x200", "200xR", "390xR", "280xR", // post additional images
+        "200x150", "390x280", "280x200", "200xR", "390xR", "280xR", "450xR", // post additional images
         "768x500", "1200x500", "1500x500", // modal base image
         "40x40", "50x50", // comments avatar
         "Rx270",

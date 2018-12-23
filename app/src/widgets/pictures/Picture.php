@@ -1,13 +1,13 @@
 <?php
 
-namespace app\widgets;
+namespace app\widgets\pictures;
 
 use yii\base\Widget;
 use yii\web\View;
 
 class Picture extends Widget
 {
-    /** TODO lazyLoad images aftrr vieweport */
+    /** TODO lazyLoad images after vieweport */
     /** TODO lazyLoad images move to separete folder cause have asset */
     const POINTS = [
         "xsm" => "(max-width: 768px)",

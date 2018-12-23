@@ -1,5 +1,7 @@
 ###### composer start :
 
+    cd /C/Users/docen/prj/publica-yii
+
 toolbox:
 
 	$ DBG_IP=192.168.99.1 docker-compose -f docker-dev.yml up -d

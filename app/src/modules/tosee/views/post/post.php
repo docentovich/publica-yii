@@ -33,11 +33,10 @@
                 ?>
                 <div class="item-photo item-masonry" style="display: none">
                     <a class="item-photo-a" data-fancybox="gallery" href="#modal-<?= $key ?>">
-                        <?= \app\widgets\Picture::widget([
-                            "src" => $image->getUrlImageSizeOf('200xR'),
+                        <?= \app\widgets\pictures\Picture::widget([
+                            "src" => $image->getUrlImageSizeOf('390xR'),
                             "points" => [
-                                "sm, md" => "280xR",
-                                "lg" => "390xR",
+                                "sm, md, lg" => "450xR",
                             ]
                         ]) ?>
                     </a>
