@@ -10,9 +10,9 @@ class Asset extends AssetBundle
 {
     public $sourcePath  = "@templates/tosee/assets";
     public $css = [
+        'bundle/vendor.css',
         'css/main.css',
         'css/additional-styles.css',
-        'bundle/vendor.css',
     ];
     public $js = [
         'bundle/vendor.js',

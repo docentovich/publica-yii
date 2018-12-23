@@ -124,7 +124,8 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
             return Constants::NO_IMAGE;
         }
         list($file_name, $file_extension) = explode('.', $this->name);
-        return "{$this->path}/{$file_name}[{$size}].$file_extension";
+        $size_prefix = ($size !== null) ? "[{$size}]" : '';
+        return "{$this->path}/{$file_name}{$size_prefix}.$file_extension";
     }
 
     public function getUrlImageSizeOf($size)

@@ -12,7 +12,7 @@
 
         <!--Image-->
         <div class="modal-image">
-            <?= \app\widgets\Picture::widget([
+            <?= \app\widgets\pictures\Picture::widget([
                 "src" => $image->getUrlImageSizeOf('768x500'),
                 "points" => [
                     "sm, md" => "1200x500",
@@ -35,7 +35,9 @@
                    class="icon-like
                                 <?= (!empty($image->myLike)) ? 'my-like' : ''; ?>
                                 <?= (\Yii::$app->user->can('user')) ? 'like-action' : ''; ?>"></i>
-                <i class="icon-share"></i>
+                <i class="share-button"
+                   data-share-title="<?=$image->alt?>"
+                   data-share-image="<?=$image->getUrlImageSizeOf(null)?>"></i>
             </div>
         </div>
         <!--// Tabs-controls-->
