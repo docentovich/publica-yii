@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\probank;
+namespace app\modules\shootme;
 
 /**
  * probank module definition class

@@ -9,7 +9,7 @@ namespace app\models;
  */
 class PortfolioQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+/*    public function active()
     {
         return $this->andWhere('[[status]]=1');
     }*/
@@ -30,5 +30,10 @@ class PortfolioQuery extends \yii\db\ActiveQuery
     public function one($db = null)
     {
         return parent::one($db);
+    }
+
+    public function byType($type)
+    {
+        return $this->andWhere(['=', 'type', $type]);
     }
 }

@@ -15,12 +15,25 @@ use yii\helpers\ArrayHelper;
  *
  * @property Image|null $mainPhoto
  * @property Image $mainPhotoNN
- * @property PortfolioAdditionalImages[] $probankPortfolioAdditionalImages@modules
+ * @property User $user
+ * @property PortfolioAdditionalImages[] $probank
  * @property Image[] $images
+ * @property integer $user_id
+ * @property integer $image_id
  */
 class Portfolio extends \yii\db\ActiveRecord
 {
     const SCENARIO_UPDATE = 'update';
+
+    const ALLOWED_TYPES = ['MODEL', 'PHOTOGRAPHER'];
+    const PORTFOLIO_MODEL_TYPE = 'MODEL';
+    const PORTFOLIO_PHOTOGRAPHER_TYPE = 'PHOTOGRAPHER';
+
+
+    public static function getSeparatedAllowedTypes($separator = ',')
+    {
+        return implode($separator, self::ALLOWED_TYPES);
+    }
 
     /**
      * {@inheritdoc}
@@ -48,6 +61,8 @@ class Portfolio extends \yii\db\ActiveRecord
         return [
             [['about'], 'string'],
             [['price'], 'number'],
+            [['type'], 'string'],
+            ['type', 'each', 'rule' => ['in', 'range' => [self::ALLOWED_TYPES]]],
             [['main_photo', 'user_id'], 'integer'],
             [['main_photo'], 'exist', 'skipOnError' => true, 'targetClass' => Image::class, 'targetAttribute' => ['main_photo' => 'id']],
             [['user_id'], 'unique'],

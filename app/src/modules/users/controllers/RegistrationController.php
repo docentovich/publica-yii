@@ -3,7 +3,7 @@
 namespace app\modules\users\controllers;
 
 use app\models\UserForm;
-use app\modules\users\dto\UserServiceConfig;
+use app\dto\UserServiceConfig;
 use app\modules\users\events\UserFormEvent;
 use app\modules\users\services\UserService;
 use dektrium\user\Finder;
@@ -29,8 +29,20 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
     use EventTrait;
     /** @var Finder */
     protected $finder;
+    /** @var UserService */
+    private $userService;
 
     public $layout = "@current_template/layouts/user";
+
+    public function __construct(string $id,
+                                \yii\base\Module $module,
+                                Finder $finder,
+                                UserService $userService,
+                                array $config = [])
+    {
+        $this->userService = $userService;
+        parent::__construct($id, $module, $finder, $config);
+    }
 
     /** @inheritdoc */
     public function behaviors()
@@ -85,19 +97,19 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
         $this->performAjaxValidation($user_form_model);
 
         // bind on service event decktrium event
-        \Yii::$app->userService->on(UserService::EVENT_AFTER_REGISTER, function ($serviceEvent) {
+        $this->userService->on(UserService::EVENT_AFTER_REGISTER, function ($serviceEvent) {
             /** @var UserFormEvent $serviceEvent */
             $event = $this->getFormEvent($serviceEvent->userForm);
             $this->trigger(RegistrationController::EVENT_AFTER_REGISTER, $event);
         });
 
         // bind on service event decktrium event
-        \Yii::$app->userService->on(UserService::EVENT_BEFORE_REGISTER, function ($serviceEvent) use ($user_form_model) {
+        $this->userService->on(UserService::EVENT_BEFORE_REGISTER, function ($serviceEvent) use ($user_form_model) {
             $event = $this->getFormEvent($user_form_model);
             $this->trigger(RegistrationController::EVENT_BEFORE_REGISTER, $event);
         });
 
-        $transport_model = \Yii::$app->userService->action(
+        $transport_model = $this->userService->action(
             $this->prepareConfig([
                 'action' => UserService::ACTION_REGISTRATION,
                 'userFormModel' => $user_form_model
@@ -145,7 +157,7 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
     public function actionChooseRole()
     {
         $this->layout = "@current_template/layouts/user";
-        \Yii::$app->userService->action(
+        $this->userService->action(
             $this->prepareConfig(['action' => UserService::ACTION_CHOOSE_ROLE])
         );
         return $this->render('choose-role');

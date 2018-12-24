@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
  * @var yii\web\View $this
  * @var dektrium\user\models\User $model
  * @var dektrium\user\Module $module
- * @var \app\modules\users\dto\UserTransportModel $transport_model
+ * @var \app\dto\UserTransportModel $transport_model
  */
 
 $this->title = Yii::t('app/user', 'Sign up');

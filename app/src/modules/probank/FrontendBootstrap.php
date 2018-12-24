@@ -10,17 +10,8 @@ class FrontendBootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-
-        if( $app->id === "app-frontend"){
-
-            $app->getUrlManager()->addRules(
-                [
-                    ''                       => 'project/front/index',
-                    'search'                 => 'project/front/search',
-                    '<action:\w+>/<id:\d+>'  => 'project/site/<action>',
-                    '<action:[\w\-]+>'       => 'project/site/<action>',
-                ]
-            );
+        if( $app->id === "app-frontend" ){
+            $app->getUrlManager()->addRules(ProbankUrls::urls());
         }
     }
 }

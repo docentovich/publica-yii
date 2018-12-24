@@ -3,19 +3,24 @@ return [
     'projects' => [
         'publica' => [
             'url' => 'http://publica.loc',
-            'logo' => 'publica.svg'
+            'logo' => 'publica.svg',
+            'name' => 'publica'
         ],
         'tosee' => [
             'url' => 'http://tosee.loc',
-            'logo' => 'tosee.svg'
+            'logo' => 'tosee.svg',
+            'name' => 'tosee'
         ],
         'probank' => [
             'url' => 'http://probank.loc',
-            'logo' => 'probank.svg'
+            'logo' => 'probank.svg',
+            'name' => 'probank'
+
         ],
         'shootme' => [
             'url' => 'http://shootme.loc',
-            'logo' => 'shootme.svg'
+            'logo' => 'shootme.svg',
+            'name' => 'shootme'
         ],
     ]
 ];

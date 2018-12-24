@@ -12,7 +12,7 @@ class FrontendBootstrap implements BootstrapInterface
     public function bootstrap ( $app )
     {
         if( $app->id === "app-frontend"){
-            $app->getUrlManager()->addRules(Urls::$frontUrls);
+            $app->getUrlManager()->addRules(ToseeUrls::urls());
         }
     }
 }

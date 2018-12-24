@@ -94,7 +94,7 @@ class Profile extends BaseProfile
      */
     public function getAvatar0()
     {
-        return $this->hasOne(Image::className(), ['id' => 'avatar']);
+        return $this->hasOne(Image::class, ['id' => 'avatar']);
     }
 
     public function getFullName()

@@ -4,60 +4,26 @@ namespace app\modules\tosee\services;
 
 use app\dto\ConfigQuery;
 use app\models\Image;
-use app\modules\tosee\dto\PostServiceConfig;
+use app\dto\PostServiceConfig;
 use app\modules\tosee\models\ToseePost;
 use ImageAjaxUpload\UploadModel;
 use League\Pipeline\Pipeline;
 use yii\helpers\Url;
 use yii\web\Cookie;
 use Yii;
-use yii\web\HttpException;
 
-class ToseePostService extends \app\services\PostService
+class ToseePostService extends \app\services\BasePostService
 {
-    const ACTION_FUTURE = 1;
-    const ACTION_PAST = 2;
-    const ACTION_SEARCH = 3;
-    const ACTION_SINGLE_POST = 4;
-    const ACTION_DATE_PICKER = 5;
-    const ACTION_BY_DATE = 6;
-    const ACTION_SAVE_POST = 7;
-    /**
-     * @var string Текущий город
-     */
-    public $city_id = '1';
-
-    /**
-     * @param PostServiceConfig $config
-     * @return \app\modules\tosee\dto\PostTransportModel
-     * @throws \Throwable
-     * @throws \yii\base\ExitException
-     */
-    public function action(\app\interfaces\config $config): \app\dto\TransportModel
-    {
-        switch ($config->action) {
-            case self::ACTION_PAST:
-            case self::ACTION_FUTURE:
-            case self::ACTION_BY_DATE:
-                return $this->actionPostsByDate($config);
-            case self::ACTION_SEARCH:
-                return $this->actionPostsByKeyword($config);
-            case self::ACTION_SINGLE_POST:
-                return $this->actionPostsById($config);
-            case self::ACTION_SAVE_POST:
-                return $this->actionSavePost($config);
-        }
-    }
 
     /**
      * `Action`
      * Past, future, concreet date getter
      *
      * @param PostServiceConfig $config
-     * @return \app\modules\tosee\dto\PostTransportModel
+     * @return \app\dto\PostTransportModel
      * @throws \Throwable
      */
-    private function actionPostsByDate(PostServiceConfig $config): \app\modules\tosee\dto\PostTransportModel
+    protected function actionPostsByDate(PostServiceConfig $config): \app\dto\PostTransportModel
     {
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
@@ -65,7 +31,7 @@ class ToseePostService extends \app\services\PostService
             ->pipe([$this, 'prepareQueryByDate'])
             ->process(new ConfigQuery($config, ToseePost::find()));
 
-        return new \app\modules\tosee\dto\PostTransportModel($configQuery, $this->all($configQuery));
+        return new \app\dto\PostTransportModel($configQuery, $this->all($configQuery));
     }
 
     /**
@@ -73,10 +39,10 @@ class ToseePostService extends \app\services\PostService
      * Single post getter
      *
      * @param PostServiceConfig $config
-     * @return \app\modules\tosee\dto\PostTransportModel
+     * @return \app\dto\PostTransportModel
      * @throws \Throwable
      */
-    private function actionPostsById(PostServiceConfig $config): \app\modules\tosee\dto\PostTransportModel
+    protected function actionPostsById(PostServiceConfig $config): \app\dto\PostTransportModel
     {
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
@@ -100,7 +66,7 @@ class ToseePostService extends \app\services\PostService
             }
         });
 
-        return new \app\modules\tosee\dto\PostTransportModel(
+        return new \app\dto\PostTransportModel(
             $configQuery,
             $post,
             $this->postLink($prevPost),
@@ -113,10 +79,10 @@ class ToseePostService extends \app\services\PostService
      * поиск по ключевому слову
      *
      * @param $keyword
-     * @return \app\modules\tosee\dto\PostTransportModel
+     * @return \app\dto\PostTransportModel
      * @throws \Throwable
      */
-    private function actionPostsByKeyword($config): \app\modules\tosee\dto\PostTransportModel
+    protected function actionPostsByKeyword(PostServiceConfig $config): \app\dto\PostTransportModel
     {
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
@@ -125,7 +91,7 @@ class ToseePostService extends \app\services\PostService
             ->process(new ConfigQuery($config, ToseePost::find()));
         $result = $configQuery->query->all();
 
-        return new \app\modules\tosee\dto\PostTransportModel($configQuery, $result);
+        return new \app\dto\PostTransportModel($configQuery, $result);
     }
 
     /**
@@ -134,10 +100,10 @@ class ToseePostService extends \app\services\PostService
      * If is successful, the browser will be redirected to the 'view' page.
      *
      * @param PostServiceConfig $config
-     * @return \app\modules\tosee\dto\PostTransportModel
+     * @return \app\dto\PostTransportModel
      * @throws \yii\base\ExitException
      */
-    public function actionSavePost(PostServiceConfig $config): \app\modules\tosee\dto\PostTransportModel
+    protected function actionSavePost(PostServiceConfig $config): \app\dto\PostTransportModel
     {
         $this->savePostData($config->post);
         $this->saveMainPhoto($config->post);

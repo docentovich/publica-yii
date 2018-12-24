@@ -45,7 +45,7 @@ class FrontController extends Controller
 
         $service = (new Post())->page($page)->getFuture();
 
-        return $this->render('index', [
+        return $this->render('specialists', [
             "service"  => $service,
         ]);
     }
@@ -67,7 +67,7 @@ class FrontController extends Controller
 
         $service = (new Post())->page($page)->getPast();
 
-        return $this->render('index', [
+        return $this->render('specialists', [
             "service"  => $service,
         ]);
 
@@ -91,7 +91,7 @@ class FrontController extends Controller
 
         $service = (new Post)->page($page)->getByDate($date);
 
-        return $this->render('index', [
+        return $this->render('specialists', [
             "service" => $service,
         ]);
 
@@ -116,7 +116,7 @@ class FrontController extends Controller
         Yii::$app->view->params['next_url'] = (isset($service->next)) ?  "/post/" . $service->next->id : "/" ;
         Yii::$app->view->params['prev_url'] = (isset($service->prev)) ?  "/post/" . $service->prev->id : "/";
 
-        return $this->render('post', [
+        return $this->render('specialist', [
             'service' => $service
         ]);
 
@@ -138,7 +138,7 @@ class FrontController extends Controller
         //передаем в лайоут ключевое слово
         Yii::$app->view->params['navigation_label'] = $keyword;
 
-        return $this->render('index', [
+        return $this->render('specialists', [
             "service" => $service
         ]);
 

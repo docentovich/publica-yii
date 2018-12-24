@@ -2,6 +2,8 @@
 
 namespace app\modules\probank;
 
+use app\modules\tosee\services\ProbankImagesService;
+use app\services\BaseImagesService;
 use yii\base\BootstrapInterface;
 
 class Bootstrap implements BootstrapInterface
@@ -11,5 +13,7 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap ( $app )
     {
+        $app->urlManagerFrontEnd->addRules(ProbankUrls::urls());
+        \Yii::$container->set(BaseImagesService::class, ProbankImagesService::class);
     }
 }

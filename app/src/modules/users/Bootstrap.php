@@ -2,6 +2,7 @@
 
 namespace app\modules\users;
 
+use app\modules\users\services\UserService;
 use yii\base\BootstrapInterface;
 
 class Bootstrap implements BootstrapInterface
@@ -32,5 +33,7 @@ class Bootstrap implements BootstrapInterface
                 ]
             );
         }
+
+        \Yii::$container->set('app\services\BaseUserService', UserService::class);
     }
 }

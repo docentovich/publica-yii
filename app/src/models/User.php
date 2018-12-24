@@ -30,6 +30,7 @@ use yii\helpers\ArrayHelper;
  * @property Comments[] $myComments
  * @property Profile $profileNN
  * @property Like|null $likes
+ * @property Portfolio $portfolio
  * @property string $password write-only password
  */
 class User extends BaseUser implements IdentityInterface
@@ -77,8 +78,8 @@ class User extends BaseUser implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
-            UserBeforValidate::className()
+            TimestampBehavior::class,
+            UserBeforValidate::class
         ];
     }
 
@@ -314,6 +315,11 @@ class User extends BaseUser implements IdentityInterface
     public function getMyComments()
     {
         return ArrayHelper::merge($this->commentsViaPosts, []);
+    }
+
+    public function getPortfolio()
+    {
+        return $this->hasMany(Portfolio::class, ['user_id' => 'id']);
     }
 
     public function toArray(array $fields = [], array $expand = [], $recursive = true)

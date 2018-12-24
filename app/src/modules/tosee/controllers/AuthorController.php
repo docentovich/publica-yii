@@ -2,15 +2,16 @@
 
 namespace app\modules\tosee\controllers;
 
-use app\modules\tosee\dto\PostServiceConfig;
+use app\dto\PostServiceConfig;
 use app\modules\tosee\models\ToseePost;
 use app\modules\tosee\models\ToseePostSearch;
 use app\modules\tosee\services\ToseePostService;
+use app\services\BasePostService;
 use app\traits\AjaxValidationTrait;
 use Yii;
+use yii\base\Module;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 
@@ -22,6 +23,17 @@ class AuthorController extends Controller
 {
     use AjaxValidationTrait;
     public $layout = "@current_template/layouts/user";
+    /** @var BasePostService */
+    public $postService;
+
+    public function __construct(string $id,
+                                Module $module,
+                                array $config = [],
+                                BasePostService $postService)
+    {
+        $this->postService = $postService;
+        parent::__construct($id, $module, $config);
+    }
 
     /**
      * @inheritdoc
@@ -29,14 +41,8 @@ class AuthorController extends Controller
     public function behaviors()
     {
         return [
-//            'verbs' => [
-//                'class' => VerbFilter::className(),
-//                'actions' => [
-//                    'delete' => ['POST'],
-//                ],
-//            ],
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -111,7 +117,7 @@ class AuthorController extends Controller
         $this->performAjaxValidation($post->postDataNN);
 
         if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
-            return \Yii::$app->postService->action(
+            return $this->postService->action(
                 new PostServiceConfig(['action' => ToseePostService::ACTION_SAVE_POST, 'post' => $post])
             );
         }

@@ -1,7 +1,7 @@
 <?php
 
 namespace app\dto;
-use app\interfaces\config;
+
 use yii\helpers\ArrayHelper;
 
 /**

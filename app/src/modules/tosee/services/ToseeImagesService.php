@@ -3,7 +3,9 @@
 namespace app\modules\tosee\services;
 
 
-class ToseeImagesService extends \app\services\ImagesService
+use app\services\BaseImagesService;
+
+class ToseeImagesService extends BaseImagesService
 {
 
 }

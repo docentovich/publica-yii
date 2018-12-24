@@ -17,6 +17,9 @@ $config = [
             'rules' => [],
             'suffix' => ''
         ],
+        'errorHandler' => [
+            'errorAction' => 'error-handler/error',
+        ],
 
         'urlManagerFrontEnd' => [
             'class' => 'yii\web\urlManager',
@@ -33,7 +36,7 @@ $config = [
         'i18n' => [
             'translations' => [
                 'app*' => [
-                    'class' => yii\i18n\PhpMessageSource::className(),
+                    'class' => yii\i18n\PhpMessageSource::class,
                     'basePath' => '@src/messages',
                     'fileMap' => [
                         'app' => 'app.php',
@@ -64,15 +67,6 @@ $config = [
                     'css' => [],
                 ],
             ],
-        ],
-        'postService' => [
-            'class' => 'app\modules\tosee\services\PostService'
-        ],
-        'imagesService' => [
-            'class' => 'app\modules\tosee\services\ImagesService'
-        ],
-        'userService' => [
-            'class' => 'app\modules\users\services\UserService'
         ],
     ],
     'modules' => [

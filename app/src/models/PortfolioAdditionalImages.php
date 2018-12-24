@@ -18,6 +18,7 @@ class PortfolioAdditionalImages extends \yii\db\ActiveRecord
 {
     const TYPE_PORTFOLIO = 'PORTFOLIO';
     const TYPE_SNAP = 'SNAP';
+    const ALLOWED_TYPES = ['PORTFOLIO', 'SNAP'];
     /**
      * {@inheritdoc}
      */
@@ -35,6 +36,7 @@ class PortfolioAdditionalImages extends \yii\db\ActiveRecord
             [['image_id', 'portfolio_id'], 'required'],
             [['image_id', 'portfolio_id'], 'integer'],
             [['type'], 'string'],
+            ['type', 'each', 'rule' => ['in', 'range' => [self::ALLOWED_TYPES]]],
             [['image_id', 'portfolio_id'], 'unique', 'targetAttribute' => ['image_id', 'portfolio_id']],
             [['image_id'], 'exist', 'skipOnError' => true, 'targetClass' => Image::class, 'targetAttribute' => ['image_id' => 'id']],
             [['portfolio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Portfolio::class, 'targetAttribute' => ['portfolio_id' => 'id']],
