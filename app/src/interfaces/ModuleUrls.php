@@ -4,5 +4,6 @@ namespace app\interfaces;
 
 interface ModuleUrls
 {
-    public static function urls();
+    public static function frontUrls(): array;
+    public static function backUrls(): array;
 }

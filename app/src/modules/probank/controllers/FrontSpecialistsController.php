@@ -44,7 +44,7 @@ class FrontSpecialistsController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ], [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'specialist'],
                         'allow' => true,
                         'roles' => ['?', '@'],
                     ]
@@ -88,5 +88,16 @@ class FrontSpecialistsController extends Controller
         ]);
     }
 
+
+    public function actionSpecialist($id)
+    {
+        $transportModel = $this->getTransportModel([
+            'action' => ProbankSpecialistsService::ACTION_GET_BY_ID,
+            'id' => (int) $id
+        ]);
+        return $this->render('specialist', [
+            'specialistTransportModel' => $transportModel,
+        ]);
+    }
 
 }

@@ -3,8 +3,8 @@
  * @var string $content
  */
 
-use app\assets\Asset;
-use app\assets\AssetIE9;
+use app\templates\tosee\Asset;
+use app\templates\tosee\AssetIE9;
 
 $bundle = Asset::register($this);
 AssetIE9::register($this);

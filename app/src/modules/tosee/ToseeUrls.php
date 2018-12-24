@@ -7,10 +7,9 @@ use app\interfaces\ModuleUrls;
 
 class ToseeUrls implements ModuleUrls
 {
-    public static function urls()
+    public static function frontUrls(): array
     {
         return [
-            // объявление правил здесь
             '' => 'project/front-post/index',
             'gen' => 'project/front-post/gen-pwd',
             '<page:\d+>' => 'project/front-post/index',
@@ -22,6 +21,16 @@ class ToseeUrls implements ModuleUrls
             '<action:[\w\-]+>/<id:\d+>' => 'project/front-post/<action>',
             '<action:[\w\-]+>' => 'project/front-post/<action>',
             '<action:[a-zA-Z\-\_]+>/<date:[\d\-]+>' => 'project/front-post/<action>',
+        ];
+    }
+
+    public static function backUrls(): array
+    {
+        return [
+            'search' => '/tosee/post/search',
+            '<controller:(author)>/<action:[a-zA-Z\-\_]+>/<id:\d+>' => '/tosee/<controller>/<action>',
+            '<controller:(author)>' => '/tosee/<controller>/index',
+            '<controller:(author)>/<action:[a-zA-Z\-\_]+>' => '/tosee/<controller>/<action>',
         ];
     }
 }

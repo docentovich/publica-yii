@@ -11,15 +11,7 @@ class BackendBootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        if ($app->id === "app-backend") {
-            $app->getUrlManager()->addRules(
-                [
-                    'search' => '/tosee/post/search',
-                    '<controller:(author)>/<action:[a-zA-Z\-\_]+>/<id:\d+>' => '/tosee/<controller>/<action>',
-                    '<controller:(author)>' => '/tosee/<controller>/index',
-                    '<controller:(author)>/<action:[a-zA-Z\-\_]+>' => '/tosee/<controller>/<action>',
-                ]
-            );
-        }
+        $app->urlManagerFrontEnd->addRules(ToseeUrls::frontUrls());
+        $app->getUrlManager()->addRules(ToseeUrls::backUrls());
     }
 }

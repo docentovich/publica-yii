@@ -9,6 +9,7 @@ class Constants{
         "200x200", "500xR", "450xR", // post main image
         "200x150", "390x280", "280x200", "200xR", "390xR", "280xR", "450xR", // post additional images
         "768x500", "1200x500", "1500x500", // modal base image
+        "800xR", // Portfolio base image
         "40x40", "50x50", // comments avatar
         "Rx270",
         "100x100",

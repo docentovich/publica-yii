@@ -1,6 +1,6 @@
 <?php
 
-namespace app\assets;
+namespace app\templates\probank;
 
 use yii\web\AssetBundle;
 

@@ -13,6 +13,7 @@ class BaseSpecialistsService extends Services
 {
     const ACTION_GET_ALL_SPECIALISTS = 1;
     const ACTION_GET_FILTERED_BY_TYPE_SPECIALISTS = 2;
+    const ACTION_GET_BY_ID = 3;
 
     /**
      * @param SpecialistsServiceConfig $config
@@ -25,6 +26,8 @@ class BaseSpecialistsService extends Services
                 return $this->actionAllSpecialists($config);
             case self::ACTION_GET_FILTERED_BY_TYPE_SPECIALISTS:
                 return $this->actionFilteredByTypeSpecialists($config);
+            case self::ACTION_GET_BY_ID:
+                return $this->actionGetByID($config);
         }
     }
 
@@ -44,6 +47,15 @@ class BaseSpecialistsService extends Services
         return new SpecialistsTransportModel(
             new SpecialistsConfigQuery($config, $portfolioModel),
             $portfolioModel->all()
+        );
+    }
+
+    protected function actionGetByID(SpecialistsServiceConfig $config)
+    {
+        $portfolioModel = Portfolio::find()->where(['=', 'id', $config->id]);
+        return new SpecialistsTransportModel(
+            new SpecialistsConfigQuery($config, $portfolioModel),
+            $portfolioModel->one()
         );
     }
 }

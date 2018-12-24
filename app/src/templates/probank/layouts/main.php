@@ -3,8 +3,9 @@
  * @var string $content
  */
 
-use app\assets\Asset;
-use app\assets\AssetIE9;
+
+use app\templates\probank\Asset;
+use app\templates\probank\AssetIE9;
 
 $bundle = Asset::register($this);
 AssetIE9::register($this);

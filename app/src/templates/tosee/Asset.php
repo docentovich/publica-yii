@@ -1,6 +1,7 @@
 <?php
-namespace app\assets;
+namespace app\templates\tosee;
 
+use app\assets\DatePickerAsset;
 use yii\web\AssetBundle;
 
 /**

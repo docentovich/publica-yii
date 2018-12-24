@@ -16,10 +16,13 @@ use yii\helpers\ArrayHelper;
  * @property Image|null $mainPhoto
  * @property Image $mainPhotoNN
  * @property User $user
- * @property PortfolioAdditionalImages[] $probank
+ * @property PortfolioAdditionalImages[]|null $additionalImages
+ * @property PortfolioAdditionalImages[] $additionalImagesNN
  * @property Image[] $images
  * @property integer $user_id
  * @property integer $image_id
+ * @property string $type
+ * @property string $typeEn
  */
 class Portfolio extends \yii\db\ActiveRecord
 {
@@ -33,6 +36,19 @@ class Portfolio extends \yii\db\ActiveRecord
     public static function getSeparatedAllowedTypes($separator = ',')
     {
         return implode($separator, self::ALLOWED_TYPES);
+    }
+
+    public static function getTypesLabels()
+    {
+        return [
+            self::PORTFOLIO_MODEL_TYPE => 'Model',
+            self::PORTFOLIO_PHOTOGRAPHER_TYPE => 'Photographer'
+        ];
+    }
+
+    public function getTypeEn()
+    {
+        return self::getTypesLabels()[$this->type];
     }
 
     /**
@@ -110,10 +126,13 @@ class Portfolio extends \yii\db\ActiveRecord
             ->with(['comments']);
     }
 
+    /**
+     * @return PortfolioAdditionalImages[]
+     */
     public function getAdditionalImagesNN()
     {
         $additionalImages = $this->additionalImages;
-        return (!empty($additionalImages)) ? $additionalImages : new Image();
+        return (!empty($additionalImages)) ? $additionalImages : [new Image()];
     }
 
     /**

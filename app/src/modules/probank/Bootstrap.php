@@ -13,7 +13,6 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap ( $app )
     {
-        $app->urlManagerFrontEnd->addRules(ProbankUrls::urls());
         \Yii::$container->set(BaseImagesService::class, ProbankImagesService::class);
     }
 }

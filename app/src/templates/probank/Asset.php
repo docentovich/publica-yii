@@ -1,7 +1,8 @@
 <?php
 
-namespace app\assets;
+namespace app\templates\probank;
 
+use app\assets\DatePickerAsset;
 use yii\web\AssetBundle;
 
 /**
@@ -9,32 +10,22 @@ use yii\web\AssetBundle;
  */
 class Asset extends AssetBundle
 {
-    public $sourcePath;
+    public $sourcePath  = "@templates/probank/assets";
     public $css = [
         'bundle/vendor.css',
         'css/main.css',
+        'css/additional-styles.css',
     ];
     public $js = [
         'bundle/vendor.js',
         'js/main.js',
+        'js/additional.js',
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $depends = [
         'yii\web\YiiAsset',
+        DatePickerAsset::class,
+        'app\assets\ImagesLoadedAsset',
+        'app\assets\FontAwesomeAsset',
     ];
-
-    public function __construct(array $config = [])
-    {
-        parent::__construct($config);
-        $this->sourcePath = "@templates/probank/assets";
-    }
-
-    public function init()
-    {
-        parent::init();
-        // resetting BootstrapAsset to not load own css files
-        \Yii::$app->assetManager->bundles['yii\web\JqueryAsset'] = [
-            'js' => []
-        ];
-    }
 }

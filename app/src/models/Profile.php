@@ -99,7 +99,7 @@ class Profile extends BaseProfile
 
     public function getFullName()
     {
-        return implode(" ", [$this->firstname, $this->sename, $this->lastname]);
+        return implode(" ", [$this->sename, $this->firstname, $this->lastname]);
     }
 
     /**

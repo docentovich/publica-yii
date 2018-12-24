@@ -6,8 +6,8 @@
 
 ?>
 
-<div class="single-post">
-    <div class="post-header">
+<div class="single-member">
+    <div class="member-header">
         <a href="<?= $specialistTransportModel->prevLink; ?>">
             <div class="chevron-left"></div>
         </a>
@@ -16,19 +16,23 @@
             <div class="chevron-right"></div>
         </a>
 
-        <div class="title"><?= $specialistTransportModel->result->postData->title; ?></div>
-        <div class="sub-title"><?= $specialistTransportModel->result->event_at; ?></div>
+        <div class="title"><?= $specialistTransportModel->result->user->profile->fullName; ?></div>
+        <div class="sub-title"><?= \Yii::t('app/probank', $specialistTransportModel->result->typeEn); ?></div>
     </div>
-    <div class="post-body">
-        <div class="post-description">
-            <?= $specialistTransportModel->result->postData->post_desc; ?>
+    <div class="member-body">
+        <div class="member-base-image">
+            <div class="image-inner"><?=$specialistTransportModel->result->mainPhotoNN->getImgSizeOf("800xR")?></div>
+            <div class="order"><a href="#">Заказать</a></div>
         </div>
-        <div class="post-additional-photos masonry">
+        <div class="member-description">
+            <?= $specialistTransportModel->result->about; ?>
+        </div>
+        <div class="member-additional-photos masonry">
             <div class="grid-sizer"></div>
             <div class="gutter-sizer"></div>
 
 
-            <?php foreach ($specialistTransportModel->result->additionalImages as $key => $image) {
+            <?php foreach ($specialistTransportModel->result->additionalImagesNN as $key => $image) {
                 /** @var \app\models\Image $image */
                 ?>
                 <div class="item-photo item-masonry" style="display: none">
