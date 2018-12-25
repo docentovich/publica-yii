@@ -1,2 +1,6 @@
 <?php
-return [];
+return [
+    'Model' => 'Модель',
+    'Photographer' => 'Фотограф',
+    'All' => 'Все',
+];

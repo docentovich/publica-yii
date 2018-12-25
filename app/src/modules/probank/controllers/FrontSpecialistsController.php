@@ -44,7 +44,7 @@ class FrontSpecialistsController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ], [
-                        'actions' => ['index', 'specialist'],
+                        'actions' => ['index', 'specialist', 'type', 'search'],
                         'allow' => true,
                         'roles' => ['?', '@'],
                     ]
@@ -74,11 +74,14 @@ class FrontSpecialistsController extends Controller
 
 
     /**
+     * Filter by type
+     *
      * @param int $page
      * @return string
      */
     public function actionType($type, $page = 1)
     {
+        $type = strtoupper($type);
         $transportModel = $this->getTransportModel([
             'action' => ProbankSpecialistsService::ACTION_GET_FILTERED_BY_TYPE_SPECIALISTS,
             'type' => $type
@@ -88,7 +91,12 @@ class FrontSpecialistsController extends Controller
         ]);
     }
 
-
+    /**
+     * Single specialist
+     *
+     * @param $id
+     * @return string
+     */
     public function actionSpecialist($id)
     {
         $transportModel = $this->getTransportModel([
@@ -98,6 +106,19 @@ class FrontSpecialistsController extends Controller
         return $this->render('specialist', [
             'specialistTransportModel' => $transportModel,
         ]);
+    }
+
+    /**
+     * @return array
+     * @throws \Throwable
+     * @throws \yii\base\ExitException
+     */
+    public function actionSearch()
+    {
+        $transportModel = $this->getTransportModel([
+            'action' => ProbankSpecialistsService::ACTION_GET_FILTERED_BY_KEYWORD,
+        ]);
+        return $transportModel->result;
     }
 
 }

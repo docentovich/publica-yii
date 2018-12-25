@@ -15,6 +15,7 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap ( $app )
     {
+        $app->urlManagerFrontEnd->addRules(ToseeUrls::frontUrls());
         \Yii::$container->set(BasePostService::class, ToseePostService::class);
         \Yii::$container->set(BaseImagesService::class, ToseeImagesService::class);
     }

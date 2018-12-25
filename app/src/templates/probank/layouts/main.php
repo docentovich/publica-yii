@@ -22,16 +22,22 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
                 <ul class="probank-menu">
                     <li>
                         <?= \yii\helpers\Html::a(
-                            \Yii::t('app/probank', 'What will be'),
-                            \yii\helpers\Url::to('/')
+                            \Yii::t('app/probank', 'All'),
+                            \yii\helpers\Url::to(['front-specialists/index'])
                         ); ?>
                     </li>
-                    <li>
-                        <?= \yii\helpers\Html::a(
-                            \Yii::t('app/probank', 'What was'),
-                            \yii\helpers\Url::to('/past')
-                        ); ?>
-                    </li>
+
+                    <?php foreach (\app\models\Portfolio::getTypesLabels() as $key => $labelEn) { ?>
+
+                        <li>
+                            <?= \yii\helpers\Html::a(
+                                \Yii::t('app/probank', $labelEn),
+                                \yii\helpers\Url::to(['front-specialists/type', 'type' => strtolower( $key )])
+                            ); ?>
+                        </li>
+
+                    <?php } ?>
+
 
                 </ul>
             </div>

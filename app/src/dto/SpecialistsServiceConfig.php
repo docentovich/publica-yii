@@ -7,6 +7,9 @@ use app\models\Portfolio;
 
 /**
  * Class SpecialistsServiceConfig
+ * @property integer $portfolioId
+ * @property Portfolio $portfolioModel
+ * @property string $type
  * @package app\dto
  */
 class SpecialistsServiceConfig extends ServiceConfig

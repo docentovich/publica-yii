@@ -221,34 +221,10 @@ class FrontPostController extends Controller
      */
     public function actionSearch()
     {
-        if (!\Yii::$app->request->isAjax) {
-            throw new \Exception('request mast be ajax');
-        }
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $keyword = \Yii::$app->request->get('keyword');
-        if(strlen($keyword) < 4)
-        {
-            return [];
-        }
-
         $transportModel = $this->getPostTransportModel([
             'action' => ToseePostService::ACTION_SEARCH,
-            'keyword' => $keyword
         ]);
-        /** @var UrlManager $url_manager */
-        $url_manager = \Yii::$app->urlManagerFrontEnd;
-
-        return [
-            'action' => 'search',
-            'result' => array_map(function(ToseePost $post) use ($url_manager) {
-                return ArrayHelper::merge(
-                    $post->toArray(),
-                    [
-                        "url" => $url_manager->createAbsoluteUrl(['/project/post/post', "id" => $post->id])
-                    ]
-                );
-            }, $transportModel->result)
-        ];
+       return $transportModel->result;
     }
 
     /**

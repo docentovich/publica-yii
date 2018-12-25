@@ -21,8 +21,10 @@
     </div>
     <div class="member-body">
         <div class="member-base-image">
-            <div class="image-inner"><?=$specialistTransportModel->result->mainPhotoNN->getImgSizeOf("800xR")?></div>
-            <div class="order"><a href="#">Заказать</a></div>
+            <div class="image-inner"><?= $specialistTransportModel->result->mainPhotoNN->getImgSizeOf("800xR") ?></div>
+            <?php if (\Yii::$app->user->can('user')) { ?>
+                <div class="order"><a href="#">Заказать</a></div>
+            <?php } ?>
         </div>
         <div class="member-description">
             <?= $specialistTransportModel->result->about; ?>
@@ -32,7 +34,7 @@
             <div class="gutter-sizer"></div>
 
 
-            <?php foreach ($specialistTransportModel->result->additionalImagesNN as $key => $image) {
+            <?php foreach ($specialistTransportModel->result->additionalImages as $key => $image) {
                 /** @var \app\models\Image $image */
                 ?>
                 <div class="item-photo item-masonry" style="display: none">

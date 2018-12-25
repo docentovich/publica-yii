@@ -25,12 +25,14 @@ $('#search-input').on('keyup', debounce(function () {
     $search_results_list.html('');
 
     $.post(url, function (data) {
+        $search_results_list.html('');
+
         if (!data || (data && data.result === undefined)) {
             return;
         }
 
         var searchResult = function (result) {
-            return $('<li><a href="' + result.url + '">' + result.post_data.title + '</a></li>');
+            return $('<li><a href="' + result.url + '">' + result.search_text + '</a></li>');
         };
 
         data.result.forEach(function (result) {

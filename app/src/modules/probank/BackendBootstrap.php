@@ -10,7 +10,6 @@ class BackendBootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        $app->urlManagerFrontEnd->addRules(ProbankUrls::frontUrls());
         $app->getUrlManager()->addRules(ProbankUrls::backUrls());
     }
 }

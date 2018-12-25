@@ -33,4 +33,9 @@ class TransportModel extends \app\abstractions\Immutable
         }
         return parent::__get($key);
     }
+
+    public static function build($options)
+    {
+        return new static($options['configQuery'], $options['result']);
+    }
 }

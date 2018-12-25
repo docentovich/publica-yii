@@ -11,7 +11,6 @@ class BackendBootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        $app->urlManagerFrontEnd->addRules(ToseeUrls::frontUrls());
         $app->getUrlManager()->addRules(ToseeUrls::backUrls());
     }
 }

@@ -121,7 +121,7 @@ class UploadModel extends Model
     }
 
     /**
-     * @param $relative_upload_dir
+     * @param string $relative_upload_dir  folder name related in uploads directory. usually users id
      * @return UploadDTO[]
      */
     public function multiUpload($relative_upload_dir)

@@ -92,6 +92,9 @@ function response($get)
 
     $file = checkFileExist($get['file_name'], $get['file_extension']);
     switch ($get['file_extension']) {
+        case 'gif':
+            $type = 'image/gif';
+            break;
         case 'png':
             $type = 'image/png';
             break;

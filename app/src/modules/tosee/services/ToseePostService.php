@@ -6,6 +6,7 @@ use app\dto\ConfigQuery;
 use app\models\Image;
 use app\dto\PostServiceConfig;
 use app\modules\tosee\models\ToseePost;
+use app\services\BaseSearchService;
 use ImageAjaxUpload\UploadModel;
 use League\Pipeline\Pipeline;
 use yii\helpers\Url;
@@ -14,6 +15,14 @@ use Yii;
 
 class ToseePostService extends \app\services\BasePostService
 {
+    /** @var BaseSearchService BaseSearchService  */
+    private $searchService;
+
+    public function __construct(array $config = [], BaseSearchService $searchService)
+    {
+        $this->searchService = $searchService;
+        parent::__construct($config);
+    }
 
     /**
      * `Action`
@@ -84,14 +93,17 @@ class ToseePostService extends \app\services\BasePostService
      */
     protected function actionPostsByKeyword(PostServiceConfig $config): \app\dto\PostTransportModel
     {
+        $config->keyword = \Yii::$app->request->get('keyword');
+
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
             ->pipe([$this, 'prepareQuery'])
             ->pipe([$this, 'prepareQueryByKeyWord'])
             ->process(new ConfigQuery($config, ToseePost::find()));
-        $result = $configQuery->query->all();
 
-        return new \app\dto\PostTransportModel($configQuery, $result);
+        return \app\dto\PostTransportModel::build(
+            $this->searchService->search($configQuery, '/project/front-post/post')
+        );
     }
 
     /**

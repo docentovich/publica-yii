@@ -23,6 +23,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $image_id
  * @property string $type
  * @property string $typeEn
+ * @property Profile|null $profile
  */
 class Portfolio extends \yii\db\ActiveRecord
 {
@@ -81,7 +82,7 @@ class Portfolio extends \yii\db\ActiveRecord
             ['type', 'each', 'rule' => ['in', 'range' => [self::ALLOWED_TYPES]]],
             [['main_photo', 'user_id'], 'integer'],
             [['main_photo'], 'exist', 'skipOnError' => true, 'targetClass' => Image::class, 'targetAttribute' => ['main_photo' => 'id']],
-            [['user_id'], 'unique'],
+            [['user_id'], 'unique', 'targetAttribute' => ['user_id', 'type']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -143,6 +144,11 @@ class Portfolio extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'user_id'])->inverseOf('portfolio');
     }
 
+    public function getProfile()
+    {
+        return$this->hasOne(Profile::class, ['user_id' => 'user_id']);
+    }
+
     /**
      * {@inheritdoc}
      * @return PortfolioQuery the active query used by this AR class.
@@ -156,5 +162,13 @@ class Portfolio extends \yii\db\ActiveRecord
     {
         $this->user_id = \Yii::$app->user->getId();
         return parent::beforeValidate();
+    }
+
+    public function toArray(array $fields = [], array $expand = [], $recursive = true)
+    {
+        return ArrayHelper::merge(
+            parent::toArray(),
+            ["search_text" => $this->profile->fullName]
+        );
     }
 }

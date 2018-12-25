@@ -24,7 +24,7 @@
         echo $specialist->mainPhotoNN->getImgSizeOf('450xR');
         ?>
         <span class="member-description">
-            <span class="member-name"><?= $specialist->user->profile->fullName ?></span>
+            <span class="member-name"><?= $specialist->user->profile->firstname ?></span>
             <span class="member-type"><?= \Yii::t('app/probank', $specialist->typeEn); ?></span>
         </span>
         <?php

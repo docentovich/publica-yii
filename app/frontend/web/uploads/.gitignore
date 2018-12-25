@@ -1,5 +1,6 @@
 */*
 *
 !.gitignore
-!noimage.png
-!noimage.jpg
+!noimage*
+!waiting*
+!invisible*

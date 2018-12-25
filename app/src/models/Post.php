@@ -161,6 +161,7 @@ class Post extends yii\db\ActiveRecord
     {
         return ArrayHelper::merge(
             parent::toArray(),
+            ["search_text" => $this->postDataNN->title],
             ["post_data" => $this->postDataNN->toArray()],
             ["front_url" => ($this->id) ? Url::to(['front/post', "id" => $this->id], true) : null]
         );

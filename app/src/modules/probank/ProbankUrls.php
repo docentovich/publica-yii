@@ -12,7 +12,8 @@ class ProbankUrls implements ModuleUrls
         return [
             '' => 'project/front-specialists/index',
             'specialist/<id:\d+>' => 'project/front-specialists/specialist',
-            '<type:(' . Portfolio::getSeparatedAllowedTypes() . ')>' => 'project/front-specialist/type'
+            'search' => 'project/front-specialists/search',
+            '<type:(' . strtolower(Portfolio::getSeparatedAllowedTypes('|') ) . ')>' => 'project/front-specialists/type'
         ];
     }
 

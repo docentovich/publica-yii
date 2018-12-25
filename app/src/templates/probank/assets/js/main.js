@@ -31,7 +31,8 @@ $('body').imagesLoaded(function () {
             helpers: {
                 overlay: {locked: false}
             },
-            touch: false
+            // arrows: false,
+            touch: false,
         });
     }, 5);
 });

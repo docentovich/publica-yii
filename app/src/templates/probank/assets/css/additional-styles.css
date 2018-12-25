@@ -89,3 +89,11 @@ img.loading{
 img.no-image{
     border-radius: 0 !important;
 }
+
+.fancybox-container > .fancybox-inner > .fancybox-navigation{
+    display: none;
+}
+
+.fancybox-caption, .fancybox-infobar, .fancybox-navigation .fancybox-button, .fancybox-toolbar{
+    visibility: visible !important;
+}
