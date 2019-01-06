@@ -1,9 +1,9 @@
 <?php
 
-namespace app\modules\users;
+namespace users;
 
 
 class Module extends \dektrium\user\Module
 {
-    public $controllerNamespace = 'app\modules\users\controllers';
+    public $controllerNamespace = 'users\controllers';
 }

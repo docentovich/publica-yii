@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -14,7 +14,7 @@ class PortfolioController extends  UserPanelController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'update' => ['POST'],
                 ],

@@ -1,11 +1,10 @@
 <?php
 
-namespace app\modules\probank\controllers;
+namespace probank\controllers;
 
-use app\dto\SpecialistsServiceConfig;
-use app\dto\SpecialistsTransportModel;
-use app\modules\probank\services\ProbankSpecialistsService;
-use app\services\BaseSpecialistsService;
+use probank\dto\ProbankSpecialistsServiceConfig;
+use probank\dto\ProbankSpecialistsTransportModel;
+use probank\services\ProbankSpecialistsService;
 use app\traits\AjaxValidationTrait;
 use yii\base\Module;
 use yii\filters\AccessControl;
@@ -18,19 +17,19 @@ class FrontSpecialistsController extends Controller
 {
     use AjaxValidationTrait;
     public $layout = "@current_template/layouts/main";
-    /** @var BaseSpecialistsService */
-    private $specialistsService;
+    /** @var \app\services\BaseSpecialistsService */
+    protected $specialistsService;
 
-    public function __construct(string $id,
-                                Module $module,
-                                array $config = [],
-                                BaseSpecialistsService $specialistsService)
+    public function setSpecialistsService($specialistsService)
     {
         $this->specialistsService = $specialistsService;
-        parent::__construct($id, $module, $config);
+    }
+    public function getSpecialistsService()
+    {
+        return $this->specialistsService;
     }
 
-      /**
+     /**
      * @inheritdoc
      */
     public function behaviors()
@@ -53,9 +52,9 @@ class FrontSpecialistsController extends Controller
         ];
     }
 
-    private function getTransportModel($config): SpecialistsTransportModel
+    private function getTransportModel($config): ProbankSpecialistsTransportModel
     {
-        return $this->specialistsService->action(new SpecialistsServiceConfig($config));
+        return $this->specialistsService->action(new ProbankSpecialistsServiceConfig($config));
     }
 
     /**

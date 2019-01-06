@@ -25,9 +25,7 @@ class Header extends Widget
     public function run()
     {
         $content = ob_get_clean();
-        $city_cookie =  \Yii::$app->request->cookies->getValue('city_id');
-        $current_city = City::findOne(["id" => $city_cookie]);
-        $current_city = $current_city ?? City::findDefault();
+        $current_city = City::findOne(["id" => \app\models\City::getCurrentCityId()]);
 
         return $this->render("view", [
             "content" => $content,

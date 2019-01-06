@@ -12,23 +12,29 @@ return [
     'homeUrl'      => '/admin',
     'bootstrap'    => [
         'log',
-        \app\templates\BootstrapBackend::class,
-        'app\modules\probank\BackendBootstrap',
-        'app\modules\tosee\Bootstrap',
-        'app\modules\tosee\BackendBootstrap',
-        'app\modules\users\Bootstrap',
+        'app\templates\BootstrapBackend',
+        'probank\Bootstrap',
+        'probank\BackendBootstrap',
+        'tosee\Bootstrap',
+        'tosee\BackendBootstrap',
         'jsUrlManager'  // need to be after all bootstrap adding rules
     ],
     'modules' => [
         'probank' => [
-            'class' => 'app\modules\probank\Module',
+            'class' => 'probank\Module',
         ],
         'tosee'   => [
-            'class' => 'app\modules\tosee\Module',
+            'class' => 'tosee\Module',
         ],
-
+        'planner' => [
+            'layout' => '@userPanelTemplate/layouts/user'
+        ],
     ],
     'components' => [
+        'errorHandler' => [
+            'errorAction' => 'error-handler/error',
+        ],
+
         'request' => [
             'csrfParam' => '_csrf-backend',
             'baseUrl'   => '/admin',

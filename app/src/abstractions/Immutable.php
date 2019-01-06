@@ -10,7 +10,7 @@ class Immutable implements \app\interfaces\dto
 
     public function __construct($params)
     {
-        $this->_params = ArrayHelper::merge($this->_params, $params);
+        $this->_params = ArrayHelper::merge($this->_params, $params ?? []);
     }
 
     public function __get($key)

@@ -3,13 +3,6 @@ use yii\helpers\Html;
 ?>
 <?= \app\widgets\Alert::widget(); ?>
 <div class="who">
-    <div class="who-header">
-        <div class="who-avatar dark-icon"><i class="fa fa-user"></i></div>
-        <div class="who-description">
-            <h2><?= Yii::t('app/user', 'who to be') ?></h2>
-            <h3><?= Yii::t('app/user', 'Nickname') ?></h3>
-        </div>
-    </div>
     <div class="who-stay-simple">
         <?= Html::a(
             Yii::t('app/user', 'Stay plain gray'),

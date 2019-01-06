@@ -6,7 +6,7 @@
  * Time: 14:16
  */
 
-namespace app\modules\tosee\services\backend;
+namespace tosee\services\backend;
 
 use app\models\User;
 use Yii;

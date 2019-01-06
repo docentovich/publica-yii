@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -14,13 +14,13 @@ class CalendarController extends UserPanelController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'occupy' => ['POST'],
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'actions' => ['show', 'occupy'],

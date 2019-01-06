@@ -1,18 +1,18 @@
 <?php
 
-namespace app\modules\tosee\controllers;
+namespace tosee\controllers;
 
-use app\dto\PostServiceConfig;
-use app\modules\tosee\models\ToseePost;
-use app\modules\tosee\models\ToseePostSearch;
-use app\modules\tosee\services\ToseePostService;
-use app\services\BasePostService;
+use tosee\dto\PostServiceConfig;
+use tosee\models\ToseePost;
+use tosee\models\ToseePostSearch;
+use tosee\services\ToseePostService;
 use app\traits\AjaxValidationTrait;
 use Yii;
 use yii\base\Module;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 
 
@@ -23,16 +23,18 @@ class AuthorController extends Controller
 {
     use AjaxValidationTrait;
     public $layout = "@current_template/layouts/user";
-    /** @var BasePostService */
+    /** @var ToseePostService */
     public $postService;
 
-    public function __construct(string $id,
-                                Module $module,
-                                array $config = [],
-                                BasePostService $postService)
+
+    public function setPostService($postService)
     {
         $this->postService = $postService;
-        parent::__construct($id, $module, $config);
+    }
+
+    public function getPostService()
+    {
+        return $this->postService;
     }
 
     /**
@@ -77,6 +79,8 @@ class AuthorController extends Controller
      * Creates a new ToseePost model.
      *
      * @return string
+     * @throws \Throwable
+     * @throws \yii\base\ExitException
      */
     public function actionCreate()
     {
@@ -94,6 +98,7 @@ class AuthorController extends Controller
      * @param $id
      * @return string
      * @throws NotFoundHttpException
+     * @throws \Throwable
      * @throws \yii\base\ExitException
      */
     public function actionUpdate($id)
@@ -108,7 +113,8 @@ class AuthorController extends Controller
 
     /**
      * @param ToseePost $post
-     * @return mixed
+     * @return \tosee\dto\PostTransportModel|\tosee\dto\TransportModel
+     * @throws \Throwable
      * @throws \yii\base\ExitException
      */
     private function savePost(ToseePost $post)
@@ -116,11 +122,9 @@ class AuthorController extends Controller
         $this->performAjaxValidation($post);
         $this->performAjaxValidation($post->postDataNN);
 
-        if ($post->load(Yii::$app->request->post()) && $post->validate() && $post->save()) {
-            return $this->postService->action(
-                new PostServiceConfig(['action' => ToseePostService::ACTION_SAVE_POST, 'post' => $post])
-            );
-        }
+        return $this->postService->action(
+            new PostServiceConfig(['action' => ToseePostService::ACTION_SAVE_POST, 'post' => $post])
+        );
     }
 
     /**

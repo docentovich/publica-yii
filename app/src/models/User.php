@@ -307,7 +307,7 @@ class User extends BaseUser implements IdentityInterface
      */
     public static function registerNewUser($data = [], $form_name = '')
     {
-        $user = new self(["scenario" => self::SCENARIO_REGISTER]);
+        $user = new static(["scenario" => self::SCENARIO_REGISTER]);
         $user->load($data, $form_name);
         return $user;
     }

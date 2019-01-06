@@ -5,7 +5,7 @@
 
 use yii\helpers\Html;
 
-$bundle = \app\assets\Asset::register($this);
+$bundle =  app\templates\userPanel\Asset::register($this);
 $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 ?>
 <?php \app\widgets\header\Header::begin([
@@ -27,7 +27,7 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
                 <?php if (\Yii::$app->user->can('calendar')) { ?>
                     <li><?= Html::a(
                             \Yii::t('app/user', 'My calendar'),
-                            ["/my/calendar"]); ?></li>
+                            ["/date-time-planner/index"]); ?></li>
                 <?php } ?>
 <!--                --><?php //if (\Yii::$app->user->can('rating')) { ?>
 <!--                    <li>--><?//= Html::a(

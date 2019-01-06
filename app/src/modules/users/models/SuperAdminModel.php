@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\users\models;
+namespace users\models;
 
 interface SuperAdminModel
 {

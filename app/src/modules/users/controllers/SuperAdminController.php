@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
-use app\modules\users\models\SuperAdminModel;
+use users\models\SuperAdminModel;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\web\Controller;

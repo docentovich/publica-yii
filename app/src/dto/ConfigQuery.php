@@ -7,7 +7,7 @@ use yii\db\ActiveQuery;
 
 /**
  * Class ConfigQuery
- * @property \app\interfaces\config $config
+ * @property \app\abstractions\ServiceConfig $config
  * @property ActiveQuery $query
  * @package app\dto
  */
@@ -15,7 +15,7 @@ class ConfigQuery implements  \app\interfaces\dto
 {
     /** @var ActiveQuery */
     private $_query;
-    /** @var config */
+    /** @var \app\abstractions\ServiceConfig */
     private $_config;
 
     public function __set($name, $value)

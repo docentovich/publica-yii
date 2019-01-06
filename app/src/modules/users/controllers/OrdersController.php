@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
-use app\models\Orders;
+use users\models\UsersOrders;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
@@ -34,7 +34,7 @@ class OrdersController extends UserPanelController
 
     public function actionIndex()
     {
-        $myOrdersModel = new Orders(['myId' => \Yii::$app->user->getId()]);
+        $myOrdersModel = new UsersOrders(['myId' => \Yii::$app->user->getId()]);
         return $this->render('orders-list', [
             "orders" => $myOrdersModel->allOrders()->all(),
             "sales" => $myOrdersModel->allSales()->all(),

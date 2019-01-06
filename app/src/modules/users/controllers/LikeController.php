@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
 use yii\filters\AccessControl;
 
@@ -13,7 +13,7 @@ class LikeController extends UserPanelController
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'actions' => ['like-picture'],

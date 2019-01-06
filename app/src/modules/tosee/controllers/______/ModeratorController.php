@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\tosee\controllers;
+namespace tosee\controllers;
 
-use app\modules\tosee\models\ModeratorPostSearch;
-use app\modules\tosee\models\ToseePost;
-use app\modules\tosee\models\ToseePostSearch;
+use tosee\models\ModeratorPostSearch;
+use tosee\models\ToseePost;
+use tosee\models\ToseePostSearch;
 use yii\BaseYii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

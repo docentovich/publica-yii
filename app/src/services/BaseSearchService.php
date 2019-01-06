@@ -5,8 +5,6 @@ namespace app\services;
 
 use app\abstractions\Services;
 use app\dto\ConfigQuery;
-use app\dto\TransportModel;
-use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 
 class BaseSearchService extends Services
@@ -41,12 +39,14 @@ class BaseSearchService extends Services
 
         $result = [
             'action' => 'search',
-            'result' => array_map(function($element) use ($url_manager, $urlOfElement) {
+            'result' => array_map(function($element) use ($url_manager, $urlOfElement, $configQuery) {
                 return ArrayHelper::merge(
                     $element->toArray(),
                     [
                         "url" => $url_manager->createAbsoluteUrl([
-                            $urlOfElement, "id" => $element->id
+                            $urlOfElement,
+                            "id" => $element->id,
+                            "config" => $configQuery->config->toArray()
                         ])
                     ]
                 );

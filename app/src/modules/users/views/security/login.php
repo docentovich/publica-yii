@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\assets\Asset;
 
 /**
  * @var yii\web\View $this
@@ -12,7 +11,7 @@ use app\assets\Asset;
 
 $this->title = Yii::t('app/user', 'Sign in');
 $this->params['breadcrumbs'][] = $this->title;
-$bundle = Asset::register($this);
+$bundle = \app\templates\CommonAsset::register($this);
 ?>
 <div class="login">
     <div class="login-form">

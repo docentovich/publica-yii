@@ -6,7 +6,7 @@
  * Time: 14:16
  */
 
-namespace app\modules\probank\services\backend;
+namespace probank\services\backend;
 
 use app\models\User;
 use Yii;

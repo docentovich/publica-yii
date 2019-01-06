@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\users\events;
+namespace users\events;
 
 use yii\base\Event;
 

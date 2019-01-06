@@ -1,21 +1,17 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
-use app\models\Image;
-use app\models\UserForm;
+use users\models\UsersImage;
+use users\models\UsersProfile;
+use users\models\UsersUser;
+use users\models\UsersUserForm;
 use dektrium\user\Finder;
-use app\models\User;
 use dektrium\user\traits\AjaxValidationTrait;
 use dektrium\user\traits\EventTrait;
 use ImageAjaxUpload\UploadModel;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\web\Cookie;
-use yii\helpers\FileHelper;
-use yii\helpers\Json;
-use Yii;
-use app\models\Profile;
 
 /**
  * SettingsController manages updating user settings (e.g. profile, email and password).
@@ -54,14 +50,14 @@ class SettingsController extends \dektrium\user\controllers\SettingsController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'disconnect' => ['post'],
                     'delete' => ['post'],
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -86,16 +82,16 @@ class SettingsController extends \dektrium\user\controllers\SettingsController
     public function actionSaveProfileForm()
     {
         /** TODO to service */
-        /** @var Profile $profile_model */
+        /** @var UsersProfile $profile_model */
         $profile_model = \Yii::$app->user->identity->myProfile;
-        $profile_model->scenario = Profile::SCENARIO_UPDATE;
+        $profile_model->scenario = UsersProfile::SCENARIO_UPDATE;
         $this->performAjaxValidation($profile_model);
 
         $profile_model->load(\Yii::$app->request->post());
 
         if ($profile_model->validate()) {
             $image_model = $profile_model->avatarNN;
-            $image_model->scenario = Image::SCENARIO_LOAD_FILE;
+            $image_model->scenario = UsersImage::SCENARIO_LOAD_FILE;
             $image_model->load(
                 (new UploadModel())->upload(\Yii::$app->user->getId())->toArray(), ''
             );
@@ -112,12 +108,12 @@ class SettingsController extends \dektrium\user\controllers\SettingsController
     public function actionSaveUserForm()
     {
         /** TODO to service */
-        $user_form_model = new UserForm(['scenario' => UserForm::SCENARIO_UPDATE]);
+        $user_form_model = new UsersUserForm(['scenario' => UsersUserForm::SCENARIO_UPDATE]);
         $this->performAjaxValidation($user_form_model);
 
         if ($user_form_model->load(\Yii::$app->request->post()) && $user_form_model->validate()) {
-            /** @var \app\models\User $user_model */
-            $user_model = (User::findMeTo(User::SCENARIO_UPDATE));
+            /** @var UsersUser  */
+            $user_model = (UsersUser::findMeTo(UsersUser::SCENARIO_UPDATE));
 
             if ($user_model->load($user_form_model->toArray(), '') && $user_model->validate()) {
                 $user_model->save();
@@ -134,63 +130,63 @@ class SettingsController extends \dektrium\user\controllers\SettingsController
      */
     public function actionProfile()
     {
-        /** @var User $identity */
+        /** @var UsersUser $identity */
         $identity = \Yii::$app->user->identity;
         $profile = $identity->myProfile;
-        $profile->scenario = Profile::SCENARIO_UPDATE;
+        $profile->scenario = UsersProfile::SCENARIO_UPDATE;
 
         return $this->render('profile', [
             'identity' => $identity,
             'profile' => $profile,
-            'user_form' => new UserForm(),
+            'user_form' => new UsersUserForm(),
         ]);
     }
 
-
-    /**
-     * Удаление картинок
-     *
-     * @param $name
-     * @return mixed
-     */
-    public function actionImageDelete($name)
-    {
-        $directory = Yii::getAlias('@frontend/web/upload') . DIRECTORY_SEPARATOR . Yii::$app->session->id;
-        if (is_file($directory . DIRECTORY_SEPARATOR . $name)) {
-            unlink($directory . DIRECTORY_SEPARATOR . $name);
-        }
-
-        $files = FileHelper::findFiles($directory);
-        $output = [];
-        foreach ($files as $file) {
-            $fileName = basename($file);
-            $path = '/img/temp/' . Yii::$app->session->id . DIRECTORY_SEPARATOR . $fileName;
-            $output['files'][] = [
-                'name' => $fileName,
-                'size' => filesize($file),
-                'url' => $path,
-                'thumbnailUrl' => $path,
-                'deleteUrl' => 'image-delete?name=' . $fileName,
-                'deleteType' => 'POST',
-            ];
-        }
-        return Json::encode($output);
-    }
-
-    /** TODO standalone action */
-    public function actionSetCity()
-    {
-        if (!Yii::$app->request->isAjax) {
-            throw new HttpException(403, "this action can be access by ajax only");
-        }
-
-        $id = (int)Yii::$app->request->post('id');
-
-        Yii::$app->response->cookies->add(new  Cookie([
-            'name' => 'city_id',
-            'value' => $id
-        ]));
-
-        return '';
-    }
+//
+//    /**
+//     * Удаление картинок
+//     *
+//     * @param $name
+//     * @return mixed
+//     */
+//    public function actionImageDelete($name)
+//    {
+//        $directory = Yii::getAlias('@frontend/web/upload') . DIRECTORY_SEPARATOR . Yii::$app->session->id;
+//        if (is_file($directory . DIRECTORY_SEPARATOR . $name)) {
+//            unlink($directory . DIRECTORY_SEPARATOR . $name);
+//        }
+//
+//        $files = FileHelper::findFiles($directory);
+//        $output = [];
+//        foreach ($files as $file) {
+//            $fileName = basename($file);
+//            $path = '/img/temp/' . Yii::$app->session->id . DIRECTORY_SEPARATOR . $fileName;
+//            $output['files'][] = [
+//                'name' => $fileName,
+//                'size' => filesize($file),
+//                'url' => $path,
+//                'thumbnailUrl' => $path,
+//                'deleteUrl' => 'image-delete?name=' . $fileName,
+//                'deleteType' => 'POST',
+//            ];
+//        }
+//        return Json::encode($output);
+//    }
+//
+//    /** TODO standalone action */
+//    public function actionSetCity()
+//    {
+//        if (!Yii::$app->request->isAjax) {
+//            throw new HttpException(403, "this action can be access by ajax only");
+//        }
+//
+//        $id = (int)Yii::$app->request->post('id');
+//
+//        Yii::$app->response->cookies->add(new  Cookie([
+//            'name' => 'city_id',
+//            'value' => $id
+//        ]));
+//
+//        return '';
+//    }
 }

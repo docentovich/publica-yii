@@ -12,6 +12,14 @@ class DatePickerAsset extends AssetBundle
         'div-datepicker.js'
     ];
 
+    public $css = [
+        'datepicker.css'
+    ];
+
+    public $depends = [
+        'yii\web\YiiAsset',
+    ];
+
     public function __construct(array $config = [])
     {
         $this->js[] = (\Yii::$app->language === Constants::LANGUAGE_RU)

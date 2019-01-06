@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\tosee\models;
+namespace tosee\models;
 
 use Yii;
 use yii\base\Model;
@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\HttpException;
 
 /**
- * ToseePostSearch represents the model behind the search form of `app\modules\tosee\models\ToseePost`.
+ * ToseePostSearch represents the model behind the search form of `tosee\models\ToseePost`.
  */
 class ModeratorPostSearch extends ToseePost
 {

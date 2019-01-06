@@ -1,24 +1,17 @@
 <?php
 
-namespace app\modules\tosee\controllers;
+namespace tosee\controllers;
 
 use app\models\Comments;
 use app\dto\ImagesServiceConfig;
 use app\dto\ImagesTransportModel;
-use app\dto\PostServiceConfig;
-use app\modules\tosee\models\ToseePost;
-use app\modules\tosee\services\ImagesService;
-use app\modules\tosee\services\ToseeImagesService;
-use app\modules\tosee\services\ToseePostService;
-use app\services\BaseImagesService;
-use app\services\BasePostService;
+use tosee\dto\PostServiceConfig;
+use tosee\services\ToseeImagesService;
+use tosee\services\ToseePostService;
 use app\traits\AjaxValidationTrait;
-use yii\base\Module;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\UrlManager;
 
 /**
  * Default controller for the `tosee` module
@@ -26,10 +19,10 @@ use yii\web\UrlManager;
 class FrontPostController extends Controller
 {
     use AjaxValidationTrait;
-    /** @var BasePostService */
-    public $postService;
-    /** @var ImagesService */
-    public $imagesService;
+    /** @var ToseePostService */
+    protected $postService;
+    /** @var \app\services\BaseImagesService */
+    protected $imagesService;
     /**
      * Задаем лайоут
      *
@@ -37,15 +30,24 @@ class FrontPostController extends Controller
      */
     public $layout = "@current_template/layouts/main";
 
-    public function __construct(string $id,
-                                Module $module,
-                                array $config = [],
-                                BasePostService $postService,
-                                BaseImagesService $imagesService)
+    public function setImagesService($imagesService)
+    {
+        $this->imagesService = $imagesService;
+    }
+
+    public function getImagesService()
+    {
+        return $this->imagesService;
+    }
+
+    public function setPostService($postService)
     {
         $this->postService = $postService;
-        $this->imagesService = $imagesService;
-        parent::__construct($id, $module, $config);
+    }
+
+    public function getPostService()
+    {
+        return $this->postService;
     }
 
     /**
@@ -88,11 +90,11 @@ class FrontPostController extends Controller
 
     /**
      * @param array $config
-     * @return \app\dto\PostTransportModel
+     * @return \tosee\dto\PostTransportModel
      * @throws \Throwable
      * @throws \yii\base\ExitException
      */
-    private function getPostTransportModel($config = []): \app\dto\PostTransportModel
+    private function getPostTransportModel($config = []): \tosee\dto\PostTransportModel
     {
         return $this->postService->action(
             new PostServiceConfig($config)
@@ -156,7 +158,7 @@ class FrontPostController extends Controller
         return $this->render('posts', [
             "postModel" => $this->getPostTransportModel([
                 'action' => ToseePostService::ACTION_BY_DATE,
-                'date' => new \DateTime($date)
+                'date' => $date
             ])
         ]);
     }
@@ -174,8 +176,8 @@ class FrontPostController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $data = \Yii::$app->request->post();
 
-        /** @var ImagesTransportModel $transporModel */
-        $transportModel = $this->imageService->action(
+        /** @var ImagesTransportModel  */
+        $transportModel = $this->imagesService->action(
             new ImagesServiceConfig([
                 'action' => ToseeImagesService::ACTION_LIKE,
                 'user_id' => \Yii::$app->user->getId(),

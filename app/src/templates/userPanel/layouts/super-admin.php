@@ -4,7 +4,7 @@
  */
 use yii\helpers\Html;
 
-$bundle = \app\assets\Asset::register($this);
+$bundle = \app\templates\CommonAsset::register($this);
 $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
 ?>
 <?php \app\widgets\header\Header::begin([

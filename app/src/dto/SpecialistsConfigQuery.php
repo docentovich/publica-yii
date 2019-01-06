@@ -6,7 +6,7 @@ use app\dto\ConfigQuery;
 
 /**
  * Class SpecialistsConfigQuery
- * @property SpecialistsServiceConfig $config
+ * @property ProbankSpecialistsServiceConfig $config
  * @package app\dto
  */
 class SpecialistsConfigQuery extends ConfigQuery

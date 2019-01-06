@@ -10,6 +10,7 @@ class HeaderAssets extends  AssetBundle
 
     public $css = [
         'css/index.css',
+        'css/additional-styles.css',
     ];
     public $js = [
         'js/index.js',

@@ -1,7 +1,6 @@
 <?php
 
-namespace app\modules\tosee\services;
-
+namespace tosee\services;
 
 use app\services\BaseImagesService;
 

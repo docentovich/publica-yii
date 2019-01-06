@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\helpers\Helpers;
-use app\modules\tosee\models\ToseePost;
+use tosee\models\ToseePost;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\tosee\models\ToseePost */
+/* @var $model tosee\models\ToseePost */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/post', 'Posts'), 'url' => ['index']];

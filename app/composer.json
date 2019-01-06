@@ -51,8 +51,7 @@
     },
     "autoload": {
         "psr-4": {
-            "app\\": "src/",
-            "ImageAjaxUpload\\": "src/components/image-ajax-upload/"
+            "app\\": "src/"
         }
     }
 }

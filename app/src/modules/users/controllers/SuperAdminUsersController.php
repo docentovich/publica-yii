@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
 
-use app\models\User;
+use users\models\UsersUser;
 use yii\db\ActiveRecord;
 
 class SuperAdminUsersController extends SuperAdminController
 {
     protected function getModel(...$params): ActiveRecord
     {
-        return new User();
+        return new UsersUser();
     }
 }

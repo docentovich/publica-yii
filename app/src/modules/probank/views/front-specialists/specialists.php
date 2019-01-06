@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \app\dto\SpecialistsTransportModel $specialistTransportModel
+ * @var \app\dto\ProbankSpecialistsTransportModel $specialistTransportModel
  */
 ?>
 

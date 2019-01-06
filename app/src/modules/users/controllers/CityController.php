@@ -1,9 +1,8 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
-
-use app\models\City;
+use users\models\UsersCity;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Cookie;
@@ -25,7 +24,7 @@ class CityController extends Controller
 
     public function actionSetCity($id)
     {
-        if(City::findOne(["id" => $id]) === null){
+        if(UsersCity::findOne(["id" => $id]) === null){
             throw new \Exception('incorrect city', 405);
         }
 

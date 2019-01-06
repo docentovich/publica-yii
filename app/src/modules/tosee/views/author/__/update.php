@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\tosee\models\ToseePost */
+/* @var $model tosee\models\ToseePost */
 
 $this->title = Yii::t('app/post', 'Редактирование записи: ') . $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/post', 'Posts'), 'url' => ['index']];

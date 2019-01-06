@@ -1,27 +1,67 @@
 <?php
 
-namespace app\modules\tosee\services;
+namespace tosee\services;
 
 use app\dto\ConfigQuery;
-use app\models\Image;
-use app\dto\PostServiceConfig;
-use app\modules\tosee\models\ToseePost;
-use app\services\BaseSearchService;
+use ImageAjaxUpload\UploadDTO;
+use tosee\dto\PostServiceConfig;
+use tosee\dto\PostTransportModel;
 use ImageAjaxUpload\UploadModel;
 use League\Pipeline\Pipeline;
+use tosee\models\ToseeImage;
+use tosee\models\ToseePost;
+use tosee\models\ToseePostQuery;
 use yii\helpers\Url;
-use yii\web\Cookie;
-use Yii;
 
 class ToseePostService extends \app\services\BasePostService
 {
-    /** @var BaseSearchService BaseSearchService  */
-    private $searchService;
+    const ACTION_FUTURE = 1;
+    const ACTION_PAST = 2;
+    const ACTION_SEARCH = 3;
+    const ACTION_SINGLE_POST = 4;
+    const ACTION_DATE_PICKER = 5;
+    const ACTION_BY_DATE = 6;
+    const ACTION_SAVE_POST = 7;
 
-    public function __construct(array $config = [], BaseSearchService $searchService)
+    /** @var \app\services\BaseSearchService */
+    protected $searchService;
+
+    /**
+     * @param PostServiceConfig $config
+     * @return PostTransportModel
+     * @throws \Throwable
+     * @throws \yii\base\ExitException
+     */
+    public function action(\app\interfaces\config $config): \app\dto\TransportModel
     {
-        $this->searchService = $searchService;
-        parent::__construct($config);
+        $this->beforeAction($config);
+        switch ($config->action) {
+            case self::ACTION_PAST:
+            case self::ACTION_FUTURE:
+            case self::ACTION_BY_DATE:
+                return $this->actionPostsByDate($config);
+            case self::ACTION_SEARCH:
+                return $this->actionPostsByKeyword($config);
+            case self::ACTION_SINGLE_POST:
+                return $this->actionPostsById($config);
+            case self::ACTION_SAVE_POST:
+                return $this->actionSavePost($config);
+        }
+    }
+
+    public function beforeAction(&$config)
+    {
+        $config->configFromQueryParams = new PostServiceConfig(\Yii::$app->request->get('config'));
+    }
+
+    public function setSearchService($service)
+    {
+        $this->searchService = $service;
+    }
+
+    public function getSearchService()
+    {
+        return $this->searchService;
     }
 
     /**
@@ -29,18 +69,19 @@ class ToseePostService extends \app\services\BasePostService
      * Past, future, concreet date getter
      *
      * @param PostServiceConfig $config
-     * @return \app\dto\PostTransportModel
+     * @return PostTransportModel
      * @throws \Throwable
      */
-    protected function actionPostsByDate(PostServiceConfig $config): \app\dto\PostTransportModel
+    protected function actionPostsByDate(PostServiceConfig $config): PostTransportModel
     {
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
             ->pipe([$this, 'prepareQuery'])
+            ->pipe([$this, 'prepareCityQuery'])
             ->pipe([$this, 'prepareQueryByDate'])
             ->process(new ConfigQuery($config, ToseePost::find()));
 
-        return new \app\dto\PostTransportModel($configQuery, $this->all($configQuery));
+        return new PostTransportModel($configQuery, $this->all($configQuery));
     }
 
     /**
@@ -48,10 +89,10 @@ class ToseePostService extends \app\services\BasePostService
      * Single post getter
      *
      * @param PostServiceConfig $config
-     * @return \app\dto\PostTransportModel
+     * @return PostTransportModel
      * @throws \Throwable
      */
-    protected function actionPostsById(PostServiceConfig $config): \app\dto\PostTransportModel
+    protected function actionPostsById(PostServiceConfig $config): PostTransportModel
     {
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
@@ -60,26 +101,24 @@ class ToseePostService extends \app\services\BasePostService
             ->process(new ConfigQuery($config, ToseePost::find()));
 
         $post = $this->one($configQuery);
-        $prevPost = \Yii::$app->db->cache(function () use ($post) {
-            try{
-                return $this->siblingPost('<', $post);
-            }catch (\Exception $e){
-                return null;
-            }
-        });
-        $nextPost = \Yii::$app->db->cache(function () use ($post) {
-            try{
-                return $this->siblingPost('>', $post);
-            }catch (\Exception $e){
-                return null;
-            }
-        });
 
-        return new \app\dto\PostTransportModel(
+        $prevPost = $this->siblingPost(
+            $config->configFromQueryParams->action !== self::ACTION_PAST ? '<' : '>',
+            $post,
+            $config
+        );
+
+        $nextPost = $this->siblingPost(
+            $config->configFromQueryParams->action !== self::ACTION_PAST ? '>' : '<',
+            $post,
+            $config
+        );
+
+        return new PostTransportModel(
             $configQuery,
             $post,
-            $this->postLink($prevPost),
-            $this->postLink($nextPost)
+            $prevPost,
+            $nextPost
         );
     }
 
@@ -87,21 +126,22 @@ class ToseePostService extends \app\services\BasePostService
      * `Action`
      * поиск по ключевому слову
      *
-     * @param $keyword
-     * @return \app\dto\PostTransportModel
+     * @param PostServiceConfig $config
+     * @return PostTransportModel
      * @throws \Throwable
      */
-    protected function actionPostsByKeyword(PostServiceConfig $config): \app\dto\PostTransportModel
+    protected function actionPostsByKeyword(PostServiceConfig $config): PostTransportModel
     {
         $config->keyword = \Yii::$app->request->get('keyword');
 
         /** @var ConfigQuery $configQuery */
         $configQuery = (new Pipeline())
             ->pipe([$this, 'prepareQuery'])
+            ->pipe([$this, 'prepareCityQuery'])
             ->pipe([$this, 'prepareQueryByKeyWord'])
             ->process(new ConfigQuery($config, ToseePost::find()));
 
-        return \app\dto\PostTransportModel::build(
+        return PostTransportModel::build(
             $this->searchService->search($configQuery, '/project/front-post/post')
         );
     }
@@ -112,17 +152,20 @@ class ToseePostService extends \app\services\BasePostService
      * If is successful, the browser will be redirected to the 'view' page.
      *
      * @param PostServiceConfig $config
-     * @return \app\dto\PostTransportModel
+     * @return PostTransportModel
      * @throws \yii\base\ExitException
      */
-    protected function actionSavePost(PostServiceConfig $config): \app\dto\PostTransportModel
+    protected function actionSavePost(PostServiceConfig $config): PostTransportModel
     {
-        $this->savePostData($config->post);
-        $this->saveMainPhoto($config->post);
-        $this->saveAdditionalPhoto($config->post);
+        if ($config->post->load(\Yii::$app->request->post()) && $config->post->validate() && $config->post->save()) {
+            $this->savePostData($config->post);
+            $this->saveMainPhoto($config->post);
+            $this->saveAdditionalPhoto($config->post);
 
-        Yii::$app->getResponse()->redirect(Url::to(['update', 'id' => $config->post->id]));
-        \Yii::$app->end();
+            \Yii::$app->getResponse()->redirect(Url::to(['update', 'id' => $config->post->id]));
+            \Yii::$app->end();
+        }
+        return new PostTransportModel(new ConfigQuery($config), false);
     }
 
     /**
@@ -134,18 +177,21 @@ class ToseePostService extends \app\services\BasePostService
      */
     public function prepareQuery(ConfigQuery $configQuery): ConfigQuery
     {
-        if (Yii::$app->request->cookies->has("city_id")) {
-            $this->city_id = Yii::$app->request->cookies->getValue("city_id");
-        } else {
-            Yii::$app->response->cookies->add(new Cookie([
-                'name' => 'city_id',
-                'value' => $this->city_id
-            ]));
-        }
-
         $configQuery->query->with(["postData", "image"])
-            ->andWhere(["=", "status", ToseePost::STATUS_ACTIVE])
-            ->andWhere(["=", "city_id", $this->city_id]);
+            ->andWhere(["=", "status", ToseePost::STATUS_ACTIVE]);
+        return $configQuery;
+    }
+
+    /**
+     * `Query pipe`
+     * Prepare query condition by cite
+     *
+     * @param ConfigQuery $configQuery
+     * @return ConfigQuery
+     */
+    public function prepareCityQuery(ConfigQuery $configQuery): ConfigQuery
+    {
+        $configQuery->query->currentCity();
         return $configQuery;
     }
 
@@ -160,20 +206,18 @@ class ToseePostService extends \app\services\BasePostService
     {
         /** @var PostServiceConfig $post_config */
         $post_config = $configQuery->config;
-        $compare_method = '';
         switch ($post_config->action) {
             case self::ACTION_FUTURE:
-                $compare_method .= '>=';
+                $configQuery->query->future()->orderByDateAsc();
                 break;
             case self::ACTION_PAST:
-                $compare_method .= '<=';
+                $configQuery->query->past()->orderByDateDesc();
                 break;
             case self::ACTION_BY_DATE:
-                $compare_method .= '=';
+                $configQuery->query->date($post_config->date)->orderByDateAsc();
                 break;
         }
 
-        $configQuery->query->andWhere([$compare_method, "event_at", $post_config->date->format('Y-m-d')]);
         return $configQuery;
     }
 
@@ -186,23 +230,7 @@ class ToseePostService extends \app\services\BasePostService
      */
     public function prepareQueryByKeyWord(ConfigQuery $configQuery): ConfigQuery
     {
-        /**
-         * @var PostServiceConfig $post_config
-         */
-        $post_config = $configQuery->config;
-        $condition = [
-            "or",
-            ["like", "postData.title", $post_config->keyword],
-            ["like", "postData.sub_header", $post_config->keyword],
-            ["like", "postData.post_short_desc", $post_config->keyword],
-            ["like", "postData.post_desc", $post_config->keyword]
-        ];
-
-        $configQuery->query
-            ->joinWith(['postData' => function($q){
-                $q->alias('postData');
-            }])
-            ->andOnCondition($condition);
+        $configQuery->query->keyword($configQuery->config->keyword)->orderByDateAsc();
         return $configQuery;
     }
 
@@ -217,7 +245,7 @@ class ToseePostService extends \app\services\BasePostService
     {
         /** @var PostServiceConfig $post_config */
         $post_config = $configQuery->config;
-        $configQuery->query->andWhere(['id' => $post_config->id]);
+        $configQuery->query->id($post_config->id);
         return $configQuery;
     }
 
@@ -225,29 +253,46 @@ class ToseePostService extends \app\services\BasePostService
     /**`Helper`
      * Return the next or prev post
      *
-     * @param $compare
-     * @param $post
-     * @return mixed
+     * @param string $compare
+     * @param ToseePost $post
+     * @param PostServiceConfig $config
+     * @return ToseePost|null
      * @throws \Throwable
      */
-    private function siblingPost($compare, $post)
+    private function siblingPost($compare, $post, $config)
     {
-        return ToseePost::find()
-            ->andWhere([$compare, 'id', $post->id])
-            ->andWhere(['=', 'status', ToseePost::STATUS_ACTIVE])
-            ->one();
-    }
+        try {
+            /** @var ToseePostQuery $query */
+            $query = ToseePost::find()
+                ->orderByDate(($compare === '>') ? SORT_ASC : SORT_DESC)
+                ->andWhere([$compare, 'event_at', $post->eventAt])
+                ->orWhere([
+                    'and',
+                    [$compare, 'id', $post->id],
+                    [$compare . '=', 'event_at', $post->eventAt]
+                ])
+                ->active()
+                ->currentCity();
 
-    /**
-     * `Helper`
-     * Return link to the next or prev post
-     *
-     * @param $model
-     * @return string
-     */
-    private function postLink($model)
-    {
-        return ($model) ? "/post/{$model->id}" : '#';
+            switch ($config->configFromQueryParams->action) {
+                case self::ACTION_FUTURE:
+                    $query->future();
+                    break;
+                case self::ACTION_PAST:
+                    $query->past();
+                    break;
+                case self::ACTION_BY_DATE:
+                    $query->date($config->configFromQueryParams->date);
+                    break;
+                case self::ACTION_SEARCH:
+                    $query->keyword($config->configFromQueryParams->keyword);
+                    break;
+            }
+
+            return $query->one();
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
 
@@ -262,7 +307,8 @@ class ToseePostService extends \app\services\BasePostService
         array_map(
             function ($item) use ($post) {
                 /** @var UploadDTO $item */
-                $image = new Image();
+
+                $image = new ToseeImage();
                 $image->load($item->toArray(), '');
                 if ($image->validate()) {
                     $image->save();
@@ -279,7 +325,7 @@ class ToseePostService extends \app\services\BasePostService
      */
     private function savePostData(ToseePost $post)
     {
-        if ($post->postDataNN->load(Yii::$app->request->post()) && $post->postDataNN->validate()) {
+        if ($post->postDataNN->load(\Yii::$app->request->post()) && $post->postDataNN->validate()) {
             $post->link('postData', $post->postDataNN);
         }
     }

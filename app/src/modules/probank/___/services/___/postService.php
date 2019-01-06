@@ -6,9 +6,9 @@
  * Time: 23:39
  */
 
-namespace app\modules\probank\services\frontend;
+namespace probank\services\frontend;
 
-use app\modules\probank\models\common\Post;
+use probank\models\Post;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use yii\web\Cookie;
 use yii\web\ForbiddenHttpException;
@@ -23,7 +23,7 @@ use yii\web\HttpException;
  * логику выборки постов, наприме искать только активные, то все это происходит тут.
  *
  * Class Post
- * @package app\modules\probank\service
+ * @package probank\service
  */
 class postService extends Services
 {

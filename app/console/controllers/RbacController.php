@@ -9,8 +9,8 @@
 namespace console\controllers;
 
 
-use common\models\User;
-use app\modules\tosee\models\Post;
+//use common\models\User;
+//use app\modules\tosee\models\Post;
 use console\rbac\AuthorRule;
 use console\rbac\CityRule;
 use yii\base\Controller;
@@ -129,8 +129,8 @@ class RbacController extends Controller
         $auth->addChild($user, $orders);
 
 
-        $auth = Yii::$app->getAuthManager();
-        $auth->assign($auth->getRole("author"), 2);
+//        $auth = Yii::$app->getAuthManager();
+//        $auth->assign($auth->getRole("author"), 2);
         echo "specialists-rules done" . PHP_EOL;
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
 class RecoveryController extends \dektrium\user\controllers\RecoveryController
 {

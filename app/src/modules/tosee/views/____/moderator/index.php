@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use app\modules\tosee\models\ToseePost;
+use tosee\models\ToseePost;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\tosee\models\ToseePostSearch */
+/* @var $searchModel tosee\models\ToseePostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app/post', 'Posts');

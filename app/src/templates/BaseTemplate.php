@@ -17,6 +17,7 @@ class BaseTemplate
     {
         $this->view = $view;
         $this->bundle = $bundle;
+        CommonAsset::register($view);
         ob_start();
     }
 
@@ -39,7 +40,6 @@ class BaseTemplate
                 var lang = '<?= \Yii::$app->language; ?>';
             </script>
             <?php $this->view->head() ?>
-            <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
         </head>
         <body class="pageload">
         <?php $this->view->beginBody() ?>

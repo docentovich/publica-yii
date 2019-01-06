@@ -1,20 +1,17 @@
 <?php
 
-namespace app\assets;
+namespace app\templates\userPanel;
 use yii\web\AssetBundle;
 
 class Asset extends AssetBundle
 {
     public $sourcePath = '@current_template/assets';
     public $css = [
-        'css/main.css',
+        'css/user-panel.css',
         'css/additional-styles.css',
         'css/tables.css',
-        'css/base.css',
-        'bundle/vendor.css',
     ];
     public $js = [
-        'bundle/vendor.js',
         'js/main.js',
         'js/additional.js',
     ];
@@ -24,6 +21,7 @@ class Asset extends AssetBundle
         'yii\web\YiiAsset',
         'app\assets\ImagesLoadedAsset',
         'app\assets\FontAwesomeAsset',
+        'app\templates\CommonAsset'
     ];
 
 }

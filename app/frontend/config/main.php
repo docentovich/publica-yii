@@ -10,12 +10,12 @@ switch (PROJECT) {
     case  TOSEE:
         $domain_params = [
             'bootstrap' => [
-                'app\modules\tosee\Bootstrap',
-                'app\modules\tosee\FrontendBootstrap',
+                'tosee\Bootstrap',
+                'tosee\FrontendBootstrap',
             ],
             'modules' => [
                 'project' => [
-                    'class' => 'app\modules\tosee\Module',
+                    'class' => 'tosee\Module',
                 ]
             ]
         ];
@@ -23,12 +23,12 @@ switch (PROJECT) {
     case PROBANK:
         $domain_params = [
             'bootstrap' => [
-                'app\modules\probank\Bootstrap',
-                'app\modules\probank\FrontendBootstrap',
+                'probank\Bootstrap',
+                'probank\FrontendBootstrap',
             ],
             'modules' => [
                 'project' => [
-                    'class' => 'app\modules\probank\Module',
+                    'class' => 'probank\Module',
                 ]
             ]
         ];
@@ -43,10 +43,13 @@ $config = [
     'bootstrap' => [
         'log',
         'app\templates\BootstrapFront',
-        'app\modules\users\Bootstrap',
         'jsUrlManager'  // need to be after all bootstrap adding rules
     ],
     'components' => [
+        'errorHandler' => [
+            'errorAction' => 'error-handler/error',
+        ],
+
         'user' => [
             'loginUrl' => '/admin/user/login'
         ],
@@ -69,11 +72,16 @@ $config = [
                 ],
             ],
         ],
+
+
     ],
     'modules'    => [
         'user' => [
             // following line will restrict access to admin controller from frontend application
             'as frontend' => 'dektrium\user\filters\FrontendFilter',
+        ],
+        'planner' => [
+            'layout' => '@current_template/layouts/main'
         ],
     ],
     'params'     => $params,

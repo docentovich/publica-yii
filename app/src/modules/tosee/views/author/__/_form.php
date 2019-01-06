@@ -6,7 +6,7 @@ use yii\jui\DatePicker;
 use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\tosee\models\ToseePost */
+/* @var $model tosee\models\ToseePost */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $upload app\models\UploadImage */
 ?>

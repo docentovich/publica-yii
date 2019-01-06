@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \app\modules\tosee\models\ToseePost $post
+ * @var \tosee\models\ToseePost $post
  */
 
 use yii\widgets\ActiveForm;

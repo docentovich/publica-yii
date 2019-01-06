@@ -1,13 +1,11 @@
 <?php
 
-namespace app\modules\probank\controllers;
+namespace probank\controllers;
 
-use app\dto\SpecialistsServiceConfig;
-use app\modules\probank\models\ProbankPortfolio;
-use app\modules\probank\services\ProbankSpecialistsService;
-use app\services\BaseSpecialistsService;
+use probank\dto\ProbankSpecialistsServiceConfig;
+use probank\models\ProbankPortfolio;
+use probank\services\ProbankSpecialistsService;
 use app\traits\AjaxValidationTrait;
-use yii\base\Module;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
@@ -16,19 +14,20 @@ class ModelController extends Controller
     use AjaxValidationTrait;
 
     public $layout = "@current_template/layouts/user";
-    /** @var BaseSpecialistsService  */
-    private $specialistsService;
+    /** @var \app\services\BaseSpecialistsService */
+    protected $specialistsService;
 
-    public function __construct(string $id,
-                                Module $module,
-                                array $config = [],
-                                BaseSpecialistsService $specialistsService)
+    public function setSpecialistsService($specialistsService)
     {
         $this->specialistsService = $specialistsService;
-        parent::__construct($id, $module, $config);
+    }
+    public function getSpecialistsService()
+    {
+        return $this->specialistsService;
     }
 
-    /**
+
+        /**
      * @inheritdoc
      */
     public function behaviors()
@@ -54,7 +53,7 @@ class ModelController extends Controller
     public function actionPortfolio()
     {
         $transportModel = $this->specialistsService->action(
-            new SpecialistsServiceConfig([
+            new ProbankSpecialistsServiceConfig([
                 'action' => ProbankSpecialistsService::ACTION_PORTFOLIO,
                 'type' => ProbankPortfolio::PORTFOLIO_MODEL_TYPE
             ])

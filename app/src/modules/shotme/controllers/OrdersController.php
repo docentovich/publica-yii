@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\probank\controllers;
+namespace probank\controllers;
 
 use yii\filters\AccessControl;
 use yii\web\Controller;

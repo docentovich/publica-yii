@@ -17,6 +17,7 @@ use yii\helpers\ArrayHelper;
  */
 class City extends \yii\db\ActiveRecord
 {
+    const DEFAULT_CITY_ID = 1;
     /**
      * @inheritdoc
      */
@@ -73,6 +74,11 @@ class City extends \yii\db\ActiveRecord
         return  ArrayHelper::map(self::find()->all(), 'id', function ($val){
             return \Yii::t('app/cities', $val->label);
         });
+    }
+
+    public static function getCurrentCityId()
+    {
+        return \Yii::$app->request->cookies->getValue('city_id') ?? self::DEFAULT_CITY_ID;
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\tosee;
+namespace tosee;
 
 
 use app\interfaces\ModuleUrls;

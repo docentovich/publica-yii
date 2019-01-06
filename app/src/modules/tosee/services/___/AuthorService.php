@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\tosee\services\backend;
+namespace tosee\services\backend;
 
 use app\Services;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Yii;
-use app\modules\tosee\models\ToseePost;
+use tosee\models\ToseePost;
 use yii\web\HttpException;
 
 class authorService extends Services

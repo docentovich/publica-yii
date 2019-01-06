@@ -1,9 +1,9 @@
 <?php
 
-namespace app\modules\probank;
+namespace probank;
 
 use app\interfaces\ModuleUrls;
-use app\models\Portfolio;
+use probank\models\ProbankPortfolio;
 
 class ProbankUrls implements ModuleUrls
 {
@@ -13,7 +13,7 @@ class ProbankUrls implements ModuleUrls
             '' => 'project/front-specialists/index',
             'specialist/<id:\d+>' => 'project/front-specialists/specialist',
             'search' => 'project/front-specialists/search',
-            '<type:(' . strtolower(Portfolio::getSeparatedAllowedTypes('|') ) . ')>' => 'project/front-specialists/type'
+            '<type:(' . strtolower(ProbankPortfolio::getSeparatedAllowedTypes('|') ) . ')>' => 'project/front-specialists/type'
         ];
     }
 

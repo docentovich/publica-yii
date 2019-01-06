@@ -7,11 +7,11 @@ use app\models\User;
 use app\dto\ImagesConfigQuery;
 use app\dto\ImagesServiceConfig;
 use app\dto\ImagesTransportModel;
-use app\modules\tosee\models\ToseeLike;
+use tosee\models\ToseeLike;
 
 /**
  * Class BaseImagesService
- * @package app\modules\tosee\services
+ * @package tosee\services
  */
 class BaseImagesService extends \app\abstractions\Services
 {

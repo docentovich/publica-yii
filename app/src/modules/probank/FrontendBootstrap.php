@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\probank;
+namespace probank;
 
 use yii\base\BootstrapInterface;
 

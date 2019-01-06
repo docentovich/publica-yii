@@ -1,20 +1,38 @@
 <?php
 /**
- * @var \app\dto\PostTransportModel $postModel
+ * @var \tosee\dto\PostTransportModel $postModel
  * @var $this yii\web\View
  */
+
+/**
+ * @param \app\models\Post|null $post
+ * @param string $linkClass
+ * @return string
+ */
+$chevronLink = function ($post, $linkClass) use ($postModel)
+{
+    $tag = \yii\helpers\Html::tag('span', '', ['class' => $linkClass]);
+    if ($post !== null) {
+        return \yii\helpers\Html::a(
+            $tag, \yii\helpers\ArrayHelper::merge(
+            ['front-post/post', 'id' => $post->id],
+            ['config' => $postModel->config->configFromQueryParams->toArray()]
+        ));
+    } else {
+        return $tag;
+    }
+}
 
 ?>
 
 <div class="single-post">
     <div class="post-header">
-        <a href="<?= $postModel->prevLink; ?>">
-            <div class="chevron-left"></div>
-        </a>
 
-        <a href="<?= $postModel->nextLink; ?>">
-            <div class="chevron-right"></div>
-        </a>
+        <?= $chevronLink(
+                $postModel->prevPost,
+                'chevron-left'
+        ); ?>
+        <?= $chevronLink($postModel->nextPost, 'chevron-right'); ?>
 
         <div class="title"><?= $postModel->result->postData->title; ?></div>
         <div class="sub-title"><?= $postModel->result->event_at; ?></div>

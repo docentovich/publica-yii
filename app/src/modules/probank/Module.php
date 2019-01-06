@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\probank;
+namespace probank;
 
 /**
  * probank module definition class
@@ -10,5 +10,5 @@ class Module extends \yii\base\Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'app\modules\probank\controllers';
+    public $controllerNamespace = 'probank\controllers';
 }

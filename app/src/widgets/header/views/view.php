@@ -14,7 +14,9 @@ $filtered_projects = array_filter(
     function ($key) use ($currentProject) {
         return $key !== $currentProject;
     },
-    ARRAY_FILTER_USE_KEY);
+    ARRAY_FILTER_USE_KEY
+);
+
 ?>
     <div style="box-sizing: content-box">
         <header style="box-sizing: content-box">
@@ -66,13 +68,16 @@ $filtered_projects = array_filter(
                 </div>
                 <div class="action-panel toggle-overlay" id="drop-down-geo" rel="geo">
                     <div class="action-panel-control">
-                        <i class="icon-geo"></i><span><?= \Yii::t('app/cities', $current_city->label); ?></span>
+                        <i class="icon-geo"></i>
+                        <span><?= \Yii::t('app/cities', $current_city->label); ?></span>
                     </div>
                 </div>
                 <div class="action-panel" id="drop-down-search">
                     <div class="action-panel-control">
-                        <div id="search-placeholder"><i class="icon-search"></i>
-                            <span><?= \Yii::t('app/tosee', 'search on website'); ?></span></div>
+                        <div id="search-placeholder">
+                            <i class="icon-search"></i>
+                            <span><?= \Yii::t('app/tosee', 'search on website'); ?></span>
+                        </div>
                         <input type="text" value="" id="search-input" rel="search"/>
                     </div>
                 </div>
@@ -111,6 +116,6 @@ $filtered_projects = array_filter(
     </div>
     <div class="overlay" id="search-overlay">
         <ul id="search-results-list" class="overlay-list"></ul>
-    </div>
+  +  </div>
 
 <?= $content; ?>

@@ -38,7 +38,7 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
             </div>
 
             <div id="sidebar-calendar">
-                <div id="calendar-back"><i class="fas fa-long-arrow-alt-left" id=""></i></div>
+                <div id="calendar-back"><i class="fa fa-long-arrow-left" id=""></i></div>
                 <div class="div-datepicker" data-provide="datepicker"></div>
             </div>
         </div>

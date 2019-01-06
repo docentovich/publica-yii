@@ -53,9 +53,6 @@
     background: #000;
 }
 
-.fancybox-slide--html .fancybox-close-small{
-    color: #fff !important;
-}
 
 body{
     padding-top: 43px;
@@ -90,10 +87,7 @@ img.no-image{
     border-radius: 0 !important;
 }
 
-.fancybox-container > .fancybox-inner > .fancybox-navigation{
-    display: none;
-}
 
-.fancybox-caption, .fancybox-infobar, .fancybox-navigation .fancybox-button, .fancybox-toolbar{
-    visibility: visible !important;
+.single-member .member-body .member-base-image .image-inner{
+    max-height: none !important;
 }

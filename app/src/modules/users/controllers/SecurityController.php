@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
 class SecurityController extends \dektrium\user\controllers\SecurityController
 {

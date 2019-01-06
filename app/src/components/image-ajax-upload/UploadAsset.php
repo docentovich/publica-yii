@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: docen
- * Date: 10/27/2018
- * Time: 12:20 AM
- */
 
 namespace ImageAjaxUpload;
-
 
 use yii\web\AssetBundle;
 

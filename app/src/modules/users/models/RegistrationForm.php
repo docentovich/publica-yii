@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace app\modules\users\models;
+namespace users\models;
 
 use dektrium\user\traits\ModuleTrait;
 use app\models\User;

@@ -1,8 +1,9 @@
 <?php
 
-namespace app\modules\users;
+namespace users;
 
-use app\modules\users\services\UserService;
+use users\controllers\RegistrationController;
+use users\services\UserService;
 use yii\base\BootstrapInterface;
 
 class Bootstrap implements BootstrapInterface
@@ -25,15 +26,16 @@ class Bootstrap implements BootstrapInterface
                     'choose-role' => '/user/registration/choose-role',
                     'save-user' => '/user/settings/save-user-form',
                     'save-profile' => '/user/settings/save-profile-form',
-                    'profile/upload-avatar'    => '/user/settings/upload-avatar',
-                    'avatar-upload'    => '/user/settings/upload-avatar',
                     'my/<controller:[\w\-]+>/<action:[\w\-]+>'    => '/user/<controller>/<action>',
                     'my/<controller:[\w\-]+>'    => '/user/<controller>/index',
-                    '<action:[\w\-]+>' => '/user/settings/<action>',
+                    '<action:(account|networks|disconnect|delete|set-city)>' => '/user/settings/<action>',
                 ]
             );
         }
 
-        \Yii::$container->set('app\services\BaseUserService', UserService::class);
+        \Yii::$container->setSingleton('UserService', ["class" => UserService::class]);
+        \Yii::$container->set(RegistrationController::class, [
+            'userService' =>  \Yii::$container->get('UserService')
+        ]);
     }
 }

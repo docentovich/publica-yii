@@ -11,12 +11,21 @@
 #calendar-back i{
     color: #fff;
     float: left;
-    font-size: 25px;
+    font-size: 17px;
+    cursor: pointer;
 }
 #calendar-back:after{
     content: '';
     display: table;
     clear: both;
+}
+
+.datepicker-days{
+    max-width: 450px;
+    margin: auto;
+}
+.datepicker-days .day{
+    cursor: pointer;
 }
 
 #sidebar-calendar{
@@ -36,6 +45,7 @@
 
 #sidebar-calendar .div-datepicker{
     display: table;
+    width: 100%;
     height: calc(100% - 100px);
 }
 
@@ -51,10 +61,6 @@
 
 .modal-image{
     background: #000;
-}
-
-.fancybox-slide--html .fancybox-close-small{
-    color: #fff !important;
 }
 
 body{
@@ -88,4 +94,12 @@ img.loading{
 
 img.no-image{
     border-radius: 0 !important;
+}
+
+#calendar-href{
+    cursor: pointer;
+}
+
+.single-member .member-body .member-base-image .image-inner{
+    max-height: none !important;
 }

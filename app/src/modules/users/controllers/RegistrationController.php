@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace users\controllers;
 
-use app\models\UserForm;
-use app\dto\UserServiceConfig;
-use app\modules\users\events\UserFormEvent;
-use app\modules\users\services\UserService;
+use users\models\UsersUserForm;
+use users\dto\UserServiceConfig;
+use users\events\UserFormEvent;
+use users\services\UserService;
 use dektrium\user\Finder;
 use dektrium\user\traits\AjaxValidationTrait;
 use dektrium\user\traits\EventTrait;
@@ -34,15 +34,16 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
 
     public $layout = "@current_template/layouts/user";
 
-    public function __construct(string $id,
-                                \yii\base\Module $module,
-                                Finder $finder,
-                                UserService $userService,
-                                array $config = [])
+    public function setUserService($userService)
     {
         $this->userService = $userService;
-        parent::__construct($id, $module, $finder, $config);
     }
+
+    public function getUserService()
+    {
+        return $this->userService;
+    }
+
 
     /** @inheritdoc */
     public function behaviors()
@@ -93,7 +94,7 @@ class RegistrationController extends \dektrium\user\controllers\RegistrationCont
      */
     public function actionRegister()
     {
-        $user_form_model = new UserForm(['scenario' => UserForm::SCENARIO_REGISTER]);
+        $user_form_model = new UsersUserForm(['scenario' => UsersUserForm::SCENARIO_REGISTER]);
         $this->performAjaxValidation($user_form_model);
 
         // bind on service event decktrium event

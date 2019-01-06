@@ -1,7 +1,6 @@
 //http://davidwalsh.name/javascript-debounce-function
-function debounce(func, wait, immediate) { // TODO move ti main js
+function debounce(func, wait, immediate) { // TODO move too main js
     var timeout;
-    // todo minimum 3-5 symbols
     return function () {
         var context = this, args = arguments;
         var later = function () {
@@ -17,12 +16,12 @@ function debounce(func, wait, immediate) { // TODO move ti main js
 
 $('#search-input').on('keyup', debounce(function () {
     var $this = $(this);
-    if(!$this.val() || ($this.val() && ($this.val().length < 4) )){
+    var $search_results_list = $('#search-results-list');
+    $search_results_list.html('');
+    if(!$this.val() || ($this.val() && ($this.val().length < 2) )){
         return;
     }
     var url = UrlManager.createUrl('/search', {keyword: $this.val()});
-    var $search_results_list = $('#search-results-list');
-    $search_results_list.html('');
 
     $.post(url, function (data) {
         $search_results_list.html('');
@@ -39,4 +38,4 @@ $('#search-input').on('keyup', debounce(function () {
             $search_results_list.append(searchResult(result));
         })
     })
-}, 500));
+}, 800));

@@ -6,7 +6,8 @@ $config = [
     'language' => 'ru-RU',
     'name' => 'Publica',
     'bootstrap' => [
-        'common\config\Aliases',
+        'users\Bootstrap',
+        'DateTimePlanner\Bootstrap',
     ],
     'components' => [
         'urlManager'   => [
@@ -16,9 +17,6 @@ $config = [
             'enableStrictParsing' => TRUE,
             'rules' => [],
             'suffix' => ''
-        ],
-        'errorHandler' => [
-            'errorAction' => 'error-handler/error',
         ],
 
         'urlManagerFrontEnd' => [
@@ -61,6 +59,8 @@ $config = [
                 'div-datepicker.js' => 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js',
                 'div-datepicker-ru.js' => 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.ru.min.js',
                 'font-awesome.css' => 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
+                'sharer.js' => 'https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js',
+                'datepicker.css' => 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css',
             ],
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => [
@@ -71,13 +71,28 @@ $config = [
     ],
     'modules' => [
         'user'  => [
-            'class' => 'app\modules\users\Module',
+            'class' => 'users\Module',
             'enableUnconfirmedLogin' => true,
             'layout'        => '@current_template/layouts/user',
             'modelMap'      => [
-                'Profile'          => \app\models\Profile::class,
-                'RegistrationForm' => \app\modules\users\models\RegistrationForm::class,
-                'User'             => \app\models\User::class,
+                'Profile'          => \users\models\UsersProfile::class,
+                'RegistrationForm' => \users\models\RegistrationForm::class,
+                'User'             => \users\models\UsersUser::class,
+            ],
+        ],
+        'planner' => [
+            'class' => 'DateTimePlanner\Module'
+        ],
+    ],
+    'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationNamespaces' => [
+                'src\migrations',
+                'users\migrations',
+                'tosee\migrations',
+                'probank\migrations',
+                'DateTimePlanner\migrations',
             ],
         ],
     ],

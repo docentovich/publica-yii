@@ -11,12 +11,10 @@ class Asset extends AssetBundle
 {
     public $sourcePath  = "@templates/tosee/assets";
     public $css = [
-        'bundle/vendor.css',
-        'css/main.css',
+        'css/tosee.css',
         'css/additional-styles.css',
     ];
     public $js = [
-        'bundle/vendor.js',
         'js/main.js',
         'js/additional.js',
     ];
@@ -26,6 +24,8 @@ class Asset extends AssetBundle
         DatePickerAsset::class,
         'app\assets\ImagesLoadedAsset',
         'app\assets\FontAwesomeAsset',
+        'app\assets\SharerAsset',
+        'app\templates\CommonAsset'
     ];
 
 }

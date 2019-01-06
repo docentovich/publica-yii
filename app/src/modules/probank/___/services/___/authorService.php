@@ -6,12 +6,12 @@
  * Time: 20:24
  */
 
-namespace app\modules\probank\services\backend;
+namespace probank\services\backend;
 
 use app\Services;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Yii;
-use app\modules\probank\models\common\Post;
+use probank\models\common\Post;
 use yii\web\HttpException;
 
 class authorService extends Services
