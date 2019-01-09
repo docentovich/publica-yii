@@ -27,7 +27,7 @@ $baseTemplate = new \app\templates\BaseTemplate($this, $bundle);
                 <?php if (\Yii::$app->user->can('calendar')) { ?>
                     <li><?= Html::a(
                             \Yii::t('app/user', 'My calendar'),
-                            ["/date-time-planner/index"]); ?></li>
+                            ["/planner/date-time/index"]); ?></li>
                 <?php } ?>
 <!--                --><?php //if (\Yii::$app->user->can('rating')) { ?>
 <!--                    <li>--><?//= Html::a(

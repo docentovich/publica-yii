@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \app\dto\ProbankSpecialistsTransportModel $specialistTransportModel
+ * @var \probank\dto\ProbankSpecialistsTransportMode $specialistTransportModel
  */
 ?>
 
@@ -35,7 +35,10 @@
         ?>
         <div class="item-member item-masonry"
              style="display: none; <?= (count($specialistTransportModel->result) < 2) ? 'width: 100%;' : '' ?> ">
-            <?= \yii\helpers\Html::a(specialistHrefInner($specialist), "/specialist/{$specialist->id}"); ?>
+            <?= \yii\helpers\Html::a(
+                    specialistHrefInner($specialist),
+                    ['/project/front-specialists/specialist', 'id' => $specialist->id]
+            ); ?>
         </div>
     <?php endforeach; ?>
 

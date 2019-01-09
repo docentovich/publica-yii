@@ -24,27 +24,27 @@ class OrdersController extends Controller
             ],
         ];
     }
-    public function actionCreate($sellers_id)
+    public function actionCreate($sellers_portfolio_id)
     {
 
     }
 
-    public function actionComplete($sellers_id)
+    public function actionComplete($sellers_portfolio_id)
     {
 
     }
 
-    public function actionRate($sellers_id)
+    public function actionRate($sellers_portfolio_id)
     {
 
     }
 
-    public function actionProcess($sellers_id)
+    public function actionProcess($sellers_portfolio_id)
     {
 
     }
 
-    public function actionSalesOf($sellers_id)
+    public function actionSalesOf($sellers_portfolio_id)
     {
 
     }

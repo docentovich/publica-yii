@@ -14,6 +14,15 @@ class DateTimePlannerQuery extends \yii\db\ActiveQuery
         return $this->andWhere('[[status]]=1');
     }*/
 
+    public function user($user_id)
+    {
+        return $this->andWhere(['=', 'user_id', $user_id]);
+    }
+
+    public function date($date)
+    {
+        return $this->andWhere(['=', 'date', $date]);
+    }
     /**
      * {@inheritdoc}
      * @return DateTimePlanner[]|array

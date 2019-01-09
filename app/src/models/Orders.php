@@ -2,8 +2,11 @@
 
 namespace app\models;
 
+use src\models\OrdersMessages;
+use src\models\OrdersQuery;
 use Yii;
 use yii\db\ActiveQuery;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "tbl_orders".
@@ -13,14 +16,20 @@ use yii\db\ActiveQuery;
  * @property int $seller_id
  * @property int $rate
  * @property string $status
- *
+ * @property string $final_message
+ * @property string $finalMessage
  * @property User $customer
  * @property User $seller
+ * @property OrdersMessages|null $orderMessages
+ * @property OrdersMessages $orderMessagesNN
  */
 class Orders extends \yii\db\ActiveRecord
 {
     const STATUS_ACTIVE = 'ACTIVE';
     const STATUS_INACTIVE = 'INACTIVE';
+    const STATUS_FINISHED = 'FINISHED';
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_MESSAGE = 'message';
 
     public $myId;
     /**
@@ -38,6 +47,7 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             [['customer_id', 'seller_id', 'rate'], 'integer'],
+            [['customer_id', 'seller_id'], 'required'],
             [['status'], 'string'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['customer_id' => 'id']],
             [['seller_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['seller_id' => 'id']],
@@ -58,6 +68,16 @@ class Orders extends \yii\db\ActiveRecord
         ];
     }
 
+    public function scenarios()
+    {
+        return ArrayHelper::merge(
+            parent::scenarios(),
+            [
+                self::SCENARIO_CREATE => ['customer_id', 'seller_id']
+            ]
+        );
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -74,23 +94,56 @@ class Orders extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'seller_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrderMessages()
+    {
+        return $this->hasMany(OrdersMessages::class, ['order_id' => 'id']);
+    }
+
+    /**
+     * @return OrdersMessages
+     */
+    public function getOrderMessagesNN()
+    {
+        return $this->orderMessages ?? new OrdersMessages();
+    }
+
     public function allOrders(): ActiveQuery
     {
-        return self::find()
-            ->andWhere([
-                'customer_id' => $this->myId ?? \Yii::$app->user->getId(),
-                'status' => self::STATUS_ACTIVE
-            ])
-            ->with('seller');
+        return self::find()->purchases($this->myId ?? \Yii::$app->user->getId());
     }
+
 
     public function allSales(): ActiveQuery
     {
-        return self::find()
-            ->andWhere([
-                'seller_id' => $this->myId ?? \Yii::$app->user->getId(),
-                'status' => self::STATUS_ACTIVE
-            ])
-            ->with('customers');
+        return self::find()->sales($this->myId ?? \Yii::$app->user->getId());
+
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return OrdersQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return (new OrdersQuery(get_called_class()))->with('orderMessages');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFinalMessage()
+    {
+        return $this->final_message;
+    }
+
+    /**
+     * @param $message
+     */
+    public function setFinalMessage($message)
+    {
+        $this->final_message = $message;
     }
 }

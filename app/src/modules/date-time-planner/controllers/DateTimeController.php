@@ -3,6 +3,7 @@
 namespace DateTimePlanner\controllers;
 
 use DateTimePlanner\models\DateTimePlanner;
+use DateTimePlanner\models\DateTimePlannerForm;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
@@ -28,6 +29,6 @@ class DateTimeController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index', ['model' => new DateTimePlanner()]);
+        return $this->render('index', ['model' => new DateTimePlannerForm()]);
     }
 }

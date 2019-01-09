@@ -7,13 +7,15 @@ use yii\web\AssetBundle;
 
 class DatePickerAsset extends AssetBundle
 {
-    public $sourcePath;
+    public $sourcePath = "@src/assets/datepicker-assets";
     public $js = [
-        'div-datepicker.js'
+        'div-datepicker.js',
+        'dtp.js'
     ];
 
     public $css = [
-        'datepicker.css'
+        'datepicker.css',
+        'dtp.css'
     ];
 
     public $depends = [

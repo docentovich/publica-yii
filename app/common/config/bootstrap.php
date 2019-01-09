@@ -14,6 +14,7 @@
 \Yii::setAlias('@tosee', \Yii::getAlias('@modules') . '/tosee' );
 \Yii::setAlias('@probank', \Yii::getAlias('@modules') . '/probank' );
 \Yii::setAlias('@users', \Yii::getAlias('@modules') . '/users' );
+\Yii::setAlias('@orders', \Yii::getAlias('@modules') . '/orders' );
 \Yii::setAlias('@ImageAjaxUpload', \Yii::getAlias('@components') . '/image-ajax-upload' );
 \Yii::setAlias('@userPanelTemplate', \Yii::getAlias('@templates') . '/userPanel' );
 

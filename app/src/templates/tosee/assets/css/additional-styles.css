@@ -20,14 +20,6 @@
     clear: both;
 }
 
-.datepicker-days{
-    max-width: 450px;
-    margin: auto;
-}
-.datepicker-days .day{
-    cursor: pointer;
-}
-
 #sidebar-calendar{
     min-height: 100%;
     min-width: 100%;
@@ -43,7 +35,7 @@
     text-align: center;
 }
 
-#sidebar-calendar .div-datepicker{
+#sidebar-calendar .datepicker-wrapper{
     display: table;
     width: 100%;
     height: calc(100% - 100px);

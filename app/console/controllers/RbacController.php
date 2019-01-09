@@ -1,18 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Andrey
- * Date: 02.06.2017
- * Time: 23:42
- */
 
 namespace console\controllers;
 
-
-//use common\models\User;
-//use app\modules\tosee\models\Post;
+use app\models\Orders;
+use app\models\User;
+use app\modules\orders\rbac\ManageOrderRule;
 use console\rbac\AuthorRule;
-use console\rbac\CityRule;
 use yii\base\Controller;
 use Yii;
 
@@ -49,6 +42,51 @@ class RbacController extends Controller
 
 
         echo "init done" . PHP_EOL;
+    }
+
+    public function actionOrders()
+    {
+        $auth = Yii::$app->getAuthManager();
+        $manageOrderRule = new ManageOrderRule();
+        $auth->remove($manageOrderRule);
+        $manageOrder = $auth->getPermission('manageOrder');
+        if($manageOrder){
+            $auth->remove($manageOrder);
+        }
+
+        $auth->add($manageOrderRule);
+        $manageOrderPermission = $auth->createPermission("manageOrder");
+        $manageOrderPermission->ruleName = $manageOrderRule->name;
+        $auth->add($manageOrderPermission);
+
+        $user = $auth->getRole("user");
+        $auth->addChild($user, $manageOrderPermission);
+    }
+
+    public function actionOtest()
+    {
+        echo "start" . PHP_EOL;
+        $user = new User(['id' => 1]);
+        $user1 = new User(['id' => 4]);
+        Yii::$app->user->setIdentity($user);
+
+        $order = new Orders([
+            'scenario' => Orders::SCENARIO_CREATE,
+            'customer_id' => $user1->id,
+            'seller_id' => $user->id,
+        ]);
+        echo $order->save() . PHP_EOL;
+        echo 'order id: ' . $order->id . PHP_EOL;
+        echo 'customer_id id: ' . $order->customer_id . PHP_EOL;
+        echo 'my id: ' . \Yii::$app->user->getId() . PHP_EOL;
+        echo 'next:' . PHP_EOL;
+
+        $a = \Yii::$app->user->can('manageOrder', [
+            'order_id' => $order->id
+        ]);
+        echo $a . PHP_EOL;
+        echo "end" . PHP_EOL;
+        $order->delete();
     }
 
     private function postsRules()
@@ -138,7 +176,6 @@ class RbacController extends Controller
     {
         $auth = Yii::$app->getAuthManager();
         $authorRule = $auth->getRule('isAuthor');
-        var_dump($authorRule);
         $author = $auth->getRole('author');
         $reedPost = $auth->getPermission("reedPost");
         $reedPosts = $auth->getPermission("reedPosts");

@@ -20,6 +20,7 @@ use yii\helpers\ArrayHelper;
  * @property PortfolioAdditionalImages[] $additionalImagesNN
  * @property Image[] $images
  * @property integer $user_id
+ * @property integer $userId
  * @property integer $image_id
  * @property string $type
  * @property string $typeEn
@@ -170,5 +171,10 @@ class Portfolio extends \yii\db\ActiveRecord
             parent::toArray(),
             ["search_text" => $this->profile->fullName]
         );
+    }
+
+    public function getUserId()
+    {
+        return $this->user_id;
     }
 }

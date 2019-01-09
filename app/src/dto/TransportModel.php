@@ -19,9 +19,9 @@ class TransportModel extends \app\abstractions\Immutable
     /**
      * TransportModel constructor.
      * @param ConfigQuery $configQuery
-     * @param $result
+     * @param mixed $result
      */
-    public function __construct(ConfigQuery $configQuery, $result)
+    public function __construct(ConfigQuery $configQuery, $result = [])
     {
         parent::__construct(compact('configQuery', 'result'));
     }

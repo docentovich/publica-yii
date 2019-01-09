@@ -24,13 +24,7 @@ Date.prototype.yyyymmdd = function () {
 })(jQuery);
 
 (function ($) {
-    // front data-picker
-    $('.div-datepicker').datepicker({
-        language: lang,
-        container: '.div-datepicker'
-    });
-
-    $('.div-datepicker').on('changeDate', function (e) {
+    $('#sidebar-calendar .datepicker-wrapper').on('changeDate', function (e) {
         e.preventDefault();
         e.stopPropagation();
         window.location = '/date/' + e.date.yyyymmdd();
@@ -64,39 +58,4 @@ Date.prototype.yyyymmdd = function () {
             });
         });
     })
-})(jQuery);
-
-
-(function ($) {
-    // ajax form submit
-    $('.form-ajax').on('submit', function (e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        var data = $(this).serialize();
-        var $this = $(this);
-        var self = this;
-
-        $.ajax({
-            url: $this.attr('action'),
-            type: 'POST',
-            data: data,
-            success: function (data) {
-                var fn = $this.attr('onsuccess');
-                if(!!fn) {
-                    fn =  fn.replace(/(?:\r\n|\r|\n)/g, '');
-                    var func = new Function('data', "(" + fn + ")(data)");
-                    func.call(self, data);
-                }
-            },
-            error: function (error) {
-                var fn = $this.attr('onerror');
-                if(!!fn) {
-                    fn =  fn.replace(/(?:\r\n|\r|\n)/g, '');
-                    var func = new Function('error', "(" + fn + ")(error)");
-                    func.call(self, error);
-                }
-            }
-        });
-        return false;
-    });
 })(jQuery);

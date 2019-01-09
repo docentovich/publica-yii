@@ -34,16 +34,7 @@ class m190103_005557_Relations extends \src\migrations\Migration
             '{{%usr_user}}','id',
             'CASCADE','CASCADE'
          );
-        $this->addForeignKey('fk_tbl_orders_customer_id',
-            '{{%orders}}','customer_id',
-            '{{%usr_user}}','id',
-            'RESTRICT','CASCADE'
-         );
-        $this->addForeignKey('fk_tbl_orders_seller_id',
-            '{{%orders}}','seller_id',
-            '{{%usr_user}}','id',
-            'RESTRICT','CASCADE'
-         );
+
     }
 
     public function safeDown()
@@ -52,7 +43,5 @@ class m190103_005557_Relations extends \src\migrations\Migration
         $this->dropForeignKey('fk_tbl_comments_user_id', '{{%comments}}');
         $this->dropForeignKey('fk_tbl_likes_image_id', '{{%likes}}');
         $this->dropForeignKey('fk_tbl_likes_user_id', '{{%likes}}');
-        $this->dropForeignKey('fk_tbl_orders_customer_id', '{{%orders}}');
-        $this->dropForeignKey('fk_tbl_orders_seller_id', '{{%orders}}');
     }
 }

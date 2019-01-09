@@ -1,0 +1,50 @@
+.datepicker-days{
+    max-width: 450px;
+    margin: auto;
+}
+.datepicker-days .day{
+    cursor: pointer;
+}
+
+
+.calendar {
+    max-width: 350px;
+    margin: auto;
+    display: block;
+    padding: 10px 10px 70px 10px; }
+
+.calendar .table-condensed td, .calendar .table-condensed th.dow {
+    border: 1px solid #999; }
+
+.calendar .timepicker {
+    width: 100%;
+    padding-top: 25px; }
+.calendar .timepicker h2 {
+    font-size: 20px;
+    color: #888888; }
+.calendar .timepicker table.time-table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 15px;
+    width: 100%; }
+.calendar .timepicker table.time-table td {
+    background: #eee;
+    color: #505050;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer; }
+.calendar .timepicker table.time-table td.busy {
+    background: none; }
+.calendar .timepicker table.time-table td.active {
+    background: red;
+    color: #fff; }
+
+.calendar .submit {
+    background: #0ad500;
+    color: #ffffff;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px #0aa300 solid; }

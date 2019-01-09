@@ -31,7 +31,7 @@ class BaseSearchService extends Services
 
         if(strlen($keyword) < 4)
         {
-            new \app\dto\PostTransportModel($configQuery, []);
+            new \app\dto\TransportModel($configQuery, []);
         }
 
         /** @var UrlManager $url_manager */

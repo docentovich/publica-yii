@@ -27,12 +27,13 @@ return [
             ],
         ],
 
-        'user'  => [
-            'class' => 'dektrium\user\Module',
+        'user' => [
+            'class' => 'yii\web\User',
+            'identityClass' => \app\models\User::class,
+            'enableAutoLogin' => false,
+            'enableSession' => false,
         ],
-
     ],
-
 
     'params' => $params,
 ];

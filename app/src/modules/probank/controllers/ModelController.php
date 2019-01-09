@@ -21,13 +21,14 @@ class ModelController extends Controller
     {
         $this->specialistsService = $specialistsService;
     }
+
     public function getSpecialistsService()
     {
         return $this->specialistsService;
     }
 
 
-        /**
+    /**
      * @inheritdoc
      */
     public function behaviors()

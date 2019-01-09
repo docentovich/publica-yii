@@ -83,6 +83,9 @@ $config = [
         'planner' => [
             'class' => 'DateTimePlanner\Module'
         ],
+        'orders' => [
+            'class' => 'orders\Module'
+        ],
     ],
     'controllerMap' => [
         'migrate' => [
@@ -93,6 +96,7 @@ $config = [
                 'tosee\migrations',
                 'probank\migrations',
                 'DateTimePlanner\migrations',
+                'orders\migrations',
             ],
         ],
     ],

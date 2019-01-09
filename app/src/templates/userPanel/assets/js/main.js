@@ -1,17 +1,4 @@
 (function ($) {
-$(document).ready(function () {
-    $('.datepicker').datepicker({
-        language: lang
-    });
-
-
-    var selectedTd = '';
-    $('.time-table td:not(.busy)').on('click', function(){
-        selectedTd = (selectedTd === $(this).attr('id')) ? '' : $(this).attr('id');
-        $('.time-table td').removeClass('active');
-        $('#' + selectedTd).addClass('active');
-    });
-});
 /** remove body classes **/
 $('body').removeClass('no-js');
 $('body').imagesLoaded(function () {

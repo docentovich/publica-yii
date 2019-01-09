@@ -1,10 +1,9 @@
 <?php
 
-namespace src\migrations;
+use yii\db\Schema;
+use yii\db\Migration;
 
-
-
-class m190103_005546_orders extends \src\migrations\Migration
+class m190108_145708_orders extends Migration
 {
 
     public function init()
@@ -23,8 +22,9 @@ class m190103_005546_orders extends \src\migrations\Migration
                 'id'=> $this->primaryKey(10),
                 'customer_id'=> $this->integer(10)->null()->defaultValue(null),
                 'seller_id'=> $this->integer(10)->null()->defaultValue(null),
-                'rate'=>  'tinyint DEFAULT NULL',
-                'status'=> "enum('INACTIVE', 'ACTIVE') NOT NULL DEFAULT 'ACTIVE'",
+                'rate'=> $this->tinyint(3)->null()->defaultValue(null),
+                'status'=> "enum('INACTIVE', 'ACTIVE', 'FINISHED') NOT NULL DEFAULT 'ACTIVE'",
+                'final_message'=> $this->text()->null()->defaultValue(null),
             ],$tableOptions
         );
         $this->createIndex('customer_id','{{%orders}}',['customer_id'],false);
