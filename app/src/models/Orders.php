@@ -48,7 +48,7 @@ class Orders extends \yii\db\ActiveRecord
         return [
             [['customer_id', 'seller_id', 'rate'], 'integer'],
             [['customer_id', 'seller_id'], 'required'],
-            [['status'], 'string'],
+            [['status', 'final_message'], 'string'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['customer_id' => 'id']],
             [['seller_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['seller_id' => 'id']],
         ];

@@ -80,7 +80,7 @@ class OrdersController extends Controller
     {
         $customer_id = $customer_id ?? \Yii::$app->user->getId();
         $orderTransportModel = $this->getTransportModel([
-            'action' => OrdersService::ACTION_GET_ORDER,
+            'action' => OrdersService::ACTION_OPEN_ORDER,
             'seller_id' => $seller_id,
             'customer_id' => $customer_id
         ]);
@@ -90,6 +90,14 @@ class OrdersController extends Controller
         return $this->render('order-chat', compact('orderTransportModel'));
     }
 
+    /**
+     * Ajax save message
+     *
+     * @param $order_id
+     * @return array|null|Orders|Orders[]
+     * @throws BadRequestHttpException
+     * @throws \yii\base\ExitException
+     */
     public function actionSendMessage($order_id)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -126,11 +134,11 @@ class OrdersController extends Controller
 
     public function actionComplete($order_id)
     {
-        return $this->render('complete', [
-            'orderTransportModel' => $this->getTransportModel([
-                'action' => OrdersService::ACTION_GET_ORDER,
-                'order_id' => $order_id,
-            ])
+        $orderTransportModel = $this->getTransportModel([
+            'action' => OrdersService::ACTION_COMPLETE_ORDER,
+            'order_id' => $order_id,
         ]);
+
+        return $this->render('complete', compact('orderTransportModel'));
     }
 }
