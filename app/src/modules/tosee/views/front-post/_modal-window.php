@@ -32,10 +32,10 @@
             <div class="right-controls">
                 <i data-likes="<?= $image->likes ?>"
                    data-image-id="<?= $image->id ?>"
-                   class="icon-like
+                   class="icon-like3
                                 <?= (!empty($image->myLike)) ? 'my-like' : ''; ?>
                                 <?= (\Yii::$app->user->can('user')) ? 'like-action' : ''; ?>"></i>
-                <i class="share-button"
+                <i class="share-button icon-share"
                    data-share-title="<?=$image->alt?>"
                    data-share-image="<?=$image->getUrlImageSizeOf(null)?>"></i>
             </div>

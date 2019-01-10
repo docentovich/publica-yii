@@ -58,12 +58,12 @@ body{
     padding-top: 43px;
 }
 
-.icon-like.my-like{
+i.my-like{
     font-family: FontAwesome !important;
     font-weight: 600;
 }
 
-.icon-like.my-like:before{
+i.my-like:before{
     content: "\f004";
 }
 

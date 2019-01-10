@@ -1,3 +1,8 @@
+if(jQuery.fn.imagesLoaded === undefined){
+    jQuery.fn.imagesLoaded = function (cb) {
+        cb();
+    }
+}
 (function ($) {
     // ajax form submit
     $('.form-ajax').on('submit', function (e) {
@@ -32,4 +37,16 @@
         });
         return false;
     });
+
+
+    /** trigger click **/
+    $(document).ready(function () {
+        $('.share-button').on('click', function (e) {
+            $(this).toggleClass('need-share-button-opened');
+            e.stopPropagation();
+            e.preventDefault();
+
+        });
+    });
+
 })(jQuery);

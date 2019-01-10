@@ -409,8 +409,8 @@ th {
 
 @font-face {
   font-family: 'icomoon';
-  src: url("../fonts/icomoon.eot?fg9amd");
-  src: url("../fonts/icomoon.eot?fg9amd#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?fg9amd") format("truetype"), url("../fonts/icomoon.woff?fg9amd") format("woff"), url("../fonts/icomoon.svg?fg9amd#icomoon") format("svg");
+  src: url("../fonts/icomoon.eot?9dh5dj");
+  src: url("../fonts/icomoon.eot?9dh5dj#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?9dh5dj") format("truetype"), url("../fonts/icomoon.woff?9dh5dj") format("woff"), url("../fonts/icomoon.svg?9dh5dj#icomoon") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -422,65 +422,82 @@ th {
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  line-height: inherit;
+  line-height: 1;
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.icon-like1:before {
+  content: "\e910"; }
+
+.icon-like2:before {
+  content: "\e911"; }
+
+.icon-like3:before {
+  content: "\e912"; }
+
+.icon-like:before {
+  content: "\e913"; }
+
+.icon-exchange2:before {
+  content: "\e90d"; }
+
+.icon-exchange:before {
+  content: "\e90e"; }
+
+.icon-exchange1:before {
+  content: "\e90f"; }
+
 .icon-burger:before {
   content: "\e900";
-  color: inherit; }
+  color: #fff; }
 
 .icon-buy:before {
   content: "\e901";
-  color: inherit; }
+  color: #fff; }
+
+.icon-clock:before {
+  content: "\e902"; }
+
+.icon-comments:before {
+  content: "\e903";
+  color: #fff; }
 
 .icon-crown:before {
-  content: "\e902";
+  content: "\e904";
   color: #666; }
 
 .icon-enter:before {
-  content: "\e903";
-  color: inherit; }
+  content: "\e905";
+  color: #fff; }
 
 .icon-exit:before {
-  content: "\e904";
-  color: inherit; }
+  content: "\e906";
+  color: #fff; }
 
 .icon-geo:before {
-  content: "\e905";
-  color: inherit; }
+  content: "\e907";
+  color: #fff; }
 
 .icon-info:before {
-  content: "\e906";
-  color: inherit; }
+  content: "\e908";
+  color: #fff; }
 
-.icon-comments:before {
-  content: "\e907";
-  color: inherit; }
-
-.icon-left_chevron:before {
-  content: "\e908"; }
-
-.icon-like:before {
+.icon-linke:before {
   content: "\e909";
-  color: inherit; }
-
-.icon-right_chevron:before {
-  content: "\e90a";
-  color: inherit; }
+  color: #fff; }
 
 .icon-search:before {
-  content: "\e90b";
-  color: inherit; }
+  content: "\e90a";
+  color: #fff; }
 
 .icon-share:before {
-  content: "\e90c";
-  color: inherit; }
+  content: "\e90b";
+  color: #fff; }
 
 .icon-temp:before {
-  content: "\e90d";
-  color: inherit; }
+  content: "\e90c";
+  color: #f80094; }
 
 body {
   background: #0D0C11;
@@ -527,7 +544,8 @@ a {
   position: relative;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
-          box-sizing: border-box; }
+          box-sizing: border-box;
+  overflow: hidden; }
   .content #waiting {
     position: absolute;
     left: 50%;
@@ -656,16 +674,6 @@ a {
   -webkit-filter: drop-shadow(1px 0px 0px #fff);
           filter: drop-shadow(1px 0px 0px #fff); }
 
-.datepicker-inline, .datepicker table {
-  width: 100%;
-  table-layout: fixed;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box; }
-
-.datepicker {
-  padding: 0; }
-
 .modal-window .modal-header:after {
   content: '';
   display: table;
@@ -715,7 +723,8 @@ a {
     display: inline-block;
     height: 100%;
     width: 40px;
-    text-align: center; }
+    text-align: center;
+    padding-top: 9px; }
     .modal-window .modal-controls i.is-active {
       background: #ff00bb; }
     .modal-window .modal-controls i:not(:last-of-type) {
@@ -788,12 +797,6 @@ a {
   margin-right: -100%; }
   .need-share-button_dropdown-top-left .need-share-button_link:after {
     line-height: 40px; }
-
-.need-share-button .need-share-button_button {
-  font-family: 'icomoon' !important; }
-  .need-share-button .need-share-button_button:before {
-    content: "\e90c";
-    color: inherit; }
 
 .comment {
   display: table-row; }

@@ -15,8 +15,8 @@ class CommonAsset extends AssetBundle
     ];
     public $js = [
         'bundle/vendor.js',
-        'js/common.js',
         'js/additional.js',
+        'js/common.js',
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $depends = [
