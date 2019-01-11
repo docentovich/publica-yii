@@ -2,8 +2,8 @@
 
 namespace probank\controllers;
 
-use probank\dto\OrdersServiceConfig;
-use probank\dto\OrdersTransportModel;
+use probank\dto\ProbankSpecialistsServiceConfig;
+use probank\dto\ProbankSpecialistsTransportModel;
 use probank\services\ProbankSpecialistsService;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -43,16 +43,16 @@ class OrdersController extends Controller
         ];
     }
 
-    private function getTransportModel($config): OrdersTransportModel
+    private function getTransportModel($config): ProbankSpecialistsTransportModel
     {
-        return $this->specialistsService->action(new OrdersServiceConfig($config));
+        return $this->specialistsService->action(new ProbankSpecialistsServiceConfig($config));
     }
 
-    public function actionDateTime($sellers_id)
+    public function actionDateTime($portfolio_id)
     {
         $transportModel = $this->getTransportModel([
             'action' => ProbankSpecialistsService::ACTION_GET_BY_ID,
-            'id' => (int) $sellers_id
+            'portfolio_id' => (int) $portfolio_id
         ]);
         return $this->render('date-time', [
             'specialistTransportModel' => $transportModel,

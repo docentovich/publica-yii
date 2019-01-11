@@ -11,6 +11,7 @@ class CommonAsset extends AssetBundle
     public $sourcePath  = "@templates/common-assets";
     public $css = [
         'bundle/vendor.css',
+        'css/tables.css',
         'css/common.css',
     ];
     public $js = [

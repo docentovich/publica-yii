@@ -1,18 +1,18 @@
 <?php
 /**
  * @var \yii\web\View $this
- * @var \probank\dto\OrdersTransportModel $specialistTransportModel
+ * @var \probank\dto\ProbankSpecialistsTransportModel $specialistTransportModel
  */
 
 $form = \yii\widgets\ActiveForm::begin([
     'action' => \yii\helpers\Url::to([
-        '/orders/orders/start',
-        'sellers_portfolio_id' => $specialistTransportModel->result->id,
+        '/orders/orders/order',
+        'portfolio_id' => $specialistTransportModel->config->portfolio_id,
         'customer_id' => Yii::$app->user->getId()
     ]),
     'id' => 'mid',
     'options' => ['class' => 'calendar'],
-    'method' => 'GET'
+    'method' => 'POST'
 ]);
 
 echo \DateTimePlanner\widget\DateTimePlanner::widget([

@@ -69,7 +69,6 @@ Date.prototype.yyyymmdd = function () {
 
 (function () {
     var list = document.getElementsByClassName('share-button');
-    debugger;
 
     for (var i = 0; i < list.length; i++) {
         new needShareDropdown(list[i], {

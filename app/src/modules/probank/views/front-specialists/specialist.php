@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \probank\dto\OrdersTransportModel $specialistTransportModel
+ * @var \probank\dto\ProbankSpecialistsTransportModel $specialistTransportModel
  * @var $this yii\web\View
  */
 
@@ -22,14 +22,11 @@
     <div class="member-body">
         <div class="member-base-image">
             <div class="image-inner"><?= $specialistTransportModel->result->mainPhotoNN->getImgSizeOf("800xR") ?></div>
-            <?php
-            $a = $specialistTransportModel->result->userId;
-            $b = Yii::$app->user->getId();
-            ?>
+
             <?php if (\Yii::$app->user->can('user') && ($specialistTransportModel->result->userId !== Yii::$app->user->getId())) { ?>
                 <?= \yii\helpers\Html::a(
                         Yii::t('app/probank', 'Order'),
-                        ['/project/orders/date-time', "sellers_id" => $specialistTransportModel->result->id],
+                        ['/project/orders/date-time', "portfolio_id" => $specialistTransportModel->result->id],
                         ['class' => 'order']
                 ); ?>
             <?php } ?>

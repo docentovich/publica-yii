@@ -8,7 +8,10 @@ use orders\dto\OrdersTransportModel;
 use app\services\BaseOrdersService;
 use Codeception\Exception\ElementNotFound;
 use orders\models\Orders;
+use orders\models\OrdersDateTimePlanner;
+use orders\models\OrdersSpecialistPortfolio;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
+use yii\web\NotFoundHttpException;
 
 class OrdersService extends BaseOrdersService
 {
@@ -46,20 +49,20 @@ class OrdersService extends BaseOrdersService
      * @param OrdersServiceConfig $config
      * @return \src\models\OrdersQuery
      */
-    private function prepareGetOrderByCSId($config)
+    private function prepareGetOrderByCSId(OrdersServiceConfig $config)
     {
-        Orders::find()
+        return Orders::find()
             ->customerId($config->customer_id)
-            ->sellerId($config->seller_id);
+            ->portfolioId($config->portfolio_id);
     }
 
     /**
      * @param OrdersServiceConfig $config
      * @return \src\models\OrdersQuery
      */
-    private function prepareGetOrderByOrderId($config)
+    private function prepareGetOrderByOrderId(OrdersServiceConfig $config)
     {
-        Orders::find()
+        return Orders::find()
             ->orderId($config->customer_id);
     }
 
@@ -68,7 +71,7 @@ class OrdersService extends BaseOrdersService
      * @param bool $throwException
      * @return \app\models\Orders|array|null
      */
-    private function findOneOrder($config, $throwException = true)
+    private function findOneOrder(OrdersServiceConfig $config, $throwException = true)
     {
         $order = $this->prepareGetOrderByOrderId($config)->one();
 
@@ -81,35 +84,88 @@ class OrdersService extends BaseOrdersService
 
     /**
      * Create order if not exist and return order.
-     * $config must contain $config->seller_id $config->customer_id
+     * $config must contain $config->portfolio_id $config->customer_id
      *
      * @param OrdersServiceConfig $config
      * @return OrdersTransportModel
      */
-    private function actionOpenOrder($config)
+    private function actionOpenOrder(OrdersServiceConfig $config)
     {
-        if ($config->seller_id === $config->customer_id) {
-            throw new \InvalidArgumentException('customer and seller must be different');
+        if (!isset($config->portfolio_id) || !isset($config->customer_id)) {
+            throw new \InvalidArgumentException('portfolio_id and customer_id must be set');
         }
 
-        $order = $this->prepareGetOrderByCSId($config)->one();
-
-        if ($order === null) {
-            if (!\Yii::$app->user->can('user')) {
-                throw new AccessDeniedException();
-            }
-            $order = new Orders([
-                'scenario' => Orders::SCENARIO_CREATE,
-                'seller_id' => $config->seller_id,
+        /** @var OrdersDateTimePlanner $order */
+        $order = $this->prepareGetOrderByCSId($config)->one()
+            ?? new Orders([
+                'portfolio_id' => $config->portfolio_id,
                 'customer_id' => $config->customer_id
             ]);
 
-            if (!$order->validate() || !$order->save()) {
-                throw new \InvalidArgumentException('invalid final message');
-            }
+        return new OrdersTransportModel(new OrdersConfigQuery($config), $order);
+    }
+
+    /**
+     * @param OrdersServiceConfig $config
+     * @return Orders|null
+     */
+    private function helperFindOrCreateOrder(OrdersServiceConfig $config)
+    {
+        if (!isset($config->portfolio_id) || !isset($config->customer_id)) {
+            throw new \InvalidArgumentException('customer and seller must be different');
         }
 
-        return new OrdersTransportModel(new OrdersConfigQuery($config), $order);
+        /** @var Orders */
+        $order = $this->prepareGetOrderByCSId($config)->one() ?? $this->helperCreateOrder($config);
+
+        return $order;
+    }
+
+    /**
+     * @param OrdersServiceConfig $config
+     * @return Orders
+     */
+    private function helperCreateOrder(OrdersServiceConfig $config)
+    {
+        if (!\Yii::$app->user->can('user')) {
+            throw new AccessDeniedException();
+        }
+        $order = new Orders([
+            'scenario' => Orders::SCENARIO_CREATE,
+            'portfolio_id' => $config->portfolio_id,
+            'customer_id' => $config->customer_id
+        ]);
+
+        if (!$order->validate() || !$order->save()) {
+            throw new \InvalidArgumentException('invalid final message');
+        }
+
+        $this->helperSavePersonalPlanner($config, $order);
+
+        return $order;
+    }
+
+    /**
+     * @param OrdersServiceConfig $config
+     * @param Orders $order
+     */
+    private function helperSavePersonalPlanner(OrdersServiceConfig $config, Orders &$order)
+    {
+        foreach ($config->time as $time){ // save time to personal planner of saller
+            try{
+                $dtp = new OrdersDateTimePlanner([
+                    'user_id' => $order->seller->id,
+                    'date' => $config->date->format('Y-m-d'),
+                    'time' => $time
+                ]);
+                if($dtp->validate() && $dtp->save()){
+                    $order->link('dateTimePlanner', $dtp);
+                }
+
+            }catch (\Exception $e){
+
+            }
+        }
     }
 
     /**
@@ -118,7 +174,7 @@ class OrdersService extends BaseOrdersService
      * @param OrdersServiceConfig $config
      * @return OrdersTransportModel
      */
-    private function actionGetOrder($config)
+    private function actionGetOrder(OrdersServiceConfig $config)
     {
         $order = $this->findOneOrder($config);
         return new OrdersTransportModel(new OrdersConfigQuery($config), $order);
@@ -128,19 +184,25 @@ class OrdersService extends BaseOrdersService
      * @param OrdersServiceConfig $config
      * @return OrdersTransportModel
      */
-    private function actionSendMessage($config)
+    private function actionSendMessage(OrdersServiceConfig $config)
     {
-        $order = $this->findOneOrder($config);
+        if($config->order_id === null){ // first message creates the order
+            $order = $this->helperFindOrCreateOrder($config);
+        } else { // second message
+            $order = $this->findOneOrder($config);
+        }
 
         ($orderMessage = $order->orderMessagesNN)->load(\Yii::$app->request->post());
 
         if ($orderMessage->validate() && $orderMessage->save()) {
             $order->link('orderMessages', $orderMessage);
+
             return new OrdersTransportModel(
                 new OrdersConfigQuery($config),
                 $order->toArray([], ['messages'])
             );
         }
+
         throw new \InvalidArgumentException('invalid message');
     }
 
@@ -148,7 +210,7 @@ class OrdersService extends BaseOrdersService
      * @param  OrdersServiceConfig $config
      * @return OrdersTransportModel
      */
-    private function actionFinalOrder($config)
+    private function actionFinalOrder(OrdersServiceConfig $config)
     {
         $order = $this->findOneOrder($config);
 
@@ -164,7 +226,7 @@ class OrdersService extends BaseOrdersService
      * @param OrdersServiceConfig $config
      * @return OrdersTransportModel
      */
-    private function actionCompleteOrder($config)
+    private function actionCompleteOrder(OrdersServiceConfig $config)
     {
         $order = $this->findOneOrder($config);
 

@@ -34,14 +34,14 @@ class OrdersQuery extends \yii\db\ActiveQuery
         return parent::one($db);
     }
 
-    public function sellerId($seller_id)
+    public function portfolioId($seller_id)
     {
-        return $this->andWhere(['=', 'seller_id', $seller_id]);
+        return $this->andWhere(['=', 'portfolio_id', $seller_id]);
     }
 
     public function customerId($consumer_id)
     {
-        return $this->andWhere(['=', 'consumer_id', $consumer_id]);
+        return $this->andWhere(['=', 'customer_id', $consumer_id]);
     }
 
     public function orderId($order_id)

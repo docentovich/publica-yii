@@ -1,5 +1,7 @@
 <?php
 
+namespace orders\migrations;
+
 use yii\db\Schema;
 use yii\db\Migration;
 
@@ -21,21 +23,21 @@ class m190108_145708_orders extends Migration
             [
                 'id'=> $this->primaryKey(10),
                 'customer_id'=> $this->integer(10)->null()->defaultValue(null),
-                'seller_id'=> $this->integer(10)->null()->defaultValue(null),
-                'rate'=> $this->tinyint(3)->null()->defaultValue(null),
+                'portfolio_id'=> $this->integer(10)->null()->defaultValue(null),
+                'rate'=> 'tinyint(3) DEFAULT null',
                 'status'=> "enum('INACTIVE', 'ACTIVE', 'FINISHED') NOT NULL DEFAULT 'ACTIVE'",
                 'final_message'=> $this->text()->null()->defaultValue(null),
             ],$tableOptions
         );
         $this->createIndex('customer_id','{{%orders}}',['customer_id'],false);
-        $this->createIndex('seller_id','{{%orders}}',['seller_id'],false);
+        $this->createIndex('portfolio_id','{{%orders}}',['portfolio_id'],false);
 
     }
 
     public function safeDown()
     {
         $this->dropIndex('customer_id', '{{%orders}}');
-        $this->dropIndex('seller_id', '{{%orders}}');
+        $this->dropIndex('portfolio_id', '{{%orders}}');
         $this->dropTable('{{%orders}}');
     }
 }

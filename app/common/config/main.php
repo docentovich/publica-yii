@@ -8,6 +8,7 @@ $config = [
     'bootstrap' => [
         'users\Bootstrap',
         'DateTimePlanner\Bootstrap',
+        'orders\Bootstrap',
     ],
     'components' => [
         'urlManager'   => [

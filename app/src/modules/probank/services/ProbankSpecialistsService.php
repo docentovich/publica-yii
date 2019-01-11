@@ -92,7 +92,7 @@ class ProbankSpecialistsService extends BaseSpecialistsService
      */
     protected function actionGetByID(ProbankSpecialistsServiceConfig $config)
     {
-        $portfolioModel = ProbankPortfolio::find()->where(['=', 'id', $config->id]);
+        $portfolioModel = ProbankPortfolio::find()->where(['=', 'id', $config->portfolio_id]);
         return new ProbankSpecialistsTransportModel(
             new ProbankSpecialistsConfigQuery($config, $portfolioModel),
             $portfolioModel->one()

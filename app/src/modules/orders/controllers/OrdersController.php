@@ -2,10 +2,11 @@
 
 namespace orders\controllers;
 
-use app\dto\OrdersServiceConfig;
+use orders\dto\OrdersServiceConfig;
 use orders\dto\OrdersTransportModel;
 use orders\models\Orders;
 use orders\services\OrdersService;
+use yii\base\Module;
 use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -62,9 +63,15 @@ class OrdersController extends Controller
         $this->ordersService = $ordersService;
     }
 
+    public function __construct(string $id, Module $module, OrdersService $ordersService, array $config = [])
+    {
+        $this->ordersService = $ordersService;
+        parent::__construct($id, $module, $config);
+    }
+
     /**
      * @param array $config = [
-     *      'seller_id' => 1,
+     *      'portfolio_id' => 1,
      *      'customer_id' => 1,
      *      'action'   => 1,
      * ]
@@ -76,13 +83,15 @@ class OrdersController extends Controller
         return $this->ordersService->action(new OrdersServiceConfig($config));
     }
 
-    public function actionOrder($seller_id, $customer_id = null)
+    public function actionOrder($portfolio_id, $customer_id = null)
     {
         $customer_id = $customer_id ?? \Yii::$app->user->getId();
         $orderTransportModel = $this->getTransportModel([
             'action' => OrdersService::ACTION_OPEN_ORDER,
-            'seller_id' => $seller_id,
-            'customer_id' => $customer_id
+            'portfolio_id' => (int) $portfolio_id,
+            'customer_id' => (int) $customer_id,
+            'date' => new \DateTime( \Yii::$app->request->post('date') ),
+            'time' => \Yii::$app->request->post('time')
         ]);
         if ($orderTransportModel->result->status === Orders::STATUS_FINISHED) {
             $this->redirect(['orders/complete']);

@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use orders\models\OrdersDateTimePlanner;
+use probank\models\ProbankPortfolio;
 use src\models\OrdersMessages;
 use src\models\OrdersQuery;
 use Yii;
@@ -12,8 +14,8 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "tbl_orders".
  *
  * @property int $id
- * @property int $customer_id
- * @property int $seller_id
+ * @property int $customer_id from tbl_usr_user
+ * @property int $portfolio_id from Probank
  * @property int $rate
  * @property string $status
  * @property string $final_message
@@ -22,6 +24,8 @@ use yii\helpers\ArrayHelper;
  * @property User $seller
  * @property OrdersMessages|null $orderMessages
  * @property OrdersMessages $orderMessagesNN
+ * @property OrdersDateTimePlanner|null $dateTimePlanner
+ * @property OrdersDateTimePlanner $dateTimePlannerNN
  */
 class Orders extends \yii\db\ActiveRecord
 {
@@ -86,12 +90,18 @@ class Orders extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'customer_id']);
     }
 
+    public function getPortfolio()
+    {
+        return $this->hasOne(ProbankPortfolio::class, ['id' => 'portfolio_id']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getSeller()
     {
-        return $this->hasOne(User::class, ['id' => 'seller_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id'])
+            ->via('portfolio');
     }
 
     /**
@@ -108,6 +118,14 @@ class Orders extends \yii\db\ActiveRecord
     public function getOrderMessagesNN()
     {
         return $this->orderMessages ?? new OrdersMessages();
+    }
+
+    /**
+     * @return OrdersDateTimePlanner
+     */
+    public function getDateTimePlannerNN()
+    {
+        return $this->dateTimePlanner ?? new OrdersDateTimePlanner();
     }
 
     public function allOrders(): ActiveQuery
@@ -128,7 +146,10 @@ class Orders extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return (new OrdersQuery(get_called_class()))->with('orderMessages');
+        return (new OrdersQuery(get_called_class()))
+            ->with('orderMessages')
+            ->with('seller')
+            ->with('dateTimePlanner');
     }
 
     /**
@@ -137,6 +158,14 @@ class Orders extends \yii\db\ActiveRecord
     public function getFinalMessage()
     {
         return $this->final_message;
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getDateTimePlanner()
+    {
+        return $this->hasMany(OrdersDateTimePlanner::class, ['order_id' => 'id']);
     }
 
     /**

@@ -17,7 +17,7 @@ class FrontSpecialistsController extends Controller
 {
     use AjaxValidationTrait;
     public $layout = "@current_template/layouts/main";
-    /** @var \app\services\BaseSpecialistsService */
+    /** @var ProbankSpecialistsService */
     protected $specialistsService;
 
     public function setSpecialistsService($specialistsService)
@@ -93,14 +93,14 @@ class FrontSpecialistsController extends Controller
     /**
      * Single specialist
      *
-     * @param $id
+     * @param int $portfolio_id
      * @return string
      */
-    public function actionSpecialist($id)
+    public function actionSpecialist($portfolio_id)
     {
         $transportModel = $this->getTransportModel([
             'action' => ProbankSpecialistsService::ACTION_GET_BY_ID,
-            'id' => (int) $id
+            'portfolio_id' => (int) $portfolio_id
         ]);
         return $this->render('specialist', [
             'specialistTransportModel' => $transportModel,

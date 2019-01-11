@@ -11,10 +11,10 @@ class ProbankUrls implements ModuleUrls
     {
         return [
             '' => 'project/front-specialists/index',
-            'specialist/<id:\d+>' => 'project/front-specialists/specialist',
+            'specialist/<portfolio_id:\d+>' => 'project/front-specialists/specialist',
             'search' => 'project/front-specialists/search',
             '<type:(' . strtolower(ProbankPortfolio::getSeparatedAllowedTypes('|') ) . ')>' => 'project/front-specialists/type',
-            'specialist/<sellers_id:\d+>/order/<action:[\w\-]+>' => 'project/orders/<action>',
+            'specialist/<portfolio_id:\d+>/order/<action:[\w\-]+>' => 'project/orders/<action>',
 
         ];
     }

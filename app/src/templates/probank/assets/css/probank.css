@@ -191,96 +191,97 @@ ul.probank-menu {
     padding-bottom: 15px;
     margin-bottom: 15px; }
 
-.order div.order-header {
-  padding: 32px 0 0 0; }
-
-.order .order-header-avatars {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-     -moz-box-orient: horizontal;
-     -moz-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -webkit-box-pack: justify;
-     -moz-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-align: center;
-     -moz-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  max-width: 450px;
-  margin: auto;
-  padding: 25px; }
-  .order .order-header-avatars .avatar {
-    border-radius: 100%;
-    width: 80px;
-    height: 80px;
-    background-size: cover;
-    background-position: center center; }
-  .order .order-header-avatars i {
-    color: #ffffff;
-    font-size: 35px; }
-
-.order .order-body {
-  max-width: 450px;
-  margin: auto;
-  padding: 25px; }
-
-.order .order-geo-time {
-  background: #2A9C3A;
-  padding: 8px 0; }
-
-.order .order-geo-time-inner {
-  color: #ffffff;
-  padding: 0 25px;
-  margin: auto;
-  max-width: 450px;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-     -moz-box-orient: horizontal;
-     -moz-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -webkit-box-pack: justify;
-     -moz-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-align: center;
-     -moz-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; }
-  .order .order-geo-time-inner .flex-el {
+.order {
+  padding-bottom: 30px; }
+  .order div.order-header {
+    padding: 32px 0 0 0; }
+  .order .order-header-avatars {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+       -moz-box-orient: horizontal;
+       -moz-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-pack: justify;
+       -moz-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     -ms-flex-line-pack: center;
         align-content: center;
     -webkit-box-align: center;
        -moz-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    max-width: 450px;
+    margin: auto;
+    padding: 25px; }
+    .order .order-header-avatars .avatar {
+      border-radius: 100%;
+      width: 80px;
+      height: 80px;
+      background-size: cover;
+      background-position: center center; }
+    .order .order-header-avatars i {
+      color: #ffffff;
+      font-size: 35px; }
+  .order .order-body {
+    max-width: 450px;
+    margin: auto;
+    padding: 25px; }
+  .order .order-geo-time {
+    background: #2A9C3A;
+    padding: 8px 0; }
+  .order .order-geo-time-inner {
+    color: #ffffff;
+    padding: 0 25px;
+    margin: auto;
+    max-width: 450px;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
-    display: flex; }
-  .order .order-geo-time-inner i {
-    font-size: 20px; }
-  .order .order-geo-time-inner span {
-    margin-left: 5px; }
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+       -moz-box-orient: horizontal;
+       -moz-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-pack: justify;
+       -moz-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    -webkit-box-align: center;
+       -moz-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .order .order-geo-time-inner .flex-el {
+      -ms-flex-line-pack: center;
+          align-content: center;
+      -webkit-box-align: center;
+         -moz-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex; }
+    .order .order-geo-time-inner i {
+      font-size: 20px; }
+    .order .order-geo-time-inner span {
+      margin-left: 5px; }
+
+.comment:last-of-type > div {
+  border-bottom: none; }
 
 .finish-order {
   padding: 25px;
@@ -295,21 +296,42 @@ ul.probank-menu {
     display: block;
     font-weight: 600;
     margin-bottom: 7px; }
-  .finish-order textarea {
+  .finish-order textarea.message {
     width: -webkit-calc(100% + 40px);
     width: -moz-calc(100% + 40px);
     width: calc(100% + 40px);
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
     margin-left: -20px;
-    margin-right: -20px;
-    border: 1px solid #dadada;
-    background: #eee;
-    border-radius: 10px;
-    height: 80px;
-    outline: none;
-    padding: 10px; }
+    margin-right: -20px; }
+
+button.green-button {
+  border-radius: 10px;
+  display: block;
+  padding: 16px 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
+  vertical-align: middle;
+  outline: none;
+  border: none 0;
+  background: #229232;
+  width: 100%;
+  color: #ffffff;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 17px; }
+
+textarea.message {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #dadada;
+  background: #eee;
+  border-radius: 10px;
+  height: 80px;
+  outline: none;
+  padding: 10px; }
 
 .bottom-bar {
   position: fixed;
@@ -332,9 +354,9 @@ ul.probank-menu {
 #finish-order {
   top: 100%;
   position: fixed;
-  height: -webkit-calc(100% - 270px);
-  height: -moz-calc(100% - 270px);
-  height: calc(100% - 270px);
+  height: -webkit-calc(100% - 268px);
+  height: -moz-calc(100% - 268px);
+  height: calc(100% - 268px);
   padding: 15px;
   background: #1a1a1a;
   -webkit-transition: top 1s ease;
@@ -345,7 +367,7 @@ ul.probank-menu {
      -moz-box-sizing: border-box;
           box-sizing: border-box; }
   #finish-order.active {
-    top: 270px; }
+    top: 268px; }
   #finish-order > span, #finish-order .finish-order-control {
     border-radius: 10px;
     display: block;

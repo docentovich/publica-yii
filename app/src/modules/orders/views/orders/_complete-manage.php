@@ -23,7 +23,13 @@
 <div class="finish-order">
     <div class="finish-block">
         <label>Поставтье оценку (0-5 баллов) о пратнере</label>
-        <div id="rate"></div>
+        <select id="rate-manage" data-val="0">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
     </div>
     <div class="finish-block finish-comment">
         <label>Оставтье окмментарий о партнере</label>

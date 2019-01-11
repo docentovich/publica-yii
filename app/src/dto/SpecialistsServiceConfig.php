@@ -8,6 +8,7 @@ use app\models\Portfolio;
 /**
  * Class SpecialistsServiceConfig
  * @property integer $portfolioId
+ * @property integer $portfolio_id
  * @property Portfolio $portfolioModel
  * @property string $type
  * @package app\dto

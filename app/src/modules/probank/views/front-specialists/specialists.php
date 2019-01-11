@@ -37,7 +37,7 @@
              style="display: none; <?= (count($specialistTransportModel->result) < 2) ? 'width: 100%;' : '' ?> ">
             <?= \yii\helpers\Html::a(
                     specialistHrefInner($specialist),
-                    ['/project/front-specialists/specialist', 'id' => $specialist->id]
+                    ['/project/front-specialists/specialist', 'portfolio_id' => $specialist->id]
             ); ?>
         </div>
     <?php endforeach; ?>

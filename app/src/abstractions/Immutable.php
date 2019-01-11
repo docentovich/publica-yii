@@ -39,4 +39,9 @@ class Immutable implements \app\interfaces\dto
             return;
         }
     }
+
+    public function __isset($key)
+    {
+        return isset($this->_params[$key]);
+    }
 }

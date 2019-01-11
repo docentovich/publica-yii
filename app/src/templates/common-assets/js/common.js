@@ -80,6 +80,34 @@ $( document ).ready(function() {
         $(this).addClass('is-active');
     })
 });
+$(document).ready(function () {
+    $('#finish-order-toggle').on('click', function () {
+        $('#finish-order').addClass('active');
+    });
+    $('#finish-order-control-no').on('click', function () {
+        $('#finish-order').removeClass('active');
+    });
+
+    $('#rate-manage').each(function () {
+        var val = $(this).data('val') || -1;
+
+        $(this).barrating({
+            theme: 'css-stars',
+            initialRating: val
+        });
+    });
+
+    $('#rate').each(function () {
+        var val = $(this).data('val') || -1;
+
+        $(this).barrating({
+            theme: 'css-stars',
+            initialRating: val,
+            readonly: true
+
+        });
+    });
+});
 var list = document.getElementsByClassName('share-button');
 
 for (var i = 0; i < list.length; i++) {

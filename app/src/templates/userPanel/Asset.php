@@ -9,7 +9,6 @@ class Asset extends AssetBundle
     public $css = [
         'css/user-panel.css',
         'css/additional-styles.css',
-        'css/tables.css',
     ];
     public $js = [
         'js/main.js',
