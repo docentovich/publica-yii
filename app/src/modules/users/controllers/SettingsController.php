@@ -67,7 +67,7 @@ class SettingsController extends \dektrium\user\controllers\SettingsController
                     [
                         'allow' => true,
                         'actions' => ['profile'],
-                        'roles' => ['@'],
+                        'roles' => ['user'],
                     ],
                     [
                         'allow' => true,

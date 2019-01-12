@@ -115,11 +115,14 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
     }
 
     /**
-     * @param string $size  e.g 200x200
+     * @param string|array $size  e.g 200x200
      * @return string url
      */
     public function getPathImageSizeOf($size)
     {
+        if(is_array($size)){
+            $size = implode('x', $size);
+        }
         if ($this->name === null) {
             return Constants::NO_IMAGE;
         }

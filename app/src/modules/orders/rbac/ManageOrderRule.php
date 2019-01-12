@@ -21,9 +21,10 @@ class ManageOrderRule extends Rule
      */
     public function execute($user, $item, $params)
     {
-        return Orders::findOne([
+        $a =  Orders::findOne([
                 'id' => $params['order_id'],
                 'customer_id' => \Yii::$app->user->getId()
             ])  !== null;
+        return $a;
     }
 }

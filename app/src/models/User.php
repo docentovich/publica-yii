@@ -16,7 +16,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property integer $id
  * @property string $username
- * @property string $city
+ * @property int $city_id
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
@@ -25,12 +25,13 @@ use yii\helpers\ArrayHelper;
  * @property integer $phone
  * @property integer $created_at
  * @property integer $updated_at
+ * @property City $city
  * @property Profile|null $profile
  * @property Profile $myProfile
  * @property Comments[] $myComments
  * @property Profile $profileNN
  * @property Like|null $likes
- * @property Portfolio $portfolio
+ * @property Portfolio[] $portfolio
  * @property string $password write-only password
  */
 class User extends BaseUser implements IdentityInterface
@@ -320,6 +321,14 @@ class User extends BaseUser implements IdentityInterface
     public function getPortfolio()
     {
         return $this->hasMany(Portfolio::class, ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCity()
+    {
+        return $this->hasOne(City::class, ['id' => 'city_id']);
     }
 
     public function toArray(array $fields = [], array $expand = [], $recursive = true)

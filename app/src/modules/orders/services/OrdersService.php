@@ -96,11 +96,7 @@ class OrdersService extends BaseOrdersService
         }
 
         /** @var OrdersDateTimePlanner $order */
-        $order = $this->prepareGetOrderByCSId($config)->one()
-            ?? new Orders([
-                'portfolio_id' => $config->portfolio_id,
-                'customer_id' => $config->customer_id
-            ]);
+        $order = $this->prepareGetOrderByCSId($config)->one() ?? $this->helperFindOrCreateOrder($config);
 
         return new OrdersTransportModel(new OrdersConfigQuery($config), $order);
     }
@@ -151,18 +147,18 @@ class OrdersService extends BaseOrdersService
      */
     private function helperSavePersonalPlanner(OrdersServiceConfig $config, Orders &$order)
     {
-        foreach ($config->time as $time){ // save time to personal planner of saller
-            try{
+        foreach ($config->time as $time) { // save time to personal planner of saller
+            try {
                 $dtp = new OrdersDateTimePlanner([
                     'user_id' => $order->seller->id,
                     'date' => $config->date->format('Y-m-d'),
                     'time' => $time
                 ]);
-                if($dtp->validate() && $dtp->save()){
+                if ($dtp->validate() && $dtp->save()) {
                     $order->link('dateTimePlanner', $dtp);
                 }
 
-            }catch (\Exception $e){
+            } catch (\Exception $e) {
 
             }
         }
@@ -186,11 +182,11 @@ class OrdersService extends BaseOrdersService
      */
     private function actionSendMessage(OrdersServiceConfig $config)
     {
-        if($config->order_id === null){ // first message creates the order
-            $order = $this->helperFindOrCreateOrder($config);
-        } else { // second message
-            $order = $this->findOneOrder($config);
-        }
+//        if($config->order_id === null){ // first message creates the order
+//            $order = $this->helperFindOrCreateOrder($config);
+//        } else { // second message
+        $order = $this->findOneOrder($config);
+//        }
 
         ($orderMessage = $order->orderMessagesNN)->load(\Yii::$app->request->post());
 
@@ -235,7 +231,7 @@ class OrdersService extends BaseOrdersService
                 throw new AccessDeniedException();
             }
 
-            if($order->validate()){
+            if ($order->validate()) {
                 $order->save();
             }
         }

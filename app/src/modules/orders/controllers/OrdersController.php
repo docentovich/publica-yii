@@ -96,7 +96,10 @@ class OrdersController extends Controller
         if ($orderTransportModel->result->status === Orders::STATUS_FINISHED) {
             $this->redirect(['orders/complete']);
         }
-        return $this->render('order-chat', compact('orderTransportModel'));
+
+        $city =  \app\models\City::findOne(["id" => \app\models\City::getCurrentCityId()]);
+
+        return $this->render('order-chat', compact('orderTransportModel', 'city'));
     }
 
     /**
@@ -113,11 +116,9 @@ class OrdersController extends Controller
         if (!\Yii::$app->request->isAjax) {
             throw new BadRequestHttpException('request must be ajax');
         }
-        $owner_id = \Yii::$app->user->getId();
         $transportModel = $this->getTransportModel([
             'action' => OrdersService::ACTION_SEND_MESSAGE,
             'order_id' => $order_id,
-            'owner_id' => $owner_id
         ]);
 
         return $transportModel->result;

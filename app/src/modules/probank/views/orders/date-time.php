@@ -24,7 +24,7 @@ echo \yii\helpers\Html::submitButton(
     Yii::t('app/probank', 'Order'),
     [
         'class' => 'submit',
-        'id' => 'submit',
+        'id' => 'order-submit',
         'style' => 'display: none'
     ]
 );
@@ -35,9 +35,9 @@ $this->registerJs(
 <<<MJS
   $('#dtp-order').on('timeSelected', function(_, time, date){
       if($(this).data('time') && $(this).data('time').length > 0){
-          $('#submit').show();
+          $('#order-submit').show();
       }else{
-          $('#submit').hide();
+          $('#order-submit').hide();
       }
   })
 MJS

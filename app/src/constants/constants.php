@@ -13,6 +13,7 @@ class Constants{
         "40x40", "50x50", // comments avatar
         "Rx270",
         "100x100",
+        "80x80" // small avatar
     ];
 
     const NO_IMAGE = 'noimage.svg';

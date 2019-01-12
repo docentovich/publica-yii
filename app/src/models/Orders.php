@@ -22,10 +22,12 @@ use yii\helpers\ArrayHelper;
  * @property string $finalMessage
  * @property User $customer
  * @property User $seller
- * @property OrdersMessages|null $orderMessages
- * @property OrdersMessages $orderMessagesNN
- * @property OrdersDateTimePlanner|null $dateTimePlanner
- * @property OrdersDateTimePlanner $dateTimePlannerNN
+ * @property Portfolio|null $portfolio
+ * @property Portfolio $portfolioNN
+ * @property OrdersMessages[]|null $orderMessages
+ * @property OrdersMessages[] $orderMessagesNN
+ * @property OrdersDateTimePlanner[]|null $dateTimePlanner
+ * @property OrdersDateTimePlanner[] $dateTimePlannerNN
  */
 class Orders extends \yii\db\ActiveRecord
 {
@@ -50,11 +52,11 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'seller_id', 'rate'], 'integer'],
-            [['customer_id', 'seller_id'], 'required'],
+            [['customer_id', 'portfolio_id', 'rate'], 'integer'],
+            [['customer_id', 'portfolio_id'], 'required'],
             [['status', 'final_message'], 'string'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['customer_id' => 'id']],
-            [['seller_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['seller_id' => 'id']],
+            [['portfolio_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['portfolio_id' => 'id']],
         ];
     }
 
@@ -66,7 +68,7 @@ class Orders extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app/user', 'ID'),
             'customer_id' => Yii::t('app/user', 'Customer ID'),
-            'seller_id' => Yii::t('app/user', 'Seller ID'),
+            'portfolio_id' => Yii::t('app/user', 'Portfolio ID'),
             'rate' => Yii::t('app/user', 'Rate'),
             'status' => Yii::t('app/user', 'Status'),
         ];
@@ -77,7 +79,7 @@ class Orders extends \yii\db\ActiveRecord
         return ArrayHelper::merge(
             parent::scenarios(),
             [
-                self::SCENARIO_CREATE => ['customer_id', 'seller_id']
+                self::SCENARIO_CREATE => ['customer_id', 'portfolio_id']
             ]
         );
     }
@@ -109,7 +111,7 @@ class Orders extends \yii\db\ActiveRecord
      */
     public function getOrderMessages()
     {
-        return $this->hasMany(OrdersMessages::class, ['order_id' => 'id']);
+        return $this->hasMany(OrdersMessages::class, ['order_id' => 'id'])->inverseOf('order');
     }
 
     /**
@@ -118,6 +120,14 @@ class Orders extends \yii\db\ActiveRecord
     public function getOrderMessagesNN()
     {
         return $this->orderMessages ?? new OrdersMessages();
+    }
+
+    /**
+     * @return Portfolio
+     */
+    public function getPortfoliosNN()
+    {
+        return $this->portfolio ?? new Portfolio();
     }
 
     /**

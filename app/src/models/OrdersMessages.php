@@ -3,6 +3,7 @@
 namespace src\models;
 
 use app\models\Orders;
+use app\models\User;
 use Yii;
 
 /**
@@ -12,7 +13,8 @@ use Yii;
  * @property int $order_id
  * @property string $message
  * @property string $created_at
- *
+ * @property int $owner_id
+ * @property User $owner
  * @property Orders $order
  */
 class OrdersMessages extends \yii\db\ActiveRecord
@@ -57,7 +59,12 @@ class OrdersMessages extends \yii\db\ActiveRecord
      */
     public function getOrder()
     {
-        return $this->hasOne(Orders::class, ['id' => 'order_id']);
+        return $this->hasOne(Orders::class, ['id' => 'order_id'])->inverseOf('orderMessages');
+    }
+
+    public function getOwner()
+    {
+        return $this->hasOne(User::class, ['id' => 'owner_id']);
     }
 
     /**

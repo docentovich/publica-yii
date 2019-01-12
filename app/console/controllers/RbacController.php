@@ -5,6 +5,7 @@ namespace console\controllers;
 use app\models\Orders;
 use app\models\User;
 use app\modules\orders\rbac\ManageOrderRule;
+use app\modules\orders\rbac\SendMessageOrderRule;
 use console\rbac\AuthorRule;
 use yii\base\Controller;
 use Yii;
@@ -41,6 +42,10 @@ class RbacController extends Controller
         $auth->assign($auth->getRole("administrator"), 1);
 
 
+
+        $this->actionOrders();
+
+
         echo "init done" . PHP_EOL;
     }
 
@@ -61,6 +66,25 @@ class RbacController extends Controller
 
         $user = $auth->getRole("user");
         $auth->addChild($user, $manageOrderPermission);
+
+
+        /** === */
+
+        $sendMessageOrderRule = new SendMessageOrderRule();
+        $auth->remove($sendMessageOrderRule);
+        $sendMessageOrder = $auth->getPermission('sendMessageOrder');
+        if($sendMessageOrder){
+            $auth->remove($sendMessageOrder);
+        }
+
+        $auth->add($sendMessageOrderRule);
+        $sendMessageOrderPermission = $auth->createPermission("sendMessageOrder");
+        $sendMessageOrderPermission->ruleName = $sendMessageOrderRule->name;
+        $auth->add($sendMessageOrderPermission);
+
+        $user = $auth->getRole("user");
+        $auth->addChild($user, $sendMessageOrderPermission);
+
     }
 
     public function actionOtest()

@@ -2,6 +2,7 @@
 
 namespace app\modules\orders\rbac;
 
+use app\models\Portfolio;
 use orders\models\Orders;
 use yii\rbac\Item;
 use yii\rbac\Rule;
@@ -21,14 +22,20 @@ class SendMessageOrderRule extends Rule
      */
     public function execute($user, $item, $params)
     {
-        return Orders::findOne([
+        $a = Orders::find()->where([
                 'AND',
-                'id' => $params['order_id'],
+                ['=', 'id', $params['order_id']],
                 [
                     'or',
-                    'customer_id' => \Yii::$app->user->getId(),
-                    'seller_id' => \Yii::$app->user->getId()
+                    ['=', 'customer_id', \Yii::$app->user->getId()],
+                    ['in', 'portfolio_id', array_map(function ($portfolio) {
+                        /** @var Portfolio $portfolio */
+                        return $portfolio->id;
+                    }, \Yii::$app->user->identity->portfolio)]
                 ]
-            ]) !== null;
+            ]);
+        $c = $a->createCommand()->sql;
+        $b = $a->one();
+        return $b !== null;
     }
 }

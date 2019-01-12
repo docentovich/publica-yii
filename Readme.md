@@ -9,6 +9,9 @@ toolbox:
 native: 
 
 	$ SET DBG_IP=10.0.75.1 && docker-compose -f docker-dev.yml up -d
+native: 
+
+	$  docker-compose -f docker-prod.yml up -d
 	
 stop:
 
