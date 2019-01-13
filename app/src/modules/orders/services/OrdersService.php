@@ -10,6 +10,7 @@ use Codeception\Exception\ElementNotFound;
 use orders\models\Orders;
 use orders\models\OrdersDateTimePlanner;
 use orders\models\OrdersSpecialistPortfolio;
+use src\models\OrdersMessages;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use yii\web\NotFoundHttpException;
 
@@ -21,6 +22,7 @@ class OrdersService extends BaseOrdersService
     const ACTION_COMPLETE_ORDER = 4;
     const ACTION_FINAL_ORDER = 5;
     const ACTION_GET_MY_ORDERS = 6;
+    const ACTION_GET_ORDER_BY_CSID = 7;
 
     /**
      * @param OrdersServiceConfig $config
@@ -42,7 +44,16 @@ class OrdersService extends BaseOrdersService
                 return $this->actionFinalOrder($config);
             case self::ACTION_GET_MY_ORDERS:
                 return $this->actionGetMyOrders($config);
+            case self::ACTION_GET_ORDER_BY_CSID:
+                return $this->actionGetOrderByCSId($config);
         }
+    }
+
+
+    private function actionGetOrderByCSId(OrdersServiceConfig $config)
+    {
+        $order = $this->prepareGetOrderByCSId($config)->one();
+        return new OrdersTransportModel(new OrdersConfigQuery($config), $order);
     }
 
     /**
@@ -63,7 +74,7 @@ class OrdersService extends BaseOrdersService
     private function prepareGetOrderByOrderId(OrdersServiceConfig $config)
     {
         return Orders::find()
-            ->orderId($config->customer_id);
+            ->orderId($config->order_id);
     }
 
     /**
@@ -76,7 +87,7 @@ class OrdersService extends BaseOrdersService
         $order = $this->prepareGetOrderByOrderId($config)->one();
 
         if (!$order && $throwException) {
-            throw new ElementNotFound('order not found');
+            throw new ElementNotFound('order id');
         }
 
         return $order;
@@ -182,20 +193,19 @@ class OrdersService extends BaseOrdersService
      */
     private function actionSendMessage(OrdersServiceConfig $config)
     {
-//        if($config->order_id === null){ // first message creates the order
-//            $order = $this->helperFindOrCreateOrder($config);
-//        } else { // second message
         $order = $this->findOneOrder($config);
-//        }
 
-        ($orderMessage = $order->orderMessagesNN)->load(\Yii::$app->request->post());
+        ($orderMessage = new OrdersMessages([
+            'order_id' => $config->order_id,
+            'owner_id' => \Yii::$app->user->getId()
+        ]))->load(\Yii::$app->request->post());
 
         if ($orderMessage->validate() && $orderMessage->save()) {
             $order->link('orderMessages', $orderMessage);
 
             return new OrdersTransportModel(
                 new OrdersConfigQuery($config),
-                $order->toArray([], ['messages'])
+                $orderMessage->toArray()
             );
         }
 

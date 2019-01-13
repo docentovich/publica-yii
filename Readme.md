@@ -1,43 +1,45 @@
-###### composer start :
-
     cd /C/Users/docen/prj/publica-yii
 
-toolbox:
+start :
+======
 
-	$ docker-compose -f docker-dev.yml up -d
+1. set chmod:
 
-native: 
+    > $ chmod +x  run_nginx.sh
+    
+2. create .env file from .env.{..}.demo
+    
+3. up:
 
-	$ docker-compose -f docker-prod.yml up -d
+   > $ docker-compose -f docker-dev.yml up -d    
+   > $ docker-compose -f docker-prod.yml up -d
 	
-stop:
+4. enter container:
 
-	$ docker-compose -f docker-dev.yml down
-	$ docker-compose -f docker-prod.yml down
-enter container:
-
-    $ docker exec -ti publica-yii_php_1 /bin/sh
-init app:
-
-    $ composer install
-    $ php yii init
-    $ composer dump-autoload
-    $ php yii migrate up
-    $ php yii migrate up --migrationPath=@yii/rbac/migrations
-    $ php yii migrate --migrationPath=@yii/rbac/migrations && php yii migrate up 
+   > $ docker exec -ti publicayii_php_1 /bin/sh
     
-    
-init rbac:
+5. init app:
 
-    $ php yii migrate --migrationPath=@yii/rbac/migrations
-    $ php yii rbac/init
+   > $ composer install     
+   > $ php init     
+   > $ composer dump-autoload   
+   > $ php yii migrate up   
+   > $ php yii migrate up --migrationPath=@yii/rbac/migrations  
     
-else commands:
+6. init rbac:
+
+   > $ php yii migrate --migrationPath=@yii/rbac/migrations     
+   > $ php yii rbac/init
+
+else
+=====   
+
+commands:
 
     $ php yii migrate/down 1 --migrationPath=src/migrations
     $ php yii migrate/down all --migrationPath=src/migrations
     $ php yii migrate/create <name> --migrationPath=src/migrations
-    php yii migrate/create add_index --migrationPath=src/migrations
+    $ php yii migrate/create add_index --migrationPath=src/migrations
     
 ###### notes:
 

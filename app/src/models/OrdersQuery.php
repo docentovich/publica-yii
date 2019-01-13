@@ -46,7 +46,7 @@ class OrdersQuery extends \yii\db\ActiveQuery
 
     public function orderId($order_id)
     {
-        return $this->andWhere(['=', 'order_id', $order_id]);
+        return $this->andWhere(['=', 'id', $order_id]);
     }
 
     public function sales($id)

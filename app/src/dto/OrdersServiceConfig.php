@@ -19,5 +19,4 @@ use app\abstractions\ServiceConfig;
  */
 class OrdersServiceConfig extends ServiceConfig
 {
-    public $order_id = null;
 }

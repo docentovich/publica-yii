@@ -185,4 +185,12 @@ class Orders extends \yii\db\ActiveRecord
     {
         $this->final_message = $message;
     }
+
+    public function toArray(array $fields = [], array $expand = [], $recursive = true)
+    {
+        return ArrayHelper::merge(
+            parent::toArray($fields, $expand, $recursive),
+            ['orderMessages' => $this->orderMessages]
+        );
+    }
 }

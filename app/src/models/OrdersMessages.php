@@ -5,6 +5,7 @@ namespace src\models;
 use app\models\Orders;
 use app\models\User;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%orders_messages}}".
@@ -33,7 +34,7 @@ class OrdersMessages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id'], 'required'],
+            [['order_id', 'message'], 'required'],
             [['order_id'], 'integer'],
             [['message'], 'string'],
             [['created_at'], 'safe'],
@@ -74,5 +75,13 @@ class OrdersMessages extends \yii\db\ActiveRecord
     public static function find()
     {
         return new OrdersMessagesQuery(get_called_class());
+    }
+
+    public function toArray(array $fields = [], array $expand = [], $recursive = true)
+    {
+        return ArrayHelper::merge(
+            parent::toArray($fields, $expand, $recursive),
+            ['owner' => $this->owner]
+        );
     }
 }

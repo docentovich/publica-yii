@@ -75,6 +75,7 @@ function resizeFileFromOriginal($original_file_and_dir, $size, $file_extension)
         : \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
     list($width, $height) = explode("x", str_replace('r', 100000, $size) );
 
+    $size = str_replace('r', 'R', $size);
     $return_file_name_and_dir = fn("{$original_file_and_dir}[{$size}]", $file_extension);
     // save
     \yii\imagine\Image::getImagine()

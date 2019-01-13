@@ -45,24 +45,27 @@ use app\models\DateTimePlanner;
     </div>
     <div class="member-body order-body">
         <div class="order-body-inner">
-            <?php foreach ($orderTransportModel->result->orderMessages as $message) { ?>
-                <div class="comment">
-                    <div class="comment-avatar"><?= $message->owner->profileNN->avatarNN->getImgSizeOf('100x100'); ?></div>
-                    <div class="comment-description">
-                        <strong><?= $message->owner->username; ?></strong>&nbsp;
-                        <span><?= $message->message; ?></span>
+
+            <div id="messages" class="comments">
+                <?php foreach ($orderTransportModel->result->orderMessages as $message) {
+                    ?>
+                    <div class="comment">
+                        <div class="comment-avatar"><?= $message->owner->profileNN->avatarNN->getImgSizeOf('100x100'); ?></div>
+                        <div class="comment-description">
+                            <strong><?= $message->owner->username; ?></strong>&nbsp;
+                            <span><?= $message->message; ?></span>
+                        </div>
                     </div>
-                </div>
-            <?php } ?>
+                <?php } ?>
+            </div>
 
             <?php $form = \yii\widgets\ActiveForm::begin([
-                    'action' => ['/orders/orders/send-message', 'order_id' => $orderTransportModel->result->id],
-                    'options' => ['class' => 'form form-ajax']
+                'action' => ['/orders/orders/send-message', 'order_id' => $orderTransportModel->result->id],
+                'options' => ['class' => 'form form-ajax', 'id' => 'form-message']
             ]);
             echo $form->field(($orderMessage = new \src\models\OrdersMessages()), 'message')
-                ->textarea(['class' => 'message'])
+                ->textarea(['class' => 'message', 'id' => 'message-text'])
                 ->label('');
-            echo $form->field($orderMessage, 'order_id')->hiddenInput()->label('');
             echo \yii\helpers\Html::submitButton(
                 Yii::t('app/orders', 'Send message'),
                 ['class' => 'green-button']
@@ -73,9 +76,31 @@ use app\models\DateTimePlanner;
     </div>
     <div class="bottom-bar"><span id="finish-order-toggle">Завершить заказ</span></div>
     <div id="finish-order"><span>Завершить заказ?</span>
-        <div class="finish-order-control-row"><a class="finish-order-control" href="/finish-order.html"
-                                                 id="finish-order-control-yes">Да</a>
+        <div class="finish-order-control-row">
+            <a class="finish-order-control" href="/finish-order.html"
+               id="finish-order-control-yes">Да</a>
             <button class="finish-order-control" id="finish-order-control-no">Нет</button>
         </div>
     </div>
 </div>
+
+<?php
+$this->registerJs(
+<<<JS
+    $('#form-message').on('ajax:success', function(_, data) {
+         var message = $('<div class=\"comment\" style=\'display: none\'>' +
+                          '<div class=\"comment-avatar\">' +
+                             '<img src=\'' + data.owner.profile.avatar_url + '\'/>' +
+                          '</div>' +
+                          '<div class=\"comment-description\">' +
+                              '<strong>' + data.owner.username + '</strong>&nbsp;' +
+                              '<span>' + data.message + '</span>' +
+                          '</div>' +
+                        '</div>');
+         $('#messages').append(message);
+         $('#message-text').val('');
+         message.slideDown("slow");
+    });
+JS
+, \yii\web\View::POS_END
+);

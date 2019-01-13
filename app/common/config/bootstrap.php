@@ -1,6 +1,7 @@
 <?php
 
 \Yii::setAlias('@common', dirname(__DIR__));
+//\Yii::setAlias('@app', dirname(dirname(__DIR__)) . '/src');
 \Yii::setAlias('@uploads', dirname(dirname(__DIR__)) . '/frontend/web/uploads');
 \Yii::setAlias('@frontend', dirname(dirname(__DIR__)) . '/frontend');
 \Yii::setAlias('@backend', dirname(dirname(__DIR__)) . '/backend');

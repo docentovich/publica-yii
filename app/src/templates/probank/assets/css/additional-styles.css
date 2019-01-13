@@ -91,3 +91,8 @@ img.no-image{
 .single-member .member-body .member-base-image .image-inner{
     max-height: none !important;
 }
+
+.comments{
+    display: table;
+    width: 100%;
+}

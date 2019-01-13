@@ -337,6 +337,7 @@ class User extends BaseUser implements IdentityInterface
             [
                 "id" => $this->id,
                 "email" => $this->email,
+                "username" => $this->username
             ],
             [
                 "profile" => $this->profileNN->toArray()

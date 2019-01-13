@@ -22,7 +22,7 @@ class SendMessageOrderRule extends Rule
      */
     public function execute($user, $item, $params)
     {
-        $a = Orders::find()->where([
+        return Orders::find()->where([
                 'AND',
                 ['=', 'id', $params['order_id']],
                 [
@@ -33,9 +33,6 @@ class SendMessageOrderRule extends Rule
                         return $portfolio->id;
                     }, \Yii::$app->user->identity->portfolio)]
                 ]
-            ]);
-        $c = $a->createCommand()->sql;
-        $b = $a->one();
-        return $b !== null;
+            ])->one() !== null;
     }
 }

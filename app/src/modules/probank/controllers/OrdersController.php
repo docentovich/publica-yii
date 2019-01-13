@@ -2,6 +2,8 @@
 
 namespace probank\controllers;
 
+use app\dto\OrdersServiceConfig;
+use orders\services\OrdersService;
 use probank\dto\ProbankSpecialistsServiceConfig;
 use probank\dto\ProbankSpecialistsTransportModel;
 use probank\services\ProbankSpecialistsService;
@@ -14,6 +16,8 @@ class OrdersController extends Controller
 
     /** @var ProbankSpecialistsService */
     protected $specialistsService;
+    /** @var \orders\services\OrdersService */
+    protected $ordersService;
 
     public function setSpecialistsService($specialistsService)
     {
@@ -24,6 +28,17 @@ class OrdersController extends Controller
     {
         return $this->specialistsService;
     }
+
+    public function setOrdersService($ordersService)
+    {
+        $this->ordersService = $ordersService;
+    }
+
+    public function getOrdersService()
+    {
+        return $this->ordersService;
+    }
+
 
     /**
      * @inheritdoc
@@ -50,6 +65,20 @@ class OrdersController extends Controller
 
     public function actionDateTime($portfolio_id)
     {
+        $ordersTransport = $this->ordersService->action(new  OrdersServiceConfig([
+            'action' => OrdersService::ACTION_GET_ORDER_BY_CSID,
+            'customer_id' => \Yii::$app->user->getId(),
+            'portfolio_id' => $portfolio_id
+        ]));
+        if($ordersTransport->result !== null){ // if order already exist
+            $this->redirect([
+                '/orders/orders/order',
+                'portfolio_id' => $portfolio_id,
+                'customer_id' => \Yii::$app->user->getId()
+            ]);
+            \Yii::$app->end();
+        }
+
         $transportModel = $this->getTransportModel([
             'action' => ProbankSpecialistsService::ACTION_GET_BY_ID,
             'portfolio_id' => (int) $portfolio_id
@@ -57,25 +86,5 @@ class OrdersController extends Controller
         return $this->render('date-time', [
             'specialistTransportModel' => $transportModel,
         ]);
-    }
-
-    public function actionComplete($sellers_id)
-    {
-
-    }
-
-    public function actionRate($sellers_id)
-    {
-
-    }
-
-    public function actionProcess($sellers_id)
-    {
-
-    }
-
-    public function actionSalesOf($sellers_id)
-    {
-
     }
 }
