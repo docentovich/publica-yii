@@ -7,3 +7,5 @@ node_modules/
 .htaccess
 .idea
 .DS_Store
+.env
+/app/env.php

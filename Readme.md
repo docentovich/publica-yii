@@ -4,18 +4,16 @@
 
 toolbox:
 
-	$ DBG_IP=192.168.99.1 docker-compose -f docker-dev.yml up -d
-	
+	$ docker-compose -f docker-dev.yml up -d
+
 native: 
 
-	$ SET DBG_IP=10.0.75.1 && docker-compose -f docker-dev.yml up -d
-native: 
-
-	$  docker-compose -f docker-prod.yml up -d
+	$ docker-compose -f docker-prod.yml up -d
 	
 stop:
 
 	$ docker-compose -f docker-dev.yml down
+	$ docker-compose -f docker-prod.yml down
 enter container:
 
     $ docker exec -ti publica-yii_php_1 /bin/sh

@@ -1,0 +1,96 @@
+events {
+}
+http {
+    include    /etc/nginx/mime.types;
+    server {
+        listen       80; # listen for IPv4
+        #listen       [::]:80 ipv6only=on; # listen for IPv6
+        server_name  ${DOMAIN_PROBANK};
+        root         /var/www/html;
+
+        #access_log   off;
+        #error_log    /dev/null crit;
+        charset      utf-8;
+        client_max_body_size  100M;
+
+        location ~* \/uploads\/(.*)\.(jpg|jpeg|gif|png|bmp)$ {
+            try_files /frontend/web$uri /src/handlers/images-fly-resize-handler.php?file_name=${DOLLAR}1&file_extension=$2${DOLLAR}args;
+            add_header        Cache-Control public;
+            add_header        Cache-Control must-revalidate;
+            expires           7d;
+        }
+
+        location / {
+            root  /var/www/html/frontend/web;
+            try_files  ${DOLLAR}uri  /frontend/web/index.php?${DOLLAR}args;
+        }
+
+        location ~* \.php$ {
+            try_files  ${DOLLAR}uri /frontend/web${DOLLAR}uri =404;
+            # check the www.conf file to see if PHP-FPM is listening on a socket or a port
+            #fastcgi_pass  unix:/run/php-fpm/php-fpm.sock; # listen for socket
+            fastcgi_pass  php:9000; # listen for port
+            fastcgi_param  SCRIPT_FILENAME "${DOLLAR}document_root${DOLLAR}fastcgi_script_name";
+            include  /etc/nginx/fastcgi_params;
+        }
+
+        location ~* \.(htaccess|htpasswd|svn|git) {
+            deny all;
+        }
+
+        location /admin {
+            alias  /var/www/html/backend/web;
+            try_files  ${DOLLAR}uri  /backend/web/index.php?${DOLLAR}args;
+
+            location ~* ^/admin/(.+\.php)$ {
+                try_files  ${DOLLAR}uri   /backend/web/${DOLLAR}1?${DOLLAR}args;
+            }
+        }
+    }
+    server {
+        listen       80; # listen for IPv4
+        #listen       [::]:80 ipv6only=on; # listen for IPv6
+        server_name   ${DOMAIN_TOSEE};
+        root         /var/www/html;
+
+        #access_log   off;
+        #error_log    /dev/null crit;
+        charset      utf-8;
+        client_max_body_size  100M;
+
+        location ~* \/uploads\/(.*)\.(jpg|jpeg|gif|png|bmp)$ {
+            try_files /frontend/web${DOLLAR}uri /src/handlers/images-fly-resize-handler.php?file_name=${DOLLAR}1&file_extension=$2${DOLLAR}args;
+
+            add_header        Cache-Control public;
+            add_header        Cache-Control must-revalidate;
+            expires           7d;
+        }
+
+        location / {
+            root  /var/www/html/frontend/web;
+            try_files  ${DOLLAR}uri  /frontend/web/index.php?${DOLLAR}args;
+        }
+
+        location ~* \.php$ {
+            try_files  ${DOLLAR}uri /frontend/web${DOLLAR}uri =404;
+            # check the www.conf file to see if PHP-FPM is listening on a socket or a port
+            #fastcgi_pass  unix:/run/php-fpm/php-fpm.sock; # listen for socket
+            fastcgi_pass  php:9000; # listen for port
+            include  /etc/nginx/fastcgi_params;
+            fastcgi_param  SCRIPT_FILENAME "${DOLLAR}document_root${DOLLAR}fastcgi_script_name";
+        }
+
+        location ~* \.(htaccess|htpasswd|svn|git) {
+            deny all;
+        }
+
+        location /admin {
+            alias  /var/www/html/backend/web;
+            try_files  ${DOLLAR}uri  /backend/web/index.php?${DOLLAR}args;
+
+            location ~* ^/admin/(.+\.php)$ {
+                try_files  ${DOLLAR}uri  /backend/web/${DOLLAR}1?${DOLLAR}args;
+            }
+        }
+    }
+}

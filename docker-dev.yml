@@ -1,18 +1,31 @@
 version: '2'
 
 services:
+  web:
+      image: nginx
+      ports:
+        - "80:80"
+      command: /var/www/run_nginx.sh
+      env_file:
+        - .env
+      volumes:
+        - ./run_nginx.sh:/var/www/run_nginx.sh
+        - ./nginx.conf.template:/var/www/default.conf.template
+        - ./env.php.template:/var/www/env.php.template
+        - ./app:/var/www/html
+        - ./php-win-dev.ini:/usr/local/etc/php/conf.d/common.ini
   php:
       image: docentovich/php.7.fpm-develop
       ports:
-       - "9000:9000"
+        - "9000:9000"
       environment:
         PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
         XDEBUG_CONFIG: remote_host=${DBG_IP}
       links:
         - db
-      volumes:
-        - ./app:/var/www/html
-        - ./php-win-dev.ini:/usr/local/etc/php/conf.d/common.ini
+        - web
+      volumes_from:
+        - web
   phpmyadmin:
       image: phpmyadmin/phpmyadmin
       container_name: phpmyadmin
@@ -22,28 +35,15 @@ services:
       ports:
        - "8090:80"
       volumes:
-       - C:\Users\AProzorov\prj\sessions
-  web:
-        image: nginx:1.11-alpine
-        links:
-         - php
-        ports:
-          - "80:80"
-        volumes:
-          - ./nginx.conf:/etc/nginx/conf.d/default.conf
-          - ./app:/var/www/html
-        volumes_from:
-         - php
+       - ./sessions
   db:
-        image: mysql:5.7.23
-        environment:
-#           - MYSQL_USER=root
-           - MYSQL_ROOT_PASSWORD=1Vv4nfkCXp
-#           - MYSQL_PASSWORD=1Vv4nfkCXp
-           - MYSQL_DATABASE=tosee
-           - TZ=Europe/Moscow
-        command: --innodb_use_native_aio=0
-        ports:
-          - '3306:3306'
-        volumes:
-         - ../mysql:/var/lib/mysql
+      image: mysql:5.7.23
+      environment:
+         - MYSQL_ROOT_PASSWORD=1Vv4nfkCXp
+         - MYSQL_DATABASE=tosee
+         - TZ=Europe/Moscow
+      command: --innodb_use_native_aio=0
+      ports:
+        - '3306:3306'
+      volumes:
+       - ../mysql:/var/lib/mysql
