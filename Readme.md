@@ -6,6 +6,7 @@ start :
 1. set chmod:
 
     > $ chmod +x  run_nginx.sh
+    > $ chmod 666 -R app/frontend/web/uploads
     
 2. create .env file from .env.{..}.demo
     
@@ -13,7 +14,7 @@ start :
 
    > $ docker-compose -f docker-dev.yml up -d    
    > $ docker-compose -f docker-prod.yml up -d
-	
+
 4. enter container:
 
    > $ docker exec -ti publicayii_php_1 /bin/sh
