@@ -12,6 +12,7 @@ class Constants{
         "800xR", // Portfolio base image
         "40x40", "50x50", // comments avatar
         "Rx270",
+        "Rx500",
         "100x100",
         "80x80" // small avatar
     ];
