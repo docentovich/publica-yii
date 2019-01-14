@@ -6,7 +6,7 @@ start :
 1. set chmod:
 
     > $ chmod +x  run_nginx.sh
-    > $ chmod 666 -R app/frontend/web/uploads
+    > $ chmod 755 -R app/frontend/web/uploads
     
 2. create .env file from .env.{..}.demo
     
