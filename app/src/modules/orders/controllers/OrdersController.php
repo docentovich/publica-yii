@@ -148,7 +148,7 @@ class OrdersController extends Controller
     public function actionFinish($order_id)
     {
         $transportModel = $this->getTransportModel([
-            'action' => OrdersService::ACTION_COMPLETE_ORDER,
+            'action' => OrdersService::ACTION_FINISH_ORDER,
             'order_id' => $order_id,
         ]);
 

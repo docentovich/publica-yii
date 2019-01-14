@@ -37,9 +37,9 @@ class OrdersService extends BaseOrdersService
     const ACTION_COMPLETE_ORDER = 4;
 
     /** @var int
-     *  @see OrdersService::actionFinalOrder
+     *  @see OrdersService::actionFinishOrder
      */
-    const ACTION_FINAL_ORDER = 5;
+    const ACTION_FINISH_ORDER = 5;
 
     /** @var int
      *  @see OrdersService::actionGetMyOrders
@@ -67,8 +67,8 @@ class OrdersService extends BaseOrdersService
                 return $this->actionSendMessage($config);
             case self::ACTION_COMPLETE_ORDER:
                 return $this->actionCompleteOrder($config);
-            case self::ACTION_FINAL_ORDER:
-                return $this->actionFinalOrder($config);
+            case self::ACTION_FINISH_ORDER:
+                return $this->actionFinishOrder($config);
             case self::ACTION_GET_MY_ORDERS:
                 return $this->actionGetMyOrders($config);
             case self::ACTION_GET_ORDER_BY_CSID:
@@ -221,7 +221,7 @@ class OrdersService extends BaseOrdersService
      * @param  OrdersServiceConfig $config
      * @return OrdersTransportModel
      */
-    private function actionFinalOrder(OrdersServiceConfig $config)
+    private function actionFinishOrder(OrdersServiceConfig $config)
     {
         $order = $this->findOneOrder($config);
 
