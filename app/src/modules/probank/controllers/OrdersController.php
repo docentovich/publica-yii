@@ -2,7 +2,7 @@
 
 namespace probank\controllers;
 
-use app\dto\OrdersServiceConfig;
+use orders\dto\OrdersServiceConfig;
 use orders\services\OrdersService;
 use probank\dto\ProbankSpecialistsServiceConfig;
 use probank\dto\ProbankSpecialistsTransportModel;
@@ -63,6 +63,14 @@ class OrdersController extends Controller
         return $this->specialistsService->action(new ProbankSpecialistsServiceConfig($config));
     }
 
+    /**
+     * Show Page with DateTime widget.
+     * If order is exist go to /orders/orders/order
+     *
+     * @param $portfolio_id
+     * @return string
+     * @throws \yii\base\ExitException
+     */
     public function actionDateTime($portfolio_id)
     {
         $ordersTransport = $this->ordersService->action(new  OrdersServiceConfig([

@@ -3,36 +3,47 @@
  * @var \orders\dto\OrdersTransportModel $orderTransportModel
  * @var \yii\web\View $this
  */
+
+$form = \yii\widgets\ActiveForm::begin([
+    'options' => ['class' => 'form', 'id' => 'form-message']
+]);
 ?>
-<div class="single-member order">
-    <div class="member-header order-header">
-        <div class="title">Анастасия</div>
-        <div class="sub-title">Модель</div>
-        <div class="order-header-avatars">
-            <div class="flex-el avatar" style="background-image:url(/images/my-avatar.jpg)"></div><i class="flex-el icon-exchange2" aria-hidden="true"></i>
-            <div class="flex-el avatar" style="background-image:url(/images/customer-avatar.jpg)"></div>
+    <div class="finish-order">
+        <div class="finish-block">
+            <label><?= Yii::t('app/orders', 'Rate from 0-5 points') ?></label>
+
+            <select id="rate-manage" data-val="<?= $orderTransportModel->result->rate ?>">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <?= $form->field($orderTransportModel->result, 'rate')
+                ->hiddenInput(['id' => 'rate-manage-input'])
+                ->label('') ?>
         </div>
-        <div class="order-geo-time">
-            <div class="order-geo-time-inner">
-                <div class="flex-el"><i class="icon-geo"></i><span>Орел</span></div>
-                <div class="flex-el"><i class="icon-clock"></i><span>18.00 - 22.00</span></div>
-            </div>
+        <div class="finish-block finish-comment">
+            <?= $form->field($orderTransportModel->result, 'final_message')
+                ->textarea(['class' => 'message'])
+                ->label(Yii::t('app/orders', 'Comment about partner')); ?>
         </div>
+
+        <?= \yii\helpers\Html::submitButton(
+            Yii::t('app/orders', 'Send message'),
+            ['class' => 'green-button', 'name' => 'send_form']
+        ); ?>
     </div>
-</div>
-<div class="finish-order">
-    <div class="finish-block">
-        <label>Поставтье оценку (0-5 баллов) о пратнере</label>
-        <select id="rate-manage" data-val="0">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-    </div>
-    <div class="finish-block finish-comment">
-        <label>Оставтье окмментарий о партнере</label>
-        <textarea class="message"></textarea>
-    </div>
-</div>
+<?php \yii\widgets\ActiveForm::end(); ?>
+
+<?php
+$this->registerJs(
+    <<<JS
+    (function($) {
+        $('#rate-manage').on('rate:select', function(event, value) {
+          $('#rate-manage-input').val(value);
+        });
+    })(jQuery);
+JS
+    , \yii\web\View::POS_END);

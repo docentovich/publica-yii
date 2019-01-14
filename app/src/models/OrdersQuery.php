@@ -49,6 +49,14 @@ class OrdersQuery extends \yii\db\ActiveQuery
         return $this->andWhere(['=', 'id', $order_id]);
     }
 
+    public function active(){
+        return $this->andWhere(['=', 'status', Orders::STATUS_ACTIVE]);
+    }
+
+    public function finished(){
+        return $this->andWhere(['=', 'status', Orders::STATUS_FINISHED]);
+    }
+
     public function sales($id)
     {
         return $this->andWhere([

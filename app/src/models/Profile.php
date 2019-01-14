@@ -27,6 +27,7 @@ use yii\helpers\ArrayHelper;
  * @property User $user
  * @property Image|null $avatar0
  * @property Image $avatarNN
+ * @property Image $avatarWhiteNN
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com
  */
@@ -108,6 +109,14 @@ class Profile extends BaseProfile
     public function getAvatarNN()
     {
         return $this->avatar0 ?? new Image();
+    }
+
+    /**
+     * @return \app\models\Image
+     */
+    public function getAvatarWhiteNN()
+    {
+        return $this->avatar0 ?? new Image(['no_image_color' => 'white']);
     }
 
     public function toArray(array $fields = [], array $expand = [], $recursive = true)

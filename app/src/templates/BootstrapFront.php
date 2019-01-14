@@ -19,6 +19,14 @@ class BootstrapFront implements BootstrapInterface
             case TOSEE:
                 \Yii::setAlias('@current_template', __DIR__ . "/tosee" );
                 break;
+
+            case PUBLICA:
+                \Yii::setAlias('@current_template', __DIR__ . "/publica" );
+                break;
+
+            case SHOOTME:
+                \Yii::setAlias('@current_template', __DIR__ . "/shootme" );
+                break;
         }
     }
 }

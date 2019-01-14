@@ -100,6 +100,13 @@ class ProbankSpecialistsService extends BaseSpecialistsService
     }
 
 
+    /**
+     * Get/Save Specialist portfolio
+     *
+     * @param ProbankSpecialistsServiceConfig $config
+     * @return ProbankSpecialistsTransportModel
+     * @throws \yii\base\ExitException
+     */
     protected function actionPortfolio(ProbankSpecialistsServiceConfig $config)
     {
         $portfolio = ProbankPortfolio::findOne([
@@ -138,6 +145,13 @@ class ProbankSpecialistsService extends BaseSpecialistsService
     }
 
 
+    /**
+     * Search Portfolio
+     *
+     * @param ProbankSpecialistsServiceConfig $config
+     * @return ProbankSpecialistsTransportModel
+     * @throws \Exception
+     */
     protected function actionSpecialistsByKeyword(ProbankSpecialistsServiceConfig $config): ProbankSpecialistsTransportModel
     {
         $config->keyword = \Yii::$app->request->get('keyword');
@@ -155,6 +169,11 @@ class ProbankSpecialistsService extends BaseSpecialistsService
         );
     }
 
+    /**
+     * Save Main Photo
+     *
+     * @param ProbankPortfolio $portfolio
+     */
     private function saveMainPhoto(ProbankPortfolio $portfolio)
     {
         // main image. get current, replace bay load, save, link
@@ -168,6 +187,14 @@ class ProbankSpecialistsService extends BaseSpecialistsService
         }
     }
 
+    /**
+     * Save Additional Photo
+     *
+     * @param ProbankPortfolio $portfolio
+     * @param array $images
+     * @param $type
+     * @throws \Exception
+     */
     private function saveAdditionalPhoto(ProbankPortfolio $portfolio, array $images, $type)
     {
         if (in_array($type, ProbankPortfolioAdditionalImages::ALLOWED_TYPES) === FALSE) {

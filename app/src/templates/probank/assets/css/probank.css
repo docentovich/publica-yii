@@ -193,6 +193,8 @@ ul.probank-menu {
 
 .order {
   padding-bottom: 30px; }
+  .order .title {
+    height: 28px; }
   .order div.order-header {
     padding: 32px 0 0 0; }
   .order .order-header-avatars {

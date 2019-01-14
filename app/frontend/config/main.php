@@ -33,6 +33,18 @@ switch (PROJECT) {
             ]
         ];
         break;
+    case PUBLICA:
+        $domain_params = [
+            'bootstrap' => [
+                'publica\FrontendBootstrap',
+            ],
+            'modules' => [
+                'project' => [
+                    'class' => 'publica\Module',
+                ]
+            ]
+        ];
+        break;
 }
 
 $config = [

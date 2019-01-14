@@ -17,9 +17,14 @@ class Constants{
     ];
 
     const NO_IMAGE = 'noimage.svg';
+    const NO_IMAGE_WHITE = 'noimage-white.svg';
 
     static public function NO_IMAGE() {
         return Url::to('/uploads/' . self::NO_IMAGE, true);
+    }
+
+    static public function NO_IMAGE_WHITE() {
+        return Url::to('/uploads/' . self::NO_IMAGE_WHITE, true);
     }
 
     static public function WAITING_IMAGE(){

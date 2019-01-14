@@ -16,12 +16,39 @@ use yii\web\NotFoundHttpException;
 
 class OrdersService extends BaseOrdersService
 {
+    /** @var int
+     *  @see OrdersService::actionOpenOrder
+     */
     const ACTION_OPEN_ORDER = 1;
+
+    /** @var int
+     *  @see OrdersService::actionGetOrder
+     */
     const ACTION_GET_ORDER = 2;
+
+    /** @var int
+     *  @see OrdersService::actionSendMessage
+     */
     const ACTION_SEND_MESSAGE = 3;
+
+    /** @var int
+     *  @see OrdersService::actionCompleteOrder
+     */
     const ACTION_COMPLETE_ORDER = 4;
+
+    /** @var int
+     *  @see OrdersService::actionFinalOrder
+     */
     const ACTION_FINAL_ORDER = 5;
+
+    /** @var int
+     *  @see OrdersService::actionGetMyOrders
+     */
     const ACTION_GET_MY_ORDERS = 6;
+
+    /** @var int
+     *  @see OrdersService::actionGetOrderByCSId
+     */
     const ACTION_GET_ORDER_BY_CSID = 7;
 
     /**
@@ -50,47 +77,16 @@ class OrdersService extends BaseOrdersService
     }
 
 
+    /**
+     * Find order by customer_id and portfolio_id
+     *
+     * @param OrdersServiceConfig $config
+     * @return OrdersTransportModel
+     */
     private function actionGetOrderByCSId(OrdersServiceConfig $config)
     {
         $order = $this->prepareGetOrderByCSId($config)->one();
         return new OrdersTransportModel(new OrdersConfigQuery($config), $order);
-    }
-
-    /**
-     * @param OrdersServiceConfig $config
-     * @return \src\models\OrdersQuery
-     */
-    private function prepareGetOrderByCSId(OrdersServiceConfig $config)
-    {
-        return Orders::find()
-            ->customerId($config->customer_id)
-            ->portfolioId($config->portfolio_id);
-    }
-
-    /**
-     * @param OrdersServiceConfig $config
-     * @return \src\models\OrdersQuery
-     */
-    private function prepareGetOrderByOrderId(OrdersServiceConfig $config)
-    {
-        return Orders::find()
-            ->orderId($config->order_id);
-    }
-
-    /**
-     * @param OrdersServiceConfig $config
-     * @param bool $throwException
-     * @return \app\models\Orders|array|null
-     */
-    private function findOneOrder(OrdersServiceConfig $config, $throwException = true)
-    {
-        $order = $this->prepareGetOrderByOrderId($config)->one();
-
-        if (!$order && $throwException) {
-            throw new ElementNotFound('order id');
-        }
-
-        return $order;
     }
 
     /**
@@ -113,6 +109,8 @@ class OrdersService extends BaseOrdersService
     }
 
     /**
+     * Find Order. if null Create Order
+     *
      * @param OrdersServiceConfig $config
      * @return Orders|null
      */
@@ -129,6 +127,8 @@ class OrdersService extends BaseOrdersService
     }
 
     /**
+     * Create Order
+     *
      * @param OrdersServiceConfig $config
      * @return Orders
      */
@@ -153,6 +153,9 @@ class OrdersService extends BaseOrdersService
     }
 
     /**
+     * Save Personal Planner
+     * TODO use DateTimePlanner module service
+     *
      * @param OrdersServiceConfig $config
      * @param Orders $order
      */
@@ -188,6 +191,8 @@ class OrdersService extends BaseOrdersService
     }
 
     /**
+     * Send Message (Ajax or ...)
+     *
      * @param OrdersServiceConfig $config
      * @return OrdersTransportModel
      */
@@ -229,22 +234,29 @@ class OrdersService extends BaseOrdersService
     }
 
     /**
+     * Return finished order. if user can edit then
+     *
      * @param OrdersServiceConfig $config
      * @return OrdersTransportModel
+     * @throws NotFoundHttpException
      */
     private function actionCompleteOrder(OrdersServiceConfig $config)
     {
-        $order = $this->findOneOrder($config);
+        $order = Orders::find()->finished()->orderId($config->order_id)->one();
 
-        if ($order->load(\Yii::$app->request->post())) {
-            if (!\Yii::$app->user->can('manageOrder', ['order_id' => $config->order_id])) {
-                throw new AccessDeniedException();
-            }
+        if($order === null){
+            throw new NotFoundHttpException();
+        }
 
-            if ($order->validate()) {
-                $order->save();
+        if( \Yii::$app->request->post('send_form') !== null ){
+            if (\Yii::$app->user->can('manageOrder', ['order_id' => $config->order_id])) {
+
+                if ($order->load(\Yii::$app->request->post()) && $order->validate()) {
+                    $order->save();
+                }
             }
         }
+
 
         return new OrdersTransportModel(new OrdersConfigQuery($config), $order);
     }
@@ -253,5 +265,34 @@ class OrdersService extends BaseOrdersService
     private function actionGetMyOrders($config)
     {
 
+    }
+
+    /**
+     * @param OrdersServiceConfig $config
+     * @return \src\models\OrdersQuery
+     */
+    private function prepareGetOrderByCSId(OrdersServiceConfig $config)
+    {
+        return Orders::find()
+            ->customerId($config->customer_id)
+            ->portfolioId($config->portfolio_id);
+    }
+
+    /**
+     * Find order by order_id
+     *
+     * @param OrdersServiceConfig $config
+     * @param bool $throwException
+     * @return \app\models\Orders|array|null
+     */
+    private function findOneOrder(OrdersServiceConfig $config, $throwException = true)
+    {
+        $order = Orders::find()->orderId($config->order_id)->one();
+
+        if (!$order && $throwException) {
+            throw new ElementNotFound('order id');
+        }
+
+        return $order;
     }
 }

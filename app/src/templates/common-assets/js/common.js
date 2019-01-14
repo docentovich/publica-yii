@@ -90,10 +90,13 @@ $(document).ready(function () {
 
     $('#rate-manage').each(function () {
         var val = $(this).data('val') || -1;
-
+        var self = this;
         $(this).barrating({
             theme: 'css-stars',
-            initialRating: val
+            initialRating: val,
+            onSelect: function(value, text, event) {
+                $(self).trigger('rate:select', [value, text, event]);
+            }
         });
     });
 

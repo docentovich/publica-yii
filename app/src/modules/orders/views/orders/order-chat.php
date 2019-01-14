@@ -8,41 +8,7 @@ use app\models\DateTimePlanner;
 
 ?>
 <div class="single-member order">
-    <div class="member-header order-header">
-        <div class="title"><?= $orderTransportModel->result->seller->profileNN->fullName; ?></div>
-        <div class="sub-title"><?= \Yii::t('app/probank', $orderTransportModel->result->portfolio->typeEn); ?></div>
-        <div class="order-header-avatars">
-            <?= \app\widgets\bgimg\BackgroundImage::widget([
-                'image' => $orderTransportModel->result->customer->profileNN->avatarNN,
-                'size' => [80, 80],
-                'wrapper_size' => null,
-                'options' => ['class' => 'flex-el avatar']
-            ]); ?>
-            <i class="flex-el icon-exchange2" aria-hidden="true"></i>
-            <?= \app\widgets\bgimg\BackgroundImage::widget([
-                'image' => $orderTransportModel->result->seller->profileNN->avatarNN,
-                'size' => [80, 80],
-                'wrapper_size' => null,
-                'options' => ['class' => 'flex-el avatar']
-            ]); ?>
-        </div>
-        <div class="order-geo-time">
-            <div class="order-geo-time-inner">
-                <div class="flex-el">
-                    <i class="icon-geo"></i>
-                    <span><?= \Yii::t('app/cities', $orderTransportModel->result->seller->city->label); ?></span>
-                </div>
-                <div class="flex-el">
-                    <i class="icon-clock"></i>
-                    <span><?= implode(' ', array_map(function ($dtp) {
-                                /** @var DateTimePlanner $dtp */
-                                return $dtp->time;
-                            }, $orderTransportModel->result->dateTimePlanner)
-                        ) ?></span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?= $this->render('_order-header', compact('orderTransportModel')); ?>
     <div class="member-body order-body">
         <div class="order-body-inner">
 
@@ -77,9 +43,16 @@ use app\models\DateTimePlanner;
     <div class="bottom-bar"><span id="finish-order-toggle">Завершить заказ</span></div>
     <div id="finish-order"><span>Завершить заказ?</span>
         <div class="finish-order-control-row">
-            <a class="finish-order-control" href="/finish-order.html"
-               id="finish-order-control-yes">Да</a>
-            <button class="finish-order-control" id="finish-order-control-no">Нет</button>
+            <?= \yii\helpers\Html::a(
+                    \Yii::t('app', 'Yes'),
+                    ['/orders/orders/finish', 'order_id' => $orderTransportModel->result->id],
+                    ['class' => 'finish-order-control', 'id' => 'finish-order-control-yes']
+            ); ?>
+            <?= \yii\helpers\Html::button(
+                \Yii::t('app', 'No'),
+                ['class' => 'finish-order-control', 'id' => 'finish-order-control-no']
+            ) ?>
+
         </div>
     </div>
 </div>

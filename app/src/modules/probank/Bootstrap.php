@@ -31,7 +31,10 @@ class Bootstrap implements BootstrapInterface
             FrontSpecialistsController::class => ['specialistsService' => $specialistsService],
             ModelController::class => ['specialistsService' => $specialistsService],
             PhotographerController::class => ['specialistsService' => $specialistsService],
-            OrdersController::class => ['specialistsService' => $specialistsService]
+            OrdersController::class => [
+                'specialistsService' => $specialistsService,
+                'ordersService' => $specialistsService = \Yii::$container->get('ordersService')
+            ]
         ]);
     }
 }

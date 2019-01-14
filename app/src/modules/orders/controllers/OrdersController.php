@@ -27,8 +27,8 @@ class OrdersController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['user', 'complete'],
-                        'actions' => ['order']
+                        'roles' => ['user'],
+                        'actions' => ['order', 'complete']
                     ],
                     [
                         'allow' => true,
@@ -83,6 +83,15 @@ class OrdersController extends Controller
         return $this->ordersService->action(new OrdersServiceConfig($config));
     }
 
+    /**
+     * Open exist order or create. if order is finished then redirect to
+     * /orders/orders/complete
+     *
+     * @param $portfolio_id
+     * @param null $customer_id
+     * @return string
+     * @throws \yii\base\ExitException
+     */
     public function actionOrder($portfolio_id, $customer_id = null)
     {
         $customer_id = $customer_id ?? \Yii::$app->user->getId();
@@ -93,8 +102,12 @@ class OrdersController extends Controller
             'date' => new \DateTime( \Yii::$app->request->post('date') ),
             'time' => \Yii::$app->request->post('time')
         ]);
+
         if ($orderTransportModel->result->status === Orders::STATUS_FINISHED) {
-            $this->redirect(['orders/complete']);
+            $this->redirect([
+                '/orders/orders/complete',
+                'order_id' => $orderTransportModel->result->id
+            ]);
         }
 
         $city =  \app\models\City::findOne(["id" => \app\models\City::getCurrentCityId()]);
@@ -124,24 +137,36 @@ class OrdersController extends Controller
         return $transportModel->result;
     }
 
+    /**
+     * Change status of the order and redirect to
+     * /orders/orders/complete
+     *
+     * @param $order_id
+     * @throws \HttpException
+     * @throws \yii\base\ExitException
+     */
     public function actionFinish($order_id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        if (!\Yii::$app->request->isAjax) {
-            throw new BadRequestHttpException('request must be ajax');
-        }
         $transportModel = $this->getTransportModel([
             'action' => OrdersService::ACTION_COMPLETE_ORDER,
             'order_id' => $order_id,
         ]);
 
         if ($transportModel->result) {
-            $this->redirect(['orders/orders/compete']);
+            $this->redirect(['/orders/orders/complete', 'order_id' => $order_id]);
             \Yii::$app->end();
         }
         throw new \HttpException();
     }
 
+    /**
+     * If we can change order then show order form.
+     * Else show rate and final message
+     *
+     * @param $order_id
+     * @return string
+     * @throws \yii\base\ExitException
+     */
     public function actionComplete($order_id)
     {
         $orderTransportModel = $this->getTransportModel([

@@ -25,9 +25,13 @@ $filtered_projects = array_filter(
                     <!--Left-->
                     <div class="navigation-part">
                         <div class="menu">
-                            <div class="hamburger toggle-overlay" id="service-menu" rel="service-menu">
-                                <i class="icon-burger"></i>
-                            </div>
+
+                            <?php if (PROJECT !== PUBLICA) { ?>
+                                <div class="hamburger toggle-overlay" id="service-menu" rel="service-menu">
+                                    <i class="icon-burger"></i>
+                                </div>
+                            <?php } ?>
+
                             <!--Logo-->
                             <div class="toggle-drop-down-action-panel base-logo" id="services" rel="services">
                                 <?= \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$currentProject}.svg"); ?>
@@ -40,12 +44,16 @@ $filtered_projects = array_filter(
                     <!--Right-->
                     <div class="navigation-part">
                         <div class="controls">
-                            <div class="toggle-drop-down-action-panel control" id="search" rel="search">
-                                <i class="icon-search"></i>
-                            </div>
-                            <div class="toggle-drop-down-action-panel control" id="geo" rel="geo">
-                                <i class="icon-geo"></i>
-                            </div>
+
+                            <?php if (PROJECT !== PUBLICA) { ?>
+                                <div class="toggle-drop-down-action-panel control" id="search" rel="search">
+                                    <i class="icon-search"></i>
+                                </div>
+                                <div class="toggle-drop-down-action-panel control" id="geo" rel="geo">
+                                    <i class="icon-geo"></i>
+                                </div>
+                            <?php } ?>
+
                             <div class="toggle-drop-down-action-panel control" id="enter" rel="enter">
                                 <?php if (Yii::$app->id === "app-backend" and \Yii::$app->user->identity !== null) {
                                     echo \yii\helpers\Html::beginForm(['/user/security/logout'], 'post');
@@ -55,11 +63,15 @@ $filtered_projects = array_filter(
                                     );
                                     echo \yii\helpers\Html::endForm();
 
-                                } else { ?>
-                                    <a href="/admin">
-                                        <i class="icon-enter"></i>
-                                    </a>
-                                <?php } ?>
+                                } else {
+                                    echo \yii\helpers\Html::a(
+                                        '<i class="icon-enter"></i>',
+                                        \yii\helpers\Url::to(
+                                            (PROJECT === PUBLICA)
+                                                ? \yii\helpers\ArrayHelper::getValue(\Yii::$app->params, 'projects.tosee.url') . '/admin'
+                                                : '/admin',
+                                            true));
+                                } ?>
                             </div>
                         </div>
                     </div>
@@ -87,8 +99,8 @@ $filtered_projects = array_filter(
                     <?php foreach ($filtered_projects as $project) {
                         echo \yii\helpers\Html::a(
                             "<div class=\"drop-down-service-image drop-down-service--publica\">"
-                                    . \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$project['logo']}") .
-                                    "</div>
+                            . \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$project['logo']}") .
+                            "</div>
                                  <div class=\"drop-down-service-description\"></div>",
                             $project['url'],
                             ["class" => "drop-down-service"])
@@ -116,6 +128,7 @@ $filtered_projects = array_filter(
     </div>
     <div class="overlay" id="search-overlay">
         <ul id="search-results-list" class="overlay-list"></ul>
-  +  </div>
+        +
+    </div>
 
 <?= $content; ?>

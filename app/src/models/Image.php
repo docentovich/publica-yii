@@ -32,6 +32,7 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
 {
     const SCENARIO_LOAD_FILE = 'loadFile';
     protected $relativeUploadPathLabel = 'Relative Upload Path';
+    public $no_image_color = 'black';
 
     /**
      * @inheritdoc
@@ -101,7 +102,7 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
     public function getPath0()
     {
         if ($this->name === null) {
-            return Constants::NO_IMAGE;
+            return ($this->no_image_color === 'black') ? Constants::NO_IMAGE : Constants::NO_IMAGE_WHITE;
         }
         return $this->path . "/" . $this->name;
     }
@@ -124,7 +125,7 @@ class Image extends \yii\db\ActiveRecord implements ImageInterface
             $size = implode('x', $size);
         }
         if ($this->name === null) {
-            return Constants::NO_IMAGE;
+            return ($this->no_image_color === 'black') ? Constants::NO_IMAGE : Constants::NO_IMAGE_WHITE;
         }
         list($file_name, $file_extension) = explode('.', $this->name);
         $size_prefix = ($size !== null) ? "[{$size}]" : '';

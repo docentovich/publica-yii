@@ -16,7 +16,8 @@ use yii\helpers\ArrayHelper;
  * @property int $id
  * @property int $customer_id from tbl_usr_user
  * @property int $portfolio_id from Probank
- * @property int $rate
+ * @property int|null $rate
+ * @property int $rating null = 0
  * @property string $status
  * @property string $final_message
  * @property string $finalMessage
@@ -192,5 +193,10 @@ class Orders extends \yii\db\ActiveRecord
             parent::toArray($fields, $expand, $recursive),
             ['orderMessages' => $this->orderMessages]
         );
+    }
+
+    public function getRating()
+    {
+        return (int)($this->rate ?? 0);
     }
 }
