@@ -3,6 +3,7 @@
 namespace users\controllers;
 
 use users\models\UsersOrders;
+use yii\db\ActiveQuery;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
@@ -37,7 +38,7 @@ class OrdersController extends UserPanelController
         $myOrdersModel = new UsersOrders(['myId' => \Yii::$app->user->getId()]);
         return $this->render('orders-list', [
             "orders" => $myOrdersModel->allOrders()->all(),
-            "sales" => $myOrdersModel->allSales()->all(),
+            "sales" => \Yii::$app->user->identity->mySales,
         ]);
     }
 

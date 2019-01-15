@@ -313,6 +313,12 @@ class User extends BaseUser implements IdentityInterface
         return $user;
     }
 
+    public function getMySales()
+    {
+        return $this->hasMany(Orders::class,['portfolio_id' => 'id'])
+            ->viaTable('{{%probank_portfolio}}', ['user_id' => 'id']);
+    }
+
     public function getMyComments()
     {
         return ArrayHelper::merge($this->commentsViaPosts, []);

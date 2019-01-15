@@ -49,21 +49,26 @@ class OrdersQuery extends \yii\db\ActiveQuery
         return $this->andWhere(['=', 'id', $order_id]);
     }
 
-    public function active(){
+    public function active()
+    {
         return $this->andWhere(['=', 'status', Orders::STATUS_ACTIVE]);
     }
 
-    public function finished(){
+    public function finished()
+    {
         return $this->andWhere(['=', 'status', Orders::STATUS_FINISHED]);
     }
 
-    public function sales($id)
-    {
-        return $this->andWhere([
-            'seller_id' => $id,
-            'status' => Orders::STATUS_ACTIVE
-        ])->with('customers');
-    }
+//    public function sales($user_id)
+//    {
+//        return $this
+//            ->active()
+//            ->joinWith(['postData postData'])
+//            ->andOnCondition([
+//                'user_id' => $id,
+//                'status' => Orders::STATUS_ACTIVE
+//            ])->with('customers');
+//    }
 
     public function purchases($id)
     {

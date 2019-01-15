@@ -29,5 +29,11 @@ use yii\db\ActiveRecord;
  */
 class Post extends ActiveRecord
 {
-
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%tosee_post}}';
+    }
 }

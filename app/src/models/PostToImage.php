@@ -13,5 +13,11 @@ namespace app\models;
  */
 class PostToImage extends \yii\db\ActiveRecord
 {
-
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%tosee_post_to_image}}';
+    }
 }

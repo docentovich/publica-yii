@@ -145,11 +145,11 @@ class Orders extends \yii\db\ActiveRecord
     }
 
 
-    public function allSales(): ActiveQuery
-    {
-        return self::find()->sales($this->myId ?? \Yii::$app->user->getId());
-
-    }
+//    public function allSales(): ActiveQuery
+//    {
+//        return self::find()->sales($this->myId ?? \Yii::$app->user->getId());
+//
+//    }
 
     /**
      * {@inheritdoc}

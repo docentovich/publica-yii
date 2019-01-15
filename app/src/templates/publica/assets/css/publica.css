@@ -1,0 +1,30 @@
+.portals {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  height: 100%; }
+  .portals .portal {
+    display: block;
+    text-align: center;
+    margin: auto; }
+    .portals .portal:not(:last-of-type) {
+      margin: 0 auto 60px auto; }
+      .portals .portal:not(:last-of-type):after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: #999999;
+        margin: 20px auto 0 auto;
+        opacity: 0.4; }
+  .portals .portal img {
+    width: 100%;
+    max-width: 160px; }
+
+.content {
+  width: 80%;
+  min-height: -webkit-calc(100% - 42px);
+  min-height: -moz-calc(100% - 42px);
+  min-height: calc(100% - 42px); }
+
+/*# sourceMappingURL=publica.css.map */
