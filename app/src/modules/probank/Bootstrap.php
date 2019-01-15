@@ -28,7 +28,10 @@ class Bootstrap implements BootstrapInterface
         $specialistsService = \Yii::$container->get('SpecialistsService');
         \Yii::$container->setDefinitions([
             PhotographerController::class => ['specialistsService' => $specialistsService],
-            FrontSpecialistsController::class => ['specialistsService' => $specialistsService],
+            FrontSpecialistsController::class => [
+                'specialistsService' => $specialistsService,
+                'imagesService' => \Yii::$container->get('ImagesService')
+            ],
             ModelController::class => ['specialistsService' => $specialistsService],
             PhotographerController::class => ['specialistsService' => $specialistsService],
             OrdersController::class => [

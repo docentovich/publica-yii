@@ -15,7 +15,9 @@ class ProbankUrls implements ModuleUrls
             'search' => 'project/front-specialists/search',
             '<type:(' . strtolower(ProbankPortfolio::getSeparatedAllowedTypes('|') ) . ')>' => 'project/front-specialists/type',
             'specialist/<portfolio_id:\d+>/order/<action:[\w\-]+>' => 'project/orders/<action>',
-
+            '<action:[\w\-]+>/<id:\d+>' => 'project/front-specialists/<action>',
+            '<action:[\w\-]+>' => 'project/front-specialists/<action>',
+            '<action:[a-zA-Z\-\_]+>/<date:[\d\-]+>' => 'project/front-specialists/<action>',
         ];
     }
 

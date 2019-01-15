@@ -38,14 +38,14 @@ function _checkFileExist($file_name_and_dir, $file_extension)
 
     if (!isset($matches[2])) {
         // user request file with out size suffix but we have not found it before? so return noimage
-        throw new \app\exceptions\IncorrectImageSizeRequest();
+        throw new Exception();
     }
 
     list(, $file_name_original, $size) = $matches;
 
     if (!in_array($size, \app\constants\Constants::ALLOWED_IMAGE_SIZES)) {
         // not allowed size
-        throw new \app\exceptions\IncorrectImageSizeRequest;
+        throw new Exception();
     }
 
     if (!file_exists(pathOf(fn($file_name_original, $file_extension)))) {

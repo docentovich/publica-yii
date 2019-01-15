@@ -1,7 +1,6 @@
 <?php
 namespace app\templates\publica;
 
-use app\assets\DatePickerAsset;
 use yii\web\AssetBundle;
 
 /**
