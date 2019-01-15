@@ -12,6 +12,7 @@ class CommonAsset extends AssetBundle
     public $css = [
         'bundle/vendor.css',
         'css/common.css',
+        'css/tables.css',
     ];
     public $js = [
         'bundle/vendor.js',

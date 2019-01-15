@@ -7,7 +7,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class ToseePostSearch extends PostSearch
+class ToseePostSearch extends ToseePost
 {
     public $postDataTitle;
 
@@ -40,7 +40,7 @@ class ToseePostSearch extends PostSearch
      */
     public function search($params)
     {
-        $query = PostSearch::find()->where(["=", "user_id", Yii::$app->user->identity->getId()]);
+        $query = ToseePostSearch::find()->where(["=", "user_id", Yii::$app->user->identity->getId()]);
 
         // add conditions that should always apply here
 
@@ -88,4 +88,6 @@ class ToseePostSearch extends PostSearch
 
         return $dataProvider;
     }
+
+
 }
