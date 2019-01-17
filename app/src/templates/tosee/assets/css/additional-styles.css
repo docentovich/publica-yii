@@ -29,6 +29,7 @@
 
 #sidebar-calendar table{
     color: #fff;
+    width: 100%;
 }
 
 #sidebar-calendar table td, #sidebar-calendar table th{

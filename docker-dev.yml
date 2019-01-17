@@ -22,8 +22,8 @@ services:
         PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
         XDEBUG_CONFIG: remote_host=${DBG_IP}
       links:
-        - db
-        - web
+                     - db
+                     - web
       volumes_from:
         - web
   phpmyadmin:
