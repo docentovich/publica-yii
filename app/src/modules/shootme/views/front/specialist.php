@@ -20,17 +20,25 @@
         <div class="sub-title"><?= \Yii::t('app/shootme', $specialistTransportModel->result->typeEn); ?></div>
     </div>
     <div class="member-body">
-        <div class="member-base-image">
-            <div class="image-inner"><?= $specialistTransportModel->result->mainPhotoNN->getImgSizeOf("800xR") ?></div>
 
-            <?php if (\Yii::$app->user->can('user') && ($specialistTransportModel->result->userId !== Yii::$app->user->getId())) { ?>
-                <?= \yii\helpers\Html::a(
-                        Yii::t('app/shootme', 'Order'),
-                        ['/project/orders/date-time', "portfolio_id" => $specialistTransportModel->result->id],
-                        ['class' => 'order']
-                ); ?>
-            <?php } ?>
+        <div class="member-characteristics">
+            <div class="member-base-image">
+                <?= \app\widgets\bgimg\BackgroundImage::widget([
+                    'image' => $specialistTransportModel->result->mainPhotoNN,
+                    'size' => '200x200',
+                    'options' => ['class' => 'image-inner']
+
+                ]); ?>
+                <a class="green-button" href="/order.html">Заказать</a>
+            </div>
+            <div class="member-numbers">
+                <div class="member-numbers-rows"><i class="fa fa-rub"></i><span>500</span></div>
+                <div class="member-numbers-rows"><i class="fa fa-star-half-o"></i><span>9.8</span></div>
+                <div class="member-numbers-rows"><i class="fa fa-shopping-basket"></i><span>5</span></div>
+            </div>
         </div>
+
+
         <div class="member-description">
             <?= $specialistTransportModel->result->about; ?>
         </div>
