@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\shootme;
+namespace shootme;
 
 use yii\base\BootstrapInterface;
 

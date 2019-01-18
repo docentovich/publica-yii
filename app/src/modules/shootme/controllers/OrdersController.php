@@ -1,12 +1,45 @@
 <?php
 
-namespace probank\controllers;
+namespace shootme\controllers;
 
+use orders\dto\OrdersServiceConfig;
+use orders\services\OrdersService;
+use shootme\dto\ShootmeSpecialistsServiceConfig;
+use shootme\dto\ShootmeSpecialistsTransportModel;
+use shootme\services\ShootmeSpecialistsService;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
 class OrdersController extends Controller
 {
+    public $layout = "@current_template/layouts/main";
+
+    /** @var ShootmeSpecialistsService */
+    protected $specialistsService;
+    /** @var \orders\services\OrdersService */
+    protected $ordersService;
+
+    public function setSpecialistsService($specialistsService)
+    {
+        $this->specialistsService = $specialistsService;
+    }
+
+    public function getSpecialistsService()
+    {
+        return $this->specialistsService;
+    }
+
+    public function setOrdersService($ordersService)
+    {
+        $this->ordersService = $ordersService;
+    }
+
+    public function getOrdersService()
+    {
+        return $this->ordersService;
+    }
+
+
     /**
      * @inheritdoc
      */
@@ -14,7 +47,7 @@ class OrdersController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -24,28 +57,42 @@ class OrdersController extends Controller
             ],
         ];
     }
-    public function actionCreate($sellers_portfolio_id)
-    {
 
+    private function getTransportModel($config): ShootmeSpecialistsTransportModel
+    {
+        return $this->specialistsService->action(new ShootmeSpecialistsServiceConfig($config));
     }
 
-    public function actionComplete($sellers_portfolio_id)
+    /**
+     * Show Page with DateTime widget.
+     * If order is exist go to /orders/orders/order
+     *
+     * @param $portfolio_id
+     * @return string
+     * @throws \yii\base\ExitException
+     */
+    public function actionDateTime($portfolio_id)
     {
+        $ordersTransport = $this->ordersService->action(new  OrdersServiceConfig([
+            'action' => OrdersService::ACTION_GET_ORDER_BY_CSID,
+            'customer_id' => \Yii::$app->user->getId(),
+            'portfolio_id' => $portfolio_id
+        ]));
+        if($ordersTransport->result !== null){ // if order already exist
+            $this->redirect([
+                '/orders/orders/order',
+                'portfolio_id' => $portfolio_id,
+                'customer_id' => \Yii::$app->user->getId()
+            ]);
+            \Yii::$app->end();
+        }
 
-    }
-
-    public function actionRate($sellers_portfolio_id)
-    {
-
-    }
-
-    public function actionProcess($sellers_portfolio_id)
-    {
-
-    }
-
-    public function actionSalesOf($sellers_portfolio_id)
-    {
-
+        $transportModel = $this->getTransportModel([
+            'action' => ShootmeSpecialistsService::ACTION_GET_BY_ID,
+            'portfolio_id' => (int) $portfolio_id
+        ]);
+        return $this->render('date-time', [
+            'specialistTransportModel' => $transportModel,
+        ]);
     }
 }

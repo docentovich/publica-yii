@@ -1,163 +1,211 @@
 <?php
 
-namespace app\modules\probank\controllers;
+namespace shootme\controllers;
 
-use Yii;
+use app\models\City;
+use app\models\Comments;
+use app\dto\ImagesServiceConfig;
+use app\dto\ImagesTransportModel;
+use app\services\BaseImagesService;
+use shootme\dto\ShootmeSpecialistsServiceConfig;
+use shootme\dto\ShootmeSpecialistsTransportModel;
+use shootme\services\ShootmeSpecialistsService;
+use app\traits\AjaxValidationTrait;
+use yii\filters\AccessControl;
 use yii\web\Controller;
-use app\modules\probank\services\frontend\postService as Post;
 use yii\web\Cookie;
-use yii\web\HttpException;
 
 /**
- * Default controller for the `probank` module
+ * Default controller for the `shootme` module
  */
 class FrontController extends Controller
 {
+    use AjaxValidationTrait;
     public $layout = "@current_template/layouts/main";
+    /** @var ShootmeSpecialistsService */
+    protected $specialistsService;
+    /** @var \app\services\BaseImagesService */
+    protected $imagesService;
 
-    /**
+    public function setSpecialistsService($specialistsService)
+    {
+        $this->specialistsService = $specialistsService;
+    }
+    public function getSpecialistsService()
+    {
+        return $this->specialistsService;
+    }
+
+    public function setImagesService($imagesService)
+    {
+        $this->imagesService = $imagesService;
+    }
+
+    public function getImagesService()
+    {
+        return $this->imagesService;
+    }
+
+     /**
      * @inheritdoc
      */
-    public function actions()
+    public function behaviors()
     {
         return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ]
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => ['like', 'comment'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ], [
+                        'actions' => ['index', 'specialist', 'type', 'search'],
+                        'allow' => true,
+                        'roles' => ['?', '@'],
+                    ]
+                ],
+            ],
         ];
     }
 
+    private function getTransportModel($config): ShootmeSpecialistsTransportModel
+    {
+        return $this->specialistsService->action(new ShootmeSpecialistsServiceConfig($config));
+    }
 
     /**
-     * Экшен вывода постов по условиям
-     *
      * @param int $page
      * @return string
      */
     public function actionIndex($page = 1)
     {
+        if(\Yii::$app->request->post('filter')){
+            \Yii::$app->response->cookies->add(new  Cookie([
+                'name'  => 'city_id',
+                'value' => \Yii::$app->request->post('city')
+            ]));
 
-        //передаем в лайоут будущее
-        Yii::$app->view->title = "Что будет";
-        Yii::$app->view->params['navigation_label'] = "Что будет";
-        Yii::$app->view->params['next_url'] = "/past";
-        Yii::$app->view->params['prev_url'] = "/past";
+            \Yii::$app->response->cookies->add(new  Cookie([
+                'name'  => 'date',
+                'value' => \Yii::$app->request->post('date')
+            ]));
 
-        $service = (new Post())->page($page)->getFuture();
+            \Yii::$app->response->cookies->add(new  Cookie([
+                'name'  => 'time',
+                'value' => \Yii::$app->request->post('time')
+            ]));
 
-        return $this->render('specialists', [
-            "service"  => $service,
+            $this->redirect(['front/members']);
+            \Yii::$app->end();
+        }
+        return $this->render('index', [
+            'cities' =>  City::find()->all()
         ]);
     }
 
+
     /**
-     * Экшен прошлое
+     * Filter by type
      *
      * @param int $page
      * @return string
      */
-    public function actionPast($page = 1)
+    public function actionType($type, $page = 1)
     {
-
-        //передаем в лайоут прошлое
-        Yii::$app->view->title = "Что было";
-        Yii::$app->view->params['navigation_label'] = "Что было";
-        Yii::$app->view->params['next_url'] = "/";
-        Yii::$app->view->params['prev_url'] = "/";
-
-        $service = (new Post())->page($page)->getPast();
-
-        return $this->render('specialists', [
-            "service"  => $service,
+        $type = strtoupper($type);
+        $transportModel = $this->getTransportModel([
+            'action' => ShootmeSpecialistsService::ACTION_GET_FILTERED_BY_TYPE_SPECIALISTS,
+            'type' => $type
         ]);
-
+        return $this->render('specialists', [
+            'specialistTransportModel' => $transportModel,
+        ]);
     }
 
     /**
-     * Фильтр по диапазону дат (пока просто дата)
+     * Single specialist
      *
-     * @param $date
-     * @param int $page
+     * @param int $portfolio_id
      * @return string
      */
-    public function actionDate($date, $page = 1)
+    public function actionSpecialist($portfolio_id)
     {
-
-        //передаем в лайоут дату и ссылки
-        Yii::$app->view->params['navigation_label'] = $date;
-        Yii::$app->view->params['next_url'] = "/" . date('Y-m-d', strtotime('+1 day', strtotime($date)));
-        Yii::$app->view->params['prev_url'] = "/" . date('Y-m-d', strtotime('-1 day', strtotime($date)));
-        Yii::$app->view->params['current_date'] = $date;
-
-        $service = (new Post)->page($page)->getByDate($date);
-
-        return $this->render('specialists', [
-            "service" => $service,
+        $transportModel = $this->getTransportModel([
+            'action' => ShootmeSpecialistsService::ACTION_GET_BY_ID,
+            'portfolio_id' => (int) $portfolio_id
         ]);
-
-
-    }
-
-    /**
-     * Экшен поста
-     *
-     * @param integer $id ид поста
-     * @return string
-     */
-    public function actionPost($id)
-    {
-
-        $id = (int)$id;
-        $service = (new Post)->getById($id);
-
-        //передаем в лайоут прошлое
-        Yii::$app->view->params['navigation_label'] = $service->items->postData->title;
-        Yii::$app->view->title = $service->items->postData->title;
-        Yii::$app->view->params['next_url'] = (isset($service->next)) ?  "/post/" . $service->next->id : "/" ;
-        Yii::$app->view->params['prev_url'] = (isset($service->prev)) ?  "/post/" . $service->prev->id : "/";
-
         return $this->render('specialist', [
-            'service' => $service
+            'specialistTransportModel' => $transportModel,
         ]);
-
     }
+
+    /**
+     * @return array
+     * @throws \Throwable
+     * @throws \yii\base\ExitException
+     */
+    public function actionSearch()
+    {
+        $transportModel = $this->getTransportModel([
+            'action' => ShootmeSpecialistsService::ACTION_GET_FILTERED_BY_KEYWORD,
+        ]);
+        return $transportModel->result;
+    }
+
 
 
     /**
-     * Экшен поиска
-     *
-     * @return string
-     * @param int $page
+     * @return array
+     * @throws \Throwable
      */
-    public function actionSearch($page = 1)
+    public function actionLike()
     {
-        $keyword = Yii::$app->request->get('keyword');
-
-        $service = (new Post)->page($page)->search($keyword);
-
-        //передаем в лайоут ключевое слово
-        Yii::$app->view->params['navigation_label'] = $keyword;
-
-        return $this->render('specialists', [
-            "service" => $service
-        ]);
-
-    }
-
-
-    public function actionSetCity(){
-        if (!Yii::$app->request->isAjax) {
-            throw new HttpException(403 , "this action can be access by ajax only");
+        if (!\Yii::$app->request->isAjax) {
+            throw new \Exception('request mast be ajax');
         }
 
-        $id = (int) Yii::$app->request->post('id');
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $data = \Yii::$app->request->post();
 
-        Yii::$app->response->cookies->add(new  Cookie([
-            'name'  => 'city_id',
-            'value' => $id
-        ]));
+        /** @var ImagesTransportModel  */
+        $transportModel = $this->imagesService->action(
+            new ImagesServiceConfig([
+                'action' => BaseImagesService::ACTION_LIKE,
+                'user_id' => \Yii::$app->user->getId(),
+                'id' => $data['image_id']
+            ])
+        );
 
-        return '';
+
+        return [
+            'action' => $transportModel->result['action'],
+        ];
+    }
+
+    /**
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function actionComment()
+    {
+        if (!\Yii::$app->request->isAjax) {
+            throw new \Exception('request mast be ajax');
+        }
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $comment = new Comments();
+        $comment->load(\Yii::$app->request->post());
+
+        /** @var ImagesTransportModel $transportModel */
+        $transportModel = $this->imagesService->action(
+            new ImagesServiceConfig([
+                'action' => BaseImagesService::ACTION_COMMENT,
+                'comment' => $comment
+            ])
+        );
+
+        return $transportModel->result;
     }
 
 }

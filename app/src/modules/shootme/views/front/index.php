@@ -1,58 +1,54 @@
 <?php
-use yii\helpers\Html;
-use app\helpers\Helpers;
-if( empty($service->items) ){
-    echo "<h1>Нет записей для отображения</h1>";
-    return;
-}
+/**
+ * @var $this \yii\web\View
+ * @var $cities \app\models\City[]
+ */
+$form = \yii\widgets\ActiveForm::begin(['id' => 'filter']);
 ?>
-<div class="events">
-    <div class="row">
-        <div class="events__events-list">
-            <?php foreach ($service->items as $post) { ?>
-                <div class="events__event">
-                    <!-- event -->
-                    <div class="event">
-                        <div class="event__image-wrap">
-                            <?= Html::a
-                                (
-                                    Helpers::bgImage
-                                    (
-                                        $post->image->path,
-                                        $post->image->name,
-                                        [
-                                            "size" => "350x390",
-                                            "block" => "event",
-                                            "class" => "event__img img-well",
-//                                            "extension" => $post->image->extension
-                                        ]
-                                    ), //передаем html вывода картинки
-                                    "/post/{$post->id}"
-                                );
-                            ?>
-                            <div class="event__date"><?= Helpers::dateVsDots($post->event_at); ?></div>
-                        </div>
-                        <div class="event__content">
-                            <?= Html::a
-                                (
-                                    $post->postData->title, //заголовок
-                                    "/post/{$post->id}",
-                                    ["class" => "event__title"]
-                                );
-                            ?>
+    <form method="post" action="/" id="filter">
+<?= \yii\helpers\Html::input('hidden', 'filter', 'submit'); ?>
 
-                            <div class="event__description">
-                                <?= Helpers::cutStringSymbols($post->postData->post_short_desc, 250); ?>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/ event -->
-                </div>
-            <?php } ?>
+    <div class="shootme-filter-content">
+        <div class="shootme-filter-main">
+            <span class="header">Зказ фотографа</span>
+            <div class="shootme-filter-control" id="where-control" data-rel="where">
+                <i class="icon-geo"></i>
+                <span>Где</span>
+                <?= \yii\helpers\Html::input('hidden', 'city', '', ['class' => 'shootme-inputs', 'id' => 'where-input']); ?>
+            </div>
+            <div class="shootme-filter-control" id="when-control" data-rel="when">
+                <i class="icon-clock"></i>
+                <span>Когда</span>
+                <?= \yii\helpers\Html::input('hidden', 'time', '', ['class' => 'shootme-inputs', 'id' => 'time-input']); ?>
+                <?= \yii\helpers\Html::input('hidden', 'date', '', ['class' => 'shootme-inputs', 'id' => 'date-input']); ?>
+
+            </div>
         </div>
     </div>
-</div>
-<!--/ events -->
-<?= \app\widgets\____pagination\Pagination::widget([
-   "service" => $service
-]);
+    <div class="shootme-filter-overlay" id="when">
+        <i class="fa fa-long-arrow-left back-button"></i>
+
+        <?= DateTimePlanner\widget\DateTimePlanner::widget(['id' => 'date-time-picker', 'is_single_time' => true]); ?>
+    </div>
+    <div class="shootme-filter-overlay" id="where">
+        <i class="fa fa-long-arrow-left back-button"></i>
+        <ul id="cities">
+            <?php foreach ($cities as $city) {
+                $label = \Yii::t('app/cities', $city->label);
+                echo "<li data-city-name=\"{$city->id}\" data-city-label=\"{$label}\">{$label}</li>";
+            }
+            ?>
+        </ul>
+    </div>
+<?php
+\yii\widgets\ActiveForm::end();
+$js = <<<JS
+    (function ($) {
+        $(document).on('complete:select-filter', function () {
+            $('#filter').submit();
+        });
+    })(jQuery);
+JS;
+
+$this->registerJs(sprintf($js, yii\helpers\Url::to(['/project/site/members'])), \yii\web\View::POS_END)
+?>

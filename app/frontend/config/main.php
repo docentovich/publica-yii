@@ -33,6 +33,19 @@ switch (PROJECT) {
             ]
         ];
         break;
+    case SHOOTME:
+        $domain_params = [
+            'bootstrap' => [
+                'shootme\Bootstrap',
+                'shootme\FrontendBootstrap',
+            ],
+            'modules' => [
+                'project' => [
+                    'class' => 'shootme\Module',
+                ]
+            ]
+        ];
+        break;
     case PUBLICA:
         $domain_params = [
             'bootstrap' => [

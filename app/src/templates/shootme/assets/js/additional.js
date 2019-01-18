@@ -9,31 +9,6 @@ Date.prototype.yyyymmdd = function () {
 };
 
 (function ($) {
-    // toggle calendarF
-    $('#calendar-href').on('click', function (event) {
-        event.stopPropagation();
-        $('#sidebar-menu').removeClass('is-active');
-        $('#sidebar-calendar').addClass('is-active');
-    });
-
-    $('#calendar-back').on('click', function (event) {
-        event.stopPropagation();
-        $('#sidebar-calendar').removeClass('is-active');
-        $('#sidebar-menu').addClass('is-active');
-    });
-})(jQuery);
-
-(function ($) {
-    $('#sidebar-calendar .datepicker-wrapper').on('changeDate', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        window.location = '/date/' + e.date.yyyymmdd();
-        return false;
-    });
-})(jQuery);
-
-
-(function ($) {
     // like
     $('.like-action').on('click', function (event) {
 

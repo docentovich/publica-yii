@@ -17,6 +17,8 @@ return [
         'probank\BackendBootstrap',
         'tosee\Bootstrap',
         'tosee\BackendBootstrap',
+        'shootme\Bootstrap',
+        'shootme\BackendBootstrap',
         'jsUrlManager'  // need to be after all bootstrap adding rules
     ],
     'modules' => [
@@ -25,6 +27,9 @@ return [
         ],
         'tosee'   => [
             'class' => 'tosee\Module',
+        ],
+        'shootme'   => [
+            'class' => 'shootme\Module',
         ],
         'planner' => [
             'layout' => '@userPanelTemplate/layouts/user'

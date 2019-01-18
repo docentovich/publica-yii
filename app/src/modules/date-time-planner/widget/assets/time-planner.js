@@ -48,22 +48,32 @@ function getYmd(date) {
         $(this).data('date', date);
 
         var dateString = getYmd(date);
+        var isSingleTime = !!$(this).data('is-single-time');
         var user_id = $(this).data('user_id');
         var url = UrlManager.createUrl('planner/date-time-api/get-busy', {user_id});
         var self = this;
         var $timepicker = $(self).children('.timepicker');
 
-        $.post(url, {date: dateString})
-            .done(function (data) {
-                $timepicker.show();
-                $timepicker.find('.time-table').myTimePicker({
-                    data,
-                    onTimeSelected: function (time) {
-                        selectTime(time, self);
-                        $(self).trigger('timeSelected', [time, date]);
-                    }
-                });
+        var showTimeGreed = function(data, self){
+            $timepicker.show();
+            $timepicker.find('.time-table').myTimePicker({
+                data,
+                isSingleTime,
+                onTimeSelected: function (time) {
+                    selectTime(time, self);
+                    $(self).trigger('timeSelected', [time, date]);
+                }
             });
+        };
+
+        if(user_id) {
+            $.post(url, {date: dateString})
+                .done(function (data) {
+                    showTimeGreed(data, self);
+                });
+        }else{
+            showTimeGreed([], self);
+        }
     });
 
     var selectTime = function(time, wrapper){
@@ -123,7 +133,11 @@ function getYmd(date) {
         this.html('');
         this.append(table);
 
+
         this.find('td:not(.busy)').on('click', function () {
+            if(options.isSingleTime){
+                $(this).siblings('td').removeClass('active');
+            }
             $(this).toggleClass('active');
             if (options.onTimeSelected) {
                 options.onTimeSelected($(this).data('time'));

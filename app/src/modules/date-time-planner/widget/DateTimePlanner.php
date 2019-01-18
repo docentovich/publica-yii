@@ -18,6 +18,7 @@ class DateTimePlanner extends Widget
     public $date_attribute;
     private $data_time_input_html = '';
     private $data_date_input_html = '';
+    public $is_single_time = false;
 
     public function init()
     {
@@ -66,6 +67,7 @@ class DateTimePlanner extends Widget
         <div data-time-input-html="<?= $this->data_time_input_html; ?>"
              data-date=""
              data-time=""
+             data-is-single-time="<?= $this->is_single_time ?? ''?>"
              data-user_id="<?= $this->user_id; ?>"
              id="<?= $this->id ?>"
              class="date-time-picker calendar">

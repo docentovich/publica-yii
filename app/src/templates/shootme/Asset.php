@@ -12,9 +12,11 @@ class Asset extends AssetBundle
     public $sourcePath  = "@templates/shootme/assets";
     public $css = [
         'css/shootme.css',
+        'css/additinal-styles.css',
     ];
     public $js = [
         'js/main.js',
+        'js/additional.js',
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $depends = [

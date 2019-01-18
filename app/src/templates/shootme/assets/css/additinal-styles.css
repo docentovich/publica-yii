@@ -1,0 +1,23 @@
+.shootme-filter-overlay .datepicker-days td, .shootme-filter-overlay .datepicker-days th{
+    color: #ffffff;
+}
+
+.shootme-filter-overlay#when .datepicker-days{
+    width: 100%;
+    margin: auto;
+}
+
+.shootme-filter-overlay .datepicker-days{
+    max-width: 450px;
+    margin: auto;
+    text-align: center;
+}
+
+.shootme-filter-overlay .datepicker-days .table-condensed{
+    margin: auto;
+    width: 100%;
+}
+
+div.datepicker {
+    width: 100%;
+}
