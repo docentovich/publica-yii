@@ -2,17 +2,14 @@
 
 namespace shootme\services;
 
+use app\models\Portfolio;
 use app\services\BaseSpecialistsService;
 use app\dto\ConfigQuery;
 use shootme\dto\ShootmeSpecialistsConfigQuery;
 use shootme\dto\ShootmeSpecialistsServiceConfig;
 use shootme\dto\ShootmeSpecialistsTransportModel;
 use app\traits\AjaxValidationTrait;
-use ImageAjaxUpload\UploadDTO;
-use ImageAjaxUpload\UploadModel;
-use shootme\models\ShootmeImages;
 use shootme\models\ShootmePortfolio;
-use shootme\models\ShootmePortfolioAdditionalImages;
 
 class ShootmeSpecialistsService extends BaseSpecialistsService
 {
@@ -64,22 +61,13 @@ class ShootmeSpecialistsService extends BaseSpecialistsService
      */
     protected function actionAllSpecialists(ShootmeSpecialistsServiceConfig $config)
     {
-        $portfolioModel = ShootmePortfolio::find()->city(\app\models\City::getCurrentCityId());
-        return new ShootmeSpecialistsTransportModel(
-            new ShootmeSpecialistsConfigQuery($config, $portfolioModel),
-            $portfolioModel->all()
-        );
-    }
-
-    /**
-     * @param ShootmeSpecialistsServiceConfig $config
-     * @return ShootmeSpecialistsTransportModel
-     */
-    protected function actionFilteredByTypeSpecialists(ShootmeSpecialistsServiceConfig $config)
-    {
+        $date = new \DateTime(\Yii::$app->request->cookies->getValue('date'));
+        $time = \Yii::$app->request->cookies->getValue('time');
         $portfolioModel = ShootmePortfolio::find()
-            ->city(\app\models\City::getCurrentCityId())
-            ->type($config->type)->orderBy('modified_at');
+            ->type(Portfolio::PORTFOLIO_PHOTOGRAPHER_TYPE)
+            ->freeDateTime($date, $time[0])
+            ->city(\app\models\City::getCurrentCityId());
+
         return new ShootmeSpecialistsTransportModel(
             new ShootmeSpecialistsConfigQuery($config, $portfolioModel),
             $portfolioModel->all()
@@ -100,49 +88,49 @@ class ShootmeSpecialistsService extends BaseSpecialistsService
     }
 
 
-    /**
-     * Get/Save Specialist portfolio
-     *
-     * @param ShootmeSpecialistsServiceConfig $config
-     * @return ShootmeSpecialistsTransportModel
-     * @throws \yii\base\ExitException
-     */
-    protected function actionPortfolio(ShootmeSpecialistsServiceConfig $config)
-    {
-        $portfolio = ShootmePortfolio::findOne([
-                'user_id' => \Yii::$app->user->getId(),
-                'type' => $config->type
-            ]) ?? new ShootmePortfolio(['type' => $config->type]);
-        $portfolio->setScenario(ShootmePortfolio::SCENARIO_UPDATE);
-        $this->performAjaxValidation($portfolio);
-
-        if ($portfolio->load(\Yii::$app->request->post()) && $portfolio->validate() && $portfolio->save()) {
-            $this->saveMainPhoto($portfolio);
-
-            // additional portfolio images
-            $this->saveAdditionalPhoto(
-                $portfolio,
-                (new UploadModel(['instance' => 1]))->multiUpload(\Yii::$app->user->getId()),
-                ShootmePortfolioAdditionalImages::TYPE_PORTFOLIO
-            );
-
-//            if($config->type === ShootmePortfolio::PORTFOLIO_MODEL_TYPE){ // snaps
-//                $this->saveAdditionalPhoto(
-//                    $portfolio,
-//                    (new UploadModel(['instance' => 2]))->multiUpload(\Yii::$app->user->getId()),
-//                    ShootmePortfolioAdditionalImages::TYPE_SNAP
-//                );
-//            }
-
-            \Yii::$app->response->refresh();
-            \Yii::$app->end();
-        }
-
-        return new ShootmeSpecialistsTransportModel(
-            new ShootmeSpecialistsConfigQuery($config),
-            $portfolio
-        );
-    }
+//    /**
+//     * Get/Save Specialist portfolio
+//     *
+//     * @param ShootmeSpecialistsServiceConfig $config
+//     * @return ShootmeSpecialistsTransportModel
+//     * @throws \yii\base\ExitException
+//     */
+//    protected function actionPortfolio(ShootmeSpecialistsServiceConfig $config)
+//    {
+//        $portfolio = ShootmePortfolio::findOne([
+//                'user_id' => \Yii::$app->user->getId(),
+//                'type' => $config->type
+//            ]) ?? new ShootmePortfolio(['type' => $config->type]);
+//        $portfolio->setScenario(ShootmePortfolio::SCENARIO_UPDATE);
+//        $this->performAjaxValidation($portfolio);
+//
+//        if ($portfolio->load(\Yii::$app->request->post()) && $portfolio->validate() && $portfolio->save()) {
+//            $this->saveMainPhoto($portfolio);
+//
+//            // additional portfolio images
+//            $this->saveAdditionalPhoto(
+//                $portfolio,
+//                (new UploadModel(['instance' => 1]))->multiUpload(\Yii::$app->user->getId()),
+//                ShootmePortfolioAdditionalImages::TYPE_PORTFOLIO
+//            );
+//
+////            if($config->type === ShootmePortfolio::PORTFOLIO_MODEL_TYPE){ // snaps
+////                $this->saveAdditionalPhoto(
+////                    $portfolio,
+////                    (new UploadModel(['instance' => 2]))->multiUpload(\Yii::$app->user->getId()),
+////                    ShootmePortfolioAdditionalImages::TYPE_SNAP
+////                );
+////            }
+//
+//            \Yii::$app->response->refresh();
+//            \Yii::$app->end();
+//        }
+//
+//        return new ShootmeSpecialistsTransportModel(
+//            new ShootmeSpecialistsConfigQuery($config),
+//            $portfolio
+//        );
+//    }
 
 
     /**
@@ -160,6 +148,7 @@ class ShootmeSpecialistsService extends BaseSpecialistsService
         $configQuery = new ConfigQuery(
             $config,
             ShootmePortfolio::find()
+                ->type(Portfolio::PORTFOLIO_PHOTOGRAPHER_TYPE)
                 ->city(\app\models\City::getCurrentCityId())
                 ->keyword($config->keyword)
         );
@@ -169,50 +158,50 @@ class ShootmeSpecialistsService extends BaseSpecialistsService
         );
     }
 
-    /**
-     * Save Main Photo
-     *
-     * @param ShootmePortfolio $portfolio
-     */
-    private function saveMainPhoto(ShootmePortfolio $portfolio)
-    {
-        // main image. get current, replace bay load, save, link
-        $main_image = $portfolio->mainPhotoNN;
-        $main_image->load(
-            (new UploadModel())->upload(\Yii::$app->user->getId())->toArray(), ''
-        );
-        if ($main_image->validate()) {
-            $main_image->save();
-            $portfolio->link('mainPhoto', $main_image);
-        }
-    }
-
-    /**
-     * Save Additional Photo
-     *
-     * @param ShootmePortfolio $portfolio
-     * @param array $images
-     * @param $type
-     * @throws \Exception
-     */
-    private function saveAdditionalPhoto(ShootmePortfolio $portfolio, array $images, $type)
-    {
-        if (in_array($type, ShootmePortfolioAdditionalImages::ALLOWED_TYPES) === FALSE) {
-            throw new \Exception(
-                'type of additional image mast be in range of [' .
-                implode(', ', ShootmePortfolioAdditionalImages::ALLOWED_TYPES
-                    . ']'));
-        }
-        array_map(
-            function ($item) use ($portfolio, $type) {
-                /** @var UploadDTO $item */
-                $image = new ShootmeImages();
-                $image->load($item->toArray(), '');
-                if ($image->validate() && $image->save()) {
-                    $portfolio->link('additionalImages', $image, ['type' => $type]);
-                }
-            },
-            $images
-        );
-    }
+//    /**
+//     * Save Main Photo
+//     *
+//     * @param ShootmePortfolio $portfolio
+//     */
+//    private function saveMainPhoto(ShootmePortfolio $portfolio)
+//    {
+//        // main image. get current, replace bay load, save, link
+//        $main_image = $portfolio->mainPhotoNN;
+//        $main_image->load(
+//            (new UploadModel())->upload(\Yii::$app->user->getId())->toArray(), ''
+//        );
+//        if ($main_image->validate()) {
+//            $main_image->save();
+//            $portfolio->link('mainPhoto', $main_image);
+//        }
+//    }
+//
+//    /**
+//     * Save Additional Photo
+//     *
+//     * @param ShootmePortfolio $portfolio
+//     * @param array $images
+//     * @param $type
+//     * @throws \Exception
+//     */
+//    private function saveAdditionalPhoto(ShootmePortfolio $portfolio, array $images, $type)
+//    {
+//        if (in_array($type, ShootmePortfolioAdditionalImages::ALLOWED_TYPES) === FALSE) {
+//            throw new \Exception(
+//                'type of additional image mast be in range of [' .
+//                implode(', ', ShootmePortfolioAdditionalImages::ALLOWED_TYPES
+//                    . ']'));
+//        }
+//        array_map(
+//            function ($item) use ($portfolio, $type) {
+//                /** @var UploadDTO $item */
+//                $image = new ShootmeImages();
+//                $image->load($item->toArray(), '');
+//                if ($image->validate() && $image->save()) {
+//                    $portfolio->link('additionalImages', $image, ['type' => $type]);
+//                }
+//            },
+//            $images
+//        );
+//    }
 }

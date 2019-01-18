@@ -31,6 +31,7 @@ class FrontController extends Controller
     {
         $this->specialistsService = $specialistsService;
     }
+
     public function getSpecialistsService()
     {
         return $this->specialistsService;
@@ -46,7 +47,7 @@ class FrontController extends Controller
         return $this->imagesService;
     }
 
-     /**
+    /**
      * @inheritdoc
      */
     public function behaviors()
@@ -60,7 +61,7 @@ class FrontController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ], [
-                        'actions' => ['index', 'specialist', 'type', 'search'],
+                        'actions' => ['index', 'specialist', 'specialists', 'type', 'search'],
                         'allow' => true,
                         'roles' => ['?', '@'],
                     ]
@@ -80,44 +81,35 @@ class FrontController extends Controller
      */
     public function actionIndex($page = 1)
     {
-        if(\Yii::$app->request->post('filter')){
+        if (\Yii::$app->request->post('filter')) {
             \Yii::$app->response->cookies->add(new  Cookie([
-                'name'  => 'city_id',
+                'name' => 'city_id',
                 'value' => \Yii::$app->request->post('city')
             ]));
 
             \Yii::$app->response->cookies->add(new  Cookie([
-                'name'  => 'date',
+                'name' => 'date',
                 'value' => \Yii::$app->request->post('date')
             ]));
 
             \Yii::$app->response->cookies->add(new  Cookie([
-                'name'  => 'time',
+                'name' => 'time',
                 'value' => \Yii::$app->request->post('time')
             ]));
 
-            $this->redirect(['front/members']);
+            $this->redirect(['front/specialists']);
             \Yii::$app->end();
         }
         return $this->render('index', [
-            'cities' =>  City::find()->all()
+            'cities' => City::find()->all()
         ]);
     }
 
-
-    /**
-     * Filter by type
-     *
-     * @param int $page
-     * @return string
-     */
-    public function actionType($type, $page = 1)
+    public function actionSpecialists()
     {
-        $type = strtoupper($type);
-        $transportModel = $this->getTransportModel([
-            'action' => ShootmeSpecialistsService::ACTION_GET_FILTERED_BY_TYPE_SPECIALISTS,
-            'type' => $type
-        ]);
+        $transportModel = $this->getTransportModel(
+            ['action' => ShootmeSpecialistsService::ACTION_GET_ALL_SPECIALISTS]
+        );
         return $this->render('specialists', [
             'specialistTransportModel' => $transportModel,
         ]);
@@ -133,7 +125,7 @@ class FrontController extends Controller
     {
         $transportModel = $this->getTransportModel([
             'action' => ShootmeSpecialistsService::ACTION_GET_BY_ID,
-            'portfolio_id' => (int) $portfolio_id
+            'portfolio_id' => (int)$portfolio_id
         ]);
         return $this->render('specialist', [
             'specialistTransportModel' => $transportModel,
@@ -154,7 +146,6 @@ class FrontController extends Controller
     }
 
 
-
     /**
      * @return array
      * @throws \Throwable
@@ -168,7 +159,7 @@ class FrontController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $data = \Yii::$app->request->post();
 
-        /** @var ImagesTransportModel  */
+        /** @var ImagesTransportModel */
         $transportModel = $this->imagesService->action(
             new ImagesServiceConfig([
                 'action' => BaseImagesService::ACTION_LIKE,

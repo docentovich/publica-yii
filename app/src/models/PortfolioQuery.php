@@ -44,6 +44,28 @@ class PortfolioQuery extends \yii\db\ActiveQuery
             ->andWhere(['=', 'user.city_id', $city]);
     }
 
+    public function freeDateTime(\DateTime $date, $time)
+    {
+        return $this
+            ->alias('portfolio')
+            ->join('RIGHT OUTER JOIN',
+                [DateTimePlanner::tableName(). ' dateTimePlanner'],
+                [
+                    'and',
+                    'portfolio.user_id = dateTimePlanner.user_id',
+                    [
+                        'or',
+                        ['<>', 'dateTimePlanner.date', $date->format('Y-m-d')],
+                        [
+                            'and',
+                            ['=', 'dateTimePlanner.date', $date->format('Y-m-d')],
+                            ['<>', 'dateTimePlanner.time', $time],
+                        ]
+                    ]
+                ]
+            );
+    }
+
     public function keyword($keyword)
     {
         $condition = [

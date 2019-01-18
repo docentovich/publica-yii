@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property Image|null $mainPhoto
  * @property Image $mainPhotoNN
  * @property User $user
+ * @property DateTimePlanner $dateTimePlanner
  * @property PortfolioAdditionalImages[]|null $additionalImages
  * @property PortfolioAdditionalImages[] $additionalImagesNN
  * @property Image[] $images
@@ -143,6 +144,12 @@ class Portfolio extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'user_id'])->inverseOf('portfolio');
+    }
+
+    public function getDateTimePlanner()
+    {
+        return $this->hasMany(DateTimePlanner::class, ['user_id' => 'id'])
+            ->via('user');
     }
 
     public function getProfile()

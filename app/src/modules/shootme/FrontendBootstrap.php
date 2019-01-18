@@ -2,6 +2,7 @@
 
 namespace shootme;
 
+use shootme\controllers\OrdersController;
 use yii\base\BootstrapInterface;
 
 class FrontendBootstrap implements BootstrapInterface
@@ -11,15 +12,11 @@ class FrontendBootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        $app->getUrlManager()->addRules(
-            [
-                // объявление правил здесь
-                '' => 'project/front/index',
-                '<page:\d+>' => 'project/front/index',
-                'search' => 'project/front/search',
-                '<action:\w+>/<id:\d+>' => 'project/site/<action>',
-                '<action:[\w\-]+>' => 'project/site/<action>',
-            ]
+        $app->getUrlManager()->addRules(ShootmeUrls::frontUrls());
+
+        $ordersService = \Yii::$container->set(
+            OrdersController::class,
+            ['layout' => "@current_template/layouts/main"]
         );
     }
 }

@@ -326,7 +326,12 @@ class User extends BaseUser implements IdentityInterface
 
     public function getPortfolio()
     {
-        return $this->hasMany(Portfolio::class, ['user_id' => 'id']);
+        return $this->hasMany(Portfolio::class, ['user_id' => 'id'])->inverseOf('user');
+    }
+
+    public function getDateTimePlanner()
+    {
+        return $this->hasMany(DateTimePlanner::class,['user_id' => 'id']);
     }
 
     /**
