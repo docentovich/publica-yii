@@ -14,6 +14,7 @@ class ShootmeUrls implements ModuleUrls
             '<page:\d+>' => 'project/front/index',
             'search' => 'project/front/search',
             'specialist/<portfolio_id:\d+>' => 'project/front/specialist',
+            '<action:\w+>/<user_id:\d+>' => 'project/front/<action>',
             '<action:\w+>/<id:\d+>' => 'project/front/<action>',
             '<action:[\w\-]+>' => 'project/front/<action>',
         ];

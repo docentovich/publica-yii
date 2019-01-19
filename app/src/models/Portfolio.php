@@ -165,7 +165,10 @@ class Portfolio extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new PortfolioQuery(get_called_class());
+        return (new PortfolioQuery(get_called_class()))
+            ->with('additionalImages')
+            ->with('mainPhoto')
+            ->with('user');
     }
 
     public function beforeValidate()

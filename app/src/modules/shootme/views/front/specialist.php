@@ -47,8 +47,11 @@
                     <span><?= $specialistTransportModel->result->price ?></span>
                 </div>
                 <div class="member-numbers-rows">
-                    <i class="fa fa-star-half-o"></i>
-                    <span><?= $specialistTransportModel->result->rating; ?></span>
+                    <?= \yii\helpers\Html::a(
+                        "<i class=\"fa fa-star-half-o\"></i>
+                                <span>{$specialistTransportModel->result->rating}</span>",
+                        ['front/orders', 'user_id' => $specialistTransportModel->result->user->id]
+                    ); ?>
                 </div>
                 <div class="member-numbers-rows">
                     <i class="fa fa-shopping-basket"></i>

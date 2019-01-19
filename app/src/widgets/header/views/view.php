@@ -26,11 +26,19 @@ $filtered_projects = array_filter(
                     <div class="navigation-part">
                         <div class="menu">
 
-                            <?php if (PROJECT !== PUBLICA) { ?>
+                            <?php if (PROJECT !== PUBLICA && PROJECT !== SHOOTME) { ?>
                                 <div class="hamburger toggle-overlay" id="service-menu" rel="service-menu">
                                     <i class="icon-burger"></i>
                                 </div>
                             <?php } ?>
+
+                            <?php if (PROJECT === SHOOTME) {
+                                echo \yii\helpers\Html::a(
+                                        "<span class=\"hamburger\" id=\"service-menu\" rel=\"service-menu\">
+                                                    <i class=\"icon-burger\"></i>
+                                                </span>", '/'
+                                );
+                            } ?>
 
                             <!--Logo-->
                             <div class="toggle-drop-down-action-panel base-logo" id="services" rel="services">
@@ -45,7 +53,7 @@ $filtered_projects = array_filter(
                     <div class="navigation-part">
                         <div class="controls">
 
-                            <?php if (PROJECT !== PUBLICA) { ?>
+                            <?php if (PROJECT !== PUBLICA && PROJECT !== SHOOTME) { ?>
                                 <div class="toggle-drop-down-action-panel control" id="search" rel="search">
                                     <i class="icon-search"></i>
                                 </div>
