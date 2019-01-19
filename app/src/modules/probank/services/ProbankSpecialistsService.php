@@ -64,7 +64,7 @@ class ProbankSpecialistsService extends BaseSpecialistsService
      */
     protected function actionAllSpecialists(ProbankSpecialistsServiceConfig $config)
     {
-        $portfolioModel = ProbankPortfolio::find()->city(\app\models\City::getCurrentCityId());
+        $portfolioModel = ProbankPortfolio::find()->city(\app\models\City::getCurrentCityId())->orderBy(['id' => SORT_DESC,]);
         return new ProbankSpecialistsTransportModel(
             new ProbankSpecialistsConfigQuery($config, $portfolioModel),
             $portfolioModel->all()
