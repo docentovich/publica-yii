@@ -15,14 +15,15 @@ return [
             'useFileTransport' => false,
             'messageConfig' => [
                 'charset' => 'UTF-8',
-                'from' => ['publica.mail1@yandex.ru' => 'Publica'],
+                'from' => ['publica.suppor@gmail.com' => 'Publica'],
             ],
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'ssl://smtp.yandex.com',
-                'username' => 'publica.mail1@yandex.ru',
+                'host' => 'smtp.gmail.com',
+                'port' => '587',
+                'encryption' => 'tls',
+                'username' => 'publica.suppor@gmail.com',
                 'password' => 'avbva007',
-                'port' => '465',
                 'streamOptions' => [
                     'ssl' => [
                         'allow_self_signed' => true,
@@ -36,7 +37,7 @@ return [
     'modules' => [
         'user' => [
             'mailer' => [
-                'sender' => ['publica.mail1@yandex.ru' => 'Publica']
+                'sender' => ['publica.suppor@gmail.com' => 'Publica']
             ],
         ],
     ],
