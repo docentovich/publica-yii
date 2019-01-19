@@ -1,7 +1,7 @@
 <?php
 /** $_GET 'file_name' => string(22) "post/noimage550x614" 'file_extension' => string(3) "jpg"  */
-require(__DIR__ . '/../../vendor/autoload.php');
-require(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
+require_once(__DIR__ . '/../../vendor/autoload.php');
+require_once(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
 
 $dir_separator = '/';
 $upload_dir = __DIR__ . "/../../frontend/web/uploads";
@@ -11,11 +11,6 @@ function pathOf(...$parts)
     global $upload_dir, $dir_separator;
     array_unshift($parts, $upload_dir);
     return implode($dir_separator, $parts);
-}
-
-function fn($name, $extension)
-{
-    return "{$name}.{$extension}";
 }
 
 function checkFileExist($file_name_and_dir, $file_extension)
@@ -29,7 +24,7 @@ function checkFileExist($file_name_and_dir, $file_extension)
 
 function _checkFileExist($file_name_and_dir, $file_extension)
 {
-    if (file_exists($response_file_path = pathOf(fn($file_name_and_dir, $file_extension)))) {
+    if (file_exists($response_file_path = pathOf(\app\handlers\Helper::fn($file_name_and_dir, $file_extension)))) {
         // if  exist
         return $response_file_path;
     }
@@ -48,13 +43,13 @@ function _checkFileExist($file_name_and_dir, $file_extension)
         throw new Exception();
     }
 
-    if (!file_exists(pathOf(fn($file_name_original, $file_extension)))) {
+    if (!file_exists(pathOf(\app\handlers\Helper::fn($file_name_original, $file_extension)))) {
         // if not exist origin
         throw new \app\exceptions\NoOriginImageRequest;
     }
 
     try {
-        return resizeFileFromOriginal(
+        return \app\handlers\Helper::resizeFileFromOriginal(
             pathOf($file_name_original),
             $size,
             $file_extension
@@ -66,25 +61,6 @@ function _checkFileExist($file_name_and_dir, $file_extension)
 
 }
 
-function resizeFileFromOriginal($original_file_and_dir, $size, $file_extension)
-{
-    $size = mb_strtolower($size);
-    // if we scaling only one side whe need use inset algotitm
-    $resize_algoritm = (strpos($size, 'r')  !== false)
-        ?  \Imagine\Image\ImageInterface::THUMBNAIL_INSET
-        : \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
-    list($width, $height) = explode("x", str_replace('r', 100000, $size) );
-
-    $size = str_replace('r', 'R', $size);
-    $return_file_name_and_dir = fn("{$original_file_and_dir}[{$size}]", $file_extension);
-    // save
-    \yii\imagine\Image::getImagine()
-        ->open(fn($original_file_and_dir, $file_extension))
-        ->thumbnail(new \Imagine\Image\Box($width, $height), $resize_algoritm)
-        ->save($return_file_name_and_dir, ['quality' => 90]);
-
-    return $return_file_name_and_dir;
-}
 
 function response($get)
 {
