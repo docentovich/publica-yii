@@ -161,8 +161,10 @@ class OrdersService extends BaseOrdersService
             ->setSubject(\Yii::t('app/orders', 'You have received an order'))
             ->setHtmlBody(
                 'Уважаемый(ая) <b>' . $seller->profile->fullName . '</b> ' .
-                ' На сайте `Publica` был произведен заказ. Узнать подробнее можно пройдя по ' . Html::a(
-                    'ссылке' . "/order/{$config->portfolio_id}/{$config->customer_id}")
+                ' На сайте `Publica` был произведен заказ. Узнать подробнее можно пройдя по ссылке: ' . Html::a(
+                    "$shootme_link/order/{$config->portfolio_id}/{$config->customer_id}",
+                    "$shootme_link/order/{$config->portfolio_id}/{$config->customer_id}"
+                )
             )
             ->send();
 

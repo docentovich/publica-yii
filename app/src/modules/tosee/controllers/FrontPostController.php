@@ -10,6 +10,8 @@ use tosee\services\ToseeImagesService;
 use tosee\services\ToseePostService;
 use app\traits\AjaxValidationTrait;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -107,12 +109,16 @@ class FrontPostController extends Controller
      */
     public function actionCheckEmail()
     {
+        $shootme_link = ArrayHelper::getValue(\Yii::$app->params, 'projects.shootme.url');
+        $bobo = 'Уважаемый(ая) <b>Прозоров Андрей Юрьевич</b> ' .
+            ' На сайте `Publica` был произведен заказ. Узнать подробнее можно пройдя по ссылке: ' . Html::a(
+                "$shootme_link/order/1/1",
+                "$shootme_link/order/1/1"
+            );
         \Yii::$app->mailer->compose()
-//            ->setFrom('from@domain.com')
             ->setTo('andrei.prozorov@mail.ru')
-            ->setSubject('Тема сообщения')
-            ->setTextBody('Текст сообщения')
-            ->setHtmlBody('<b>текст сообщения в формате HTML</b>')
+            ->setSubject(\Yii::t('app/orders', 'You have received an order'))
+            ->setHtmlBody($bobo)
             ->send();
         return '';
     }
