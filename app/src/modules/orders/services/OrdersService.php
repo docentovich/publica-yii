@@ -155,17 +155,15 @@ class OrdersService extends BaseOrdersService
         $seller = (Portfolio::findOne(['id' => $config->portfolio_id]))->user;
         $shootme_link = ArrayHelper::getValue(\Yii::$app->params, 'projects.shootme.url');
 
+        $mailer = \Yii::$app->mailer;
+        $mailer->viewPath = '@orders/views/mail';
 
-        \Yii::$app->mailer->compose()
+        $mailer->compose(
+                ['html' => 'order'],
+                ['shootme_link' => $shootme_link, 'seller' => $seller, 'config' => $config]
+            )
             ->setTo($seller->email)
             ->setSubject(\Yii::t('app/orders', 'You have received an order'))
-            ->setHtmlBody(
-                'Уважаемый(ая) <b>' . $seller->profile->fullName . '</b> ' .
-                ' На сайте `Publica` был произведен заказ. Узнать подробнее можно пройдя по ссылке: ' . Html::a(
-                    "$shootme_link/order/{$config->portfolio_id}/{$config->customer_id}",
-                    "$shootme_link/order/{$config->portfolio_id}/{$config->customer_id}"
-                )
-            )
             ->send();
 
         return $order;

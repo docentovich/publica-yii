@@ -109,16 +109,16 @@ class FrontPostController extends Controller
      */
     public function actionCheckEmail()
     {
+//        $seller = ( \app\models\Portfolio::findOne(['id' => 1]))->user;
 //        $shootme_link = ArrayHelper::getValue(\Yii::$app->params, 'projects.shootme.url');
-//        $bobo = 'Уважаемый(ая) <b>Прозоров Андрей Юрьевич</b> ' .
-//            ' На сайте `Publica` был произведен заказ. Узнать подробнее можно пройдя по ссылке: ' . Html::a(
-//                "$shootme_link/order/1/1",
-//                "$shootme_link/order/1/1"
-//            );
-//        \Yii::$app->mailer->compose()
-//            ->setTo('andrei.prozorov@mail.ru')
+//
+//        $mailer = \Yii::$app->mailer;
+//        $mailer->viewPath = '@orders/views/mail';
+//        $config = new \orders\dto\OrdersServiceConfig(['portfolio_id' => 1, 'customer_id' => 1]);
+//
+//        $mailer->compose(['html' => 'order'], ['shootme_link' => $shootme_link, 'seller' => $seller, 'config' => $config])
+//            ->setTo($seller->email)
 //            ->setSubject(\Yii::t('app/orders', 'You have received an order'))
-//            ->setHtmlBody($bobo)
 //            ->send();
         return \Yii::t('app/orders', 'You have received an order');
     }
