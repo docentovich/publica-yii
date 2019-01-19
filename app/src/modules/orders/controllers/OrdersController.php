@@ -2,6 +2,7 @@
 
 namespace orders\controllers;
 
+use app\models\DateTimePlanner;
 use orders\dto\OrdersServiceConfig;
 use orders\dto\OrdersTransportModel;
 use orders\models\Orders;
@@ -83,6 +84,11 @@ class OrdersController extends Controller
         return $this->ordersService->action(new OrdersServiceConfig($config));
     }
 
+    private function getDefaultTime()
+    {
+        return '12-14';
+    }
+
     /**
      * Open exist order or create. if order is finished then redirect to
      * /orders/orders/complete
@@ -95,12 +101,21 @@ class OrdersController extends Controller
     public function actionOrder($portfolio_id, $customer_id = null)
     {
         $customer_id = $customer_id ?? \Yii::$app->user->getId();
+        $date = new \DateTime(
+            \Yii::$app->request->post('date')
+                    ?? \Yii::$app->request->cookies->getValue('date')
+                        ?? (new \DateTime())->format('Y-m-d')
+        );
+        $time = \Yii::$app->request->post('time')
+                    ?? \Yii::$app->request->cookies->getValue('time')
+                        ?? $this->getDefaultTime();
+
         $orderTransportModel = $this->getTransportModel([
             'action' => OrdersService::ACTION_OPEN_ORDER,
             'portfolio_id' => (int) $portfolio_id,
             'customer_id' => (int) $customer_id,
-            'date' => new \DateTime( \Yii::$app->request->post('date') ),
-            'time' => \Yii::$app->request->post('time')
+            'date' => $date,
+            'time' => $time
         ]);
 
         if ($orderTransportModel->result->status === Orders::STATUS_FINISHED) {

@@ -44,15 +44,15 @@
             <div class="member-numbers">
                 <div class="member-numbers-rows">
                     <i class="fa fa-rub"></i>
-                    <span>500</span>
+                    <span><?= $specialistTransportModel->result->price ?></span>
                 </div>
                 <div class="member-numbers-rows">
                     <i class="fa fa-star-half-o"></i>
-                    <span>9.8</span>
+                    <span><?= $specialistTransportModel->result->rating; ?></span>
                 </div>
                 <div class="member-numbers-rows">
                     <i class="fa fa-shopping-basket"></i>
-                    <span>5</span>
+                    <span><?= $specialistTransportModel->result->ordersCount; ?></span>
                 </div>
             </div>
         </div>

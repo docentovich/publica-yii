@@ -25,6 +25,8 @@ use yii\helpers\ArrayHelper;
  * @property integer $image_id
  * @property string $type
  * @property string $typeEn
+ * @property int $ordersCount
+ * @property float $rating
  * @property Profile|null $profile
  */
 class Portfolio extends \yii\db\ActiveRecord
@@ -183,5 +185,20 @@ class Portfolio extends \yii\db\ActiveRecord
     public function getUserId()
     {
         return $this->user_id;
+    }
+
+    public function getOrders()
+    {
+        return $this->hasMany(Orders::class, ['portfolio_id' => 'id']);
+    }
+
+    public function getOrdersCount()
+    {
+        return $this->getOrders()->count();
+    }
+
+    public function getRating()
+    {
+        return number_format($this->getOrders()->average('rate'),1);
     }
 }

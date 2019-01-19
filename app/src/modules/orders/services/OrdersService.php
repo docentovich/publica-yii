@@ -161,9 +161,13 @@ class OrdersService extends BaseOrdersService
      */
     private function helperSavePersonalPlanner(OrdersServiceConfig $config, Orders &$order)
     {
-        if(!isset($config->time) || !is_array($config->time))
+        if(!isset($config->time))
         {
             return;
+        }
+        if(is_string($config->time))
+        {
+            $config->time = [$config->time];
         }
         foreach ($config->time as $time) { // save time to personal planner of saller
             try {
