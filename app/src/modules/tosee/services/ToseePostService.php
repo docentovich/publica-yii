@@ -3,6 +3,7 @@
 namespace tosee\services;
 
 use app\dto\ConfigQuery;
+use app\modules\tosee\dto\PostConfigQuery;
 use ImageAjaxUpload\UploadDTO;
 use tosee\dto\PostServiceConfig;
 use tosee\dto\PostTransportModel;
@@ -199,7 +200,7 @@ class ToseePostService extends \app\services\BasePostService
      * `Query pipe`
      * Prepare query condition for dated queries
      *
-     * @param ConfigQuery $configQuery
+     * @param PostConfigQuery $configQuery
      * @return ConfigQuery
      */
     public function prepareQueryByDate(ConfigQuery $configQuery): ConfigQuery
@@ -208,13 +209,13 @@ class ToseePostService extends \app\services\BasePostService
         $post_config = $configQuery->config;
         switch ($post_config->action) {
             case self::ACTION_FUTURE:
-                $configQuery->query->future()->orderByDateAsc();
+                $configQuery->query->future()->orderByDateDesc();
                 break;
             case self::ACTION_PAST:
                 $configQuery->query->past()->orderByDateDesc();
                 break;
             case self::ACTION_BY_DATE:
-                $configQuery->query->date($post_config->date)->orderByDateAsc();
+                $configQuery->query->date($post_config->date)->orderByDateDesc();
                 break;
         }
 
@@ -225,7 +226,7 @@ class ToseePostService extends \app\services\BasePostService
      * `Query pipe`
      * Prepare query condition for dated queries
      *
-     * @param ConfigQuery $configQuery
+     * @param PostConfigQuery $configQuery
      * @return ConfigQuery
      */
     public function prepareQueryByKeyWord(ConfigQuery $configQuery): ConfigQuery
@@ -238,7 +239,7 @@ class ToseePostService extends \app\services\BasePostService
      * `Query pipe`
      * Prepare query condition for single post
      *
-     * @param ConfigQuery $configQuery
+     * @param PostConfigQuery $configQuery
      * @return ConfigQuery
      */
     public function prepareQueryById(ConfigQuery $configQuery): ConfigQuery

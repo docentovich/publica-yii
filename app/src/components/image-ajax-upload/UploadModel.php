@@ -112,7 +112,7 @@ class UploadModel extends Model
         //сохраняем оригинал
         $file->saveAs($full_file_name);
 
-        \app\handlers\Helper::resizeComplex( $full_file_name, ["390xR", "450xR"] );
+        \app\handlers\Helper::resizeComplex( $full_file_name, ["390xR", "450xR", "200x200"] );
 
         return new UploadDTO([
             'url' => $upload_url . '/' . $file_name,
