@@ -153,18 +153,16 @@ class OrdersService extends BaseOrdersService
         $this->helperSavePersonalPlanner($config, $order);
 
         $seller = (Portfolio::findOne(['id' => $config->portfolio_id]))->user;
+        $shootme_link = ArrayHelper::getValue(\Yii::$app->params, 'projects.shootme.url');
 
 
         \Yii::$app->mailer->compose()
             ->setTo($seller->email)
             ->setSubject(\Yii::t('app/orders', 'You have received an order'))
             ->setHtmlBody(
-                \Yii::t('app/orders', 'You have received an order') .
-                ' <b>' . Html::a(
-                    \Yii::t('app/orders', 'link'),
-                    ArrayHelper::getValue(\Yii::$app->params, 'projects.shootme.url')
-                            . "/order/{$config->portfolio_id}/{$config->customer_id}"
-                ) . '</b>'
+                'Уважаемый(ая) <b>' . $seller->profile->fullName . '</b> ' .
+                ' На сайте `Publica` был произведен заказ. Узнать подробнее можно пройдя по ' . Html::a(
+                    'ссылке' . "/order/{$config->portfolio_id}/{$config->customer_id}")
             )
             ->send();
 
