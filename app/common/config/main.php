@@ -43,6 +43,7 @@ $config = [
                         'app/user' => 'user.php',
                         'app/tosee' => 'tosee.php',
                         'app/probank' => 'probank.php',
+                        'app/orders' => 'orders.php',
                         'app/shotme' => 'shotme.php',
                         'app/cities' => 'cities.php',
                     ],

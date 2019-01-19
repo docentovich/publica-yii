@@ -2,7 +2,6 @@
 return [
     'Login {sub_level}' => 'Логин {sub_level}',
     'Login required' => 'Логин обязателен',
-    'You have received an order' => 'Вы получили заказ',
     'sub_level' => '<span class="sub-label">(логин будет использован как ваш Никнейм на сайтеsss)</span>',
     'Password' => 'Пароль',
     'Repeat password' => 'Пароль еще раз',

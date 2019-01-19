@@ -109,18 +109,18 @@ class FrontPostController extends Controller
      */
     public function actionCheckEmail()
     {
-        $shootme_link = ArrayHelper::getValue(\Yii::$app->params, 'projects.shootme.url');
-        $bobo = 'Уважаемый(ая) <b>Прозоров Андрей Юрьевич</b> ' .
-            ' На сайте `Publica` был произведен заказ. Узнать подробнее можно пройдя по ссылке: ' . Html::a(
-                "$shootme_link/order/1/1",
-                "$shootme_link/order/1/1"
-            );
-        \Yii::$app->mailer->compose()
-            ->setTo('andrei.prozorov@mail.ru')
-            ->setSubject(\Yii::t('app/orders', 'You have received an order'))
-            ->setHtmlBody($bobo)
-            ->send();
-        return '';
+//        $shootme_link = ArrayHelper::getValue(\Yii::$app->params, 'projects.shootme.url');
+//        $bobo = 'Уважаемый(ая) <b>Прозоров Андрей Юрьевич</b> ' .
+//            ' На сайте `Publica` был произведен заказ. Узнать подробнее можно пройдя по ссылке: ' . Html::a(
+//                "$shootme_link/order/1/1",
+//                "$shootme_link/order/1/1"
+//            );
+//        \Yii::$app->mailer->compose()
+//            ->setTo('andrei.prozorov@mail.ru')
+//            ->setSubject(\Yii::t('app/orders', 'You have received an order'))
+//            ->setHtmlBody($bobo)
+//            ->send();
+        return \Yii::t('app/orders', 'You have received an order');
     }
 
     /**
