@@ -11,7 +11,7 @@ class ToseeUrls implements ModuleUrls
     {
         return [
             '' => 'project/front-post/index',
-            'gen' => 'project/front-post/gen-pwd',
+            'check-email' => 'project/front-post/check-email',
             '<page:\d+>' => 'project/front-post/index',
             '<date:[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])>' => 'project/front-post/date',
             '<date:[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])>/<page:\d+>' => 'project/front-post/date',

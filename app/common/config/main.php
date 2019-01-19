@@ -3,7 +3,7 @@
 $config = [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'sourceLanguage' => 'en',
-    'language' => 'ru-RU',
+    'language' => 'ru',
     'name' => 'Publica',
     'bootstrap' => [
         'users\Bootstrap',

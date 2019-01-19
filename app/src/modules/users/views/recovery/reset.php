@@ -21,25 +21,33 @@ use yii\widgets\ActiveForm;
 $this->title = Yii::t('app/user', 'Reset your password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="row">
-    <div class="">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
+
+<div class="login">
+    <div class="login-form">
+        <div class="panel-heading">
+            <h3 style="color: #fff"><?= Html::encode($this->title) ?></h3>
+        </div>
+        <div class="panel-body">
+            <?php $form = ActiveForm::begin([
+                'id' => 'password-recovery-form',
+                'enableAjaxValidation' => true,
+                'enableClientValidation' => false,
+                'fieldConfig' => [
+                    'template' => "{label}\n{input}\n
+                            <div class=\"form-error\">{error}\n{hint}</div>",
+                    'options' => [
+                        'class' => 'form-row'
+                    ],
+                ],
+            ]); ?>
+
+            <?= $form->field($model, 'password')->passwordInput()->label('') ?>
+
+            <div class="form-row" style="margin-top: 25px;">
+                <?= Html::submitButton(Yii::t('app/user', 'Finish'), ['class' => 'submit']) ?><br>
             </div>
-            <div class="panel-body">
-                <?php $form = ActiveForm::begin([
-                    'id' => 'password-recovery-form',
-                    'enableAjaxValidation' => true,
-                    'enableClientValidation' => false,
-                ]); ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= Html::submitButton(Yii::t('app/user', 'Finish'), ['class' => 'btn btn-success btn-block']) ?><br>
-
-                <?php ActiveForm::end(); ?>
-            </div>
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>

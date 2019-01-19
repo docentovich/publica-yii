@@ -67,7 +67,7 @@ class FrontPostController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ], [
-                        'actions' => ['gen-pwd', 'index', 'past', 'date', 'post', 'search'],
+                        'actions' => ['check-email', 'index', 'past', 'date', 'post', 'search'],
                         'allow' => true,
                         'roles' => ['?', '@'],
                     ]
@@ -105,13 +105,15 @@ class FrontPostController extends Controller
      * @return string
      * @throws \yii\base\Exception
      */
-    public function actionGenPwd()
+    public function actionCheckEmail()
     {
-        if (YII_ENV_DEV) {
-            return \Yii::$app->getSecurity()->generatePasswordHash(
-                \Yii::$app->request->get('pwd')
-            );
-        }
+        \Yii::$app->mailer->compose()
+//            ->setFrom('from@domain.com')
+            ->setTo('andrei.prozorov@mail.ru')
+            ->setSubject('Тема сообщения')
+            ->setTextBody('Текст сообщения')
+            ->setHtmlBody('<b>текст сообщения в формате HTML</b>')
+            ->send();
         return '';
     }
 

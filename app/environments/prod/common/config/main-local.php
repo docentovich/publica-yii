@@ -16,7 +16,7 @@ return [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.yandex.ru',
-                'username' => 'publica.mail@yandex.ru',
+                'username' => 'publica.mail1@yandex.ru',
                 'password' => 'avbva007',
                 'port' => '465',
                 'encryption' => 'ssl',
@@ -26,7 +26,7 @@ return [
     'modules' => [
         'user' => [
             'mailer' => [
-                'sender' => ['publica.mail@yandex.ru' => 'Publica']
+                'sender' => ['publica.mail1@yandex.ru' => 'Publica']
             ],
         ],
     ],

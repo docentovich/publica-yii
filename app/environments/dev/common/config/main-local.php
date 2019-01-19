@@ -8,7 +8,7 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.yandex.ru',
-                'username' => 'publica.mail@yandex.ru',
+                'username' => 'publica.mail11@yandex.ru',
                 'password' => 'avbva007',
                 'port' => '465',
                 'encryption' => 'ssl',
@@ -30,7 +30,7 @@ $config = [
         ],
         'user' => [
             'mailer' => [
-                'sender' => ['publica.mail@yandex.ru' => 'Publica']
+                'sender' => ['publica.mail1@yandex.ru' => 'Publica']
             ],
         ],
     ],
