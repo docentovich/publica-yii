@@ -2,6 +2,7 @@
 
 namespace orders\services;
 
+use app\models\Portfolio;
 use orders\dto\OrdersConfigQuery;
 use orders\dto\OrdersServiceConfig;
 use orders\dto\OrdersTransportModel;
@@ -12,42 +13,44 @@ use orders\models\OrdersDateTimePlanner;
 use orders\models\OrdersSpecialistPortfolio;
 use src\models\OrdersMessages;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 
 class OrdersService extends BaseOrdersService
 {
     /** @var int
-     *  @see OrdersService::actionOpenOrder
+     * @see OrdersService::actionOpenOrder
      */
     const ACTION_OPEN_ORDER = 1;
 
     /** @var int
-     *  @see OrdersService::actionGetOrder
+     * @see OrdersService::actionGetOrder
      */
     const ACTION_GET_ORDER = 2;
 
     /** @var int
-     *  @see OrdersService::actionSendMessage
+     * @see OrdersService::actionSendMessage
      */
     const ACTION_SEND_MESSAGE = 3;
 
     /** @var int
-     *  @see OrdersService::actionCompleteOrder
+     * @see OrdersService::actionCompleteOrder
      */
     const ACTION_COMPLETE_ORDER = 4;
 
     /** @var int
-     *  @see OrdersService::actionFinishOrder
+     * @see OrdersService::actionFinishOrder
      */
     const ACTION_FINISH_ORDER = 5;
 
     /** @var int
-     *  @see OrdersService::actionGetMyOrders
+     * @see OrdersService::actionGetMyOrders
      */
     const ACTION_GET_MY_ORDERS = 6;
 
     /** @var int
-     *  @see OrdersService::actionGetOrderByCSId
+     * @see OrdersService::actionGetOrderByCSId
      */
     const ACTION_GET_ORDER_BY_CSID = 7;
 
@@ -149,6 +152,22 @@ class OrdersService extends BaseOrdersService
 
         $this->helperSavePersonalPlanner($config, $order);
 
+        $seller = (Portfolio::findOne(['id' => $config->portfolio_id]))->user;
+
+
+        \Yii::$app->mailer->compose()
+            ->setTo($seller->email)
+            ->setSubject(\Yii::t('app/orders', 'You have received an order'))
+            ->setHtmlBody(
+                \Yii::t('app/orders', 'You have received an order') .
+                ' <b>' . Html::a(
+                    \Yii::t('app/orders', 'link'),
+                    ArrayHelper::getValue(\Yii::$app->params, 'projects.shootme.url')
+                            . "/order/{$config->portfolio_id}/{$config->customer_id}"
+                ) . '</b>'
+            )
+            ->send();
+
         return $order;
     }
 
@@ -161,12 +180,10 @@ class OrdersService extends BaseOrdersService
      */
     private function helperSavePersonalPlanner(OrdersServiceConfig $config, Orders &$order)
     {
-        if(!isset($config->time))
-        {
+        if (!isset($config->time)) {
             return;
         }
-        if(is_string($config->time))
-        {
+        if (is_string($config->time)) {
             $config->time = [$config->time];
         }
         foreach ($config->time as $time) { // save time to personal planner of saller
@@ -252,11 +269,11 @@ class OrdersService extends BaseOrdersService
     {
         $order = Orders::find()->finished()->orderId($config->order_id)->one();
 
-        if($order === null){
+        if ($order === null) {
             throw new NotFoundHttpException();
         }
 
-        if( \Yii::$app->request->post('send_form') !== null ){
+        if (\Yii::$app->request->post('send_form') !== null) {
             if (\Yii::$app->user->can('manageOrder', ['order_id' => $config->order_id])) {
 
                 if ($order->load(\Yii::$app->request->post()) && $order->validate()) {
