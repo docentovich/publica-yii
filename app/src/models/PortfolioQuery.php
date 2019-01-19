@@ -48,22 +48,19 @@ class PortfolioQuery extends \yii\db\ActiveQuery
     {
         return $this
             ->alias('portfolio')
-            ->join('RIGHT OUTER JOIN',
+            ->join('LEFT OUTER JOIN',
                 [DateTimePlanner::tableName(). ' dateTimePlanner'],
+                'portfolio.user_id = dateTimePlanner.user_id'
+            )->andWhere([
+                'or',
+                ['is', 'dateTimePlanner.date', new \yii\db\Expression('null')],
+                ['<>', 'dateTimePlanner.date', $date->format('Y-m-d')],
                 [
                     'and',
-                    'portfolio.user_id = dateTimePlanner.user_id',
-                    [
-                        'or',
-                        ['<>', 'dateTimePlanner.date', $date->format('Y-m-d')],
-                        [
-                            'and',
-                            ['=', 'dateTimePlanner.date', $date->format('Y-m-d')],
-                            ['<>', 'dateTimePlanner.time', $time],
-                        ]
-                    ]
+                    ['=', 'dateTimePlanner.date', $date->format('Y-m-d')],
+                    ['<>', 'dateTimePlanner.time', $time],
                 ]
-            );
+            ]);
     }
 
     public function keyword($keyword)

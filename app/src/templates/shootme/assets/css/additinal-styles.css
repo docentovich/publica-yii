@@ -25,3 +25,12 @@ div.datepicker {
 .content{
     background: #ffffff;
 }
+
+.single-member .member-body .member-characteristics{
+    margin: auto;
+    max-width: 550px;
+}
+
+button.green-button{
+    max-width: none;
+}

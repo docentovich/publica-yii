@@ -144,7 +144,7 @@ class OrdersService extends BaseOrdersService
         ]);
 
         if (!$order->validate() || !$order->save()) {
-            throw new \InvalidArgumentException('invalid final message');
+            throw new \InvalidArgumentException();
         }
 
         $this->helperSavePersonalPlanner($config, $order);
@@ -161,6 +161,10 @@ class OrdersService extends BaseOrdersService
      */
     private function helperSavePersonalPlanner(OrdersServiceConfig $config, Orders &$order)
     {
+        if(!isset($config->time) || !is_array($config->time))
+        {
+            return;
+        }
         foreach ($config->time as $time) { // save time to personal planner of saller
             try {
                 $dtp = new OrdersDateTimePlanner([

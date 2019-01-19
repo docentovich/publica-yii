@@ -2,7 +2,7 @@
 
 namespace shootme;
 
-use shootme\controllers\OrdersController;
+use orders\controllers\OrdersController;
 use yii\base\BootstrapInterface;
 
 class FrontendBootstrap implements BootstrapInterface

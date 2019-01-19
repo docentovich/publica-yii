@@ -57,7 +57,7 @@ class Orders extends \yii\db\ActiveRecord
             [['customer_id', 'portfolio_id'], 'required'],
             [['status', 'final_message'], 'string'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['customer_id' => 'id']],
-            [['portfolio_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['portfolio_id' => 'id']],
+            [['portfolio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Portfolio::class, 'targetAttribute' => ['portfolio_id' => 'id']],
         ];
     }
 

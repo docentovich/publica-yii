@@ -3,7 +3,6 @@
  * @var \shootme\dto\ShootmeSpecialistsTransportModel $specialistTransportModel
  * @var $this yii\web\View
  */
-
 ?>
 
 <div class="single-member">
@@ -29,12 +28,32 @@
                     'options' => ['class' => 'image-inner']
 
                 ]); ?>
-                <a class="green-button" href="/order.html">Заказать</a>
+                <?php if (\Yii::$app->user->can('user')
+                    && ($specialistTransportModel->result->userId !== Yii::$app->user->getId())) { ?>
+                    <?= \yii\helpers\Html::a(
+                        Yii::t('app', 'Order'),
+                        [
+                            '/orders/orders/order',
+                            'portfolio_id' => $specialistTransportModel->config->portfolio_id,
+                            'customer_id' => Yii::$app->user->getId()
+                        ],
+                        ['class' => 'green-button']
+                    ); ?>
+                <?php } ?>
             </div>
             <div class="member-numbers">
-                <div class="member-numbers-rows"><i class="fa fa-rub"></i><span>500</span></div>
-                <div class="member-numbers-rows"><i class="fa fa-star-half-o"></i><span>9.8</span></div>
-                <div class="member-numbers-rows"><i class="fa fa-shopping-basket"></i><span>5</span></div>
+                <div class="member-numbers-rows">
+                    <i class="fa fa-rub"></i>
+                    <span>500</span>
+                </div>
+                <div class="member-numbers-rows">
+                    <i class="fa fa-star-half-o"></i>
+                    <span>9.8</span>
+                </div>
+                <div class="member-numbers-rows">
+                    <i class="fa fa-shopping-basket"></i>
+                    <span>5</span>
+                </div>
             </div>
         </div>
 
