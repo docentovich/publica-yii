@@ -16,7 +16,7 @@ use dektrium\user\migrations\Migration;
 /**
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class m140504_130429_create_token_table extends Migration
+class m190120_182530_create_token_table extends Migration
 {
     public function up()
     {
