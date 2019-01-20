@@ -3,23 +3,23 @@ return [
     'projects' => [
         'publica' => [
             'url' => 'http://' . PUBLICA_SITE,
-            'logo' => 'publica.svg',
+            'logo' => 'publica.png',
             'name' => 'publica'
         ],
         'tosee' => [
             'url' => 'http://' . TOSEE_SITE,
-            'logo' => 'tosee.svg',
+            'logo' => 'tosee.png',
             'name' => 'tosee'
         ],
         'probank' => [
             'url' => 'http://'  . PROBANK_SITE,
-            'logo' => 'probank.svg',
+            'logo' => 'probank.png',
             'name' => 'probank'
 
         ],
         'shootme' => [
             'url' => 'http://' . SHOOTME_SITE,
-            'logo' => 'shootme.svg',
+            'logo' => 'shootme.png',
             'name' => 'shootme'
         ],
     ]
