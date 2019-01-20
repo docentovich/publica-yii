@@ -83,6 +83,7 @@
                 <?php if (\Yii::$app->user->can('user')) {
                     include \Yii::getAlias('@common-views') . "/_comments-form.php";
                 } ?>
+
             </div>
             <!--// Comment-->
 

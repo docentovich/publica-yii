@@ -853,6 +853,16 @@ textarea.message {
 .fancybox-slide--html .fancybox-close-small {
   color: #fff !important; }
 
+.comment-button {
+  float: right;
+  color: #ffffff;
+  border-radius: 5px;
+  background: #0070ff;
+  border: 0 none;
+  margin-top: 12px;
+  padding: 9px 17px;
+  font-size: 15px; }
+
 .need-share-button_dropdown-top-left {
   margin-right: -100%; }
   .need-share-button_dropdown-top-left .need-share-button_link:after {
