@@ -12,14 +12,16 @@
 
         <!--Image-->
         <div class="modal-image">
-            <?= \app\widgets\pictures\Picture::widget([
-                "src" => $image->getUrlImageSizeOf('768x500'),
-                "points" => [
-                    "sm, md" => "1200x500",
-                    "lg" => "1500x500",
-                ],
-                "lazyLoadFn" => true
-            ]) ?>
+            <div class="modal-image-inner">
+                <?= \app\widgets\pictures\Picture::widget([
+                    "src" => $image->getUrlImageSizeOf('768x500'),
+                    "points" => [
+                        "sm, md" => "1200x500",
+                        "lg" => "1500x500",
+                    ],
+                    "lazyLoadFn" => true
+                ]) ?>
+            </div>
         </div>
         <!--// Image-->
 

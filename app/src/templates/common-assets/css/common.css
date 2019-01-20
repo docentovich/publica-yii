@@ -711,13 +711,29 @@ textarea.message {
   -webkit-filter: drop-shadow(1px 0px 0px #fff);
           filter: drop-shadow(1px 0px 0px #fff); }
 
+.fancybox-navigation .fancybox-button div {
+  padding: 0;
+  background: none; }
+
+.fancybox-navigation .fancybox-button--arrow_right {
+  right: -10px; }
+
+.fancybox-navigation .fancybox-button--arrow_left {
+  left: -10px; }
+
 .modal-window .modal-header:after {
   content: '';
   display: table;
   clear: both; }
 
 .modal-window .modal-image {
-  height: 500px;
+  padding: 32px;
+  height: 350px;
+  background: #222; }
+
+.modal-window .modal-image .modal-image-inner {
+  width: 100%;
+  overflow: hidden;
   overflow: hidden;
   display: -webkit-box;
   display: -moz-box;
@@ -741,9 +757,9 @@ textarea.message {
      -moz-box-align: center;
       -ms-flex-align: center;
           align-items: center; }
-  .modal-window .modal-image img {
+  .modal-window .modal-image .modal-image-inner img {
     display: inline-block; }
-  .modal-window .modal-image img {
+  .modal-window .modal-image .modal-image-inner img {
     height: 100%; }
 
 .modal-window .modal-controls {
@@ -826,7 +842,13 @@ textarea.message {
   height: 100% !important; }
 
 .fancybox-container {
-  top: 42px; }
+  top: 42px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+     -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  max-width: 640px; }
 
 .fancybox-slide--html .fancybox-close-small {
   color: #fff !important; }

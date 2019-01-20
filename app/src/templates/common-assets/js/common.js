@@ -27,6 +27,12 @@ $('body').imagesLoaded(function () {
 $('body').imagesLoaded(function () {
     setTimeout(function () {
         $('[data-fancybox="gallery"]').fancybox({
+            // infobar: false,
+            // buttons : false,
+            afterLoad: function (instance, current) {
+                $(instance.$refs.navigation).find('.fancybox-button--arrow_right ').html('<div class="chevron-right"></div>');
+                $(instance.$refs.navigation).find('.fancybox-button--arrow_left ').html('<div class="chevron-left"></div>');
+            },
             helpers: {
                 overlay: {locked: false}
             },
