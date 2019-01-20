@@ -502,10 +502,10 @@ th {
 body {
   background: #0D0C11;
   font-family: Tahoma;
-  padding-top: 44px;
   height: auto !important;
   overflow-x: hidden;
-  line-height: 1.3em; }
+  line-height: 1.3em;
+  background: url("../images/back.jpg") repeat fixed; }
 
 body * {
   line-height: 1.3em; }
@@ -537,6 +537,13 @@ a {
   text-decoration: none;
   color: inherit;
   outline: none; }
+
+.main-wrapper {
+  max-width: 640px;
+  position: relative;
+  margin: auto;
+  background: #0D0C11;
+  padding-top: 44px; }
 
 .content {
   display: table;

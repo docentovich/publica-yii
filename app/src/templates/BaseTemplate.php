@@ -44,7 +44,9 @@ class BaseTemplate
         <body class="pageload">
         <?php $this->view->beginBody() ?>
 
-        <?= $content ?>
+        <div class="main-wrapper">
+            <?= $content ?>
+        </div>
 
         <?php $this->view->endBody() ?>
         </body>

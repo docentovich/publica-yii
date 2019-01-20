@@ -7,7 +7,8 @@ header {
   background: #0D0C11;
   z-index: 99996;
   top: 0;
-  border-bottom: 1px solid #000; }
+  border-bottom: 1px solid #000;
+  max-width: 640px; }
   header:after {
     display: block;
     content: '';
@@ -21,7 +22,7 @@ header {
   header #header-inner {
     width: 100%;
     margin: auto;
-    padding: 0 20px;
+    padding: 0 20px 0 31px;
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box; }
@@ -112,7 +113,7 @@ header #header-inner #drop-down-geo.action-panel.is-open {
   border-bottom: 1px solid #000; }
 
 header #header-inner #drop-down-services {
-  top: -183px; }
+  top: -216px; }
 
 header #header-inner #drop-down-search, header #header-inner #drop-down-geo {
   top: -60px; }
@@ -135,7 +136,7 @@ header #header-inner .drop-down-service {
   header #header-inner .drop-down-service > div {
     display: inline-block;
     line-height: 25px;
-    width: 125px;
+    width: 286px;
     vertical-align: middle; }
     header #header-inner .drop-down-service > div img {
       max-height: 100%;
