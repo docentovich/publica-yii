@@ -10,7 +10,7 @@ $form = \yii\widgets\ActiveForm::begin(['id' => 'filter']);
 
     <div class="shootme-filter-content">
         <div class="shootme-filter-main">
-            <span class="header">Зказ фотографа</span>
+            <span class="header">Заказ фотографа</span>
             <div class="shootme-filter-control" id="where-control" data-rel="where">
                 <i class="icon-geo"></i>
                 <span>Где</span>
