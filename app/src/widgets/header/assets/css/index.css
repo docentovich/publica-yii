@@ -230,10 +230,15 @@ body.is-open-overlay {
   height: -moz-calc(100vh - 86px);
   height: calc(100vh - 86px);
   top: 86px;
-  left: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+     -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   background: #0D0C11;
   z-index: 99995;
   width: 100%;
+  max-width: 640px;
   overflow: auto;
   padding: 10px 0;
   -webkit-box-sizing: border-box;
