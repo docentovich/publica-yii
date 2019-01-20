@@ -15,7 +15,7 @@ $chevronLink = function ($portfolio, $linkClass)
     $tag = \yii\helpers\Html::tag('span', '', ['class' => $linkClass]);
     if ($portfolio !== null) {
         return \yii\helpers\Html::a(
-            $tag, ['/project/front-specialists/specialist', 'portfolio_id' => $portfolio->id]
+            $tag, ['/project/front/specialist', 'portfolio_id' => $portfolio->id]
         );
     } else {
         return $tag;
