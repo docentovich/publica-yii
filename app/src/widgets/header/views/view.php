@@ -104,7 +104,7 @@ $filtered_projects = array_filter(
 
                 <!--DropDown projects logos-->
                 <div class="action-panel" id="drop-down-services">
-                    <?php foreach ($filtered_projects as $project) {
+                    <?php foreach ($projects as $project) {
                         echo \yii\helpers\Html::a(
                             "<div class=\"drop-down-service-image drop-down-service--publica\">"
                             . \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$project['logo']}") .
