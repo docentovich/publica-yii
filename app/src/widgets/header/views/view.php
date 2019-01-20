@@ -42,7 +42,7 @@ $filtered_projects = array_filter(
 
                             <!--Logo-->
                             <div class="toggle-drop-down-action-panel base-logo" id="services" rel="services">
-                                <?= \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-inline/{$currentProject}.svg"); ?>
+                                <?= \yii\helpers\Html::img("{$bundle->baseUrl}/images/logo-base/{$currentProject}.png"); ?>
                             </div>
                             <!--// Logo-->
                         </div>

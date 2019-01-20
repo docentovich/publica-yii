@@ -14,9 +14,6 @@
 html{
     background: #000;
 }
-body{
-    background: #fff;
-}
 
 .user-avatar img{
     max-width: 100%;
@@ -42,10 +39,6 @@ a.desc[data-sort]:after {
 }
 a.asc[data-sort]:after{
     content: "\f175";
-}
-
-body{
-    padding-top: 43px;
 }
 
 .login .form-row input[type='text'],

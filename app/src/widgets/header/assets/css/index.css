@@ -179,7 +179,7 @@ header .menu {
   height: 25px;
   width: auto; }
   header .menu .hamburger {
-    margin-right: 10px;
+    padding: 7px 17px 7px 2px;
     height: 13px;
     line-height: 15px;
     font-size: 14px;

@@ -58,7 +58,13 @@ ul.user-panel-menu {
       -ms-flex-align: start;
           align-items: flex-start;
   background: #CCCCCC;
-  padding: 0; }
+  max-width: 640px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+     -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  padding-top: 18px; }
   #service-menu-overlay.overlay--user-panel .service-overlay-wrapper {
     margin: 0; }
 
