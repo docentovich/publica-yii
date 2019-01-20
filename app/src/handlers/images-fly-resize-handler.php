@@ -1,4 +1,6 @@
 <?php
+defined('YII_DEBUG') or define('YII_DEBUG', false);
+defined('YII_ENV') or define('YII_ENV', 'prod');
 /** $_GET 'file_name' => string(22) "post/noimage550x614" 'file_extension' => string(3) "jpg"  */
 require_once(__DIR__ . '/../../vendor/autoload.php');
 require_once(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
