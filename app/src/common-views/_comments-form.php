@@ -33,18 +33,18 @@
     ]); ?>
     <div class="comment-text">
         <?= $comment_form->field($new_comment, 'text')
-            ->textarea(['id' => "comments-text-{$image->id}"])
+            ->textarea(['id' => "comments-text-{$image->id}", 'class' => 'message'])
             ->label(false); ?>
     </div>
 
     <?= $comment_form->field($new_comment, 'image_id', [
-        'template' => "{input}",
-        "options" => ['tag' => false]
-    ])
+            'template' => "{input}",
+            "options" => ['tag' => false]
+        ])
         ->hiddenInput(['value' => $image->id])
         ->label(false); ?>
 
 
-    <?= \yii\helpers\Html::submitButton(\Yii::t('app/tosee', 'Comment')); ?>
+    <?= \yii\helpers\Html::submitButton(\Yii::t('app/tosee', 'Comment'), ['class' => 'green-button']); ?>
     <?php \yii\widgets\ActiveForm::end(); ?>
 </div>

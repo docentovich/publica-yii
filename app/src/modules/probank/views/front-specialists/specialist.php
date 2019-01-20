@@ -4,17 +4,28 @@
  * @var $this yii\web\View
  */
 
+/**
+ * @param \app\models\Portfolio|null $portfolio
+ * @param string $linkClass
+ * @return string
+ */
+$chevronLink = function ($portfolio, $linkClass)
+{
+    $tag = \yii\helpers\Html::tag('span', '', ['class' => $linkClass]);
+    if ($portfolio !== null) {
+        return \yii\helpers\Html::a(
+            $tag, ['/project/front-specialists/specialist', 'portfolio_id' => $portfolio->id]
+        );
+    } else {
+        return $tag;
+    }
+}
 ?>
 
 <div class="single-member">
     <div class="member-header">
-        <a href="<?= $specialistTransportModel->prevLink; ?>">
-            <div class="chevron-left"></div>
-        </a>
-
-        <a href="<?= $specialistTransportModel->nextLink; ?>">
-            <div class="chevron-right"></div>
-        </a>
+        <?= $chevronLink($specialistTransportModel->prevPost, 'chevron-left'); ?>
+        <?= $chevronLink($specialistTransportModel->nextPost, 'chevron-right'); ?>
 
         <div class="title"><?= $specialistTransportModel->result->user->profile->fullName; ?></div>
         <div class="sub-title"><?= \Yii::t('app/probank', $specialistTransportModel->result->typeEn); ?></div>
@@ -61,7 +72,7 @@
 <div style="display: none">
 
     <?php foreach ($specialistTransportModel->result->additionalImages as $key => $image) {
-        include '_modal-window.php';
+        include \Yii::getAlias('@common-views') . '/_modal-window.php';
     } ?>
 
 </div>

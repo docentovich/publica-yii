@@ -305,36 +305,6 @@ ul.probank-menu {
     margin-left: -20px;
     margin-right: -20px; }
 
-button.green-button {
-  border-radius: 10px;
-  display: block;
-  padding: 16px 10px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  text-align: center;
-  vertical-align: middle;
-  outline: none;
-  border: none 0;
-  background: #229232;
-  width: 100%;
-  color: #ffffff;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  font-size: 17px; }
-
-textarea.message {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  width: 100%;
-  border: 1px solid #dadada;
-  background: #eee;
-  border-radius: 10px;
-  height: 80px;
-  outline: none;
-  padding: 10px; }
-
 .bottom-bar {
   position: fixed;
   bottom: 0;

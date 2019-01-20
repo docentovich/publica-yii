@@ -36,7 +36,7 @@ class Constants{
         return Url::to('/uploads/invisible.png', true);
     }
 
-    const LANGUAGE_RU = 'ru-RU';
+    const LANGUAGE_RU = 'ru';
     const LANGUAGE_EN = 'en';
     const LANGUAGE_SHORT_RU = 'ru';
     const LANGUAGE_SHORT_EN = 'en';

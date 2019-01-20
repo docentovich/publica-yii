@@ -28,10 +28,7 @@ $chevronLink = function ($post, $linkClass) use ($postModel)
 <div class="single-post">
     <div class="post-header">
 
-        <?= $chevronLink(
-                $postModel->prevPost,
-                'chevron-left'
-        ); ?>
+        <?= $chevronLink($postModel->prevPost, 'chevron-left'); ?>
         <?= $chevronLink($postModel->nextPost, 'chevron-right'); ?>
 
         <div class="title"><?= $postModel->result->postData->title; ?></div>
@@ -68,7 +65,7 @@ $chevronLink = function ($post, $linkClass) use ($postModel)
 <div style="display: none">
 
     <?php foreach ($postModel->result->additionalImages as $key => $image) {
-        include '_modal-window.php';
+        include \Yii::getAlias('@common-views') . '/_modal-window.php';
     } ?>
 
 </div>

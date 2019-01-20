@@ -8,6 +8,7 @@
 \Yii::setAlias('@console',              dirname(dirname(__DIR__)) . '/console');
 \Yii::setAlias('@modules',              dirname(dirname(__DIR__)) . '/src/modules');
 \Yii::setAlias('@src',                  dirname(dirname(__DIR__)) . '/src');
+\Yii::setAlias('@common-views',         \Yii::getAlias('@src') . '/common-views');
 \Yii::setAlias('@models',               dirname(dirname(__DIR__)) . '/src/models');
 \Yii::setAlias('@components',           dirname(dirname(__DIR__)) . '/src/components');
 \Yii::setAlias('@templates',            dirname(dirname(__DIR__)) . '/src/templates');

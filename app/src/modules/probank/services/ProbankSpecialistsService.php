@@ -2,6 +2,9 @@
 
 namespace probank\services;
 
+use app\dto\SpecialistsServiceConfig;
+use app\models\Portfolio;
+use app\models\PortfolioQuery;
 use app\services\BaseSpecialistsService;
 use app\dto\ConfigQuery;
 use probank\dto\ProbankSpecialistsConfigQuery;
@@ -90,13 +93,21 @@ class ProbankSpecialistsService extends BaseSpecialistsService
     /**
      * @param ProbankSpecialistsServiceConfig $config
      * @return ProbankSpecialistsTransportModel
+     * @throws \Throwable
      */
     protected function actionGetByID(ProbankSpecialistsServiceConfig $config)
     {
         $portfolioModel = ProbankPortfolio::find()->where(['=', 'id', $config->portfolio_id]);
+        $result = $portfolioModel->one();
+
+        $nextPortfolio = $this->siblingPortfolio('>', $result, $config);
+        $prevPortfolio = $this->siblingPortfolio('<', $result, $config);
+
         return new ProbankSpecialistsTransportModel(
             new ProbankSpecialistsConfigQuery($config, $portfolioModel),
-            $portfolioModel->one()
+            $result,
+            $prevPortfolio,
+            $nextPortfolio
         );
     }
 
@@ -215,5 +226,30 @@ class ProbankSpecialistsService extends BaseSpecialistsService
             },
             $images
         );
+    }
+
+    /**`Helper`
+     * Return the next or prev post
+     *
+     * @param string $compare
+     * @param ProbankPortfolio $portfolio
+     * @param SpecialistsServiceConfig $config
+     * @return ProbankPortfolio|null
+     * @throws \Throwable
+     */
+    private function siblingPortfolio($compare, $portfolio, $config)
+    {
+        try {
+            /** @var PortfolioQuery $query */
+            $query = Portfolio::find()
+                ->alias('portfolio')
+                ->orderBy(['id' => ($compare === '>') ? SORT_ASC : SORT_DESC])
+                ->andWhere([$compare, 'portfolio.id', $portfolio->id])
+                ->currentCity();
+
+            return $query->one();
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 }

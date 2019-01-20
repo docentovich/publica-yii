@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use yii\web\Cookie;
+
 /**
  * This is the ActiveQuery class for [[Portfolio]].
  *
@@ -75,5 +77,22 @@ class PortfolioQuery extends \yii\db\ActiveQuery
 
         return $this->innerJoinWith(['profile profile'])
             ->andWhere($condition);
+    }
+
+    public function currentCity()
+    {
+        $city_id = City::DEFAULT_CITY_ID;
+        if (\Yii::$app->request->cookies->has("city_id")) {
+            $city_id = \Yii::$app->request->cookies->getValue("city_id");
+        } else {
+            \Yii::$app->response->cookies->add(new Cookie([
+                'name' => 'city_id',
+                'value' => $city_id
+            ]));
+        }
+
+        return $this
+            ->joinWith(['user user'])
+            ->andWhere(["=", "user.city_id", $city_id]);
     }
 }

@@ -26,8 +26,8 @@
         <!--Tabs-controls-->
         <div class="modal-controls">
             <div class="left-controls">
-                <i class="icon-info modal-tab-control is-active" rel="<?= $key ?>-info"></i>
-                <i class="icon-comments modal-tab-control" rel="<?= $key ?>-comments"></i>
+                <i class="icon-comments modal-tab-control is-active" rel="<?= $key ?>-comments"></i>
+                <i class="icon-info modal-tab-control" rel="<?= $key ?>-info"></i>
             </div>
             <div class="right-controls">
                 <i data-likes="<?= $image->likes ?>"
@@ -49,7 +49,7 @@
 
     <div class="modal-body">
         <!-- Comments tab -->
-        <div class="modal-tab modal-comments" style="display: none" id="tab-<?= $key ?>-comments">
+        <div class="modal-tab modal-comments" id="tab-<?= $key ?>-comments">
             <div data-likes="<?= $image->likes ?>"
                  data-image-id="<?= $image->id ?>"
                  class="modal-likes
@@ -79,7 +79,7 @@
                 </div>
 
                 <?php if (\Yii::$app->user->can('user')) {
-                    include "_comments-form.php";
+                    include \Yii::getAlias('@common-views') . "/_comments-form.php";
                 } ?>
             </div>
             <!--// Comment-->
@@ -88,7 +88,7 @@
         <!--// Comments-tab-->
 
         <!--Info-tab-->
-        <div class="modal-tab modal-info" id="tab-<?= $key ?>-info">
+        <div class="modal-tab modal-info" style="display: none" id="tab-<?= $key ?>-info">
             <div class=" modal-inner-body">
                 <?= $image->desc ?>
             </div>
