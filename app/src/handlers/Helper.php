@@ -34,7 +34,7 @@ class Helper
         \yii\imagine\Image::getImagine()
             ->open(self::fn($original_file_and_dir, $file_extension))
             ->thumbnail(new \Imagine\Image\Box($width, $height), $resize_algoritm)
-            ->save($return_file_name_and_dir, ['quality' => 90]);
+            ->save($return_file_name_and_dir, ['quality' => 85]);
 
         return $return_file_name_and_dir;
     }

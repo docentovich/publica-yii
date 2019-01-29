@@ -1,31 +1,30 @@
 version: '2'
 
 services:
+  php:
+      image: docentovich/php7:develop
+      environment:
+        PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
+        XDEBUG_CONFIG: remote_host=${DBG_IP}
+      links:
+         - db
+      volumes:
+        - ./env.php.template:/var/www/env.php.template
+        - ./app:/var/www/html
+        - ./php-win-dev.ini:/usr/local/etc/php/conf.d/common.ini
   web:
       image: nginx
       ports:
         - "80:80"
       command: /var/www/run_nginx.sh
+      links:
+        - php
       env_file:
         - .env
       volumes:
+        - ./app:/var/www/html
         - ./run_nginx.sh:/var/www/run_nginx.sh
         - ./nginx.conf.template:/var/www/default.conf.template
-        - ./env.php.template:/var/www/env.php.template
-        - ./app:/var/www/html
-        - ./php-win-dev.ini:/usr/local/etc/php/conf.d/common.ini
-  php:
-      image: docentovich/php.7.fpm-develop
-      ports:
-        - "9000:9000"
-      environment:
-        PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
-        XDEBUG_CONFIG: remote_host=${DBG_IP}
-      links:
-                     - db
-                     - web
-      volumes_from:
-        - web
   phpmyadmin:
       image: phpmyadmin/phpmyadmin
       container_name: phpmyadmin
