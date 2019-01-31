@@ -19,9 +19,9 @@ services:
       env_file:
         - .env
       volumes:
+        - ./app:/var/www/html
         - ./run_nginx.sh:/var/www/run_nginx.sh
         - ./nginx.conf.template:/var/www/default.conf.template
-        - ./env.php.template:/var/www/env.php.template
   db:
       image: mysql:5.7.23
       environment:
