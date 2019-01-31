@@ -5,7 +5,7 @@ define("PROBANK", 2);
 define("PUBLICA", 3);
 define("SHOOTME", 4);
 
-switch ($_SERVER['SERVER_NAME']) {
+switch ($_SERVER['HTTP_HOST']) {
     case  TOSEE_SITE:
         define("PROJECT", TOSEE);
         break;
